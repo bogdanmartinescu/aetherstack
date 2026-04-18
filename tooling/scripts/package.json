@@ -1,0 +1,21 @@
+{
+  "name": "@aetherstack/scripts",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Internal build scripts for the Aetherstack monorepo",
+  "scripts": {
+    "validate-registry": "tsx src/validate-registry.ts",
+    "build-registry": "tsx src/build-registry.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aetherstack/registry-build": "workspace:*",
+    "@aetherstack/registry-schema": "workspace:*"
+  },
+  "devDependencies": {
+    "@aetherstack/typescript-config": "workspace:*",
+    "tsx": "^4.9.3",
+    "typescript": "^5.4.5",
+    "@types/node": "^20.12.7"
+  }
+}

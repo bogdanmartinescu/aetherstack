@@ -1,0 +1,24 @@
+{
+  "$schema": "../../packages/registry-schema/src/registry.ts",
+  "name": "aether-ui",
+  "homepage": "https://aetherui.dev",
+  "version": "0.0.1",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "A versatile button component with multiple variants and sizes.",
+      "author": "aetherstack",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        }
+      ]
+    }
+  ]
+}

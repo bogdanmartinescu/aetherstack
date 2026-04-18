@@ -1,0 +1,25 @@
+{
+  "name": "@aetherstack/themes",
+  "version": "0.0.1",
+  "description": "Aether UI themes — CSS variable collections for light/dark and branded themes",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./default": "./src/default.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@aetherstack/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "@aetherstack/typescript-config": "workspace:*",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

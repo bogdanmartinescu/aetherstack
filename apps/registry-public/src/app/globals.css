@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 274 66% 19%;
+    --border: 0 0% 90%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --primary: 269 74% 57%;
+    --primary-foreground: 0 0% 100%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 274 66% 4%;
+    --foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 64%;
+    --primary: 267 84% 65%;
+    --primary-foreground: 274 66% 4%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground antialiased; }
+}

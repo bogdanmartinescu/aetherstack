@@ -1,0 +1,25 @@
+{
+  "name": "@aetherstack/tailwind-config",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Shared Tailwind CSS configuration for Aetherstack",
+  "license": "MIT",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "files": ["index.ts"],
+  "dependencies": {
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.0"
+  },
+  "devDependencies": {
+    "@aetherstack/typescript-config": "workspace:*",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.4.5"
+  }
+}
