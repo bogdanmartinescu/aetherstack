@@ -19,19 +19,19 @@ export default function HomePage() {
           A premium design system for SaaS dashboards and admin interfaces.
         </p>
         <p className="mb-10 text-sm text-muted-foreground">
-          Open-code · Registry-installable · Token-driven · 16 components
+          Open-code · Registry-installable · Token-driven · Lucide icons · 16 components
         </p>
 
         {/* CTA */}
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Button size="lg" asChild>
-            <a href="/installation">Get started</a>
+            <a href="/introduction">Get started</a>
           </Button>
           <Button variant="outline" size="lg" asChild>
             <a href="/components">Components</a>
           </Button>
           <Button variant="ghost" size="lg" asChild>
-            <a href="/tokens">Tokens</a>
+            <a href="/cli">CLI</a>
           </Button>
         </div>
 

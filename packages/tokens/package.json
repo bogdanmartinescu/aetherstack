@@ -14,15 +14,60 @@
     "./spacing": "./src/spacing.ts",
     "./typography": "./src/typography.ts"
   },
+  "publishConfig": {
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js",
+        "types": "./dist/index.d.ts"
+      },
+      "./colors": {
+        "import": "./dist/colors.mjs",
+        "require": "./dist/colors.js",
+        "types": "./dist/colors.d.ts"
+      },
+      "./motion": {
+        "import": "./dist/motion.mjs",
+        "require": "./dist/motion.js",
+        "types": "./dist/motion.d.ts"
+      },
+      "./radius": {
+        "import": "./dist/radius.mjs",
+        "require": "./dist/radius.js",
+        "types": "./dist/radius.d.ts"
+      },
+      "./shadows": {
+        "import": "./dist/shadows.mjs",
+        "require": "./dist/shadows.js",
+        "types": "./dist/shadows.d.ts"
+      },
+      "./spacing": {
+        "import": "./dist/spacing.mjs",
+        "require": "./dist/spacing.js",
+        "types": "./dist/spacing.d.ts"
+      },
+      "./typography": {
+        "import": "./dist/typography.mjs",
+        "require": "./dist/typography.js",
+        "types": "./dist/typography.d.ts"
+      }
+    }
+  },
   "files": [
+    "dist",
     "src"
   ],
   "devDependencies": {
     "@aetherstack/typescript-config": "workspace:*",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"
   },
   "scripts": {
+    "build": "tsup",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   }

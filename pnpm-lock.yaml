@@ -111,6 +111,9 @@ importers:
       '@aetherstack/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      lucide-react:
+        specifier: ^1.11.0
+        version: 1.11.0(react@18.3.1)
       next:
         specifier: ^16.2.4
         version: 16.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -488,6 +491,9 @@ importers:
       '@aetherstack/typescript-config':
         specifier: workspace:*
         version: link:../config-typescript
+      tsup:
+        specifier: ^8.0.2
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.10)(tsx@4.21.0)(typescript@5.9.3)
       typescript:
         specifier: ^5.4.5
         version: 5.9.3
@@ -579,6 +585,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.0
         version: 3.4.19(tsx@4.21.0)
+      tsup:
+        specifier: ^8.0.2
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.10)(tsx@4.21.0)(typescript@5.9.3)
       typescript:
         specifier: ^5.4.5
         version: 5.9.3
@@ -598,6 +607,9 @@ importers:
       '@aetherstack/typescript-config':
         specifier: workspace:*
         version: link:../config-typescript
+      tsup:
+        specifier: ^8.0.2
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.10)(tsx@4.21.0)(typescript@5.9.3)
       typescript:
         specifier: ^5.4.5
         version: 5.9.3
@@ -3334,6 +3346,11 @@ packages:
     resolution: {integrity: sha512-0vfExYtvSDhkC2lqg0zYVW1Uu9GsI4knuV9GP9by5z0Xhc4Zi5RejTxfz9LsjRmCyWVzHCJvxGKZWcRyvQCWVg==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
+
+  lucide-react@1.11.0:
+    resolution: {integrity: sha512-UOhjdztXCgdBReRcIhsvz2siIBogfv/lhJEIViCpLt924dO+GDms9T7DNoucI23s6kEPpe988m5N0D2ajnzb2g==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
@@ -7167,6 +7184,10 @@ snapshots:
       react: 18.3.1
 
   lucide-react@0.441.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
+  lucide-react@1.11.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 

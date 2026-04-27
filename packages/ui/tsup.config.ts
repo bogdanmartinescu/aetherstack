@@ -1,0 +1,50 @@
+import { defineConfig } from "tsup"
+
+export default defineConfig({
+  entry: [
+    "src/index.ts",
+    "src/components/badge.tsx",
+    "src/components/button.tsx",
+    "src/components/card.tsx",
+    "src/components/checkbox.tsx",
+    "src/components/dialog.tsx",
+    "src/components/input.tsx",
+    "src/components/label.tsx",
+    "src/components/radio-group.tsx",
+    "src/components/select.tsx",
+    "src/components/sheet.tsx",
+    "src/components/skeleton.tsx",
+    "src/components/switch.tsx",
+    "src/components/table.tsx",
+    "src/components/tabs.tsx",
+    "src/components/textarea.tsx",
+    "src/components/tooltip.tsx",
+  ],
+  format: ["cjs", "esm"],
+  dts: true,
+  clean: true,
+  sourcemap: true,
+  treeshake: true,
+  // React/Radix UI/utils are peer/external deps — don't bundle them
+  external: [
+    "react",
+    "react-dom",
+    "@radix-ui/react-checkbox",
+    "@radix-ui/react-dialog",
+    "@radix-ui/react-label",
+    "@radix-ui/react-radio-group",
+    "@radix-ui/react-select",
+    "@radix-ui/react-slot",
+    "@radix-ui/react-switch",
+    "@radix-ui/react-tabs",
+    "@radix-ui/react-tooltip",
+    "class-variance-authority",
+    "clsx",
+    "lucide-react",
+    "tailwind-merge",
+    "@aetherstack/utils",
+  ],
+  esbuildOptions(options) {
+    options.jsx = "automatic"
+  },
+})

@@ -25,7 +25,101 @@
     "./tooltip": "./src/components/tooltip.tsx",
     "./globals.css": "./src/styles/globals.css"
   },
+  "publishConfig": {
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js",
+        "types": "./dist/index.d.ts"
+      },
+      "./badge": {
+        "import": "./dist/badge.mjs",
+        "require": "./dist/badge.js",
+        "types": "./dist/badge.d.ts"
+      },
+      "./button": {
+        "import": "./dist/button.mjs",
+        "require": "./dist/button.js",
+        "types": "./dist/button.d.ts"
+      },
+      "./card": {
+        "import": "./dist/card.mjs",
+        "require": "./dist/card.js",
+        "types": "./dist/card.d.ts"
+      },
+      "./checkbox": {
+        "import": "./dist/checkbox.mjs",
+        "require": "./dist/checkbox.js",
+        "types": "./dist/checkbox.d.ts"
+      },
+      "./dialog": {
+        "import": "./dist/dialog.mjs",
+        "require": "./dist/dialog.js",
+        "types": "./dist/dialog.d.ts"
+      },
+      "./input": {
+        "import": "./dist/input.mjs",
+        "require": "./dist/input.js",
+        "types": "./dist/input.d.ts"
+      },
+      "./label": {
+        "import": "./dist/label.mjs",
+        "require": "./dist/label.js",
+        "types": "./dist/label.d.ts"
+      },
+      "./radio-group": {
+        "import": "./dist/radio-group.mjs",
+        "require": "./dist/radio-group.js",
+        "types": "./dist/radio-group.d.ts"
+      },
+      "./select": {
+        "import": "./dist/select.mjs",
+        "require": "./dist/select.js",
+        "types": "./dist/select.d.ts"
+      },
+      "./sheet": {
+        "import": "./dist/sheet.mjs",
+        "require": "./dist/sheet.js",
+        "types": "./dist/sheet.d.ts"
+      },
+      "./skeleton": {
+        "import": "./dist/skeleton.mjs",
+        "require": "./dist/skeleton.js",
+        "types": "./dist/skeleton.d.ts"
+      },
+      "./switch": {
+        "import": "./dist/switch.mjs",
+        "require": "./dist/switch.js",
+        "types": "./dist/switch.d.ts"
+      },
+      "./table": {
+        "import": "./dist/table.mjs",
+        "require": "./dist/table.js",
+        "types": "./dist/table.d.ts"
+      },
+      "./tabs": {
+        "import": "./dist/tabs.mjs",
+        "require": "./dist/tabs.js",
+        "types": "./dist/tabs.d.ts"
+      },
+      "./textarea": {
+        "import": "./dist/textarea.mjs",
+        "require": "./dist/textarea.js",
+        "types": "./dist/textarea.d.ts"
+      },
+      "./tooltip": {
+        "import": "./dist/tooltip.mjs",
+        "require": "./dist/tooltip.js",
+        "types": "./dist/tooltip.d.ts"
+      },
+      "./globals.css": "./src/styles/globals.css"
+    }
+  },
   "files": [
+    "dist",
     "src"
   ],
   "dependencies": {
@@ -60,10 +154,12 @@
     "@vitejs/plugin-react": "^4.7.0",
     "jsdom": "^29.1.0",
     "tailwindcss": "^3.4.0",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"
   },
   "scripts": {
+    "build": "tsup",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   }

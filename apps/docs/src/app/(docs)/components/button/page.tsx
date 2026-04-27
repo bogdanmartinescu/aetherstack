@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Button } from "@aetherstack/ui"
+import { Plus, RefreshCw, Download, Search, Settings, Bell, X, Loader2, Trash2, Mail } from "lucide-react"
 import { ComponentPage } from "@/components/component-page"
 
 export const metadata: Metadata = {
@@ -73,7 +74,8 @@ export default function ButtonPage() {
       description="Triggers an action or event. Supports 6 variants, 4 sizes, and can render as any HTML element via the asChild prop."
       features={[
         "6 variants: default, secondary, outline, ghost, destructive, link",
-        "4 sizes: sm, default, lg, icon",
+        "4 sizes: sm, default, lg, icon (square, for icon-only buttons)",
+        "First-class Lucide React icon support — icons are auto-sized and pointer-events disabled",
         "asChild prop renders as any element via Radix Slot (avoids nested button/anchor issues)",
         "Full keyboard accessibility — focus ring, disabled state",
         "Forwards ref to the underlying element",
@@ -132,19 +134,23 @@ export function ButtonDemo() {
         },
         {
           title: "Sizes",
-          description: "Four sizes. Use 'icon' for square icon-only buttons.",
+          description: "Four sizes. Use 'icon' for square icon-only buttons — always add aria-label.",
           preview: (
             <div className="flex flex-wrap items-center gap-3">
               <Button size="sm">Small</Button>
               <Button size="default">Default</Button>
               <Button size="lg">Large</Button>
-              <Button size="icon">+</Button>
+              <Button size="icon" aria-label="Add item"><Plus /></Button>
             </div>
           ),
-          code: `<Button size="sm">Small</Button>
+          code: `import { Plus } from "lucide-react"
+
+<Button size="sm">Small</Button>
 <Button size="default">Default</Button>
 <Button size="lg">Large</Button>
-<Button size="icon">+</Button>`,
+<Button size="icon" aria-label="Add item">
+  <Plus />
+</Button>`,
         },
         {
           title: "Disabled state",
@@ -183,43 +189,65 @@ export function ButtonDemo() {
         },
         {
           title: "With icon",
-          description: "Icons inside buttons are sized automatically via the SVG selector.",
+          description: "Place a Lucide icon before or after the label. Icons are auto-sized to 16px — no extra classes needed.",
           preview: (
             <div className="flex flex-wrap gap-3">
-              <Button>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-                </svg>
-                Add item
-              </Button>
-              <Button variant="outline">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z" clipRule="evenodd" />
-                </svg>
-                Refresh
-              </Button>
+              <Button><Plus />New item</Button>
+              <Button variant="outline"><Download />Export</Button>
+              <Button variant="secondary"><Mail />Send email</Button>
+              <Button variant="destructive"><Trash2 />Delete</Button>
             </div>
           ),
-          code: `import { Plus } from "lucide-react"
+          code: `import { Plus, Download, Mail, Trash2 } from "lucide-react"
 
+// Leading icon
 <Button>
   <Plus />
-  Add item
+  New item
+</Button>
+
+// Trailing icon
+<Button variant="outline">
+  Export
+  <Download />
+</Button>`,
+        },
+        {
+          title: "Icon-only buttons",
+          description: "Use size=\"icon\" for square icon buttons. Always provide aria-label for screen readers.",
+          preview: (
+            <div className="flex flex-wrap items-center gap-3">
+              <Button size="icon" aria-label="Search"><Search /></Button>
+              <Button size="icon" variant="outline" aria-label="Settings"><Settings /></Button>
+              <Button size="icon" variant="ghost" aria-label="Notifications"><Bell /></Button>
+              <Button size="icon" variant="secondary" aria-label="Refresh"><RefreshCw /></Button>
+              <Button size="icon" variant="destructive" aria-label="Remove"><X /></Button>
+            </div>
+          ),
+          code: `import { Search, Settings, Bell, RefreshCw, X } from "lucide-react"
+
+<Button size="icon" aria-label="Search">
+  <Search />
+</Button>
+<Button size="icon" variant="outline" aria-label="Settings">
+  <Settings />
+</Button>
+<Button size="icon" variant="ghost" aria-label="Notifications">
+  <Bell />
 </Button>`,
         },
         {
           title: "Loading state",
-          description: "Combine disabled with an animated spinner for async actions.",
+          description: "Combine disabled with an animated Loader2 spinner for async actions.",
           preview: (
-            <Button disabled>
-              <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-              </svg>
-              Loading…
-            </Button>
+            <div className="flex flex-wrap gap-3">
+              <Button disabled><Loader2 className="animate-spin" />Loading…</Button>
+              <Button variant="outline" disabled><Loader2 className="animate-spin" />Saving…</Button>
+            </div>
           ),
-          code: `<Button disabled>
+          code: `import { Loader2 } from "lucide-react"
+
+<Button disabled>
   <Loader2 className="animate-spin" />
   Loading…
 </Button>`,
