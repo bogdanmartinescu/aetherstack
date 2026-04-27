@@ -98,3 +98,28 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+/*
+ * Font switching via data-font attribute on <html>.
+ * Each variant maps --font-sans to the pre-loaded Google Font variable.
+ * Defaults to Inter when no data-font is set.
+ */
+:root,
+[data-font="inter"] {
+  --font-sans: var(--font-inter);
+}
+[data-font="plus-jakarta-sans"] {
+  --font-sans: var(--font-plus-jakarta-sans);
+}
+[data-font="dm-sans"] {
+  --font-sans: var(--font-dm-sans);
+}
+[data-font="manrope"] {
+  --font-sans: var(--font-manrope);
+}
+[data-font="outfit"] {
+  --font-sans: var(--font-outfit);
+}
+[data-font="figtree"] {
+  --font-sans: var(--font-figtree);
+}

@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@aetherstack/utils"
+import { ThemeToggle, FontPicker } from "./theme-font-controls"
 
 const nav = [
   {
@@ -19,6 +20,7 @@ const nav = [
     items: [
       { label: "Tokens", href: "/tokens" },
       { label: "Icons", href: "/icons" },
+      { label: "Fonts", href: "/fonts" },
     ],
   },
   {
@@ -127,6 +129,10 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
           <div className="flex items-center gap-2">
+            <div className="hidden items-center gap-2 sm:flex">
+              <FontPicker />
+              <ThemeToggle />
+            </div>
             <MobileSidebarToggle open={mobileOpen} onToggle={() => setMobileOpen((v) => !v)} />
             <a
               href="https://github.com"
