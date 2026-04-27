@@ -6,7 +6,7 @@ export default function HomePage() {
       <div className="mx-auto max-w-3xl text-center">
         {/* Eyebrow */}
         <div className="mb-6 inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
-          Aetherstack · Public Docs
+          Aetherstack · Design System
         </div>
 
         {/* Wordmark */}
@@ -19,29 +19,49 @@ export default function HomePage() {
           A premium design system for SaaS dashboards and admin interfaces.
         </p>
         <p className="mb-10 text-sm text-muted-foreground">
-          Built on shadcn/ui. Fully open. Ready for production.
+          Open-code · Registry-installable · Token-driven · 16 components
         </p>
 
         {/* CTA */}
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Button size="lg">Get started</Button>
-          <Button variant="outline" size="lg">
-            View components
+          <Button size="lg" asChild>
+            <a href="/installation">Get started</a>
+          </Button>
+          <Button variant="outline" size="lg" asChild>
+            <a href="/components">Components</a>
+          </Button>
+          <Button variant="ghost" size="lg" asChild>
+            <a href="/tokens">Tokens</a>
           </Button>
         </div>
 
-        {/* Token system link */}
-        <div className="mt-12 flex flex-col items-center gap-2">
-          <a
-            href="/tokens"
-            className="text-xs text-muted-foreground underline-offset-4 hover:underline hover:text-foreground transition-colors"
-          >
-            View token reference →
-          </a>
-          <p className="text-xs text-muted-foreground">
-            Phase 2 complete — token system active.
-          </p>
+        {/* Feature grid */}
+        <div className="mt-16 grid grid-cols-3 gap-4 text-left">
+          {[
+            {
+              title: "Open code",
+              desc: "Components are copied into your project — you own the source.",
+            },
+            {
+              title: "Token-driven",
+              desc: "Every color, radius, and spacing value is a CSS variable.",
+            },
+            {
+              title: "Accessible",
+              desc: "Built on Radix UI — keyboard nav, ARIA, and focus management built in.",
+            },
+          ].map((f) => (
+            <div key={f.title} className="rounded-lg border border-border bg-muted/30 p-4">
+              <p className="mb-1 text-sm font-semibold text-foreground">{f.title}</p>
+              <p className="text-xs text-muted-foreground">{f.desc}</p>
+            </div>
+          ))}
         </div>
+
+        {/* Phase indicator */}
+        <p className="mt-10 text-xs text-muted-foreground">
+          Phase 3 complete · 16 primitives · Phase 4 App Patterns in progress
+        </p>
       </div>
     </main>
   )

@@ -121,18 +121,30 @@ Do not:
 
 ## Current Phase Context
 
-Phase 1 is complete.
+Phases 1, 2, and 3 are complete. Phase 3 includes extensive documentation in `apps/docs`:
+
+- **`/installation`** — step-by-step setup guides for Next.js App Router, Next.js Pages Router, Vite + React, Remix, Astro, and TanStack Start
+- **`/components`** — component index with category grouping
+- **`/components/[slug]`** — individual pages for all 16 components with Preview/Installation tabs, usage examples, props tables, and accessibility notes
+- **`/tokens`** — design token reference
+
+The docs app uses a shared `DocsShell` with sidebar navigation (route group `(docs)`).
 
 Current expected phase:
 
-**Phase 2 — Token System**
+**Phase 4 — App Patterns**
 
 Priority deliverables:
-- semantic token model
-- CSS variable contract
-- base Aether theme
-- dark mode structure
-- token exports
-- token documentation
+- Form Field wrapper
+- Page Header
+- Filter Toolbar
+- Search/Command surface
+- Empty State, Loading State, Error State
+- Settings Section, Section Header
+- Table Toolbar
+- Sidebar/Nav pattern
+- Dashboard metric card pattern
+- Simple layout helpers
 
-Treat the token layer as the next architectural dependency for the rest of the system.
+Patterns must depend on `@aetherstack/ui` primitives, not parallel implementations.
+Package: `packages/patterns`.

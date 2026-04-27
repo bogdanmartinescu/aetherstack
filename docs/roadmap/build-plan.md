@@ -1,6 +1,6 @@
 # Aetherstack Build Plan
 
-Status: Phase 1 complete  
+Status: Phases 1–3 complete  
 Project: Aetherstack  
 Design system: Aether UI
 
@@ -500,15 +500,15 @@ The following should not be prioritized until the core system is stable:
 
 ## Immediate Next Step
 
-Start **Phase 2 — Token System** and complete the following first:
+Start **Phase 4 — App Patterns** and complete the following first:
 
-- semantic token model
-- CSS variable contract
-- theme structure
-- default Aether theme
-- docs page explaining token usage
+- Form Field wrapper (Label + Input + error message composition)
+- Page Header (title, breadcrumb, actions slot)
+- Empty State (icon, title, description, CTA)
+- Loading State
+- Section Header
 
-That is the correct next dependency for the entire system.
+Patterns must depend on `@aetherstack/ui` primitives, not parallel implementations. Package: `packages/patterns`.
 
 ## Standards Enforcement
 

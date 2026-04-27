@@ -116,11 +116,18 @@ durations.normal   // → "200ms"
 easings.inOut      // → "cubic-bezier(0.4, 0, 0.2, 1)"
 ```
 
-### Generating CSS programmatically (Phase 3+)
+### Generating CSS programmatically
 
-`@aetherstack/themes` will expose a `generateCssVariables(theme)` utility for producing `:root { ... }` / `.dark { ... }` CSS blocks programmatically. This is useful for build-time CSS generation, server-side theme injection, and registry base items.
+`@aetherstack/themes` exposes a `generateCssVariables(theme)` utility for producing `:root { ... }` / `.dark { ... }` CSS blocks programmatically. This is useful for build-time CSS generation, server-side theme injection, and registry base items.
 
-This API ships in Phase 3 once the themes package is wired into the app layer. Until then, CSS variables are maintained manually in each app's `globals.css` (see the note in that file).
+```ts
+import { generateCssVariables, defaultTheme } from "@aetherstack/themes"
+
+const css = generateCssVariables(defaultTheme)
+// → `:root { --background: ...; ... }\n\n.dark { --background: ...; ... }`
+```
+
+Each app's `globals.css` currently maintains CSS variables manually. The `generateCssVariables()` utility is available for tooling and future automated generation.
 
 ---
 
