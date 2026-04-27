@@ -1,6 +1,7 @@
 # Aetherstack
 
-**Aether UI** — a premium shadcn-compatible design system for SaaS dashboards and admin interfaces.
+**Aether UI** — a premium design system for SaaS dashboards and admin interfaces, with a
+shadcn-compatible registry format and its own installer CLI.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-violet.svg)](LICENSE)
 
@@ -8,13 +9,30 @@
 
 ## What is this?
 
-Aetherstack is the monorepo for **Aether UI** — an open-code, shadcn/ui-compatible design system
-built for serious SaaS products. It is not a loose component collection; it is a structured product
-with a public registry, documentation site, playground, and room for a future premium tier.
+Aetherstack is the monorepo for **Aether UI** — an open-code design system built for serious SaaS
+products. It is not a loose component collection; it is a structured product with a public
+registry, its own CLI, documentation site, playground, and room for a future premium tier.
+
+Aether UI uses a registry format compatible with the shadcn/ui convention (same JSON schema shape),
+but ships its own CLI (`aether-ui`) and its own installer. It does not depend on the shadcn CLI and
+is not built on top of shadcn/ui.
 
 **Design system name:** Aether UI  
 **Registry namespace:** `@aether` (public), `@aether-pro` (future premium)  
-**Stack:** Next.js 14 · Tailwind CSS 3 · TypeScript · pnpm workspaces · Turborepo · shadcn/ui-compatible
+**Stack:** Next.js 14 · Tailwind CSS 3 · TypeScript · pnpm workspaces · Turborepo
+
+---
+
+## Project Docs
+
+| Doc | Purpose |
+|---|---|
+| [`docs/architecture/overview.md`](docs/architecture/overview.md) | Repo layout, dependency graph, naming glossary |
+| [`docs/architecture/engineering-standards.md`](docs/architecture/engineering-standards.md) | Coding, API, styling, a11y, and review standards — source of truth |
+| [`docs/roadmap/build-plan.md`](docs/roadmap/build-plan.md) | Phased roadmap and acceptance criteria |
+| [`docs/product/positioning.md`](docs/product/positioning.md) | Product vision and audience |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Dev setup, branching, commit style, pre-PR checklist |
+| [`CLAUDE.md`](CLAUDE.md) | Working rules for AI assistants in this repo |
 
 ---
 
@@ -40,7 +58,8 @@ aetherstack/
 │   ├── icons/            — Icon set (lucide-react + custom)
 │   ├── utils/            — Shared utilities
 │   ├── registry-schema/  — Zod types for registry manifests
-│   └── registry-build/   — Registry build & validation tooling
+│   ├── registry-build/   — Registry build & validation tooling
+│   └── cli/              — `aether-ui` CLI (init / add / list)
 │
 ├── registry/
 │   ├── public/           — Public registry manifest
@@ -129,6 +148,19 @@ npx @aetherstack/cli add button badge card
 The CLI writes component source files directly into your project — you own the code.
 No lock-in. No wrapper components. Just clean, editable TypeScript.
 
+> **Note:** `@aetherstack/cli` is not yet published to npm. During development, run the CLI from
+> this repo instead:
+>
+> ```bash
+> # Dev mode (tsx, no build required)
+> pnpm --filter @aetherstack/cli dev -- add button --cwd /path/to/your/project
+>
+> # Or after `pnpm --filter @aetherstack/cli build`, invoke the compiled binary
+> node packages/cli/dist/index.js add button --cwd /path/to/your/project
+> ```
+>
+> The published `npx @aetherstack/cli` flow becomes available after Phase 9 (release readiness).
+
 ---
 
 ## Package Overview
@@ -136,7 +168,7 @@ No lock-in. No wrapper components. Just clean, editable TypeScript.
 | Package | Description |
 |---|---|
 | `@aetherstack/tokens` | Design tokens — colors, spacing, typography, radius, shadows |
-| `@aetherstack/ui` | Core UI components (shadcn-compatible) |
+| `@aetherstack/ui` | Core UI components (open-code, registry-installable) |
 | `@aetherstack/patterns` | Higher-level compositions built on `@aetherstack/ui` |
 | `@aetherstack/blocks` | Full page-section layout blocks |
 | `@aetherstack/themes` | CSS variable theme collections |

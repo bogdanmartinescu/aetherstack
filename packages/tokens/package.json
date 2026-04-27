@@ -8,19 +8,22 @@
   "exports": {
     ".": "./src/index.ts",
     "./colors": "./src/colors.ts",
-    "./spacing": "./src/spacing.ts",
-    "./typography": "./src/typography.ts",
+    "./motion": "./src/motion.ts",
     "./radius": "./src/radius.ts",
-    "./shadows": "./src/shadows.ts"
+    "./shadows": "./src/shadows.ts",
+    "./spacing": "./src/spacing.ts",
+    "./typography": "./src/typography.ts"
   },
   "files": [
     "src"
   ],
   "devDependencies": {
     "@aetherstack/typescript-config": "workspace:*",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   }
 }

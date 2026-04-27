@@ -91,25 +91,32 @@ export const palette = {
 } as const
 
 /**
- * Semantic CSS variable names mapped to their default (light mode) HSL values.
- * These are injected as `:root` variables by the base globals.css.
+ * Semantic CSS variable names mapped to their Aether UI HSL values.
+ *
+ * Light mode uses violet-tinted foreground/secondary text to give the
+ * interface a subtle branded warmth. Dark mode uses a deep violet
+ * background ("274 66% 4%") rather than pure black — this is
+ * intentional Aether UI brand identity and is not a raw palette value.
+ *
+ * These are injected as `:root` / `.dark` variables by globals.css.
+ * The Tailwind config consumes them via `hsl(var(--token-name))`.
  */
 export const semanticColors = {
   light: {
     "--background": palette.neutral[0],
-    "--foreground": palette.neutral[950],
+    "--foreground": palette.violet[950],
     "--card": palette.neutral[0],
-    "--card-foreground": palette.neutral[950],
+    "--card-foreground": palette.violet[950],
     "--popover": palette.neutral[0],
-    "--popover-foreground": palette.neutral[950],
+    "--popover-foreground": palette.violet[950],
     "--primary": palette.violet[600],
     "--primary-foreground": palette.neutral[0],
     "--secondary": palette.neutral[100],
-    "--secondary-foreground": palette.neutral[900],
+    "--secondary-foreground": palette.violet[900],
     "--muted": palette.neutral[100],
     "--muted-foreground": palette.neutral[500],
     "--accent": palette.neutral[100],
-    "--accent-foreground": palette.neutral[900],
+    "--accent-foreground": palette.violet[900],
     "--destructive": palette.red[600],
     "--destructive-foreground": palette.neutral[0],
     "--border": palette.neutral[200],
@@ -120,19 +127,21 @@ export const semanticColors = {
     "--sidebar-primary": palette.violet[600],
     "--sidebar-primary-foreground": palette.neutral[0],
     "--sidebar-accent": palette.neutral[100],
-    "--sidebar-accent-foreground": palette.neutral[900],
+    "--sidebar-accent-foreground": palette.violet[900],
     "--sidebar-border": palette.neutral[200],
     "--sidebar-ring": palette.violet[600],
   },
   dark: {
-    "--background": palette.neutral[950],
+    // Deep violet background — not a raw palette step, intentional brand value
+    "--background": "274 66% 4%",
     "--foreground": palette.neutral[50],
-    "--card": palette.neutral[900],
+    // Violet-tinted dark surface for cards and popovers
+    "--card": "272 57% 9%",
     "--card-foreground": palette.neutral[50],
-    "--popover": palette.neutral[900],
+    "--popover": "272 57% 9%",
     "--popover-foreground": palette.neutral[50],
     "--primary": palette.violet[500],
-    "--primary-foreground": palette.neutral[950],
+    "--primary-foreground": "274 66% 4%",
     "--secondary": palette.neutral[800],
     "--secondary-foreground": palette.neutral[50],
     "--muted": palette.neutral[800],
@@ -140,14 +149,14 @@ export const semanticColors = {
     "--accent": palette.neutral[800],
     "--accent-foreground": palette.neutral[50],
     "--destructive": palette.red[500],
-    "--destructive-foreground": palette.neutral[950],
+    "--destructive-foreground": "274 66% 4%",
     "--border": palette.neutral[800],
     "--input": palette.neutral[800],
     "--ring": palette.violet[500],
-    "--sidebar-background": palette.neutral[900],
+    "--sidebar-background": "272 57% 9%",
     "--sidebar-foreground": palette.neutral[300],
     "--sidebar-primary": palette.violet[500],
-    "--sidebar-primary-foreground": palette.neutral[950],
+    "--sidebar-primary-foreground": "274 66% 4%",
     "--sidebar-accent": palette.neutral[800],
     "--sidebar-accent-foreground": palette.neutral[50],
     "--sidebar-border": palette.neutral[800],

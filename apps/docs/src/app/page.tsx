@@ -30,10 +30,18 @@ export default function HomePage() {
           </Button>
         </div>
 
-        {/* Status */}
-        <p className="mt-12 text-xs text-muted-foreground">
-          Documentation site coming soon — foundation scaffolded.
-        </p>
+        {/* Token system link */}
+        <div className="mt-12 flex flex-col items-center gap-2">
+          <a
+            href="/tokens"
+            className="text-xs text-muted-foreground underline-offset-4 hover:underline hover:text-foreground transition-colors"
+          >
+            View token reference →
+          </a>
+          <p className="text-xs text-muted-foreground">
+            Phase 2 complete — token system active.
+          </p>
+        </div>
       </div>
     </main>
   )

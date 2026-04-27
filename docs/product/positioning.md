@@ -2,7 +2,7 @@
 
 ## What is Aether UI?
 
-**Aether UI** is a premium shadcn/ui-compatible design system purpose-built for:
+**Aether UI** is a premium open-code design system purpose-built for:
 - SaaS dashboards
 - Admin interfaces
 - Internal tooling
@@ -10,6 +10,10 @@
 
 It is not a general-purpose component library. Every design decision is optimized for
 **dense, data-rich, professional interfaces** — not marketing sites or consumer apps.
+
+Aether UI uses a registry format compatible with the shadcn/ui convention, but ships its own CLI
+and installer. It does not depend on the shadcn CLI and is not built on top of shadcn/ui — the two
+are independent products that share a registry-JSON shape.
 
 ---
 
@@ -25,8 +29,8 @@ Existing solutions fall into two categories:
    You can't own the code or adapt it to your design language.
 
 Aether UI sits in the gap: **open-code components with a strong opinionated
-design language**, installable via the standard shadcn CLI and fully owned by
-the consuming team.
+design language**, installable via the Aether UI CLI and fully owned by the
+consuming team.
 
 ---
 
@@ -46,8 +50,8 @@ the consuming team.
 ## Positioning Statement
 
 > Aether UI is the design system for serious SaaS builders who want premium
-> quality without vendor lock-in. Built on shadcn/ui. Fully open. Composable.
-> Ready for production from day one.
+> quality without vendor lock-in. Open code, its own CLI, and a shadcn-compatible
+> registry format. Fully composable. Ready for production from day one.
 
 ---
 
@@ -63,6 +67,9 @@ the consuming team.
 - Advanced dashboard patterns (data grids, KPI cards, analytics)
 - License-gated, per-project or team subscription
 - Same code-ownership model — you get the source
+
+Both tiers install through the same `aether-ui` CLI using a single `aether.json` config;
+the pro tier just points at a license-gated registry URL.
 
 ---
 
@@ -85,7 +92,7 @@ making it trivially overridable per project.
 | | Aether UI | shadcn/ui | Tremor | MUI |
 |---|---|---|---|---|
 | Open code | ✓ | ✓ | ✓ | ✗ |
-| shadcn compatible | ✓ | — | ✗ | ✗ |
+| Registry-based install | ✓ | ✓ | ✗ | ✗ |
 | SaaS-focused | ✓ | ✗ | ✓ | ✗ |
 | Full blocks | ✓ (pro) | ✗ | partial | ✗ |
 | Premium tier | ✓ | ✗ | ✓ | ✓ |

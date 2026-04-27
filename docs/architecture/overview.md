@@ -1,5 +1,8 @@
 # Architecture Overview
 
+> Companion doc: [`engineering-standards.md`](./engineering-standards.md) — the source of truth for
+> coding, API, styling, a11y, and review standards in this repo.
+
 ## What is Aetherstack?
 
 **Aetherstack** is the monorepo and umbrella brand that contains the **Aether UI** design system, its
@@ -7,6 +10,20 @@ public registry, documentation, and demo applications. It is built as a real pro
 component collection.
 
 ---
+
+## Naming Glossary
+
+Six related names show up across the repo — this table pins down what each one refers to so imports
+and URLs stay consistent.
+
+| Name | Refers to |
+|---|---|
+| `aetherstack` | The monorepo, the GitHub repository, and the umbrella brand |
+| `Aether UI` | The design system product shipped from this monorepo |
+| `@aetherstack/*` | npm scope for all internal packages (e.g. `@aetherstack/ui`) |
+| `@aether` | Namespace for the **public** registry manifest items |
+| `@aether-pro` | Namespace for the future **premium** registry manifest items |
+| `aether-ui` | The CLI binary (`npx @aetherstack/cli` → runs `aether-ui`) |
 
 ## Repository Structure
 
@@ -24,7 +41,7 @@ aetherstack/
 │   ├── config-tailwind/  — Shared Tailwind base config
 │   │
 │   ├── tokens/           — Design tokens (colors, spacing, typography, …)
-│   ├── ui/               — Core component library (shadcn-compatible)
+│   ├── ui/               — Core component library (open-code, registry-installable)
 │   ├── patterns/         — Higher-level compositions (forms, nav, data)
 │   ├── blocks/           — Full page-section layout blocks
 │   ├── themes/           — CSS variable theme collections
@@ -66,12 +83,15 @@ utils
             └── blocks
 
 registry-schema
-  └── registry-build
-       └── tooling/scripts
+  ├── registry-build
+  │    └── tooling/scripts
+  └── cli
 ```
 
 Apps consume whichever packages they need. The `docs`, `studio`, and `demo` apps consume the full
-UI stack. `registry-public` only consumes `registry-schema`.
+UI stack. `registry-public` only consumes `registry-schema`. The `cli` package depends on
+`registry-schema` for validating manifests it fetches at runtime; `tsup` bundles the schema into
+the CLI output so the published binary has no workspace runtime deps.
 
 ---
 
@@ -82,8 +102,9 @@ UI stack. `registry-public` only consumes `registry-schema`.
 | Monorepo | pnpm workspaces + Turborepo | Industry standard, fast, great caching |
 | Language | TypeScript everywhere | Type safety across all boundaries |
 | UI framework | Next.js 14 (App Router) | SSR/SSG support, best-in-class DX |
-| Styling | Tailwind CSS 3 | Utility-first, shadcn-compatible |
-| Component model | shadcn/ui-compatible | Open-code, registry-installable |
+| Styling | Tailwind CSS 3 | Utility-first, token-driven |
+| Component model | Open-code, registry-installable | Users own the source; shadcn-format-compatible |
+| CLI bundler | tsup | Single-file CJS output with workspace deps inlined |
 | Schema validation | Zod | Runtime safety for registry data |
 | Versioning | Changesets | Independent package versioning |
 | Linting | ESLint 8 | Next.js native support |

@@ -1,6 +1,11 @@
 /**
  * Shadow tokens.
- * Defined as CSS box-shadow values. Dark mode overrides are handled in globals.css.
+ * Defined as CSS box-shadow values using raw `rgb(0 0 0 / ...)` alpha syntax.
+ *
+ * NOTE: These values are not adapted for dark mode. On dark surfaces a near-black
+ * drop shadow is invisible. Dark-mode shadow handling (e.g. a `--shadow-color`
+ * CSS variable overridden in `.dark {}`) is deferred to Phase 3 when surface
+ * colors and elevation patterns are established in the primitive layer.
  */
 export const shadows = {
   none: "none",

@@ -8,7 +8,6 @@ const config = {
     "@aetherstack/themes",
     "@aetherstack/utils",
     "@aetherstack/icons",
-    "@aetherstack/tailwind-config",
   ],
 }
 
