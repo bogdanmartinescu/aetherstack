@@ -102,6 +102,9 @@ importers:
       '@aetherstack/icons':
         specifier: workspace:*
         version: link:../../packages/icons
+      '@aetherstack/patterns':
+        specifier: workspace:*
+        version: link:../../packages/patterns
       '@aetherstack/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens

@@ -1,6 +1,6 @@
 # Aetherstack Build Plan
 
-Status: Phases 1–3 complete  
+Status: Phases 1–3 complete + Phase 3 extras + Phase 4 in progress  
 Project: Aetherstack  
 Design system: Aether UI
 
@@ -179,9 +179,59 @@ Implement the minimum serious component base required for product UI work.
 ## Notes
 This is the first phase where public quality becomes visible. Do not rush quantity. A smaller, clean set is better than a broad but inconsistent library.
 
+## Phase 3 Extras (delivered beyond spec)
+
+The following were delivered during or immediately after Phase 3 and are considered stable:
+
+### Infrastructure
+- **Next.js upgrade**: all four apps upgraded from `^14.2.3` to `^16.2.4` (Turbopack-enabled); `eslint-config-next` pinned to `^15.3.9` (ESLint-8-compatible); `next lint` replaced with direct `eslint src` invocations (removed in Next.js 16)
+- **npm publishing pipeline**: `tsup.config.ts` added to `@aetherstack/ui`, `@aetherstack/tokens`, `@aetherstack/utils`; `build` script via tsup generates ESM + CJS + `.d.ts`; `publishConfig` in each `package.json` lets workspace consumers use raw `src/*.ts` while npm consumers receive pre-built `dist/`
+- **CI (GitHub Actions)**: `.github/workflows/ci.yml` — three parallel jobs (Typecheck & Lint, Tests, Build) triggered on push/PR to `main` and `develop`; pnpm v9.1.0, Node 20, Turbo cache
+- **PR template**: `.github/pull_request_template.md`
+- **Develop branch**: all Phase 3+ work lives on `develop`
+
+### Documentation (apps/docs)
+All docs pages are server-side static, use the `DocsShell` layout, and are fully typed.
+
+| Route | Content |
+|-------|---------|
+| `/introduction` | shadcn/ui-style intro: design principles, architecture layers, tech stack, quick-start, comparison table |
+| `/installation` | Step-by-step setup for Next.js App Router, Next.js Pages Router, Vite + React, Remix, Astro, TanStack Start |
+| `/cli` | Full CLI reference: all 5 commands (`init`, `add`, `diff`, `update`, `list`), `aether.config.json` schema, common workflows, npm publishing workflow, monorepo support |
+| `/tokens` | Design token reference |
+| `/icons` | Lucide React integration: install, usage in Button/Input/Badge/Select, icon-only button pattern, 80+ icon reference grid, a11y notes |
+| `/fonts` | 6-font catalog with live UI demo, how-it-works explainer, Next.js + Vite setup snippets, `aether.config.json` font config |
+| `/components` | Component index with category grouping |
+| `/components/[slug]` | Individual pages for all 16 primitives — Preview + Installation tabs, usage examples, prop tables, a11y notes |
+
+### Icons integration
+- Lucide React (`^0.441.0`) is the default icon library, already a dep of `@aetherstack/ui`
+- Button page updated with real Lucide icon examples: leading/trailing icons, icon-only (`size="icon"` + `aria-label`), loading (`Loader2 className="animate-spin"`)
+- `[&_svg]:size-4 [&_svg]:pointer-events-none` already baked into `buttonVariants` for zero-config icon sizing
+
+### Font system
+- 6 curated Google Fonts loaded via `next/font/google` in `apps/docs`: **Inter**, **Plus Jakarta Sans**, **DM Sans**, **Manrope**, **Outfit**, **Figtree** + **JetBrains Mono**
+- Each font gets its own CSS variable; `--font-sans` is redirected via `data-font` attribute on `<html>`
+- FOUC-prevention inline script restores persisted font from `localStorage` before first paint
+- `globals.css` data-font rules make the switch instant and global — all Tailwind `font-sans` classes update automatically
+
+### Theme toggle
+- `next-themes` installed in docs app; `ThemeProvider` wraps app with `attribute="class"`, `defaultTheme="system"`
+- `ThemeToggle` component: three-button pill (☀️ Light · 🌙 Dark · 🖥 System) in `DocsShell` header
+- Dark mode was already wired via `.dark` CSS selector in `globals.css`
+
+### Sidebar (updated structure)
+```
+Getting started  →  Introduction · Installation · CLI
+Foundation       →  Tokens · Icons · Fonts
+Components       →  Overview + 16 primitives (alphabetical)
+```
+
 ---
 
 # Phase 4 — App Patterns
+
+Status: In progress
 
 ## Goal
 Create reusable product UI compositions built on the primitives.
@@ -190,19 +240,24 @@ Create reusable product UI compositions built on the primitives.
 Patterns should represent real application use, not isolated visual demos.
 
 ## Deliverables
-- Form Field wrapper
-- Page Header
-- Filter Toolbar
-- Search/Command surface
-- Empty State
-- Loading State
-- Error State
-- Settings Section
-- Section Header
-- Table Toolbar
-- Sidebar/Nav pattern
-- Dashboard metric card pattern
-- simple layout helpers
+
+### Compositions (packages/patterns)
+- **FormField** — Label + control + helper text + error message; `useFormField` context hook
+- **PageHeader** — title, description, optional breadcrumb, actions slot
+- **SectionHeader** — lighter heading block with title + description + optional action
+- **SettingsSection** — structured settings block (header + content + optional footer)
+- **EmptyState** — icon, title, description, optional primary/secondary CTA
+- **LoadingState** — centred spinner or skeleton-row variant
+- **ErrorState** — error icon, title, description, optional retry CTA
+- **MetricCard** — stat label, value, optional trend badge and icon (dashboard card)
+- **FilterToolbar** — active filter pills + clear-all + slot for additional filter controls
+- **TableToolbar** — search input + filter trigger + action buttons slot (sits above a Table)
+- **NavItem / NavGroup** — composable sidebar nav building blocks
+- **Breadcrumb** — list of linked crumbs with configurable separator
+
+### Documentation (apps/docs)
+- `/patterns` — pattern index page
+- `/patterns/[slug]` — individual pages for each pattern with the same layout as component pages
 
 ## Testing
 - unit tests for each pattern covering composition contracts (slots, props, empty/loading/error states)
@@ -500,15 +555,14 @@ The following should not be prioritized until the core system is stable:
 
 ## Immediate Next Step
 
-Start **Phase 4 — App Patterns** and complete the following first:
+Phase 4 — App Patterns is now underway. Package: `packages/patterns`.
 
-- Form Field wrapper (Label + Input + error message composition)
-- Page Header (title, breadcrumb, actions slot)
-- Empty State (icon, title, description, CTA)
-- Loading State
-- Section Header
-
-Patterns must depend on `@aetherstack/ui` primitives, not parallel implementations. Package: `packages/patterns`.
+Priority order:
+1. FormField, PageHeader, SectionHeader, SettingsSection
+2. EmptyState, LoadingState, ErrorState
+3. MetricCard, FilterToolbar, TableToolbar
+4. NavItem/NavGroup, Breadcrumb
+5. Docs pages for all patterns
 
 ## Standards Enforcement
 

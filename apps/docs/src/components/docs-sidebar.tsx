@@ -24,6 +24,24 @@ const nav = [
     ],
   },
   {
+    group: "Patterns",
+    items: [
+      { label: "Overview", href: "/patterns" },
+      { label: "Form Field", href: "/patterns/form-field" },
+      { label: "Page Header", href: "/patterns/page-header" },
+      { label: "Breadcrumb", href: "/patterns/breadcrumb" },
+      { label: "Section Header", href: "/patterns/section-header" },
+      { label: "Settings Section", href: "/patterns/settings-section" },
+      { label: "Empty State", href: "/patterns/empty-state" },
+      { label: "Loading State", href: "/patterns/loading-state" },
+      { label: "Error State", href: "/patterns/error-state" },
+      { label: "Metric Card", href: "/patterns/metric-card" },
+      { label: "Table Toolbar", href: "/patterns/table-toolbar" },
+      { label: "Filter Toolbar", href: "/patterns/filter-toolbar" },
+      { label: "Sidebar Nav", href: "/patterns/nav" },
+    ],
+  },
+  {
     group: "Components",
     items: [
       { label: "Overview", href: "/components" },

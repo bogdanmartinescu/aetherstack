@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@aetherstack/icons": "workspace:*",
+    "@aetherstack/patterns": "workspace:*",
     "@aetherstack/tokens": "workspace:*",
     "@aetherstack/ui": "workspace:*",
     "@aetherstack/utils": "workspace:*",

@@ -121,30 +121,38 @@ Do not:
 
 ## Current Phase Context
 
-Phases 1, 2, and 3 are complete. Phase 3 includes extensive documentation in `apps/docs`:
+**Phases 1–3 complete + Phase 3 Extras + Phase 4 in progress**
 
-- **`/installation`** — step-by-step setup guides for Next.js App Router, Next.js Pages Router, Vite + React, Remix, Astro, and TanStack Start
-- **`/components`** — component index with category grouping
-- **`/components/[slug]`** — individual pages for all 16 components with Preview/Installation tabs, usage examples, props tables, and accessibility notes
-- **`/tokens`** — design token reference
+### Phase 3 core (complete)
+16 UI primitives in `packages/ui`: Button, Input, Textarea, Select, Checkbox, RadioGroup, Switch, Badge, Card, Tabs, Dialog, Sheet, Tooltip, Table, Label, Skeleton. Full Vitest test suite (82 tests).
 
-The docs app uses a shared `DocsShell` with sidebar navigation (route group `(docs)`).
+### Phase 3 extras (complete)
+- Next.js upgraded to 16.2.4 across all four apps
+- tsup build pipeline for `@aetherstack/ui`, `@aetherstack/tokens`, `@aetherstack/utils` (publishConfig for npm)
+- GitHub Actions CI (`.github/workflows/ci.yml`) — typecheck/lint/test/build on push + PR
+- `apps/docs` routes: `/introduction`, `/installation`, `/cli`, `/tokens`, `/icons`, `/fonts`, `/components`, `/components/[slug]` (16 pages)
+- `DocsShell` header: font picker (6 Google Fonts, global via `data-font` + CSS vars, persisted to localStorage) + theme toggle (light/dark/system via next-themes)
+- Sidebar: Getting started · Foundation · Components
 
-Current expected phase:
+### Phase 4 — App Patterns (in progress)
+Package: `packages/patterns`
 
-**Phase 4 — App Patterns**
+Patterns are higher-level compositions of primitives. Rules:
+- Must depend on `@aetherstack/ui`, never re-implement primitive behavior
+- Export named components with a stable API
+- Each pattern has its own file in `packages/patterns/src/`
+- Docs live at `/patterns/[slug]` in `apps/docs`
 
-Priority deliverables:
-- Form Field wrapper
-- Page Header
-- Filter Toolbar
-- Search/Command surface
-- Empty State, Loading State, Error State
-- Settings Section, Section Header
-- Table Toolbar
-- Sidebar/Nav pattern
-- Dashboard metric card pattern
-- Simple layout helpers
-
-Patterns must depend on `@aetherstack/ui` primitives, not parallel implementations.
-Package: `packages/patterns`.
+Deliverables in progress:
+- FormField (Label + control + helper + error message)
+- PageHeader (title, description, breadcrumb, actions)
+- SectionHeader (title + description + optional action)
+- SettingsSection (header + content + optional footer)
+- EmptyState (icon, title, description, CTA)
+- LoadingState (spinner / skeleton variant)
+- ErrorState (title, description, retry CTA)
+- MetricCard (label, value, trend, icon)
+- FilterToolbar (active filter pills + clear-all)
+- TableToolbar (search + filter + actions)
+- NavItem / NavGroup (sidebar nav building blocks)
+- Breadcrumb
