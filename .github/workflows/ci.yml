@@ -23,8 +23,6 @@ env:
 
 jobs:
   # ─── Typecheck + Lint ───────────────────────────────────────────────────────
-  # Runs in parallel with the test job — fails fast on type errors before
-  # spending time on the test runner.
   check:
     name: Typecheck & Lint
     runs-on: ubuntu-latest
@@ -66,7 +64,7 @@ jobs:
 
   # ─── Tests ──────────────────────────────────────────────────────────────────
   # Runs Vitest for every package that has a test script.
-  # Currently: @aetherstack/tokens (26 tests) and @aetherstack/ui (56 tests).
+  # tokens, ui, patterns, blocks, cli, registry-schema, registry-build.
   test:
     name: Tests
     runs-on: ubuntu-latest
@@ -100,23 +98,116 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-test-
 
-      # Run each test package explicitly so GitHub Actions shows them as
-      # separate steps with individual pass/fail indicators.
+      # The CLI integration test reads from apps/registry-public/public/r/, so
+      # the registry must be built before the CLI tests run.
+      - name: Build registry artefacts (for CLI integration tests)
+        run: pnpm --filter @aetherstack/scripts build-registry
+
       - name: Test — @aetherstack/tokens
         run: pnpm --filter @aetherstack/tokens test
 
-      - name: Test — @aetherstack/ui (primitives)
+      - name: Test — @aetherstack/ui
         run: pnpm --filter @aetherstack/ui test
 
+      - name: Test — @aetherstack/patterns
+        run: pnpm --filter @aetherstack/patterns test
+
+      - name: Test — @aetherstack/blocks
+        run: pnpm --filter @aetherstack/blocks test
+
+      - name: Test — @aetherstack/registry-schema
+        run: pnpm --filter @aetherstack/registry-schema test
+
+      - name: Test — @aetherstack/registry-build
+        run: pnpm --filter @aetherstack/registry-build test
+
+      - name: Test — @aetherstack/cli
+        run: pnpm --filter @aetherstack/cli test
+
+  # ─── Registry validation ────────────────────────────────────────────────────
+  # Validates schema integrity AND ensures the committed per-item JSON output
+  # matches what `build-registry` would emit. Catches drift where someone edits
+  # registry/public/registry.json without re-running the build.
+  registry:
+    name: Registry
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.1.0
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate registry manifests
+        run: pnpm --filter @aetherstack/scripts validate-registry
+
+      - name: Build registry artefacts
+        run: pnpm --filter @aetherstack/scripts build-registry
+
+      - name: Fail if committed registry artefacts are stale
+        run: |
+          if ! git diff --quiet --exit-code -- apps/registry-public/public/r; then
+            echo "::error::Committed registry artefacts in apps/registry-public/public/r/ are out of date. Run 'pnpm --filter @aetherstack/scripts build-registry' and commit the result."
+            git --no-pager diff -- apps/registry-public/public/r
+            exit 1
+          fi
+
+  # ─── Changeset check (PRs only) ─────────────────────────────────────────────
+  # Fails when a PR modifies packages/*/src/** without adding a .changeset/*.md.
+  # This enforces the changeset discipline documented in CONTRIBUTING.md.
+  changeset:
+    name: Changeset
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect package changes without a changeset
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          git fetch origin "$BASE_REF" --depth=1
+          BASE_SHA=$(git rev-parse "origin/$BASE_REF")
+          CHANGED=$(git diff --name-only "$BASE_SHA"...HEAD)
+          PACKAGE_TOUCHED=$(echo "$CHANGED" | grep -E '^packages/[^/]+/src/' || true)
+          NEW_CHANGESET=$(echo "$CHANGED" | grep -E '^\.changeset/.+\.md$' | grep -v '^\.changeset/README\.md$' || true)
+
+          if [ -n "$PACKAGE_TOUCHED" ] && [ -z "$NEW_CHANGESET" ]; then
+            echo "::error::This PR modifies packages/*/src/** but adds no changeset."
+            echo "Touched package files:"
+            echo "$PACKAGE_TOUCHED"
+            echo ""
+            echo "Run 'pnpm changeset' and commit the generated .changeset/*.md."
+            exit 1
+          fi
+          echo "Changeset check OK."
+
   # ─── Build ──────────────────────────────────────────────────────────────────
-  # Verifies the workspace builds end-to-end. Only runs on pushes to main or
-  # develop (not on every PR to keep feedback fast; adjust if needed).
+  # Verifies the workspace builds end-to-end on every push AND every PR.
   build:
     name: Build
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    # Only build on direct pushes, not on every PR draft.
-    if: github.event_name == 'push'
 
     steps:
       - name: Checkout

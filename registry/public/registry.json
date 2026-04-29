@@ -5,18 +5,428 @@
   "version": "0.0.1",
   "items": [
     {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Status, category, or count label.",
+      "author": "aetherstack",
+      "dependencies": ["class-variance-authority", "@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/badge.tsx"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
       "description": "A versatile button component with multiple variants and sizes.",
       "author": "aetherstack",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": [],
+      "dependencies": ["class-variance-authority", "@radix-ui/react-slot", "@aetherstack/utils"],
       "files": [
         {
           "path": "packages/ui/src/components/button.tsx",
           "type": "registry:ui",
           "target": "components/ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Surface container with header, content, and footer subcomponents.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Binary toggle with indeterminate support, built on Radix UI.",
+      "author": "aetherstack",
+      "dependencies": ["@radix-ui/react-checkbox", "lucide-react", "@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Modal window with focus trap and backdrop.",
+      "author": "aetherstack",
+      "dependencies": ["@radix-ui/react-dialog", "lucide-react", "@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Single-line text field supporting all HTML input types.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Accessible form label built on Radix UI.",
+      "author": "aetherstack",
+      "dependencies": ["@radix-ui/react-label", "class-variance-authority", "@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/label.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/label.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Single-select control over a set of options.",
+      "author": "aetherstack",
+      "dependencies": ["@radix-ui/react-radio-group", "lucide-react", "@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/radio-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Accessible single-select dropdown built on Radix UI.",
+      "author": "aetherstack",
+      "dependencies": ["@radix-ui/react-select", "lucide-react", "@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "Slide-in panel from any screen edge.",
+      "author": "aetherstack",
+      "dependencies": ["@radix-ui/react-dialog", "class-variance-authority", "lucide-react", "@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/sheet.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sheet.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Loading placeholder that mimics content shape.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/skeleton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "On/off slide toggle built on Radix UI.",
+      "author": "aetherstack",
+      "dependencies": ["@radix-ui/react-switch", "@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/switch.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Semantic data table with header, body, and footer subcomponents.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/table.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Layered content panels with tab navigation.",
+      "author": "aetherstack",
+      "dependencies": ["@radix-ui/react-tabs", "@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Multi-line text field.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Contextual label on hover or focus, built on Radix UI.",
+      "author": "aetherstack",
+      "dependencies": ["@radix-ui/react-tooltip", "@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "form-field",
+      "type": "registry:pattern",
+      "title": "Form Field",
+      "description": "Label + control + helper text + error message composition with context hook.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils", "@aetherstack/ui"],
+      "registryDependencies": ["label"],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/form-field.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/form-field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "page-header",
+      "type": "registry:pattern",
+      "title": "Page Header",
+      "description": "Title, description, optional breadcrumb, and actions slot. Includes Breadcrumb.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/page-header.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/page-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "section-header",
+      "type": "registry:pattern",
+      "title": "Section Header",
+      "description": "Lightweight block heading with optional action. Includes SettingsSection.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/section-header.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/section-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:pattern",
+      "title": "Empty State",
+      "description": "Icon, title, description and optional CTA for zero-data views.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/empty-state.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/empty-state.tsx"
+        }
+      ]
+    },
+    {
+      "name": "loading-state",
+      "type": "registry:pattern",
+      "title": "Loading State",
+      "description": "Centered spinner or skeleton-row variant for async loading.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils", "@aetherstack/ui"],
+      "registryDependencies": ["skeleton"],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/loading-state.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/loading-state.tsx"
+        }
+      ]
+    },
+    {
+      "name": "error-state",
+      "type": "registry:pattern",
+      "title": "Error State",
+      "description": "Error icon, title, description and retry CTA.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/error-state.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/error-state.tsx"
+        }
+      ]
+    },
+    {
+      "name": "metric-card",
+      "type": "registry:pattern",
+      "title": "Metric Card",
+      "description": "Dashboard stat card: label, value, trend badge, icon.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils", "@aetherstack/ui"],
+      "registryDependencies": ["card"],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/metric-card.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/metric-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table-toolbar",
+      "type": "registry:pattern",
+      "title": "Table Toolbar",
+      "description": "Search + filter + actions layout above a Table. Includes FilterToolbar and FilterPill.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/table-toolbar.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/table-toolbar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "nav",
+      "type": "registry:pattern",
+      "title": "Sidebar Nav",
+      "description": "NavItem, NavGroup, and SidebarNav composable building blocks.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/nav.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/nav.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dashboard-shell",
+      "type": "registry:block",
+      "title": "Dashboard Shell",
+      "description": "Full-page SaaS dashboard layout with collapsible sidebar, topbar with search and notifications, and a content slot.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils", "@aetherstack/ui", "lucide-react"],
+      "registryDependencies": ["input"],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/dashboard-shell.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/dashboard-shell.tsx"
+        }
+      ]
+    },
+    {
+      "name": "login-block",
+      "type": "registry:block",
+      "title": "Login",
+      "description": "Centered login card with email, password, remember-me, and forgot-password link.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils", "@aetherstack/ui", "@aetherstack/patterns"],
+      "registryDependencies": ["button", "input", "checkbox", "label", "form-field"],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/login-block.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/login-block.tsx"
+        }
+      ]
+    },
+    {
+      "name": "signup-block",
+      "type": "registry:block",
+      "title": "Sign Up",
+      "description": "Sign-up form with name, email, password fields, validation, and terms/privacy links.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils", "@aetherstack/ui", "@aetherstack/patterns"],
+      "registryDependencies": ["button", "input", "form-field"],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/signup-block.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/signup-block.tsx"
         }
       ]
     }

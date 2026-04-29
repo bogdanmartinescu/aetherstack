@@ -1,29 +1,28 @@
 # Aetherstack Build Plan
 
-Status: Phases 1–3 complete + Phase 3 extras + Phase 4 in progress  
-Project: Aetherstack  
+Status: Phases 1–4 complete · Phase 4.6 in progress · Phase 5 (AI Foundations) next
+Project: Aetherstack
 Design system: Aether UI
 
 ## Purpose
 
-This document is the implementation roadmap for Aetherstack. It defines the build phases, expected deliverables, acceptance criteria, and sequencing for turning the current monorepo foundation into a production-grade design system and registry product.
+This document is the implementation roadmap for Aetherstack. It defines the build phases, expected deliverables, acceptance criteria, and sequencing for turning the current monorepo foundation into a production-grade, AI-native design system and registry product.
 
-Phase 1 is already complete and committed. The remaining phases should be executed in order unless a specific dependency can be isolated safely.
+Phases 1–4 are complete and committed. Phase 4.6 is a stabilization sprint (see [the audit & stabilization plan](../../.cursor/plans/aetherstack_quality_stabilization_ea20042a.plan.md)) that tightens the truth-floor of what's already shipped before the AI-native expansion in Phase 5+.
 
 ---
 
 ## Product Goal
 
-Aetherstack is the umbrella product and monorepo for **Aether UI**, a premium open-code design system and registry for SaaS products, admin dashboards, and modern internal tools. Its registry format is compatible with the shadcn/ui convention, but it ships its own CLI (`aether-ui`) and is independent from the shadcn CLI.
+Aetherstack is the umbrella product and monorepo for **Aether UI**, a premium open-code design system and registry for SaaS products, admin dashboards, and modern internal tools. Its registry format is compatible with the shadcn/ui convention, but it ships its own CLI (`aether-ui`), AI metadata, and an opt-in MCP server, and is independent of the shadcn CLI.
 
-The system should support:
+The system supports:
 
-- public design-system primitives
-- reusable app patterns
-- polished blocks and shells
-- a public installable registry
-- a future premium registry
-- documentation, demos, and examples
+- public design-system primitives, patterns, and blocks
+- a public installable registry consumed via a first-party CLI
+- a future premium registry behind auth + license gating
+- AI-native metadata so LLMs can generate, modify, and reason about Aether UI components
+- documentation, demos, and examples that match the shipped reality
 - a maintainable commercial-grade monorepo architecture
 
 ---
@@ -32,11 +31,12 @@ The system should support:
 
 1. Build foundations before breadth.
 2. Prefer consistency over novelty.
-3. Keep boundaries strict between tokens, primitives, patterns, and blocks.
+3. Keep boundaries strict between tokens, primitives, patterns, blocks, and AI metadata.
 4. Optimize for installability and maintainability, not just visual polish.
 5. Keep the public system high quality enough to drive trust.
 6. Reserve premium value for deeper blocks, complete shells, themes, and vertical kits.
 7. Ship each phase with clear acceptance criteria.
+8. Truth in docs: every claim is verifiable in CI before it appears in user-facing docs.
 
 ---
 
@@ -47,12 +47,13 @@ The system should support:
 | 1 | Foundation | Monorepo base, package structure, apps, docs scaffolding |
 | 2 | Token System | Design tokens, theme contract, CSS variables, base semantics |
 | 3 | Core Primitives | Stable foundational components for forms, layout, and interaction |
-| 4 | App Patterns | Reusable product-level UI patterns built on primitives |
-| 5 | Blocks & Shells | Complete page sections and app blocks with real product value |
-| 6 | Public Registry | Installable public registry with validated manifests and build flow |
-| 7 | Docs & Demo Hardening | Production-quality docs, examples, demo app, install flows |
-| 8 | Pro Architecture | Premium registry structure, gated items, premium package plan |
-| 9 | Release Readiness | Versioning, QA, contribution flow, release process, launch prep |
+| 4 | App Patterns | Reusable product-level UI patterns + first 3 blocks (Dashboard Shell, Login, Signup) |
+| 4.6 | Quality, Truth & Coverage | Reality stabilization — registry truth, reference apps, test coverage, CI hardening |
+| 5 | AI Foundations | LLM-friendly metadata, `llms.txt`, MCP server, prompt-driven CLI flow |
+| 6 | Component Gap-Fill | Net-new primitives, patterns, and blocks chosen by SaaS/AI value |
+| 7 | Public Registry hardened | Production-ready public registry, install flows, CDN, versioning |
+| 8 | Pro Architecture | Auth, license gating, premium namespace, billing flow |
+| 9 | Pro Content + Launch | Vertical kits (CRM, Billing, Analytics), AI Recipes Pro, public launch |
 
 ---
 
@@ -76,452 +77,351 @@ Create the monorepo base and product scaffolding.
 - engineering standards doc, AI working rules (`CLAUDE.md`), product positioning, architecture overview
 - roadmap/docs foundation
 
-## Testing
-- `pnpm typecheck`, `pnpm lint`, and `pnpm build` all green across the workspace
-- CLI smoke-tested end-to-end: `init` → `list` → `add button` in a clean target directory
-
-## Exit Criteria
+## Exit Criteria — all met
 - repo installs cleanly
 - apps run
 - packages resolve
 - TypeScript boundaries are working
-- structure is stable enough to build on
 
 ---
 
 # Phase 2 — Token System
 
-## Goal
-Create the design foundation for Aether UI.
+Status: Complete
 
-## Scope
-Build the token layer that all other packages depend on.
-
-## Deliverables
-- semantic color system
-- base neutral palette
-- accent palette(s)
-- typography scale
-- spacing scale
-- radius scale
-- shadow scale
-- motion tokens
-- CSS variable contract
-- light/dark theme support
+## Delivered
+- semantic color system + base neutral palette + accent palettes
+- typography, spacing, radius, shadow, motion scales
+- CSS variable contract with light/dark theme support
 - token exports for package consumption
-- docs for token usage
+- 26 vitest cases covering token shape, palette structure, and semantic mapping
+- docs for token usage in `apps/docs/src/app/(docs)/tokens`
 
-## Package Focus
-- `packages/tokens`
-- `packages/themes`
-- `packages/utils`
-- app integration for docs/demo/studio
-
-## Acceptance Criteria
+## Acceptance Criteria — all met
 - tokens are defined centrally and consumed consistently
 - no primitive hardcodes visual values that should come from tokens
 - theme switching is structurally supported
-- docs app can demonstrate the token system clearly
 - token naming is stable and semantically meaningful
-
-## Notes
-This phase should establish the long-term visual language. Avoid overbuilding multiple themes too early. The default Aether theme should be complete and well-structured before any style packs are added.
 
 ---
 
 # Phase 3 — Core Primitives
 
-## Goal
-Build the first stable, reusable Aether UI primitive layer.
+Status: Complete
 
-## Scope
-Implement the minimum serious component base required for product UI work.
-
-## Deliverables
-- Button
-- Input
-- Textarea
-- Select
-- Checkbox
-- Radio Group
-- Switch
-- Badge
-- Card
-- Tabs
-- Dialog
-- Sheet
-- Tooltip
-- Table
-- Skeleton
-- shared variant conventions
-- accessibility pass
-- docs examples for each component
-
-## Testing
-- unit tests (Vitest + Testing Library) for every primitive covering default render, each variant/size, disabled state, and keyboard interaction where applicable
-- axe/a11y smoke tests for interactive primitives (Dialog, Sheet, Tabs, Tooltip, Select, Switch)
-- visual sanity in `apps/studio` for each primitive at default and key variants
-
-## Package Focus
-- `packages/ui`
-- `packages/utils`
-- `apps/docs`
-- `apps/studio`
-
-## Acceptance Criteria
-- all primitives compile and are exported cleanly
-- components are token-driven
-- variants follow a consistent API shape
-- keyboard/accessibility behavior is correct for core interactions
-- components are demonstrated in docs and studio
-- component APIs are stable enough for patterns to depend on them
-
-## Notes
-This is the first phase where public quality becomes visible. Do not rush quantity. A smaller, clean set is better than a broad but inconsistent library.
+## Delivered
+- 16 primitives in `packages/ui/src/components/`: Badge, Button, Card, Checkbox, Dialog, Input, Label, Radio Group, Select, Sheet, Skeleton, Switch, Table, Tabs, Textarea, Tooltip
+- shared variant conventions, accessibility pass, docs examples per component
+- 56 vitest cases covering default render, variants/sizes, disabled state, keyboard interaction
+- visual sanity in `apps/studio` for each primitive
 
 ## Phase 3 Extras (delivered beyond spec)
 
-The following were delivered during or immediately after Phase 3 and are considered stable:
-
 ### Infrastructure
-- **Next.js upgrade**: all four apps upgraded from `^14.2.3` to `^16.2.4` (Turbopack-enabled); `eslint-config-next` pinned to `^15.3.9` (ESLint-8-compatible); `next lint` replaced with direct `eslint src` invocations (removed in Next.js 16)
-- **npm publishing pipeline**: `tsup.config.ts` added to `@aetherstack/ui`, `@aetherstack/tokens`, `@aetherstack/utils`; `build` script via tsup generates ESM + CJS + `.d.ts`; `publishConfig` in each `package.json` lets workspace consumers use raw `src/*.ts` while npm consumers receive pre-built `dist/`
-- **CI (GitHub Actions)**: `.github/workflows/ci.yml` — three parallel jobs (Typecheck & Lint, Tests, Build) triggered on push/PR to `main` and `develop`; pnpm v9.1.0, Node 20, Turbo cache
-- **PR template**: `.github/pull_request_template.md`
-- **Develop branch**: all Phase 3+ work lives on `develop`
+- **Next.js 16.2.4** (Turbopack-enabled) across all four apps
+- **npm publishing pipeline** via `tsup` for `@aetherstack/ui`, `@aetherstack/tokens`, `@aetherstack/utils`
+- **CI (GitHub Actions)** with parallel Typecheck/Lint, Test, and Build jobs
+- **PR template** + `develop` branch model
 
 ### Documentation (apps/docs)
-All docs pages are server-side static, use the `DocsShell` layout, and are fully typed.
-
 | Route | Content |
 |-------|---------|
 | `/introduction` | shadcn/ui-style intro: design principles, architecture layers, tech stack, quick-start, comparison table |
-| `/installation` | Step-by-step setup for Next.js App Router, Next.js Pages Router, Vite + React, Remix, Astro, TanStack Start |
-| `/cli` | Full CLI reference: all 5 commands (`init`, `add`, `diff`, `update`, `list`), `aether.config.json` schema, common workflows, npm publishing workflow, monorepo support |
+| `/installation` | Setup for Next.js App Router, Pages Router, Vite + React, Remix, Astro, TanStack Start |
+| `/cli` | Full CLI reference: `init`, `add`, `diff`, `update`, `list`, `aether.json` schema |
 | `/tokens` | Design token reference |
-| `/icons` | Lucide React integration: install, usage in Button/Input/Badge/Select, icon-only button pattern, 80+ icon reference grid, a11y notes |
-| `/fonts` | 6-font catalog with live UI demo, how-it-works explainer, Next.js + Vite setup snippets, `aether.config.json` font config |
+| `/icons` | Lucide React integration: 80+ icon reference grid, a11y notes |
+| `/fonts` | 6-font catalog with live UI demo |
 | `/components` | Component index with category grouping |
-| `/components/[slug]` | Individual pages for all 16 primitives — Preview + Installation tabs, usage examples, prop tables, a11y notes |
+| `/components/[slug]` | Individual pages for all 16 primitives |
+| `/blocks` | Block gallery (Dashboard / Login / Signup) |
+| `/charts` | Recharts integration with 4 live chart examples |
+| `/patterns` | Pattern index + per-pattern pages |
 
-### Icons integration
-- Lucide React (`^0.441.0`) is the default icon library, already a dep of `@aetherstack/ui`
-- Button page updated with real Lucide icon examples: leading/trailing icons, icon-only (`size="icon"` + `aria-label`), loading (`Loader2 className="animate-spin"`)
-- `[&_svg]:size-4 [&_svg]:pointer-events-none` already baked into `buttonVariants` for zero-config icon sizing
-
-### Font system
-- 6 curated Google Fonts loaded via `next/font/google` in `apps/docs`: **Inter**, **Plus Jakarta Sans**, **DM Sans**, **Manrope**, **Outfit**, **Figtree** + **JetBrains Mono**
-- Each font gets its own CSS variable; `--font-sans` is redirected via `data-font` attribute on `<html>`
-- FOUC-prevention inline script restores persisted font from `localStorage` before first paint
-- `globals.css` data-font rules make the switch instant and global — all Tailwind `font-sans` classes update automatically
-
-### Theme toggle
-- `next-themes` installed in docs app; `ThemeProvider` wraps app with `attribute="class"`, `defaultTheme="system"`
-- `ThemeToggle` component: three-button pill (☀️ Light · 🌙 Dark · 🖥 System) in `DocsShell` header
-- Dark mode was already wired via `.dark` CSS selector in `globals.css`
-
-### Sidebar (updated structure)
-```
-Getting started  →  Introduction · Installation · CLI
-Foundation       →  Tokens · Icons · Fonts
-Components       →  Overview + 16 primitives (alphabetical)
-```
+### Theme + font system
+- `next-themes` light/dark/system toggle
+- 6 curated Google Fonts swappable via `data-font` attribute on `<html>`, FOUC-prevention inline script
 
 ---
 
-# Phase 4 — App Patterns
+# Phase 4 — App Patterns + First Blocks
 
-Status: In progress
+Status: Complete
 
-## Goal
-Create reusable product UI compositions built on the primitives.
+## Delivered
 
-## Scope
-Patterns should represent real application use, not isolated visual demos.
+### Patterns (packages/patterns)
+12 patterns in 9 source files: **FormField** (+ FormLabel, FormControl, FormDescription, FormMessage, useFormField), **PageHeader** (+ Breadcrumb), **SectionHeader** (+ SettingsSection), **EmptyState**, **LoadingState**, **ErrorState**, **MetricCard**, **TableToolbar** (+ FilterToolbar, FilterPill), and **NavItem** / **NavGroup** / **SidebarNav**.
 
-## Deliverables
+85 vitest cases covering composition contracts, slots, props, error states, and a11y attributes.
 
-### Compositions (packages/patterns)
-- **FormField** — Label + control + helper text + error message; `useFormField` context hook
-- **PageHeader** — title, description, optional breadcrumb, actions slot
-- **SectionHeader** — lighter heading block with title + description + optional action
-- **SettingsSection** — structured settings block (header + content + optional footer)
-- **EmptyState** — icon, title, description, optional primary/secondary CTA
-- **LoadingState** — centred spinner or skeleton-row variant
-- **ErrorState** — error icon, title, description, optional retry CTA
-- **MetricCard** — stat label, value, optional trend badge and icon (dashboard card)
-- **FilterToolbar** — active filter pills + clear-all + slot for additional filter controls
-- **TableToolbar** — search input + filter trigger + action buttons slot (sits above a Table)
-- **NavItem / NavGroup** — composable sidebar nav building blocks
-- **Breadcrumb** — list of linked crumbs with configurable separator
+### First three blocks (packages/blocks)
+- **DashboardShell** — collapsible sidebar, topbar with search/notifications, content slot
+- **LoginBlock** — email + password form with validation, optional split-panel layout
+- **SignupBlock** — name + email + password form with validation and terms/privacy links
 
-### Documentation (apps/docs)
-- `/patterns` — pattern index page
-- `/patterns/[slug]` — individual pages for each pattern with the same layout as component pages
-
-## Testing
-- unit tests for each pattern covering composition contracts (slots, props, empty/loading/error states)
-- integration tests in `apps/demo` exercising at least one realistic flow per pattern category (form, table toolbar, empty state)
-
-## Package Focus
-- `packages/patterns`
-- `packages/ui`
-- `packages/utils`
-- `apps/docs`
-- `apps/studio`
-- `apps/demo`
-
-## Acceptance Criteria
+## Acceptance Criteria — all met
 - patterns depend on primitives, not parallel implementations
 - pattern APIs feel product-oriented and reusable
-- docs explain where patterns should be used
-- demo app consumes patterns realistically
+- docs explain where patterns and blocks should be used
+- demo and studio consume patterns and blocks (post-Phase-4.6)
 - no pattern duplicates logic that belongs in primitives
 
-## Notes
-This phase is where Aether UI starts becoming commercially interesting. Focus on patterns people repeatedly need in SaaS and internal tools.
-
 ---
 
-# Phase 5 — Blocks & Shells
+# Phase 4.6 — Quality, Truth & Coverage
+
+Status: In progress (current)
 
 ## Goal
-Deliver installable blocks with obvious end-user value.
+Close the gap between what the build plan claimed and what was actually shipped. Make every claim verifiable in CI before stacking new phases on top.
 
-## Scope
-Create complete sections, page-level structures, and starter building blocks.
+## Tracks (see [stabilization plan](../../.cursor/plans/aetherstack_quality_stabilization_ea20042a.plan.md) for full detail)
 
-## Deliverables
-- Login Page block
-- Signup Page block
-- Dashboard Shell block
-- Account Settings Page block
-- Pricing Section block
-- Onboarding Checklist block
-- Profile/Team Settings block
-- Empty Dashboard block
-- Billing Overview block
-- Notification Preferences block
-- sidebar/topbar shell variants
+### Track A — Registry truth
+- `registry/public/registry.json` populated with all 28 items (16 primitives + 9 patterns + 3 blocks)
+- `registry/pro/registry.json` populated with two `pro: true` placeholders
+- `tooling/scripts/build-registry.ts` emits one `r/<name>.json` per item alongside the aggregate manifest
+- CLI integration test runs `init` + `add` against a fixture project in CI
 
-## Testing
-- render tests per block (snapshot-lite: key structural assertions, not full DOM snapshots)
-- a clean-project install test for at least 2 blocks end-to-end through the CLI
-- demo app regression pass: every shipped block renders without runtime errors in `apps/demo`
+### Track B — Reference app reality
+- `apps/demo` rebuilt with `/dashboard`, `/users`, `/settings`, `/login` routes using `DashboardShell`, `LoginBlock`, real patterns, and recharts — no placeholder text
+- `apps/studio` extended with Patterns and Blocks sections so the playground reflects everything we ship
 
-## Package Focus
-- `packages/blocks`
-- `packages/patterns`
-- `packages/ui`
-- `packages/themes`
-- `apps/docs`
-- `apps/demo`
+### Track C — Test coverage
+- Vitest suites added to `cli` (config / lib/registry / lib/installer + integration), `registry-schema`, `registry-build`, and `blocks`
+- All workspace packages with logic now run in CI
+
+### Track D — CI hardening
+- Build job runs on every PR (no longer push-only)
+- `validate-registry` + `build-registry` diff check enforce registry truth
+- Changeset check fails on PRs that touch `packages/*/src/**` without a `.changeset/*.md`
+- New test suites wired into the CI test job
+
+### Track E — Cleanups & truth in docs
+- `@aetherstack/icons` populated with custom AetherMark / AetherGlyph / AetherSpark / AetherStack icons on top of the lucide-react re-export
+- Stray `console.log` removed from docs installation page
+- Build plan rewritten (this file)
+- Component counts on the introduction page sourced from `src/index.ts` exports at build time
+- `pnpm install-hooks` callout added to `CONTRIBUTING.md`
 
 ## Acceptance Criteria
-- blocks are installable, not just showcased
-- blocks are composed from patterns/primitives cleanly
-- docs clearly distinguish blocks from primitives/patterns
-- demo app proves block interoperability
-- at least 5 blocks are strong enough for a public first release
-
-## Notes
-This phase creates the first serious differentiation layer. The public/free layer should include a small but polished set. Hold back deeper vertical or premium-value blocks for Pro later.
+- `aether-ui add <any-shipped-item>` installs the file into a fixture project with no errors
+- `apps/registry-public/public/r/` contains exactly N+1 JSON files (one per item plus the aggregate)
+- `apps/demo` boots and shows three real routes plus `/login`
+- `pnpm test` runs vitest in `cli`, `registry-schema`, `registry-build`, `blocks`, plus existing `tokens`, `ui`, `patterns` — all green
+- A PR that modifies `packages/ui/src/components/button.tsx` without a changeset fails CI
+- A PR that introduces a build error fails CI
+- The introduction page no longer hard-codes "16 primitives"
 
 ---
 
-# Phase 6 — Public Registry
+# Phase 5 — AI Foundations
+
+Status: Pending (next after Phase 4.6)
 
 ## Goal
-Turn Aether UI into an installable public registry product.
+Make Aether UI the most LLM-friendly design system in the ecosystem. Treat AI agents as a primary consumer alongside human developers.
 
-## Scope
-Mature the registry infrastructure scaffolded in Phase 1 and populate it with real items.
-
-## Already delivered in Phase 1
-- `@aetherstack/registry-schema` (Zod types + runtime validators)
-- `@aetherstack/registry-build` helpers
-- `@aetherstack/cli` with `init` / `add` / `list`
-- `tooling/scripts/validate-registry` and `tooling/scripts/build-registry`
-- placeholder `registry/public/registry.json` and `registry/pro/registry.json`
-
-## Deliverables (this phase)
-- populated public `registry.json` with real items
-- item manifests for base, primitives, patterns, and selected blocks
-- per-item file resolution (inline content vs. path references)
-- public namespace strategy using `@aether`
-- docs for installation and usage
-- versioning strategy for registry items (semver + per-item `version` field)
-- registry-format compatibility with the shadcn convention (JSON schema only, not CLI)
-- install-test harness: a throwaway project the CLI installs into in CI
-
-## Testing
-- CI step: run `validate-registry` on every push; fail on any invalid item
-- CI step: install-test harness runs `aether-ui add <item>` against each published item and asserts files land in the right place
-- snapshot test on the generated `apps/registry-public/public/r/*.json` artifacts
+## Deliverables
+- **`llms.txt`** at the registry-public root following the [llms.txt convention](https://llmstxt.org/) — directory of every item with description and install command, optimized for LLM context windows
+- **AI metadata schema** extension to `RegistryItem`: `prompts` (example natural-language prompts that should produce this item), `intent` (machine-readable purpose), `composition` (which other items are typically used with this), `slots` (named insertion points an LLM can target)
+- **MCP server** (`@aetherstack/mcp-server`): exposes `list_components`, `get_component`, `install_component`, `compose_block` tools so Cursor / Claude Desktop / Codex CLI can read and use the registry directly
+- **Prompt-driven CLI**: `aether-ui generate "build me a settings page with notifications and billing sections"` resolves into a sequence of `add` calls plus a starter file
+- **Docs site `/llms`** route documenting AI usage and copy-paste integration snippets for popular agents
 
 ## Package Focus
+- new `packages/mcp-server`
 - `packages/registry-schema`
-- `packages/registry-build`
 - `packages/cli`
-- `registry/public`
 - `apps/registry-public`
 - `apps/docs`
 
 ## Acceptance Criteria
-- registry manifests are valid and reproducible
-- install examples work in a clean test project
-- at least one `registry:base` flow is defined
-- selected public items install correctly via the Aether UI CLI
-- docs cover setup, install, and troubleshooting
+- An LLM can fetch `/llms.txt` and produce a syntactically valid install plan for "make me a SaaS dashboard"
+- The MCP server passes basic conformance tests against a stock Cursor instance
+- AI metadata is required for new public-registry items (CI rejects items missing it)
+- The prompt-driven CLI resolves at least 5 canonical demo prompts deterministically
 
 ## Notes
-This phase is critical. The value of Aether UI depends heavily on installability and registry discipline, not only design quality.
+This is Aether UI's primary differentiation lever. Get this right before adding more components.
 
 ---
 
-# Phase 7 — Docs & Demo Hardening
+# Phase 6 — Component Gap-Fill
+
+Status: Pending
 
 ## Goal
-Make the project feel like a serious product.
+Bring the public surface to "good enough for any SaaS product" by filling gaps prioritized by SaaS frequency and AI-prompt frequency.
 
-## Scope
-Polish documentation, examples, and demo consumption.
+## Deliverables (proposed; finalized at phase entry)
 
-## Deliverables
-- improved docs navigation
-- component pages
-- pattern pages
-- block pages
-- token/theming docs
-- install guides
-- monorepo architecture docs
-- demo app using real Aether UI flows
-- copy refinement across docs site
-- example usage snippets
-- contribution guidance
+### Primitives
+- DropdownMenu / ContextMenu (Radix popover backbone)
+- Combobox (autocomplete select with search)
+- Calendar / DatePicker
+- Toast (notifications system)
+- Avatar / AvatarGroup
+- Progress / Slider
+- ScrollArea
+- Separator
+- Accordion
+- HoverCard
+- Toggle / ToggleGroup
+- Pagination
 
-## Package Focus
-- `apps/docs`
-- `apps/demo`
-- `docs/`
-- all shared packages as needed
+### Patterns
+- DataTable (sortable, paginated, with column visibility)
+- CommandPalette (⌘K searchable command surface)
+- StatGroup (multi-metric dashboard row)
+- Stepper / Wizard
+- KanbanColumn
+- ActivityFeed
+- FileDropzone
+- ColorPicker
+
+### Blocks
+- AccountSettings block
+- BillingOverview block
+- OnboardingChecklist block
+- PricingSection block
+- TeamSettings block
+- NotificationCenter block
+- EmptyDashboard block
 
 ## Acceptance Criteria
-- a new developer can understand the product quickly
-- demo app showcases realistic use
-- install docs are complete
-- docs reflect actual package boundaries
-- public repo is presentable enough for external users
+- Every new item ships with: source code in the right package, vitest tests, docs page, AI metadata, registry entry, per-item JSON output
+- No primitive hardcodes visual values that belong in tokens
+- All items installable end-to-end through the CLI
+- Studio playground updated alongside each new item
 
 ## Notes
-This is a trust phase. Good docs are part of the product.
+Quantity matters here — but not at the cost of consistency. Reject any item that breaks Phase 4 patterns or skips its acceptance gates.
+
+---
+
+# Phase 7 — Public Registry Hardened
+
+Status: Pending
+
+## Goal
+Make the public registry production-quality: durable URLs, versioning, CDN delivery, and a polished install experience.
+
+## Deliverables
+- production registry domain (`registry.aetherui.dev`) backed by a CDN
+- per-item versioning with semver and `version` field; CLI prefers exact versions when pinned
+- `aether-ui update` command upgrades installed items to their latest registry version
+- `aether-ui diff` command shows changes between installed file and registry version
+- `aether-ui registry list-namespaces` enumerates `@aether`, `@aether-pro`, and any third-party registries
+- npm publish flow for `@aetherstack/cli` so `npx @aetherstack/cli init` works for end users
+- install-test harness expanded: clean Next.js, Vite, and Remix fixture projects in CI
+
+## Acceptance Criteria
+- A new user can run `npx @aetherstack/cli init && npx @aetherstack/cli add dashboard-shell` against the public CDN with zero local setup
+- Every published item has a stable `/r/<name>@<version>.json` URL
+- CI runs end-to-end install tests against three real frameworks
+- Docs cover the full install + update + diff workflow
 
 ---
 
 # Phase 8 — Pro Architecture
 
-## Goal
-Prepare the premium layer without destabilizing the public system.
+Status: Pending
 
-## Scope
-Design and scaffold the premium namespace and packaging strategy.
+## Goal
+Build the commercial layer: auth, license gating, billing, and the premium-namespace runtime — without destabilizing the public system.
 
 ## Deliverables
-- `@aether-pro` namespace plan
-- premium registry structure under `registry/pro`
-- auth/gating architecture plan
-- premium item classification
-- pro block roadmap
-- premium theme strategy
-- license/access control plan
-- separation rules between public and pro items
-
-## Package Focus
-- `registry/pro`
-- `packages/registry-build`
-- docs/product planning
-- optional premium source structure if needed
+- `@aether-pro` namespace fully wired: registry, CDN, schema-level `pro: true` enforcement
+- license-aware CLI: `aether-ui login`, `aether-ui add <pro-item>` checks license token before fetching
+- account dashboard at `account.aetherui.dev` (sign in, manage seats, view license keys, download invoices)
+- Stripe checkout + customer portal integration with workspace-level seat counts
+- license validation service (token-bound, rotatable, offline-capable for short windows)
+- separation rules between public and pro source: pro items live in `registry/pro/**` with their own build pipeline and never leak into public registry artefacts
+- pro `llms.txt` gated behind license
 
 ## Acceptance Criteria
-- premium boundary is clearly defined
-- no accidental coupling between free and premium assets
-- premium items can be added without reworking the public registry model
-- commercial path is documented clearly
+- A non-licensed user cannot download any `pro: true` registry item
+- A licensed user can install pro items via the CLI without manual auth flow
+- Pro items can be added or revoked without rebuilding the public registry
+- Account, billing, and license flows are documented and self-serve
 
 ## Notes
-Do not implement billing/auth/product delivery before the architecture is clear. This phase is about system design and product separation.
+Resist the urge to ship pro content before the gating works end-to-end. Architecture first, content second.
 
 ---
 
-# Phase 9 — Release Readiness
+# Phase 9 — Pro Content + Launch
+
+Status: Pending
 
 ## Goal
-Prepare Aetherstack for a real public release cycle.
-
-## Scope
-Formalize quality, release, and maintenance workflow.
+Ship enough premium value to justify a paid tier, then launch publicly.
 
 ## Deliverables
-- changeset/release flow finalized
+
+### Pro content
+- **CRM Vertical Kit** — Contacts page, Deal Pipeline kanban, Activity Timeline block, Contact Drawer
+- **Billing Vertical Kit** — Subscription management, Invoice history, Usage charts, Plan picker
+- **Analytics Vertical Kit** — Dashboards with recharts, Funnel charts, Cohort retention, Custom report builder
+- **AI Recipes Pro** — opinionated prompt → generated-stack flows (e.g. "make me a project management tool"), each backed by composed pro blocks
+- 2–3 premium themes (Slate Pro, Indigo Pro, Onyx) with full token overrides
+
+### Release polish
+- changesets release flow finalized for both `@aetherstack/*` and `@aether-pro/*`
 - versioning policy documented
-- package release checklist
-- QA checklist for public items
-- regression checklist for docs/demo
-- contribution guidelines
-- issue templates
-- PR template
-- release notes process
-- launch-ready README cleanup
-- npm publish flow for `@aetherstack/cli` (required for `npx @aetherstack/cli` to work end-to-end)
-- registry CDN deployment for `apps/registry-public`
+- regression checklist for docs, demo, and registry
+- contribution guidelines + issue templates + release notes process
+- launch-ready README, marketing copy, comparison page vs shadcn/ui
+- Lighthouse pass on `apps/docs` and `account.aetherui.dev`
+- visual regression baseline (Playwright + Percy or equivalent) for primitives and blocks
 
 ## Acceptance Criteria
-- repo can be maintained consistently
-- releases can be created without guesswork
-- contribution standards are documented
-- public-facing quality bar is enforceable
+- A subscriber can subscribe, install at least one vertical kit, and ship a working SaaS feature in under 30 minutes
+- Repo is maintainable consistently
+- Public-facing quality bar is enforceable
 
 ## Notes
-This phase should happen before broad external promotion.
+This is the public-launch milestone. Defer any item that's not directly required for it.
 
 ---
 
 ## Suggested Build Sequence
 
-Recommended near-term order:
+Recommended order:
 
-1. Phase 2 — Token System
-2. Phase 3 — Core Primitives
-3. Phase 4 — App Patterns
-4. Phase 5 — Blocks & Shells
-5. Phase 6 — Public Registry
-6. Phase 7 — Docs & Demo Hardening
-7. Phase 8 — Pro Architecture
-8. Phase 9 — Release Readiness
+1. ~~Phase 2 — Token System~~ ✅
+2. ~~Phase 3 — Core Primitives~~ ✅
+3. ~~Phase 4 — App Patterns + First Blocks~~ ✅
+4. **Phase 4.6 — Quality, Truth & Coverage** (current)
+5. Phase 5 — AI Foundations
+6. Phase 6 — Component Gap-Fill
+7. Phase 7 — Public Registry Hardened
+8. Phase 8 — Pro Architecture
+9. Phase 9 — Pro Content + Launch
 
 ---
 
 ## Recommended Milestone Strategy
 
-### Milestone A
-Complete Phases 2–3  
-Outcome: Aether Base + stable primitives
+### Milestone A — Foundation ✅
+Phases 2–3 — Aether Base + stable primitives
 
-### Milestone B
-Complete Phase 4  
-Outcome: Aether UI becomes useful for app teams
+### Milestone B — Composability ✅
+Phase 4 — Aether UI useful for app teams
 
-### Milestone C
-Complete Phases 5–6  
-Outcome: installable public registry with meaningful value
+### Milestone B.5 — Trust (current)
+Phase 4.6 — Truth, coverage, CI parity with claims
 
-### Milestone D
-Complete Phase 7  
-Outcome: public-ready product surface
+### Milestone C — AI Native
+Phase 5 — Differentiated, LLM-first design system
 
-### Milestone E
-Complete Phases 8–9  
-Outcome: commercial structure and release discipline
+### Milestone D — Breadth
+Phases 6–7 — Public registry production-ready with broad component coverage
+
+### Milestone E — Commercial
+Phases 8–9 — Pro tier live, launch ready
 
 ---
 
@@ -529,40 +429,27 @@ Outcome: commercial structure and release discipline
 
 A phase is done only when:
 
-- code is committed and builds cleanly
-- docs for the phase exist
+- code is committed and builds cleanly on PRs (not just on merge)
+- every claim in this build plan is reflected in shipped code or CI
+- docs for the phase exist and match reality
 - package boundaries remain clean
 - exported APIs are deliberate
-- acceptance criteria are met
+- acceptance criteria are met in CI
 - demo/docs reflect the new functionality where relevant
 
 ---
 
 ## Out of Scope for Now
 
-The following should not be prioritized until the core system is stable:
+The following should not be prioritized until Phase 9:
 
-- billing implementation
-- full premium marketplace
-- Figma kit
-- complex theming matrix
-- multiple framework targets
+- multiple framework targets beyond Next.js / Vite / Remix
 - CMS/database integrations
-- advanced analytics
-- SaaS account system
+- advanced analytics / telemetry
+- Figma kit
+- mobile-native rendering targets
 
 ---
-
-## Immediate Next Step
-
-Phase 4 — App Patterns is now underway. Package: `packages/patterns`.
-
-Priority order:
-1. FormField, PageHeader, SectionHeader, SettingsSection
-2. EmptyState, LoadingState, ErrorState
-3. MetricCard, FilterToolbar, TableToolbar
-4. NavItem/NavGroup, Breadcrumb
-5. Docs pages for all patterns
 
 ## Standards Enforcement
 
@@ -572,13 +459,13 @@ The following documents define and reinforce implementation quality:
 - `docs/architecture/engineering-standards.md`
 - `CONTRIBUTING.md`
 
-These standards should be enforced progressively through:
+These standards are enforced through:
 
 - strict TypeScript
 - ESLint rules
 - formatting rules
 - package boundary discipline
 - review checklists
-- CI checks later in the build process
+- automated CI checks (typecheck, lint, tests, registry validation, build, changeset enforcement)
 
 No new phase should weaken these standards for convenience.

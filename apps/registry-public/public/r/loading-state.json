@@ -1,0 +1,22 @@
+{
+  "name": "loading-state",
+  "type": "registry:pattern",
+  "title": "Loading State",
+  "description": "Centered spinner or skeleton-row variant for async loading.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils",
+    "@aetherstack/ui"
+  ],
+  "registryDependencies": [
+    "skeleton"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/loading-state.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/loading-state.tsx",
+      "content": "import { Skeleton } from \"@aetherstack/ui\"\nimport { cn } from \"@aetherstack/utils\"\n\n// ── Spinner ───────────────────────────────────────────────────────────────────\n\nfunction Spinner({ className }: { className?: string }) {\n  return (\n    <svg\n      className={cn(\"animate-spin\", className)}\n      xmlns=\"http://www.w3.org/2000/svg\"\n      fill=\"none\"\n      viewBox=\"0 0 24 24\"\n      aria-hidden=\"true\"\n    >\n      <circle\n        className=\"opacity-25\"\n        cx=\"12\"\n        cy=\"12\"\n        r=\"10\"\n        stroke=\"currentColor\"\n        strokeWidth=\"4\"\n      />\n      <path\n        className=\"opacity-75\"\n        fill=\"currentColor\"\n        d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z\"\n      />\n    </svg>\n  )\n}\n\n// ── LoadingState ──────────────────────────────────────────────────────────────\n\nexport interface LoadingStateProps {\n  /** \"spinner\" shows a centred spinner; \"skeleton\" shows skeleton rows */\n  variant?: \"spinner\" | \"skeleton\"\n  /** Number of skeleton rows (only used when variant=\"skeleton\") */\n  rows?: number\n  text?: string\n  className?: string\n}\n\nexport function LoadingState({\n  variant = \"spinner\",\n  rows = 4,\n  text = \"Loading…\",\n  className,\n}: LoadingStateProps) {\n  if (variant === \"skeleton\") {\n    return (\n      <div className={cn(\"space-y-3 p-4\", className)} aria-busy=\"true\" aria-label={text}>\n        {Array.from({ length: rows }).map((_, i) => (\n          <div key={i} className=\"flex items-center gap-3\">\n            {i === 0 && <Skeleton className=\"h-9 w-9 shrink-0 rounded-full\" />}\n            <div className=\"flex-1 space-y-2\">\n              <Skeleton className={cn(\"h-4\", i === 0 ? \"w-3/4\" : i % 2 === 0 ? \"w-5/6\" : \"w-4/5\")} />\n              {i === 0 && <Skeleton className=\"h-3 w-1/2\" />}\n            </div>\n          </div>\n        ))}\n      </div>\n    )\n  }\n\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center gap-3 py-16 text-center\",\n        className,\n      )}\n      aria-busy=\"true\"\n      aria-label={text}\n    >\n      <Spinner className=\"h-8 w-8 text-primary\" />\n      {text && <p className=\"text-sm text-muted-foreground\">{text}</p>}\n    </div>\n  )\n}\n"
+    }
+  ]
+}

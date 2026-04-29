@@ -3,5 +3,42 @@
   "name": "aether-ui-pro",
   "homepage": "https://pro.aetherui.dev",
   "version": "0.0.1",
-  "items": []
+  "items": [
+    {
+      "name": "crm-dashboard",
+      "type": "registry:block",
+      "title": "CRM Dashboard",
+      "description": "Full CRM dashboard with contacts list, deal pipeline (kanban), activity timeline, and contact drawer.",
+      "author": "aetherstack",
+      "pro": true,
+      "dependencies": ["@aetherstack/utils", "@aetherstack/ui", "@aetherstack/patterns", "@aetherstack/blocks", "lucide-react", "recharts"],
+      "registryDependencies": ["dashboard-shell", "metric-card", "table-toolbar"],
+      "files": [
+        {
+          "path": "registry/pro/blocks/crm-dashboard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/crm-dashboard.tsx",
+          "content": "// Pro placeholder \u2014 full CRM Dashboard ships in Phase 9.\nexport function CrmDashboard() {\n  return null\n}\n"
+        }
+      ]
+    },
+    {
+      "name": "billing-table",
+      "type": "registry:block",
+      "title": "Billing Table",
+      "description": "Invoice / subscription billing table with status pills, sorting, pagination, and export action.",
+      "author": "aetherstack",
+      "pro": true,
+      "dependencies": ["@aetherstack/utils", "@aetherstack/ui", "@aetherstack/patterns", "lucide-react"],
+      "registryDependencies": ["table", "table-toolbar", "badge"],
+      "files": [
+        {
+          "path": "registry/pro/blocks/billing-table.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/billing-table.tsx",
+          "content": "// Pro placeholder \u2014 full Billing Table ships in Phase 9.\nexport function BillingTable() {\n  return null\n}\n"
+        }
+      ]
+    }
+  ]
 }

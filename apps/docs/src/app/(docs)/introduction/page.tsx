@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { CodeBlock } from "@/components/code-block"
+import { REGISTRY_STATS } from "@/lib/registry-stats"
 
 export const metadata: Metadata = {
   title: "Introduction",
@@ -24,7 +25,7 @@ function Principle({
 
 export default function IntroductionPage() {
   return (
-    <div className="max-w-3xl">
+    <div>
       {/* Header */}
       <div className="mb-10">
         <div className="mb-4 inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
@@ -105,17 +106,17 @@ export default function IntroductionPage() {
             {
               layer: "4 — Blocks",
               pkg: "@aetherstack/blocks",
-              desc: "Page-level compositions: feature sections, sidebars, full-page layouts.",
+              desc: `${REGISTRY_STATS.blocks} page-level compositions: dashboard shells, auth pages, full-page layouts.`,
             },
             {
               layer: "3 — Patterns",
               pkg: "@aetherstack/patterns",
-              desc: "App-level compound components: Form Field, Page Header, Data Table toolbar, etc.",
+              desc: `${REGISTRY_STATS.patterns} app-level compound components: Form Field, Page Header, Table Toolbar, etc.`,
             },
             {
               layer: "2 — Primitives",
               pkg: "@aetherstack/ui",
-              desc: "16 foundational components: Button, Input, Dialog, Tabs, etc.",
+              desc: `${REGISTRY_STATS.primitives} foundational components: Button, Input, Dialog, Tabs, etc.`,
             },
             {
               layer: "1 — Tokens",
@@ -219,7 +220,7 @@ import { Input } from "@/components/ui/input"`}
           {[
             { href: "/installation", title: "Installation", desc: "Set up Aether UI in your framework" },
             { href: "/cli", title: "CLI reference", desc: "All commands and configuration options" },
-            { href: "/components", title: "Components", desc: "Browse all 16 primitives" },
+            { href: "/components", title: "Components", desc: `Browse all ${REGISTRY_STATS.primitives} primitives` },
           ].map((link) => (
             <Link
               key={link.href}

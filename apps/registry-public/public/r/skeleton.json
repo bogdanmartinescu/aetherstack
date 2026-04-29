@@ -1,0 +1,18 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "title": "Skeleton",
+  "description": "Loading placeholder that mimics content shape.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/skeleton.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/skeleton.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nfunction Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      className={cn(\"animate-pulse rounded-md bg-muted\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Skeleton }\n"
+    }
+  ]
+}

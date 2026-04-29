@@ -11,7 +11,8 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@aetherstack/registry-schema": "workspace:*",
@@ -25,7 +26,8 @@
     "@types/node": "^20.12.7",
     "tsup": "^8.0.2",
     "tsx": "^4.9.3",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
   },
   "engines": {
     "node": ">=18.0.0"

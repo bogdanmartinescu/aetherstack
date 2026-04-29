@@ -47,12 +47,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={fontClasses}>
       <head>
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script dangerouslySetInnerHTML={{ __html: fontScript }} />
       </head>
-      <body className={`${fontClasses} font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -2,6 +2,16 @@
 
 import { useState } from "react"
 import {
+  AlertCircle,
+  BarChart3,
+  Inbox,
+  LayoutDashboard,
+  Plus,
+  Search,
+  Settings,
+  Users as UsersIcon,
+} from "lucide-react"
+import {
   Badge,
   Button,
   Card,
@@ -52,6 +62,28 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@aetherstack/ui"
+import {
+  Breadcrumb,
+  EmptyState,
+  ErrorState,
+  FilterPill,
+  FilterToolbar,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormLabel,
+  FormMessage,
+  LoadingState,
+  MetricCard,
+  NavGroup,
+  NavItem,
+  PageHeader,
+  SectionHeader,
+  SettingsSection,
+  SidebarNav,
+  TableToolbar,
+} from "@aetherstack/patterns"
+import { DashboardShell, LoginBlock, SignupBlock } from "@aetherstack/blocks"
 
 function Section({
   title,
@@ -93,9 +125,20 @@ export default function StudioPage() {
             </div>
             <h1 className="text-3xl font-bold text-foreground">Aether Studio</h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              Component playground — Phase 3 primitives
+              Live playground for primitives, patterns, and blocks.
             </p>
+            <div className="mt-3 flex flex-wrap gap-2 text-xs">
+              <a href="#primitives" className="text-primary hover:underline">Primitives</a>
+              <span className="text-border">·</span>
+              <a href="#patterns" className="text-primary hover:underline">Patterns</a>
+              <span className="text-border">·</span>
+              <a href="#blocks" className="text-primary hover:underline">Blocks</a>
+            </div>
           </div>
+
+          <h2 id="primitives" className="mb-6 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            Primitives
+          </h2>
 
           {/* ── Button ─────────────────────────────────────────────────────── */}
           <Section title="Button">
@@ -387,6 +430,278 @@ export default function StudioPage() {
                   </SheetContent>
                 </Sheet>
               ))}
+            </Preview>
+          </Section>
+
+          {/* ── Patterns ───────────────────────────────────────────────────── */}
+          <h2
+            id="patterns"
+            className="mb-6 mt-16 text-xs font-semibold uppercase tracking-widest text-muted-foreground"
+          >
+            Patterns
+          </h2>
+
+          <Section title="PageHeader + Breadcrumb">
+            <Preview>
+              <div className="w-full">
+                <PageHeader
+                  title="Project settings"
+                  description="Manage members, permissions, and integrations."
+                  breadcrumb={[
+                    { label: "Workspace", href: "#" },
+                    { label: "Acme" },
+                  ]}
+                  actions={
+                    <>
+                      <Button variant="outline" size="sm">Cancel</Button>
+                      <Button size="sm">Save</Button>
+                    </>
+                  }
+                />
+              </div>
+            </Preview>
+            <Preview>
+              <Breadcrumb
+                items={[
+                  { label: "Home", href: "#" },
+                  { label: "Reports", href: "#" },
+                  { label: "Q3 Revenue" },
+                ]}
+              />
+            </Preview>
+          </Section>
+
+          <Section title="SectionHeader + SettingsSection">
+            <Preview>
+              <div className="w-full">
+                <SectionHeader
+                  title="Team members"
+                  description="Invite collaborators to your workspace."
+                  action={<Button size="sm">Invite</Button>}
+                />
+              </div>
+            </Preview>
+            <Preview>
+              <div className="w-full">
+                <SettingsSection
+                  title="API access"
+                  description="Generate keys for programmatic access."
+                  footer={<Button size="sm">Save</Button>}
+                >
+                  <p className="text-sm text-muted-foreground">
+                    No API keys yet. Generate one to start using the API.
+                  </p>
+                </SettingsSection>
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="EmptyState · LoadingState · ErrorState">
+            <Preview>
+              <div className="w-full max-w-xl">
+                <EmptyState
+                  icon={<Inbox className="h-6 w-6" />}
+                  title="No messages yet"
+                  description="When new messages arrive, you'll see them here."
+                  action={<Button size="sm">Compose</Button>}
+                />
+              </div>
+            </Preview>
+            <Preview>
+              <div className="w-full max-w-xl">
+                <LoadingState text="Loading reports…" />
+              </div>
+            </Preview>
+            <Preview>
+              <div className="w-full max-w-xl">
+                <ErrorState
+                  title="Could not load reports"
+                  description="Something went wrong fetching your data."
+                  action={<Button size="sm">Try again</Button>}
+                />
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="MetricCard">
+            <Preview>
+              <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
+                <MetricCard
+                  label="Revenue"
+                  value="$48,295"
+                  change="+12.5%"
+                  trend="up"
+                  icon={<BarChart3 className="h-5 w-5" />}
+                />
+                <MetricCard
+                  label="Users"
+                  value="3,241"
+                  change="+8.1%"
+                  trend="up"
+                  icon={<UsersIcon className="h-5 w-5" />}
+                />
+                <MetricCard
+                  label="Churn"
+                  value="1.2%"
+                  change="+0.3%"
+                  trend="down"
+                  icon={<AlertCircle className="h-5 w-5" />}
+                />
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="TableToolbar · FilterToolbar · FilterPill">
+            <Preview>
+              <div className="w-full">
+                <TableToolbar
+                  search={
+                    <div className="relative w-full max-w-sm">
+                      <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input placeholder="Search…" className="pl-8" />
+                    </div>
+                  }
+                  filters={
+                    <FilterToolbar
+                      activeFilters={[
+                        { id: "role", label: "Role: Admin", onRemove: () => {} },
+                        { id: "active", label: "Active", onRemove: () => {} },
+                      ]}
+                      onClearAll={() => {}}
+                    />
+                  }
+                  actions={
+                    <Button size="sm">
+                      <Plus className="mr-1 h-4 w-4" />
+                      New
+                    </Button>
+                  }
+                />
+              </div>
+            </Preview>
+            <Preview>
+              <FilterPill label="Stage: Discovery" onRemove={() => {}} />
+              <FilterPill label="Owner: Alex" onRemove={() => {}} />
+              <FilterPill label="Created this week" />
+            </Preview>
+          </Section>
+
+          <Section title="FormField (label + control + message)">
+            <Preview>
+              <div className="w-full max-w-sm">
+                <FormField name="email" error="This field is required">
+                  <FormLabel>Work email</FormLabel>
+                  <FormControl>
+                    <Input type="email" placeholder="you@example.com" />
+                  </FormControl>
+                  <FormDescription>We&apos;ll never share it.</FormDescription>
+                  <FormMessage />
+                </FormField>
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="SidebarNav · NavGroup · NavItem">
+            <Preview>
+              <div className="w-64 rounded-lg border border-border bg-card p-2">
+                <SidebarNav>
+                  <NavGroup>
+                    <NavItem
+                      href="#"
+                      icon={<LayoutDashboard className="h-4 w-4" />}
+                      label="Dashboard"
+                      active
+                    />
+                    <NavItem
+                      href="#"
+                      icon={<UsersIcon className="h-4 w-4" />}
+                      label="Users"
+                      badge="4"
+                    />
+                  </NavGroup>
+                  <NavGroup label="Settings">
+                    <NavItem
+                      href="#"
+                      icon={<Settings className="h-4 w-4" />}
+                      label="General"
+                    />
+                  </NavGroup>
+                </SidebarNav>
+              </div>
+            </Preview>
+          </Section>
+
+          {/* ── Blocks ─────────────────────────────────────────────────────── */}
+          <h2
+            id="blocks"
+            className="mb-6 mt-16 text-xs font-semibold uppercase tracking-widest text-muted-foreground"
+          >
+            Blocks
+          </h2>
+
+          <Section title="DashboardShell">
+            <Preview>
+              <div
+                className="w-full overflow-hidden rounded-md border border-border"
+                style={{ height: 480 }}
+              >
+                <div
+                  style={{
+                    transform: "scale(0.6)",
+                    transformOrigin: "top left",
+                    width: "166.67%",
+                    height: "166.67%",
+                  }}
+                >
+                  <DashboardShell appName="Acme" pageTitle="Dashboard">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                      <MetricCard label="Revenue" value="$48,295" change="+12.5%" trend="up" />
+                      <MetricCard label="Users" value="3,241" change="+8.1%" trend="up" />
+                      <MetricCard label="Churn" value="1.2%" change="-0.3%" trend="up" />
+                    </div>
+                  </DashboardShell>
+                </div>
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="LoginBlock">
+            <Preview>
+              <div
+                className="w-full overflow-hidden rounded-md border border-border"
+                style={{ height: 560 }}
+              >
+                <div
+                  style={{
+                    transform: "scale(0.7)",
+                    transformOrigin: "top left",
+                    width: "142.86%",
+                    height: "142.86%",
+                  }}
+                >
+                  <LoginBlock />
+                </div>
+              </div>
+            </Preview>
+          </Section>
+
+          <Section title="SignupBlock">
+            <Preview>
+              <div
+                className="w-full overflow-hidden rounded-md border border-border"
+                style={{ height: 560 }}
+              >
+                <div
+                  style={{
+                    transform: "scale(0.7)",
+                    transformOrigin: "top left",
+                    width: "142.86%",
+                    height: "142.86%",
+                  }}
+                >
+                  <SignupBlock />
+                </div>
+              </div>
             </Preview>
           </Section>
         </div>

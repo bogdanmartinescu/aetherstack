@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation"
 import { cn } from "@aetherstack/utils"
 import { ThemeToggle, FontPicker } from "./theme-font-controls"
 
+// ── Navigation data ───────────────────────────────────────────────────────────
+
 const nav = [
   {
     group: "Getting started",
@@ -21,6 +23,7 @@ const nav = [
       { label: "Tokens", href: "/tokens" },
       { label: "Icons", href: "/icons" },
       { label: "Fonts", href: "/fonts" },
+      { label: "Charts", href: "/charts" },
     ],
   },
   {
@@ -39,6 +42,12 @@ const nav = [
       { label: "Table Toolbar", href: "/patterns/table-toolbar" },
       { label: "Filter Toolbar", href: "/patterns/filter-toolbar" },
       { label: "Sidebar Nav", href: "/patterns/nav" },
+    ],
+  },
+  {
+    group: "Blocks",
+    items: [
+      { label: "Overview", href: "/blocks" },
     ],
   },
   {
@@ -65,6 +74,56 @@ const nav = [
   },
 ]
 
+// Top-level header nav links with active prefix matching
+const topNav = [
+  { label: "Docs", href: "/introduction", match: ["/introduction", "/installation", "/cli", "/tokens", "/icons", "/fonts"] },
+  { label: "Components", href: "/components", match: ["/components"] },
+  { label: "Patterns", href: "/patterns", match: ["/patterns"] },
+  { label: "Blocks", href: "/blocks", match: ["/blocks"] },
+  { label: "Charts", href: "/charts", match: ["/charts"] },
+]
+
+// ── Icons ─────────────────────────────────────────────────────────────────────
+
+function GitHubIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
+    </svg>
+  )
+}
+
+function SearchIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.3-4.3" />
+    </svg>
+  )
+}
+
+// ── Sidebar nav item ──────────────────────────────────────────────────────────
+
 function NavItem({ href, label }: { href: string; label: string }) {
   const pathname = usePathname()
   const active = pathname === href
@@ -82,6 +141,36 @@ function NavItem({ href, label }: { href: string; label: string }) {
     </Link>
   )
 }
+
+// ── Top nav link ──────────────────────────────────────────────────────────────
+
+function TopNavLink({
+  href,
+  label,
+  match,
+}: {
+  href: string
+  label: string
+  match: string[]
+}) {
+  const pathname = usePathname()
+  const active = match.some((prefix) => pathname === prefix || pathname.startsWith(prefix + "/"))
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "text-sm transition-colors",
+        active
+          ? "text-foreground font-medium"
+          : "text-muted-foreground hover:text-foreground",
+      )}
+    >
+      {label}
+    </Link>
+  )
+}
+
+// ── Sidebar ───────────────────────────────────────────────────────────────────
 
 export function DocsSidebar() {
   return (
@@ -102,15 +191,17 @@ export function DocsSidebar() {
   )
 }
 
+// ── Mobile toggle ─────────────────────────────────────────────────────────────
+
 export function MobileSidebarToggle({ open, onToggle }: { open: boolean; onToggle: () => void }) {
   return (
     <button
       onClick={onToggle}
-      className="flex items-center gap-2 rounded-md border border-border bg-background px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted lg:hidden"
+      className="flex items-center justify-center rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground lg:hidden"
       aria-label={open ? "Close navigation" : "Open navigation"}
     >
       <svg
-        className="h-4 w-4"
+        className="h-5 w-5"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -121,10 +212,11 @@ export function MobileSidebarToggle({ open, onToggle }: { open: boolean; onToggl
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
         )}
       </svg>
-      Menu
     </button>
   )
 }
+
+// ── DocsShell ─────────────────────────────────────────────────────────────────
 
 export function DocsShell({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -132,38 +224,75 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background">
       {/* Top bar */}
-      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-[90rem] items-center justify-between px-4 sm:px-6">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-sm font-bold text-foreground">Aether UI</span>
-            </Link>
-            <span className="hidden text-muted-foreground sm:block">/</span>
-            <Link
-              href="/components/button"
-              className="hidden text-sm text-muted-foreground hover:text-foreground transition-colors sm:block"
-            >
-              Components
-            </Link>
-          </div>
+      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="mx-auto flex h-14 max-w-[90rem] items-center gap-4 px-4 sm:px-6">
+
+          {/* Logo */}
+          <Link
+            href="/"
+            className="flex shrink-0 items-center gap-2"
+            aria-label="Aether UI home"
+          >
+            <div className="flex h-6 w-6 items-center justify-center rounded bg-primary text-[10px] font-bold text-primary-foreground">
+              A
+            </div>
+            <span className="font-semibold text-foreground text-sm">Aether UI</span>
+          </Link>
+
+          {/* Separator */}
+          <div className="hidden h-5 w-px shrink-0 bg-border sm:block" aria-hidden="true" />
+
+          {/* Top-level nav links */}
+          <nav className="hidden items-center gap-5 sm:flex" aria-label="Main navigation">
+            {topNav.map((link) => (
+              <TopNavLink key={link.href} href={link.href} label={link.label} match={link.match} />
+            ))}
+          </nav>
+
+          {/* Spacer */}
+          <div className="flex-1" />
+
+          {/* Right-side controls */}
           <div className="flex items-center gap-2">
+            {/* Search trigger */}
+            <button
+              className="hidden h-8 items-center gap-2 rounded-md border border-border bg-muted/40 px-3 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:flex"
+              aria-label="Search documentation"
+            >
+              <SearchIcon />
+              <span>Search...</span>
+              <kbd className="ml-2 hidden rounded border border-border bg-background px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground lg:inline-flex">
+                ⌘K
+              </kbd>
+            </button>
+
+            {/* Controls (hidden on very small screens) */}
             <div className="hidden items-center gap-2 sm:flex">
               <FontPicker />
               <ThemeToggle />
             </div>
-            <MobileSidebarToggle open={mobileOpen} onToggle={() => setMobileOpen((v) => !v)} />
+
+            {/* GitHub */}
             <a
-              href="https://github.com"
+              href="https://github.com/aetherstack/aetherstack"
               target="_blank"
               rel="noreferrer"
-              className="hidden items-center gap-2 rounded-md border border-border px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground sm:flex"
+              className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              aria-label="GitHub repository"
             >
-              GitHub
+              <GitHubIcon />
             </a>
+
+            {/* Mobile menu toggle */}
+            <MobileSidebarToggle
+              open={mobileOpen}
+              onToggle={() => setMobileOpen((v) => !v)}
+            />
           </div>
         </div>
       </header>
 
+      {/* Page body */}
       <div className="mx-auto max-w-[90rem] px-4 sm:px-6">
         <div className="flex gap-8">
           {/* Sidebar — desktop */}
@@ -173,7 +302,7 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
             </div>
           </aside>
 
-          {/* Mobile sidebar */}
+          {/* Mobile sidebar overlay */}
           {mobileOpen && (
             <div className="fixed inset-0 z-30 lg:hidden">
               <div

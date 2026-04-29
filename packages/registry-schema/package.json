@@ -16,9 +16,11 @@
   },
   "devDependencies": {
     "@aetherstack/typescript-config": "workspace:*",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   }
 }

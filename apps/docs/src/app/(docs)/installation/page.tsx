@@ -898,7 +898,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   type="submit"
   aria-label="Submit form"
   data-testid="submit-btn"
-  onClick={(e) => console.log(e.currentTarget)}
+  onClick={(e) => handleSubmit(e.currentTarget)}
 >
   Submit
 </Button>

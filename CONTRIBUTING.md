@@ -13,11 +13,17 @@ Prerequisites:
 
 ```bash
 pnpm install          # install all workspace deps
+pnpm install-hooks    # install git hooks (auto-bumps version on commit)
 pnpm dev              # run all apps in parallel (docs / studio / demo / registry-public)
 pnpm typecheck        # type-check the whole workspace
 pnpm lint             # lint the whole workspace
 pnpm build            # build everything
 ```
+
+`pnpm install-hooks` is a one-time per-clone step that wires up the workspace
+git hooks under `.git/hooks/`. The current pre-commit hook auto-increments the
+root `package.json` patch version on every commit; without it, your version
+will fall behind the rest of the team.
 
 Useful scoped commands:
 

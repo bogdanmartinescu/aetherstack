@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# Auto-bumps the workspace patch version on every commit.
+node "$(git rev-parse --show-toplevel)/scripts/bump-version.js"
+git add "$(git rev-parse --show-toplevel)/package.json"
