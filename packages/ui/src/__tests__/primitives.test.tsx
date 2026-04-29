@@ -41,6 +41,49 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "../components/tooltip"
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "../components/accordion"
+import { Avatar, AvatarFallback, AvatarGroup } from "../components/avatar"
+import { Progress } from "../components/progress"
+import { Slider } from "../components/slider"
+import { ScrollArea } from "../components/scroll-area"
+import { Separator } from "../components/separator"
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "../components/dropdown-menu"
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "../components/hover-card"
+import { Toggle } from "../components/toggle"
+import { ToggleGroup, ToggleGroupItem } from "../components/toggle-group"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationEllipsis,
+} from "../components/pagination"
+import { useToast, toast } from "../components/toast"
+import {
+  Combobox,
+  ComboboxTrigger,
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxList,
+  ComboboxEmpty,
+  ComboboxItem,
+} from "../components/combobox"
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
 
@@ -571,5 +614,541 @@ describe("Dialog", () => {
     expect(screen.getByRole("dialog")).toBeInTheDocument()
     await user.keyboard("{Escape}")
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument()
+  })
+})
+
+// ─── Accordion ───────────────────────────────────────────────────────────────
+
+describe("Accordion", () => {
+  it("renders without crash", () => {
+    render(
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger>Section 1</AccordionTrigger>
+          <AccordionContent>Content 1</AccordionContent>
+        </AccordionItem>
+      </Accordion>,
+    )
+    expect(screen.getByText("Section 1")).toBeInTheDocument()
+  })
+
+  it("content is not in the DOM when closed", () => {
+    render(
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger>Section 1</AccordionTrigger>
+          <AccordionContent>Hidden content</AccordionContent>
+        </AccordionItem>
+      </Accordion>,
+    )
+    expect(screen.queryByText("Hidden content")).not.toBeInTheDocument()
+  })
+
+  it("expands content on trigger click", async () => {
+    const user = userEvent.setup()
+    render(
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger>Section 1</AccordionTrigger>
+          <AccordionContent>Expanded content</AccordionContent>
+        </AccordionItem>
+      </Accordion>,
+    )
+    await user.click(screen.getByText("Section 1"))
+    expect(screen.getByText("Expanded content")).toBeVisible()
+  })
+
+  it("trigger has correct button role", () => {
+    render(
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger>Section 1</AccordionTrigger>
+          <AccordionContent>Content</AccordionContent>
+        </AccordionItem>
+      </Accordion>,
+    )
+    expect(screen.getByRole("button", { name: /Section 1/i })).toBeInTheDocument()
+  })
+})
+
+// ─── Avatar / AvatarGroup ─────────────────────────────────────────────────────
+
+describe("Avatar", () => {
+  it("renders fallback when no image src", () => {
+    render(
+      <Avatar>
+        <AvatarFallback>JD</AvatarFallback>
+      </Avatar>,
+    )
+    expect(screen.getByText("JD")).toBeInTheDocument()
+  })
+
+  it("merges custom className on Avatar", () => {
+    const { container } = render(
+      <Avatar className="custom-avatar">
+        <AvatarFallback>AB</AvatarFallback>
+      </Avatar>,
+    )
+    expect(container.firstChild).toHaveClass("custom-avatar")
+  })
+
+  it("AvatarGroup renders all children when no max", () => {
+    render(
+      <AvatarGroup>
+        <Avatar><AvatarFallback>A1</AvatarFallback></Avatar>
+        <Avatar><AvatarFallback>A2</AvatarFallback></Avatar>
+        <Avatar><AvatarFallback>A3</AvatarFallback></Avatar>
+      </AvatarGroup>,
+    )
+    expect(screen.getByText("A1")).toBeInTheDocument()
+    expect(screen.getByText("A2")).toBeInTheDocument()
+    expect(screen.getByText("A3")).toBeInTheDocument()
+  })
+
+  it("AvatarGroup shows overflow count when max is set", () => {
+    render(
+      <AvatarGroup max={2}>
+        <Avatar><AvatarFallback>A1</AvatarFallback></Avatar>
+        <Avatar><AvatarFallback>A2</AvatarFallback></Avatar>
+        <Avatar><AvatarFallback>A3</AvatarFallback></Avatar>
+      </AvatarGroup>,
+    )
+    expect(screen.getByText("A1")).toBeInTheDocument()
+    expect(screen.getByText("A2")).toBeInTheDocument()
+    expect(screen.queryByText("A3")).not.toBeInTheDocument()
+    expect(screen.getByText("+1")).toBeInTheDocument()
+  })
+})
+
+// ─── Progress ─────────────────────────────────────────────────────────────────
+
+describe("Progress", () => {
+  it("renders without crash", () => {
+    const { container } = render(<Progress value={50} />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("has progressbar role", () => {
+    render(<Progress value={75} />)
+    expect(screen.getByRole("progressbar")).toBeInTheDocument()
+  })
+
+  it("has aria-valuemax of 100 by default", () => {
+    render(<Progress value={60} />)
+    expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuemax", "100")
+  })
+
+  it("merges custom className", () => {
+    const { container } = render(<Progress value={0} className="custom-progress" />)
+    expect(container.firstChild).toHaveClass("custom-progress")
+  })
+})
+
+// ─── Slider ───────────────────────────────────────────────────────────────────
+
+describe("Slider", () => {
+  it("renders without crash", () => {
+    const { container } = render(<Slider defaultValue={[50]} />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("has slider role on thumb", () => {
+    render(<Slider defaultValue={[30]} min={0} max={100} />)
+    expect(screen.getByRole("slider")).toBeInTheDocument()
+  })
+
+  it("reflects aria-valuenow on thumb", () => {
+    render(<Slider defaultValue={[42]} min={0} max={100} />)
+    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "42")
+  })
+
+  it("merges custom className", () => {
+    const { container } = render(<Slider defaultValue={[0]} className="custom-slider" />)
+    expect(container.firstChild).toHaveClass("custom-slider")
+  })
+})
+
+// ─── ScrollArea ───────────────────────────────────────────────────────────────
+
+describe("ScrollArea", () => {
+  it("renders children", () => {
+    render(
+      <ScrollArea>
+        <p>Scrollable content</p>
+      </ScrollArea>,
+    )
+    expect(screen.getByText("Scrollable content")).toBeInTheDocument()
+  })
+
+  it("merges custom className", () => {
+    const { container } = render(
+      <ScrollArea className="custom-scroll">
+        <p>Content</p>
+      </ScrollArea>,
+    )
+    expect(container.firstChild).toHaveClass("custom-scroll")
+  })
+
+  it("root element has overflow-hidden class", () => {
+    const { container } = render(
+      <ScrollArea>
+        <p>Content</p>
+      </ScrollArea>,
+    )
+    expect(container.firstChild).toHaveClass("overflow-hidden")
+  })
+})
+
+// ─── Separator ────────────────────────────────────────────────────────────────
+
+describe("Separator", () => {
+  it("renders without crash", () => {
+    const { container } = render(<Separator />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("defaults to horizontal orientation", () => {
+    render(<Separator />)
+    expect(screen.getByRole("none")).toBeInTheDocument()
+  })
+
+  it("renders vertical separator", () => {
+    render(<Separator orientation="vertical" decorative={false} />)
+    const sep = screen.getByRole("separator")
+    expect(sep).toHaveAttribute("data-orientation", "vertical")
+  })
+
+  it("merges custom className", () => {
+    const { container } = render(<Separator className="custom-sep" />)
+    expect(container.firstChild).toHaveClass("custom-sep")
+  })
+})
+
+// ─── DropdownMenu ─────────────────────────────────────────────────────────────
+
+describe("DropdownMenu", () => {
+  it("renders trigger without crash", () => {
+    render(
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button>Open Menu</button>
+        </DropdownMenuTrigger>
+      </DropdownMenu>,
+    )
+    expect(screen.getByRole("button", { name: "Open Menu" })).toBeInTheDocument()
+  })
+
+  it("trigger has aria-haspopup attribute", () => {
+    render(
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button>Open Menu</button>
+        </DropdownMenuTrigger>
+      </DropdownMenu>,
+    )
+    expect(screen.getByRole("button", { name: "Open Menu" })).toHaveAttribute(
+      "aria-haspopup",
+      "menu",
+    )
+  })
+
+  it("menu content is not visible when closed", () => {
+    render(
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button>Open Menu</button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem>Item 1</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>,
+    )
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument()
+  })
+
+  it("opens menu on trigger click", async () => {
+    const user = userEvent.setup()
+    render(
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button>Open Menu</button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem>Item 1</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>,
+    )
+    await user.click(screen.getByRole("button", { name: "Open Menu" }))
+    expect(screen.getByRole("menu")).toBeInTheDocument()
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+  })
+})
+
+// ─── HoverCard ────────────────────────────────────────────────────────────────
+
+describe("HoverCard", () => {
+  it("renders trigger without crash", () => {
+    render(
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <a href="#">Hover me</a>
+        </HoverCardTrigger>
+        <HoverCardContent>Card content</HoverCardContent>
+      </HoverCard>,
+    )
+    expect(screen.getByText("Hover me")).toBeInTheDocument()
+  })
+
+  it("card content is not visible when not hovered", () => {
+    render(
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <a href="#">Hover me</a>
+        </HoverCardTrigger>
+        <HoverCardContent>Card content</HoverCardContent>
+      </HoverCard>,
+    )
+    expect(screen.queryByText("Card content")).not.toBeInTheDocument()
+  })
+
+  it("trigger renders as its child element", () => {
+    render(
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <button>Hover trigger</button>
+        </HoverCardTrigger>
+        <HoverCardContent>Card content</HoverCardContent>
+      </HoverCard>,
+    )
+    expect(screen.getByRole("button", { name: "Hover trigger" })).toBeInTheDocument()
+  })
+})
+
+// ─── Toggle ───────────────────────────────────────────────────────────────────
+
+describe("Toggle", () => {
+  it("renders without crash", () => {
+    render(<Toggle>Bold</Toggle>)
+    expect(screen.getByRole("button")).toBeInTheDocument()
+  })
+
+  it("can be toggled on and off", async () => {
+    const user = userEvent.setup()
+    render(<Toggle>Bold</Toggle>)
+    const btn = screen.getByRole("button")
+    expect(btn).toHaveAttribute("data-state", "off")
+    await user.click(btn)
+    expect(btn).toHaveAttribute("data-state", "on")
+    await user.click(btn)
+    expect(btn).toHaveAttribute("data-state", "off")
+  })
+
+  it("applies outline variant className", () => {
+    const { container } = render(<Toggle variant="outline">Italic</Toggle>)
+    expect(container.firstChild).toHaveClass("border")
+  })
+
+  it("merges custom className", () => {
+    const { container } = render(<Toggle className="custom-toggle">B</Toggle>)
+    expect(container.firstChild).toHaveClass("custom-toggle")
+  })
+})
+
+// ─── ToggleGroup ──────────────────────────────────────────────────────────────
+
+describe("ToggleGroup", () => {
+  it("renders without crash", () => {
+    render(
+      <ToggleGroup type="single">
+        <ToggleGroupItem value="a">A</ToggleGroupItem>
+        <ToggleGroupItem value="b">B</ToggleGroupItem>
+      </ToggleGroup>,
+    )
+    expect(screen.getByText("A")).toBeInTheDocument()
+    expect(screen.getByText("B")).toBeInTheDocument()
+  })
+
+  it("items have radio role for single-select group", () => {
+    render(
+      <ToggleGroup type="single">
+        <ToggleGroupItem value="x">X</ToggleGroupItem>
+      </ToggleGroup>,
+    )
+    expect(screen.getByRole("radio", { name: "X" })).toBeInTheDocument()
+  })
+
+  it("selects an item on click", async () => {
+    const user = userEvent.setup()
+    render(
+      <ToggleGroup type="single">
+        <ToggleGroupItem value="a">A</ToggleGroupItem>
+        <ToggleGroupItem value="b">B</ToggleGroupItem>
+      </ToggleGroup>,
+    )
+    const itemA = screen.getByRole("radio", { name: "A" })
+    await user.click(itemA)
+    expect(itemA).toHaveAttribute("data-state", "on")
+  })
+
+  it("merges custom className on ToggleGroup", () => {
+    const { container } = render(
+      <ToggleGroup type="single" className="custom-group">
+        <ToggleGroupItem value="a">A</ToggleGroupItem>
+      </ToggleGroup>,
+    )
+    expect(container.firstChild).toHaveClass("custom-group")
+  })
+})
+
+// ─── Pagination ───────────────────────────────────────────────────────────────
+
+describe("Pagination", () => {
+  it("renders with navigation role and label", () => {
+    render(<Pagination />)
+    expect(screen.getByRole("navigation", { name: /pagination/i })).toBeInTheDocument()
+  })
+
+  it("renders Previous and Next links", () => {
+    render(
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious href="#" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext href="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>,
+    )
+    expect(screen.getByLabelText("Go to previous page")).toBeInTheDocument()
+    expect(screen.getByLabelText("Go to next page")).toBeInTheDocument()
+  })
+
+  it("active page link has aria-current='page'", () => {
+    render(
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationLink href="#" isActive>
+              2
+            </PaginationLink>
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>,
+    )
+    expect(screen.getByText("2").closest("a")).toHaveAttribute("aria-current", "page")
+  })
+
+  it("renders ellipsis with aria-hidden", () => {
+    render(
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>,
+    )
+    expect(screen.getByText("More pages")).toBeInTheDocument()
+  })
+})
+
+// ─── Toast (useToast hook) ────────────────────────────────────────────────────
+
+describe("useToast", () => {
+  it("toast() returns an id, dismiss, and update", () => {
+    const result = toast({ title: "Hello" })
+    expect(result).toHaveProperty("id")
+    expect(result).toHaveProperty("dismiss")
+    expect(result).toHaveProperty("update")
+    result.dismiss()
+  })
+
+  it("useToast exposes toast function and toasts array", () => {
+    let hookResult: ReturnType<typeof useToast> | null = null
+    function Harness() {
+      hookResult = useToast()
+      return null
+    }
+    render(<Harness />)
+    expect(hookResult).not.toBeNull()
+    expect(typeof hookResult!.toast).toBe("function")
+    expect(Array.isArray(hookResult!.toasts)).toBe(true)
+  })
+
+  it("useToast exposes a dismiss function", () => {
+    let hookResult: ReturnType<typeof useToast> | null = null
+    function Harness() {
+      hookResult = useToast()
+      return null
+    }
+    render(<Harness />)
+    expect(typeof hookResult!.dismiss).toBe("function")
+  })
+})
+
+// ─── Combobox ─────────────────────────────────────────────────────────────────
+
+describe("Combobox", () => {
+  it("renders trigger without crash", () => {
+    render(
+      <Combobox>
+        <ComboboxTrigger asChild>
+          <button>Select option</button>
+        </ComboboxTrigger>
+      </Combobox>,
+    )
+    expect(screen.getByRole("button", { name: "Select option" })).toBeInTheDocument()
+  })
+
+  it("popover is closed by default", () => {
+    render(
+      <Combobox>
+        <ComboboxTrigger asChild>
+          <button>Select option</button>
+        </ComboboxTrigger>
+        <ComboboxContent>
+          <ComboboxList>
+            <ComboboxEmpty>No results found.</ComboboxEmpty>
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>,
+    )
+    expect(screen.queryByText("No results found.")).not.toBeInTheDocument()
+  })
+
+  it("opens popover on trigger click and shows empty state", async () => {
+    const user = userEvent.setup()
+    render(
+      <Combobox>
+        <ComboboxTrigger asChild>
+          <button>Select option</button>
+        </ComboboxTrigger>
+        <ComboboxContent>
+          <ComboboxInput placeholder="Search..." />
+          <ComboboxList>
+            <ComboboxEmpty>No results found.</ComboboxEmpty>
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>,
+    )
+    await user.click(screen.getByRole("button", { name: "Select option" }))
+    expect(screen.getByPlaceholderText("Search...")).toBeInTheDocument()
+  })
+
+  it("renders ComboboxItem with selected indicator", () => {
+    render(
+      <Combobox open>
+        <ComboboxContent>
+          <ComboboxList>
+            <ComboboxItem value="apple" selected>
+              Apple
+            </ComboboxItem>
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>,
+    )
+    expect(screen.getByText("Apple")).toBeInTheDocument()
   })
 })

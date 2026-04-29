@@ -13,7 +13,9 @@
   ],
   "dependencies": {
     "@aetherstack/ui": "workspace:*",
-    "@aetherstack/utils": "workspace:*"
+    "@aetherstack/utils": "workspace:*",
+    "cmdk": "^1.1.1",
+    "lucide-react": "^0.441.0"
   },
   "peerDependencies": {
     "react": "^18.0.0",

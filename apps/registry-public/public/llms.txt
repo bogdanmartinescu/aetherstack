@@ -28,7 +28,25 @@ Aether UI uses a four-layer architecture:
 3. **Blocks** (registry:block) — full page-section assemblies
 4. **Tokens** — design tokens for colors, spacing, typography, and more
 
-## Primitives (16)
+## Primitives (31)
+
+## Accordion
+- Name: accordion
+- Install: aether-ui add accordion
+- Source: https://registry.aetherui.dev/r/accordion.json
+- Intent: Collapsible content sections for FAQs, settings panels, or any expandable content
+  Slots: AccordionItem, AccordionTrigger, AccordionContent
+  Often used with: card, separator
+  Prompts: add an accordion | create a collapsible section | add an FAQ section
+
+## Avatar
+- Name: avatar
+- Install: aether-ui add avatar
+- Source: https://registry.aetherui.dev/r/avatar.json
+- Intent: Display user profile images with graceful fallback to initials
+  Slots: AvatarImage, AvatarFallback, AvatarGroup
+  Often used with: badge, card, team-settings
+  Prompts: add a user avatar | show profile picture | add avatar with initials
 
 ## Badge
 - Name: badge
@@ -48,6 +66,15 @@ Aether UI uses a four-layer architecture:
   Often used with: form-field, dialog, card, page-header, empty-state
   Prompts: add a button | create a submit button | add a call to action
 
+## Calendar
+- Name: calendar
+- Install: aether-ui add calendar
+- Source: https://registry.aetherui.dev/r/calendar.json
+- Intent: Select a single date or date range from a month-view calendar
+  Slots: onSelect, selected, mode
+  Often used with: button, combobox
+  Prompts: add a date picker | add a calendar | select a date
+
 ## Card
 - Name: card
 - Install: aether-ui add card
@@ -66,6 +93,24 @@ Aether UI uses a four-layer architecture:
   Often used with: form-field, label, login-block
   Prompts: add a checkbox | add an accept terms checkbox | add a remember me option
 
+## Combobox
+- Name: combobox
+- Install: aether-ui add combobox
+- Source: https://registry.aetherui.dev/r/combobox.json
+- Intent: Searchable dropdown select for large option sets with async support
+  Slots: ComboboxTrigger, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxEmpty
+  Often used with: button, command-palette
+  Prompts: add a combobox | add a searchable select | add autocomplete input
+
+## Context Menu
+- Name: context-menu
+- Install: aether-ui add context-menu
+- Source: https://registry.aetherui.dev/r/context-menu.json
+- Intent: Show a contextual right-click menu with actions for a target element
+  Slots: ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator
+  Often used with: dropdown-menu, separator
+  Prompts: add a right-click menu | add a context menu | show contextual actions
+
 ## Dialog
 - Name: dialog
 - Install: aether-ui add dialog
@@ -74,6 +119,24 @@ Aether UI uses a four-layer architecture:
   Slots: DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter
   Often used with: button, form-field, input
   Prompts: add a confirmation dialog | add a modal popup | add a delete confirmation modal
+
+## Dropdown Menu
+- Name: dropdown-menu
+- Install: aether-ui add dropdown-menu
+- Source: https://registry.aetherui.dev/r/dropdown-menu.json
+- Intent: Show a list of actions or options in a floating dropdown triggered by a button
+  Slots: DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel
+  Often used with: button, separator, badge
+  Prompts: add a dropdown menu | add action menu | add options menu
+
+## Hover Card
+- Name: hover-card
+- Install: aether-ui add hover-card
+- Source: https://registry.aetherui.dev/r/hover-card.json
+- Intent: Show a rich preview popup when hovering over a link or user mention
+  Slots: HoverCardTrigger, HoverCardContent
+  Often used with: avatar, card, tooltip
+  Prompts: add a hover card | show preview on hover | add user card preview
 
 ## Input
 - Name: input
@@ -93,6 +156,24 @@ Aether UI uses a four-layer architecture:
   Often used with: form-field, input, checkbox, radio-group, switch
   Prompts: add a form label | label an input field | add an accessible label
 
+## Pagination
+- Name: pagination
+- Install: aether-ui add pagination
+- Source: https://registry.aetherui.dev/r/pagination.json
+- Intent: Navigate between pages of content with previous, next, and numbered page links
+  Slots: PaginationPrevious, PaginationNext, PaginationLink, PaginationEllipsis
+  Often used with: button, data-table
+  Prompts: add pagination | add page navigation | add next previous buttons
+
+## Progress
+- Name: progress
+- Install: aether-ui add progress
+- Source: https://registry.aetherui.dev/r/progress.json
+- Intent: Show completion percentage of a task or upload as a horizontal bar
+  Slots: value
+  Often used with: billing-overview, onboarding-checklist
+  Prompts: add a progress bar | show upload progress | show task completion
+
 ## Radio Group
 - Name: radio-group
 - Install: aether-ui add radio-group
@@ -102,6 +183,15 @@ Aether UI uses a four-layer architecture:
   Often used with: form-field, label
   Prompts: add a radio group | add a plan selector with radio buttons | add a single-choice option list
 
+## Scroll Area
+- Name: scroll-area
+- Install: aether-ui add scroll-area
+- Source: https://registry.aetherui.dev/r/scroll-area.json
+- Intent: Wrap content that overflows with a styled, accessible scroll container
+  Slots: children, ScrollBar
+  Often used with: command-palette, activity-feed
+  Prompts: add a scroll area | make content scrollable | add a custom scrollbar
+
 ## Select
 - Name: select
 - Install: aether-ui add select
@@ -110,6 +200,15 @@ Aether UI uses a four-layer architecture:
   Slots: SelectTrigger, SelectContent, SelectItem, value, onValueChange
   Often used with: form-field, label, table-toolbar
   Prompts: add a select dropdown | add a country picker | add a role selector
+
+## Separator
+- Name: separator
+- Install: aether-ui add separator
+- Source: https://registry.aetherui.dev/r/separator.json
+- Intent: Visually separate groups of content with a thin divider line
+  Slots: orientation
+  Often used with: dropdown-menu, card, sidebar-nav
+  Prompts: add a divider | add a separator | separate content sections
 
 ## Sheet
 - Name: sheet
@@ -128,6 +227,15 @@ Aether UI uses a four-layer architecture:
   Slots: className
   Often used with: loading-state, card, table
   Prompts: add a skeleton loader | add loading placeholders | add a skeleton card
+
+## Slider
+- Name: slider
+- Install: aether-ui add slider
+- Source: https://registry.aetherui.dev/r/slider.json
+- Intent: Let users select a numeric value within a range by dragging a thumb
+  Slots: value, onValueChange, min, max, step
+  Often used with: form-field
+  Prompts: add a slider | add a range input | add a volume control
 
 ## Switch
 - Name: switch
@@ -165,6 +273,33 @@ Aether UI uses a four-layer architecture:
   Often used with: form-field, label
   Prompts: add a textarea | add a description field | add a multiline text input
 
+## Toast
+- Name: toast
+- Install: aether-ui add toast
+- Source: https://registry.aetherui.dev/r/toast.json
+- Intent: Show brief non-blocking notifications at the bottom of the screen
+  Slots: ToastTitle, ToastDescription, ToastAction, ToastProvider, ToastViewport
+  Often used with: button
+  Prompts: add a toast notification | show a success toast | add a notification
+
+## Toggle
+- Name: toggle
+- Install: aether-ui add toggle
+- Source: https://registry.aetherui.dev/r/toggle.json
+- Intent: A pressable button that toggles between active and inactive states
+  Slots: pressed, onPressedChange, variant, size
+  Often used with: toggle-group, toolbar
+  Prompts: add a toggle button | add a press-to-activate button | add a bold/italic toggle
+
+## Toggle Group
+- Name: toggle-group
+- Install: aether-ui add toggle-group
+- Source: https://registry.aetherui.dev/r/toggle-group.json
+- Intent: Allow single or multiple selection from a set of toggle buttons
+  Slots: ToggleGroupItem, value, onValueChange, type
+  Often used with: toggle
+  Prompts: add toggle group | add a toolbar button group | add text alignment toggles
+
 ## Tooltip
 - Name: tooltip
 - Install: aether-ui add tooltip
@@ -174,7 +309,43 @@ Aether UI uses a four-layer architecture:
   Often used with: button, badge
   Prompts: add a tooltip | show a hint on hover | add an icon with a tooltip
 
-## Patterns (9)
+## Patterns (17)
+
+## Activity Feed
+- Name: activity-feed
+- Install: aether-ui add activity-feed
+- Source: https://registry.aetherui.dev/r/activity-feed.json
+- Intent: Show a chronological feed of user actions or system events
+  Slots: ActivityItem, items
+  Often used with: avatar, notification-center
+  Prompts: add an activity feed | show recent events | add an audit log
+
+## Color Picker
+- Name: color-picker
+- Install: aether-ui add color-picker
+- Source: https://registry.aetherui.dev/r/color-picker.json
+- Intent: Let users select or input a color using hex input, native picker, or preset swatches
+  Slots: value, onChange, presets
+  Often used with: button, input
+  Prompts: add a color picker | add a color selector | pick a hex color
+
+## Command Palette
+- Name: command-palette
+- Install: aether-ui add command-palette
+- Source: https://registry.aetherui.dev/r/command-palette.json
+- Intent: Open a keyboard-driven search palette for quick navigation and action execution
+  Slots: CommandPaletteInput, CommandGroup, CommandItem, CommandPaletteDialog
+  Often used with: dialog, combobox, scroll-area
+  Prompts: add a command palette | add cmd+k search | add a quick search
+
+## Data Table
+- Name: data-table
+- Install: aether-ui add data-table
+- Source: https://registry.aetherui.dev/r/data-table.json
+- Intent: Display tabular data with sorting, search filtering, and pagination
+  Slots: columns, data, pageSize, searchable, searchKeys
+  Often used with: table, input, button, pagination, table-toolbar
+  Prompts: add a data table | show a sortable table | add a paginated list
 
 ## Empty State
 - Name: empty-state
@@ -194,6 +365,15 @@ Aether UI uses a four-layer architecture:
   Often used with: button
   Prompts: add an error state | show an error message with a retry button | add a fetch error fallback
 
+## File Dropzone
+- Name: file-dropzone
+- Install: aether-ui add file-dropzone
+- Source: https://registry.aetherui.dev/r/file-dropzone.json
+- Intent: Let users upload files by dragging them onto a target zone or clicking to browse
+  Slots: onFilesSelected, accept, multiple, maxSize
+  Often used with: button
+  Prompts: add a file upload | add a drag and drop zone | add a file picker
+
 ## Form Field
 - Name: form-field
 - Install: aether-ui add form-field
@@ -202,6 +382,15 @@ Aether UI uses a four-layer architecture:
   Slots: FormLabel, FormControl, FormDescription, FormMessage, children
   Often used with: input, textarea, select, checkbox, switch, label
   Prompts: add a form field with validation | add an email field with error message | add a labelled input with helper text
+
+## Kanban Board
+- Name: kanban
+- Install: aether-ui add kanban
+- Source: https://registry.aetherui.dev/r/kanban.json
+- Intent: Organize items into drag-and-drop status columns for task management
+  Slots: KanbanColumn, KanbanCard, KanbanBoard, columns
+  Often used with: card, badge
+  Prompts: add a kanban board | add a task board | add drag and drop columns
 
 ## Loading State
 - Name: loading-state
@@ -248,6 +437,24 @@ Aether UI uses a four-layer architecture:
   Often used with: card, form-field, button
   Prompts: add a section heading | add a settings section | add a content block title
 
+## Stat Group
+- Name: stat-group
+- Install: aether-ui add stat-group
+- Source: https://registry.aetherui.dev/r/stat-group.json
+- Intent: Display multiple key metrics side-by-side in a responsive stat grid
+  Slots: StatItem, cols
+  Often used with: metric-card, card
+  Prompts: add a stats row | show key metrics | add KPI cards
+
+## Stepper
+- Name: stepper
+- Install: aether-ui add stepper
+- Source: https://registry.aetherui.dev/r/stepper.json
+- Intent: Show progress through a multi-step form or onboarding wizard
+  Slots: steps, currentStep, orientation
+  Often used with: onboarding-checklist
+  Prompts: add a stepper | add a wizard | add multi-step form progress
+
 ## Table Toolbar
 - Name: table-toolbar
 - Install: aether-ui add table-toolbar
@@ -257,7 +464,25 @@ Aether UI uses a four-layer architecture:
   Often used with: table, input, button, badge, select
   Prompts: add a table toolbar with search and filters | add a search bar above a table | add filter chips to a data table
 
-## Blocks (3)
+## Blocks (10)
+
+## Account Settings
+- Name: account-settings
+- Install: aether-ui add account-settings
+- Source: https://registry.aetherui.dev/r/account-settings.json
+- Intent: Let users update their profile information including avatar, name, email, and bio
+  Slots: defaultValues, onSave
+  Often used with: input, textarea, button, avatar, form-field
+  Prompts: add account settings | add profile settings | add user settings form
+
+## Billing Overview
+- Name: billing-overview
+- Install: aether-ui add billing-overview
+- Source: https://registry.aetherui.dev/r/billing-overview.json
+- Intent: Show subscription plan details, usage metrics, and billing management actions
+  Slots: plan, usage, nextBillingDate, onUpgrade, onManageBilling
+  Often used with: progress, button, card, badge
+  Prompts: add a billing overview | show subscription details | add plan usage
 
 ## Dashboard Shell
 - Name: dashboard-shell
@@ -268,6 +493,15 @@ Aether UI uses a four-layer architecture:
   Often used with: nav, metric-card, table-toolbar, table, page-header
   Prompts: build me a SaaS dashboard | add a dashboard layout | create an admin panel shell
 
+## Empty Dashboard
+- Name: empty-dashboard
+- Install: aether-ui add empty-dashboard
+- Source: https://registry.aetherui.dev/r/empty-dashboard.json
+- Intent: Show a welcoming placeholder when a dashboard has no data yet
+  Slots: title, description, actions
+  Often used with: empty-state, button
+  Prompts: add an empty dashboard | show empty state for dashboard | add a welcome screen
+
 ## Login
 - Name: login-block
 - Install: aether-ui add login-block
@@ -277,6 +511,33 @@ Aether UI uses a four-layer architecture:
   Often used with: form-field, input, button, checkbox, label
   Prompts: add a login page | create an authentication screen | add a sign-in form
 
+## Notification Center
+- Name: notification-center
+- Install: aether-ui add notification-center
+- Source: https://registry.aetherui.dev/r/notification-center.json
+- Intent: Display a list of in-app notifications with read state and dismiss controls
+  Slots: notifications, onMarkRead, onMarkAllRead, onDismiss
+  Often used with: badge, button, activity-feed
+  Prompts: add a notification center | show notifications | add in-app notifications
+
+## Onboarding Checklist
+- Name: onboarding-checklist
+- Install: aether-ui add onboarding-checklist
+- Source: https://registry.aetherui.dev/r/onboarding-checklist.json
+- Intent: Guide new users through setup tasks with a checklist and progress bar
+  Slots: steps, onStepToggle, title, description
+  Often used with: checkbox, progress, stepper
+  Prompts: add an onboarding checklist | add a getting started guide | add setup steps
+
+## Pricing Section
+- Name: pricing-section
+- Install: aether-ui add pricing-section
+- Source: https://registry.aetherui.dev/r/pricing-section.json
+- Intent: Show pricing tiers with feature lists and CTA buttons for a marketing or landing page
+  Slots: tiers, title, description
+  Often used with: badge, button, card
+  Prompts: add a pricing section | add pricing plans | show subscription tiers
+
 ## Sign Up
 - Name: signup-block
 - Install: aether-ui add signup-block
@@ -285,6 +546,15 @@ Aether UI uses a four-layer architecture:
   Slots: onSubmit, onSignIn, footer
   Often used with: form-field, input, button, checkbox
   Prompts: add a sign up page | create a registration form | add a new account form
+
+## Team Settings
+- Name: team-settings
+- Install: aether-ui add team-settings
+- Source: https://registry.aetherui.dev/r/team-settings.json
+- Intent: Manage team members, invite new members by email, and assign roles
+  Slots: members, onInvite, onRoleChange, onRemove
+  Often used with: avatar, badge, select, input, button
+  Prompts: add team settings | add team member management | add invite team members
 
 ## Compose a SaaS Dashboard
 

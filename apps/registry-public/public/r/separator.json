@@ -1,0 +1,35 @@
+{
+  "name": "separator",
+  "type": "registry:ui",
+  "title": "Separator",
+  "description": "Thin horizontal or vertical divider line.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@radix-ui/react-separator",
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/separator.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/separator.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SeparatorPrimitive from \"@radix-ui/react-separator\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst Separator = React.forwardRef<\n  React.ElementRef<typeof SeparatorPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>\n>(\n  (\n    { className, orientation = \"horizontal\", decorative = true, ...props },\n    ref,\n  ) => (\n    <SeparatorPrimitive.Root\n      ref={ref}\n      decorative={decorative}\n      orientation={orientation}\n      className={cn(\n        \"shrink-0 bg-border\",\n        orientation === \"horizontal\" ? \"h-[1px] w-full\" : \"h-full w-[1px]\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n)\nSeparator.displayName = \"Separator\"\n\nexport { Separator }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Visually separate groups of content with a thin divider line",
+    "prompts": [
+      "add a divider",
+      "add a separator",
+      "separate content sections"
+    ],
+    "composition": [
+      "dropdown-menu",
+      "card",
+      "sidebar-nav"
+    ],
+    "slots": [
+      "orientation"
+    ]
+  }
+}

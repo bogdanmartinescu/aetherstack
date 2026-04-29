@@ -56,3 +56,53 @@ export type {
 // Navigation
 export { NavItem, NavGroup, SidebarNav } from "./components/nav"
 export type { NavItemProps, NavGroupProps, SidebarNavProps } from "./components/nav"
+
+// Stats
+export { StatGroup, StatItem } from "./components/stat-group"
+export type { StatGroupProps, StatItemProps } from "./components/stat-group"
+
+// Stepper / Wizard
+export { Stepper, StepperStep } from "./components/stepper"
+export type { StepperProps, StepperStepProps, StepperItem } from "./components/stepper"
+
+// Activity Feed
+export { ActivityFeed, ActivityItem } from "./components/activity-feed"
+export type { ActivityFeedProps, ActivityItemProps, ActivityEntry } from "./components/activity-feed"
+
+// File Dropzone
+export { FileDropzone } from "./components/file-dropzone"
+export type { FileDropzoneProps } from "./components/file-dropzone"
+
+// Data Table
+export { DataTable } from "./components/data-table"
+export type { DataTableProps, DataTableColumn } from "./components/data-table"
+
+// Command Palette
+export {
+  CommandPalette,
+  CommandPaletteInput,
+  CommandPaletteList,
+  CommandPaletteEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandPaletteSeparator,
+  CommandPaletteDialog,
+} from "./components/command-palette"
+export type {
+  CommandPaletteProps,
+  CommandPaletteInputProps,
+  CommandPaletteListProps,
+  CommandPaletteEmptyProps,
+  CommandGroupProps,
+  CommandItemProps,
+  CommandPaletteSeparatorProps,
+  CommandPaletteDialogProps,
+} from "./components/command-palette"
+
+// Kanban
+export { KanbanBoard, KanbanColumn, KanbanCard } from "./components/kanban"
+export type { KanbanBoardProps, KanbanColumnProps, KanbanCardProps, KanbanItem } from "./components/kanban"
+
+// Color Picker
+export { ColorPicker, ColorSwatch } from "./components/color-picker"
+export type { ColorPickerProps, ColorSwatchProps } from "./components/color-picker"

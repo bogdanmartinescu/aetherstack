@@ -1,0 +1,43 @@
+{
+  "name": "data-table",
+  "type": "registry:pattern",
+  "title": "Data Table",
+  "description": "Sortable, searchable, and paginated data table with column configuration.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/data-table.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/data-table.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport {\n  Table,\n  TableHeader,\n  TableBody,\n  TableRow,\n  TableHead,\n  TableCell,\n  Button,\n  Input,\n} from \"@aetherstack/ui\"\nimport { ChevronUp, ChevronDown, ChevronsUpDown } from \"lucide-react\"\n\n// ── Types ─────────────────────────────────────────────────────────────────────\n\nexport interface DataTableColumn<T> {\n  key: keyof T\n  header: string\n  render?: (value: T[keyof T], row: T) => React.ReactNode\n  sortable?: boolean\n  className?: string\n}\n\nexport interface DataTableProps<T> {\n  columns: DataTableColumn<T>[]\n  data: T[]\n  pageSize?: number\n  searchable?: boolean\n  searchKeys?: (keyof T)[]\n  className?: string\n  emptyMessage?: string\n}\n\ntype SortDir = \"asc\" | \"desc\"\n\n// ── DataTable ─────────────────────────────────────────────────────────────────\n\nexport function DataTable<T extends Record<string, unknown>>({\n  columns,\n  data,\n  pageSize = 10,\n  searchable = false,\n  searchKeys,\n  className,\n  emptyMessage = \"No results found.\",\n}: DataTableProps<T>) {\n  const [sortKey, setSortKey] = React.useState<keyof T | null>(null)\n  const [sortDir, setSortDir] = React.useState<SortDir>(\"asc\")\n  const [page, setPage] = React.useState(0)\n  const [searchQuery, setSearchQuery] = React.useState(\"\")\n\n  // Filter\n  const filtered = React.useMemo(() => {\n    if (!searchable || !searchQuery.trim()) return data\n    const query = searchQuery.toLowerCase()\n    const keys = searchKeys ?? (columns.map((c) => c.key) as (keyof T)[])\n    return data.filter((row) =>\n      keys.some((key) => {\n        const val = row[key]\n        return val !== null && val !== undefined && String(val).toLowerCase().includes(query)\n      }),\n    )\n  }, [data, searchable, searchQuery, searchKeys, columns])\n\n  // Sort — stable sort using index as tiebreaker\n  const sorted = React.useMemo(() => {\n    if (!sortKey) return filtered\n    return [...filtered].sort((a, b) => {\n      const av = a[sortKey]\n      const bv = b[sortKey]\n      if (av === bv) return 0\n      const result = av === null || av === undefined\n        ? 1\n        : bv === null || bv === undefined\n          ? -1\n          : av < bv\n            ? -1\n            : 1\n      return sortDir === \"asc\" ? result : -result\n    })\n  }, [filtered, sortKey, sortDir])\n\n  // Paginate\n  const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize))\n  const safePage = Math.min(page, totalPages - 1)\n  const paginated = sorted.slice(safePage * pageSize, (safePage + 1) * pageSize)\n\n  function handleSort(key: keyof T) {\n    if (sortKey === key) {\n      setSortDir((d) => (d === \"asc\" ? \"desc\" : \"asc\"))\n    } else {\n      setSortKey(key)\n      setSortDir(\"asc\")\n    }\n    setPage(0)\n  }\n\n  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {\n    setSearchQuery(e.target.value)\n    setPage(0)\n  }\n\n  return (\n    <div className={cn(\"space-y-3\", className)}>\n      {searchable && (\n        <div className=\"flex items-center gap-2\">\n          <Input\n            placeholder=\"Search…\"\n            value={searchQuery}\n            onChange={handleSearch}\n            className=\"max-w-xs\"\n            aria-label=\"Search table\"\n          />\n        </div>\n      )}\n\n      <div className=\"overflow-x-auto rounded-md border border-border\">\n        <Table>\n          <TableHeader>\n            <TableRow>\n              {columns.map((col) => (\n                <TableHead\n                  key={String(col.key)}\n                  className={cn(\n                    col.sortable && \"cursor-pointer select-none hover:bg-muted/50\",\n                    col.className,\n                  )}\n                  onClick={col.sortable ? () => handleSort(col.key) : undefined}\n                  aria-sort={\n                    sortKey === col.key\n                      ? sortDir === \"asc\"\n                        ? \"ascending\"\n                        : \"descending\"\n                      : col.sortable\n                        ? \"none\"\n                        : undefined\n                  }\n                >\n                  <span className=\"flex items-center gap-1.5\">\n                    {col.header}\n                    {col.sortable && (\n                      <span className=\"text-muted-foreground\" aria-hidden=\"true\">\n                        {sortKey === col.key ? (\n                          sortDir === \"asc\" ? (\n                            <ChevronUp className=\"h-3.5 w-3.5\" />\n                          ) : (\n                            <ChevronDown className=\"h-3.5 w-3.5\" />\n                          )\n                        ) : (\n                          <ChevronsUpDown className=\"h-3.5 w-3.5 opacity-50\" />\n                        )}\n                      </span>\n                    )}\n                  </span>\n                </TableHead>\n              ))}\n            </TableRow>\n          </TableHeader>\n          <TableBody>\n            {paginated.length === 0 ? (\n              <TableRow>\n                <TableCell\n                  colSpan={columns.length}\n                  className=\"h-24 text-center text-muted-foreground\"\n                >\n                  {emptyMessage}\n                </TableCell>\n              </TableRow>\n            ) : (\n              paginated.map((row, rowIndex) => (\n                <TableRow key={rowIndex}>\n                  {columns.map((col) => (\n                    <TableCell key={String(col.key)} className={col.className}>\n                      {col.render\n                        ? col.render(row[col.key], row)\n                        : (row[col.key] as React.ReactNode)}\n                    </TableCell>\n                  ))}\n                </TableRow>\n              ))\n            )}\n          </TableBody>\n        </Table>\n      </div>\n\n      {totalPages > 1 && (\n        <div className=\"flex items-center justify-between text-sm text-muted-foreground\">\n          <span>\n            Page {safePage + 1} of {totalPages}\n          </span>\n          <div className=\"flex items-center gap-2\">\n            <Button\n              variant=\"outline\"\n              size=\"sm\"\n              onClick={() => setPage((p) => Math.max(0, p - 1))}\n              disabled={safePage === 0}\n              aria-label=\"Previous page\"\n            >\n              Previous\n            </Button>\n            <Button\n              variant=\"outline\"\n              size=\"sm\"\n              onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}\n              disabled={safePage === totalPages - 1}\n              aria-label=\"Next page\"\n            >\n              Next\n            </Button>\n          </div>\n        </div>\n      )}\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Display tabular data with sorting, search filtering, and pagination",
+    "prompts": [
+      "add a data table",
+      "show a sortable table",
+      "add a paginated list",
+      "add a users table",
+      "create a data grid"
+    ],
+    "composition": [
+      "table",
+      "input",
+      "button",
+      "pagination",
+      "table-toolbar"
+    ],
+    "slots": [
+      "columns",
+      "data",
+      "pageSize",
+      "searchable",
+      "searchKeys"
+    ]
+  }
+}

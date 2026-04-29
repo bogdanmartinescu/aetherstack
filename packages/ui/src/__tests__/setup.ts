@@ -1,5 +1,16 @@
 import "@testing-library/jest-dom"
 
+// ResizeObserver is not available in JSDOM. Several Radix primitives
+// (@radix-ui/react-use-size used by Slider) and cmdk depend on it.
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+// cmdk calls scrollIntoView when selecting items; stub it for JSDOM.
+Element.prototype.scrollIntoView = function () {}
+
 // Suppress known Radix UI + JSDOM false-positive act() warnings.
 // Radix's roving-focus (RadioGroup, Tabs) schedules state updates inside
 // keyboard event handlers. JSDOM doesn't run requestAnimationFrame so those

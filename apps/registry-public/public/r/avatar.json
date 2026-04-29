@@ -1,0 +1,38 @@
+{
+  "name": "avatar",
+  "type": "registry:ui",
+  "title": "Avatar",
+  "description": "User image with fallback initials and stacked group variant.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@radix-ui/react-avatar",
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/avatar.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/avatar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst Avatar = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full\",\n      className,\n    )}\n    {...props}\n  />\n))\nAvatar.displayName = \"Avatar\"\n\nconst AvatarImage = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Image>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    className={cn(\"aspect-square h-full w-full\", className)}\n    {...props}\n  />\n))\nAvatarImage.displayName = \"AvatarImage\"\n\nconst AvatarFallback = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Fallback>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    className={cn(\n      \"flex h-full w-full items-center justify-center rounded-full bg-muted text-sm font-medium text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nAvatarFallback.displayName = \"AvatarFallback\"\n\ninterface AvatarGroupProps {\n  children: React.ReactNode\n  className?: string\n  max?: number\n}\n\nfunction AvatarGroup({ children, className, max }: AvatarGroupProps) {\n  const childArray = React.Children.toArray(children)\n  const visible = max !== undefined ? childArray.slice(0, max) : childArray\n  const overflow = max !== undefined ? childArray.length - max : 0\n\n  return (\n    <div className={cn(\"flex items-center -space-x-2\", className)}>\n      {visible}\n      {overflow > 0 && (\n        <Avatar>\n          <AvatarFallback>+{overflow}</AvatarFallback>\n        </Avatar>\n      )}\n    </div>\n  )\n}\nAvatarGroup.displayName = \"AvatarGroup\"\n\nexport { Avatar, AvatarImage, AvatarFallback, AvatarGroup }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Display user profile images with graceful fallback to initials",
+    "prompts": [
+      "add a user avatar",
+      "show profile picture",
+      "add avatar with initials",
+      "show stacked user avatars"
+    ],
+    "composition": [
+      "badge",
+      "card",
+      "team-settings"
+    ],
+    "slots": [
+      "AvatarImage",
+      "AvatarFallback",
+      "AvatarGroup"
+    ]
+  }
+}

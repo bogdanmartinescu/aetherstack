@@ -1,0 +1,36 @@
+{
+  "name": "color-picker",
+  "type": "registry:pattern",
+  "title": "Color Picker",
+  "description": "Hex color input with preset swatches and native color picker.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/color-picker.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/color-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Input } from \"@aetherstack/ui\"\n\n// ── ColorSwatch ───────────────────────────────────────────────────────────────\n\nexport interface ColorSwatchProps {\n  color: string\n  selected?: boolean\n  onClick?: () => void\n  className?: string\n}\n\nexport function ColorSwatch({ color, selected, onClick, className }: ColorSwatchProps) {\n  return (\n    <button\n      type=\"button\"\n      onClick={onClick}\n      title={color}\n      aria-label={`Select color ${color}`}\n      aria-pressed={selected}\n      className={cn(\n        \"h-7 w-7 rounded-md border-2 cursor-pointer transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1\",\n        selected\n          ? \"border-primary ring-2 ring-primary ring-offset-1\"\n          : \"border-border hover:scale-110\",\n        className,\n      )}\n      style={{ backgroundColor: color }}\n    />\n  )\n}\n\n// ── ColorPicker ───────────────────────────────────────────────────────────────\n\nexport interface ColorPickerProps {\n  value: string\n  onChange: (value: string) => void\n  presets?: string[]\n  className?: string\n}\n\nfunction normalizeHex(raw: string): string {\n  const v = raw.startsWith(\"#\") ? raw : `#${raw}`\n  return v\n}\n\nfunction isValidHex(value: string): boolean {\n  return /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(value)\n}\n\nexport function ColorPicker({ value, onChange, presets, className }: ColorPickerProps) {\n  const nativeInputRef = React.useRef<HTMLInputElement>(null)\n  const [inputText, setInputText] = React.useState(value)\n\n  // Sync internal text when value changes from outside\n  React.useEffect(() => {\n    setInputText(value)\n  }, [value])\n\n  function handleNativeChange(e: React.ChangeEvent<HTMLInputElement>) {\n    const normalized = normalizeHex(e.target.value)\n    setInputText(normalized)\n    onChange(normalized)\n  }\n\n  function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {\n    const raw = e.target.value\n    setInputText(raw)\n    const normalized = normalizeHex(raw)\n    if (isValidHex(normalized)) {\n      onChange(normalized)\n    }\n  }\n\n  function handleTextBlur() {\n    const normalized = normalizeHex(inputText)\n    if (!isValidHex(normalized)) {\n      // Revert to last valid value\n      setInputText(value)\n    }\n  }\n\n  return (\n    <div className={cn(\"flex flex-col gap-3\", className)}>\n      {/* Preview + native color input trigger */}\n      <div className=\"flex items-center gap-3\">\n        <button\n          type=\"button\"\n          onClick={() => nativeInputRef.current?.click()}\n          className=\"relative h-9 w-9 rounded-md border-2 border-border shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 hover:border-primary/50 transition-colors cursor-pointer\"\n          style={{ backgroundColor: isValidHex(normalizeHex(inputText)) ? normalizeHex(inputText) : value }}\n          title=\"Open color picker\"\n          aria-label=\"Open native color picker\"\n        >\n          <input\n            ref={nativeInputRef}\n            type=\"color\"\n            value={isValidHex(normalizeHex(inputText)) ? normalizeHex(inputText) : value}\n            onChange={handleNativeChange}\n            className=\"sr-only\"\n            tabIndex={-1}\n            aria-hidden=\"true\"\n          />\n        </button>\n\n        <Input\n          value={inputText}\n          onChange={handleTextChange}\n          onBlur={handleTextBlur}\n          placeholder=\"#000000\"\n          className=\"font-mono uppercase\"\n          aria-label=\"Hex color value\"\n          maxLength={7}\n        />\n      </div>\n\n      {/* Preset swatches */}\n      {presets && presets.length > 0 && (\n        <div className=\"flex flex-wrap gap-1.5\" role=\"group\" aria-label=\"Preset colors\">\n          {presets.map((preset) => (\n            <ColorSwatch\n              key={preset}\n              color={preset}\n              selected={normalizeHex(inputText).toLowerCase() === preset.toLowerCase()}\n              onClick={() => {\n                setInputText(preset)\n                onChange(preset)\n              }}\n            />\n          ))}\n        </div>\n      )}\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Let users select or input a color using hex input, native picker, or preset swatches",
+    "prompts": [
+      "add a color picker",
+      "add a color selector",
+      "pick a hex color",
+      "add theme color input"
+    ],
+    "composition": [
+      "button",
+      "input"
+    ],
+    "slots": [
+      "value",
+      "onChange",
+      "presets"
+    ]
+  }
+}

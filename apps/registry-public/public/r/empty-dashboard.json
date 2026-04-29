@@ -1,0 +1,36 @@
+{
+  "name": "empty-dashboard",
+  "type": "registry:block",
+  "title": "Empty Dashboard",
+  "description": "Welcoming empty state for a dashboard with no data, with action slots.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/empty-dashboard.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/empty-dashboard.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface EmptyDashboardProps {\n  title?: string\n  description?: string\n  actions?: React.ReactNode\n  className?: string\n}\n\nexport function EmptyDashboard({\n  title = \"Welcome to your dashboard\",\n  description = \"You haven't set anything up yet. Get started by creating your first project.\",\n  actions,\n  className,\n}: EmptyDashboardProps) {\n  return (\n    <div\n      className={cn(\n        \"relative flex min-h-[480px] w-full flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed border-border bg-background p-12\",\n        className,\n      )}\n    >\n      {/* Subtle dot-grid background */}\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0\"\n        style={{\n          backgroundImage:\n            \"radial-gradient(circle, hsl(var(--muted-foreground) / 0.15) 1px, transparent 1px)\",\n          backgroundSize: \"24px 24px\",\n        }}\n      />\n\n      {/* Illustration placeholder */}\n      <div className=\"relative mb-8 flex h-32 w-32 items-center justify-center rounded-2xl border border-border bg-muted/50 shadow-sm\">\n        <svg\n          xmlns=\"http://www.w3.org/2000/svg\"\n          width=\"56\"\n          height=\"56\"\n          viewBox=\"0 0 24 24\"\n          fill=\"none\"\n          stroke=\"currentColor\"\n          strokeWidth=\"1.25\"\n          strokeLinecap=\"round\"\n          strokeLinejoin=\"round\"\n          className=\"text-muted-foreground/50\"\n          aria-hidden\n        >\n          <rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\" />\n          <path d=\"M3 9h18\" />\n          <path d=\"M9 21V9\" />\n          <path d=\"M7 6h.01\" />\n          <path d=\"M11 6h.01\" />\n        </svg>\n        {/* Corner accent dots */}\n        <span className=\"absolute -right-1.5 -top-1.5 h-3 w-3 rounded-full bg-primary/30\" />\n        <span className=\"absolute -bottom-1.5 -left-1.5 h-3 w-3 rounded-full bg-primary/20\" />\n      </div>\n\n      {/* Text */}\n      <h2 className=\"relative text-xl font-semibold tracking-tight text-foreground\">\n        {title}\n      </h2>\n      <p className=\"relative mt-2 max-w-sm text-center text-sm text-muted-foreground\">\n        {description}\n      </p>\n\n      {/* Actions slot */}\n      {actions && (\n        <div className=\"relative mt-8 flex flex-wrap items-center justify-center gap-3\">\n          {actions}\n        </div>\n      )}\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Show a welcoming placeholder when a dashboard has no data yet",
+    "prompts": [
+      "add an empty dashboard",
+      "show empty state for dashboard",
+      "add a welcome screen",
+      "add a getting started screen"
+    ],
+    "composition": [
+      "empty-state",
+      "button"
+    ],
+    "slots": [
+      "title",
+      "description",
+      "actions"
+    ]
+  }
+}

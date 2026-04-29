@@ -5,6 +5,84 @@
   "version": "0.0.1",
   "items": [
     {
+      "name": "account-settings",
+      "type": "registry:block",
+      "title": "Account Settings",
+      "description": "Profile settings form with avatar, name, email, and bio fields.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/account-settings.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/account-settings.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport {\n  Button,\n  Input,\n  Textarea,\n  Label,\n  Avatar,\n  AvatarImage,\n  AvatarFallback,\n} from \"@aetherstack/ui\"\n\nexport interface AccountSettingsData {\n  name: string\n  email: string\n  bio?: string\n  avatarUrl?: string\n}\n\nexport interface AccountSettingsProps {\n  defaultValues?: AccountSettingsData\n  onSave?: (data: AccountSettingsData) => void | Promise<void>\n  className?: string\n}\n\nfunction getInitials(name: string): string {\n  return name\n    .split(\" \")\n    .map((n) => n[0])\n    .filter(Boolean)\n    .slice(0, 2)\n    .join(\"\")\n    .toUpperCase()\n}\n\nexport function AccountSettings({\n  defaultValues,\n  onSave,\n  className,\n}: AccountSettingsProps) {\n  const [name, setName] = React.useState(defaultValues?.name ?? \"\")\n  const [email, setEmail] = React.useState(defaultValues?.email ?? \"\")\n  const [bio, setBio] = React.useState(defaultValues?.bio ?? \"\")\n  const [avatarUrl] = React.useState(defaultValues?.avatarUrl ?? \"\")\n  const [isSaving, setIsSaving] = React.useState(false)\n\n  async function handleSubmit(e: React.FormEvent) {\n    e.preventDefault()\n    if (!onSave) return\n    setIsSaving(true)\n    try {\n      await onSave({ name, email, bio, avatarUrl })\n    } finally {\n      setIsSaving(false)\n    }\n  }\n\n  return (\n    <div\n      className={cn(\n        \"w-full rounded-xl border border-border bg-card p-6 shadow-sm\",\n        className,\n      )}\n    >\n      <h2 className=\"mb-6 text-base font-semibold text-foreground\">\n        Account settings\n      </h2>\n\n      {/* Avatar section */}\n      <div className=\"mb-6 flex items-center gap-4\">\n        <Avatar className=\"h-16 w-16\">\n          <AvatarImage src={avatarUrl} alt={name} />\n          <AvatarFallback className=\"text-lg\">\n            {getInitials(name) || \"?\"}\n          </AvatarFallback>\n        </Avatar>\n        <div>\n          <Button\n            type=\"button\"\n            variant=\"outline\"\n            size=\"sm\"\n            disabled\n            title=\"Avatar upload not available in this demo\"\n          >\n            Change avatar\n          </Button>\n          <p className=\"mt-1.5 text-xs text-muted-foreground\">\n            JPG, PNG or GIF. Max 2 MB.\n          </p>\n        </div>\n      </div>\n\n      <form onSubmit={handleSubmit} className=\"space-y-5\">\n        {/* Name */}\n        <div className=\"space-y-1.5\">\n          <Label htmlFor=\"account-name\">Display name</Label>\n          <Input\n            id=\"account-name\"\n            type=\"text\"\n            placeholder=\"Your name\"\n            value={name}\n            onChange={(e) => setName(e.target.value)}\n            autoComplete=\"name\"\n          />\n        </div>\n\n        {/* Email */}\n        <div className=\"space-y-1.5\">\n          <Label htmlFor=\"account-email\">Email address</Label>\n          <Input\n            id=\"account-email\"\n            type=\"email\"\n            placeholder=\"you@example.com\"\n            value={email}\n            onChange={(e) => setEmail(e.target.value)}\n            autoComplete=\"email\"\n          />\n        </div>\n\n        {/* Bio */}\n        <div className=\"space-y-1.5\">\n          <Label htmlFor=\"account-bio\">\n            Bio{\" \"}\n            <span className=\"text-xs font-normal text-muted-foreground\">\n              (optional)\n            </span>\n          </Label>\n          <Textarea\n            id=\"account-bio\"\n            placeholder=\"Tell us a little about yourself…\"\n            value={bio}\n            onChange={(e) => setBio(e.target.value)}\n            rows={3}\n            className=\"resize-none\"\n          />\n        </div>\n\n        <div className=\"flex justify-end pt-1\">\n          <Button type=\"submit\" disabled={isSaving}>\n            {isSaving ? \"Saving…\" : \"Save changes\"}\n          </Button>\n        </div>\n      </form>\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Let users update their profile information including avatar, name, email, and bio",
+        "prompts": [
+          "add account settings",
+          "add profile settings",
+          "add user settings form",
+          "add edit profile"
+        ],
+        "composition": [
+          "input",
+          "textarea",
+          "button",
+          "avatar",
+          "form-field"
+        ],
+        "slots": [
+          "defaultValues",
+          "onSave"
+        ]
+      }
+    },
+    {
+      "name": "billing-overview",
+      "type": "registry:block",
+      "title": "Billing Overview",
+      "description": "Current plan, usage meters, and billing management block.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/billing-overview.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/billing-overview.tsx",
+          "content": "\"use client\"\n\nimport { cn } from \"@aetherstack/utils\"\nimport { Button, Progress } from \"@aetherstack/ui\"\n\nexport interface BillingPlan {\n  name: string\n  price: string\n  period: string\n  features: string[]\n}\n\nexport interface UsageMetric {\n  label: string\n  used: number\n  limit: number\n  unit?: string\n}\n\nexport interface BillingOverviewProps {\n  plan?: BillingPlan\n  usage?: UsageMetric[]\n  nextBillingDate?: string\n  onUpgrade?: () => void\n  onManageBilling?: () => void\n  className?: string\n}\n\nconst DEFAULT_PLAN: BillingPlan = {\n  name: \"Free\",\n  price: \"$0\",\n  period: \"month\",\n  features: [\"Up to 3 projects\", \"1 team member\", \"Community support\"],\n}\n\nexport function BillingOverview({\n  plan = DEFAULT_PLAN,\n  usage = [],\n  nextBillingDate,\n  onUpgrade,\n  onManageBilling,\n  className,\n}: BillingOverviewProps) {\n  return (\n    <div className={cn(\"w-full space-y-6\", className)}>\n      {/* Current plan card */}\n      <div className=\"rounded-xl border border-border bg-card p-6 shadow-sm\">\n        <div className=\"flex items-start justify-between gap-4\">\n          <div>\n            <p className=\"text-xs font-medium uppercase tracking-wider text-muted-foreground\">\n              Current plan\n            </p>\n            <h2 className=\"mt-1 text-2xl font-bold text-foreground\">\n              {plan.name}\n            </h2>\n            <p className=\"mt-0.5 text-sm text-muted-foreground\">\n              <span className=\"text-xl font-semibold text-foreground\">\n                {plan.price}\n              </span>\n              &nbsp;/ {plan.period}\n            </p>\n          </div>\n          {onUpgrade && (\n            <Button size=\"sm\" onClick={onUpgrade} className=\"shrink-0\">\n              Upgrade plan\n            </Button>\n          )}\n        </div>\n\n        {/* Features */}\n        {plan.features.length > 0 && (\n          <ul className=\"mt-4 space-y-1.5\">\n            {plan.features.map((f) => (\n              <li key={f} className=\"flex items-center gap-2 text-sm text-muted-foreground\">\n                <svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  width=\"14\"\n                  height=\"14\"\n                  viewBox=\"0 0 24 24\"\n                  fill=\"none\"\n                  stroke=\"currentColor\"\n                  strokeWidth=\"2.5\"\n                  strokeLinecap=\"round\"\n                  strokeLinejoin=\"round\"\n                  className=\"text-primary shrink-0\"\n                  aria-hidden\n                >\n                  <polyline points=\"20 6 9 17 4 12\" />\n                </svg>\n                {f}\n              </li>\n            ))}\n          </ul>\n        )}\n      </div>\n\n      {/* Usage meters */}\n      {usage.length > 0 && (\n        <div className=\"rounded-xl border border-border bg-card p-6 shadow-sm\">\n          <h3 className=\"mb-4 text-sm font-semibold text-foreground\">Usage</h3>\n          <div className=\"space-y-4\">\n            {usage.map((metric) => {\n              const pct = metric.limit > 0\n                ? Math.min(100, Math.round((metric.used / metric.limit) * 100))\n                : 0\n              const isNearLimit = pct >= 80\n              return (\n                <div key={metric.label}>\n                  <div className=\"mb-1.5 flex items-center justify-between text-sm\">\n                    <span className=\"font-medium text-foreground\">\n                      {metric.label}\n                    </span>\n                    <span className={cn(\"text-muted-foreground\", isNearLimit && \"text-destructive font-medium\")}>\n                      {metric.used.toLocaleString()}\n                      {metric.unit ? ` ${metric.unit}` : \"\"} /{\" \"}\n                      {metric.limit.toLocaleString()}\n                      {metric.unit ? ` ${metric.unit}` : \"\"}\n                    </span>\n                  </div>\n                  <Progress\n                    value={pct}\n                    className={cn(\"h-2\", isNearLimit && \"[&>div]:bg-destructive\")}\n                  />\n                </div>\n              )\n            })}\n          </div>\n        </div>\n      )}\n\n      {/* Footer: next billing + manage button */}\n      <div className=\"flex items-center justify-between gap-4 rounded-xl border border-border bg-card px-6 py-4 shadow-sm\">\n        {nextBillingDate ? (\n          <p className=\"text-sm text-muted-foreground\">\n            Next billing date:{\" \"}\n            <span className=\"font-medium text-foreground\">{nextBillingDate}</span>\n          </p>\n        ) : (\n          <p className=\"text-sm text-muted-foreground\">No upcoming charges.</p>\n        )}\n        {onManageBilling && (\n          <Button variant=\"outline\" size=\"sm\" onClick={onManageBilling}>\n            Manage billing\n          </Button>\n        )}\n      </div>\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Show subscription plan details, usage metrics, and billing management actions",
+        "prompts": [
+          "add a billing overview",
+          "show subscription details",
+          "add plan usage",
+          "add billing section"
+        ],
+        "composition": [
+          "progress",
+          "button",
+          "card",
+          "badge"
+        ],
+        "slots": [
+          "plan",
+          "usage",
+          "nextBillingDate",
+          "onUpgrade",
+          "onManageBilling"
+        ]
+      }
+    },
+    {
       "name": "dashboard-shell",
       "type": "registry:block",
       "title": "Dashboard Shell",
@@ -47,6 +125,42 @@
           "children",
           "sidebar",
           "topbar"
+        ]
+      }
+    },
+    {
+      "name": "empty-dashboard",
+      "type": "registry:block",
+      "title": "Empty Dashboard",
+      "description": "Welcoming empty state for a dashboard with no data, with action slots.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/empty-dashboard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/empty-dashboard.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface EmptyDashboardProps {\n  title?: string\n  description?: string\n  actions?: React.ReactNode\n  className?: string\n}\n\nexport function EmptyDashboard({\n  title = \"Welcome to your dashboard\",\n  description = \"You haven't set anything up yet. Get started by creating your first project.\",\n  actions,\n  className,\n}: EmptyDashboardProps) {\n  return (\n    <div\n      className={cn(\n        \"relative flex min-h-[480px] w-full flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed border-border bg-background p-12\",\n        className,\n      )}\n    >\n      {/* Subtle dot-grid background */}\n      <div\n        aria-hidden\n        className=\"pointer-events-none absolute inset-0\"\n        style={{\n          backgroundImage:\n            \"radial-gradient(circle, hsl(var(--muted-foreground) / 0.15) 1px, transparent 1px)\",\n          backgroundSize: \"24px 24px\",\n        }}\n      />\n\n      {/* Illustration placeholder */}\n      <div className=\"relative mb-8 flex h-32 w-32 items-center justify-center rounded-2xl border border-border bg-muted/50 shadow-sm\">\n        <svg\n          xmlns=\"http://www.w3.org/2000/svg\"\n          width=\"56\"\n          height=\"56\"\n          viewBox=\"0 0 24 24\"\n          fill=\"none\"\n          stroke=\"currentColor\"\n          strokeWidth=\"1.25\"\n          strokeLinecap=\"round\"\n          strokeLinejoin=\"round\"\n          className=\"text-muted-foreground/50\"\n          aria-hidden\n        >\n          <rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\" />\n          <path d=\"M3 9h18\" />\n          <path d=\"M9 21V9\" />\n          <path d=\"M7 6h.01\" />\n          <path d=\"M11 6h.01\" />\n        </svg>\n        {/* Corner accent dots */}\n        <span className=\"absolute -right-1.5 -top-1.5 h-3 w-3 rounded-full bg-primary/30\" />\n        <span className=\"absolute -bottom-1.5 -left-1.5 h-3 w-3 rounded-full bg-primary/20\" />\n      </div>\n\n      {/* Text */}\n      <h2 className=\"relative text-xl font-semibold tracking-tight text-foreground\">\n        {title}\n      </h2>\n      <p className=\"relative mt-2 max-w-sm text-center text-sm text-muted-foreground\">\n        {description}\n      </p>\n\n      {/* Actions slot */}\n      {actions && (\n        <div className=\"relative mt-8 flex flex-wrap items-center justify-center gap-3\">\n          {actions}\n        </div>\n      )}\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Show a welcoming placeholder when a dashboard has no data yet",
+        "prompts": [
+          "add an empty dashboard",
+          "show empty state for dashboard",
+          "add a welcome screen",
+          "add a getting started screen"
+        ],
+        "composition": [
+          "empty-state",
+          "button"
+        ],
+        "slots": [
+          "title",
+          "description",
+          "actions"
         ]
       }
     },
@@ -100,6 +214,119 @@
       }
     },
     {
+      "name": "notification-center",
+      "type": "registry:block",
+      "title": "Notification Center",
+      "description": "In-app notification feed with read/unread state and dismiss actions.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/notification-center.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/notification-center.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Button, Badge } from \"@aetherstack/ui\"\n\nexport type NotificationType = \"info\" | \"success\" | \"warning\" | \"error\"\n\nexport interface NotificationEntry {\n  id: string\n  title: string\n  description?: string\n  timestamp: Date | string\n  read?: boolean\n  icon?: React.ReactNode\n  type?: NotificationType\n}\n\nexport interface NotificationCenterProps {\n  notifications?: NotificationEntry[]\n  onMarkRead?: (id: string) => void\n  onMarkAllRead?: () => void\n  onDismiss?: (id: string) => void\n  className?: string\n}\n\nfunction relativeTime(timestamp: Date | string): string {\n  const now = Date.now()\n  const ts = typeof timestamp === \"string\" ? new Date(timestamp).getTime() : timestamp.getTime()\n  const diffMs = now - ts\n  const diffSec = Math.floor(diffMs / 1000)\n  const diffMin = Math.floor(diffSec / 60)\n  const diffHr = Math.floor(diffMin / 60)\n  const diffDay = Math.floor(diffHr / 24)\n  if (diffSec < 60) return \"just now\"\n  if (diffMin < 60) return `${diffMin} min ago`\n  if (diffHr < 24) return `${diffHr} hr ago`\n  return `${diffDay} day${diffDay !== 1 ? \"s\" : \"\"} ago`\n}\n\nconst TYPE_ICONS: Record<NotificationType, React.ReactNode> = {\n  info: (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\" className=\"text-blue-500\" aria-hidden>\n      <circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"M12 16v-4\" /><path d=\"M12 8h.01\" />\n    </svg>\n  ),\n  success: (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" className=\"text-green-500\" aria-hidden>\n      <circle cx=\"12\" cy=\"12\" r=\"10\" /><polyline points=\"9 12 11 14 15 10\" />\n    </svg>\n  ),\n  warning: (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\" className=\"text-yellow-500\" aria-hidden>\n      <path d=\"m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z\" /><path d=\"M12 9v4\" /><path d=\"M12 17h.01\" />\n    </svg>\n  ),\n  error: (\n    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\" className=\"text-destructive\" aria-hidden>\n      <circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"m15 9-6 6\" /><path d=\"m9 9 6 6\" />\n    </svg>\n  ),\n}\n\n/** A single notification row, exported for external composition */\nexport function NotificationItem({\n  notification,\n  onMarkRead,\n  onDismiss,\n}: {\n  notification: NotificationEntry\n  onMarkRead?: (id: string) => void\n  onDismiss?: (id: string) => void\n}) {\n  const typeIcon = notification.icon ?? (notification.type ? TYPE_ICONS[notification.type] : TYPE_ICONS.info)\n\n  return (\n    <div\n      className={cn(\n        \"group flex items-start gap-3 rounded-lg px-3 py-3 transition-colors\",\n        !notification.read && \"bg-primary/5\",\n        \"hover:bg-muted/50\",\n      )}\n    >\n      {/* Type icon */}\n      <div className=\"mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted\">\n        {typeIcon}\n      </div>\n\n      {/* Content */}\n      <div className=\"min-w-0 flex-1\">\n        <p\n          className={cn(\n            \"text-sm leading-snug\",\n            notification.read ? \"font-normal text-muted-foreground\" : \"font-medium text-foreground\",\n          )}\n        >\n          {notification.title}\n        </p>\n        {notification.description && (\n          <p className=\"mt-0.5 text-xs text-muted-foreground line-clamp-2\">\n            {notification.description}\n          </p>\n        )}\n        <p className=\"mt-1 text-xs text-muted-foreground/60\">\n          {relativeTime(notification.timestamp)}\n        </p>\n      </div>\n\n      {/* Actions */}\n      <div className=\"flex shrink-0 items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100\">\n        {!notification.read && onMarkRead && (\n          <button\n            type=\"button\"\n            onClick={() => onMarkRead(notification.id)}\n            className=\"flex h-6 w-6 items-center justify-center rounded text-muted-foreground hover:text-foreground focus-visible:outline-none\"\n            aria-label=\"Mark as read\"\n            title=\"Mark as read\"\n          >\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" aria-hidden>\n              <polyline points=\"20 6 9 17 4 12\" />\n            </svg>\n          </button>\n        )}\n        {onDismiss && (\n          <button\n            type=\"button\"\n            onClick={() => onDismiss(notification.id)}\n            className=\"flex h-6 w-6 items-center justify-center rounded text-muted-foreground hover:text-destructive focus-visible:outline-none\"\n            aria-label=\"Dismiss notification\"\n            title=\"Dismiss\"\n          >\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" aria-hidden>\n              <path d=\"M18 6 6 18\" /><path d=\"m6 6 12 12\" />\n            </svg>\n          </button>\n        )}\n      </div>\n    </div>\n  )\n}\n\nexport function NotificationCenter({\n  notifications = [],\n  onMarkRead,\n  onMarkAllRead,\n  onDismiss,\n  className,\n}: NotificationCenterProps) {\n  const unreadCount = notifications.filter((n) => !n.read).length\n\n  return (\n    <div\n      className={cn(\n        \"w-full rounded-xl border border-border bg-card shadow-sm\",\n        className,\n      )}\n    >\n      {/* Header */}\n      <div className=\"flex items-center justify-between border-b border-border px-4 py-3\">\n        <div className=\"flex items-center gap-2\">\n          <h2 className=\"text-sm font-semibold text-foreground\">Notifications</h2>\n          {unreadCount > 0 && (\n            <Badge variant=\"default\" className=\"h-5 min-w-5 px-1.5 text-xs tabular-nums\">\n              {unreadCount}\n            </Badge>\n          )}\n        </div>\n        {unreadCount > 0 && onMarkAllRead && (\n          <Button\n            variant=\"ghost\"\n            size=\"sm\"\n            className=\"h-7 text-xs text-muted-foreground\"\n            onClick={onMarkAllRead}\n          >\n            Mark all read\n          </Button>\n        )}\n      </div>\n\n      {/* List */}\n      {notifications.length === 0 ? (\n        <div className=\"flex flex-col items-center justify-center px-6 py-12 text-center\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"36\" height=\"36\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"1.25\" strokeLinecap=\"round\" strokeLinejoin=\"round\" className=\"mb-3 text-muted-foreground/40\" aria-hidden>\n            <path d=\"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9\" /><path d=\"M13.73 21a2 2 0 0 1-3.46 0\" />\n          </svg>\n          <p className=\"text-sm font-medium text-muted-foreground\">All caught up</p>\n          <p className=\"mt-1 text-xs text-muted-foreground/60\">No new notifications.</p>\n        </div>\n      ) : (\n        <div className=\"divide-y divide-border/50 p-2\">\n          {notifications.map((notification) => (\n            <NotificationItem\n              key={notification.id}\n              notification={notification}\n              {...(onMarkRead && { onMarkRead })}\n              {...(onDismiss && { onDismiss })}\n            />\n          ))}\n        </div>\n      )}\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Display a list of in-app notifications with read state and dismiss controls",
+        "prompts": [
+          "add a notification center",
+          "show notifications",
+          "add in-app notifications",
+          "add alerts feed"
+        ],
+        "composition": [
+          "badge",
+          "button",
+          "activity-feed"
+        ],
+        "slots": [
+          "notifications",
+          "onMarkRead",
+          "onMarkAllRead",
+          "onDismiss"
+        ]
+      }
+    },
+    {
+      "name": "onboarding-checklist",
+      "type": "registry:block",
+      "title": "Onboarding Checklist",
+      "description": "Step-by-step onboarding widget with progress tracking and checkbox steps.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/onboarding-checklist.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/onboarding-checklist.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Checkbox } from \"@aetherstack/ui\"\n\nexport interface OnboardingStep {\n  id: string\n  title: string\n  description?: string\n  completed?: boolean\n  href?: string\n}\n\nexport interface OnboardingChecklistProps {\n  steps: OnboardingStep[]\n  title?: string\n  description?: string\n  onStepToggle?: (id: string, completed: boolean) => void\n  className?: string\n}\n\nexport function OnboardingChecklist({\n  steps,\n  title = \"Get started\",\n  description = \"Complete these steps to set up your workspace.\",\n  onStepToggle,\n  className,\n}: OnboardingChecklistProps) {\n  const [localSteps, setLocalSteps] = React.useState<OnboardingStep[]>(steps)\n  const [hideCompleted, setHideCompleted] = React.useState(false)\n\n  React.useEffect(() => {\n    setLocalSteps(steps)\n  }, [steps])\n\n  const completed = localSteps.filter((s) => s.completed).length\n  const total = localSteps.length\n  const progressPct = total === 0 ? 0 : Math.round((completed / total) * 100)\n\n  function handleToggle(id: string) {\n    setLocalSteps((prev) =>\n      prev.map((s) => (s.id === id ? { ...s, completed: !s.completed } : s)),\n    )\n    const step = localSteps.find((s) => s.id === id)\n    if (step) onStepToggle?.(id, !step.completed)\n  }\n\n  const visibleSteps = hideCompleted\n    ? localSteps.filter((s) => !s.completed)\n    : localSteps\n\n  return (\n    <div\n      className={cn(\n        \"w-full rounded-xl border border-border bg-card p-6 shadow-sm\",\n        className,\n      )}\n    >\n      {/* Header */}\n      <div className=\"mb-4\">\n        <div className=\"flex items-center justify-between\">\n          <h2 className=\"text-base font-semibold text-foreground\">{title}</h2>\n          <span className=\"text-xs text-muted-foreground\">\n            {completed} of {total} completed\n          </span>\n        </div>\n        {description && (\n          <p className=\"mt-1 text-sm text-muted-foreground\">{description}</p>\n        )}\n      </div>\n\n      {/* Progress bar */}\n      <div className=\"mb-5 h-1.5 w-full overflow-hidden rounded-full bg-muted\">\n        <div\n          className=\"h-1.5 rounded-full bg-primary transition-all duration-500\"\n          style={{ width: `${progressPct}%` }}\n        />\n      </div>\n\n      {/* Steps */}\n      <ol className=\"space-y-3\">\n        {visibleSteps.map((step) => (\n          <li\n            key={step.id}\n            className={cn(\n              \"flex items-start gap-3 rounded-lg border border-transparent p-3 transition-colors\",\n              step.completed\n                ? \"opacity-60\"\n                : \"hover:border-border hover:bg-muted/40\",\n            )}\n          >\n            <Checkbox\n              id={`step-${step.id}`}\n              checked={Boolean(step.completed)}\n              onCheckedChange={() => handleToggle(step.id)}\n              className=\"mt-0.5 shrink-0\"\n            />\n            <div className=\"min-w-0 flex-1\">\n              <label\n                htmlFor={`step-${step.id}`}\n                className={cn(\n                  \"block cursor-pointer text-sm font-medium\",\n                  step.completed\n                    ? \"line-through text-muted-foreground\"\n                    : \"text-foreground\",\n                )}\n              >\n                {step.title}\n              </label>\n              {step.description && (\n                <p className=\"mt-0.5 text-xs text-muted-foreground\">\n                  {step.description}\n                </p>\n              )}\n              {step.href && !step.completed && (\n                <a\n                  href={step.href}\n                  className=\"mt-1 inline-block text-xs font-medium text-primary underline-offset-4 hover:underline\"\n                  target=\"_blank\"\n                  rel=\"noopener noreferrer\"\n                >\n                  Learn more →\n                </a>\n              )}\n            </div>\n          </li>\n        ))}\n      </ol>\n\n      {/* Toggle completed */}\n      {localSteps.some((s) => s.completed) && (\n        <button\n          type=\"button\"\n          onClick={() => setHideCompleted((v) => !v)}\n          className=\"mt-4 text-xs text-muted-foreground underline-offset-4 hover:underline focus-visible:outline-none\"\n        >\n          {hideCompleted ? \"Show completed steps\" : \"Hide completed steps\"}\n        </button>\n      )}\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Guide new users through setup tasks with a checklist and progress bar",
+        "prompts": [
+          "add an onboarding checklist",
+          "add a getting started guide",
+          "add setup steps",
+          "add a progress checklist"
+        ],
+        "composition": [
+          "checkbox",
+          "progress",
+          "stepper"
+        ],
+        "slots": [
+          "steps",
+          "onStepToggle",
+          "title",
+          "description"
+        ]
+      }
+    },
+    {
+      "name": "pricing-section",
+      "type": "registry:block",
+      "title": "Pricing Section",
+      "description": "Responsive pricing tier cards for marketing and landing pages.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/pricing-section.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/pricing-section.tsx",
+          "content": "import { cn } from \"@aetherstack/utils\"\nimport { Button, Badge } from \"@aetherstack/ui\"\n\nexport interface PricingFeature {\n  text: string\n  included: boolean\n}\n\nexport interface PricingTier {\n  name: string\n  price: string\n  period?: string\n  description?: string\n  features: PricingFeature[]\n  cta: string\n  ctaHref?: string\n  highlighted?: boolean\n  badge?: string\n}\n\nexport interface PricingSectionProps {\n  title?: string\n  description?: string\n  tiers: PricingTier[]\n  className?: string\n}\n\nconst CheckIcon = () => (\n  <svg\n    xmlns=\"http://www.w3.org/2000/svg\"\n    width=\"15\"\n    height=\"15\"\n    viewBox=\"0 0 24 24\"\n    fill=\"none\"\n    stroke=\"currentColor\"\n    strokeWidth=\"2.5\"\n    strokeLinecap=\"round\"\n    strokeLinejoin=\"round\"\n    className=\"shrink-0 text-primary\"\n    aria-hidden\n  >\n    <polyline points=\"20 6 9 17 4 12\" />\n  </svg>\n)\n\nconst XIcon = () => (\n  <svg\n    xmlns=\"http://www.w3.org/2000/svg\"\n    width=\"15\"\n    height=\"15\"\n    viewBox=\"0 0 24 24\"\n    fill=\"none\"\n    stroke=\"currentColor\"\n    strokeWidth=\"2\"\n    strokeLinecap=\"round\"\n    strokeLinejoin=\"round\"\n    className=\"shrink-0 text-muted-foreground/40\"\n    aria-hidden\n  >\n    <path d=\"M18 6 6 18\" />\n    <path d=\"m6 6 12 12\" />\n  </svg>\n)\n\nfunction PricingCard({ tier }: { tier: PricingTier }) {\n  return (\n    <div\n      className={cn(\n        \"relative flex flex-col rounded-2xl border bg-card p-7 shadow-sm transition-shadow\",\n        tier.highlighted\n          ? \"border-primary ring-2 ring-primary shadow-lg\"\n          : \"border-border hover:shadow-md\",\n      )}\n    >\n      {/* Badge */}\n      {tier.badge && (\n        <div className=\"absolute -top-3 left-1/2 -translate-x-1/2\">\n          <Badge className=\"shadow-sm\">{tier.badge}</Badge>\n        </div>\n      )}\n\n      {/* Tier header */}\n      <div className=\"mb-5\">\n        <h3 className=\"text-base font-semibold text-foreground\">{tier.name}</h3>\n        <div className=\"mt-2 flex items-end gap-1\">\n          <span className=\"text-4xl font-bold tracking-tight text-foreground\">\n            {tier.price}\n          </span>\n          {tier.period && (\n            <span className=\"mb-1 text-sm text-muted-foreground\">\n              / {tier.period}\n            </span>\n          )}\n        </div>\n        {tier.description && (\n          <p className=\"mt-2 text-sm text-muted-foreground\">{tier.description}</p>\n        )}\n      </div>\n\n      {/* CTA */}\n      <Button\n        asChild={Boolean(tier.ctaHref)}\n        variant={tier.highlighted ? \"default\" : \"outline\"}\n        className=\"w-full\"\n      >\n        {tier.ctaHref ? (\n          <a href={tier.ctaHref}>{tier.cta}</a>\n        ) : (\n          <span>{tier.cta}</span>\n        )}\n      </Button>\n\n      {/* Features */}\n      {tier.features.length > 0 && (\n        <ul className=\"mt-6 space-y-2.5\">\n          {tier.features.map((feature, i) => (\n            <li key={i} className=\"flex items-start gap-2.5\">\n              {feature.included ? <CheckIcon /> : <XIcon />}\n              <span\n                className={cn(\n                  \"text-sm\",\n                  feature.included\n                    ? \"text-foreground\"\n                    : \"text-muted-foreground/50 line-through\",\n                )}\n              >\n                {feature.text}\n              </span>\n            </li>\n          ))}\n        </ul>\n      )}\n    </div>\n  )\n}\n\nexport function PricingSection({\n  title = \"Simple, transparent pricing\",\n  description = \"Choose the plan that works best for you. Upgrade or downgrade at any time.\",\n  tiers,\n  className,\n}: PricingSectionProps) {\n  return (\n    <section className={cn(\"w-full py-16 px-4\", className)}>\n      {/* Section header */}\n      <div className=\"mx-auto mb-12 max-w-2xl text-center\">\n        <h2 className=\"text-3xl font-bold tracking-tight text-foreground sm:text-4xl\">\n          {title}\n        </h2>\n        {description && (\n          <p className=\"mt-4 text-base text-muted-foreground\">{description}</p>\n        )}\n      </div>\n\n      {/* Tier grid */}\n      <div\n        className={cn(\n          \"mx-auto grid max-w-6xl gap-6\",\n          tiers.length === 1 && \"max-w-sm grid-cols-1\",\n          tiers.length === 2 && \"grid-cols-1 sm:grid-cols-2\",\n          tiers.length === 3 && \"grid-cols-1 sm:grid-cols-2 lg:grid-cols-3\",\n          tiers.length >= 4 && \"grid-cols-1 sm:grid-cols-2 lg:grid-cols-4\",\n        )}\n      >\n        {tiers.map((tier) => (\n          <PricingCard key={tier.name} tier={tier} />\n        ))}\n      </div>\n    </section>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Show pricing tiers with feature lists and CTA buttons for a marketing or landing page",
+        "prompts": [
+          "add a pricing section",
+          "add pricing plans",
+          "show subscription tiers",
+          "add a pricing table"
+        ],
+        "composition": [
+          "badge",
+          "button",
+          "card"
+        ],
+        "slots": [
+          "tiers",
+          "title",
+          "description"
+        ]
+      }
+    },
+    {
       "name": "signup-block",
       "type": "registry:block",
       "title": "Sign Up",
@@ -141,6 +368,201 @@
           "onSubmit",
           "onSignIn",
           "footer"
+        ]
+      }
+    },
+    {
+      "name": "team-settings",
+      "type": "registry:block",
+      "title": "Team Settings",
+      "description": "Team member management with invite form, role management, and member list.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/team-settings.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-settings.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport {\n  Button,\n  Input,\n  Label,\n  Badge,\n  Avatar,\n  AvatarImage,\n  AvatarFallback,\n  Select,\n  SelectContent,\n  SelectItem,\n  SelectTrigger,\n  SelectValue,\n} from \"@aetherstack/ui\"\n\nexport type TeamMemberRole = \"owner\" | \"admin\" | \"member\"\n\nexport interface TeamMember {\n  id: string\n  name: string\n  email: string\n  role: TeamMemberRole\n  avatarUrl?: string\n}\n\nexport interface TeamSettingsProps {\n  members?: TeamMember[]\n  onInvite?: (email: string, role: string) => void\n  onRoleChange?: (id: string, role: string) => void\n  onRemove?: (id: string) => void\n  className?: string\n}\n\nconst ROLE_LABELS: Record<TeamMemberRole, string> = {\n  owner: \"Owner\",\n  admin: \"Admin\",\n  member: \"Member\",\n}\n\nconst ROLE_BADGE_VARIANT: Record<TeamMemberRole, \"default\" | \"secondary\" | \"outline\"> = {\n  owner: \"default\",\n  admin: \"secondary\",\n  member: \"outline\",\n}\n\nfunction getInitials(name: string): string {\n  return name\n    .split(\" \")\n    .map((n) => n[0])\n    .filter(Boolean)\n    .slice(0, 2)\n    .join(\"\")\n    .toUpperCase()\n}\n\nexport function TeamSettings({\n  members = [],\n  onInvite,\n  onRoleChange,\n  onRemove,\n  className,\n}: TeamSettingsProps) {\n  const [inviteEmail, setInviteEmail] = React.useState(\"\")\n  const [inviteRole, setInviteRole] = React.useState<string>(\"member\")\n\n  function handleInvite(e: React.FormEvent) {\n    e.preventDefault()\n    if (!inviteEmail.trim()) return\n    onInvite?.(inviteEmail.trim(), inviteRole)\n    setInviteEmail(\"\")\n    setInviteRole(\"member\")\n  }\n\n  return (\n    <div\n      className={cn(\n        \"w-full rounded-xl border border-border bg-card p-6 shadow-sm\",\n        className,\n      )}\n    >\n      {/* Header */}\n      <div className=\"mb-6 flex items-center justify-between\">\n        <div>\n          <h2 className=\"text-base font-semibold text-foreground\">Team members</h2>\n          <p className=\"mt-0.5 text-sm text-muted-foreground\">\n            {members.length} {members.length === 1 ? \"member\" : \"members\"}\n          </p>\n        </div>\n      </div>\n\n      {/* Invite form */}\n      <form onSubmit={handleInvite} className=\"mb-6\">\n        <Label className=\"mb-1.5 block text-sm font-medium\">Invite teammate</Label>\n        <div className=\"flex gap-2\">\n          <Input\n            type=\"email\"\n            placeholder=\"colleague@example.com\"\n            value={inviteEmail}\n            onChange={(e) => setInviteEmail(e.target.value)}\n            className=\"flex-1\"\n          />\n          <Select value={inviteRole} onValueChange={setInviteRole}>\n            <SelectTrigger className=\"w-[120px] shrink-0\">\n              <SelectValue placeholder=\"Role\" />\n            </SelectTrigger>\n            <SelectContent>\n              <SelectItem value=\"owner\">Owner</SelectItem>\n              <SelectItem value=\"admin\">Admin</SelectItem>\n              <SelectItem value=\"member\">Member</SelectItem>\n            </SelectContent>\n          </Select>\n          <Button type=\"submit\" size=\"sm\" className=\"shrink-0\">\n            Invite\n          </Button>\n        </div>\n      </form>\n\n      {/* Members list */}\n      {members.length === 0 ? (\n        <p className=\"py-6 text-center text-sm text-muted-foreground\">\n          No team members yet. Invite someone to get started.\n        </p>\n      ) : (\n        <ul className=\"divide-y divide-border\">\n          {members.map((member) => (\n            <li\n              key={member.id}\n              className=\"flex items-center gap-3 py-3 first:pt-0 last:pb-0\"\n            >\n              <Avatar className=\"h-9 w-9 shrink-0\">\n                <AvatarImage src={member.avatarUrl} alt={member.name} />\n                <AvatarFallback className=\"text-xs\">\n                  {getInitials(member.name)}\n                </AvatarFallback>\n              </Avatar>\n\n              <div className=\"min-w-0 flex-1\">\n                <p className=\"truncate text-sm font-medium text-foreground\">\n                  {member.name}\n                </p>\n                <p className=\"truncate text-xs text-muted-foreground\">\n                  {member.email}\n                </p>\n              </div>\n\n              {/* Role selector / badge */}\n              {onRoleChange && member.role !== \"owner\" ? (\n                <Select\n                  value={member.role}\n                  onValueChange={(val) => onRoleChange(member.id, val)}\n                >\n                  <SelectTrigger className=\"h-7 w-[100px] text-xs\">\n                    <SelectValue />\n                  </SelectTrigger>\n                  <SelectContent>\n                    <SelectItem value=\"admin\">Admin</SelectItem>\n                    <SelectItem value=\"member\">Member</SelectItem>\n                  </SelectContent>\n                </Select>\n              ) : (\n                <Badge variant={ROLE_BADGE_VARIANT[member.role]} className=\"shrink-0\">\n                  {ROLE_LABELS[member.role]}\n                </Badge>\n              )}\n\n              {/* Remove button (not for owner) */}\n              {onRemove && member.role !== \"owner\" && (\n                <Button\n                  type=\"button\"\n                  variant=\"ghost\"\n                  size=\"sm\"\n                  className=\"h-7 w-7 shrink-0 p-0 text-muted-foreground hover:text-destructive\"\n                  onClick={() => onRemove(member.id)}\n                  aria-label={`Remove ${member.name}`}\n                >\n                  <svg\n                    xmlns=\"http://www.w3.org/2000/svg\"\n                    width=\"14\"\n                    height=\"14\"\n                    viewBox=\"0 0 24 24\"\n                    fill=\"none\"\n                    stroke=\"currentColor\"\n                    strokeWidth=\"2\"\n                    strokeLinecap=\"round\"\n                    strokeLinejoin=\"round\"\n                    aria-hidden\n                  >\n                    <path d=\"M18 6 6 18\" />\n                    <path d=\"m6 6 12 12\" />\n                  </svg>\n                </Button>\n              )}\n            </li>\n          ))}\n        </ul>\n      )}\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Manage team members, invite new members by email, and assign roles",
+        "prompts": [
+          "add team settings",
+          "add team member management",
+          "add invite team members",
+          "add user roles"
+        ],
+        "composition": [
+          "avatar",
+          "badge",
+          "select",
+          "input",
+          "button"
+        ],
+        "slots": [
+          "members",
+          "onInvite",
+          "onRoleChange",
+          "onRemove"
+        ]
+      }
+    },
+    {
+      "name": "activity-feed",
+      "type": "registry:pattern",
+      "title": "Activity Feed",
+      "description": "Vertical timeline of timestamped activity events with user avatars.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/activity-feed.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/activity-feed.tsx",
+          "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\n// ── Types ─────────────────────────────────────────────────────────────────────\n\nexport interface ActivityEntry {\n  id: string\n  user?: string\n  action: string\n  target?: string\n  timestamp: Date | string\n  icon?: React.ReactNode\n}\n\nexport interface ActivityItemProps {\n  item: ActivityEntry\n  className?: string\n}\n\nexport interface ActivityFeedProps {\n  items: ActivityEntry[]\n  className?: string\n}\n\n// ── Helpers ───────────────────────────────────────────────────────────────────\n\nfunction getInitials(name: string): string {\n  return name\n    .split(\" \")\n    .map((part) => part[0])\n    .join(\"\")\n    .toUpperCase()\n    .slice(0, 2)\n}\n\nfunction formatRelativeTime(timestamp: Date | string): string {\n  const date = timestamp instanceof Date ? timestamp : new Date(timestamp)\n  const now = Date.now()\n  const diffMs = now - date.getTime()\n  const diffSeconds = Math.floor(diffMs / 1000)\n  const diffMinutes = Math.floor(diffSeconds / 60)\n  const diffHours = Math.floor(diffMinutes / 60)\n  const diffDays = Math.floor(diffHours / 24)\n\n  if (diffSeconds < 60) return \"just now\"\n  if (diffMinutes < 60) return `${diffMinutes} minute${diffMinutes === 1 ? \"\" : \"s\"} ago`\n  if (diffHours < 24) return `${diffHours} hour${diffHours === 1 ? \"\" : \"s\"} ago`\n  return `${diffDays} day${diffDays === 1 ? \"\" : \"s\"} ago`\n}\n\n// ── ActivityItem ──────────────────────────────────────────────────────────────\n\nexport function ActivityItem({ item, className }: ActivityItemProps) {\n  return (\n    <li className={cn(\"relative flex gap-3 pl-8 pb-6 last:pb-0\", className)}>\n      {/* Avatar / icon */}\n      <div className=\"absolute left-0 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold text-muted-foreground ring-2 ring-background\">\n        {item.icon ? (\n          item.icon\n        ) : item.user ? (\n          getInitials(item.user)\n        ) : (\n          <svg\n            className=\"h-3.5 w-3.5\"\n            xmlns=\"http://www.w3.org/2000/svg\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n            aria-hidden=\"true\"\n          >\n            <circle cx=\"12\" cy=\"12\" r=\"4\" />\n          </svg>\n        )}\n      </div>\n\n      <div className=\"flex-1 min-w-0\">\n        <p className=\"text-sm text-foreground\">\n          {item.user && (\n            <span className=\"font-medium\">{item.user} </span>\n          )}\n          <span>{item.action}</span>\n          {item.target && (\n            <span className=\"font-medium\"> {item.target}</span>\n          )}\n        </p>\n        <p className=\"mt-0.5 text-xs text-muted-foreground\">\n          {formatRelativeTime(item.timestamp)}\n        </p>\n      </div>\n    </li>\n  )\n}\n\n// ── ActivityFeed ──────────────────────────────────────────────────────────────\n\nexport function ActivityFeed({ items, className }: ActivityFeedProps) {\n  return (\n    <div className={cn(\"relative\", className)}>\n      {/* Vertical connecting line */}\n      <div\n        className=\"absolute left-3.5 top-0 h-full w-px bg-border\"\n        aria-hidden=\"true\"\n      />\n      <ul className=\"space-y-0\" role=\"list\" aria-label=\"Activity feed\">\n        {items.map((item) => (\n          <ActivityItem key={item.id} item={item} />\n        ))}\n      </ul>\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Show a chronological feed of user actions or system events",
+        "prompts": [
+          "add an activity feed",
+          "show recent events",
+          "add an audit log",
+          "show user activity",
+          "add a timeline"
+        ],
+        "composition": [
+          "avatar",
+          "notification-center"
+        ],
+        "slots": [
+          "ActivityItem",
+          "items"
+        ]
+      }
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:pattern",
+      "title": "Color Picker",
+      "description": "Hex color input with preset swatches and native color picker.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/color-picker.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/color-picker.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Input } from \"@aetherstack/ui\"\n\n// ── ColorSwatch ───────────────────────────────────────────────────────────────\n\nexport interface ColorSwatchProps {\n  color: string\n  selected?: boolean\n  onClick?: () => void\n  className?: string\n}\n\nexport function ColorSwatch({ color, selected, onClick, className }: ColorSwatchProps) {\n  return (\n    <button\n      type=\"button\"\n      onClick={onClick}\n      title={color}\n      aria-label={`Select color ${color}`}\n      aria-pressed={selected}\n      className={cn(\n        \"h-7 w-7 rounded-md border-2 cursor-pointer transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1\",\n        selected\n          ? \"border-primary ring-2 ring-primary ring-offset-1\"\n          : \"border-border hover:scale-110\",\n        className,\n      )}\n      style={{ backgroundColor: color }}\n    />\n  )\n}\n\n// ── ColorPicker ───────────────────────────────────────────────────────────────\n\nexport interface ColorPickerProps {\n  value: string\n  onChange: (value: string) => void\n  presets?: string[]\n  className?: string\n}\n\nfunction normalizeHex(raw: string): string {\n  const v = raw.startsWith(\"#\") ? raw : `#${raw}`\n  return v\n}\n\nfunction isValidHex(value: string): boolean {\n  return /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(value)\n}\n\nexport function ColorPicker({ value, onChange, presets, className }: ColorPickerProps) {\n  const nativeInputRef = React.useRef<HTMLInputElement>(null)\n  const [inputText, setInputText] = React.useState(value)\n\n  // Sync internal text when value changes from outside\n  React.useEffect(() => {\n    setInputText(value)\n  }, [value])\n\n  function handleNativeChange(e: React.ChangeEvent<HTMLInputElement>) {\n    const normalized = normalizeHex(e.target.value)\n    setInputText(normalized)\n    onChange(normalized)\n  }\n\n  function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {\n    const raw = e.target.value\n    setInputText(raw)\n    const normalized = normalizeHex(raw)\n    if (isValidHex(normalized)) {\n      onChange(normalized)\n    }\n  }\n\n  function handleTextBlur() {\n    const normalized = normalizeHex(inputText)\n    if (!isValidHex(normalized)) {\n      // Revert to last valid value\n      setInputText(value)\n    }\n  }\n\n  return (\n    <div className={cn(\"flex flex-col gap-3\", className)}>\n      {/* Preview + native color input trigger */}\n      <div className=\"flex items-center gap-3\">\n        <button\n          type=\"button\"\n          onClick={() => nativeInputRef.current?.click()}\n          className=\"relative h-9 w-9 rounded-md border-2 border-border shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 hover:border-primary/50 transition-colors cursor-pointer\"\n          style={{ backgroundColor: isValidHex(normalizeHex(inputText)) ? normalizeHex(inputText) : value }}\n          title=\"Open color picker\"\n          aria-label=\"Open native color picker\"\n        >\n          <input\n            ref={nativeInputRef}\n            type=\"color\"\n            value={isValidHex(normalizeHex(inputText)) ? normalizeHex(inputText) : value}\n            onChange={handleNativeChange}\n            className=\"sr-only\"\n            tabIndex={-1}\n            aria-hidden=\"true\"\n          />\n        </button>\n\n        <Input\n          value={inputText}\n          onChange={handleTextChange}\n          onBlur={handleTextBlur}\n          placeholder=\"#000000\"\n          className=\"font-mono uppercase\"\n          aria-label=\"Hex color value\"\n          maxLength={7}\n        />\n      </div>\n\n      {/* Preset swatches */}\n      {presets && presets.length > 0 && (\n        <div className=\"flex flex-wrap gap-1.5\" role=\"group\" aria-label=\"Preset colors\">\n          {presets.map((preset) => (\n            <ColorSwatch\n              key={preset}\n              color={preset}\n              selected={normalizeHex(inputText).toLowerCase() === preset.toLowerCase()}\n              onClick={() => {\n                setInputText(preset)\n                onChange(preset)\n              }}\n            />\n          ))}\n        </div>\n      )}\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Let users select or input a color using hex input, native picker, or preset swatches",
+        "prompts": [
+          "add a color picker",
+          "add a color selector",
+          "pick a hex color",
+          "add theme color input"
+        ],
+        "composition": [
+          "button",
+          "input"
+        ],
+        "slots": [
+          "value",
+          "onChange",
+          "presets"
+        ]
+      }
+    },
+    {
+      "name": "command-palette",
+      "type": "registry:pattern",
+      "title": "Command Palette",
+      "description": "⌘K fuzzy-search command surface built on cmdk.",
+      "author": "aetherstack",
+      "dependencies": [
+        "cmdk",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/command-palette.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/command-palette.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Command as CommandPrimitive } from \"cmdk\"\nimport { cn } from \"@aetherstack/utils\"\nimport {\n  Dialog,\n  DialogContent,\n} from \"@aetherstack/ui\"\n\n// ── CommandPalette (root) ─────────────────────────────────────────────────────\n\nexport interface CommandPaletteProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive> {\n  className?: string\n}\n\nexport function CommandPalette({ className, ...props }: CommandPaletteProps) {\n  return (\n    <CommandPrimitive\n      className={cn(\n        \"flex flex-col overflow-hidden rounded-md bg-popover text-popover-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\n// ── CommandPaletteInput ───────────────────────────────────────────────────────\n\nexport interface CommandPaletteInputProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> {\n  className?: string\n}\n\nexport function CommandPaletteInput({ className, ...props }: CommandPaletteInputProps) {\n  return (\n    <div className=\"flex items-center border-b border-border px-3\" cmdk-input-wrapper=\"\">\n      <svg\n        className=\"mr-2 h-4 w-4 shrink-0 text-muted-foreground\"\n        xmlns=\"http://www.w3.org/2000/svg\"\n        viewBox=\"0 0 24 24\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        strokeWidth=\"2\"\n        strokeLinecap=\"round\"\n        strokeLinejoin=\"round\"\n        aria-hidden=\"true\"\n      >\n        <circle cx=\"11\" cy=\"11\" r=\"8\" />\n        <path d=\"m21 21-4.35-4.35\" />\n      </svg>\n      <CommandPrimitive.Input\n        className={cn(\n          \"flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50\",\n          className,\n        )}\n        {...props}\n      />\n    </div>\n  )\n}\n\n// ── CommandPaletteList ────────────────────────────────────────────────────────\n\nexport interface CommandPaletteListProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.List> {\n  className?: string\n}\n\nexport function CommandPaletteList({ className, ...props }: CommandPaletteListProps) {\n  return (\n    <CommandPrimitive.List\n      className={cn(\"max-h-[300px] overflow-y-auto overflow-x-hidden\", className)}\n      {...props}\n    />\n  )\n}\n\n// ── CommandPaletteEmpty ───────────────────────────────────────────────────────\n\nexport interface CommandPaletteEmptyProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty> {\n  className?: string\n}\n\nexport function CommandPaletteEmpty({ className, ...props }: CommandPaletteEmptyProps) {\n  return (\n    <CommandPrimitive.Empty\n      className={cn(\"py-6 text-center text-sm text-muted-foreground\", className)}\n      {...props}\n    />\n  )\n}\n\n// ── CommandGroup (re-export with styling) ─────────────────────────────────────\n\nexport interface CommandGroupProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group> {\n  className?: string\n}\n\nexport function CommandGroup({ className, ...props }: CommandGroupProps) {\n  return (\n    <CommandPrimitive.Group\n      className={cn(\n        \"overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\n// ── CommandItem (re-export with styling) ──────────────────────────────────────\n\nexport interface CommandItemProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item> {\n  className?: string\n}\n\nexport function CommandItem({ className, ...props }: CommandItemProps) {\n  return (\n    <CommandPrimitive.Item\n      className={cn(\n        \"relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\n// ── CommandPaletteSeparator ───────────────────────────────────────────────────\n\nexport interface CommandPaletteSeparatorProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator> {\n  className?: string\n}\n\nexport function CommandPaletteSeparator({ className, ...props }: CommandPaletteSeparatorProps) {\n  return (\n    <CommandPrimitive.Separator\n      className={cn(\"-mx-1 h-px bg-border\", className)}\n      {...props}\n    />\n  )\n}\n\n// ── CommandPaletteDialog ──────────────────────────────────────────────────────\n\nexport interface CommandPaletteDialogProps {\n  open: boolean\n  onOpenChange: (open: boolean) => void\n  children: React.ReactNode\n}\n\nexport function CommandPaletteDialog({\n  open,\n  onOpenChange,\n  children,\n}: CommandPaletteDialogProps) {\n  return (\n    <Dialog open={open} onOpenChange={onOpenChange}>\n      <DialogContent className=\"overflow-hidden p-0 shadow-lg\">\n        <CommandPalette className=\"[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5\">\n          {children}\n        </CommandPalette>\n      </DialogContent>\n    </Dialog>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Open a keyboard-driven search palette for quick navigation and action execution",
+        "prompts": [
+          "add a command palette",
+          "add cmd+k search",
+          "add a quick search",
+          "add keyboard navigation"
+        ],
+        "composition": [
+          "dialog",
+          "combobox",
+          "scroll-area"
+        ],
+        "slots": [
+          "CommandPaletteInput",
+          "CommandGroup",
+          "CommandItem",
+          "CommandPaletteDialog"
+        ]
+      }
+    },
+    {
+      "name": "data-table",
+      "type": "registry:pattern",
+      "title": "Data Table",
+      "description": "Sortable, searchable, and paginated data table with column configuration.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/data-table.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/data-table.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport {\n  Table,\n  TableHeader,\n  TableBody,\n  TableRow,\n  TableHead,\n  TableCell,\n  Button,\n  Input,\n} from \"@aetherstack/ui\"\nimport { ChevronUp, ChevronDown, ChevronsUpDown } from \"lucide-react\"\n\n// ── Types ─────────────────────────────────────────────────────────────────────\n\nexport interface DataTableColumn<T> {\n  key: keyof T\n  header: string\n  render?: (value: T[keyof T], row: T) => React.ReactNode\n  sortable?: boolean\n  className?: string\n}\n\nexport interface DataTableProps<T> {\n  columns: DataTableColumn<T>[]\n  data: T[]\n  pageSize?: number\n  searchable?: boolean\n  searchKeys?: (keyof T)[]\n  className?: string\n  emptyMessage?: string\n}\n\ntype SortDir = \"asc\" | \"desc\"\n\n// ── DataTable ─────────────────────────────────────────────────────────────────\n\nexport function DataTable<T extends Record<string, unknown>>({\n  columns,\n  data,\n  pageSize = 10,\n  searchable = false,\n  searchKeys,\n  className,\n  emptyMessage = \"No results found.\",\n}: DataTableProps<T>) {\n  const [sortKey, setSortKey] = React.useState<keyof T | null>(null)\n  const [sortDir, setSortDir] = React.useState<SortDir>(\"asc\")\n  const [page, setPage] = React.useState(0)\n  const [searchQuery, setSearchQuery] = React.useState(\"\")\n\n  // Filter\n  const filtered = React.useMemo(() => {\n    if (!searchable || !searchQuery.trim()) return data\n    const query = searchQuery.toLowerCase()\n    const keys = searchKeys ?? (columns.map((c) => c.key) as (keyof T)[])\n    return data.filter((row) =>\n      keys.some((key) => {\n        const val = row[key]\n        return val !== null && val !== undefined && String(val).toLowerCase().includes(query)\n      }),\n    )\n  }, [data, searchable, searchQuery, searchKeys, columns])\n\n  // Sort — stable sort using index as tiebreaker\n  const sorted = React.useMemo(() => {\n    if (!sortKey) return filtered\n    return [...filtered].sort((a, b) => {\n      const av = a[sortKey]\n      const bv = b[sortKey]\n      if (av === bv) return 0\n      const result = av === null || av === undefined\n        ? 1\n        : bv === null || bv === undefined\n          ? -1\n          : av < bv\n            ? -1\n            : 1\n      return sortDir === \"asc\" ? result : -result\n    })\n  }, [filtered, sortKey, sortDir])\n\n  // Paginate\n  const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize))\n  const safePage = Math.min(page, totalPages - 1)\n  const paginated = sorted.slice(safePage * pageSize, (safePage + 1) * pageSize)\n\n  function handleSort(key: keyof T) {\n    if (sortKey === key) {\n      setSortDir((d) => (d === \"asc\" ? \"desc\" : \"asc\"))\n    } else {\n      setSortKey(key)\n      setSortDir(\"asc\")\n    }\n    setPage(0)\n  }\n\n  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {\n    setSearchQuery(e.target.value)\n    setPage(0)\n  }\n\n  return (\n    <div className={cn(\"space-y-3\", className)}>\n      {searchable && (\n        <div className=\"flex items-center gap-2\">\n          <Input\n            placeholder=\"Search…\"\n            value={searchQuery}\n            onChange={handleSearch}\n            className=\"max-w-xs\"\n            aria-label=\"Search table\"\n          />\n        </div>\n      )}\n\n      <div className=\"overflow-x-auto rounded-md border border-border\">\n        <Table>\n          <TableHeader>\n            <TableRow>\n              {columns.map((col) => (\n                <TableHead\n                  key={String(col.key)}\n                  className={cn(\n                    col.sortable && \"cursor-pointer select-none hover:bg-muted/50\",\n                    col.className,\n                  )}\n                  onClick={col.sortable ? () => handleSort(col.key) : undefined}\n                  aria-sort={\n                    sortKey === col.key\n                      ? sortDir === \"asc\"\n                        ? \"ascending\"\n                        : \"descending\"\n                      : col.sortable\n                        ? \"none\"\n                        : undefined\n                  }\n                >\n                  <span className=\"flex items-center gap-1.5\">\n                    {col.header}\n                    {col.sortable && (\n                      <span className=\"text-muted-foreground\" aria-hidden=\"true\">\n                        {sortKey === col.key ? (\n                          sortDir === \"asc\" ? (\n                            <ChevronUp className=\"h-3.5 w-3.5\" />\n                          ) : (\n                            <ChevronDown className=\"h-3.5 w-3.5\" />\n                          )\n                        ) : (\n                          <ChevronsUpDown className=\"h-3.5 w-3.5 opacity-50\" />\n                        )}\n                      </span>\n                    )}\n                  </span>\n                </TableHead>\n              ))}\n            </TableRow>\n          </TableHeader>\n          <TableBody>\n            {paginated.length === 0 ? (\n              <TableRow>\n                <TableCell\n                  colSpan={columns.length}\n                  className=\"h-24 text-center text-muted-foreground\"\n                >\n                  {emptyMessage}\n                </TableCell>\n              </TableRow>\n            ) : (\n              paginated.map((row, rowIndex) => (\n                <TableRow key={rowIndex}>\n                  {columns.map((col) => (\n                    <TableCell key={String(col.key)} className={col.className}>\n                      {col.render\n                        ? col.render(row[col.key], row)\n                        : (row[col.key] as React.ReactNode)}\n                    </TableCell>\n                  ))}\n                </TableRow>\n              ))\n            )}\n          </TableBody>\n        </Table>\n      </div>\n\n      {totalPages > 1 && (\n        <div className=\"flex items-center justify-between text-sm text-muted-foreground\">\n          <span>\n            Page {safePage + 1} of {totalPages}\n          </span>\n          <div className=\"flex items-center gap-2\">\n            <Button\n              variant=\"outline\"\n              size=\"sm\"\n              onClick={() => setPage((p) => Math.max(0, p - 1))}\n              disabled={safePage === 0}\n              aria-label=\"Previous page\"\n            >\n              Previous\n            </Button>\n            <Button\n              variant=\"outline\"\n              size=\"sm\"\n              onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}\n              disabled={safePage === totalPages - 1}\n              aria-label=\"Next page\"\n            >\n              Next\n            </Button>\n          </div>\n        </div>\n      )}\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Display tabular data with sorting, search filtering, and pagination",
+        "prompts": [
+          "add a data table",
+          "show a sortable table",
+          "add a paginated list",
+          "add a users table",
+          "create a data grid"
+        ],
+        "composition": [
+          "table",
+          "input",
+          "button",
+          "pagination",
+          "table-toolbar"
+        ],
+        "slots": [
+          "columns",
+          "data",
+          "pageSize",
+          "searchable",
+          "searchKeys"
         ]
       }
     },
@@ -218,6 +640,43 @@
       }
     },
     {
+      "name": "file-dropzone",
+      "type": "registry:pattern",
+      "title": "File Dropzone",
+      "description": "Drag-and-drop file upload zone with click-to-browse fallback.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/file-dropzone.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/file-dropzone.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\n// ── Types ─────────────────────────────────────────────────────────────────────\n\nexport interface FileDropzoneProps {\n  onFilesSelected: (files: File[]) => void\n  accept?: string\n  multiple?: boolean\n  maxSize?: number\n  className?: string\n  disabled?: boolean\n  children?: React.ReactNode\n}\n\n// ── FileDropzone ──────────────────────────────────────────────────────────────\n\nexport function FileDropzone({\n  onFilesSelected,\n  accept,\n  multiple = false,\n  maxSize,\n  className,\n  disabled = false,\n  children,\n}: FileDropzoneProps) {\n  const inputRef = React.useRef<HTMLInputElement>(null)\n  const [isDragging, setIsDragging] = React.useState(false)\n  const dragCounterRef = React.useRef(0)\n\n  function filterFiles(fileList: FileList): File[] {\n    const files = Array.from(fileList)\n    if (!maxSize) return files\n    return files.filter((f) => f.size <= maxSize)\n  }\n\n  function handleDragEnter(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    e.stopPropagation()\n    dragCounterRef.current += 1\n    if (!disabled) setIsDragging(true)\n  }\n\n  function handleDragLeave(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    e.stopPropagation()\n    dragCounterRef.current -= 1\n    if (dragCounterRef.current === 0) setIsDragging(false)\n  }\n\n  function handleDragOver(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    e.stopPropagation()\n  }\n\n  function handleDrop(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    e.stopPropagation()\n    dragCounterRef.current = 0\n    setIsDragging(false)\n    if (disabled) return\n    const { files } = e.dataTransfer\n    if (files.length > 0) {\n      onFilesSelected(filterFiles(files))\n    }\n  }\n\n  function handleClick() {\n    if (!disabled) inputRef.current?.click()\n  }\n\n  function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {\n    if (e.key === \"Enter\" || e.key === \" \") {\n      e.preventDefault()\n      handleClick()\n    }\n  }\n\n  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {\n    const { files } = e.target\n    if (files && files.length > 0) {\n      onFilesSelected(filterFiles(files))\n    }\n    // Reset input so same file can be selected again\n    e.target.value = \"\"\n  }\n\n  return (\n    <div\n      role=\"button\"\n      tabIndex={disabled ? -1 : 0}\n      aria-disabled={disabled}\n      onClick={handleClick}\n      onKeyDown={handleKeyDown}\n      onDragEnter={handleDragEnter}\n      onDragLeave={handleDragLeave}\n      onDragOver={handleDragOver}\n      onDrop={handleDrop}\n      className={cn(\n        \"relative flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-border bg-muted/30 p-8 text-center transition-colors\",\n        isDragging && \"border-primary bg-primary/5\",\n        disabled\n          ? \"cursor-not-allowed opacity-50\"\n          : \"cursor-pointer hover:border-primary/50 hover:bg-muted/50\",\n        className,\n      )}\n    >\n      <input\n        ref={inputRef}\n        type=\"file\"\n        accept={accept}\n        multiple={multiple}\n        disabled={disabled}\n        onChange={handleInputChange}\n        className=\"sr-only\"\n        tabIndex={-1}\n        aria-hidden=\"true\"\n      />\n\n      {/* Upload icon */}\n      <div className=\"flex h-12 w-12 items-center justify-center rounded-full bg-muted text-muted-foreground\">\n        <svg\n          className=\"h-6 w-6\"\n          xmlns=\"http://www.w3.org/2000/svg\"\n          viewBox=\"0 0 24 24\"\n          fill=\"none\"\n          stroke=\"currentColor\"\n          strokeWidth=\"2\"\n          strokeLinecap=\"round\"\n          strokeLinejoin=\"round\"\n          aria-hidden=\"true\"\n        >\n          <path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" />\n          <polyline points=\"17 8 12 3 7 8\" />\n          <line x1=\"12\" y1=\"3\" x2=\"12\" y2=\"15\" />\n        </svg>\n      </div>\n\n      <div className=\"space-y-1\">\n        <p className=\"text-sm font-medium text-foreground\">\n          Drag files here or click to browse\n        </p>\n        {maxSize && (\n          <p className=\"text-xs text-muted-foreground\">\n            Max file size: {(maxSize / 1024 / 1024).toFixed(0)} MB\n          </p>\n        )}\n        {accept && (\n          <p className=\"text-xs text-muted-foreground\">\n            Accepted: {accept}\n          </p>\n        )}\n      </div>\n\n      {children}\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Let users upload files by dragging them onto a target zone or clicking to browse",
+        "prompts": [
+          "add a file upload",
+          "add a drag and drop zone",
+          "add a file picker",
+          "add an image uploader"
+        ],
+        "composition": [
+          "button"
+        ],
+        "slots": [
+          "onFilesSelected",
+          "accept",
+          "multiple",
+          "maxSize"
+        ]
+      }
+    },
+    {
       "name": "form-field",
       "type": "registry:pattern",
       "title": "Form Field",
@@ -261,6 +720,43 @@
           "FormDescription",
           "FormMessage",
           "children"
+        ]
+      }
+    },
+    {
+      "name": "kanban",
+      "type": "registry:pattern",
+      "title": "Kanban Board",
+      "description": "Drag-and-drop kanban columns using native HTML5 drag events.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/kanban.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/kanban.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Badge } from \"@aetherstack/ui\"\n\n// ── Types ─────────────────────────────────────────────────────────────────────\n\nexport interface KanbanItem {\n  id: string\n  title: string\n  description?: string\n  badge?: string\n}\n\nexport interface KanbanCardProps {\n  item: KanbanItem\n  className?: string\n}\n\nexport interface KanbanColumnProps {\n  title: string\n  items: KanbanItem[]\n  onDrop?: (item: KanbanItem, columnTitle: string) => void\n  className?: string\n}\n\nexport interface KanbanBoardProps {\n  columns: KanbanColumnProps[]\n  className?: string\n}\n\n// ── KanbanCard ────────────────────────────────────────────────────────────────\n\nexport function KanbanCard({ item, className }: KanbanCardProps) {\n  function handleDragStart(e: React.DragEvent<HTMLDivElement>) {\n    e.dataTransfer.setData(\"application/json\", JSON.stringify(item))\n    e.dataTransfer.effectAllowed = \"move\"\n  }\n\n  return (\n    <div\n      draggable\n      onDragStart={handleDragStart}\n      className={cn(\n        \"rounded-lg border border-border bg-card p-3 shadow-sm cursor-grab active:cursor-grabbing select-none\",\n        className,\n      )}\n    >\n      <div className=\"flex items-start justify-between gap-2\">\n        <p className=\"text-sm font-medium text-foreground leading-snug\">{item.title}</p>\n        {item.badge && (\n          <Badge variant=\"secondary\" className=\"shrink-0 text-xs\">\n            {item.badge}\n          </Badge>\n        )}\n      </div>\n      {item.description && (\n        <p className=\"mt-1.5 text-xs text-muted-foreground leading-relaxed\">\n          {item.description}\n        </p>\n      )}\n    </div>\n  )\n}\n\n// ── KanbanColumn ──────────────────────────────────────────────────────────────\n\nexport function KanbanColumn({ title, items, onDrop, className }: KanbanColumnProps) {\n  const [isDragOver, setIsDragOver] = React.useState(false)\n\n  function handleDragOver(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    e.dataTransfer.dropEffect = \"move\"\n    setIsDragOver(true)\n  }\n\n  function handleDragLeave() {\n    setIsDragOver(false)\n  }\n\n  function handleDrop(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    setIsDragOver(false)\n    const raw = e.dataTransfer.getData(\"application/json\")\n    if (!raw) return\n    try {\n      const item = JSON.parse(raw) as KanbanItem\n      onDrop?.(item, title)\n    } catch {\n      // Silently ignore invalid drag data\n    }\n  }\n\n  return (\n    <div\n      onDragOver={handleDragOver}\n      onDragLeave={handleDragLeave}\n      onDrop={handleDrop}\n      className={cn(\n        \"flex flex-col gap-2 rounded-xl bg-muted/40 p-3 min-h-[200px] w-[280px] transition-colors\",\n        isDragOver && \"bg-muted/70 ring-2 ring-primary/30\",\n        className,\n      )}\n    >\n      <div className=\"flex items-center justify-between px-1 pb-1\">\n        <h3 className=\"text-sm font-semibold text-foreground\">{title}</h3>\n        <span className=\"rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground\">\n          {items.length}\n        </span>\n      </div>\n      {items.map((item) => (\n        <KanbanCard key={item.id} item={item} />\n      ))}\n      {items.length === 0 && (\n        <div className=\"flex flex-1 items-center justify-center rounded-lg border-2 border-dashed border-border py-6 text-xs text-muted-foreground\">\n          Drop cards here\n        </div>\n      )}\n    </div>\n  )\n}\n\n// ── KanbanBoard ───────────────────────────────────────────────────────────────\n\nexport function KanbanBoard({ columns, className }: KanbanBoardProps) {\n  return (\n    <div\n      className={cn(\n        \"flex gap-4 overflow-x-auto pb-4\",\n        className,\n      )}\n      role=\"region\"\n      aria-label=\"Kanban board\"\n    >\n      {columns.map((col) => (\n        <KanbanColumn\n          key={col.title}\n          title={col.title}\n          items={col.items}\n          {...(col.onDrop !== undefined ? { onDrop: col.onDrop } : {})}\n          {...(col.className !== undefined ? { className: col.className } : {})}\n        />\n      ))}\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Organize items into drag-and-drop status columns for task management",
+        "prompts": [
+          "add a kanban board",
+          "add a task board",
+          "add drag and drop columns",
+          "add a project board"
+        ],
+        "composition": [
+          "card",
+          "badge"
+        ],
+        "slots": [
+          "KanbanColumn",
+          "KanbanCard",
+          "KanbanBoard",
+          "columns"
         ]
       }
     },
@@ -465,6 +961,77 @@
       }
     },
     {
+      "name": "stat-group",
+      "type": "registry:pattern",
+      "title": "Stat Group",
+      "description": "Responsive grid of metric stats with value, label, and optional trend delta.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/stat-group.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/stat-group.tsx",
+          "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\n// ── StatItem ──────────────────────────────────────────────────────────────────\n\nexport interface StatItemProps {\n  label: string\n  value: string | number\n  /** Positive = green, negative = red */\n  delta?: number\n  icon?: React.ReactNode\n  className?: string\n}\n\nexport function StatItem({ label, value, delta, icon, className }: StatItemProps) {\n  const hasDelta = delta !== undefined\n\n  return (\n    <div\n      className={cn(\n        \"rounded-lg border border-border bg-card p-5 shadow-sm\",\n        className,\n      )}\n    >\n      <div className=\"flex items-start justify-between gap-3\">\n        <div className=\"min-w-0 flex-1\">\n          <p className=\"text-xs font-medium uppercase tracking-wider text-muted-foreground\">\n            {label}\n          </p>\n          <p className=\"mt-1.5 text-2xl font-semibold tracking-tight text-foreground\">\n            {value}\n          </p>\n          {hasDelta && (\n            <p\n              className={cn(\n                \"mt-1.5 text-xs font-medium\",\n                delta > 0\n                  ? \"text-green-600 dark:text-green-400\"\n                  : \"text-red-500 dark:text-red-400\",\n              )}\n            >\n              {delta > 0 ? \"+\" : \"\"}\n              {delta}%\n            </p>\n          )}\n        </div>\n        {icon && (\n          <div className=\"flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary\">\n            {icon}\n          </div>\n        )}\n      </div>\n    </div>\n  )\n}\n\n// ── StatGroup ─────────────────────────────────────────────────────────────────\n\nexport interface StatGroupProps {\n  children: React.ReactNode\n  cols?: 2 | 3 | 4\n  className?: string\n}\n\nconst colsMap: Record<2 | 3 | 4, string> = {\n  2: \"grid-cols-1 sm:grid-cols-2\",\n  3: \"grid-cols-1 sm:grid-cols-2 lg:grid-cols-3\",\n  4: \"grid-cols-1 sm:grid-cols-2 lg:grid-cols-4\",\n}\n\nexport function StatGroup({ children, cols = 3, className }: StatGroupProps) {\n  return (\n    <div className={cn(\"grid gap-4\", colsMap[cols], className)}>\n      {children}\n    </div>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Display multiple key metrics side-by-side in a responsive stat grid",
+        "prompts": [
+          "add a stats row",
+          "show key metrics",
+          "add KPI cards",
+          "show stat overview",
+          "add a metrics grid"
+        ],
+        "composition": [
+          "metric-card",
+          "card"
+        ],
+        "slots": [
+          "StatItem",
+          "cols"
+        ]
+      }
+    },
+    {
+      "name": "stepper",
+      "type": "registry:pattern",
+      "title": "Stepper",
+      "description": "Multi-step progress indicator for wizards and onboarding flows.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/stepper.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/stepper.tsx",
+          "content": "import { cn } from \"@aetherstack/utils\"\n\n// ── Types ─────────────────────────────────────────────────────────────────────\n\nexport interface StepperItem {\n  id: string\n  label: string\n  description?: string\n}\n\nexport interface StepperStepProps {\n  item: StepperItem\n  index: number\n  currentStep: number\n  isLast: boolean\n  orientation: \"horizontal\" | \"vertical\"\n}\n\nexport interface StepperProps {\n  steps: StepperItem[]\n  currentStep: number\n  orientation?: \"horizontal\" | \"vertical\"\n  className?: string\n}\n\n// ── StepperStep ───────────────────────────────────────────────────────────────\n\nexport function StepperStep({\n  item,\n  index,\n  currentStep,\n  isLast,\n  orientation,\n}: StepperStepProps) {\n  const isCompleted = index < currentStep\n  const isCurrent = index === currentStep\n\n  return (\n    <li\n      className={cn(\n        \"flex gap-3\",\n        orientation === \"horizontal\" ? \"flex-col items-center flex-1\" : \"flex-row\",\n      )}\n    >\n      <div\n        className={cn(\n          \"flex items-center\",\n          orientation === \"horizontal\" ? \"w-full\" : \"flex-col\",\n        )}\n      >\n        {/* Number circle */}\n        <div\n          className={cn(\n            \"flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-colors\",\n            isCompleted && \"border-primary bg-primary text-primary-foreground\",\n            isCurrent && \"border-primary bg-background text-primary\",\n            !isCompleted && !isCurrent && \"border-muted-foreground bg-background text-muted-foreground\",\n          )}\n          aria-current={isCurrent ? \"step\" : undefined}\n        >\n          {isCompleted ? (\n            <svg\n              className=\"h-4 w-4\"\n              xmlns=\"http://www.w3.org/2000/svg\"\n              viewBox=\"0 0 24 24\"\n              fill=\"none\"\n              stroke=\"currentColor\"\n              strokeWidth=\"2.5\"\n              strokeLinecap=\"round\"\n              strokeLinejoin=\"round\"\n              aria-hidden=\"true\"\n            >\n              <path d=\"M20 6 9 17l-5-5\" />\n            </svg>\n          ) : (\n            <span>{index + 1}</span>\n          )}\n        </div>\n\n        {/* Connector line */}\n        {!isLast && (\n          <div\n            className={cn(\n              \"transition-colors\",\n              orientation === \"horizontal\"\n                ? \"h-0.5 flex-1 mx-2\"\n                : \"w-0.5 flex-1 my-2 ml-[15px]\",\n              index < currentStep ? \"bg-primary\" : \"bg-border\",\n            )}\n            aria-hidden=\"true\"\n          />\n        )}\n      </div>\n\n      {/* Label and description */}\n      <div\n        className={cn(\n          orientation === \"horizontal\" ? \"text-center\" : \"pb-6\",\n          isLast && orientation === \"vertical\" && \"pb-0\",\n        )}\n      >\n        <p\n          className={cn(\n            \"text-sm font-medium\",\n            isCurrent ? \"text-primary\" : isCompleted ? \"text-foreground\" : \"text-muted-foreground\",\n          )}\n        >\n          {item.label}\n        </p>\n        {item.description && (\n          <p className=\"mt-0.5 text-xs text-muted-foreground\">{item.description}</p>\n        )}\n      </div>\n    </li>\n  )\n}\n\n// ── Stepper ───────────────────────────────────────────────────────────────────\n\nexport function Stepper({\n  steps,\n  currentStep,\n  orientation = \"horizontal\",\n  className,\n}: StepperProps) {\n  return (\n    <ol\n      className={cn(\n        orientation === \"horizontal\" ? \"flex items-start\" : \"flex flex-col\",\n        className,\n      )}\n      aria-label=\"Progress steps\"\n    >\n      {steps.map((step, index) => (\n        <StepperStep\n          key={step.id}\n          item={step}\n          index={index}\n          currentStep={currentStep}\n          isLast={index === steps.length - 1}\n          orientation={orientation}\n        />\n      ))}\n    </ol>\n  )\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Show progress through a multi-step form or onboarding wizard",
+        "prompts": [
+          "add a stepper",
+          "add a wizard",
+          "add multi-step form progress",
+          "add onboarding steps"
+        ],
+        "composition": [
+          "onboarding-checklist"
+        ],
+        "slots": [
+          "steps",
+          "currentStep",
+          "orientation"
+        ]
+      }
+    },
+    {
       "name": "table-toolbar",
       "type": "registry:pattern",
       "title": "Table Toolbar",
@@ -501,6 +1068,82 @@
           "filters",
           "actions",
           "FilterPill"
+        ]
+      }
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Vertically stacked set of interactive headings that each reveal a section of content.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-accordion",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/accordion.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/accordion.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as AccordionPrimitive from \"@radix-ui/react-accordion\"\nimport { ChevronDown } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst Accordion = AccordionPrimitive.Root\n\nconst AccordionItem = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>\n>(({ className, ...props }, ref) => (\n  <AccordionPrimitive.Item\n    ref={ref}\n    className={cn(\"border-b border-border\", className)}\n    {...props}\n  />\n))\nAccordionItem.displayName = \"AccordionItem\"\n\nconst AccordionTrigger = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Trigger>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Header className=\"flex\">\n    <AccordionPrimitive.Trigger\n      ref={ref}\n      className={cn(\n        \"flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      <ChevronDown className=\"h-4 w-4 shrink-0 transition-transform duration-200\" />\n    </AccordionPrimitive.Trigger>\n  </AccordionPrimitive.Header>\n))\nAccordionTrigger.displayName = \"AccordionTrigger\"\n\nconst AccordionContent = React.forwardRef<\n  React.ElementRef<typeof AccordionPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Content\n    ref={ref}\n    className=\"overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down\"\n    {...props}\n  >\n    <div className={cn(\"pb-4 pt-0\", className)}>{children}</div>\n  </AccordionPrimitive.Content>\n))\nAccordionContent.displayName = \"AccordionContent\"\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent }\n"
+        }
+      ],
+      "ai": {
+        "intent": "Collapsible content sections for FAQs, settings panels, or any expandable content",
+        "prompts": [
+          "add an accordion",
+          "create a collapsible section",
+          "add an FAQ section",
+          "add expandable panels"
+        ],
+        "composition": [
+          "card",
+          "separator"
+        ],
+        "slots": [
+          "AccordionItem",
+          "AccordionTrigger",
+          "AccordionContent"
+        ]
+      }
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "User image with fallback initials and stacked group variant.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-avatar",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/avatar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/avatar.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst Avatar = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full\",\n      className,\n    )}\n    {...props}\n  />\n))\nAvatar.displayName = \"Avatar\"\n\nconst AvatarImage = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Image>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    className={cn(\"aspect-square h-full w-full\", className)}\n    {...props}\n  />\n))\nAvatarImage.displayName = \"AvatarImage\"\n\nconst AvatarFallback = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Fallback>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    className={cn(\n      \"flex h-full w-full items-center justify-center rounded-full bg-muted text-sm font-medium text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nAvatarFallback.displayName = \"AvatarFallback\"\n\ninterface AvatarGroupProps {\n  children: React.ReactNode\n  className?: string\n  max?: number\n}\n\nfunction AvatarGroup({ children, className, max }: AvatarGroupProps) {\n  const childArray = React.Children.toArray(children)\n  const visible = max !== undefined ? childArray.slice(0, max) : childArray\n  const overflow = max !== undefined ? childArray.length - max : 0\n\n  return (\n    <div className={cn(\"flex items-center -space-x-2\", className)}>\n      {visible}\n      {overflow > 0 && (\n        <Avatar>\n          <AvatarFallback>+{overflow}</AvatarFallback>\n        </Avatar>\n      )}\n    </div>\n  )\n}\nAvatarGroup.displayName = \"AvatarGroup\"\n\nexport { Avatar, AvatarImage, AvatarFallback, AvatarGroup }\n"
+        }
+      ],
+      "ai": {
+        "intent": "Display user profile images with graceful fallback to initials",
+        "prompts": [
+          "add a user avatar",
+          "show profile picture",
+          "add avatar with initials",
+          "show stacked user avatars"
+        ],
+        "composition": [
+          "badge",
+          "card",
+          "team-settings"
+        ],
+        "slots": [
+          "AvatarImage",
+          "AvatarFallback",
+          "AvatarGroup"
         ]
       }
     },
@@ -585,6 +1228,45 @@
       }
     },
     {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Month-view date picker built on react-day-picker with full token styling.",
+      "author": "aetherstack",
+      "dependencies": [
+        "react-day-picker",
+        "date-fns",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/calendar.tsx",
+          "content": "\"use client\"\n\nimport { DayPicker, type DayPickerProps } from \"react-day-picker\"\nimport { ChevronLeft, ChevronRight } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { buttonVariants } from \"./button\"\n\nexport type CalendarProps = DayPickerProps\n\nfunction Calendar({\n  className,\n  classNames,\n  showOutsideDays = true,\n  ...props\n}: CalendarProps) {\n  return (\n    <DayPicker\n      showOutsideDays={showOutsideDays}\n      className={cn(\"p-3\", className)}\n      classNames={{\n        months: \"flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0\",\n        month: \"space-y-4\",\n        month_caption: \"flex justify-center pt-1 relative items-center\",\n        caption_label: \"text-sm font-medium\",\n        nav: \"space-x-1 flex items-center\",\n        button_previous: cn(\n          buttonVariants({ variant: \"outline\" }),\n          \"absolute left-1 h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100\",\n        ),\n        button_next: cn(\n          buttonVariants({ variant: \"outline\" }),\n          \"absolute right-1 h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100\",\n        ),\n        month_grid: \"w-full border-collapse space-y-1\",\n        weekdays: \"flex\",\n        weekday: \"text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]\",\n        week: \"flex w-full mt-2\",\n        day: \"h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20\",\n        day_button: cn(\n          buttonVariants({ variant: \"ghost\" }),\n          \"h-9 w-9 p-0 font-normal aria-selected:opacity-100\",\n        ),\n        range_end: \"day-range-end\",\n        selected:\n          \"bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground\",\n        today: \"bg-accent text-accent-foreground\",\n        outside:\n          \"day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30\",\n        disabled: \"text-muted-foreground opacity-50\",\n        range_middle:\n          \"aria-selected:bg-accent aria-selected:text-accent-foreground\",\n        hidden: \"invisible\",\n        ...classNames,\n      }}\n      components={{\n        Chevron: ({ orientation, ...rest }) =>\n          orientation === \"left\" ? (\n            <ChevronLeft className=\"h-4 w-4\" {...rest} />\n          ) : (\n            <ChevronRight className=\"h-4 w-4\" {...rest} />\n          ),\n      }}\n      {...props}\n    />\n  )\n}\nCalendar.displayName = \"Calendar\"\n\nexport { Calendar }\n"
+        }
+      ],
+      "ai": {
+        "intent": "Select a single date or date range from a month-view calendar",
+        "prompts": [
+          "add a date picker",
+          "add a calendar",
+          "select a date",
+          "add a date range picker"
+        ],
+        "composition": [
+          "button",
+          "combobox"
+        ],
+        "slots": [
+          "onSelect",
+          "selected",
+          "mode"
+        ]
+      }
+    },
+    {
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
@@ -664,6 +1346,85 @@
       }
     },
     {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Autocomplete select with search, powered by cmdk and Radix Popover.",
+      "author": "aetherstack",
+      "dependencies": [
+        "cmdk",
+        "@radix-ui/react-popover",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/combobox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/combobox.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Command as CommandPrimitive } from \"cmdk\"\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\"\nimport { Check } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\n// Re-export Command pieces for direct use inside Combobox\nconst ComboboxInput = React.forwardRef<\n  React.ElementRef<typeof CommandPrimitive.Input>,\n  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>\n>(({ className, ...props }, ref) => (\n  <CommandPrimitive.Input\n    ref={ref}\n    className={cn(\n      \"flex h-10 w-full rounded-md bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50\",\n      className,\n    )}\n    {...props}\n  />\n))\nComboboxInput.displayName = \"ComboboxInput\"\n\nconst ComboboxList = React.forwardRef<\n  React.ElementRef<typeof CommandPrimitive.List>,\n  React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>\n>(({ className, ...props }, ref) => (\n  <CommandPrimitive.List\n    ref={ref}\n    className={cn(\"max-h-[300px] overflow-y-auto overflow-x-hidden\", className)}\n    {...props}\n  />\n))\nComboboxList.displayName = \"ComboboxList\"\n\nconst ComboboxEmpty = React.forwardRef<\n  React.ElementRef<typeof CommandPrimitive.Empty>,\n  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>\n>((props, ref) => (\n  <CommandPrimitive.Empty\n    ref={ref}\n    className=\"py-6 text-center text-sm text-muted-foreground\"\n    {...props}\n  />\n))\nComboboxEmpty.displayName = \"ComboboxEmpty\"\n\nconst ComboboxGroup = React.forwardRef<\n  React.ElementRef<typeof CommandPrimitive.Group>,\n  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group>\n>(({ className, ...props }, ref) => (\n  <CommandPrimitive.Group\n    ref={ref}\n    className={cn(\n      \"overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nComboboxGroup.displayName = \"ComboboxGroup\"\n\nconst ComboboxItem = React.forwardRef<\n  React.ElementRef<typeof CommandPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item> & {\n    selected?: boolean\n  }\n>(({ className, selected, children, ...props }, ref) => (\n  <CommandPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 aria-selected:bg-accent aria-selected:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n      className,\n    )}\n    {...props}\n  >\n    <span className={cn(\"mr-2 h-4 w-4\", selected ? \"opacity-100\" : \"opacity-0\")}>\n      <Check className=\"h-4 w-4\" />\n    </span>\n    {children}\n  </CommandPrimitive.Item>\n))\nComboboxItem.displayName = \"ComboboxItem\"\n\n// ComboboxContent wraps the popover content with a Command container\nconst ComboboxContent = React.forwardRef<\n  React.ElementRef<typeof PopoverPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <PopoverPrimitive.Portal>\n    <PopoverPrimitive.Content\n      ref={ref}\n      className={cn(\n        \"z-50 w-[--radix-popover-trigger-width] overflow-hidden rounded-md border border-border bg-popover p-0 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95\",\n        className,\n      )}\n      sideOffset={4}\n      {...props}\n    >\n      <CommandPrimitive>{children}</CommandPrimitive>\n    </PopoverPrimitive.Content>\n  </PopoverPrimitive.Portal>\n))\nComboboxContent.displayName = \"ComboboxContent\"\n\n// Combobox = Popover root + Trigger\nconst Combobox = PopoverPrimitive.Root\nconst ComboboxTrigger = PopoverPrimitive.Trigger\n\nexport {\n  Combobox,\n  ComboboxTrigger,\n  ComboboxContent,\n  ComboboxInput,\n  ComboboxList,\n  ComboboxEmpty,\n  ComboboxGroup,\n  ComboboxItem,\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Searchable dropdown select for large option sets with async support",
+        "prompts": [
+          "add a combobox",
+          "add a searchable select",
+          "add autocomplete input",
+          "add a filterable dropdown"
+        ],
+        "composition": [
+          "button",
+          "command-palette"
+        ],
+        "slots": [
+          "ComboboxTrigger",
+          "ComboboxContent",
+          "ComboboxInput",
+          "ComboboxItem",
+          "ComboboxEmpty"
+        ]
+      }
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Right-click contextual menu with nested submenus and keyboard navigation.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-context-menu",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/context-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/context-menu.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ContextMenuPrimitive from \"@radix-ui/react-context-menu\"\nimport { CheckIcon, ChevronRightIcon, CircleIcon } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst ContextMenu = ContextMenuPrimitive.Root\nconst ContextMenuTrigger = ContextMenuPrimitive.Trigger\nconst ContextMenuGroup = ContextMenuPrimitive.Group\nconst ContextMenuPortal = ContextMenuPrimitive.Portal\nconst ContextMenuSub = ContextMenuPrimitive.Sub\nconst ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup\n\nconst ContextMenuSubTrigger = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.SubTrigger>,\n  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubTrigger> & {\n    inset?: boolean\n  }\n>(({ className, inset, children, ...props }, ref) => (\n  <ContextMenuPrimitive.SubTrigger\n    ref={ref}\n    className={cn(\n      \"flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n      inset && \"pl-8\",\n      className,\n    )}\n    {...props}\n  >\n    {children}\n    <ChevronRightIcon className=\"ml-auto\" />\n  </ContextMenuPrimitive.SubTrigger>\n))\nContextMenuSubTrigger.displayName = \"ContextMenuSubTrigger\"\n\nconst ContextMenuSubContent = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.SubContent>,\n  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubContent>\n>(({ className, ...props }, ref) => (\n  <ContextMenuPrimitive.SubContent\n    ref={ref}\n    className={cn(\n      \"z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md\",\n      \"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2\",\n      className,\n    )}\n    {...props}\n  />\n))\nContextMenuSubContent.displayName = \"ContextMenuSubContent\"\n\nconst ContextMenuContent = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>\n>(({ className, ...props }, ref) => (\n  <ContextMenuPrimitive.Portal>\n    <ContextMenuPrimitive.Content\n      ref={ref}\n      className={cn(\n        \"z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md\",\n        \"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2\",\n        className,\n      )}\n      {...props}\n    />\n  </ContextMenuPrimitive.Portal>\n))\nContextMenuContent.displayName = \"ContextMenuContent\"\n\nconst ContextMenuItem = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item> & {\n    inset?: boolean\n  }\n>(({ className, inset, ...props }, ref) => (\n  <ContextMenuPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n      inset && \"pl-8\",\n      className,\n    )}\n    {...props}\n  />\n))\nContextMenuItem.displayName = \"ContextMenuItem\"\n\nconst ContextMenuCheckboxItem = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.CheckboxItem>,\n  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.CheckboxItem>\n>(({ className, children, checked, ...props }, ref) => (\n  <ContextMenuPrimitive.CheckboxItem\n    ref={ref}\n    className={cn(\n      \"relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n      className,\n    )}\n    {...(checked !== undefined ? { checked } : {})}\n    {...props}\n  >\n    <span className=\"absolute left-2 flex h-3.5 w-3.5 items-center justify-center\">\n      <ContextMenuPrimitive.ItemIndicator>\n        <CheckIcon className=\"h-4 w-4\" />\n      </ContextMenuPrimitive.ItemIndicator>\n    </span>\n    {children}\n  </ContextMenuPrimitive.CheckboxItem>\n))\nContextMenuCheckboxItem.displayName = \"ContextMenuCheckboxItem\"\n\nconst ContextMenuRadioItem = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.RadioItem>,\n  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.RadioItem>\n>(({ className, children, ...props }, ref) => (\n  <ContextMenuPrimitive.RadioItem\n    ref={ref}\n    className={cn(\n      \"relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n      className,\n    )}\n    {...props}\n  >\n    <span className=\"absolute left-2 flex h-3.5 w-3.5 items-center justify-center\">\n      <ContextMenuPrimitive.ItemIndicator>\n        <CircleIcon className=\"h-2 w-2 fill-current\" />\n      </ContextMenuPrimitive.ItemIndicator>\n    </span>\n    {children}\n  </ContextMenuPrimitive.RadioItem>\n))\nContextMenuRadioItem.displayName = \"ContextMenuRadioItem\"\n\nconst ContextMenuLabel = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.Label>,\n  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Label> & {\n    inset?: boolean\n  }\n>(({ className, inset, ...props }, ref) => (\n  <ContextMenuPrimitive.Label\n    ref={ref}\n    className={cn(\n      \"px-2 py-1.5 text-xs font-semibold\",\n      inset && \"pl-8\",\n      className,\n    )}\n    {...props}\n  />\n))\nContextMenuLabel.displayName = \"ContextMenuLabel\"\n\nconst ContextMenuSeparator = React.forwardRef<\n  React.ElementRef<typeof ContextMenuPrimitive.Separator>,\n  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Separator>\n>(({ className, ...props }, ref) => (\n  <ContextMenuPrimitive.Separator\n    ref={ref}\n    className={cn(\"-mx-1 my-1 h-px bg-muted\", className)}\n    {...props}\n  />\n))\nContextMenuSeparator.displayName = \"ContextMenuSeparator\"\n\nfunction ContextMenuShortcut({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLSpanElement>) {\n  return (\n    <span\n      className={cn(\"ml-auto text-xs tracking-widest opacity-60\", className)}\n      {...props}\n    />\n  )\n}\nContextMenuShortcut.displayName = \"ContextMenuShortcut\"\n\nexport {\n  ContextMenu,\n  ContextMenuTrigger,\n  ContextMenuGroup,\n  ContextMenuPortal,\n  ContextMenuSub,\n  ContextMenuRadioGroup,\n  ContextMenuSubTrigger,\n  ContextMenuSubContent,\n  ContextMenuContent,\n  ContextMenuItem,\n  ContextMenuCheckboxItem,\n  ContextMenuRadioItem,\n  ContextMenuLabel,\n  ContextMenuSeparator,\n  ContextMenuShortcut,\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Show a contextual right-click menu with actions for a target element",
+        "prompts": [
+          "add a right-click menu",
+          "add a context menu",
+          "show contextual actions"
+        ],
+        "composition": [
+          "dropdown-menu",
+          "separator"
+        ],
+        "slots": [
+          "ContextMenuTrigger",
+          "ContextMenuContent",
+          "ContextMenuItem",
+          "ContextMenuSeparator"
+        ]
+      }
+    },
+    {
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
@@ -703,6 +1464,85 @@
           "DialogTitle",
           "DialogDescription",
           "DialogFooter"
+        ]
+      }
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Accessible dropdown menu with submenus, checkboxes, radio items, and shortcuts.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-dropdown-menu",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dropdown-menu.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as DropdownMenuPrimitive from \"@radix-ui/react-dropdown-menu\"\nimport { CheckIcon, ChevronRightIcon, CircleIcon } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst DropdownMenu = DropdownMenuPrimitive.Root\nconst DropdownMenuTrigger = DropdownMenuPrimitive.Trigger\nconst DropdownMenuGroup = DropdownMenuPrimitive.Group\nconst DropdownMenuPortal = DropdownMenuPrimitive.Portal\nconst DropdownMenuSub = DropdownMenuPrimitive.Sub\nconst DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup\n\nconst DropdownMenuSubTrigger = React.forwardRef<\n  React.ElementRef<typeof DropdownMenuPrimitive.SubTrigger>,\n  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubTrigger> & {\n    inset?: boolean\n  }\n>(({ className, inset, children, ...props }, ref) => (\n  <DropdownMenuPrimitive.SubTrigger\n    ref={ref}\n    className={cn(\n      \"flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n      inset && \"pl-8\",\n      className,\n    )}\n    {...props}\n  >\n    {children}\n    <ChevronRightIcon className=\"ml-auto\" />\n  </DropdownMenuPrimitive.SubTrigger>\n))\nDropdownMenuSubTrigger.displayName = \"DropdownMenuSubTrigger\"\n\nconst DropdownMenuSubContent = React.forwardRef<\n  React.ElementRef<typeof DropdownMenuPrimitive.SubContent>,\n  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent>\n>(({ className, ...props }, ref) => (\n  <DropdownMenuPrimitive.SubContent\n    ref={ref}\n    className={cn(\n      \"z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md\",\n      \"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2\",\n      className,\n    )}\n    {...props}\n  />\n))\nDropdownMenuSubContent.displayName = \"DropdownMenuSubContent\"\n\nconst DropdownMenuContent = React.forwardRef<\n  React.ElementRef<typeof DropdownMenuPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>\n>(({ className, sideOffset = 4, ...props }, ref) => (\n  <DropdownMenuPrimitive.Portal>\n    <DropdownMenuPrimitive.Content\n      ref={ref}\n      sideOffset={sideOffset}\n      className={cn(\n        \"z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md\",\n        \"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2\",\n        className,\n      )}\n      {...props}\n    />\n  </DropdownMenuPrimitive.Portal>\n))\nDropdownMenuContent.displayName = \"DropdownMenuContent\"\n\nconst DropdownMenuItem = React.forwardRef<\n  React.ElementRef<typeof DropdownMenuPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {\n    inset?: boolean\n  }\n>(({ className, inset, ...props }, ref) => (\n  <DropdownMenuPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n      inset && \"pl-8\",\n      className,\n    )}\n    {...props}\n  />\n))\nDropdownMenuItem.displayName = \"DropdownMenuItem\"\n\nconst DropdownMenuCheckboxItem = React.forwardRef<\n  React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,\n  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>\n>(({ className, children, checked, ...props }, ref) => (\n  <DropdownMenuPrimitive.CheckboxItem\n    ref={ref}\n    className={cn(\n      \"relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n      className,\n    )}\n    {...(checked !== undefined ? { checked } : {})}\n    {...props}\n  >\n    <span className=\"absolute left-2 flex h-3.5 w-3.5 items-center justify-center\">\n      <DropdownMenuPrimitive.ItemIndicator>\n        <CheckIcon className=\"h-4 w-4\" />\n      </DropdownMenuPrimitive.ItemIndicator>\n    </span>\n    {children}\n  </DropdownMenuPrimitive.CheckboxItem>\n))\nDropdownMenuCheckboxItem.displayName = \"DropdownMenuCheckboxItem\"\n\nconst DropdownMenuRadioItem = React.forwardRef<\n  React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>,\n  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>\n>(({ className, children, ...props }, ref) => (\n  <DropdownMenuPrimitive.RadioItem\n    ref={ref}\n    className={cn(\n      \"relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n      className,\n    )}\n    {...props}\n  >\n    <span className=\"absolute left-2 flex h-3.5 w-3.5 items-center justify-center\">\n      <DropdownMenuPrimitive.ItemIndicator>\n        <CircleIcon className=\"h-2 w-2 fill-current\" />\n      </DropdownMenuPrimitive.ItemIndicator>\n    </span>\n    {children}\n  </DropdownMenuPrimitive.RadioItem>\n))\nDropdownMenuRadioItem.displayName = \"DropdownMenuRadioItem\"\n\nconst DropdownMenuLabel = React.forwardRef<\n  React.ElementRef<typeof DropdownMenuPrimitive.Label>,\n  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label> & {\n    inset?: boolean\n  }\n>(({ className, inset, ...props }, ref) => (\n  <DropdownMenuPrimitive.Label\n    ref={ref}\n    className={cn(\n      \"px-2 py-1.5 text-xs font-semibold\",\n      inset && \"pl-8\",\n      className,\n    )}\n    {...props}\n  />\n))\nDropdownMenuLabel.displayName = \"DropdownMenuLabel\"\n\nconst DropdownMenuSeparator = React.forwardRef<\n  React.ElementRef<typeof DropdownMenuPrimitive.Separator>,\n  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>\n>(({ className, ...props }, ref) => (\n  <DropdownMenuPrimitive.Separator\n    ref={ref}\n    className={cn(\"-mx-1 my-1 h-px bg-muted\", className)}\n    {...props}\n  />\n))\nDropdownMenuSeparator.displayName = \"DropdownMenuSeparator\"\n\nfunction DropdownMenuShortcut({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLSpanElement>) {\n  return (\n    <span\n      className={cn(\"ml-auto text-xs tracking-widest opacity-60\", className)}\n      {...props}\n    />\n  )\n}\nDropdownMenuShortcut.displayName = \"DropdownMenuShortcut\"\n\nexport {\n  DropdownMenu,\n  DropdownMenuTrigger,\n  DropdownMenuGroup,\n  DropdownMenuPortal,\n  DropdownMenuSub,\n  DropdownMenuRadioGroup,\n  DropdownMenuSubTrigger,\n  DropdownMenuSubContent,\n  DropdownMenuContent,\n  DropdownMenuItem,\n  DropdownMenuCheckboxItem,\n  DropdownMenuRadioItem,\n  DropdownMenuLabel,\n  DropdownMenuSeparator,\n  DropdownMenuShortcut,\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Show a list of actions or options in a floating dropdown triggered by a button",
+        "prompts": [
+          "add a dropdown menu",
+          "add action menu",
+          "add options menu",
+          "add a kebab menu",
+          "add more actions"
+        ],
+        "composition": [
+          "button",
+          "separator",
+          "badge"
+        ],
+        "slots": [
+          "DropdownMenuTrigger",
+          "DropdownMenuContent",
+          "DropdownMenuItem",
+          "DropdownMenuSeparator",
+          "DropdownMenuLabel"
+        ]
+      }
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Rich preview card that appears on hover over a trigger element.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-hover-card",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/hover-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/hover-card.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as HoverCardPrimitive from \"@radix-ui/react-hover-card\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst HoverCard = HoverCardPrimitive.Root\nconst HoverCardTrigger = HoverCardPrimitive.Trigger\n\nconst HoverCardContent = React.forwardRef<\n  React.ElementRef<typeof HoverCardPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>\n>(({ className, align = \"center\", sideOffset = 4, ...props }, ref) => (\n  <HoverCardPrimitive.Portal>\n    <HoverCardPrimitive.Content\n      ref={ref}\n      align={align}\n      sideOffset={sideOffset}\n      className={cn(\n        \"z-50 w-64 rounded-md border border-border bg-popover p-4 text-popover-foreground shadow-md outline-none\",\n        \"data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2\",\n        className,\n      )}\n      {...props}\n    />\n  </HoverCardPrimitive.Portal>\n))\nHoverCardContent.displayName = \"HoverCardContent\"\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent }\n"
+        }
+      ],
+      "ai": {
+        "intent": "Show a rich preview popup when hovering over a link or user mention",
+        "prompts": [
+          "add a hover card",
+          "show preview on hover",
+          "add user card preview",
+          "show tooltip with content"
+        ],
+        "composition": [
+          "avatar",
+          "card",
+          "tooltip"
+        ],
+        "slots": [
+          "HoverCardTrigger",
+          "HoverCardContent"
         ]
       }
     },
@@ -787,6 +1627,79 @@
       }
     },
     {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Accessible pagination navigation with previous, next, and page links.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pagination.tsx",
+          "content": "import * as React from \"react\"\nimport { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { buttonVariants } from \"./button\"\n\nfunction Pagination({ className, ...props }: React.ComponentProps<\"nav\">) {\n  return (\n    <nav\n      role=\"navigation\"\n      aria-label=\"pagination\"\n      className={cn(\"mx-auto flex w-full justify-center\", className)}\n      {...props}\n    />\n  )\n}\nPagination.displayName = \"Pagination\"\n\nconst PaginationContent = React.forwardRef<\n  HTMLUListElement,\n  React.ComponentProps<\"ul\">\n>(({ className, ...props }, ref) => (\n  <ul\n    ref={ref}\n    className={cn(\"flex flex-row items-center gap-1\", className)}\n    {...props}\n  />\n))\nPaginationContent.displayName = \"PaginationContent\"\n\nconst PaginationItem = React.forwardRef<\n  HTMLLIElement,\n  React.ComponentProps<\"li\">\n>(({ className, ...props }, ref) => (\n  <li ref={ref} className={cn(\"\", className)} {...props} />\n))\nPaginationItem.displayName = \"PaginationItem\"\n\ntype PaginationLinkProps = {\n  isActive?: boolean\n} & React.ComponentProps<\"a\">\n\nfunction PaginationLink({\n  className,\n  isActive,\n  ...props\n}: PaginationLinkProps) {\n  return (\n    <a\n      aria-current={isActive ? \"page\" : undefined}\n      className={cn(\n        buttonVariants({\n          variant: isActive ? \"outline\" : \"ghost\",\n          size: \"icon\",\n        }),\n        className,\n      )}\n      {...props}\n    />\n  )\n}\nPaginationLink.displayName = \"PaginationLink\"\n\nfunction PaginationPrevious({\n  className,\n  ...props\n}: React.ComponentProps<typeof PaginationLink>) {\n  return (\n    <PaginationLink\n      aria-label=\"Go to previous page\"\n      className={cn(\"gap-1 pl-2.5\", className)}\n      {...props}\n    >\n      <ChevronLeftIcon className=\"h-4 w-4\" />\n      <span>Previous</span>\n    </PaginationLink>\n  )\n}\nPaginationPrevious.displayName = \"PaginationPrevious\"\n\nfunction PaginationNext({\n  className,\n  ...props\n}: React.ComponentProps<typeof PaginationLink>) {\n  return (\n    <PaginationLink\n      aria-label=\"Go to next page\"\n      className={cn(\"gap-1 pr-2.5\", className)}\n      {...props}\n    >\n      <span>Next</span>\n      <ChevronRightIcon className=\"h-4 w-4\" />\n    </PaginationLink>\n  )\n}\nPaginationNext.displayName = \"PaginationNext\"\n\nfunction PaginationEllipsis({\n  className,\n  ...props\n}: React.ComponentProps<\"span\">) {\n  return (\n    <span\n      aria-hidden\n      className={cn(\"flex h-9 w-9 items-center justify-center\", className)}\n      {...props}\n    >\n      <MoreHorizontalIcon className=\"h-4 w-4\" />\n      <span className=\"sr-only\">More pages</span>\n    </span>\n  )\n}\nPaginationEllipsis.displayName = \"PaginationEllipsis\"\n\nexport {\n  Pagination,\n  PaginationContent,\n  PaginationItem,\n  PaginationLink,\n  PaginationPrevious,\n  PaginationNext,\n  PaginationEllipsis,\n}\n"
+        }
+      ],
+      "ai": {
+        "intent": "Navigate between pages of content with previous, next, and numbered page links",
+        "prompts": [
+          "add pagination",
+          "add page navigation",
+          "add next previous buttons",
+          "paginate a list"
+        ],
+        "composition": [
+          "button",
+          "data-table"
+        ],
+        "slots": [
+          "PaginationPrevious",
+          "PaginationNext",
+          "PaginationLink",
+          "PaginationEllipsis"
+        ]
+      }
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Linear progress bar with smooth animation and accessible role.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-progress",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/progress.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/progress.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ProgressPrimitive from \"@radix-ui/react-progress\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst Progress = React.forwardRef<\n  React.ElementRef<typeof ProgressPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative h-2 w-full overflow-hidden rounded-full bg-secondary\",\n      className,\n    )}\n    {...props}\n  >\n    <ProgressPrimitive.Indicator\n      className=\"h-full w-full flex-1 bg-primary transition-all\"\n      style={{ transform: `translateX(-${100 - (value ?? 0)}%)` }}\n    />\n  </ProgressPrimitive.Root>\n))\nProgress.displayName = \"Progress\"\n\nexport { Progress }\n"
+        }
+      ],
+      "ai": {
+        "intent": "Show completion percentage of a task or upload as a horizontal bar",
+        "prompts": [
+          "add a progress bar",
+          "show upload progress",
+          "show task completion",
+          "add a loading bar"
+        ],
+        "composition": [
+          "billing-overview",
+          "onboarding-checklist"
+        ],
+        "slots": [
+          "value"
+        ]
+      }
+    },
+    {
       "name": "radio-group",
       "type": "registry:ui",
       "title": "Radio Group",
@@ -821,6 +1734,41 @@
           "value",
           "onValueChange",
           "RadioGroupItem"
+        ]
+      }
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Custom-styled scroll container with consistent cross-browser scrollbar appearance.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-scroll-area",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/scroll-area.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ScrollAreaPrimitive from \"@radix-ui/react-scroll-area\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst ScrollArea = React.forwardRef<\n  React.ElementRef<typeof ScrollAreaPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>\n>(({ className, children, ...props }, ref) => (\n  <ScrollAreaPrimitive.Root\n    ref={ref}\n    className={cn(\"relative overflow-hidden\", className)}\n    {...props}\n  >\n    <ScrollAreaPrimitive.Viewport className=\"h-full w-full rounded-[inherit]\">\n      {children}\n    </ScrollAreaPrimitive.Viewport>\n    <ScrollBar />\n    <ScrollAreaPrimitive.Corner />\n  </ScrollAreaPrimitive.Root>\n))\nScrollArea.displayName = \"ScrollArea\"\n\nconst ScrollBar = React.forwardRef<\n  React.ElementRef<typeof ScrollAreaPrimitive.Scrollbar>,\n  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Scrollbar>\n>(({ className, orientation = \"vertical\", ...props }, ref) => (\n  <ScrollAreaPrimitive.Scrollbar\n    ref={ref}\n    orientation={orientation}\n    className={cn(\n      \"flex touch-none select-none transition-colors\",\n      orientation === \"vertical\" &&\n        \"h-full w-2.5 border-l border-l-transparent p-[1px]\",\n      orientation === \"horizontal\" &&\n        \"h-2.5 flex-col border-t border-t-transparent p-[1px]\",\n      className,\n    )}\n    {...props}\n  >\n    <ScrollAreaPrimitive.Thumb className=\"relative flex-1 rounded-full bg-border\" />\n  </ScrollAreaPrimitive.Scrollbar>\n))\nScrollBar.displayName = \"ScrollBar\"\n\nexport { ScrollArea, ScrollBar }\n"
+        }
+      ],
+      "ai": {
+        "intent": "Wrap content that overflows with a styled, accessible scroll container",
+        "prompts": [
+          "add a scroll area",
+          "make content scrollable",
+          "add a custom scrollbar"
+        ],
+        "composition": [
+          "command-palette",
+          "activity-feed"
+        ],
+        "slots": [
+          "children",
+          "ScrollBar"
         ]
       }
     },
@@ -862,6 +1810,41 @@
           "SelectItem",
           "value",
           "onValueChange"
+        ]
+      }
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Thin horizontal or vertical divider line.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-separator",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/separator.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/separator.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SeparatorPrimitive from \"@radix-ui/react-separator\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst Separator = React.forwardRef<\n  React.ElementRef<typeof SeparatorPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>\n>(\n  (\n    { className, orientation = \"horizontal\", decorative = true, ...props },\n    ref,\n  ) => (\n    <SeparatorPrimitive.Root\n      ref={ref}\n      decorative={decorative}\n      orientation={orientation}\n      className={cn(\n        \"shrink-0 bg-border\",\n        orientation === \"horizontal\" ? \"h-[1px] w-full\" : \"h-full w-[1px]\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n)\nSeparator.displayName = \"Separator\"\n\nexport { Separator }\n"
+        }
+      ],
+      "ai": {
+        "intent": "Visually separate groups of content with a thin divider line",
+        "prompts": [
+          "add a divider",
+          "add a separator",
+          "separate content sections"
+        ],
+        "composition": [
+          "dropdown-menu",
+          "card",
+          "sidebar-nav"
+        ],
+        "slots": [
+          "orientation"
         ]
       }
     },
@@ -942,6 +1925,44 @@
         ],
         "slots": [
           "className"
+        ]
+      }
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Range input slider with accessible keyboard navigation.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-slider",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/slider.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SliderPrimitive from \"@radix-ui/react-slider\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst Slider = React.forwardRef<\n  React.ElementRef<typeof SliderPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SliderPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative flex w-full touch-none select-none items-center\",\n      className,\n    )}\n    {...props}\n  >\n    <SliderPrimitive.Track className=\"relative h-2 w-full grow overflow-hidden rounded-full bg-secondary\">\n      <SliderPrimitive.Range className=\"absolute h-full bg-primary\" />\n    </SliderPrimitive.Track>\n    <SliderPrimitive.Thumb className=\"block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50\" />\n  </SliderPrimitive.Root>\n))\nSlider.displayName = \"Slider\"\n\nexport { Slider }\n"
+        }
+      ],
+      "ai": {
+        "intent": "Let users select a numeric value within a range by dragging a thumb",
+        "prompts": [
+          "add a slider",
+          "add a range input",
+          "add a volume control",
+          "add a price range slider"
+        ],
+        "composition": [
+          "form-field"
+        ],
+        "slots": [
+          "value",
+          "onValueChange",
+          "min",
+          "max",
+          "step"
         ]
       }
     },
@@ -1095,6 +2116,127 @@
           "onChange",
           "placeholder",
           "rows"
+        ]
+      }
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Transient notification messages with default and destructive variants.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-toast",
+        "class-variance-authority",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/toast.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toast.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ToastPrimitive from \"@radix-ui/react-toast\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { XIcon } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\n// ---------------------------------------------------------------------------\n// Radix pass-throughs\n// ---------------------------------------------------------------------------\n\nconst ToastProvider = ToastPrimitive.Provider\n\nconst ToastViewport = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitive.Viewport>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitive.Viewport>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitive.Viewport\n    ref={ref}\n    className={cn(\n      \"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\",\n      className,\n    )}\n    {...props}\n  />\n))\nToastViewport.displayName = \"ToastViewport\"\n\n// ---------------------------------------------------------------------------\n// Toast variants\n// ---------------------------------------------------------------------------\n\nconst toastVariants = cva(\n  [\n    \"group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-6 pr-8 shadow-lg transition-all\",\n    \"data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none\",\n    \"data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full\",\n  ],\n  {\n    variants: {\n      variant: {\n        default: \"border border-border bg-background text-foreground\",\n        destructive:\n          \"destructive group border-destructive bg-destructive text-destructive-foreground\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n)\n\nconst Toast = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitive.Root> &\n    VariantProps<typeof toastVariants>\n>(({ className, variant, ...props }, ref) => (\n  <ToastPrimitive.Root\n    ref={ref}\n    className={cn(toastVariants({ variant }), className)}\n    {...props}\n  />\n))\nToast.displayName = \"Toast\"\n\nconst ToastAction = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitive.Action>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitive.Action>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitive.Action\n    ref={ref}\n    className={cn(\n      \"shrink-0 rounded-md border bg-transparent px-3 py-1.5 text-sm font-medium ring-offset-background transition-colors\",\n      \"hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n      \"disabled:pointer-events-none disabled:opacity-50\",\n      \"group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive\",\n      className,\n    )}\n    {...props}\n  />\n))\nToastAction.displayName = \"ToastAction\"\n\nconst ToastClose = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitive.Close>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitive.Close>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitive.Close\n    ref={ref}\n    className={cn(\n      \"absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity\",\n      \"hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100\",\n      \"group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600\",\n      className,\n    )}\n    toast-close=\"\"\n    {...props}\n  >\n    <XIcon className=\"h-4 w-4\" />\n  </ToastPrimitive.Close>\n))\nToastClose.displayName = \"ToastClose\"\n\nconst ToastTitle = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitive.Title\n    ref={ref}\n    className={cn(\"text-sm font-semibold\", className)}\n    {...props}\n  />\n))\nToastTitle.displayName = \"ToastTitle\"\n\nconst ToastDescription = React.forwardRef<\n  React.ElementRef<typeof ToastPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof ToastPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <ToastPrimitive.Description\n    ref={ref}\n    className={cn(\"text-sm opacity-90\", className)}\n    {...props}\n  />\n))\nToastDescription.displayName = \"ToastDescription\"\n\n// ---------------------------------------------------------------------------\n// Types\n// ---------------------------------------------------------------------------\n\ntype ToastProps = React.ComponentPropsWithoutRef<typeof Toast>\ntype ToastActionElement = React.ReactElement<typeof ToastAction>\n\n// ---------------------------------------------------------------------------\n// useToast hook — module-level reducer so state is shared across consumers\n// ---------------------------------------------------------------------------\n\nconst TOAST_LIMIT = 5\nconst TOAST_REMOVE_DELAY = 1_000_000\n\ntype ToastEntry = ToastProps & {\n  id: string\n  title?: React.ReactNode\n  description?: React.ReactNode\n  action?: ToastActionElement\n}\n\ntype ActionType =\n  | { type: \"ADD_TOAST\"; toast: ToastEntry }\n  | { type: \"UPDATE_TOAST\"; toast: Partial<ToastEntry> & { id: string } }\n  | { type: \"DISMISS_TOAST\"; toastId?: string }\n  | { type: \"REMOVE_TOAST\"; toastId?: string }\n\ninterface State {\n  toasts: ToastEntry[]\n}\n\nlet count = 0\nfunction genId() {\n  count = (count + 1) % Number.MAX_SAFE_INTEGER\n  return String(count)\n}\n\nconst toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()\n\nfunction addToRemoveQueue(toastId: string) {\n  if (toastTimeouts.has(toastId)) return\n  const timeout = setTimeout(() => {\n    toastTimeouts.delete(toastId)\n    dispatch({ type: \"REMOVE_TOAST\", toastId })\n  }, TOAST_REMOVE_DELAY)\n  toastTimeouts.set(toastId, timeout)\n}\n\nfunction reducer(state: State, action: ActionType): State {\n  switch (action.type) {\n    case \"ADD_TOAST\":\n      return {\n        ...state,\n        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),\n      }\n    case \"UPDATE_TOAST\":\n      return {\n        ...state,\n        toasts: state.toasts.map((t) =>\n          t.id === action.toast.id ? { ...t, ...action.toast } : t,\n        ),\n      }\n    case \"DISMISS_TOAST\": {\n      const { toastId } = action\n      if (toastId) {\n        addToRemoveQueue(toastId)\n      } else {\n        state.toasts.forEach((t) => addToRemoveQueue(t.id))\n      }\n      return {\n        ...state,\n        toasts: state.toasts.map((t) =>\n          t.id === toastId || toastId === undefined\n            ? { ...t, open: false }\n            : t,\n        ),\n      }\n    }\n    case \"REMOVE_TOAST\":\n      if (action.toastId === undefined) return { ...state, toasts: [] }\n      return {\n        ...state,\n        toasts: state.toasts.filter((t) => t.id !== action.toastId),\n      }\n  }\n}\n\n// Module-level state shared across all useToast() callers.\nlet memoryState: State = { toasts: [] }\nconst listeners: Array<(state: State) => void> = []\n\nfunction dispatch(action: ActionType) {\n  memoryState = reducer(memoryState, action)\n  listeners.forEach((listener) => listener(memoryState))\n}\n\ntype ToastInput = Omit<ToastEntry, \"id\">\n\nfunction toast(input: ToastInput) {\n  const id = genId()\n  function update(props: ToastInput) {\n    dispatch({ type: \"UPDATE_TOAST\", toast: { ...props, id } })\n  }\n  function dismiss() {\n    dispatch({ type: \"DISMISS_TOAST\", toastId: id })\n  }\n  dispatch({\n    type: \"ADD_TOAST\",\n    toast: {\n      ...input,\n      id,\n      open: true,\n      onOpenChange(open) {\n        if (!open) dismiss()\n      },\n    },\n  })\n  return { id, dismiss, update }\n}\n\nfunction useToast() {\n  const [state, setState] = React.useState<State>(memoryState)\n\n  React.useEffect(() => {\n    listeners.push(setState)\n    return () => {\n      const idx = listeners.indexOf(setState)\n      if (idx > -1) listeners.splice(idx, 1)\n    }\n  }, [])\n\n  return {\n    ...state,\n    toast,\n    dismiss(toastId?: string) {\n      if (toastId !== undefined) {\n        dispatch({ type: \"DISMISS_TOAST\", toastId })\n      } else {\n        dispatch({ type: \"DISMISS_TOAST\" })\n      }\n    },\n  }\n}\n\nexport {\n  ToastProvider,\n  ToastViewport,\n  Toast,\n  ToastTitle,\n  ToastDescription,\n  ToastClose,\n  ToastAction,\n  toastVariants,\n  useToast,\n  toast,\n}\nexport type { ToastProps, ToastActionElement }\n"
+        }
+      ],
+      "ai": {
+        "intent": "Show brief non-blocking notifications at the bottom of the screen",
+        "prompts": [
+          "add a toast notification",
+          "show a success toast",
+          "add a notification",
+          "show an error toast"
+        ],
+        "composition": [
+          "button"
+        ],
+        "slots": [
+          "ToastTitle",
+          "ToastDescription",
+          "ToastAction",
+          "ToastProvider",
+          "ToastViewport"
+        ]
+      }
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "Two-state button that can be on or off, with variant and size support.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-toggle",
+        "class-variance-authority",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst toggleVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ],\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-transparent hover:bg-muted hover:text-muted-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground\",\n        outline:\n          \"border border-input bg-transparent hover:bg-accent hover:text-accent-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground\",\n      },\n      size: {\n        default: \"h-10 px-3\",\n        sm: \"h-9 px-2.5\",\n        lg: \"h-11 px-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n)\n\nconst Toggle = React.forwardRef<\n  React.ElementRef<typeof TogglePrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive.Root\n    ref={ref}\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n))\nToggle.displayName = \"Toggle\"\n\nexport { Toggle, toggleVariants }\n"
+        }
+      ],
+      "ai": {
+        "intent": "A pressable button that toggles between active and inactive states",
+        "prompts": [
+          "add a toggle button",
+          "add a press-to-activate button",
+          "add a bold/italic toggle"
+        ],
+        "composition": [
+          "toggle-group",
+          "toolbar"
+        ],
+        "slots": [
+          "pressed",
+          "onPressedChange",
+          "variant",
+          "size"
+        ]
+      }
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "Group of toggles where one or multiple items can be selected.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-toggle-group",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle-group.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\"\nimport { type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@aetherstack/utils\"\nimport { toggleVariants } from \"./toggle\"\n\ntype ToggleGroupContextValue = VariantProps<typeof toggleVariants>\n\nconst ToggleGroupContext = React.createContext<ToggleGroupContextValue>({\n  size: \"default\",\n  variant: \"default\",\n})\n\nconst ToggleGroup = React.forwardRef<\n  React.ElementRef<typeof ToggleGroupPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, children, ...props }, ref) => (\n  <ToggleGroupPrimitive.Root\n    ref={ref}\n    className={cn(\"flex items-center justify-center gap-1\", className)}\n    {...props}\n  >\n    <ToggleGroupContext.Provider value={{ variant, size }}>\n      {children}\n    </ToggleGroupContext.Provider>\n  </ToggleGroupPrimitive.Root>\n))\nToggleGroup.displayName = \"ToggleGroup\"\n\nconst ToggleGroupItem = React.forwardRef<\n  React.ElementRef<typeof ToggleGroupPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &\n    VariantProps<typeof toggleVariants>\n>(({ className, children, variant, size, ...props }, ref) => {\n  const context = React.useContext(ToggleGroupContext)\n  return (\n    <ToggleGroupPrimitive.Item\n      ref={ref}\n      className={cn(\n        toggleVariants({\n          variant: variant ?? context.variant,\n          size: size ?? context.size,\n        }),\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </ToggleGroupPrimitive.Item>\n  )\n})\nToggleGroupItem.displayName = \"ToggleGroupItem\"\n\nexport { ToggleGroup, ToggleGroupItem }\n"
+        },
+        {
+          "path": "packages/ui/src/components/toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst toggleVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ],\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-transparent hover:bg-muted hover:text-muted-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground\",\n        outline:\n          \"border border-input bg-transparent hover:bg-accent hover:text-accent-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground\",\n      },\n      size: {\n        default: \"h-10 px-3\",\n        sm: \"h-9 px-2.5\",\n        lg: \"h-11 px-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n)\n\nconst Toggle = React.forwardRef<\n  React.ElementRef<typeof TogglePrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive.Root\n    ref={ref}\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n))\nToggle.displayName = \"Toggle\"\n\nexport { Toggle, toggleVariants }\n"
+        }
+      ],
+      "ai": {
+        "intent": "Allow single or multiple selection from a set of toggle buttons",
+        "prompts": [
+          "add toggle group",
+          "add a toolbar button group",
+          "add text alignment toggles",
+          "add view mode switcher"
+        ],
+        "composition": [
+          "toggle"
+        ],
+        "slots": [
+          "ToggleGroupItem",
+          "value",
+          "onValueChange",
+          "type"
         ]
       }
     },

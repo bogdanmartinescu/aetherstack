@@ -34,7 +34,40 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuGroup,
+  DropdownMenuCheckboxItem,
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+  Toggle,
+  ToggleGroup,
+  ToggleGroupItem,
+  ToastProvider,
+  ToastViewport,
+  Toast,
+  ToastTitle,
+  ToastDescription,
+  ToastClose,
+  useToast,
+  toast,
 } from "@aetherstack/ui"
+import {
+  Bold,
+  Italic,
+  Underline,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  User,
+  CalendarDays,
+} from "lucide-react"
 
 export function CheckboxPreview() {
   const [checked, setChecked] = useState(false)
@@ -166,5 +199,299 @@ export function TabsPreview() {
         Change your password here.
       </TabsContent>
     </Tabs>
+  )
+}
+
+export function DropdownMenuPreview() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Open Menu</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-48">
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem>Settings</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Sign out</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+export function DropdownMenuGroupPreview() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Open Menu</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Account</DropdownMenuLabel>
+          <DropdownMenuItem>Profile</DropdownMenuItem>
+          <DropdownMenuItem>Settings</DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Team</DropdownMenuLabel>
+          <DropdownMenuItem>Invite members</DropdownMenuItem>
+          <DropdownMenuItem>Team settings</DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Sign out</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+export function DropdownMenuCheckboxPreview() {
+  const [showStatus, setShowStatus] = useState(true)
+  const [showTimeline, setShowTimeline] = useState(false)
+  const [showArchived, setShowArchived] = useState(false)
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">View options</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-48">
+        <DropdownMenuLabel>Show columns</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuCheckboxItem checked={showStatus} onCheckedChange={setShowStatus}>
+          Status
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={showTimeline} onCheckedChange={setShowTimeline}>
+          Timeline
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={showArchived} onCheckedChange={setShowArchived}>
+          Archived
+        </DropdownMenuCheckboxItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+export function DropdownMenuShortcutsPreview() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Actions</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-48">
+        <DropdownMenuItem>
+          New file <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          Save <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          Duplicate <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          Delete <DropdownMenuShortcut>⌫</DropdownMenuShortcut>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+export function HoverCardPreview() {
+  return (
+    <HoverCard>
+      <HoverCardTrigger asChild>
+        <a href="#" className="text-primary underline underline-offset-4">
+          Hover over me
+        </a>
+      </HoverCardTrigger>
+      <HoverCardContent className="w-64">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted">
+            <User className="h-5 w-5" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold">@johndoe</p>
+            <p className="text-xs text-muted-foreground">Joined December 2021</p>
+          </div>
+        </div>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Full-stack developer. Building cool things on the web.
+        </p>
+        <div className="mt-3 flex items-center gap-1 text-xs text-muted-foreground">
+          <CalendarDays className="h-3 w-3" />
+          Joined December 2021
+        </div>
+      </HoverCardContent>
+    </HoverCard>
+  )
+}
+
+export function HoverCardLinkPreview() {
+  return (
+    <HoverCard>
+      <HoverCardTrigger asChild>
+        <a href="#" className="text-primary underline underline-offset-4">
+          @aetherstack/ui
+        </a>
+      </HoverCardTrigger>
+      <HoverCardContent className="w-72" side="top">
+        <div>
+          <p className="text-sm font-semibold">@aetherstack/ui</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            A beautifully designed component library built with Radix UI and Tailwind CSS.
+          </p>
+          <div className="mt-2 flex gap-3 text-xs text-muted-foreground">
+            <span>⭐ 1.2k</span>
+            <span>🍴 142 forks</span>
+          </div>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
+  )
+}
+
+export function TogglePreview() {
+  return (
+    <Toggle aria-label="Toggle bold">
+      <Bold />
+    </Toggle>
+  )
+}
+
+export function ToggleOutlinePreview() {
+  return (
+    <div className="flex gap-2">
+      <Toggle variant="outline" aria-label="Toggle bold">
+        <Bold />
+      </Toggle>
+      <Toggle variant="outline" aria-label="Toggle italic">
+        <Italic />
+      </Toggle>
+      <Toggle variant="outline" aria-label="Toggle underline">
+        <Underline />
+      </Toggle>
+    </div>
+  )
+}
+
+export function ToggleSizesPreview() {
+  return (
+    <div className="flex items-center gap-2">
+      <Toggle size="sm" aria-label="Toggle bold small">
+        <Bold />
+      </Toggle>
+      <Toggle size="default" aria-label="Toggle bold default">
+        <Bold />
+      </Toggle>
+      <Toggle size="lg" aria-label="Toggle bold large">
+        <Bold />
+      </Toggle>
+    </div>
+  )
+}
+
+export function ToggleGroupPreview() {
+  return (
+    <ToggleGroup type="single" defaultValue="center">
+      <ToggleGroupItem value="left" aria-label="Align left">
+        <AlignLeft />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="center" aria-label="Align center">
+        <AlignCenter />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="right" aria-label="Align right">
+        <AlignRight />
+      </ToggleGroupItem>
+    </ToggleGroup>
+  )
+}
+
+export function ToggleGroupMultiplePreview() {
+  return (
+    <ToggleGroup type="multiple" defaultValue={["bold"]}>
+      <ToggleGroupItem value="bold" aria-label="Toggle bold">
+        <Bold />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="italic" aria-label="Toggle italic">
+        <Italic />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="underline" aria-label="Toggle underline">
+        <Underline />
+      </ToggleGroupItem>
+    </ToggleGroup>
+  )
+}
+
+export function ToggleGroupOutlinePreview() {
+  return (
+    <ToggleGroup type="single" variant="outline" defaultValue="left">
+      <ToggleGroupItem value="left" aria-label="Align left">
+        <AlignLeft />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="center" aria-label="Align center">
+        <AlignCenter />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="right" aria-label="Align right">
+        <AlignRight />
+      </ToggleGroupItem>
+    </ToggleGroup>
+  )
+}
+
+export function ToastPreview() {
+  const { toasts } = useToast()
+  return (
+    <ToastProvider>
+      <Button
+        variant="outline"
+        onClick={() =>
+          toast({ title: "Success!", description: "Your action was completed." })
+        }
+      >
+        Show Toast
+      </Button>
+      {toasts.map(({ id, title, description, action, ...props }) => (
+        <Toast key={id} {...props}>
+          <div className="grid gap-1">
+            {title && <ToastTitle>{title}</ToastTitle>}
+            {description && <ToastDescription>{description}</ToastDescription>}
+          </div>
+          {action}
+          <ToastClose />
+        </Toast>
+      ))}
+      <ToastViewport />
+    </ToastProvider>
+  )
+}
+
+export function ToastDestructivePreview() {
+  const { toasts } = useToast()
+  return (
+    <ToastProvider>
+      <Button
+        variant="destructive"
+        onClick={() =>
+          toast({
+            variant: "destructive",
+            title: "Error",
+            description: "Something went wrong. Please try again.",
+          })
+        }
+      >
+        Show Error Toast
+      </Button>
+      {toasts.map(({ id, title, description, action, ...props }) => (
+        <Toast key={id} {...props}>
+          <div className="grid gap-1">
+            {title && <ToastTitle>{title}</ToastTitle>}
+            {description && <ToastDescription>{description}</ToastDescription>}
+          </div>
+          {action}
+          <ToastClose />
+        </Toast>
+      ))}
+      <ToastViewport />
+    </ToastProvider>
   )
 }

@@ -1,0 +1,38 @@
+{
+  "name": "onboarding-checklist",
+  "type": "registry:block",
+  "title": "Onboarding Checklist",
+  "description": "Step-by-step onboarding widget with progress tracking and checkbox steps.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/onboarding-checklist.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/onboarding-checklist.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Checkbox } from \"@aetherstack/ui\"\n\nexport interface OnboardingStep {\n  id: string\n  title: string\n  description?: string\n  completed?: boolean\n  href?: string\n}\n\nexport interface OnboardingChecklistProps {\n  steps: OnboardingStep[]\n  title?: string\n  description?: string\n  onStepToggle?: (id: string, completed: boolean) => void\n  className?: string\n}\n\nexport function OnboardingChecklist({\n  steps,\n  title = \"Get started\",\n  description = \"Complete these steps to set up your workspace.\",\n  onStepToggle,\n  className,\n}: OnboardingChecklistProps) {\n  const [localSteps, setLocalSteps] = React.useState<OnboardingStep[]>(steps)\n  const [hideCompleted, setHideCompleted] = React.useState(false)\n\n  React.useEffect(() => {\n    setLocalSteps(steps)\n  }, [steps])\n\n  const completed = localSteps.filter((s) => s.completed).length\n  const total = localSteps.length\n  const progressPct = total === 0 ? 0 : Math.round((completed / total) * 100)\n\n  function handleToggle(id: string) {\n    setLocalSteps((prev) =>\n      prev.map((s) => (s.id === id ? { ...s, completed: !s.completed } : s)),\n    )\n    const step = localSteps.find((s) => s.id === id)\n    if (step) onStepToggle?.(id, !step.completed)\n  }\n\n  const visibleSteps = hideCompleted\n    ? localSteps.filter((s) => !s.completed)\n    : localSteps\n\n  return (\n    <div\n      className={cn(\n        \"w-full rounded-xl border border-border bg-card p-6 shadow-sm\",\n        className,\n      )}\n    >\n      {/* Header */}\n      <div className=\"mb-4\">\n        <div className=\"flex items-center justify-between\">\n          <h2 className=\"text-base font-semibold text-foreground\">{title}</h2>\n          <span className=\"text-xs text-muted-foreground\">\n            {completed} of {total} completed\n          </span>\n        </div>\n        {description && (\n          <p className=\"mt-1 text-sm text-muted-foreground\">{description}</p>\n        )}\n      </div>\n\n      {/* Progress bar */}\n      <div className=\"mb-5 h-1.5 w-full overflow-hidden rounded-full bg-muted\">\n        <div\n          className=\"h-1.5 rounded-full bg-primary transition-all duration-500\"\n          style={{ width: `${progressPct}%` }}\n        />\n      </div>\n\n      {/* Steps */}\n      <ol className=\"space-y-3\">\n        {visibleSteps.map((step) => (\n          <li\n            key={step.id}\n            className={cn(\n              \"flex items-start gap-3 rounded-lg border border-transparent p-3 transition-colors\",\n              step.completed\n                ? \"opacity-60\"\n                : \"hover:border-border hover:bg-muted/40\",\n            )}\n          >\n            <Checkbox\n              id={`step-${step.id}`}\n              checked={Boolean(step.completed)}\n              onCheckedChange={() => handleToggle(step.id)}\n              className=\"mt-0.5 shrink-0\"\n            />\n            <div className=\"min-w-0 flex-1\">\n              <label\n                htmlFor={`step-${step.id}`}\n                className={cn(\n                  \"block cursor-pointer text-sm font-medium\",\n                  step.completed\n                    ? \"line-through text-muted-foreground\"\n                    : \"text-foreground\",\n                )}\n              >\n                {step.title}\n              </label>\n              {step.description && (\n                <p className=\"mt-0.5 text-xs text-muted-foreground\">\n                  {step.description}\n                </p>\n              )}\n              {step.href && !step.completed && (\n                <a\n                  href={step.href}\n                  className=\"mt-1 inline-block text-xs font-medium text-primary underline-offset-4 hover:underline\"\n                  target=\"_blank\"\n                  rel=\"noopener noreferrer\"\n                >\n                  Learn more →\n                </a>\n              )}\n            </div>\n          </li>\n        ))}\n      </ol>\n\n      {/* Toggle completed */}\n      {localSteps.some((s) => s.completed) && (\n        <button\n          type=\"button\"\n          onClick={() => setHideCompleted((v) => !v)}\n          className=\"mt-4 text-xs text-muted-foreground underline-offset-4 hover:underline focus-visible:outline-none\"\n        >\n          {hideCompleted ? \"Show completed steps\" : \"Hide completed steps\"}\n        </button>\n      )}\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Guide new users through setup tasks with a checklist and progress bar",
+    "prompts": [
+      "add an onboarding checklist",
+      "add a getting started guide",
+      "add setup steps",
+      "add a progress checklist"
+    ],
+    "composition": [
+      "checkbox",
+      "progress",
+      "stepper"
+    ],
+    "slots": [
+      "steps",
+      "onStepToggle",
+      "title",
+      "description"
+    ]
+  }
+}

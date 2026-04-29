@@ -1,0 +1,37 @@
+{
+  "name": "pricing-section",
+  "type": "registry:block",
+  "title": "Pricing Section",
+  "description": "Responsive pricing tier cards for marketing and landing pages.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/pricing-section.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/pricing-section.tsx",
+      "content": "import { cn } from \"@aetherstack/utils\"\nimport { Button, Badge } from \"@aetherstack/ui\"\n\nexport interface PricingFeature {\n  text: string\n  included: boolean\n}\n\nexport interface PricingTier {\n  name: string\n  price: string\n  period?: string\n  description?: string\n  features: PricingFeature[]\n  cta: string\n  ctaHref?: string\n  highlighted?: boolean\n  badge?: string\n}\n\nexport interface PricingSectionProps {\n  title?: string\n  description?: string\n  tiers: PricingTier[]\n  className?: string\n}\n\nconst CheckIcon = () => (\n  <svg\n    xmlns=\"http://www.w3.org/2000/svg\"\n    width=\"15\"\n    height=\"15\"\n    viewBox=\"0 0 24 24\"\n    fill=\"none\"\n    stroke=\"currentColor\"\n    strokeWidth=\"2.5\"\n    strokeLinecap=\"round\"\n    strokeLinejoin=\"round\"\n    className=\"shrink-0 text-primary\"\n    aria-hidden\n  >\n    <polyline points=\"20 6 9 17 4 12\" />\n  </svg>\n)\n\nconst XIcon = () => (\n  <svg\n    xmlns=\"http://www.w3.org/2000/svg\"\n    width=\"15\"\n    height=\"15\"\n    viewBox=\"0 0 24 24\"\n    fill=\"none\"\n    stroke=\"currentColor\"\n    strokeWidth=\"2\"\n    strokeLinecap=\"round\"\n    strokeLinejoin=\"round\"\n    className=\"shrink-0 text-muted-foreground/40\"\n    aria-hidden\n  >\n    <path d=\"M18 6 6 18\" />\n    <path d=\"m6 6 12 12\" />\n  </svg>\n)\n\nfunction PricingCard({ tier }: { tier: PricingTier }) {\n  return (\n    <div\n      className={cn(\n        \"relative flex flex-col rounded-2xl border bg-card p-7 shadow-sm transition-shadow\",\n        tier.highlighted\n          ? \"border-primary ring-2 ring-primary shadow-lg\"\n          : \"border-border hover:shadow-md\",\n      )}\n    >\n      {/* Badge */}\n      {tier.badge && (\n        <div className=\"absolute -top-3 left-1/2 -translate-x-1/2\">\n          <Badge className=\"shadow-sm\">{tier.badge}</Badge>\n        </div>\n      )}\n\n      {/* Tier header */}\n      <div className=\"mb-5\">\n        <h3 className=\"text-base font-semibold text-foreground\">{tier.name}</h3>\n        <div className=\"mt-2 flex items-end gap-1\">\n          <span className=\"text-4xl font-bold tracking-tight text-foreground\">\n            {tier.price}\n          </span>\n          {tier.period && (\n            <span className=\"mb-1 text-sm text-muted-foreground\">\n              / {tier.period}\n            </span>\n          )}\n        </div>\n        {tier.description && (\n          <p className=\"mt-2 text-sm text-muted-foreground\">{tier.description}</p>\n        )}\n      </div>\n\n      {/* CTA */}\n      <Button\n        asChild={Boolean(tier.ctaHref)}\n        variant={tier.highlighted ? \"default\" : \"outline\"}\n        className=\"w-full\"\n      >\n        {tier.ctaHref ? (\n          <a href={tier.ctaHref}>{tier.cta}</a>\n        ) : (\n          <span>{tier.cta}</span>\n        )}\n      </Button>\n\n      {/* Features */}\n      {tier.features.length > 0 && (\n        <ul className=\"mt-6 space-y-2.5\">\n          {tier.features.map((feature, i) => (\n            <li key={i} className=\"flex items-start gap-2.5\">\n              {feature.included ? <CheckIcon /> : <XIcon />}\n              <span\n                className={cn(\n                  \"text-sm\",\n                  feature.included\n                    ? \"text-foreground\"\n                    : \"text-muted-foreground/50 line-through\",\n                )}\n              >\n                {feature.text}\n              </span>\n            </li>\n          ))}\n        </ul>\n      )}\n    </div>\n  )\n}\n\nexport function PricingSection({\n  title = \"Simple, transparent pricing\",\n  description = \"Choose the plan that works best for you. Upgrade or downgrade at any time.\",\n  tiers,\n  className,\n}: PricingSectionProps) {\n  return (\n    <section className={cn(\"w-full py-16 px-4\", className)}>\n      {/* Section header */}\n      <div className=\"mx-auto mb-12 max-w-2xl text-center\">\n        <h2 className=\"text-3xl font-bold tracking-tight text-foreground sm:text-4xl\">\n          {title}\n        </h2>\n        {description && (\n          <p className=\"mt-4 text-base text-muted-foreground\">{description}</p>\n        )}\n      </div>\n\n      {/* Tier grid */}\n      <div\n        className={cn(\n          \"mx-auto grid max-w-6xl gap-6\",\n          tiers.length === 1 && \"max-w-sm grid-cols-1\",\n          tiers.length === 2 && \"grid-cols-1 sm:grid-cols-2\",\n          tiers.length === 3 && \"grid-cols-1 sm:grid-cols-2 lg:grid-cols-3\",\n          tiers.length >= 4 && \"grid-cols-1 sm:grid-cols-2 lg:grid-cols-4\",\n        )}\n      >\n        {tiers.map((tier) => (\n          <PricingCard key={tier.name} tier={tier} />\n        ))}\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Show pricing tiers with feature lists and CTA buttons for a marketing or landing page",
+    "prompts": [
+      "add a pricing section",
+      "add pricing plans",
+      "show subscription tiers",
+      "add a pricing table"
+    ],
+    "composition": [
+      "badge",
+      "button",
+      "card"
+    ],
+    "slots": [
+      "tiers",
+      "title",
+      "description"
+    ]
+  }
+}

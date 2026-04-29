@@ -1,0 +1,36 @@
+{
+  "name": "stat-group",
+  "type": "registry:pattern",
+  "title": "Stat Group",
+  "description": "Responsive grid of metric stats with value, label, and optional trend delta.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/stat-group.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/stat-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\n// ── StatItem ──────────────────────────────────────────────────────────────────\n\nexport interface StatItemProps {\n  label: string\n  value: string | number\n  /** Positive = green, negative = red */\n  delta?: number\n  icon?: React.ReactNode\n  className?: string\n}\n\nexport function StatItem({ label, value, delta, icon, className }: StatItemProps) {\n  const hasDelta = delta !== undefined\n\n  return (\n    <div\n      className={cn(\n        \"rounded-lg border border-border bg-card p-5 shadow-sm\",\n        className,\n      )}\n    >\n      <div className=\"flex items-start justify-between gap-3\">\n        <div className=\"min-w-0 flex-1\">\n          <p className=\"text-xs font-medium uppercase tracking-wider text-muted-foreground\">\n            {label}\n          </p>\n          <p className=\"mt-1.5 text-2xl font-semibold tracking-tight text-foreground\">\n            {value}\n          </p>\n          {hasDelta && (\n            <p\n              className={cn(\n                \"mt-1.5 text-xs font-medium\",\n                delta > 0\n                  ? \"text-green-600 dark:text-green-400\"\n                  : \"text-red-500 dark:text-red-400\",\n              )}\n            >\n              {delta > 0 ? \"+\" : \"\"}\n              {delta}%\n            </p>\n          )}\n        </div>\n        {icon && (\n          <div className=\"flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary\">\n            {icon}\n          </div>\n        )}\n      </div>\n    </div>\n  )\n}\n\n// ── StatGroup ─────────────────────────────────────────────────────────────────\n\nexport interface StatGroupProps {\n  children: React.ReactNode\n  cols?: 2 | 3 | 4\n  className?: string\n}\n\nconst colsMap: Record<2 | 3 | 4, string> = {\n  2: \"grid-cols-1 sm:grid-cols-2\",\n  3: \"grid-cols-1 sm:grid-cols-2 lg:grid-cols-3\",\n  4: \"grid-cols-1 sm:grid-cols-2 lg:grid-cols-4\",\n}\n\nexport function StatGroup({ children, cols = 3, className }: StatGroupProps) {\n  return (\n    <div className={cn(\"grid gap-4\", colsMap[cols], className)}>\n      {children}\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Display multiple key metrics side-by-side in a responsive stat grid",
+    "prompts": [
+      "add a stats row",
+      "show key metrics",
+      "add KPI cards",
+      "show stat overview",
+      "add a metrics grid"
+    ],
+    "composition": [
+      "metric-card",
+      "card"
+    ],
+    "slots": [
+      "StatItem",
+      "cols"
+    ]
+  }
+}

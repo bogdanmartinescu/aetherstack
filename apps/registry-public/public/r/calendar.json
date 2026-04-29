@@ -1,0 +1,39 @@
+{
+  "name": "calendar",
+  "type": "registry:ui",
+  "title": "Calendar",
+  "description": "Month-view date picker built on react-day-picker with full token styling.",
+  "author": "aetherstack",
+  "dependencies": [
+    "react-day-picker",
+    "date-fns",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/calendar.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/calendar.tsx",
+      "content": "\"use client\"\n\nimport { DayPicker, type DayPickerProps } from \"react-day-picker\"\nimport { ChevronLeft, ChevronRight } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { buttonVariants } from \"./button\"\n\nexport type CalendarProps = DayPickerProps\n\nfunction Calendar({\n  className,\n  classNames,\n  showOutsideDays = true,\n  ...props\n}: CalendarProps) {\n  return (\n    <DayPicker\n      showOutsideDays={showOutsideDays}\n      className={cn(\"p-3\", className)}\n      classNames={{\n        months: \"flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0\",\n        month: \"space-y-4\",\n        month_caption: \"flex justify-center pt-1 relative items-center\",\n        caption_label: \"text-sm font-medium\",\n        nav: \"space-x-1 flex items-center\",\n        button_previous: cn(\n          buttonVariants({ variant: \"outline\" }),\n          \"absolute left-1 h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100\",\n        ),\n        button_next: cn(\n          buttonVariants({ variant: \"outline\" }),\n          \"absolute right-1 h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100\",\n        ),\n        month_grid: \"w-full border-collapse space-y-1\",\n        weekdays: \"flex\",\n        weekday: \"text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]\",\n        week: \"flex w-full mt-2\",\n        day: \"h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20\",\n        day_button: cn(\n          buttonVariants({ variant: \"ghost\" }),\n          \"h-9 w-9 p-0 font-normal aria-selected:opacity-100\",\n        ),\n        range_end: \"day-range-end\",\n        selected:\n          \"bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground\",\n        today: \"bg-accent text-accent-foreground\",\n        outside:\n          \"day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30\",\n        disabled: \"text-muted-foreground opacity-50\",\n        range_middle:\n          \"aria-selected:bg-accent aria-selected:text-accent-foreground\",\n        hidden: \"invisible\",\n        ...classNames,\n      }}\n      components={{\n        Chevron: ({ orientation, ...rest }) =>\n          orientation === \"left\" ? (\n            <ChevronLeft className=\"h-4 w-4\" {...rest} />\n          ) : (\n            <ChevronRight className=\"h-4 w-4\" {...rest} />\n          ),\n      }}\n      {...props}\n    />\n  )\n}\nCalendar.displayName = \"Calendar\"\n\nexport { Calendar }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Select a single date or date range from a month-view calendar",
+    "prompts": [
+      "add a date picker",
+      "add a calendar",
+      "select a date",
+      "add a date range picker"
+    ],
+    "composition": [
+      "button",
+      "combobox"
+    ],
+    "slots": [
+      "onSelect",
+      "selected",
+      "mode"
+    ]
+  }
+}

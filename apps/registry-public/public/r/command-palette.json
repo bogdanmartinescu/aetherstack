@@ -1,0 +1,40 @@
+{
+  "name": "command-palette",
+  "type": "registry:pattern",
+  "title": "Command Palette",
+  "description": "⌘K fuzzy-search command surface built on cmdk.",
+  "author": "aetherstack",
+  "dependencies": [
+    "cmdk",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/command-palette.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/command-palette.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Command as CommandPrimitive } from \"cmdk\"\nimport { cn } from \"@aetherstack/utils\"\nimport {\n  Dialog,\n  DialogContent,\n} from \"@aetherstack/ui\"\n\n// ── CommandPalette (root) ─────────────────────────────────────────────────────\n\nexport interface CommandPaletteProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive> {\n  className?: string\n}\n\nexport function CommandPalette({ className, ...props }: CommandPaletteProps) {\n  return (\n    <CommandPrimitive\n      className={cn(\n        \"flex flex-col overflow-hidden rounded-md bg-popover text-popover-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\n// ── CommandPaletteInput ───────────────────────────────────────────────────────\n\nexport interface CommandPaletteInputProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> {\n  className?: string\n}\n\nexport function CommandPaletteInput({ className, ...props }: CommandPaletteInputProps) {\n  return (\n    <div className=\"flex items-center border-b border-border px-3\" cmdk-input-wrapper=\"\">\n      <svg\n        className=\"mr-2 h-4 w-4 shrink-0 text-muted-foreground\"\n        xmlns=\"http://www.w3.org/2000/svg\"\n        viewBox=\"0 0 24 24\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        strokeWidth=\"2\"\n        strokeLinecap=\"round\"\n        strokeLinejoin=\"round\"\n        aria-hidden=\"true\"\n      >\n        <circle cx=\"11\" cy=\"11\" r=\"8\" />\n        <path d=\"m21 21-4.35-4.35\" />\n      </svg>\n      <CommandPrimitive.Input\n        className={cn(\n          \"flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50\",\n          className,\n        )}\n        {...props}\n      />\n    </div>\n  )\n}\n\n// ── CommandPaletteList ────────────────────────────────────────────────────────\n\nexport interface CommandPaletteListProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.List> {\n  className?: string\n}\n\nexport function CommandPaletteList({ className, ...props }: CommandPaletteListProps) {\n  return (\n    <CommandPrimitive.List\n      className={cn(\"max-h-[300px] overflow-y-auto overflow-x-hidden\", className)}\n      {...props}\n    />\n  )\n}\n\n// ── CommandPaletteEmpty ───────────────────────────────────────────────────────\n\nexport interface CommandPaletteEmptyProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty> {\n  className?: string\n}\n\nexport function CommandPaletteEmpty({ className, ...props }: CommandPaletteEmptyProps) {\n  return (\n    <CommandPrimitive.Empty\n      className={cn(\"py-6 text-center text-sm text-muted-foreground\", className)}\n      {...props}\n    />\n  )\n}\n\n// ── CommandGroup (re-export with styling) ─────────────────────────────────────\n\nexport interface CommandGroupProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group> {\n  className?: string\n}\n\nexport function CommandGroup({ className, ...props }: CommandGroupProps) {\n  return (\n    <CommandPrimitive.Group\n      className={cn(\n        \"overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\n// ── CommandItem (re-export with styling) ──────────────────────────────────────\n\nexport interface CommandItemProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item> {\n  className?: string\n}\n\nexport function CommandItem({ className, ...props }: CommandItemProps) {\n  return (\n    <CommandPrimitive.Item\n      className={cn(\n        \"relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\n// ── CommandPaletteSeparator ───────────────────────────────────────────────────\n\nexport interface CommandPaletteSeparatorProps\n  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator> {\n  className?: string\n}\n\nexport function CommandPaletteSeparator({ className, ...props }: CommandPaletteSeparatorProps) {\n  return (\n    <CommandPrimitive.Separator\n      className={cn(\"-mx-1 h-px bg-border\", className)}\n      {...props}\n    />\n  )\n}\n\n// ── CommandPaletteDialog ──────────────────────────────────────────────────────\n\nexport interface CommandPaletteDialogProps {\n  open: boolean\n  onOpenChange: (open: boolean) => void\n  children: React.ReactNode\n}\n\nexport function CommandPaletteDialog({\n  open,\n  onOpenChange,\n  children,\n}: CommandPaletteDialogProps) {\n  return (\n    <Dialog open={open} onOpenChange={onOpenChange}>\n      <DialogContent className=\"overflow-hidden p-0 shadow-lg\">\n        <CommandPalette className=\"[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5\">\n          {children}\n        </CommandPalette>\n      </DialogContent>\n    </Dialog>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Open a keyboard-driven search palette for quick navigation and action execution",
+    "prompts": [
+      "add a command palette",
+      "add cmd+k search",
+      "add a quick search",
+      "add keyboard navigation"
+    ],
+    "composition": [
+      "dialog",
+      "combobox",
+      "scroll-area"
+    ],
+    "slots": [
+      "CommandPaletteInput",
+      "CommandGroup",
+      "CommandItem",
+      "CommandPaletteDialog"
+    ]
+  }
+}

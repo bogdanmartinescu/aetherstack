@@ -1,0 +1,37 @@
+{
+  "name": "file-dropzone",
+  "type": "registry:pattern",
+  "title": "File Dropzone",
+  "description": "Drag-and-drop file upload zone with click-to-browse fallback.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/file-dropzone.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/file-dropzone.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\n// ── Types ─────────────────────────────────────────────────────────────────────\n\nexport interface FileDropzoneProps {\n  onFilesSelected: (files: File[]) => void\n  accept?: string\n  multiple?: boolean\n  maxSize?: number\n  className?: string\n  disabled?: boolean\n  children?: React.ReactNode\n}\n\n// ── FileDropzone ──────────────────────────────────────────────────────────────\n\nexport function FileDropzone({\n  onFilesSelected,\n  accept,\n  multiple = false,\n  maxSize,\n  className,\n  disabled = false,\n  children,\n}: FileDropzoneProps) {\n  const inputRef = React.useRef<HTMLInputElement>(null)\n  const [isDragging, setIsDragging] = React.useState(false)\n  const dragCounterRef = React.useRef(0)\n\n  function filterFiles(fileList: FileList): File[] {\n    const files = Array.from(fileList)\n    if (!maxSize) return files\n    return files.filter((f) => f.size <= maxSize)\n  }\n\n  function handleDragEnter(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    e.stopPropagation()\n    dragCounterRef.current += 1\n    if (!disabled) setIsDragging(true)\n  }\n\n  function handleDragLeave(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    e.stopPropagation()\n    dragCounterRef.current -= 1\n    if (dragCounterRef.current === 0) setIsDragging(false)\n  }\n\n  function handleDragOver(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    e.stopPropagation()\n  }\n\n  function handleDrop(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    e.stopPropagation()\n    dragCounterRef.current = 0\n    setIsDragging(false)\n    if (disabled) return\n    const { files } = e.dataTransfer\n    if (files.length > 0) {\n      onFilesSelected(filterFiles(files))\n    }\n  }\n\n  function handleClick() {\n    if (!disabled) inputRef.current?.click()\n  }\n\n  function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {\n    if (e.key === \"Enter\" || e.key === \" \") {\n      e.preventDefault()\n      handleClick()\n    }\n  }\n\n  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {\n    const { files } = e.target\n    if (files && files.length > 0) {\n      onFilesSelected(filterFiles(files))\n    }\n    // Reset input so same file can be selected again\n    e.target.value = \"\"\n  }\n\n  return (\n    <div\n      role=\"button\"\n      tabIndex={disabled ? -1 : 0}\n      aria-disabled={disabled}\n      onClick={handleClick}\n      onKeyDown={handleKeyDown}\n      onDragEnter={handleDragEnter}\n      onDragLeave={handleDragLeave}\n      onDragOver={handleDragOver}\n      onDrop={handleDrop}\n      className={cn(\n        \"relative flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-border bg-muted/30 p-8 text-center transition-colors\",\n        isDragging && \"border-primary bg-primary/5\",\n        disabled\n          ? \"cursor-not-allowed opacity-50\"\n          : \"cursor-pointer hover:border-primary/50 hover:bg-muted/50\",\n        className,\n      )}\n    >\n      <input\n        ref={inputRef}\n        type=\"file\"\n        accept={accept}\n        multiple={multiple}\n        disabled={disabled}\n        onChange={handleInputChange}\n        className=\"sr-only\"\n        tabIndex={-1}\n        aria-hidden=\"true\"\n      />\n\n      {/* Upload icon */}\n      <div className=\"flex h-12 w-12 items-center justify-center rounded-full bg-muted text-muted-foreground\">\n        <svg\n          className=\"h-6 w-6\"\n          xmlns=\"http://www.w3.org/2000/svg\"\n          viewBox=\"0 0 24 24\"\n          fill=\"none\"\n          stroke=\"currentColor\"\n          strokeWidth=\"2\"\n          strokeLinecap=\"round\"\n          strokeLinejoin=\"round\"\n          aria-hidden=\"true\"\n        >\n          <path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" />\n          <polyline points=\"17 8 12 3 7 8\" />\n          <line x1=\"12\" y1=\"3\" x2=\"12\" y2=\"15\" />\n        </svg>\n      </div>\n\n      <div className=\"space-y-1\">\n        <p className=\"text-sm font-medium text-foreground\">\n          Drag files here or click to browse\n        </p>\n        {maxSize && (\n          <p className=\"text-xs text-muted-foreground\">\n            Max file size: {(maxSize / 1024 / 1024).toFixed(0)} MB\n          </p>\n        )}\n        {accept && (\n          <p className=\"text-xs text-muted-foreground\">\n            Accepted: {accept}\n          </p>\n        )}\n      </div>\n\n      {children}\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Let users upload files by dragging them onto a target zone or clicking to browse",
+    "prompts": [
+      "add a file upload",
+      "add a drag and drop zone",
+      "add a file picker",
+      "add an image uploader"
+    ],
+    "composition": [
+      "button"
+    ],
+    "slots": [
+      "onFilesSelected",
+      "accept",
+      "multiple",
+      "maxSize"
+    ]
+  }
+}

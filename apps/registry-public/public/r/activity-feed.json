@@ -1,0 +1,36 @@
+{
+  "name": "activity-feed",
+  "type": "registry:pattern",
+  "title": "Activity Feed",
+  "description": "Vertical timeline of timestamped activity events with user avatars.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/activity-feed.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/activity-feed.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\n// ── Types ─────────────────────────────────────────────────────────────────────\n\nexport interface ActivityEntry {\n  id: string\n  user?: string\n  action: string\n  target?: string\n  timestamp: Date | string\n  icon?: React.ReactNode\n}\n\nexport interface ActivityItemProps {\n  item: ActivityEntry\n  className?: string\n}\n\nexport interface ActivityFeedProps {\n  items: ActivityEntry[]\n  className?: string\n}\n\n// ── Helpers ───────────────────────────────────────────────────────────────────\n\nfunction getInitials(name: string): string {\n  return name\n    .split(\" \")\n    .map((part) => part[0])\n    .join(\"\")\n    .toUpperCase()\n    .slice(0, 2)\n}\n\nfunction formatRelativeTime(timestamp: Date | string): string {\n  const date = timestamp instanceof Date ? timestamp : new Date(timestamp)\n  const now = Date.now()\n  const diffMs = now - date.getTime()\n  const diffSeconds = Math.floor(diffMs / 1000)\n  const diffMinutes = Math.floor(diffSeconds / 60)\n  const diffHours = Math.floor(diffMinutes / 60)\n  const diffDays = Math.floor(diffHours / 24)\n\n  if (diffSeconds < 60) return \"just now\"\n  if (diffMinutes < 60) return `${diffMinutes} minute${diffMinutes === 1 ? \"\" : \"s\"} ago`\n  if (diffHours < 24) return `${diffHours} hour${diffHours === 1 ? \"\" : \"s\"} ago`\n  return `${diffDays} day${diffDays === 1 ? \"\" : \"s\"} ago`\n}\n\n// ── ActivityItem ──────────────────────────────────────────────────────────────\n\nexport function ActivityItem({ item, className }: ActivityItemProps) {\n  return (\n    <li className={cn(\"relative flex gap-3 pl-8 pb-6 last:pb-0\", className)}>\n      {/* Avatar / icon */}\n      <div className=\"absolute left-0 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold text-muted-foreground ring-2 ring-background\">\n        {item.icon ? (\n          item.icon\n        ) : item.user ? (\n          getInitials(item.user)\n        ) : (\n          <svg\n            className=\"h-3.5 w-3.5\"\n            xmlns=\"http://www.w3.org/2000/svg\"\n            viewBox=\"0 0 24 24\"\n            fill=\"none\"\n            stroke=\"currentColor\"\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n            strokeLinejoin=\"round\"\n            aria-hidden=\"true\"\n          >\n            <circle cx=\"12\" cy=\"12\" r=\"4\" />\n          </svg>\n        )}\n      </div>\n\n      <div className=\"flex-1 min-w-0\">\n        <p className=\"text-sm text-foreground\">\n          {item.user && (\n            <span className=\"font-medium\">{item.user} </span>\n          )}\n          <span>{item.action}</span>\n          {item.target && (\n            <span className=\"font-medium\"> {item.target}</span>\n          )}\n        </p>\n        <p className=\"mt-0.5 text-xs text-muted-foreground\">\n          {formatRelativeTime(item.timestamp)}\n        </p>\n      </div>\n    </li>\n  )\n}\n\n// ── ActivityFeed ──────────────────────────────────────────────────────────────\n\nexport function ActivityFeed({ items, className }: ActivityFeedProps) {\n  return (\n    <div className={cn(\"relative\", className)}>\n      {/* Vertical connecting line */}\n      <div\n        className=\"absolute left-3.5 top-0 h-full w-px bg-border\"\n        aria-hidden=\"true\"\n      />\n      <ul className=\"space-y-0\" role=\"list\" aria-label=\"Activity feed\">\n        {items.map((item) => (\n          <ActivityItem key={item.id} item={item} />\n        ))}\n      </ul>\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Show a chronological feed of user actions or system events",
+    "prompts": [
+      "add an activity feed",
+      "show recent events",
+      "add an audit log",
+      "show user activity",
+      "add a timeline"
+    ],
+    "composition": [
+      "avatar",
+      "notification-center"
+    ],
+    "slots": [
+      "ActivityItem",
+      "items"
+    ]
+  }
+}

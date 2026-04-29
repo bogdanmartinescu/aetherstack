@@ -1,0 +1,37 @@
+{
+  "name": "kanban",
+  "type": "registry:pattern",
+  "title": "Kanban Board",
+  "description": "Drag-and-drop kanban columns using native HTML5 drag events.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/kanban.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/kanban.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Badge } from \"@aetherstack/ui\"\n\n// ── Types ─────────────────────────────────────────────────────────────────────\n\nexport interface KanbanItem {\n  id: string\n  title: string\n  description?: string\n  badge?: string\n}\n\nexport interface KanbanCardProps {\n  item: KanbanItem\n  className?: string\n}\n\nexport interface KanbanColumnProps {\n  title: string\n  items: KanbanItem[]\n  onDrop?: (item: KanbanItem, columnTitle: string) => void\n  className?: string\n}\n\nexport interface KanbanBoardProps {\n  columns: KanbanColumnProps[]\n  className?: string\n}\n\n// ── KanbanCard ────────────────────────────────────────────────────────────────\n\nexport function KanbanCard({ item, className }: KanbanCardProps) {\n  function handleDragStart(e: React.DragEvent<HTMLDivElement>) {\n    e.dataTransfer.setData(\"application/json\", JSON.stringify(item))\n    e.dataTransfer.effectAllowed = \"move\"\n  }\n\n  return (\n    <div\n      draggable\n      onDragStart={handleDragStart}\n      className={cn(\n        \"rounded-lg border border-border bg-card p-3 shadow-sm cursor-grab active:cursor-grabbing select-none\",\n        className,\n      )}\n    >\n      <div className=\"flex items-start justify-between gap-2\">\n        <p className=\"text-sm font-medium text-foreground leading-snug\">{item.title}</p>\n        {item.badge && (\n          <Badge variant=\"secondary\" className=\"shrink-0 text-xs\">\n            {item.badge}\n          </Badge>\n        )}\n      </div>\n      {item.description && (\n        <p className=\"mt-1.5 text-xs text-muted-foreground leading-relaxed\">\n          {item.description}\n        </p>\n      )}\n    </div>\n  )\n}\n\n// ── KanbanColumn ──────────────────────────────────────────────────────────────\n\nexport function KanbanColumn({ title, items, onDrop, className }: KanbanColumnProps) {\n  const [isDragOver, setIsDragOver] = React.useState(false)\n\n  function handleDragOver(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    e.dataTransfer.dropEffect = \"move\"\n    setIsDragOver(true)\n  }\n\n  function handleDragLeave() {\n    setIsDragOver(false)\n  }\n\n  function handleDrop(e: React.DragEvent<HTMLDivElement>) {\n    e.preventDefault()\n    setIsDragOver(false)\n    const raw = e.dataTransfer.getData(\"application/json\")\n    if (!raw) return\n    try {\n      const item = JSON.parse(raw) as KanbanItem\n      onDrop?.(item, title)\n    } catch {\n      // Silently ignore invalid drag data\n    }\n  }\n\n  return (\n    <div\n      onDragOver={handleDragOver}\n      onDragLeave={handleDragLeave}\n      onDrop={handleDrop}\n      className={cn(\n        \"flex flex-col gap-2 rounded-xl bg-muted/40 p-3 min-h-[200px] w-[280px] transition-colors\",\n        isDragOver && \"bg-muted/70 ring-2 ring-primary/30\",\n        className,\n      )}\n    >\n      <div className=\"flex items-center justify-between px-1 pb-1\">\n        <h3 className=\"text-sm font-semibold text-foreground\">{title}</h3>\n        <span className=\"rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground\">\n          {items.length}\n        </span>\n      </div>\n      {items.map((item) => (\n        <KanbanCard key={item.id} item={item} />\n      ))}\n      {items.length === 0 && (\n        <div className=\"flex flex-1 items-center justify-center rounded-lg border-2 border-dashed border-border py-6 text-xs text-muted-foreground\">\n          Drop cards here\n        </div>\n      )}\n    </div>\n  )\n}\n\n// ── KanbanBoard ───────────────────────────────────────────────────────────────\n\nexport function KanbanBoard({ columns, className }: KanbanBoardProps) {\n  return (\n    <div\n      className={cn(\n        \"flex gap-4 overflow-x-auto pb-4\",\n        className,\n      )}\n      role=\"region\"\n      aria-label=\"Kanban board\"\n    >\n      {columns.map((col) => (\n        <KanbanColumn\n          key={col.title}\n          title={col.title}\n          items={col.items}\n          {...(col.onDrop !== undefined ? { onDrop: col.onDrop } : {})}\n          {...(col.className !== undefined ? { className: col.className } : {})}\n        />\n      ))}\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Organize items into drag-and-drop status columns for task management",
+    "prompts": [
+      "add a kanban board",
+      "add a task board",
+      "add drag and drop columns",
+      "add a project board"
+    ],
+    "composition": [
+      "card",
+      "badge"
+    ],
+    "slots": [
+      "KanbanColumn",
+      "KanbanCard",
+      "KanbanBoard",
+      "columns"
+    ]
+  }
+}

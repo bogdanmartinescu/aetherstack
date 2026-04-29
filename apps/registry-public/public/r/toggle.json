@@ -1,0 +1,38 @@
+{
+  "name": "toggle",
+  "type": "registry:ui",
+  "title": "Toggle",
+  "description": "Two-state button that can be on or off, with variant and size support.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@radix-ui/react-toggle",
+    "class-variance-authority",
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/toggle.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst toggleVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ],\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-transparent hover:bg-muted hover:text-muted-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground\",\n        outline:\n          \"border border-input bg-transparent hover:bg-accent hover:text-accent-foreground data-[state=on]:bg-accent data-[state=on]:text-accent-foreground\",\n      },\n      size: {\n        default: \"h-10 px-3\",\n        sm: \"h-9 px-2.5\",\n        lg: \"h-11 px-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n)\n\nconst Toggle = React.forwardRef<\n  React.ElementRef<typeof TogglePrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> &\n    VariantProps<typeof toggleVariants>\n>(({ className, variant, size, ...props }, ref) => (\n  <TogglePrimitive.Root\n    ref={ref}\n    className={cn(toggleVariants({ variant, size, className }))}\n    {...props}\n  />\n))\nToggle.displayName = \"Toggle\"\n\nexport { Toggle, toggleVariants }\n"
+    }
+  ],
+  "ai": {
+    "intent": "A pressable button that toggles between active and inactive states",
+    "prompts": [
+      "add a toggle button",
+      "add a press-to-activate button",
+      "add a bold/italic toggle"
+    ],
+    "composition": [
+      "toggle-group",
+      "toolbar"
+    ],
+    "slots": [
+      "pressed",
+      "onPressedChange",
+      "variant",
+      "size"
+    ]
+  }
+}

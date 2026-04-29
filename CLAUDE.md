@@ -121,7 +121,7 @@ Do not:
 
 ## Current Phase Context
 
-**Phases 1–5 complete · Phase 6 (Component Gap-Fill) next**
+**Phases 1–6 complete · Phase 7 (Public Registry Hardened) next**
 
 ### Phases 1–4.6 (complete)
 See `docs/roadmap/build-plan.md` for full details. Key deliverables:
@@ -136,7 +136,7 @@ See `docs/roadmap/build-plan.md` for full details. Key deliverables:
 
 #### AI Metadata (`packages/registry-schema`)
 - `RegistryItemAi` schema: `intent`, `prompts`, `composition`, `slots`
-- All 28 registry items carry an `ai` block
+- All registry items carry an `ai` block
 - CI enforces AI metadata — items without it are rejected
 
 #### `llms.txt` (`apps/registry-public/public/llms.txt`)
@@ -152,9 +152,23 @@ See `docs/roadmap/build-plan.md` for full details. Key deliverables:
 #### Docs (`apps/docs`)
 - `/llms` route: MCP setup, AI metadata reference, canonical recipes, system prompt snippet
 
-### Phase 6 — Component Gap-Fill (next)
-Package focus: `packages/ui` (new primitives), `packages/patterns` (new patterns), `packages/blocks` (new blocks)
+### Phase 6 — Component Gap-Fill (complete)
 
-Every new item must ship with: source in the right package, Vitest tests, docs page, AI metadata, registry entry, per-item JSON.
+#### New Primitives (15 added, `packages/ui`)
+- Accordion, Avatar/AvatarGroup, Calendar, Combobox, ContextMenu, DropdownMenu, HoverCard, Pagination, Progress, ScrollArea, Separator, Slider, Toast (+ useToast hook), Toggle, ToggleGroup
+- **Total**: 31 UI primitives
 
-See `docs/roadmap/build-plan.md` for the full component list.
+#### New Patterns (8 added, `packages/patterns`)
+- StatGroup, Stepper, ActivityFeed, FileDropzone, DataTable, CommandPalette, Kanban, ColorPicker
+- **Total**: 20 patterns
+
+#### New Blocks (7 added, `packages/blocks`)
+- EmptyDashboard, OnboardingChecklist, BillingOverview, AccountSettings, TeamSettings, NotificationCenter, PricingSection
+- **Total**: 10 blocks
+
+#### Registry
+- 58 items (was 28), all with AI metadata, per-item JSON, llms.txt updated
+- 105 Vitest tests in `packages/ui` alone
+
+### Phase 7 — Public Registry Hardened (next)
+See `docs/roadmap/build-plan.md` for the full deliverables list.

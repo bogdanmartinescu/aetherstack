@@ -1,0 +1,41 @@
+{
+  "name": "combobox",
+  "type": "registry:ui",
+  "title": "Combobox",
+  "description": "Autocomplete select with search, powered by cmdk and Radix Popover.",
+  "author": "aetherstack",
+  "dependencies": [
+    "cmdk",
+    "@radix-ui/react-popover",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/combobox.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/combobox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Command as CommandPrimitive } from \"cmdk\"\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\"\nimport { Check } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\n// Re-export Command pieces for direct use inside Combobox\nconst ComboboxInput = React.forwardRef<\n  React.ElementRef<typeof CommandPrimitive.Input>,\n  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>\n>(({ className, ...props }, ref) => (\n  <CommandPrimitive.Input\n    ref={ref}\n    className={cn(\n      \"flex h-10 w-full rounded-md bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50\",\n      className,\n    )}\n    {...props}\n  />\n))\nComboboxInput.displayName = \"ComboboxInput\"\n\nconst ComboboxList = React.forwardRef<\n  React.ElementRef<typeof CommandPrimitive.List>,\n  React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>\n>(({ className, ...props }, ref) => (\n  <CommandPrimitive.List\n    ref={ref}\n    className={cn(\"max-h-[300px] overflow-y-auto overflow-x-hidden\", className)}\n    {...props}\n  />\n))\nComboboxList.displayName = \"ComboboxList\"\n\nconst ComboboxEmpty = React.forwardRef<\n  React.ElementRef<typeof CommandPrimitive.Empty>,\n  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>\n>((props, ref) => (\n  <CommandPrimitive.Empty\n    ref={ref}\n    className=\"py-6 text-center text-sm text-muted-foreground\"\n    {...props}\n  />\n))\nComboboxEmpty.displayName = \"ComboboxEmpty\"\n\nconst ComboboxGroup = React.forwardRef<\n  React.ElementRef<typeof CommandPrimitive.Group>,\n  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group>\n>(({ className, ...props }, ref) => (\n  <CommandPrimitive.Group\n    ref={ref}\n    className={cn(\n      \"overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nComboboxGroup.displayName = \"ComboboxGroup\"\n\nconst ComboboxItem = React.forwardRef<\n  React.ElementRef<typeof CommandPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item> & {\n    selected?: boolean\n  }\n>(({ className, selected, children, ...props }, ref) => (\n  <CommandPrimitive.Item\n    ref={ref}\n    className={cn(\n      \"relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 aria-selected:bg-accent aria-selected:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n      className,\n    )}\n    {...props}\n  >\n    <span className={cn(\"mr-2 h-4 w-4\", selected ? \"opacity-100\" : \"opacity-0\")}>\n      <Check className=\"h-4 w-4\" />\n    </span>\n    {children}\n  </CommandPrimitive.Item>\n))\nComboboxItem.displayName = \"ComboboxItem\"\n\n// ComboboxContent wraps the popover content with a Command container\nconst ComboboxContent = React.forwardRef<\n  React.ElementRef<typeof PopoverPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <PopoverPrimitive.Portal>\n    <PopoverPrimitive.Content\n      ref={ref}\n      className={cn(\n        \"z-50 w-[--radix-popover-trigger-width] overflow-hidden rounded-md border border-border bg-popover p-0 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95\",\n        className,\n      )}\n      sideOffset={4}\n      {...props}\n    >\n      <CommandPrimitive>{children}</CommandPrimitive>\n    </PopoverPrimitive.Content>\n  </PopoverPrimitive.Portal>\n))\nComboboxContent.displayName = \"ComboboxContent\"\n\n// Combobox = Popover root + Trigger\nconst Combobox = PopoverPrimitive.Root\nconst ComboboxTrigger = PopoverPrimitive.Trigger\n\nexport {\n  Combobox,\n  ComboboxTrigger,\n  ComboboxContent,\n  ComboboxInput,\n  ComboboxList,\n  ComboboxEmpty,\n  ComboboxGroup,\n  ComboboxItem,\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Searchable dropdown select for large option sets with async support",
+    "prompts": [
+      "add a combobox",
+      "add a searchable select",
+      "add autocomplete input",
+      "add a filterable dropdown"
+    ],
+    "composition": [
+      "button",
+      "command-palette"
+    ],
+    "slots": [
+      "ComboboxTrigger",
+      "ComboboxContent",
+      "ComboboxInput",
+      "ComboboxItem",
+      "ComboboxEmpty"
+    ]
+  }
+}
