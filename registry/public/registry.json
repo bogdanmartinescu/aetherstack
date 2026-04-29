@@ -17,7 +17,19 @@
           "type": "registry:ui",
           "target": "components/ui/badge.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Display a small inline label for status, category, or count",
+        "prompts": [
+          "add a status badge",
+          "show a label pill",
+          "display a count indicator",
+          "add a tag chip",
+          "show a category badge"
+        ],
+        "composition": ["button", "card", "table", "metric-card"],
+        "slots": ["children"]
+      }
     },
     {
       "name": "button",
@@ -32,7 +44,20 @@
           "type": "registry:ui",
           "target": "components/ui/button.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Trigger an action or navigate; supports multiple visual styles and sizes",
+        "prompts": [
+          "add a button",
+          "create a submit button",
+          "add a call to action",
+          "add a destructive delete button",
+          "add an icon button",
+          "add a ghost button"
+        ],
+        "composition": ["form-field", "dialog", "card", "page-header", "empty-state"],
+        "slots": ["children", "asChild"]
+      }
     },
     {
       "name": "card",
@@ -47,7 +72,19 @@
           "type": "registry:ui",
           "target": "components/ui/card.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Group related content in a visually distinct surface container",
+        "prompts": [
+          "add a card",
+          "create a content card",
+          "add a panel with a title and description",
+          "wrap content in a card",
+          "add a settings card"
+        ],
+        "composition": ["metric-card", "login-block", "signup-block", "section-header"],
+        "slots": ["CardHeader", "CardTitle", "CardDescription", "CardContent", "CardFooter"]
+      }
     },
     {
       "name": "checkbox",
@@ -62,7 +99,18 @@
           "type": "registry:ui",
           "target": "components/ui/checkbox.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Allow the user to check or uncheck a boolean option",
+        "prompts": [
+          "add a checkbox",
+          "add an accept terms checkbox",
+          "add a remember me option",
+          "add a multi-select checkbox list"
+        ],
+        "composition": ["form-field", "label", "login-block"],
+        "slots": ["checked", "onCheckedChange"]
+      }
     },
     {
       "name": "dialog",
@@ -77,7 +125,19 @@
           "type": "registry:ui",
           "target": "components/ui/dialog.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Display a modal overlay that traps focus and requires user action",
+        "prompts": [
+          "add a confirmation dialog",
+          "add a modal popup",
+          "add a delete confirmation modal",
+          "add a dialog with a form",
+          "create an alert dialog"
+        ],
+        "composition": ["button", "form-field", "input"],
+        "slots": ["DialogTrigger", "DialogContent", "DialogHeader", "DialogTitle", "DialogDescription", "DialogFooter"]
+      }
     },
     {
       "name": "input",
@@ -92,7 +152,19 @@
           "type": "registry:ui",
           "target": "components/ui/input.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Capture a single line of user text input",
+        "prompts": [
+          "add a text input",
+          "add a search field",
+          "add an email input",
+          "add a password field",
+          "add a name input"
+        ],
+        "composition": ["form-field", "label", "table-toolbar", "login-block", "signup-block"],
+        "slots": ["value", "onChange", "placeholder", "type"]
+      }
     },
     {
       "name": "label",
@@ -107,7 +179,17 @@
           "type": "registry:ui",
           "target": "components/ui/label.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Associate an accessible text label with a form control",
+        "prompts": [
+          "add a form label",
+          "label an input field",
+          "add an accessible label"
+        ],
+        "composition": ["form-field", "input", "checkbox", "radio-group", "switch"],
+        "slots": ["children", "htmlFor"]
+      }
     },
     {
       "name": "radio-group",
@@ -122,7 +204,18 @@
           "type": "registry:ui",
           "target": "components/ui/radio-group.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Let the user pick exactly one option from a list of radio buttons",
+        "prompts": [
+          "add a radio group",
+          "add a plan selector with radio buttons",
+          "add a single-choice option list",
+          "add a payment method selector"
+        ],
+        "composition": ["form-field", "label"],
+        "slots": ["value", "onValueChange", "RadioGroupItem"]
+      }
     },
     {
       "name": "select",
@@ -137,7 +230,18 @@
           "type": "registry:ui",
           "target": "components/ui/select.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Let the user choose one option from a collapsible dropdown list",
+        "prompts": [
+          "add a select dropdown",
+          "add a country picker",
+          "add a role selector",
+          "add a dropdown menu for filtering"
+        ],
+        "composition": ["form-field", "label", "table-toolbar"],
+        "slots": ["SelectTrigger", "SelectContent", "SelectItem", "value", "onValueChange"]
+      }
     },
     {
       "name": "sheet",
@@ -152,7 +256,19 @@
           "type": "registry:ui",
           "target": "components/ui/sheet.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Slide a panel in from an edge of the screen for contextual detail or editing",
+        "prompts": [
+          "add a side panel",
+          "add a slide-in drawer",
+          "add a detail sheet",
+          "add a mobile navigation drawer",
+          "add an edit panel that slides in from the right"
+        ],
+        "composition": ["button", "form-field", "input"],
+        "slots": ["SheetTrigger", "SheetContent", "SheetHeader", "SheetTitle", "SheetDescription", "SheetFooter", "side"]
+      }
     },
     {
       "name": "skeleton",
@@ -167,7 +283,18 @@
           "type": "registry:ui",
           "target": "components/ui/skeleton.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Show a shimmering placeholder while content is loading",
+        "prompts": [
+          "add a skeleton loader",
+          "add loading placeholders",
+          "add a skeleton card",
+          "show loading state with skeleton"
+        ],
+        "composition": ["loading-state", "card", "table"],
+        "slots": ["className"]
+      }
     },
     {
       "name": "switch",
@@ -182,7 +309,18 @@
           "type": "registry:ui",
           "target": "components/ui/switch.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Toggle a binary setting on or off with a slide animation",
+        "prompts": [
+          "add a toggle switch",
+          "add an enable/disable toggle",
+          "add a notifications on/off switch",
+          "add a feature flag toggle"
+        ],
+        "composition": ["form-field", "label"],
+        "slots": ["checked", "onCheckedChange"]
+      }
     },
     {
       "name": "table",
@@ -197,7 +335,18 @@
           "type": "registry:ui",
           "target": "components/ui/table.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Display rows of structured data in a semantic table layout",
+        "prompts": [
+          "add a data table",
+          "show a list of users in a table",
+          "add a table with sortable columns",
+          "display records in a table"
+        ],
+        "composition": ["table-toolbar", "badge", "button", "skeleton"],
+        "slots": ["TableHeader", "TableBody", "TableRow", "TableHead", "TableCell", "TableFooter"]
+      }
     },
     {
       "name": "tabs",
@@ -212,7 +361,18 @@
           "type": "registry:ui",
           "target": "components/ui/tabs.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Organise content into switchable panels navigated by tab buttons",
+        "prompts": [
+          "add tabs",
+          "add a tabbed interface",
+          "add a settings page with tabs",
+          "add a profile page with tabs for overview and activity"
+        ],
+        "composition": ["card", "section-header"],
+        "slots": ["TabsList", "TabsTrigger", "TabsContent", "defaultValue"]
+      }
     },
     {
       "name": "textarea",
@@ -227,7 +387,19 @@
           "type": "registry:ui",
           "target": "components/ui/textarea.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Capture multi-line free-form text from the user",
+        "prompts": [
+          "add a textarea",
+          "add a description field",
+          "add a multiline text input",
+          "add a notes field",
+          "add a bio input"
+        ],
+        "composition": ["form-field", "label"],
+        "slots": ["value", "onChange", "placeholder", "rows"]
+      }
     },
     {
       "name": "tooltip",
@@ -242,7 +414,18 @@
           "type": "registry:ui",
           "target": "components/ui/tooltip.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Show a short contextual hint when the user hovers or focuses an element",
+        "prompts": [
+          "add a tooltip",
+          "show a hint on hover",
+          "add an icon with a tooltip",
+          "add help text on hover"
+        ],
+        "composition": ["button", "badge"],
+        "slots": ["TooltipTrigger", "TooltipContent", "children"]
+      }
     },
     {
       "name": "form-field",
@@ -258,7 +441,19 @@
           "type": "registry:pattern",
           "target": "components/patterns/form-field.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Compose a labelled form control with helper text and validation error message",
+        "prompts": [
+          "add a form field with validation",
+          "add an email field with error message",
+          "add a labelled input with helper text",
+          "add form fields for a settings form",
+          "add a password field with requirements hint"
+        ],
+        "composition": ["input", "textarea", "select", "checkbox", "switch", "label"],
+        "slots": ["FormLabel", "FormControl", "FormDescription", "FormMessage", "children"]
+      }
     },
     {
       "name": "page-header",
@@ -273,7 +468,19 @@
           "type": "registry:pattern",
           "target": "components/patterns/page-header.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Top-of-page heading block with title, description, optional breadcrumb, and an actions area",
+        "prompts": [
+          "add a page header",
+          "add a page title with a breadcrumb",
+          "add a header with an action button",
+          "add a dashboard page header",
+          "add a settings page title area"
+        ],
+        "composition": ["button", "badge", "section-header"],
+        "slots": ["title", "description", "breadcrumb", "actions"]
+      }
     },
     {
       "name": "section-header",
@@ -288,7 +495,19 @@
           "type": "registry:pattern",
           "target": "components/patterns/section-header.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Label a content section with a title and optional action, or wrap it in a SettingsSection",
+        "prompts": [
+          "add a section heading",
+          "add a settings section",
+          "add a content block title",
+          "add a section with a title and description",
+          "wrap settings fields in a section"
+        ],
+        "composition": ["card", "form-field", "button"],
+        "slots": ["title", "description", "action", "children"]
+      }
     },
     {
       "name": "empty-state",
@@ -303,7 +522,19 @@
           "type": "registry:pattern",
           "target": "components/patterns/empty-state.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Show a helpful empty-view when a list or collection has no data yet",
+        "prompts": [
+          "add an empty state",
+          "show a no results message",
+          "add a zero-data placeholder",
+          "add an empty list with a create button",
+          "add a no users found state"
+        ],
+        "composition": ["button", "card"],
+        "slots": ["icon", "title", "description", "action"]
+      }
     },
     {
       "name": "loading-state",
@@ -319,7 +550,18 @@
           "type": "registry:pattern",
           "target": "components/patterns/loading-state.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Display a centered loading indicator while async data is being fetched",
+        "prompts": [
+          "add a loading state",
+          "show a spinner while data loads",
+          "add a loading indicator",
+          "add skeleton rows while loading"
+        ],
+        "composition": ["skeleton"],
+        "slots": ["variant", "rows"]
+      }
     },
     {
       "name": "error-state",
@@ -334,7 +576,18 @@
           "type": "registry:pattern",
           "target": "components/patterns/error-state.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Communicate a data-loading or network failure and offer a retry action",
+        "prompts": [
+          "add an error state",
+          "show an error message with a retry button",
+          "add a fetch error fallback",
+          "add an error boundary UI"
+        ],
+        "composition": ["button"],
+        "slots": ["title", "description", "onRetry"]
+      }
     },
     {
       "name": "metric-card",
@@ -350,7 +603,20 @@
           "type": "registry:pattern",
           "target": "components/patterns/metric-card.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Show a single KPI metric with a label, value, trend indicator, and icon",
+        "prompts": [
+          "add a metric card",
+          "add a KPI card",
+          "add a stat card with a trend",
+          "show a dashboard metric",
+          "add a revenue card",
+          "add a users count card"
+        ],
+        "composition": ["card", "badge", "dashboard-shell"],
+        "slots": ["label", "value", "trend", "icon", "description"]
+      }
     },
     {
       "name": "table-toolbar",
@@ -365,7 +631,18 @@
           "type": "registry:pattern",
           "target": "components/patterns/table-toolbar.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Provide a search input, active filter pills, and action buttons above a data table",
+        "prompts": [
+          "add a table toolbar with search and filters",
+          "add a search bar above a table",
+          "add filter chips to a data table",
+          "add table actions toolbar"
+        ],
+        "composition": ["table", "input", "button", "badge", "select"],
+        "slots": ["search", "filters", "actions", "FilterPill"]
+      }
     },
     {
       "name": "nav",
@@ -380,7 +657,19 @@
           "type": "registry:pattern",
           "target": "components/patterns/nav.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Build a composable sidebar navigation with grouped nav items and active states",
+        "prompts": [
+          "add a sidebar navigation",
+          "add nav items to a sidebar",
+          "add a grouped sidebar menu",
+          "add navigation links with icons",
+          "add a sidebar nav with sections"
+        ],
+        "composition": ["dashboard-shell", "badge"],
+        "slots": ["NavItem", "NavGroup", "SidebarNav", "items", "groups"]
+      }
     },
     {
       "name": "dashboard-shell",
@@ -396,7 +685,20 @@
           "type": "registry:block",
           "target": "components/blocks/dashboard-shell.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Full-page SaaS app shell with a collapsible sidebar, search topbar, and a main content slot",
+        "prompts": [
+          "build me a SaaS dashboard",
+          "add a dashboard layout",
+          "create an admin panel shell",
+          "add a sidebar navigation layout",
+          "add a full-page app layout with a sidebar",
+          "build an internal tool layout"
+        ],
+        "composition": ["nav", "metric-card", "table-toolbar", "table", "page-header"],
+        "slots": ["children", "sidebar", "topbar"]
+      }
     },
     {
       "name": "login-block",
@@ -412,7 +714,19 @@
           "type": "registry:block",
           "target": "components/blocks/login-block.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Ready-made login page block with email, password, remember-me, and forgot-password",
+        "prompts": [
+          "add a login page",
+          "create an authentication screen",
+          "add a sign-in form",
+          "build a login card",
+          "add an email and password login"
+        ],
+        "composition": ["form-field", "input", "button", "checkbox", "label"],
+        "slots": ["onSubmit", "onForgotPassword", "footer"]
+      }
     },
     {
       "name": "signup-block",
@@ -428,7 +742,18 @@
           "type": "registry:block",
           "target": "components/blocks/signup-block.tsx"
         }
-      ]
+      ],
+      "ai": {
+        "intent": "Ready-made sign-up page block with name, email, password validation, and terms acceptance",
+        "prompts": [
+          "add a sign up page",
+          "create a registration form",
+          "add a new account form",
+          "build a user registration screen"
+        ],
+        "composition": ["form-field", "input", "button", "checkbox"],
+        "slots": ["onSubmit", "onSignIn", "footer"]
+      }
     }
   ]
 }

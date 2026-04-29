@@ -14,5 +14,25 @@
       "target": "components/patterns/empty-state.tsx",
       "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface EmptyStateProps {\n  /** Icon element — recommended size: h-10 w-10 */\n  icon?: React.ReactNode\n  title: string\n  description?: string\n  /** Primary CTA — typically a Button */\n  action?: React.ReactNode\n  /** Secondary CTA */\n  secondaryAction?: React.ReactNode\n  className?: string\n}\n\nexport function EmptyState({\n  icon,\n  title,\n  description,\n  action,\n  secondaryAction,\n  className,\n}: EmptyStateProps) {\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center justify-center rounded-lg border border-dashed border-border bg-muted/20 px-6 py-16 text-center\",\n        className,\n      )}\n    >\n      {icon && (\n        <div className=\"mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-muted text-muted-foreground\">\n          {icon}\n        </div>\n      )}\n      <h3 className=\"mb-1 text-base font-semibold text-foreground\">{title}</h3>\n      {description && (\n        <p className=\"mb-5 max-w-sm text-sm text-muted-foreground\">{description}</p>\n      )}\n      {(action || secondaryAction) && (\n        <div className=\"flex flex-wrap items-center justify-center gap-2\">\n          {action}\n          {secondaryAction}\n        </div>\n      )}\n    </div>\n  )\n}\n"
     }
-  ]
+  ],
+  "ai": {
+    "intent": "Show a helpful empty-view when a list or collection has no data yet",
+    "prompts": [
+      "add an empty state",
+      "show a no results message",
+      "add a zero-data placeholder",
+      "add an empty list with a create button",
+      "add a no users found state"
+    ],
+    "composition": [
+      "button",
+      "card"
+    ],
+    "slots": [
+      "icon",
+      "title",
+      "description",
+      "action"
+    ]
+  }
 }

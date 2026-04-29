@@ -8,6 +8,9 @@ import { resolve } from "node:path"
 import { validateRegistry, findMissingDependencies } from "@aetherstack/registry-build"
 import type { Registry } from "@aetherstack/registry-schema"
 
+// Items in this list are exempt from the AI metadata requirement (pro placeholders, etc.)
+const AI_METADATA_EXEMPT: string[] = []
+
 // tsx runs in CJS mode — use __dirname rather than import.meta.dirname
 const ROOT = resolve(__dirname, "../../../")
 
@@ -42,6 +45,21 @@ for (const { label, path } of registries) {
   if (missing.length > 0) {
     console.warn("  ⚠ Missing registry dependencies:")
     missing.forEach((m) => console.warn(`    - ${m}`))
+  }
+
+  // Enforce AI metadata for public registry items (Phase 5 requirement).
+  // Pro registry items are excluded — they may ship AI metadata later.
+  if (label === "public") {
+    const registry = raw as Registry
+    const missingAi = registry.items.filter(
+      (item) => !item.ai && !AI_METADATA_EXEMPT.includes(item.name),
+    )
+    if (missingAi.length > 0) {
+      console.error("  ✗ Items missing required AI metadata (add an `ai` block):")
+      missingAi.forEach((item) => console.error(`    - ${item.name}`))
+      hasErrors = true
+      continue
+    }
   }
 
   console.log(`  ✓ Valid (${(raw as Registry).items.length} items)`)

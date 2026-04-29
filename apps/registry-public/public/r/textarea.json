@@ -14,5 +14,25 @@
       "target": "components/ui/textarea.tsx",
       "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface TextareaProps\n  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, ...props }, ref) => {\n    return (\n      <textarea\n        className={cn(\n          \"flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm\",\n          \"ring-offset-background\",\n          \"placeholder:text-muted-foreground\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className,\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  },\n)\nTextarea.displayName = \"Textarea\"\n\nexport { Textarea }\n"
     }
-  ]
+  ],
+  "ai": {
+    "intent": "Capture multi-line free-form text from the user",
+    "prompts": [
+      "add a textarea",
+      "add a description field",
+      "add a multiline text input",
+      "add a notes field",
+      "add a bio input"
+    ],
+    "composition": [
+      "form-field",
+      "label"
+    ],
+    "slots": [
+      "value",
+      "onChange",
+      "placeholder",
+      "rows"
+    ]
+  }
 }

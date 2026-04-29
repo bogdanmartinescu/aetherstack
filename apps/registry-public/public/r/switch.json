@@ -15,5 +15,22 @@
       "target": "components/ui/switch.tsx",
       "content": "import * as React from \"react\"\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <SwitchPrimitive.Root\n    className={cn(\n      \"peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent\",\n      \"transition-colors\",\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\n      \"data-[state=checked]:bg-primary data-[state=unchecked]:bg-input\",\n      className,\n    )}\n    {...props}\n    ref={ref}\n  >\n    <SwitchPrimitive.Thumb\n      className={cn(\n        \"pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform\",\n        \"data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0\",\n      )}\n    />\n  </SwitchPrimitive.Root>\n))\nSwitch.displayName = SwitchPrimitive.Root.displayName\n\nexport { Switch }\n"
     }
-  ]
+  ],
+  "ai": {
+    "intent": "Toggle a binary setting on or off with a slide animation",
+    "prompts": [
+      "add a toggle switch",
+      "add an enable/disable toggle",
+      "add a notifications on/off switch",
+      "add a feature flag toggle"
+    ],
+    "composition": [
+      "form-field",
+      "label"
+    ],
+    "slots": [
+      "checked",
+      "onCheckedChange"
+    ]
+  }
 }

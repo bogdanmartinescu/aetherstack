@@ -14,5 +14,26 @@
       "target": "components/patterns/section-header.tsx",
       "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface SectionHeaderProps {\n  title: string\n  description?: string\n  /** Optional right-aligned element (e.g. an edit button) */\n  action?: React.ReactNode\n  className?: string\n  /** Render `<h2>` (default) or another heading level */\n  as?: \"h1\" | \"h2\" | \"h3\" | \"h4\"\n}\n\nexport function SectionHeader({\n  title,\n  description,\n  action,\n  className,\n  as: Heading = \"h2\",\n}: SectionHeaderProps) {\n  return (\n    <div className={cn(\"flex flex-wrap items-start justify-between gap-4\", className)}>\n      <div className=\"min-w-0 flex-1\">\n        <Heading className=\"text-base font-semibold text-foreground\">\n          {title}\n        </Heading>\n        {description && (\n          <p className=\"mt-0.5 text-sm text-muted-foreground\">{description}</p>\n        )}\n      </div>\n      {action && <div className=\"shrink-0\">{action}</div>}\n    </div>\n  )\n}\n\n// ── SettingsSection ───────────────────────────────────────────────────────────\n\nexport interface SettingsSectionProps {\n  title: string\n  description?: string\n  /** Optional action rendered in the header (e.g. Save button) */\n  headerAction?: React.ReactNode\n  /** Optional footer content (e.g. Save / Cancel buttons) */\n  footer?: React.ReactNode\n  className?: string\n  children: React.ReactNode\n}\n\nexport function SettingsSection({\n  title,\n  description,\n  headerAction,\n  footer,\n  className,\n  children,\n}: SettingsSectionProps) {\n  return (\n    <section\n      className={cn(\n        \"rounded-lg border border-border bg-card\",\n        className,\n      )}\n    >\n      {/* Header */}\n      <div className=\"border-b border-border px-6 py-4\">\n      <SectionHeader\n        title={title}\n        {...(description !== undefined && { description })}\n        action={headerAction}\n      />\n      </div>\n\n      {/* Content */}\n      <div className=\"px-6 py-5\">{children}</div>\n\n      {/* Footer */}\n      {footer && (\n        <div className=\"flex items-center justify-end gap-2 rounded-b-lg border-t border-border bg-muted/30 px-6 py-3\">\n          {footer}\n        </div>\n      )}\n    </section>\n  )\n}\n"
     }
-  ]
+  ],
+  "ai": {
+    "intent": "Label a content section with a title and optional action, or wrap it in a SettingsSection",
+    "prompts": [
+      "add a section heading",
+      "add a settings section",
+      "add a content block title",
+      "add a section with a title and description",
+      "wrap settings fields in a section"
+    ],
+    "composition": [
+      "card",
+      "form-field",
+      "button"
+    ],
+    "slots": [
+      "title",
+      "description",
+      "action",
+      "children"
+    ]
+  }
 }

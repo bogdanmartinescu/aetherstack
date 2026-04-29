@@ -14,5 +14,26 @@
       "target": "components/patterns/nav.tsx",
       "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\n// ── NavItem ───────────────────────────────────────────────────────────────────\n\nexport interface NavItemProps {\n  label: string\n  href: string\n  icon?: React.ReactNode\n  /** Badge/count shown on the right */\n  badge?: string | number\n  active?: boolean\n  disabled?: boolean\n  className?: string\n  onClick?: React.MouseEventHandler<HTMLAnchorElement>\n}\n\nexport function NavItem({\n  label,\n  href,\n  icon,\n  badge,\n  active,\n  disabled,\n  className,\n  onClick,\n}: NavItemProps) {\n  return (\n    <a\n      href={href}\n      onClick={onClick}\n      aria-current={active ? \"page\" : undefined}\n      aria-disabled={disabled}\n      tabIndex={disabled ? -1 : undefined}\n      className={cn(\n        \"group flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors\",\n        active\n          ? \"bg-accent text-accent-foreground font-medium\"\n          : \"text-muted-foreground hover:bg-muted hover:text-foreground\",\n        disabled && \"pointer-events-none opacity-40\",\n        className,\n      )}\n    >\n      {icon && (\n        <span className=\"flex h-4 w-4 shrink-0 items-center justify-center\">\n          {icon}\n        </span>\n      )}\n      <span className=\"flex-1 truncate\">{label}</span>\n      {badge !== undefined && (\n        <span className=\"ml-auto rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary\">\n          {badge}\n        </span>\n      )}\n    </a>\n  )\n}\n\n// ── NavGroup ──────────────────────────────────────────────────────────────────\n\nexport interface NavGroupProps {\n  label?: string\n  children: React.ReactNode\n  className?: string\n  /** Whether items are initially collapsed (requires collapsible=true) */\n  defaultCollapsed?: boolean\n  collapsible?: boolean\n}\n\nexport function NavGroup({\n  label,\n  children,\n  className,\n  defaultCollapsed = false,\n  collapsible = false,\n}: NavGroupProps) {\n  const [collapsed, setCollapsed] = React.useState(defaultCollapsed)\n\n  return (\n    <div className={cn(\"space-y-0.5\", className)}>\n      {label && (\n        <div className=\"flex items-center justify-between\">\n          {collapsible ? (\n            <button\n              type=\"button\"\n              onClick={() => setCollapsed((v) => !v)}\n              className=\"flex w-full items-center justify-between px-3 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground\"\n              aria-expanded={!collapsed}\n            >\n              {label}\n              <svg\n                className={cn(\n                  \"h-3 w-3 transition-transform\",\n                  collapsed && \"-rotate-90\",\n                )}\n                xmlns=\"http://www.w3.org/2000/svg\"\n                viewBox=\"0 0 24 24\"\n                fill=\"none\"\n                stroke=\"currentColor\"\n                strokeWidth=\"2.5\"\n                strokeLinecap=\"round\"\n                strokeLinejoin=\"round\"\n                aria-hidden=\"true\"\n              >\n                <path d=\"m6 9 6 6 6-6\" />\n              </svg>\n            </button>\n          ) : (\n            <p className=\"px-3 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground\">\n              {label}\n            </p>\n          )}\n        </div>\n      )}\n      {!collapsed && <div className=\"space-y-0.5\">{children}</div>}\n    </div>\n  )\n}\n\n// ── SidebarNav ────────────────────────────────────────────────────────────────\n\nexport interface SidebarNavProps {\n  children: React.ReactNode\n  className?: string\n}\n\nexport function SidebarNav({ children, className }: SidebarNavProps) {\n  return (\n    <nav\n      aria-label=\"Sidebar navigation\"\n      className={cn(\"space-y-4\", className)}\n    >\n      {children}\n    </nav>\n  )\n}\n"
     }
-  ]
+  ],
+  "ai": {
+    "intent": "Build a composable sidebar navigation with grouped nav items and active states",
+    "prompts": [
+      "add a sidebar navigation",
+      "add nav items to a sidebar",
+      "add a grouped sidebar menu",
+      "add navigation links with icons",
+      "add a sidebar nav with sections"
+    ],
+    "composition": [
+      "dashboard-shell",
+      "badge"
+    ],
+    "slots": [
+      "NavItem",
+      "NavGroup",
+      "SidebarNav",
+      "items",
+      "groups"
+    ]
+  }
 }

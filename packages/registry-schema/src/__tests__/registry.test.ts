@@ -6,6 +6,7 @@ import {
   registryItemFileSchema,
   registryItemCssVarsSchema,
   registryItemTailwindSchema,
+  registryItemAiSchema,
 } from "../registry"
 
 const VALID_ITEM = {
@@ -191,5 +192,72 @@ describe("registryItemTailwindSchema", () => {
         },
       }).success,
     ).toBe(true)
+  })
+})
+
+describe("registryItemAiSchema", () => {
+  it("accepts an empty object", () => {
+    expect(registryItemAiSchema.safeParse({}).success).toBe(true)
+  })
+
+  it("accepts a fully populated ai block", () => {
+    expect(
+      registryItemAiSchema.safeParse({
+        intent: "Display a small inline label",
+        prompts: ["add a badge", "show a status pill"],
+        composition: ["button", "card"],
+        slots: ["children"],
+      }).success,
+    ).toBe(true)
+  })
+
+  it("rejects non-string intent", () => {
+    expect(registryItemAiSchema.safeParse({ intent: 42 }).success).toBe(false)
+  })
+
+  it("rejects non-array prompts", () => {
+    expect(registryItemAiSchema.safeParse({ prompts: "add a badge" }).success).toBe(false)
+  })
+
+  it("rejects prompts array with non-string entries", () => {
+    expect(registryItemAiSchema.safeParse({ prompts: [1, 2] }).success).toBe(false)
+  })
+
+  it("rejects non-array composition", () => {
+    expect(registryItemAiSchema.safeParse({ composition: "button" }).success).toBe(false)
+  })
+
+  it("rejects non-array slots", () => {
+    expect(registryItemAiSchema.safeParse({ slots: "children" }).success).toBe(false)
+  })
+})
+
+describe("registryItemSchema — ai field", () => {
+  it("accepts an item with a full ai block", () => {
+    const result = registryItemSchema.safeParse({
+      name: "badge",
+      type: "registry:ui",
+      ai: {
+        intent: "Display a small inline label",
+        prompts: ["add a badge"],
+        composition: ["button"],
+        slots: ["children"],
+      },
+    })
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect(result.data.ai?.intent).toBe("Display a small inline label")
+    }
+  })
+
+  it("accepts an item without an ai block (backward-compatible)", () => {
+    const result = registryItemSchema.safeParse({
+      name: "badge",
+      type: "registry:ui",
+    })
+    expect(result.success).toBe(true)
+    if (result.success) {
+      expect(result.data.ai).toBeUndefined()
+    }
   })
 })

@@ -2,6 +2,7 @@ import { Command } from "commander"
 import { addCommand } from "./commands/add"
 import { listCommand } from "./commands/list"
 import { initCommand } from "./commands/init"
+import { generateCommand } from "./commands/generate"
 
 const program = new Command()
 
@@ -14,5 +15,6 @@ program
 program.addCommand(initCommand)
 program.addCommand(addCommand)
 program.addCommand(listCommand)
+program.addCommand(generateCommand)
 
 program.parse(process.argv)

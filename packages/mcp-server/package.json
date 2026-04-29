@@ -1,0 +1,32 @@
+{
+  "name": "@aetherstack/mcp-server",
+  "version": "0.0.1",
+  "description": "Aether UI MCP server — exposes the registry to LLM agents via the Model Context Protocol",
+  "license": "MIT",
+  "bin": {
+    "aether-ui-mcp": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@aetherstack/registry-schema": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.23.4"
+  },
+  "devDependencies": {
+    "@aetherstack/typescript-config": "workspace:*",
+    "@types/node": "^20.12.7",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

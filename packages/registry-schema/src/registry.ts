@@ -62,6 +62,35 @@ export type RegistryItemCssVars = z.infer<typeof registryItemCssVarsSchema>
 // A single registry item (component, block, theme, etc.)
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// AI metadata — machine-readable hints for LLM consumers
+// ---------------------------------------------------------------------------
+
+export const registryItemAiSchema = z.object({
+  /**
+   * Natural-language prompts that should resolve to this item.
+   * Used by `aether-ui generate` and LLM context injection.
+   */
+  prompts: z.array(z.string()).optional(),
+  /**
+   * Short machine-readable purpose summary (one sentence, no punctuation).
+   * Placed in llms.txt and MCP tool responses.
+   */
+  intent: z.string().optional(),
+  /**
+   * Names of other registry items frequently composed with this one.
+   * Helps LLMs suggest coherent component groups.
+   */
+  composition: z.array(z.string()).optional(),
+  /**
+   * Named insertion points / props that an LLM can target when generating usage code.
+   * Example: ["children", "actions", "header", "footer"]
+   */
+  slots: z.array(z.string()).optional(),
+})
+
+export type RegistryItemAi = z.infer<typeof registryItemAiSchema>
+
 export const registryItemSchema = z.object({
   $schema: z.string().optional(),
   name: z.string().min(1),
@@ -81,6 +110,8 @@ export const registryItemSchema = z.object({
   meta: z.record(z.unknown()).optional(),
   /** Whether this item is part of the pro tier. */
   pro: z.boolean().optional(),
+  /** AI-native metadata for LLM consumers. Required for all public registry items. */
+  ai: registryItemAiSchema.optional(),
 })
 
 export type RegistryItem = z.infer<typeof registryItemSchema>

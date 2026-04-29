@@ -124,10 +124,14 @@ jobs:
       - name: Test — @aetherstack/cli
         run: pnpm --filter @aetherstack/cli test
 
+      - name: Test — @aetherstack/mcp-server
+        run: pnpm --filter @aetherstack/mcp-server test
+
   # ─── Registry validation ────────────────────────────────────────────────────
-  # Validates schema integrity AND ensures the committed per-item JSON output
-  # matches what `build-registry` would emit. Catches drift where someone edits
-  # registry/public/registry.json without re-running the build.
+  # Validates schema integrity (including AI metadata) AND ensures committed
+  # per-item JSON files and llms.txt match what `build-registry` would emit.
+  # Catches drift where someone edits registry/public/registry.json without
+  # re-running the build.
   registry:
     name: Registry
     runs-on: ubuntu-latest
@@ -161,11 +165,18 @@ jobs:
 
       - name: Fail if committed registry artefacts are stale
         run: |
+          STALE=0
           if ! git diff --quiet --exit-code -- apps/registry-public/public/r; then
             echo "::error::Committed registry artefacts in apps/registry-public/public/r/ are out of date. Run 'pnpm --filter @aetherstack/scripts build-registry' and commit the result."
             git --no-pager diff -- apps/registry-public/public/r
-            exit 1
+            STALE=1
           fi
+          if ! git diff --quiet --exit-code -- apps/registry-public/public/llms.txt; then
+            echo "::error::Committed llms.txt is out of date. Run 'pnpm --filter @aetherstack/scripts build-registry' and commit the result."
+            git --no-pager diff -- apps/registry-public/public/llms.txt
+            STALE=1
+          fi
+          if [ "$STALE" -eq 1 ]; then exit 1; fi
 
   # ─── Changeset check (PRs only) ─────────────────────────────────────────────
   # Fails when a PR modifies packages/*/src/** without adding a .changeset/*.md.

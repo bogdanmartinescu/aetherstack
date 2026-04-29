@@ -15,6 +15,7 @@ const nav = [
       { label: "Introduction", href: "/introduction" },
       { label: "Installation", href: "/installation" },
       { label: "CLI", href: "/cli" },
+      { label: "AI & LLMs", href: "/llms" },
     ],
   },
   {
@@ -76,7 +77,7 @@ const nav = [
 
 // Top-level header nav links with active prefix matching
 const topNav = [
-  { label: "Docs", href: "/introduction", match: ["/introduction", "/installation", "/cli", "/tokens", "/icons", "/fonts"] },
+  { label: "Docs", href: "/introduction", match: ["/introduction", "/installation", "/cli", "/tokens", "/icons", "/fonts", "/llms"] },
   { label: "Components", href: "/components", match: ["/components"] },
   { label: "Patterns", href: "/patterns", match: ["/patterns"] },
   { label: "Blocks", href: "/blocks", match: ["/blocks"] },

@@ -14,5 +14,28 @@
       "target": "components/ui/card.tsx",
       "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\n        \"rounded-lg border border-border bg-card text-card-foreground shadow-sm\",\n        className,\n      )}\n      {...props}\n    />\n  ),\n)\nCard.displayName = \"Card\"\n\nconst CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"flex flex-col space-y-1.5 p-6\", className)}\n      {...props}\n    />\n  ),\n)\nCardHeader.displayName = \"CardHeader\"\n\nconst CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(\n  ({ className, ...props }, ref) => (\n    <h3\n      ref={ref}\n      className={cn(\"text-2xl font-semibold leading-none tracking-tight\", className)}\n      {...props}\n    />\n  ),\n)\nCardTitle.displayName = \"CardTitle\"\n\nconst CardDescription = React.forwardRef<\n  HTMLParagraphElement,\n  React.HTMLAttributes<HTMLParagraphElement>\n>(({ className, ...props }, ref) => (\n  <p\n    ref={ref}\n    className={cn(\"text-sm text-muted-foreground\", className)}\n    {...props}\n  />\n))\nCardDescription.displayName = \"CardDescription\"\n\nconst CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div ref={ref} className={cn(\"p-6 pt-0\", className)} {...props} />\n  ),\n)\nCardContent.displayName = \"CardContent\"\n\nconst CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\n  ({ className, ...props }, ref) => (\n    <div\n      ref={ref}\n      className={cn(\"flex items-center p-6 pt-0\", className)}\n      {...props}\n    />\n  ),\n)\nCardFooter.displayName = \"CardFooter\"\n\nexport { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }\n"
     }
-  ]
+  ],
+  "ai": {
+    "intent": "Group related content in a visually distinct surface container",
+    "prompts": [
+      "add a card",
+      "create a content card",
+      "add a panel with a title and description",
+      "wrap content in a card",
+      "add a settings card"
+    ],
+    "composition": [
+      "metric-card",
+      "login-block",
+      "signup-block",
+      "section-header"
+    ],
+    "slots": [
+      "CardHeader",
+      "CardTitle",
+      "CardDescription",
+      "CardContent",
+      "CardFooter"
+    ]
+  }
 }

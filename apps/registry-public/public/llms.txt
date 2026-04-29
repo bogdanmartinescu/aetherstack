@@ -1,0 +1,321 @@
+# Aether UI
+
+> Aether UI is a premium open-code design system for SaaS dashboards and admin interfaces.
+> Registry format is compatible with shadcn/ui. Use the `aether-ui` CLI to install components.
+
+## Quick Start
+
+```bash
+npx aether-ui init          # initialise project, creates aether.json
+npx aether-ui list          # browse available components
+npx aether-ui add button    # install a component
+npx aether-ui generate "build me a SaaS dashboard"  # AI-driven scaffolding
+```
+
+## Documentation
+
+- Full docs: https://aetherui.dev
+- Registry API: https://registry.aetherui.dev/r/registry.json
+- AI usage guide: https://aetherui.dev/llms
+- Tokens reference: https://aetherui.dev/tokens
+- Component reference: https://aetherui.dev/components
+
+## Architecture
+
+Aether UI uses a four-layer architecture:
+1. **Primitives** (registry:ui) — foundational components for forms, layout, and interaction
+2. **Patterns** (registry:pattern) — higher-level compositions of primitives
+3. **Blocks** (registry:block) — full page-section assemblies
+4. **Tokens** — design tokens for colors, spacing, typography, and more
+
+## Primitives (16)
+
+## Badge
+- Name: badge
+- Install: aether-ui add badge
+- Source: https://registry.aetherui.dev/r/badge.json
+- Intent: Display a small inline label for status, category, or count
+  Slots: children
+  Often used with: button, card, table, metric-card
+  Prompts: add a status badge | show a label pill | display a count indicator
+
+## Button
+- Name: button
+- Install: aether-ui add button
+- Source: https://registry.aetherui.dev/r/button.json
+- Intent: Trigger an action or navigate; supports multiple visual styles and sizes
+  Slots: children, asChild
+  Often used with: form-field, dialog, card, page-header, empty-state
+  Prompts: add a button | create a submit button | add a call to action
+
+## Card
+- Name: card
+- Install: aether-ui add card
+- Source: https://registry.aetherui.dev/r/card.json
+- Intent: Group related content in a visually distinct surface container
+  Slots: CardHeader, CardTitle, CardDescription, CardContent, CardFooter
+  Often used with: metric-card, login-block, signup-block, section-header
+  Prompts: add a card | create a content card | add a panel with a title and description
+
+## Checkbox
+- Name: checkbox
+- Install: aether-ui add checkbox
+- Source: https://registry.aetherui.dev/r/checkbox.json
+- Intent: Allow the user to check or uncheck a boolean option
+  Slots: checked, onCheckedChange
+  Often used with: form-field, label, login-block
+  Prompts: add a checkbox | add an accept terms checkbox | add a remember me option
+
+## Dialog
+- Name: dialog
+- Install: aether-ui add dialog
+- Source: https://registry.aetherui.dev/r/dialog.json
+- Intent: Display a modal overlay that traps focus and requires user action
+  Slots: DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter
+  Often used with: button, form-field, input
+  Prompts: add a confirmation dialog | add a modal popup | add a delete confirmation modal
+
+## Input
+- Name: input
+- Install: aether-ui add input
+- Source: https://registry.aetherui.dev/r/input.json
+- Intent: Capture a single line of user text input
+  Slots: value, onChange, placeholder, type
+  Often used with: form-field, label, table-toolbar, login-block, signup-block
+  Prompts: add a text input | add a search field | add an email input
+
+## Label
+- Name: label
+- Install: aether-ui add label
+- Source: https://registry.aetherui.dev/r/label.json
+- Intent: Associate an accessible text label with a form control
+  Slots: children, htmlFor
+  Often used with: form-field, input, checkbox, radio-group, switch
+  Prompts: add a form label | label an input field | add an accessible label
+
+## Radio Group
+- Name: radio-group
+- Install: aether-ui add radio-group
+- Source: https://registry.aetherui.dev/r/radio-group.json
+- Intent: Let the user pick exactly one option from a list of radio buttons
+  Slots: value, onValueChange, RadioGroupItem
+  Often used with: form-field, label
+  Prompts: add a radio group | add a plan selector with radio buttons | add a single-choice option list
+
+## Select
+- Name: select
+- Install: aether-ui add select
+- Source: https://registry.aetherui.dev/r/select.json
+- Intent: Let the user choose one option from a collapsible dropdown list
+  Slots: SelectTrigger, SelectContent, SelectItem, value, onValueChange
+  Often used with: form-field, label, table-toolbar
+  Prompts: add a select dropdown | add a country picker | add a role selector
+
+## Sheet
+- Name: sheet
+- Install: aether-ui add sheet
+- Source: https://registry.aetherui.dev/r/sheet.json
+- Intent: Slide a panel in from an edge of the screen for contextual detail or editing
+  Slots: SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, side
+  Often used with: button, form-field, input
+  Prompts: add a side panel | add a slide-in drawer | add a detail sheet
+
+## Skeleton
+- Name: skeleton
+- Install: aether-ui add skeleton
+- Source: https://registry.aetherui.dev/r/skeleton.json
+- Intent: Show a shimmering placeholder while content is loading
+  Slots: className
+  Often used with: loading-state, card, table
+  Prompts: add a skeleton loader | add loading placeholders | add a skeleton card
+
+## Switch
+- Name: switch
+- Install: aether-ui add switch
+- Source: https://registry.aetherui.dev/r/switch.json
+- Intent: Toggle a binary setting on or off with a slide animation
+  Slots: checked, onCheckedChange
+  Often used with: form-field, label
+  Prompts: add a toggle switch | add an enable/disable toggle | add a notifications on/off switch
+
+## Table
+- Name: table
+- Install: aether-ui add table
+- Source: https://registry.aetherui.dev/r/table.json
+- Intent: Display rows of structured data in a semantic table layout
+  Slots: TableHeader, TableBody, TableRow, TableHead, TableCell, TableFooter
+  Often used with: table-toolbar, badge, button, skeleton
+  Prompts: add a data table | show a list of users in a table | add a table with sortable columns
+
+## Tabs
+- Name: tabs
+- Install: aether-ui add tabs
+- Source: https://registry.aetherui.dev/r/tabs.json
+- Intent: Organise content into switchable panels navigated by tab buttons
+  Slots: TabsList, TabsTrigger, TabsContent, defaultValue
+  Often used with: card, section-header
+  Prompts: add tabs | add a tabbed interface | add a settings page with tabs
+
+## Textarea
+- Name: textarea
+- Install: aether-ui add textarea
+- Source: https://registry.aetherui.dev/r/textarea.json
+- Intent: Capture multi-line free-form text from the user
+  Slots: value, onChange, placeholder, rows
+  Often used with: form-field, label
+  Prompts: add a textarea | add a description field | add a multiline text input
+
+## Tooltip
+- Name: tooltip
+- Install: aether-ui add tooltip
+- Source: https://registry.aetherui.dev/r/tooltip.json
+- Intent: Show a short contextual hint when the user hovers or focuses an element
+  Slots: TooltipTrigger, TooltipContent, children
+  Often used with: button, badge
+  Prompts: add a tooltip | show a hint on hover | add an icon with a tooltip
+
+## Patterns (9)
+
+## Empty State
+- Name: empty-state
+- Install: aether-ui add empty-state
+- Source: https://registry.aetherui.dev/r/empty-state.json
+- Intent: Show a helpful empty-view when a list or collection has no data yet
+  Slots: icon, title, description, action
+  Often used with: button, card
+  Prompts: add an empty state | show a no results message | add a zero-data placeholder
+
+## Error State
+- Name: error-state
+- Install: aether-ui add error-state
+- Source: https://registry.aetherui.dev/r/error-state.json
+- Intent: Communicate a data-loading or network failure and offer a retry action
+  Slots: title, description, onRetry
+  Often used with: button
+  Prompts: add an error state | show an error message with a retry button | add a fetch error fallback
+
+## Form Field
+- Name: form-field
+- Install: aether-ui add form-field
+- Source: https://registry.aetherui.dev/r/form-field.json
+- Intent: Compose a labelled form control with helper text and validation error message
+  Slots: FormLabel, FormControl, FormDescription, FormMessage, children
+  Often used with: input, textarea, select, checkbox, switch, label
+  Prompts: add a form field with validation | add an email field with error message | add a labelled input with helper text
+
+## Loading State
+- Name: loading-state
+- Install: aether-ui add loading-state
+- Source: https://registry.aetherui.dev/r/loading-state.json
+- Intent: Display a centered loading indicator while async data is being fetched
+  Slots: variant, rows
+  Often used with: skeleton
+  Prompts: add a loading state | show a spinner while data loads | add a loading indicator
+
+## Metric Card
+- Name: metric-card
+- Install: aether-ui add metric-card
+- Source: https://registry.aetherui.dev/r/metric-card.json
+- Intent: Show a single KPI metric with a label, value, trend indicator, and icon
+  Slots: label, value, trend, icon, description
+  Often used with: card, badge, dashboard-shell
+  Prompts: add a metric card | add a KPI card | add a stat card with a trend
+
+## Sidebar Nav
+- Name: nav
+- Install: aether-ui add nav
+- Source: https://registry.aetherui.dev/r/nav.json
+- Intent: Build a composable sidebar navigation with grouped nav items and active states
+  Slots: NavItem, NavGroup, SidebarNav, items, groups
+  Often used with: dashboard-shell, badge
+  Prompts: add a sidebar navigation | add nav items to a sidebar | add a grouped sidebar menu
+
+## Page Header
+- Name: page-header
+- Install: aether-ui add page-header
+- Source: https://registry.aetherui.dev/r/page-header.json
+- Intent: Top-of-page heading block with title, description, optional breadcrumb, and an actions area
+  Slots: title, description, breadcrumb, actions
+  Often used with: button, badge, section-header
+  Prompts: add a page header | add a page title with a breadcrumb | add a header with an action button
+
+## Section Header
+- Name: section-header
+- Install: aether-ui add section-header
+- Source: https://registry.aetherui.dev/r/section-header.json
+- Intent: Label a content section with a title and optional action, or wrap it in a SettingsSection
+  Slots: title, description, action, children
+  Often used with: card, form-field, button
+  Prompts: add a section heading | add a settings section | add a content block title
+
+## Table Toolbar
+- Name: table-toolbar
+- Install: aether-ui add table-toolbar
+- Source: https://registry.aetherui.dev/r/table-toolbar.json
+- Intent: Provide a search input, active filter pills, and action buttons above a data table
+  Slots: search, filters, actions, FilterPill
+  Often used with: table, input, button, badge, select
+  Prompts: add a table toolbar with search and filters | add a search bar above a table | add filter chips to a data table
+
+## Blocks (3)
+
+## Dashboard Shell
+- Name: dashboard-shell
+- Install: aether-ui add dashboard-shell
+- Source: https://registry.aetherui.dev/r/dashboard-shell.json
+- Intent: Full-page SaaS app shell with a collapsible sidebar, search topbar, and a main content slot
+  Slots: children, sidebar, topbar
+  Often used with: nav, metric-card, table-toolbar, table, page-header
+  Prompts: build me a SaaS dashboard | add a dashboard layout | create an admin panel shell
+
+## Login
+- Name: login-block
+- Install: aether-ui add login-block
+- Source: https://registry.aetherui.dev/r/login-block.json
+- Intent: Ready-made login page block with email, password, remember-me, and forgot-password
+  Slots: onSubmit, onForgotPassword, footer
+  Often used with: form-field, input, button, checkbox, label
+  Prompts: add a login page | create an authentication screen | add a sign-in form
+
+## Sign Up
+- Name: signup-block
+- Install: aether-ui add signup-block
+- Source: https://registry.aetherui.dev/r/signup-block.json
+- Intent: Ready-made sign-up page block with name, email, password validation, and terms acceptance
+  Slots: onSubmit, onSignIn, footer
+  Often used with: form-field, input, button, checkbox
+  Prompts: add a sign up page | create a registration form | add a new account form
+
+## Compose a SaaS Dashboard
+
+To build a standard SaaS dashboard, install these items in order:
+
+```bash
+npx aether-ui add dashboard-shell   # full-page layout with sidebar and topbar
+npx aether-ui add metric-card       # KPI cards for the overview
+npx aether-ui add table-toolbar     # search + filter above data tables
+npx aether-ui add table             # data table
+npx aether-ui add page-header       # page titles with breadcrumbs
+npx aether-ui add empty-state       # zero-data fallbacks
+npx aether-ui add loading-state     # async loading indicators
+npx aether-ui add error-state       # fetch error fallbacks
+```
+
+## Compose an Authentication Flow
+
+```bash
+npx aether-ui add login-block       # email + password login
+npx aether-ui add signup-block      # registration form
+```
+
+## Token-Driven Styling
+
+All components consume CSS custom properties from `@aetherstack/tokens`.
+Override the design system by redefining tokens in your global CSS:
+
+```css
+:root {
+  --color-primary: 220 90% 56%;
+  --radius: 0.5rem;
+}
+```

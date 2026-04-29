@@ -28,6 +28,7 @@ const ROOT = resolve(__dirname, "../../../")
 const INPUT = resolve(ROOT, "registry/public/registry.json")
 const OUTPUT_DIR = resolve(ROOT, "apps/registry-public/public/r")
 const OUTPUT_FILE = resolve(OUTPUT_DIR, "registry.json")
+const LLMS_TXT_FILE = resolve(ROOT, "apps/registry-public/public/llms.txt")
 
 console.log("Building public registry …")
 
@@ -63,6 +64,10 @@ for (const item of itemsWithContent) {
 console.log(`  ✓ Written aggregate manifest with ${aggregate.items.length} items`)
 console.log(`  ✓ Written ${aggregate.items.length} per-item JSON files`)
 
+const llmsTxt = buildLlmsTxt(aggregate)
+writeFileSync(LLMS_TXT_FILE, llmsTxt)
+console.log(`  ✓ Written llms.txt`)
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -84,6 +89,128 @@ function inlineItemFiles(item: RegistryItem): RegistryItem {
   })
 
   return { ...item, files }
+}
+
+function buildLlmsTxt(registry: Registry): string {
+  const registryUrl = "https://registry.aetherui.dev"
+  const docsUrl = "https://aetherui.dev"
+
+  const typeOrder: Record<string, number> = {
+    "registry:ui": 0,
+    "registry:pattern": 1,
+    "registry:block": 2,
+  }
+
+  const sorted = [...registry.items].sort((a, b) => {
+    const ta = typeOrder[a.type] ?? 99
+    const tb = typeOrder[b.type] ?? 99
+    return ta !== tb ? ta - tb : a.name.localeCompare(b.name)
+  })
+
+  const primitives = sorted.filter((i) => i.type === "registry:ui")
+  const patterns = sorted.filter((i) => i.type === "registry:pattern")
+  const blocks = sorted.filter((i) => i.type === "registry:block")
+
+  const formatItem = (item: RegistryItem): string => {
+    const intent = item.ai?.intent ?? item.description ?? ""
+    const installCmd = `aether-ui add ${item.name}`
+    const slots = item.ai?.slots?.length ? `  Slots: ${item.ai.slots.join(", ")}` : ""
+    const composition = item.ai?.composition?.length
+      ? `  Often used with: ${item.ai.composition.join(", ")}`
+      : ""
+    const prompts = item.ai?.prompts?.length
+      ? `  Prompts: ${item.ai.prompts.slice(0, 3).join(" | ")}`
+      : ""
+    return [
+      `## ${item.title ?? item.name}`,
+      `- Name: ${item.name}`,
+      `- Install: ${installCmd}`,
+      `- Source: ${registryUrl}/r/${item.name}.json`,
+      `- Intent: ${intent}`,
+      slots,
+      composition,
+      prompts,
+    ]
+      .filter(Boolean)
+      .join("\n")
+  }
+
+  const lines: string[] = [
+    `# Aether UI`,
+    ``,
+    `> Aether UI is a premium open-code design system for SaaS dashboards and admin interfaces.`,
+    `> Registry format is compatible with shadcn/ui. Use the \`aether-ui\` CLI to install components.`,
+    ``,
+    `## Quick Start`,
+    ``,
+    `\`\`\`bash`,
+    `npx aether-ui init          # initialise project, creates aether.json`,
+    `npx aether-ui list          # browse available components`,
+    `npx aether-ui add button    # install a component`,
+    `npx aether-ui generate "build me a SaaS dashboard"  # AI-driven scaffolding`,
+    `\`\`\``,
+    ``,
+    `## Documentation`,
+    ``,
+    `- Full docs: ${docsUrl}`,
+    `- Registry API: ${registryUrl}/r/registry.json`,
+    `- AI usage guide: ${docsUrl}/llms`,
+    `- Tokens reference: ${docsUrl}/tokens`,
+    `- Component reference: ${docsUrl}/components`,
+    ``,
+    `## Architecture`,
+    ``,
+    `Aether UI uses a four-layer architecture:`,
+    `1. **Primitives** (registry:ui) — foundational components for forms, layout, and interaction`,
+    `2. **Patterns** (registry:pattern) — higher-level compositions of primitives`,
+    `3. **Blocks** (registry:block) — full page-section assemblies`,
+    `4. **Tokens** — design tokens for colors, spacing, typography, and more`,
+    ``,
+    `## Primitives (${primitives.length})`,
+    ``,
+    ...primitives.map(formatItem).flatMap((s) => [s, ""]),
+    `## Patterns (${patterns.length})`,
+    ``,
+    ...patterns.map(formatItem).flatMap((s) => [s, ""]),
+    `## Blocks (${blocks.length})`,
+    ``,
+    ...blocks.map(formatItem).flatMap((s) => [s, ""]),
+    `## Compose a SaaS Dashboard`,
+    ``,
+    `To build a standard SaaS dashboard, install these items in order:`,
+    ``,
+    `\`\`\`bash`,
+    `npx aether-ui add dashboard-shell   # full-page layout with sidebar and topbar`,
+    `npx aether-ui add metric-card       # KPI cards for the overview`,
+    `npx aether-ui add table-toolbar     # search + filter above data tables`,
+    `npx aether-ui add table             # data table`,
+    `npx aether-ui add page-header       # page titles with breadcrumbs`,
+    `npx aether-ui add empty-state       # zero-data fallbacks`,
+    `npx aether-ui add loading-state     # async loading indicators`,
+    `npx aether-ui add error-state       # fetch error fallbacks`,
+    `\`\`\``,
+    ``,
+    `## Compose an Authentication Flow`,
+    ``,
+    `\`\`\`bash`,
+    `npx aether-ui add login-block       # email + password login`,
+    `npx aether-ui add signup-block      # registration form`,
+    `\`\`\``,
+    ``,
+    `## Token-Driven Styling`,
+    ``,
+    `All components consume CSS custom properties from \`@aetherstack/tokens\`.`,
+    `Override the design system by redefining tokens in your global CSS:`,
+    ``,
+    `\`\`\`css`,
+    `:root {`,
+    `  --color-primary: 220 90% 56%;`,
+    `  --radius: 0.5rem;`,
+    `}`,
+    `\`\`\``,
+  ]
+
+  return lines.join("\n") + "\n"
 }
 
 function clearStaleItemFiles(dir: string, currentItems: RegistryItem[]): void {
