@@ -40,7 +40,7 @@ function FrameworkBadge({ name, emoji }: { name: string; emoji: string }) {
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">{children}</h2>
+    <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">{children}</h2>
   )
 }
 

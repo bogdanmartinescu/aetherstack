@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="mb-4 mt-10 text-xl font-semibold tracking-tight text-foreground first:mt-0">
+    <h2 className="mb-4 mt-10 text-2xl font-semibold tracking-tight text-foreground">
       {children}
     </h2>
   )
@@ -17,7 +17,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 function SubHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="mb-3 mt-6 text-base font-semibold text-foreground">{children}</h3>
+    <h3 className="mb-3 mt-8 text-lg font-semibold text-foreground">{children}</h3>
   )
 }
 
@@ -25,17 +25,11 @@ function Prose({ children }: { children: React.ReactNode }) {
   return <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">{children}</div>
 }
 
-function Callout({
-  title,
-  children,
-}: {
-  title: string
-  children: React.ReactNode
-}) {
+function Callout({ title, children }: { title?: string; children: React.ReactNode }) {
   return (
-    <div className="my-6 rounded-lg border border-border bg-muted/40 px-5 py-4">
-      <p className="mb-1 text-sm font-semibold text-foreground">{title}</p>
-      <p className="text-sm text-muted-foreground">{children}</p>
+    <div className="my-4 rounded-lg border border-border bg-muted/40 px-4 py-3">
+      {title && <p className="mb-1 text-sm font-semibold text-foreground">{title}</p>}
+      <div className="text-sm text-muted-foreground">{children}</div>
     </div>
   )
 }
@@ -83,15 +77,16 @@ function ToolCard({
 
 export default function LlmsPage() {
   return (
-    <div className="mx-auto max-w-3xl space-y-2 pb-16">
+    <div className="max-w-3xl">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="mb-2 text-3xl font-bold tracking-tight text-foreground">AI &amp; LLMs</h1>
-        <p className="text-base text-muted-foreground">
+      <div className="mb-10">
+        <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">AI &amp; LLMs</h1>
+        <p className="text-lg text-muted-foreground">
           Aether UI is designed to be the most LLM-friendly design system in the ecosystem.
           Every component ships with machine-readable AI metadata, the registry exposes a{" "}
-          <code className="text-sm">llms.txt</code> index, and an MCP server lets agents browse
-          and install components directly from Cursor, Claude Desktop, or any MCP-compatible tool.
+          <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-base">llms.txt</code>{" "}
+          index, and an MCP server lets agents browse and install components directly from
+          Cursor, Claude Desktop, or any MCP-compatible tool.
         </p>
       </div>
 
