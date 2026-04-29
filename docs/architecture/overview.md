@@ -22,8 +22,9 @@ and URLs stay consistent.
 | `Aether UI` | The design system product shipped from this monorepo |
 | `@aetherstack/*` | npm scope for all internal packages (e.g. `@aetherstack/ui`) |
 | `@aether` | Namespace for the **public** registry manifest items |
-| `@aether-pro` | Namespace for the future **premium** registry manifest items |
+| `@aether-pro` | Namespace for the **premium** registry manifest items (license-gated) |
 | `aether-ui` | The CLI binary (`npx @aetherstack/cli` → runs `aether-ui`) |
+| `account.aetherui.dev` | The Pro account dashboard app (`apps/account`) |
 
 ## Repository Structure
 
@@ -33,7 +34,8 @@ aetherstack/
 │   ├── docs/             — Public documentation site (Next.js)
 │   ├── studio/           — Internal component playground (Next.js, private)
 │   ├── demo/             — Reference SaaS dashboard (Next.js)
-│   └── registry-public/  — Static registry host (Next.js, output: export)
+│   ├── registry-public/  — Static registry host (Next.js, output: export)
+│   └── account/          — Pro account dashboard: auth, billing, license (Next.js) [Phase 8]
 │
 ├── packages/
 │   ├── config-eslint/    — Shared ESLint configs
@@ -50,7 +52,8 @@ aetherstack/
 │   │
 │   ├── registry-schema/  — Zod schemas + types for registry manifests
 │   ├── registry-build/   — Build tooling for validating/generating registries
-│   └── cli/              — `aether-ui` CLI (init / add / list)
+│   ├── mcp-server/       — Aether UI MCP server (list/get/install/compose tools)
+│   └── cli/              — `aether-ui` CLI (init / add / list / generate / login)
 │
 ├── registry/
 │   ├── public/           — @aether public registry manifest (registry.json)
@@ -85,13 +88,18 @@ utils
 registry-schema
   ├── registry-build
   │    └── tooling/scripts
-  └── cli
+  ├── cli              (also: lib/auth.ts for license token mgmt — Phase 8)
+  └── mcp-server
 ```
 
 Apps consume whichever packages they need. The `docs`, `studio`, and `demo` apps consume the full
 UI stack. `registry-public` only consumes `registry-schema`. The `cli` package depends on
 `registry-schema` for validating manifests it fetches at runtime; `tsup` bundles the schema into
 the CLI output so the published binary has no workspace runtime deps.
+
+The `account` app (Phase 8) is a standalone Next.js App Router application. It consumes
+`@aetherstack/ui` and `@aetherstack/tokens` for its own UI, and adds `@clerk/nextjs` and `stripe`
+as external dependencies. It is not a shared package — it is a deployable product app.
 
 ---
 
@@ -109,6 +117,8 @@ the CLI output so the published binary has no workspace runtime deps.
 | Versioning | Changesets | Independent package versioning |
 | Linting | ESLint 8 | Next.js native support |
 | Formatting | Prettier + prettier-plugin-tailwindcss | Consistent class ordering |
+| Auth (Phase 8) | Clerk | Built-in React components, Organizations for Team tier, custom session JWT claims for license |
+| Billing (Phase 8) | Stripe | Checkout, Customer Portal, webhook-driven license sync |
 
 ---
 
@@ -155,4 +165,37 @@ Each item in the manifest carries its own `files[]` array with either inline
 The `cssVars` and `tailwind` fields let items ship theme overrides alongside code.
 
 The pro registry (`registry/pro/`) follows the same format and will be served
-from an authenticated endpoint in a future phase.
+from a license-gated API route in `apps/account` (Phase 8).
+
+---
+
+## Auth & License Architecture (Phase 8)
+
+The commercial layer is built on Clerk + Stripe with no custom database required for basic license management.
+
+```
+User pays via Stripe Checkout
+  → Stripe webhook fires
+  → apps/account API route writes to Clerk privateMetadata:
+     { license_tier, status, seats, stripe_customer_id }
+  → Clerk custom session template adds license_tier as a JWT claim
+
+User runs: aether-ui login
+  → CLI opens browser to account.aetherui.dev/cli-auth  (device-flow)
+  → User authenticates with Clerk
+  → CLI polls /cli-auth for the token
+  → JWT saved to ~/.aetherui/config.json (1-hour TTL, auto-refresh)
+
+User runs: aether-ui add <pro-item>
+  → CLI reads local JWT, checks license_tier claim offline
+  → If unlicensed: prints upgrade link, exits cleanly
+  → If licensed: sends JWT to apps/account pro-registry proxy route
+  → Proxy validates JWT server-side, returns pro item JSON
+```
+
+### Key decisions
+- **Clerk** handles identity, session tokens, and license metadata — no separate auth database
+- **JWT claims** allow the CLI to verify license tier offline within the token TTL window
+- **Public registry** remains completely unauthenticated and CDN-served — auth only touches `@aether-pro` items
+- **License is per-project** (Pro) or per-seat/org (Team); Clerk Organizations manage Team-tier membership natively
+- **Installed code is perpetually owned** — components already installed stay in the user's repo even if a subscription lapses

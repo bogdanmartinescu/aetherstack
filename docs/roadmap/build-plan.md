@@ -14,7 +14,7 @@ Phases 1–4 are complete and committed. Phase 4.6 is a stabilization sprint (se
 
 ## Product Goal
 
-Aetherstack is the umbrella product and monorepo for **Aether UI**, a premium open-code design system and registry for SaaS products, admin dashboards, and modern internal tools. Its registry format is compatible with the shadcn/ui convention, but it ships its own CLI (`aether-ui`), AI metadata, and an opt-in MCP server, and is independent of the shadcn CLI.
+Aetherstack is the umbrella product and monorepo for **Aether UI**, a premium open-code design system and registry for any modern web product — SaaS dashboards, marketing sites, e-commerce, portfolios, internal tools, and beyond. Its registry format is compatible with the shadcn/ui convention, but it ships its own CLI (`aether-ui`), AI metadata, and an opt-in MCP server, and is independent of the shadcn CLI.
 
 The system supports:
 
@@ -347,25 +347,53 @@ Make the public registry production-quality: durable URLs, versioning, CDN deliv
 Status: Pending
 
 ## Goal
-Build the commercial layer: auth, license gating, billing, and the premium-namespace runtime — without destabilizing the public system.
+Build the commercial layer: Clerk auth, Stripe billing, license gating, and the premium-namespace runtime — without destabilizing the public system.
 
 ## Deliverables
+
+### `apps/account` — Account Dashboard
+- New Next.js App Router app at `account.aetherui.dev`
+- Clerk authentication — sign in, sign up, profile management; no custom auth UI required
+- Pages:
+  - `/` — license overview (tier, seats used, expiry)
+  - `/billing` — Stripe Customer Portal redirect (invoices, plan changes, cancellation)
+  - `/license` — license key display + seat invites (Team tier)
+  - `/cli-auth` — device-flow polling endpoint for `aether-ui login`
+  - `/api/stripe/webhook` — Stripe event handler that writes to Clerk `privateMetadata`
+- Uses `@aetherstack/ui` and `@aetherstack/tokens` throughout
+
+### License System
+- **Identity:** Clerk — `privateMetadata.license` stores `{ tier, status, seats, stripe_customer_id }`
+- **Session token:** Clerk custom session template adds `license_tier` as a JWT claim; 1-hour TTL with auto-refresh
+- **No external database required** for basic license storage — Clerk handles identity and metadata
+- **CLI credentials:** stored in `~/.aetherui/config.json` after device flow completes
+- Stripe Checkout for Pro ($79/yr) and Team ($199/yr) tiers; webhook fires on `checkout.session.completed` and `customer.subscription.*` events to keep Clerk metadata in sync
+
+### CLI Auth Layer (`packages/cli`)
+- `aether-ui login` — device flow: opens browser to `account.aetherui.dev/cli-auth`, polls for JWT, saves to `~/.aetherui/config.json`
+- `aether-ui logout` — clears stored credentials
+- `aether-ui whoami` — prints current user email and license tier
+- `aether-ui add <pro-item>` — detects `pro: true` on the registry item; reads JWT, verifies `license_tier` claim locally; shows a clear upgrade link if unlicensed
+- New file: `packages/cli/src/lib/auth.ts` — reads/writes `~/.aetherui/config.json`, validates JWT claims offline (1-hour window), handles token refresh
+
+### Pro Registry Gating
 - `@aether-pro` namespace fully wired: registry, CDN, schema-level `pro: true` enforcement
-- license-aware CLI: `aether-ui login`, `aether-ui add <pro-item>` checks license token before fetching
-- account dashboard at `account.aetherui.dev` (sign in, manage seats, view license keys, download invoices)
-- Stripe checkout + customer portal integration with workspace-level seat counts
-- license validation service (token-bound, rotatable, offline-capable for short windows)
-- separation rules between public and pro source: pro items live in `registry/pro/**` with their own build pipeline and never leak into public registry artefacts
-- pro `llms.txt` gated behind license
+- JWT-validated API route in `apps/account` proxies pro registry item JSON — public registry stays on CDN with no auth
+- Separation rules enforced: pro items live in `registry/pro/**` with their own build pipeline and never appear in public registry artifacts
+- Pro `llms.txt` generated separately and gated behind license
 
 ## Acceptance Criteria
 - A non-licensed user cannot download any `pro: true` registry item
-- A licensed user can install pro items via the CLI without manual auth flow
+- A licensed user can install pro items via the CLI without a manual auth step after `aether-ui login`
+- `aether-ui login` completes the device flow and stores a valid JWT locally
+- `aether-ui add <pro-item>` fails with a clear, actionable error for unlicensed users (includes upgrade link)
+- Stripe webhook correctly writes `license_tier` to Clerk `privateMetadata` on successful payment
+- A Team-tier user can manage seats and invite collaborators via `apps/account`
 - Pro items can be added or revoked without rebuilding the public registry
-- Account, billing, and license flows are documented and self-serve
+- Account, billing, and license flows are self-serve and documented
 
 ## Notes
-Resist the urge to ship pro content before the gating works end-to-end. Architecture first, content second.
+Resist the urge to ship pro content before the gating works end-to-end. Architecture first, content second. The account app must use `@aetherstack/ui` components — Aether UI should eat its own cooking.
 
 ---
 
@@ -374,18 +402,61 @@ Resist the urge to ship pro content before the gating works end-to-end. Architec
 Status: Pending
 
 ## Goal
-Ship enough premium value to justify a paid tier, then launch publicly.
+Ship enough premium value to justify the paid tier — across advanced components, page templates, vertical kits, and themes for any product type — then launch publicly.
 
 ## Deliverables
 
-### Pro content
-- **CRM Vertical Kit** — Contacts page, Deal Pipeline kanban, Activity Timeline block, Contact Drawer
-- **Billing Vertical Kit** — Subscription management, Invoice history, Usage charts, Plan picker
-- **Analytics Vertical Kit** — Dashboards with recharts, Funnel charts, Cohort retention, Custom report builder
-- **AI Recipes Pro** — opinionated prompt → generated-stack flows (e.g. "make me a project management tool"), each backed by composed pro blocks
-- 2–3 premium themes (Slate Pro, Indigo Pro, Onyx) with full token overrides
+### Advanced Components (pro-gated, `@aether-pro` namespace)
+- **DataTable** — sortable, filterable, paginated data grid with column visibility
+- **CommandPalette** — ⌘K fuzzy-search command surface
+- **Calendar & DatePicker** — date + date-range selection
+- **Combobox** — autocomplete select with async search
+- **FileDropzone** — drag-and-drop file upload with preview
+- **Toast / Notification system** — queue, variants, actions
+- **Avatar & AvatarGroup** — fallback initials, stacked groups
+- **Stepper / Wizard** — multi-step form flow
+- **RichText editor** — Tiptap-based rich text integration
+- **KanbanColumn** — drag-and-drop board column
+- **ActivityFeed** — timestamped event stream
+- **ColorPicker** — hex, HSL, and alpha controls
 
-### Release polish
+### Page Templates (pro-gated)
+- SaaS landing page (hero, features, pricing, CTA)
+- Marketing site sections (testimonials, logos, FAQ)
+- Full settings page (profile, billing, notifications, team)
+- User management page with roles and invites
+- Analytics dashboard with charts and KPI grid
+- Blog home + article layout
+- Portfolio / agency site sections
+- E-commerce product listing + detail + cart
+- Waitlist + early-access page
+- Changelog / release notes page
+
+### Vertical Kits (pro-gated)
+- **SaaS Kit** — landing, auth, onboarding, dashboard, settings, billing
+- **CRM Kit** — Contacts page, Deal Pipeline kanban, Activity Timeline block, Contact Drawer
+- **Billing Kit** — Subscription management, Invoice history, Usage charts, Plan picker
+- **Analytics Kit** — Multi-chart dashboards, Funnel charts, Cohort retention, Custom report builder
+- **Marketing Kit** — Hero, features, testimonials, pricing, blog, footer sections
+- **E-commerce Kit** — Product listing, detail, cart, checkout
+
+### Premium Themes (pro-gated)
+- **Slate Pro** — cool-gray, professional
+- **Indigo Pro** — indigo accent, modern
+- **Onyx** — deep dark, high-contrast
+- **Rose** — warm, premium consumer feel
+- **Emerald** — fresh green-accent palette
+
+### AI Pro (pro-gated)
+- Pro `llms.txt` with all pro-item entries and kit composition recipes, gated behind license
+- 50+ extended `generate` recipes that resolve to pro blocks and templates
+- MCP `compose_block` and `compose_template` tools serving pro items when a valid JWT is present
+- AI Recipes Pro — opinionated prompt → feature-scaffold flows (e.g. "make me a project management tool"), each backed by composed pro blocks
+
+### Figma Kit (pro-gated)
+- Full Figma component library matching the Aether UI system, with auto-layout and design tokens bound to the token system
+
+### Release Polish
 - changesets release flow finalized for both `@aetherstack/*` and `@aether-pro/*`
 - versioning policy documented
 - regression checklist for docs, demo, and registry
@@ -395,12 +466,14 @@ Ship enough premium value to justify a paid tier, then launch publicly.
 - visual regression baseline (Playwright + Percy or equivalent) for primitives and blocks
 
 ## Acceptance Criteria
-- A subscriber can subscribe, install at least one vertical kit, and ship a working SaaS feature in under 30 minutes
-- Repo is maintainable consistently
-- Public-facing quality bar is enforceable
+- A subscriber can subscribe, install at least one vertical kit, and ship a working product feature in under 30 minutes
+- All pro content is correctly gated — unlicensed users get helpful upgrade prompts, not raw errors
+- The Figma kit covers 100% of shipped pro components
+- Repo is maintainable long-term
+- Public-facing quality bar is enforceable and verified in CI
 
 ## Notes
-This is the public-launch milestone. Defer any item that's not directly required for it.
+This is the public-launch milestone. Defer any item that's not directly required for it. The general-UI scope means templates and kits should serve a broad range of product types — not only SaaS dashboards.
 
 ---
 
@@ -458,12 +531,11 @@ A phase is done only when:
 
 ## Out of Scope for Now
 
-The following should not be prioritized until Phase 9:
+The following should not be prioritized until Phase 9 (or beyond):
 
 - multiple framework targets beyond Next.js / Vite / Remix
 - CMS/database integrations
-- advanced analytics / telemetry
-- Figma kit
+- advanced analytics / telemetry on the platform itself
 - mobile-native rendering targets
 
 ---
