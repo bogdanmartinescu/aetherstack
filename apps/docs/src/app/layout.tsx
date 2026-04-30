@@ -9,7 +9,9 @@ import {
   Figtree,
   JetBrains_Mono,
 } from "next/font/google"
+import Script from "next/script"
 import { Providers } from "./providers"
+import { Toaster } from "@aetherstack/ui"
 import "./globals.css"
 
 // ── Google font instances — each gets its own CSS variable ──────────────────
@@ -48,12 +50,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={fontClasses}>
-      <head>
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script dangerouslySetInnerHTML={{ __html: fontScript }} />
-      </head>
       <body className="font-sans antialiased">
-        <Providers>{children}</Providers>
+        <Script
+          id="font-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: fontScript }}
+        />
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   )

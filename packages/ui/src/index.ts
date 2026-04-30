@@ -5,6 +5,46 @@ export {
   AccordionContent,
 } from "./components/accordion"
 
+export { Alert, AlertTitle, AlertDescription, alertVariants } from "./components/alert"
+
+export {
+  AlertDialog,
+  AlertDialogPortal,
+  AlertDialogOverlay,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from "./components/alert-dialog"
+
+export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./components/collapsible"
+
+export {
+  Drawer,
+  DrawerPortal,
+  DrawerOverlay,
+  DrawerTrigger,
+  DrawerClose,
+  DrawerHandle,
+  DrawerContent,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerDescription,
+} from "./components/drawer"
+
+export { Kbd } from "./components/kbd"
+export type { KbdProps } from "./components/kbd"
+
+export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor, PopoverClose } from "./components/popover"
+
+export { Spinner, spinnerVariants } from "./components/spinner"
+export type { SpinnerProps } from "./components/spinner"
+
 export { Avatar, AvatarImage, AvatarFallback, AvatarGroup } from "./components/avatar"
 
 export { Badge, badgeVariants } from "./components/badge"
@@ -92,9 +132,11 @@ export {
   ToastDescription,
   ToastClose,
   ToastAction,
+  Toaster,
   toastVariants,
   useToast,
   toast,
+  VARIANT_ICONS,
 } from "./components/toast"
 export type { ToastProps, ToastActionElement } from "./components/toast"
 

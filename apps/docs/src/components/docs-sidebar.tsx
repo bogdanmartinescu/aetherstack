@@ -1,16 +1,26 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@aetherstack/utils"
 import { ThemeToggle, FontPicker } from "./theme-font-controls"
+import {
+  CommandPaletteDialog,
+  CommandPalette,
+  CommandPaletteInput,
+  CommandPaletteList,
+  CommandPaletteEmpty,
+  CommandGroup,
+  CommandItem,
+} from "@aetherstack/patterns"
 
 // ── Navigation data ───────────────────────────────────────────────────────────
 
 const nav = [
   {
     group: "Getting started",
+    section: "docs",
     items: [
       { label: "Introduction", href: "/introduction" },
       { label: "Installation", href: "/installation" },
@@ -21,6 +31,7 @@ const nav = [
   },
   {
     group: "Foundation",
+    section: "docs",
     items: [
       { label: "Tokens", href: "/tokens" },
       { label: "Icons", href: "/icons" },
@@ -29,7 +40,53 @@ const nav = [
     ],
   },
   {
+    group: "Components",
+    section: "components",
+    items: [
+      { label: "Overview", href: "/components" },
+      { label: "Accordion", href: "/components/accordion" },
+      { label: "Alert", href: "/components/alert" },
+      { label: "Alert Dialog", href: "/components/alert-dialog" },
+      { label: "Avatar", href: "/components/avatar" },
+      { label: "Badge", href: "/components/badge" },
+      { label: "Button", href: "/components/button" },
+      { label: "Calendar", href: "/components/calendar" },
+      { label: "Card", href: "/components/card" },
+      { label: "Checkbox", href: "/components/checkbox" },
+      { label: "Collapsible", href: "/components/collapsible" },
+      { label: "Combobox", href: "/components/combobox" },
+      { label: "Context Menu", href: "/components/context-menu" },
+      { label: "Dialog", href: "/components/dialog" },
+      { label: "Drawer", href: "/components/drawer" },
+      { label: "Dropdown Menu", href: "/components/dropdown-menu" },
+      { label: "Hover Card", href: "/components/hover-card" },
+      { label: "Input", href: "/components/input" },
+      { label: "Kbd", href: "/components/kbd" },
+      { label: "Label", href: "/components/label" },
+      { label: "Pagination", href: "/components/pagination" },
+      { label: "Popover", href: "/components/popover" },
+      { label: "Progress", href: "/components/progress" },
+      { label: "Radio Group", href: "/components/radio-group" },
+      { label: "Scroll Area", href: "/components/scroll-area" },
+      { label: "Select", href: "/components/select" },
+      { label: "Separator", href: "/components/separator" },
+      { label: "Sheet", href: "/components/sheet" },
+      { label: "Skeleton", href: "/components/skeleton" },
+      { label: "Slider", href: "/components/slider" },
+      { label: "Spinner", href: "/components/spinner" },
+      { label: "Switch", href: "/components/switch" },
+      { label: "Table", href: "/components/table" },
+      { label: "Tabs", href: "/components/tabs" },
+      { label: "Textarea", href: "/components/textarea" },
+      { label: "Toast", href: "/components/toast" },
+      { label: "Toggle", href: "/components/toggle" },
+      { label: "Toggle Group", href: "/components/toggle-group" },
+      { label: "Tooltip", href: "/components/tooltip" },
+    ],
+  },
+  {
     group: "Patterns",
+    section: "patterns",
     items: [
       { label: "Overview", href: "/patterns" },
       { label: "Activity Feed", href: "/patterns/activity-feed" },
@@ -42,6 +99,10 @@ const nav = [
       { label: "File Dropzone", href: "/patterns/file-dropzone" },
       { label: "Filter Toolbar", href: "/patterns/filter-toolbar" },
       { label: "Form Field", href: "/patterns/form-field" },
+      { label: "Login Form", href: "/patterns/login-form" },
+      { label: "Sign Up Form", href: "/patterns/signup-form" },
+      { label: "Profile Form", href: "/patterns/profile-form" },
+      { label: "Contact Form", href: "/patterns/contact-form" },
       { label: "Kanban", href: "/patterns/kanban" },
       { label: "Loading State", href: "/patterns/loading-state" },
       { label: "Metric Card", href: "/patterns/metric-card" },
@@ -55,65 +116,53 @@ const nav = [
     ],
   },
   {
-    group: "Blocks",
+    group: "Forms",
+    section: "forms",
     items: [
-      { label: "Overview", href: "/blocks" },
-      { label: "Account Settings", href: "/blocks/account-settings" },
-      { label: "Billing Overview", href: "/blocks/billing-overview" },
-      { label: "Empty Dashboard", href: "/blocks/empty-dashboard" },
-      { label: "Notification Center", href: "/blocks/notification-center" },
-      { label: "Onboarding Checklist", href: "/blocks/onboarding-checklist" },
-      { label: "Pricing Section", href: "/blocks/pricing-section" },
-      { label: "Team Settings", href: "/blocks/team-settings" },
+      { label: "React Hook Form", href: "/forms/react-hook-form" },
     ],
   },
   {
-    group: "Components",
+    group: "Blocks",
+    section: "blocks",
     items: [
-      { label: "Overview", href: "/components" },
-      { label: "Accordion", href: "/components/accordion" },
-      { label: "Avatar", href: "/components/avatar" },
-      { label: "Badge", href: "/components/badge" },
-      { label: "Button", href: "/components/button" },
-      { label: "Calendar", href: "/components/calendar" },
-      { label: "Card", href: "/components/card" },
-      { label: "Checkbox", href: "/components/checkbox" },
-      { label: "Combobox", href: "/components/combobox" },
-      { label: "Context Menu", href: "/components/context-menu" },
-      { label: "Dialog", href: "/components/dialog" },
-      { label: "Dropdown Menu", href: "/components/dropdown-menu" },
-      { label: "Hover Card", href: "/components/hover-card" },
-      { label: "Input", href: "/components/input" },
-      { label: "Label", href: "/components/label" },
-      { label: "Pagination", href: "/components/pagination" },
-      { label: "Progress", href: "/components/progress" },
-      { label: "Radio Group", href: "/components/radio-group" },
-      { label: "Scroll Area", href: "/components/scroll-area" },
-      { label: "Select", href: "/components/select" },
-      { label: "Separator", href: "/components/separator" },
-      { label: "Sheet", href: "/components/sheet" },
-      { label: "Skeleton", href: "/components/skeleton" },
-      { label: "Slider", href: "/components/slider" },
-      { label: "Switch", href: "/components/switch" },
-      { label: "Table", href: "/components/table" },
-      { label: "Tabs", href: "/components/tabs" },
-      { label: "Textarea", href: "/components/textarea" },
-      { label: "Toast", href: "/components/toast" },
-      { label: "Toggle", href: "/components/toggle" },
-      { label: "Toggle Group", href: "/components/toggle-group" },
-      { label: "Tooltip", href: "/components/tooltip" },
+      { label: "Overview", href: "/blocks" },
+      { label: "Dashboard Shell", href: "/blocks/dashboard-shell" },
+      { label: "Login", href: "/blocks/login-block" },
+      { label: "Sign Up", href: "/blocks/signup-block" },
+      { label: "Empty Dashboard", href: "/blocks/empty-dashboard" },
+      { label: "Onboarding Checklist", href: "/blocks/onboarding-checklist" },
+      { label: "Account Settings", href: "/blocks/account-settings" },
+      { label: "Team Settings", href: "/blocks/team-settings" },
+      { label: "Billing Overview", href: "/blocks/billing-overview" },
+      { label: "Notification Center", href: "/blocks/notification-center" },
+      { label: "Pricing Section", href: "/blocks/pricing-section" },
     ],
   },
 ]
 
-// Top-level header nav links with active prefix matching
+// Flat list of all items used for search
+const allItems = nav.flatMap((g) =>
+  g.items.map((item) => ({ ...item, group: g.group })),
+)
+
+// Top-level header nav links
 const topNav = [
-  { label: "Docs", href: "/introduction", match: ["/introduction", "/installation", "/cli", "/tokens", "/icons", "/fonts", "/llms", "/pricing"] },
+  { label: "Docs", href: "/introduction", match: ["/introduction", "/installation", "/cli", "/tokens", "/icons", "/fonts", "/llms", "/pricing", "/charts"] },
   { label: "Components", href: "/components", match: ["/components"] },
   { label: "Patterns", href: "/patterns", match: ["/patterns"] },
+  { label: "Forms", href: "/forms/react-hook-form", match: ["/forms"] },
   { label: "Blocks", href: "/blocks", match: ["/blocks"] },
-  { label: "Charts", href: "/charts", match: ["/charts"] },
 ]
+
+// Determine which section the current pathname belongs to
+function getSection(pathname: string): string {
+  if (pathname.startsWith("/components")) return "components"
+  if (pathname.startsWith("/patterns")) return "patterns"
+  if (pathname.startsWith("/forms")) return "forms"
+  if (pathname.startsWith("/blocks")) return "blocks"
+  return "docs"
+}
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
 
@@ -202,18 +251,89 @@ function TopNavLink({
   )
 }
 
+// ── DocsSearch ────────────────────────────────────────────────────────────────
+
+function DocsSearch() {
+  const [open, setOpen] = useState(false)
+  const router = useRouter()
+
+  const openSearch = useCallback(() => setOpen(true), [])
+
+  // ⌘K / Ctrl+K shortcut
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        openSearch()
+      }
+    }
+    document.addEventListener("keydown", handleKey)
+    return () => document.removeEventListener("keydown", handleKey)
+  }, [openSearch])
+
+  function handleSelect(href: string) {
+    setOpen(false)
+    router.push(href)
+  }
+
+  // Group items by their nav group for display
+  const groups = nav.map((g) => ({ group: g.group, items: g.items }))
+
+  return (
+    <>
+      <button
+        onClick={openSearch}
+        className="hidden h-8 items-center gap-2 rounded-md border border-border bg-muted/40 px-3 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:flex"
+        aria-label="Search documentation"
+      >
+        <SearchIcon />
+        <span>Search docs...</span>
+        <kbd className="ml-2 hidden rounded border border-border bg-background px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground lg:inline-flex">
+          ⌘K
+        </kbd>
+      </button>
+
+      <CommandPaletteDialog open={open} onOpenChange={setOpen}>
+        <CommandPalette>
+          <CommandPaletteInput placeholder="Search docs…" />
+          <CommandPaletteList>
+            <CommandPaletteEmpty>No results found.</CommandPaletteEmpty>
+            {groups.map((g) => (
+              <CommandGroup key={g.group} heading={g.group}>
+                {g.items.map((item) => (
+                  <CommandItem
+                    key={item.href}
+                    value={`${g.group} ${item.label} ${item.href}`}
+                    onSelect={() => handleSelect(item.href)}
+                  >
+                    {item.label}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            ))}
+          </CommandPaletteList>
+        </CommandPalette>
+      </CommandPaletteDialog>
+    </>
+  )
+}
+
 // ── Sidebar ───────────────────────────────────────────────────────────────────
 
 export function DocsSidebar() {
+  const pathname = usePathname()
+  const section = getSection(pathname)
+  const visibleGroups = nav.filter((g) => g.section === section)
+
   return (
     <nav className="space-y-6">
-      {nav.map((section) => (
-        <div key={section.group}>
+      {visibleGroups.map((g) => (
+        <div key={g.group}>
           <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            {section.group}
+            {g.group}
           </p>
           <div className="space-y-0.5">
-            {section.items.map((item) => (
+            {g.items.map((item) => (
               <NavItem key={item.href} href={item.href} label={item.label} />
             ))}
           </div>
@@ -286,19 +406,10 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
 
           {/* Right-side controls */}
           <div className="flex items-center gap-2">
-            {/* Search trigger */}
-            <button
-              className="hidden h-8 items-center gap-2 rounded-md border border-border bg-muted/40 px-3 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:flex"
-              aria-label="Search documentation"
-            >
-              <SearchIcon />
-              <span>Search...</span>
-              <kbd className="ml-2 hidden rounded border border-border bg-background px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground lg:inline-flex">
-                ⌘K
-              </kbd>
-            </button>
+            {/* Search */}
+            <DocsSearch />
 
-            {/* Controls (hidden on very small screens) */}
+            {/* Controls */}
             <div className="hidden items-center gap-2 sm:flex">
               <FontPicker />
               <ThemeToggle />
@@ -329,7 +440,7 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
         <div className="flex gap-8">
           {/* Sidebar — desktop */}
           <aside className="hidden w-56 shrink-0 py-10 lg:block">
-            <div className="sticky top-20">
+            <div className="sticky top-20 max-h-[calc(100vh-5rem)] overflow-y-auto pr-2">
               <DocsSidebar />
             </div>
           </aside>

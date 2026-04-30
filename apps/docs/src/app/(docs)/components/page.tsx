@@ -18,14 +18,17 @@ const components = [
   {
     category: "Display",
     items: [
+      { name: "Alert", href: "/components/alert", description: "Contextual feedback banner with 5 severity variants." },
       { name: "Avatar", href: "/components/avatar", description: "User avatar with image and fallback initials." },
       { name: "Badge", href: "/components/badge", description: "Status, category, or count label." },
       { name: "Card", href: "/components/card", description: "Surface container with header, content, footer." },
+      { name: "Kbd", href: "/components/kbd", description: "Keyboard key badge for shortcuts and hotkeys." },
       { name: "Progress", href: "/components/progress", description: "Horizontal progress bar with animated fill." },
       { name: "Scroll Area", href: "/components/scroll-area", description: "Custom scrollbar overlay for any container." },
       { name: "Separator", href: "/components/separator", description: "Horizontal or vertical visual divider." },
       { name: "Skeleton", href: "/components/skeleton", description: "Loading placeholder that mimics content shape." },
       { name: "Slider", href: "/components/slider", description: "Draggable range input with min, max, and step." },
+      { name: "Spinner", href: "/components/spinner", description: "Animated loading indicator with four sizes." },
       { name: "Table", href: "/components/table", description: "Semantic data table with 8 sub-components." },
     ],
   },
@@ -47,6 +50,7 @@ const components = [
     category: "Navigation",
     items: [
       { name: "Accordion", href: "/components/accordion", description: "Collapsible content sections with animated transitions." },
+      { name: "Collapsible", href: "/components/collapsible", description: "Expand/collapse any content section with programmatic control." },
       { name: "Pagination", href: "/components/pagination", description: "Page navigation with prev/next and numbered links." },
       { name: "Tabs", href: "/components/tabs", description: "Layered content panels with tab navigation." },
     ],
@@ -54,10 +58,13 @@ const components = [
   {
     category: "Overlays",
     items: [
+      { name: "Alert Dialog", href: "/components/alert-dialog", description: "Blocking confirmation dialog for destructive actions." },
       { name: "Context Menu", href: "/components/context-menu", description: "Right-click contextual action menu." },
       { name: "Dialog", href: "/components/dialog", description: "Modal window with focus trap and backdrop." },
+      { name: "Drawer", href: "/components/drawer", description: "Bottom-sheet drawer with drag-to-dismiss gesture." },
       { name: "Dropdown Menu", href: "/components/dropdown-menu", description: "Floating menu anchored to a trigger element." },
       { name: "Hover Card", href: "/components/hover-card", description: "Rich preview card revealed on hover." },
+      { name: "Popover", href: "/components/popover", description: "Floating overlay anchored to a trigger for detail panels." },
       { name: "Sheet", href: "/components/sheet", description: "Slide-in panel from any screen edge." },
       { name: "Toast", href: "/components/toast", description: "Non-blocking notification messages." },
       { name: "Tooltip", href: "/components/tooltip", description: "Contextual label on hover or focus." },
@@ -71,7 +78,7 @@ export default function ComponentsPage() {
       <div className="mb-10">
         <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">Components</h1>
         <p className="text-lg text-muted-foreground">
-          31 token-driven, fully accessible, open-code primitives. Each component ships as source
+          38 token-driven, fully accessible, open-code primitives. Each component ships as source
           — you own it, edit it, extend it.
         </p>
       </div>

@@ -49,13 +49,6 @@ import {
   Toggle,
   ToggleGroup,
   ToggleGroupItem,
-  ToastProvider,
-  ToastViewport,
-  Toast,
-  ToastTitle,
-  ToastDescription,
-  ToastClose,
-  useToast,
   toast,
 } from "@aetherstack/ui"
 import {
@@ -439,59 +432,60 @@ export function ToggleGroupOutlinePreview() {
 }
 
 export function ToastPreview() {
-  const { toasts } = useToast()
   return (
-    <ToastProvider>
+    <div className="flex flex-wrap gap-2">
       <Button
         variant="outline"
         onClick={() =>
-          toast({ title: "Success!", description: "Your action was completed." })
+          toast({ title: "Saved!", description: "Your changes have been saved." })
         }
       >
-        Show Toast
+        Default
       </Button>
-      {toasts.map(({ id, title, description, action, ...props }) => (
-        <Toast key={id} {...props}>
-          <div className="grid gap-1">
-            {title && <ToastTitle>{title}</ToastTitle>}
-            {description && <ToastDescription>{description}</ToastDescription>}
-          </div>
-          {action}
-          <ToastClose />
-        </Toast>
-      ))}
-      <ToastViewport />
-    </ToastProvider>
+      <Button
+        variant="outline"
+        className="border-emerald-500/40 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/40"
+        onClick={() =>
+          toast({ variant: "success", title: "Success!", description: "Your action was completed." })
+        }
+      >
+        Success
+      </Button>
+      <Button
+        variant="outline"
+        className="border-blue-500/40 text-blue-700 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/40"
+        onClick={() =>
+          toast({ variant: "info", title: "Heads up", description: "A new version is available." })
+        }
+      >
+        Info
+      </Button>
+      <Button
+        variant="outline"
+        className="border-amber-500/40 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/40"
+        onClick={() =>
+          toast({ variant: "warning", title: "Warning", description: "Your session will expire in 5 minutes." })
+        }
+      >
+        Warning
+      </Button>
+    </div>
   )
 }
 
 export function ToastDestructivePreview() {
-  const { toasts } = useToast()
   return (
-    <ToastProvider>
-      <Button
-        variant="destructive"
-        onClick={() =>
-          toast({
-            variant: "destructive",
-            title: "Error",
-            description: "Something went wrong. Please try again.",
-          })
-        }
-      >
-        Show Error Toast
-      </Button>
-      {toasts.map(({ id, title, description, action, ...props }) => (
-        <Toast key={id} {...props}>
-          <div className="grid gap-1">
-            {title && <ToastTitle>{title}</ToastTitle>}
-            {description && <ToastDescription>{description}</ToastDescription>}
-          </div>
-          {action}
-          <ToastClose />
-        </Toast>
-      ))}
-      <ToastViewport />
-    </ToastProvider>
+    <Button
+      variant="destructive"
+      onClick={() =>
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Something went wrong. Please try again.",
+        })
+      }
+    >
+      Show Error Toast
+    </Button>
   )
 }

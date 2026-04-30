@@ -7,7 +7,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Toast",
-  description: "Transient notification messages that slide in from the edge of the screen.",
+  description: "Transient notification messages that slide in from the bottom of the screen.",
 }
 
 const MANUAL_SOURCE = `"use client"
@@ -15,124 +15,31 @@ const MANUAL_SOURCE = `"use client"
 import * as React from "react"
 import * as ToastPrimitive from "@radix-ui/react-toast"
 import { cva, type VariantProps } from "class-variance-authority"
-import { XIcon } from "lucide-react"
+import { CheckCircle2, XCircle, AlertTriangle, Info, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-
-const ToastProvider = ToastPrimitive.Provider
-
-const ToastViewport = React.forwardRef<...>(({ className, ...props }, ref) => (
-  <ToastPrimitive.Viewport
-    ref={ref}
-    className={cn(
-      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
-      className,
-    )}
-    {...props}
-  />
-))
 
 const toastVariants = cva([...], {
   variants: {
     variant: {
-      default: "border border-border bg-background text-foreground",
-      destructive: "destructive group border-destructive bg-destructive text-destructive-foreground",
+      default:     "border-border bg-background text-foreground",
+      success:     "border-emerald-500/30 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-100",
+      warning:     "border-amber-500/30 bg-amber-50 text-amber-900 dark:bg-amber-950/60 dark:text-amber-100",
+      info:        "border-blue-500/30 bg-blue-50 text-blue-900 dark:bg-blue-950/60 dark:text-blue-100",
+      destructive: "border-destructive/30 bg-destructive/10 text-destructive",
     },
   },
   defaultVariants: { variant: "default" },
 })
 
-const Toast = React.forwardRef<...>(({ className, variant, ...props }, ref) => (
-  <ToastPrimitive.Root
-    ref={ref}
-    className={cn(toastVariants({ variant }), className)}
-    {...props}
-  />
-))
-
-const ToastAction = React.forwardRef<...>(({ className, ...props }, ref) => (
-  <ToastPrimitive.Action ref={ref} className={cn("shrink-0 rounded-md border ...", className)} {...props} />
-))
-
-const ToastClose = React.forwardRef<...>(({ className, ...props }, ref) => (
-  <ToastPrimitive.Close ref={ref} className={cn("absolute right-2 top-2 ...", className)} toast-close="" {...props}>
-    <XIcon className="h-4 w-4" />
-  </ToastPrimitive.Close>
-))
-
-const ToastTitle = React.forwardRef<...>(({ className, ...props }, ref) => (
-  <ToastPrimitive.Title ref={ref} className={cn("text-sm font-semibold", className)} {...props} />
-))
-
-const ToastDescription = React.forwardRef<...>(({ className, ...props }, ref) => (
-  <ToastPrimitive.Description ref={ref} className={cn("text-sm opacity-90", className)} {...props} />
-))
-
-// useToast hook — module-level reducer, state is shared across all consumers
-function useToast() { ... }
-function toast(input: ToastInput) { ... }
-
-// Full source: packages/ui/src/components/toast.tsx
-
-export {
-  ToastProvider,
-  ToastViewport,
-  Toast,
-  ToastTitle,
-  ToastDescription,
-  ToastClose,
-  ToastAction,
-  toastVariants,
-  useToast,
-  toast,
-}`
-
-export default function ToastPage() {
-  return (
-    <ComponentPage
-      name="Toast"
-      description="Transient notification messages that appear at the edge of the screen and auto-dismiss. Built on Radix UI Toast — handles stacking, swipe-to-dismiss, and ARIA live region announcements."
-      radixSource="https://www.radix-ui.com/primitives/docs/components/toast"
-      features={[
-        "Module-level state — call toast() from anywhere in your app",
-        "Two variants: default and destructive",
-        "Supports title, description, and an optional action button",
-        "Swipe-to-dismiss on touch devices",
-        "Auto-stacks up to 5 toasts (configurable via TOAST_LIMIT)",
-        "ARIA live region — screen readers announce new toasts automatically",
-        "Animated slide-in/out with Tailwind data-state classes",
-      ]}
-      preview={<ToastPreview />}
-      previewCode={`"use client"
-
-import { Button } from "@/components/ui/button"
-import {
-  ToastProvider,
-  ToastViewport,
-  Toast,
-  ToastTitle,
-  ToastDescription,
-  ToastClose,
-  useToast,
-  toast,
-} from "@/components/ui/toast"
-
-export function ToastDemo() {
+// Convenience component — drop in your root layout
+function Toaster() {
   const { toasts } = useToast()
-
   return (
     <ToastProvider>
-      <Button
-        variant="outline"
-        onClick={() =>
-          toast({ title: "Success!", description: "Your action was completed." })
-        }
-      >
-        Show Toast
-      </Button>
-
-      {toasts.map(({ id, title, description, action, ...props }) => (
-        <Toast key={id} {...props}>
-          <div className="grid gap-1">
+      {toasts.map(({ id, title, description, action, variant, ...props }) => (
+        <Toast key={id} variant={variant} {...props}>
+          {VARIANT_ICONS[variant ?? "default"]}
+          <div className="flex-1 space-y-0.5">
             {title && <ToastTitle>{title}</ToastTitle>}
             {description && <ToastDescription>{description}</ToastDescription>}
           </div>
@@ -140,9 +47,50 @@ export function ToastDemo() {
           <ToastClose />
         </Toast>
       ))}
-
       <ToastViewport />
     </ToastProvider>
+  )
+}
+
+// Full source: packages/ui/src/components/toast.tsx`
+
+export default function ToastPage() {
+  return (
+    <ComponentPage
+      name="Toast"
+      description="Transient notification messages that appear at the bottom-right of the screen and auto-dismiss. Five semantic variants with automatic icons, swipe-to-dismiss, and ARIA live regions. Drop in <Toaster /> once and call toast() anywhere."
+      radixSource="https://www.radix-ui.com/primitives/docs/components/toast"
+      features={[
+        "Five variants: default, success, warning, info, destructive — each with automatic icon",
+        "Module-level state — call toast() from anywhere without prop drilling",
+        "Convenience <Toaster /> component — add once to your root layout",
+        "Swipe-to-dismiss on touch devices",
+        "Auto-stacks up to 5 toasts (configurable via TOAST_LIMIT)",
+        "ARIA live region — screen readers announce new toasts automatically",
+        "Animated slide-up with Tailwind data-state classes",
+      ]}
+      preview={<ToastPreview />}
+      previewCode={`"use client"
+
+import { Button } from "@/components/ui/button"
+import { toast } from "@/components/ui/toast"
+
+export function ToastDemo() {
+  return (
+    <div className="flex gap-2">
+      <Button onClick={() => toast({ title: "Saved!", description: "Changes have been saved." })}>
+        Default
+      </Button>
+      <Button onClick={() => toast({ variant: "success", title: "Success!", description: "Action completed." })}>
+        Success
+      </Button>
+      <Button onClick={() => toast({ variant: "info", title: "Heads up", description: "New version available." })}>
+        Info
+      </Button>
+      <Button onClick={() => toast({ variant: "warning", title: "Warning", description: "Session expiring soon." })}>
+        Warning
+      </Button>
+    </div>
   )
 }`}
       cliInstall={`npx aether-ui add toast`}
@@ -154,65 +102,72 @@ export function ToastDemo() {
           filename: "terminal",
         },
         {
-          title: "Add ToastProvider and ToastViewport to your layout",
+          title: "Add <Toaster /> to your root layout",
           code: `// app/layout.tsx
-import {
-  ToastProvider,
-  ToastViewport,
-  Toast,
-  ToastTitle,
-  ToastDescription,
-  ToastClose,
-  useToast,
-} from "@/components/ui/toast"
+import { Toaster } from "@/components/ui/toast"
 
-// Wrap your app in ToastProvider and include ToastViewport at the root:
 export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-        <ToastProvider>
-          {children}
-          <ToastViewport />
-        </ToastProvider>
+        {children}
+        <Toaster />
       </body>
     </html>
   )
 }`,
           filename: "app/layout.tsx",
         },
+        {
+          title: "Fire toasts from anywhere",
+          code: `import { toast } from "@/components/ui/toast"
+
+// Default
+toast({ title: "Saved!", description: "Your changes have been saved." })
+
+// Success
+toast({ variant: "success", title: "Done!", description: "Export finished." })
+
+// Warning
+toast({ variant: "warning", title: "Warning", description: "Session expires in 5 min." })
+
+// Info
+toast({ variant: "info", title: "Update available", description: "v2.1.0 is ready." })
+
+// Error
+toast({ variant: "destructive", title: "Error", description: "Something went wrong." })`,
+          filename: "your-component.tsx",
+        },
       ]}
       examples={[
         {
-          title: "Default",
-          description: "A standard notification with title and description.",
+          title: "All variants",
+          description: "Five semantic variants — each includes an automatic icon and colour-coded background.",
           preview: <ToastPreview />,
-          code: `import { toast } from "@/components/ui/toast"
-
-toast({
-  title: "Success!",
-  description: "Your action was completed.",
-})`,
+          code: `toast({ title: "Saved!", description: "Changes have been saved." })
+toast({ variant: "success", title: "Success!", description: "Action completed." })
+toast({ variant: "info", title: "Heads up", description: "New version available." })
+toast({ variant: "warning", title: "Warning", description: "Session expiring soon." })
+toast({ variant: "destructive", title: "Error", description: "Something went wrong." })`,
         },
         {
           title: "Destructive",
-          description: "Use variant='destructive' for error or warning notifications.",
+          description: "Use variant='destructive' for errors and critical failures.",
           preview: <ToastDestructivePreview />,
-          code: `import { toast } from "@/components/ui/toast"
-
-toast({
+          code: `toast({
   variant: "destructive",
-  title: "Error",
-  description: "Something went wrong. Please try again.",
+  title: "Delete failed",
+  description: "Could not delete the record. Please try again.",
 })`,
         },
         {
           title: "With action",
-          description: "Include a ToastAction button for recoverable operations like undo.",
+          description: "Include a ToastAction for recoverable operations like undo.",
           preview: <ToastPreview />,
           code: `import { toast, ToastAction } from "@/components/ui/toast"
 
 toast({
+  variant: "success",
   title: "Email sent",
   description: "Your message has been delivered.",
   action: (
@@ -222,44 +177,38 @@ toast({
   ),
 })`,
         },
-        {
-          title: "Title and description",
-          description: "Combine title and description for richer context.",
-          preview: <ToastPreview />,
-          code: `import { toast } from "@/components/ui/toast"
-
-toast({
-  title: "Scheduled",
-  description: "Your post will be published on Friday at 9:00 AM.",
-})`,
-        },
       ]}
       props={[]}
       propGroups={[
         {
-          title: "Toast",
+          title: "toast() function",
           props: [
             {
+              name: "title",
+              type: "ReactNode",
+              description: "Bold heading text displayed in the toast.",
+            },
+            {
+              name: "description",
+              type: "ReactNode",
+              description: "Supporting detail text below the title.",
+            },
+            {
               name: "variant",
-              type: '"default" | "destructive"',
+              type: '"default" | "success" | "warning" | "info" | "destructive"',
               default: '"default"',
-              description: "Visual style. Use destructive for error or warning messages.",
-            },
-            {
-              name: "open",
-              type: "boolean",
-              description: "Controlled open state. Managed automatically by useToast.",
-            },
-            {
-              name: "onOpenChange",
-              type: "(open: boolean) => void",
-              description: "Callback when open state changes. Managed automatically by useToast.",
+              description: "Controls the colour scheme and automatic icon. Choose based on the semantic meaning of the notification.",
             },
             {
               name: "duration",
               type: "number",
               default: "5000",
               description: "Milliseconds before the toast auto-dismisses.",
+            },
+            {
+              name: "action",
+              type: "ToastActionElement",
+              description: "Optional action button for recoverable operations (e.g. Undo).",
             },
           ],
         },
@@ -269,7 +218,7 @@ toast({
             {
               name: "altText",
               type: "string",
-              description: "Required. Screen-reader description of the action (e.g. 'Undo send email').",
+              description: "Required. Screen-reader description of the action.",
             },
           ],
         },
@@ -279,28 +228,28 @@ toast({
             {
               name: "toasts",
               type: "ToastEntry[]",
-              description: "Array of active toast entries to render.",
+              description: "Array of active toast entries (used internally by <Toaster />).",
             },
             {
               name: "toast(input)",
               type: "(input: ToastInput) => { id, dismiss, update }",
-              description: "Imperative function to fire a new toast. Returns controls to dismiss or update it.",
+              description: "Imperative function to fire a toast. Returns controls to dismiss or update it.",
             },
             {
               name: "dismiss(toastId?)",
               type: "(toastId?: string) => void",
-              description: "Dismisses a specific toast by ID, or all toasts if no ID is provided.",
+              description: "Dismisses a toast by ID, or all toasts if no ID is provided.",
             },
           ],
         },
       ]}
       a11yNotes={[
-        "ToastViewport has role='region' and aria-label='Notifications' — a screen reader landmark.",
-        "Each Toast has role='status' and aria-live='polite' by default — announcements are non-interruptive.",
-        "Destructive toasts use aria-live='assertive' for immediate announcement.",
+        "ToastViewport has role='region' and aria-label='Notifications' — a landmark for assistive technology.",
+        "Each Toast has role='status' and aria-live='polite' — announcements are non-interruptive.",
+        "Destructive toasts use aria-live='assertive' for immediate announcement of critical errors.",
         "ToastAction requires altText — a descriptive label read aloud by screen readers.",
-        "ToastClose has aria-label='Close' — screen readers announce it as a dismiss button.",
-        "Swipe-to-dismiss is available on touch devices with proper visual feedback.",
+        "ToastClose has aria-label='Close' — announced as a dismiss control.",
+        "Swipe-to-dismiss is available on touch devices with ARIA-appropriate interaction patterns.",
       ]}
     />
   )

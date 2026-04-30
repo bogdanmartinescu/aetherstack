@@ -11,6 +11,10 @@ const PATTERNS = [
     category: "Forms",
     items: [
       { slug: "form-field", label: "Form Field", desc: "Label + control + helper text + error message composition with context hook." },
+      { slug: "login-form", label: "Login Form", desc: "Email + password sign-in with remember-me, validated with react-hook-form and Zod." },
+      { slug: "signup-form", label: "Sign Up Form", desc: "Registration form with password strength meter and confirmation field." },
+      { slug: "profile-form", label: "Profile Settings Form", desc: "Multi-section settings form with Select, Switch, character counter, and dirty detection." },
+      { slug: "contact-form", label: "Contact Form", desc: "Name, email, subject select, and textarea with a post-submit success state." },
     ],
   },
   {
@@ -34,6 +38,9 @@ const PATTERNS = [
     category: "Data display",
     items: [
       { slug: "metric-card", label: "Metric Card", desc: "Dashboard stat card: label, value, trend badge, icon." },
+      { slug: "stat-group", label: "Stat Group", desc: "Responsive grid of stat cards with labels, values, and delta indicators." },
+      { slug: "data-table", label: "Data Table", desc: "Sortable, searchable, paginated table built on the Table primitive." },
+      { slug: "activity-feed", label: "Activity Feed", desc: "Chronological timeline of events with user avatars and relative timestamps." },
     ],
   },
   {
@@ -47,6 +54,31 @@ const PATTERNS = [
     category: "Navigation",
     items: [
       { slug: "nav", label: "Sidebar Nav", desc: "NavItem, NavGroup, and SidebarNav composable building blocks." },
+    ],
+  },
+  {
+    category: "Inputs",
+    items: [
+      { slug: "color-picker", label: "Color Picker", desc: "Hex color picker with native input, text field, and preset swatches." },
+    ],
+  },
+  {
+    category: "Overlays & commands",
+    items: [
+      { slug: "command-palette", label: "Command Palette", desc: "Keyboard-driven ⌘K command palette with grouped results and fuzzy search." },
+    ],
+  },
+  {
+    category: "Uploads",
+    items: [
+      { slug: "file-dropzone", label: "File Dropzone", desc: "Drag-and-drop upload zone with click-to-browse, type filtering, and size limits." },
+    ],
+  },
+  {
+    category: "Workflows",
+    items: [
+      { slug: "stepper", label: "Stepper", desc: "Multi-step progress indicator with horizontal and vertical orientations." },
+      { slug: "kanban", label: "Kanban Board", desc: "Drag-and-drop Kanban board with columns, cards, and drop-zone highlighting." },
     ],
   },
 ]
@@ -65,11 +97,11 @@ export default function PatternsPage() {
         </p>
         <div className="mt-4 flex flex-wrap gap-4">
           <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">
-            <p className="text-2xl font-bold text-foreground">12</p>
+            <p className="text-2xl font-bold text-foreground">24</p>
             <p className="text-xs text-muted-foreground">Patterns</p>
           </div>
           <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">
-            <p className="text-2xl font-bold text-foreground">6</p>
+            <p className="text-2xl font-bold text-foreground">10</p>
             <p className="text-xs text-muted-foreground">Categories</p>
           </div>
           <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">

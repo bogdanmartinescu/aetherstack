@@ -3,7 +3,7 @@
 import * as React from "react"
 import * as ToastPrimitive from "@radix-ui/react-toast"
 import { cva, type VariantProps } from "class-variance-authority"
-import { XIcon } from "lucide-react"
+import { CheckCircle2, XCircle, AlertTriangle, Info, X } from "lucide-react"
 import { cn } from "@aetherstack/utils"
 
 // ---------------------------------------------------------------------------
@@ -19,7 +19,7 @@ const ToastViewport = React.forwardRef<
   <ToastPrimitive.Viewport
     ref={ref}
     className={cn(
-      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
+      "fixed bottom-0 right-0 z-[100] flex max-h-screen w-full flex-col gap-2 p-4 sm:max-w-[420px]",
       className,
     )}
     {...props}
@@ -33,16 +33,22 @@ ToastViewport.displayName = "ToastViewport"
 
 const toastVariants = cva(
   [
-    "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-6 pr-8 shadow-lg transition-all",
+    "group pointer-events-auto relative flex w-full items-start gap-3 overflow-hidden rounded-lg border p-4 shadow-lg transition-all",
     "data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none",
-    "data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
+    "data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-bottom-full",
   ],
   {
     variants: {
       variant: {
-        default: "border border-border bg-background text-foreground",
+        default: "border-border bg-background text-foreground",
+        success:
+          "border-emerald-500/30 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-100 dark:border-emerald-500/20",
+        warning:
+          "border-amber-500/30 bg-amber-50 text-amber-900 dark:bg-amber-950/60 dark:text-amber-100 dark:border-amber-500/20",
+        info:
+          "border-blue-500/30 bg-blue-50 text-blue-900 dark:bg-blue-950/60 dark:text-blue-100 dark:border-blue-500/20",
         destructive:
-          "destructive group border-destructive bg-destructive text-destructive-foreground",
+          "destructive group border-destructive/30 bg-destructive/10 text-destructive dark:bg-destructive/20",
       },
     },
     defaultVariants: {
@@ -50,6 +56,13 @@ const toastVariants = cva(
     },
   },
 )
+
+const VARIANT_ICONS: Record<string, React.ReactNode> = {
+  success: <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />,
+  warning: <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" />,
+  info: <Info className="mt-0.5 h-5 w-5 shrink-0 text-blue-600 dark:text-blue-400" />,
+  destructive: <XCircle className="mt-0.5 h-5 w-5 shrink-0 text-destructive" />,
+}
 
 const Toast = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Root>,
@@ -89,15 +102,15 @@ const ToastClose = React.forwardRef<
   <ToastPrimitive.Close
     ref={ref}
     className={cn(
-      "absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity",
+      "ml-auto shrink-0 rounded-md p-1 text-foreground/40 opacity-0 transition-opacity",
       "hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100",
-      "group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600",
+      "group-[.destructive]:text-destructive/60 group-[.destructive]:hover:text-destructive group-[.destructive]:focus:ring-destructive",
       className,
     )}
     toast-close=""
     {...props}
   >
-    <XIcon className="h-4 w-4" />
+    <X className="h-4 w-4" />
   </ToastPrimitive.Close>
 ))
 ToastClose.displayName = "ToastClose"
@@ -108,7 +121,7 @@ const ToastTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitive.Title
     ref={ref}
-    className={cn("text-sm font-semibold", className)}
+    className={cn("text-sm font-semibold leading-snug", className)}
     {...props}
   />
 ))
@@ -120,7 +133,7 @@ const ToastDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitive.Description
     ref={ref}
-    className={cn("text-sm opacity-90", className)}
+    className={cn("mt-0.5 text-sm opacity-80 leading-snug", className)}
     {...props}
   />
 ))
@@ -138,7 +151,7 @@ type ToastActionElement = React.ReactElement<typeof ToastAction>
 // ---------------------------------------------------------------------------
 
 const TOAST_LIMIT = 5
-const TOAST_REMOVE_DELAY = 1_000_000
+const TOAST_REMOVE_DELAY = 1_000
 
 type ToastEntry = ToastProps & {
   id: string
@@ -213,7 +226,6 @@ function reducer(state: State, action: ActionType): State {
   }
 }
 
-// Module-level state shared across all useToast() callers.
 let memoryState: State = { toasts: [] }
 const listeners: Array<(state: State) => void> = []
 
@@ -270,6 +282,34 @@ function useToast() {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Toaster — drop-in convenience component for app layouts
+// ---------------------------------------------------------------------------
+
+function Toaster() {
+  const { toasts } = useToast()
+
+  return (
+    <ToastProvider>
+      {toasts.map(({ id, title, description, action, variant, ...props }) => {
+        const icon = variant ? VARIANT_ICONS[variant] : null
+        return (
+          <Toast key={id} variant={variant} {...props}>
+            {icon}
+            <div className="flex-1 space-y-0.5">
+              {title && <ToastTitle>{title}</ToastTitle>}
+              {description && <ToastDescription>{description}</ToastDescription>}
+            </div>
+            {action}
+            <ToastClose />
+          </Toast>
+        )
+      })}
+      <ToastViewport />
+    </ToastProvider>
+  )
+}
+
 export {
   ToastProvider,
   ToastViewport,
@@ -278,8 +318,10 @@ export {
   ToastDescription,
   ToastClose,
   ToastAction,
+  Toaster,
   toastVariants,
   useToast,
   toast,
+  VARIANT_ICONS,
 }
 export type { ToastProps, ToastActionElement }
