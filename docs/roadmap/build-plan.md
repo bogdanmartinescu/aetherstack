@@ -1,6 +1,6 @@
 # Aetherstack Build Plan
 
-Status: Phases 1–5 complete · Phase 6 (Component Gap-Fill) next
+Status: Phases 1–7 in progress · npm packages published · Phase 7 remaining items next
 Project: Aetherstack
 Design system: Aether UI
 
@@ -320,7 +320,7 @@ Quantity matters here — but not at the cost of consistency. Reject any item th
 
 # Phase 7 — Public Registry Hardened
 
-Status: Pending
+Status: In progress — npm publish complete ✅
 
 ## Goal
 Make the public registry production-quality: durable URLs, versioning, CDN delivery, and a polished install experience.
@@ -331,7 +331,7 @@ Make the public registry production-quality: durable URLs, versioning, CDN deliv
 - `aether-ui update` command upgrades installed items to their latest registry version
 - `aether-ui diff` command shows changes between installed file and registry version
 - `aether-ui registry list-namespaces` enumerates `@aether`, `@aether-pro`, and any third-party registries
-- npm publish flow for `@aetherstack/cli` so `npx @aetherstack/cli init` works for end users
+- npm publish flow for `@aetherstack/cli` so `npx @aetherstack/cli init` works for end users ✅ (0.1.0 published)
 - install-test harness expanded: clean Next.js, Vite, and Remix fixture projects in CI
 
 ## Acceptance Criteria

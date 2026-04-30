@@ -121,7 +121,7 @@ Do not:
 
 ## Current Phase Context
 
-**Phases 1–6 complete · Phase 7 (Public Registry Hardened) next**
+**Phases 1–6 complete · Phase 7 (Public Registry Hardened) in progress — npm publish done ✅**
 
 ### Phases 1–4.6 (complete)
 See `docs/roadmap/build-plan.md` for full details. Key deliverables:
@@ -170,5 +170,17 @@ See `docs/roadmap/build-plan.md` for full details. Key deliverables:
 - 58 items (was 28), all with AI metadata, per-item JSON, llms.txt updated
 - 105 Vitest tests in `packages/ui` alone
 
-### Phase 7 — Public Registry Hardened (next)
-See `docs/roadmap/build-plan.md` for the full deliverables list.
+### Phase 7 — Public Registry Hardened (in progress)
+
+#### npm Publishing (complete ✅)
+- All 7 packages published at `0.1.0` to the `@aetherstack` npm org
+- `tsup` build infra added to `patterns` and `blocks`
+- `.npmrc` scoped to `@aetherstack` registry (token via `${NPM_TOKEN}` env var)
+- `.github/workflows/release.yml` automates future changeset-driven releases
+
+#### Remaining Phase 7 items
+- Production registry CDN (`registry.aetherui.dev`)
+- Per-item semver versioning + stable `/r/<name>@<version>.json` URLs
+- `aether-ui update` and `aether-ui diff` CLI commands
+- `aether-ui registry list-namespaces`
+- CI end-to-end install tests (Next.js, Vite, Remix fixtures)
