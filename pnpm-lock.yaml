@@ -17,6 +17,9 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.5.14
         version: 0.5.14(prettier@3.8.3)
+      tsup:
+        specifier: ^8.0.2
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.10)(tsx@4.21.0)(typescript@5.9.3)
       turbo:
         specifier: ^2.0.3
         version: 2.9.6
@@ -358,6 +361,9 @@ importers:
       jsdom:
         specifier: ^29.1.0
         version: 29.1.0
+      tsup:
+        specifier: ^8.0.2
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.10)(tsx@4.21.0)(typescript@5.9.3)
       typescript:
         specifier: ^5.4.5
         version: 5.9.3
@@ -537,6 +543,9 @@ importers:
       jsdom:
         specifier: ^29.1.0
         version: 29.1.0
+      tsup:
+        specifier: ^8.0.2
+        version: 8.5.1(jiti@1.21.7)(postcss@8.5.10)(tsx@4.21.0)(typescript@5.9.3)
       typescript:
         specifier: ^5.4.5
         version: 5.9.3

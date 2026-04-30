@@ -1,6 +1,6 @@
 {
   "name": "@aetherstack/tokens",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Design tokens for Aether UI — colors, spacing, typography, radius, shadows",
   "license": "MIT",
   "main": "./src/index.ts",

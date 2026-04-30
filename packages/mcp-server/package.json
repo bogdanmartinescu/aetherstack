@@ -1,13 +1,15 @@
 {
   "name": "@aetherstack/mcp-server",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Aether UI MCP server — exposes the registry to LLM agents via the Model Context Protocol",
   "license": "MIT",
   "bin": {
     "aether-ui-mcp": "./dist/index.js"
   },
   "main": "./dist/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",

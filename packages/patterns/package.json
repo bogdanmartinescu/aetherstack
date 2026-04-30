@@ -1,6 +1,6 @@
 {
   "name": "@aetherstack/patterns",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Aether UI patterns — higher-level compositions of UI primitives (forms, nav, data displays)",
   "license": "MIT",
   "main": "./src/index.ts",
@@ -8,7 +8,20 @@
   "exports": {
     ".": "./src/index.ts"
   },
+  "publishConfig": {
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js",
+        "types": "./dist/index.d.ts"
+      }
+    }
+  },
   "files": [
+    "dist",
     "src"
   ],
   "dependencies": {
@@ -31,10 +44,12 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.7.0",
     "jsdom": "^29.1.0",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"
   },
   "scripts": {
+    "build": "tsup",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   }

@@ -1,13 +1,15 @@
 {
   "name": "@aetherstack/cli",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Aether UI CLI — add components from the Aether UI registry into your project",
   "license": "MIT",
   "bin": {
     "aether-ui": "./dist/index.js"
   },
   "main": "./dist/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",

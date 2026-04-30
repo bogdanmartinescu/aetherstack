@@ -3,6 +3,7 @@ import { defineConfig } from "tsup"
 export default defineConfig({
   entry: [
     "src/index.ts",
+    // Original 16
     "src/components/badge.tsx",
     "src/components/button.tsx",
     "src/components/card.tsx",
@@ -19,16 +20,32 @@ export default defineConfig({
     "src/components/tabs.tsx",
     "src/components/textarea.tsx",
     "src/components/tooltip.tsx",
+    // Phase 6 additions (15)
+    "src/components/accordion.tsx",
+    "src/components/avatar.tsx",
+    "src/components/calendar.tsx",
+    "src/components/combobox.tsx",
+    "src/components/context-menu.tsx",
+    "src/components/dropdown-menu.tsx",
+    "src/components/hover-card.tsx",
+    "src/components/pagination.tsx",
+    "src/components/progress.tsx",
+    "src/components/scroll-area.tsx",
+    "src/components/separator.tsx",
+    "src/components/slider.tsx",
+    "src/components/toast.tsx",
+    "src/components/toggle.tsx",
+    "src/components/toggle-group.tsx",
   ],
   format: ["cjs", "esm"],
   dts: true,
   clean: true,
   sourcemap: true,
   treeshake: true,
-  // React/Radix UI/utils are peer/external deps — don't bundle them
   external: [
     "react",
     "react-dom",
+    // Original Radix deps
     "@radix-ui/react-checkbox",
     "@radix-ui/react-dialog",
     "@radix-ui/react-label",
@@ -38,6 +55,25 @@ export default defineConfig({
     "@radix-ui/react-switch",
     "@radix-ui/react-tabs",
     "@radix-ui/react-tooltip",
+    // Phase 6 Radix deps
+    "@radix-ui/react-accordion",
+    "@radix-ui/react-avatar",
+    "@radix-ui/react-context-menu",
+    "@radix-ui/react-dropdown-menu",
+    "@radix-ui/react-hover-card",
+    "@radix-ui/react-popover",
+    "@radix-ui/react-progress",
+    "@radix-ui/react-scroll-area",
+    "@radix-ui/react-separator",
+    "@radix-ui/react-slider",
+    "@radix-ui/react-toast",
+    "@radix-ui/react-toggle",
+    "@radix-ui/react-toggle-group",
+    // Phase 6 utility deps
+    "cmdk",
+    "react-day-picker",
+    "date-fns",
+    // Shared
     "class-variance-authority",
     "clsx",
     "lucide-react",

@@ -1,6 +1,6 @@
 {
   "name": "@aetherstack/utils",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Shared utility functions for Aether UI",
   "license": "MIT",
   "main": "./src/index.ts",
