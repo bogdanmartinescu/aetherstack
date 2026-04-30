@@ -1,6 +1,6 @@
 {
   "name": "@aetherstack/docs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "description": "Aether UI public documentation site",
   "scripts": {

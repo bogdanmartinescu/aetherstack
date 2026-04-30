@@ -1,5 +1,19 @@
 # @aetherstack/patterns
 
+## 0.1.1
+
+### Patch Changes
+
+- 4d7ede2: Fix horizontal Stepper layout alignment
+
+  Rewrite horizontal step rendering to use split half-connectors so step
+  circles stay centred and connector lines form a continuous visual path
+  between steps. Fixes misalignment between circles and labels in
+  horizontal orientation.
+
+- Updated dependencies [4d7ede2]
+  - @aetherstack/ui@0.2.0
+
 ## 0.1.0
 
 ### Minor Changes

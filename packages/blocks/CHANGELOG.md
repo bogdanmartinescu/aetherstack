@@ -1,5 +1,14 @@
 # @aetherstack/blocks
 
+## 0.1.1
+
+### Patch Changes
+
+- Updated dependencies [4d7ede2]
+- Updated dependencies [4d7ede2]
+  - @aetherstack/patterns@0.1.1
+  - @aetherstack/ui@0.2.0
+
 ## 0.1.0
 
 ### Minor Changes

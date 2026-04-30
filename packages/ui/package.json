@@ -1,6 +1,6 @@
 {
   "name": "@aetherstack/ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Aether UI — shadcn-compatible component library for premium SaaS products",
   "license": "MIT",
   "main": "./src/index.ts",
