@@ -227,7 +227,7 @@ const selectSchema = z.object({
 type SelectValues = z.infer<typeof selectSchema>
 
 export function SelectDemo() {
-  const { handleSubmit, reset, control, formState: { errors, isSubmitting } } =
+  const { handleSubmit, reset, control, formState: { isSubmitting } } =
     useForm<SelectValues>({ resolver: zodResolver(selectSchema), defaultValues: { language: "" } })
 
   function onSubmit(data: SelectValues) {
@@ -290,7 +290,7 @@ const checkboxSchema = z.object({
 type CheckboxValues = z.infer<typeof checkboxSchema>
 
 export function CheckboxDemo() {
-  const { handleSubmit, reset, control, formState: { errors, isSubmitting } } =
+  const { handleSubmit, reset, control, formState: { isSubmitting } } =
     useForm<CheckboxValues>({
       resolver: zodResolver(checkboxSchema),
       defaultValues: { notifications: ["security"] },
@@ -360,7 +360,7 @@ const radioSchema = z.object({
 type RadioValues = z.infer<typeof radioSchema>
 
 export function RadioGroupDemo() {
-  const { handleSubmit, reset, control, formState: { errors, isSubmitting } } =
+  const { handleSubmit, reset, control, formState: { isSubmitting } } =
     useForm<RadioValues>({ resolver: zodResolver(radioSchema), defaultValues: { plan: "" } })
 
   function onSubmit(data: RadioValues) {
@@ -499,7 +499,7 @@ const emailArraySchema = z.object({
 type EmailArrayValues = z.infer<typeof emailArraySchema>
 
 export function ArrayFieldsDemo() {
-  const { handleSubmit, reset, control, formState: { errors, isSubmitting } } =
+  const { handleSubmit, reset, control, formState: { isSubmitting } } =
     useForm<EmailArrayValues>({
       resolver: zodResolver(emailArraySchema),
       defaultValues: { emails: [{ address: "" }] },

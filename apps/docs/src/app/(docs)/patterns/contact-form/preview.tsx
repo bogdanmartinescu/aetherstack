@@ -72,7 +72,7 @@ export function ContactFormPreview() {
         <div className="space-y-1">
           <h3 className="text-lg font-semibold">Message received!</h3>
           <p className="text-sm text-muted-foreground">
-            Thanks for reaching out. We'll get back to you within 24 hours.
+            Thanks for reaching out. We&apos;ll get back to you within 24 hours.
           </p>
         </div>
         <Button

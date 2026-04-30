@@ -36,6 +36,14 @@ export default defineConfig({
     "src/components/toast.tsx",
     "src/components/toggle.tsx",
     "src/components/toggle-group.tsx",
+    // Phase 7 additions (7)
+    "src/components/alert.tsx",
+    "src/components/alert-dialog.tsx",
+    "src/components/collapsible.tsx",
+    "src/components/drawer.tsx",
+    "src/components/kbd.tsx",
+    "src/components/popover.tsx",
+    "src/components/spinner.tsx",
   ],
   format: ["cjs", "esm"],
   dts: true,
@@ -69,6 +77,10 @@ export default defineConfig({
     "@radix-ui/react-toast",
     "@radix-ui/react-toggle",
     "@radix-ui/react-toggle-group",
+    // Phase 7 Radix deps
+    "@radix-ui/react-alert-dialog",
+    "@radix-ui/react-collapsible",
+    "vaul",
     // Phase 6 utility deps
     "cmdk",
     "react-day-picker",

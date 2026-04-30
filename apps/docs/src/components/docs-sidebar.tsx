@@ -141,11 +141,6 @@ const nav = [
   },
 ]
 
-// Flat list of all items used for search
-const allItems = nav.flatMap((g) =>
-  g.items.map((item) => ({ ...item, group: g.group })),
-)
-
 // Top-level header nav links
 const topNav = [
   { label: "Docs", href: "/introduction", match: ["/introduction", "/installation", "/cli", "/tokens", "/icons", "/fonts", "/llms", "/pricing", "/charts"] },

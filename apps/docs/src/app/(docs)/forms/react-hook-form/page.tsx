@@ -56,14 +56,6 @@ function DemoWrapper({ children }: { children: React.ReactNode }) {
   )
 }
 
-function StepNumber({ n }: { n: number }) {
-  return (
-    <span className="mr-3 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-[11px] font-bold text-primary-foreground">
-      {n}
-    </span>
-  )
-}
-
 // ── On-this-page items ─────────────────────────────────────────────────────────
 
 const ON_THIS_PAGE = [
@@ -264,7 +256,7 @@ export function BugReportForm() {
 
         <H2 id="build-form">Step 3 — Build the form</H2>
         <P>
-          Spread <InlineCode>register("fieldName")</InlineCode> onto each native input, add{" "}
+          Spread <InlineCode>{`register("fieldName")`}</InlineCode> onto each native input, add{" "}
           <InlineCode>aria-invalid</InlineCode> when there{"'"}s an error, and render the error
           message beneath.
         </P>
@@ -379,7 +371,7 @@ export function BugReportForm() {
         {/* ── Field types ── */}
         <H2 id="field-input">Input</H2>
         <P>
-          Spread <InlineCode>register("name")</InlineCode> directly onto{" "}
+          Spread <InlineCode>{`register("name")`}</InlineCode> directly onto{" "}
           <InlineCode>{"<Input />"}</InlineCode>. Add <InlineCode>aria-invalid</InlineCode> when
           the field has an error.
         </P>
