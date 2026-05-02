@@ -197,7 +197,7 @@ jobs:
         env:
           BASE_REF: ${{ github.event.pull_request.base.ref }}
         run: |
-          git fetch origin "$BASE_REF" --depth=1
+          git fetch origin "$BASE_REF"
           BASE_SHA=$(git rev-parse "origin/$BASE_REF")
           CHANGED=$(git diff --name-only "$BASE_SHA"...HEAD)
           PACKAGE_TOUCHED=$(echo "$CHANGED" | grep -E '^packages/[^/]+/src/' || true)
