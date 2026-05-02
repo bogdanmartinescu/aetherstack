@@ -2,7 +2,7 @@
 
 > Aether UI — 20 higher-level UI patterns built on `@aetherstack/ui` primitives.
 
-Part of the [Aetherstack](https://aetherui.dev) design system monorepo.
+Part of the [Aetherstack](https://aether-ui.dev) design system monorepo.
 
 ## What this is
 
@@ -64,7 +64,7 @@ npx aether-ui add data-table
 npx aether-ui add command-palette
 ```
 
-See [aetherui.dev/patterns](https://aetherui.dev/patterns).
+See [aether-ui.dev/patterns](https://aether-ui.dev/patterns).
 
 ## License
 

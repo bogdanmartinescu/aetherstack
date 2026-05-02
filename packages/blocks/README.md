@@ -2,7 +2,7 @@
 
 > Aether UI — 10 full-section layout blocks for SaaS dashboards and product UIs.
 
-Part of the [Aetherstack](https://aetherui.dev) design system monorepo.
+Part of the [Aetherstack](https://aether-ui.dev) design system monorepo.
 
 ## What this is
 
@@ -55,7 +55,7 @@ npx aether-ui add account-settings
 npx aether-ui add pricing-section
 ```
 
-See [aetherui.dev/blocks](https://aetherui.dev/blocks).
+See [aether-ui.dev/blocks](https://aether-ui.dev/blocks).
 
 ## License
 

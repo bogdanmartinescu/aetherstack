@@ -1,6 +1,6 @@
 # Aetherstack Build Plan
 
-Status: Phases 1–7 in progress · npm packages published · Phase 7 remaining items next
+Status: Phases 1–7.5 code complete · npm packages published at 0.1.0 · Phase 7 remaining items (CDN, versioning, CLI update/diff) + Phase 7.5 Track E (registry/docs/tests) pending
 Project: Aetherstack
 Design system: Aether UI
 
@@ -52,7 +52,7 @@ The system supports:
 | 5 | AI Foundations | LLM-friendly metadata, `llms.txt`, MCP server, prompt-driven CLI flow ✅ |
 | 6 | Component Gap-Fill | Net-new primitives, patterns, and blocks chosen by SaaS/AI value ✅ |
 | 7 | Public Registry Hardened | Production-ready public registry, install flows, CDN, versioning (npm ✅) |
-| 7.5 | Component Completeness | Full shadcn parity + marketing blocks + SaaS patterns — "good for any web product" |
+| 7.5 | Component Completeness | Full shadcn parity + marketing blocks + SaaS patterns + AI-native UI — code complete ✅ |
 | 8 | Pro Architecture | Auth, license gating, premium namespace, billing flow |
 | 9 | Pro Content + Launch | Vertical kits (CRM, Billing, Analytics), AI Recipes Pro, public launch |
 
@@ -172,7 +172,7 @@ Status: Complete
 
 # Phase 4.6 — Quality, Truth & Coverage
 
-Status: In progress (current)
+Status: Complete
 
 ## Goal
 Close the gap between what the build plan claimed and what was actually shipped. Make every claim verifiable in CI before stacking new phases on top.
@@ -268,12 +268,12 @@ This is Aether UI's primary differentiation lever. Get this right before adding 
 
 # Phase 6 — Component Gap-Fill
 
-Status: Pending (next)
+Status: Complete
 
 ## Goal
 Bring the public surface to "good enough for any SaaS product" by filling gaps prioritized by SaaS frequency and AI-prompt frequency.
 
-## Deliverables (proposed; finalized at phase entry)
+## Delivered
 
 ### Primitives
 - DropdownMenu / ContextMenu (Radix popover backbone)
@@ -327,7 +327,7 @@ Status: In progress — npm publish complete ✅
 Make the public registry production-quality: durable URLs, versioning, CDN delivery, and a polished install experience.
 
 ## Deliverables
-- production registry domain (`registry.aetherui.dev`) backed by a CDN
+- production registry domain (`registry.aether-ui.dev`) backed by a CDN
 - per-item versioning with semver and `version` field; CLI prefers exact versions when pinned
 - `aether-ui update` command upgrades installed items to their latest registry version
 - `aether-ui diff` command shows changes between installed file and registry version
@@ -345,7 +345,7 @@ Make the public registry production-quality: durable URLs, versioning, CDN deliv
 
 # Phase 7.5 — Component Completeness
 
-Status: In progress — Tracks A–D code complete ✅ · Registry/docs/tests (Track E) pending
+Status: Code complete ✅ · Track E (registry/docs/tests) pending
 
 ## Goal
 
@@ -353,7 +353,7 @@ Reach full shadcn/ui component parity and add the marketing-site + SaaS utility 
 
 ## Context
 
-After Phase 6 the component inventory stands at **38 primitives · 17 patterns · 10 blocks**. Systematic comparison with shadcn/ui, common SaaS product requirements, and the AI-native product landscape reveals four categories of gaps:
+After Phase 6 the component inventory stood at **38 primitives · 17 patterns · 10 blocks**. Tracks A–D have been completed, bringing the total to **65 primitives (51 + 14 AI) · 39 patterns (29 + 10 AI) · 34 blocks (25 + 9 AI)**. Systematic comparison with shadcn/ui, common SaaS product requirements, and the AI-native product landscape identified four categories of gaps, all now addressed:
 
 1. **Primitive gaps** — components that shadcn ships as primitives but we haven't yet built
 2. **Pattern gaps** — higher-level compositions that appear in every real SaaS product
@@ -512,15 +512,15 @@ These items live in `ai/` subdirectories within each package and are registered 
 
 ## Acceptance Criteria
 
-- `packages/ui` reaches **50 + 14 AI = ~64 primitives total**
-- `packages/patterns` reaches **29 + 10 AI = ~39 patterns total**
-- `packages/blocks` reaches **25 + 9 AI = ~34 blocks total**
-- Every item installable end-to-end via `aether-ui add <name>`
-- Every item has AI metadata; CI rejects items missing it
-- `apps/docs` has a docs page for each new item, with an "AI UI" section in the sidebar
-- No primitive hardcodes visual values that belong in tokens
-- `pnpm test` remains green across all packages
-- `ChatLayout` block renders a functional end-to-end chat UI using only `@aetherstack/*` packages
+- ✅ `packages/ui` reaches **51 + 14 AI = 65 primitives total**
+- ✅ `packages/patterns` reaches **29 + 10 AI = 39 patterns total**
+- ✅ `packages/blocks` reaches **25 + 9 AI = 34 blocks total**
+- ⏳ Every item installable end-to-end via `aether-ui add <name>` (Track E)
+- ⏳ Every item has AI metadata; CI rejects items missing it (Track E)
+- ⏳ `apps/docs` has a docs page for each new item, with an "AI UI" section in the sidebar (Track E)
+- ✅ No primitive hardcodes visual values that belong in tokens
+- ⏳ `pnpm test` remains green across all packages (Track E)
+- ✅ `ChatLayout` block renders a functional end-to-end chat UI using only `@aetherstack/*` packages
 
 ---
 
@@ -544,7 +544,7 @@ Build the commercial layer: Clerk auth, Stripe billing, license gating, and the 
 ## Deliverables
 
 ### `apps/account` — Account Dashboard
-- New Next.js App Router app at `account.aetherui.dev`
+- New Next.js App Router app at `account.aether-ui.dev`
 - Clerk authentication — sign in, sign up, profile management; no custom auth UI required
 - Pages:
   - `/` — license overview (tier, seats used, expiry)
@@ -562,7 +562,7 @@ Build the commercial layer: Clerk auth, Stripe billing, license gating, and the 
 - Stripe Checkout for Pro ($79/yr) and Team ($199/yr) tiers; webhook fires on `checkout.session.completed` and `customer.subscription.*` events to keep Clerk metadata in sync
 
 ### CLI Auth Layer (`packages/cli`)
-- `aether-ui login` — device flow: opens browser to `account.aetherui.dev/cli-auth`, polls for JWT, saves to `~/.aetherui/config.json`
+- `aether-ui login` — device flow: opens browser to `account.aether-ui.dev/cli-auth`, polls for JWT, saves to `~/.aetherui/config.json`
 - `aether-ui logout` — clears stored credentials
 - `aether-ui whoami` — prints current user email and license tier
 - `aether-ui add <pro-item>` — detects `pro: true` on the registry item; reads JWT, verifies `license_tier` claim locally; shows a clear upgrade link if unlicensed
@@ -657,7 +657,7 @@ Extends the public AI-native UI (shipped in Phase 7.5 Track D) with pro-tier cap
 - regression checklist for docs, demo, and registry
 - contribution guidelines + issue templates + release notes process
 - launch-ready README, marketing copy, comparison page vs shadcn/ui
-- Lighthouse pass on `apps/docs` and `account.aetherui.dev`
+- Lighthouse pass on `apps/docs` and `account.aether-ui.dev`
 - visual regression baseline (Playwright + Percy or equivalent) for primitives and blocks
 
 ## Acceptance Criteria
@@ -682,8 +682,8 @@ Recommended order:
 4. ~~Phase 4.6 — Quality, Truth & Coverage~~ ✅
 5. ~~Phase 5 — AI Foundations~~ ✅
 6. ~~Phase 6 — Component Gap-Fill~~ ✅
-7. Phase 7 — Public Registry Hardened (npm ✅, CDN/versioning/CLI commands pending)
-8. **Phase 7.5 — Component Completeness** (current — parallel with Phase 7 remaining items)
+7. Phase 7 — Public Registry Hardened (npm ✅, CDN/versioning/CLI update+diff pending)
+8. **Phase 7.5 — Component Completeness** (code ✅ — Track E: registry/docs/tests pending)
 9. Phase 8 — Pro Architecture
 10. Phase 9 — Pro Content + Launch
 
@@ -703,8 +703,8 @@ Phase 4.6 — Truth, coverage, CI parity with claims
 ### Milestone C — AI Native ✅
 Phase 5 — Differentiated, LLM-first design system
 
-### Milestone D — Breadth
-Phases 6–7.5 — Public registry production-ready with full component coverage (shadcn parity + marketing blocks)
+### Milestone D — Breadth (in progress)
+Phases 6–7.5 — Public registry production-ready with full component coverage (shadcn parity + marketing blocks + AI-native UI). Code complete; Track E (registry/docs/tests) and Phase 7 CDN/versioning remaining.
 
 ### Milestone E — Commercial
 Phases 8–9 — Pro tier live, launch ready

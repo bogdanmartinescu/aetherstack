@@ -14,11 +14,11 @@ npx aether-ui generate "build me a SaaS dashboard"  # AI-driven scaffolding
 
 ## Documentation
 
-- Full docs: https://aetherui.dev
-- Registry API: https://registry.aetherui.dev/r/registry.json
-- AI usage guide: https://aetherui.dev/llms
-- Tokens reference: https://aetherui.dev/tokens
-- Component reference: https://aetherui.dev/components
+- Full docs: https://aether-ui.dev
+- Registry API: https://registry.aether-ui.dev/r/registry.json
+- AI usage guide: https://aether-ui.dev/llms
+- Tokens reference: https://aether-ui.dev/tokens
+- Component reference: https://aether-ui.dev/components
 
 ## Architecture
 
@@ -33,7 +33,7 @@ Aether UI uses a four-layer architecture:
 ## Accordion
 - Name: accordion
 - Install: aether-ui add accordion
-- Source: https://registry.aetherui.dev/r/accordion.json
+- Source: https://registry.aether-ui.dev/r/accordion.json
 - Intent: Collapsible content sections for FAQs, settings panels, or any expandable content
   Slots: AccordionItem, AccordionTrigger, AccordionContent
   Often used with: card, separator
@@ -42,7 +42,7 @@ Aether UI uses a four-layer architecture:
 ## Avatar
 - Name: avatar
 - Install: aether-ui add avatar
-- Source: https://registry.aetherui.dev/r/avatar.json
+- Source: https://registry.aether-ui.dev/r/avatar.json
 - Intent: Display user profile images with graceful fallback to initials
   Slots: AvatarImage, AvatarFallback, AvatarGroup
   Often used with: badge, card, team-settings
@@ -51,7 +51,7 @@ Aether UI uses a four-layer architecture:
 ## Badge
 - Name: badge
 - Install: aether-ui add badge
-- Source: https://registry.aetherui.dev/r/badge.json
+- Source: https://registry.aether-ui.dev/r/badge.json
 - Intent: Display a small inline label for status, category, or count
   Slots: children
   Often used with: button, card, table, metric-card
@@ -60,7 +60,7 @@ Aether UI uses a four-layer architecture:
 ## Button
 - Name: button
 - Install: aether-ui add button
-- Source: https://registry.aetherui.dev/r/button.json
+- Source: https://registry.aether-ui.dev/r/button.json
 - Intent: Trigger an action or navigate; supports multiple visual styles and sizes
   Slots: children, asChild
   Often used with: form-field, dialog, card, page-header, empty-state
@@ -69,7 +69,7 @@ Aether UI uses a four-layer architecture:
 ## Calendar
 - Name: calendar
 - Install: aether-ui add calendar
-- Source: https://registry.aetherui.dev/r/calendar.json
+- Source: https://registry.aether-ui.dev/r/calendar.json
 - Intent: Select a single date or date range from a month-view calendar
   Slots: onSelect, selected, mode
   Often used with: button, combobox
@@ -78,7 +78,7 @@ Aether UI uses a four-layer architecture:
 ## Card
 - Name: card
 - Install: aether-ui add card
-- Source: https://registry.aetherui.dev/r/card.json
+- Source: https://registry.aether-ui.dev/r/card.json
 - Intent: Group related content in a visually distinct surface container
   Slots: CardHeader, CardTitle, CardDescription, CardContent, CardFooter
   Often used with: metric-card, login-block, signup-block, section-header
@@ -87,7 +87,7 @@ Aether UI uses a four-layer architecture:
 ## Checkbox
 - Name: checkbox
 - Install: aether-ui add checkbox
-- Source: https://registry.aetherui.dev/r/checkbox.json
+- Source: https://registry.aether-ui.dev/r/checkbox.json
 - Intent: Allow the user to check or uncheck a boolean option
   Slots: checked, onCheckedChange
   Often used with: form-field, label, login-block
@@ -96,7 +96,7 @@ Aether UI uses a four-layer architecture:
 ## Combobox
 - Name: combobox
 - Install: aether-ui add combobox
-- Source: https://registry.aetherui.dev/r/combobox.json
+- Source: https://registry.aether-ui.dev/r/combobox.json
 - Intent: Searchable dropdown select for large option sets with async support
   Slots: ComboboxTrigger, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxEmpty
   Often used with: button, command-palette
@@ -105,7 +105,7 @@ Aether UI uses a four-layer architecture:
 ## Context Menu
 - Name: context-menu
 - Install: aether-ui add context-menu
-- Source: https://registry.aetherui.dev/r/context-menu.json
+- Source: https://registry.aether-ui.dev/r/context-menu.json
 - Intent: Show a contextual right-click menu with actions for a target element
   Slots: ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator
   Often used with: dropdown-menu, separator
@@ -114,7 +114,7 @@ Aether UI uses a four-layer architecture:
 ## Dialog
 - Name: dialog
 - Install: aether-ui add dialog
-- Source: https://registry.aetherui.dev/r/dialog.json
+- Source: https://registry.aether-ui.dev/r/dialog.json
 - Intent: Display a modal overlay that traps focus and requires user action
   Slots: DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter
   Often used with: button, form-field, input
@@ -123,7 +123,7 @@ Aether UI uses a four-layer architecture:
 ## Dropdown Menu
 - Name: dropdown-menu
 - Install: aether-ui add dropdown-menu
-- Source: https://registry.aetherui.dev/r/dropdown-menu.json
+- Source: https://registry.aether-ui.dev/r/dropdown-menu.json
 - Intent: Show a list of actions or options in a floating dropdown triggered by a button
   Slots: DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel
   Often used with: button, separator, badge
@@ -132,7 +132,7 @@ Aether UI uses a four-layer architecture:
 ## Hover Card
 - Name: hover-card
 - Install: aether-ui add hover-card
-- Source: https://registry.aetherui.dev/r/hover-card.json
+- Source: https://registry.aether-ui.dev/r/hover-card.json
 - Intent: Show a rich preview popup when hovering over a link or user mention
   Slots: HoverCardTrigger, HoverCardContent
   Often used with: avatar, card, tooltip
@@ -141,7 +141,7 @@ Aether UI uses a four-layer architecture:
 ## Input
 - Name: input
 - Install: aether-ui add input
-- Source: https://registry.aetherui.dev/r/input.json
+- Source: https://registry.aether-ui.dev/r/input.json
 - Intent: Capture a single line of user text input
   Slots: value, onChange, placeholder, type
   Often used with: form-field, label, table-toolbar, login-block, signup-block
@@ -150,7 +150,7 @@ Aether UI uses a four-layer architecture:
 ## Label
 - Name: label
 - Install: aether-ui add label
-- Source: https://registry.aetherui.dev/r/label.json
+- Source: https://registry.aether-ui.dev/r/label.json
 - Intent: Associate an accessible text label with a form control
   Slots: children, htmlFor
   Often used with: form-field, input, checkbox, radio-group, switch
@@ -159,7 +159,7 @@ Aether UI uses a four-layer architecture:
 ## Pagination
 - Name: pagination
 - Install: aether-ui add pagination
-- Source: https://registry.aetherui.dev/r/pagination.json
+- Source: https://registry.aether-ui.dev/r/pagination.json
 - Intent: Navigate between pages of content with previous, next, and numbered page links
   Slots: PaginationPrevious, PaginationNext, PaginationLink, PaginationEllipsis
   Often used with: button, data-table
@@ -168,7 +168,7 @@ Aether UI uses a four-layer architecture:
 ## Progress
 - Name: progress
 - Install: aether-ui add progress
-- Source: https://registry.aetherui.dev/r/progress.json
+- Source: https://registry.aether-ui.dev/r/progress.json
 - Intent: Show completion percentage of a task or upload as a horizontal bar
   Slots: value
   Often used with: billing-overview, onboarding-checklist
@@ -177,7 +177,7 @@ Aether UI uses a four-layer architecture:
 ## Radio Group
 - Name: radio-group
 - Install: aether-ui add radio-group
-- Source: https://registry.aetherui.dev/r/radio-group.json
+- Source: https://registry.aether-ui.dev/r/radio-group.json
 - Intent: Let the user pick exactly one option from a list of radio buttons
   Slots: value, onValueChange, RadioGroupItem
   Often used with: form-field, label
@@ -186,7 +186,7 @@ Aether UI uses a four-layer architecture:
 ## Scroll Area
 - Name: scroll-area
 - Install: aether-ui add scroll-area
-- Source: https://registry.aetherui.dev/r/scroll-area.json
+- Source: https://registry.aether-ui.dev/r/scroll-area.json
 - Intent: Wrap content that overflows with a styled, accessible scroll container
   Slots: children, ScrollBar
   Often used with: command-palette, activity-feed
@@ -195,7 +195,7 @@ Aether UI uses a four-layer architecture:
 ## Select
 - Name: select
 - Install: aether-ui add select
-- Source: https://registry.aetherui.dev/r/select.json
+- Source: https://registry.aether-ui.dev/r/select.json
 - Intent: Let the user choose one option from a collapsible dropdown list
   Slots: SelectTrigger, SelectContent, SelectItem, value, onValueChange
   Often used with: form-field, label, table-toolbar
@@ -204,7 +204,7 @@ Aether UI uses a four-layer architecture:
 ## Separator
 - Name: separator
 - Install: aether-ui add separator
-- Source: https://registry.aetherui.dev/r/separator.json
+- Source: https://registry.aether-ui.dev/r/separator.json
 - Intent: Visually separate groups of content with a thin divider line
   Slots: orientation
   Often used with: dropdown-menu, card, sidebar-nav
@@ -213,7 +213,7 @@ Aether UI uses a four-layer architecture:
 ## Sheet
 - Name: sheet
 - Install: aether-ui add sheet
-- Source: https://registry.aetherui.dev/r/sheet.json
+- Source: https://registry.aether-ui.dev/r/sheet.json
 - Intent: Slide a panel in from an edge of the screen for contextual detail or editing
   Slots: SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, side
   Often used with: button, form-field, input
@@ -222,7 +222,7 @@ Aether UI uses a four-layer architecture:
 ## Skeleton
 - Name: skeleton
 - Install: aether-ui add skeleton
-- Source: https://registry.aetherui.dev/r/skeleton.json
+- Source: https://registry.aether-ui.dev/r/skeleton.json
 - Intent: Show a shimmering placeholder while content is loading
   Slots: className
   Often used with: loading-state, card, table
@@ -231,7 +231,7 @@ Aether UI uses a four-layer architecture:
 ## Slider
 - Name: slider
 - Install: aether-ui add slider
-- Source: https://registry.aetherui.dev/r/slider.json
+- Source: https://registry.aether-ui.dev/r/slider.json
 - Intent: Let users select a numeric value within a range by dragging a thumb
   Slots: value, onValueChange, min, max, step
   Often used with: form-field
@@ -240,7 +240,7 @@ Aether UI uses a four-layer architecture:
 ## Switch
 - Name: switch
 - Install: aether-ui add switch
-- Source: https://registry.aetherui.dev/r/switch.json
+- Source: https://registry.aether-ui.dev/r/switch.json
 - Intent: Toggle a binary setting on or off with a slide animation
   Slots: checked, onCheckedChange
   Often used with: form-field, label
@@ -249,7 +249,7 @@ Aether UI uses a four-layer architecture:
 ## Table
 - Name: table
 - Install: aether-ui add table
-- Source: https://registry.aetherui.dev/r/table.json
+- Source: https://registry.aether-ui.dev/r/table.json
 - Intent: Display rows of structured data in a semantic table layout
   Slots: TableHeader, TableBody, TableRow, TableHead, TableCell, TableFooter
   Often used with: table-toolbar, badge, button, skeleton
@@ -258,7 +258,7 @@ Aether UI uses a four-layer architecture:
 ## Tabs
 - Name: tabs
 - Install: aether-ui add tabs
-- Source: https://registry.aetherui.dev/r/tabs.json
+- Source: https://registry.aether-ui.dev/r/tabs.json
 - Intent: Organise content into switchable panels navigated by tab buttons
   Slots: TabsList, TabsTrigger, TabsContent, defaultValue
   Often used with: card, section-header
@@ -267,7 +267,7 @@ Aether UI uses a four-layer architecture:
 ## Textarea
 - Name: textarea
 - Install: aether-ui add textarea
-- Source: https://registry.aetherui.dev/r/textarea.json
+- Source: https://registry.aether-ui.dev/r/textarea.json
 - Intent: Capture multi-line free-form text from the user
   Slots: value, onChange, placeholder, rows
   Often used with: form-field, label
@@ -276,7 +276,7 @@ Aether UI uses a four-layer architecture:
 ## Toast
 - Name: toast
 - Install: aether-ui add toast
-- Source: https://registry.aetherui.dev/r/toast.json
+- Source: https://registry.aether-ui.dev/r/toast.json
 - Intent: Show brief non-blocking notifications at the bottom of the screen
   Slots: ToastTitle, ToastDescription, ToastAction, ToastProvider, ToastViewport
   Often used with: button
@@ -285,7 +285,7 @@ Aether UI uses a four-layer architecture:
 ## Toggle
 - Name: toggle
 - Install: aether-ui add toggle
-- Source: https://registry.aetherui.dev/r/toggle.json
+- Source: https://registry.aether-ui.dev/r/toggle.json
 - Intent: A pressable button that toggles between active and inactive states
   Slots: pressed, onPressedChange, variant, size
   Often used with: toggle-group, toolbar
@@ -294,7 +294,7 @@ Aether UI uses a four-layer architecture:
 ## Toggle Group
 - Name: toggle-group
 - Install: aether-ui add toggle-group
-- Source: https://registry.aetherui.dev/r/toggle-group.json
+- Source: https://registry.aether-ui.dev/r/toggle-group.json
 - Intent: Allow single or multiple selection from a set of toggle buttons
   Slots: ToggleGroupItem, value, onValueChange, type
   Often used with: toggle
@@ -303,7 +303,7 @@ Aether UI uses a four-layer architecture:
 ## Tooltip
 - Name: tooltip
 - Install: aether-ui add tooltip
-- Source: https://registry.aetherui.dev/r/tooltip.json
+- Source: https://registry.aether-ui.dev/r/tooltip.json
 - Intent: Show a short contextual hint when the user hovers or focuses an element
   Slots: TooltipTrigger, TooltipContent, children
   Often used with: button, badge
@@ -314,7 +314,7 @@ Aether UI uses a four-layer architecture:
 ## Activity Feed
 - Name: activity-feed
 - Install: aether-ui add activity-feed
-- Source: https://registry.aetherui.dev/r/activity-feed.json
+- Source: https://registry.aether-ui.dev/r/activity-feed.json
 - Intent: Show a chronological feed of user actions or system events
   Slots: ActivityItem, items
   Often used with: avatar, notification-center
@@ -323,7 +323,7 @@ Aether UI uses a four-layer architecture:
 ## Color Picker
 - Name: color-picker
 - Install: aether-ui add color-picker
-- Source: https://registry.aetherui.dev/r/color-picker.json
+- Source: https://registry.aether-ui.dev/r/color-picker.json
 - Intent: Let users select or input a color using hex input, native picker, or preset swatches
   Slots: value, onChange, presets
   Often used with: button, input
@@ -332,7 +332,7 @@ Aether UI uses a four-layer architecture:
 ## Command Palette
 - Name: command-palette
 - Install: aether-ui add command-palette
-- Source: https://registry.aetherui.dev/r/command-palette.json
+- Source: https://registry.aether-ui.dev/r/command-palette.json
 - Intent: Open a keyboard-driven search palette for quick navigation and action execution
   Slots: CommandPaletteInput, CommandGroup, CommandItem, CommandPaletteDialog
   Often used with: dialog, combobox, scroll-area
@@ -341,7 +341,7 @@ Aether UI uses a four-layer architecture:
 ## Data Table
 - Name: data-table
 - Install: aether-ui add data-table
-- Source: https://registry.aetherui.dev/r/data-table.json
+- Source: https://registry.aether-ui.dev/r/data-table.json
 - Intent: Display tabular data with sorting, search filtering, and pagination
   Slots: columns, data, pageSize, searchable, searchKeys
   Often used with: table, input, button, pagination, table-toolbar
@@ -350,7 +350,7 @@ Aether UI uses a four-layer architecture:
 ## Empty State
 - Name: empty-state
 - Install: aether-ui add empty-state
-- Source: https://registry.aetherui.dev/r/empty-state.json
+- Source: https://registry.aether-ui.dev/r/empty-state.json
 - Intent: Show a helpful empty-view when a list or collection has no data yet
   Slots: icon, title, description, action
   Often used with: button, card
@@ -359,7 +359,7 @@ Aether UI uses a four-layer architecture:
 ## Error State
 - Name: error-state
 - Install: aether-ui add error-state
-- Source: https://registry.aetherui.dev/r/error-state.json
+- Source: https://registry.aether-ui.dev/r/error-state.json
 - Intent: Communicate a data-loading or network failure and offer a retry action
   Slots: title, description, onRetry
   Often used with: button
@@ -368,7 +368,7 @@ Aether UI uses a four-layer architecture:
 ## File Dropzone
 - Name: file-dropzone
 - Install: aether-ui add file-dropzone
-- Source: https://registry.aetherui.dev/r/file-dropzone.json
+- Source: https://registry.aether-ui.dev/r/file-dropzone.json
 - Intent: Let users upload files by dragging them onto a target zone or clicking to browse
   Slots: onFilesSelected, accept, multiple, maxSize
   Often used with: button
@@ -377,7 +377,7 @@ Aether UI uses a four-layer architecture:
 ## Form Field
 - Name: form-field
 - Install: aether-ui add form-field
-- Source: https://registry.aetherui.dev/r/form-field.json
+- Source: https://registry.aether-ui.dev/r/form-field.json
 - Intent: Compose a labelled form control with helper text and validation error message
   Slots: FormLabel, FormControl, FormDescription, FormMessage, children
   Often used with: input, textarea, select, checkbox, switch, label
@@ -386,7 +386,7 @@ Aether UI uses a four-layer architecture:
 ## Kanban Board
 - Name: kanban
 - Install: aether-ui add kanban
-- Source: https://registry.aetherui.dev/r/kanban.json
+- Source: https://registry.aether-ui.dev/r/kanban.json
 - Intent: Organize items into drag-and-drop status columns for task management
   Slots: KanbanColumn, KanbanCard, KanbanBoard, columns
   Often used with: card, badge
@@ -395,7 +395,7 @@ Aether UI uses a four-layer architecture:
 ## Loading State
 - Name: loading-state
 - Install: aether-ui add loading-state
-- Source: https://registry.aetherui.dev/r/loading-state.json
+- Source: https://registry.aether-ui.dev/r/loading-state.json
 - Intent: Display a centered loading indicator while async data is being fetched
   Slots: variant, rows
   Often used with: skeleton
@@ -404,7 +404,7 @@ Aether UI uses a four-layer architecture:
 ## Metric Card
 - Name: metric-card
 - Install: aether-ui add metric-card
-- Source: https://registry.aetherui.dev/r/metric-card.json
+- Source: https://registry.aether-ui.dev/r/metric-card.json
 - Intent: Show a single KPI metric with a label, value, trend indicator, and icon
   Slots: label, value, trend, icon, description
   Often used with: card, badge, dashboard-shell
@@ -413,7 +413,7 @@ Aether UI uses a four-layer architecture:
 ## Sidebar Nav
 - Name: nav
 - Install: aether-ui add nav
-- Source: https://registry.aetherui.dev/r/nav.json
+- Source: https://registry.aether-ui.dev/r/nav.json
 - Intent: Build a composable sidebar navigation with grouped nav items and active states
   Slots: NavItem, NavGroup, SidebarNav, items, groups
   Often used with: dashboard-shell, badge
@@ -422,7 +422,7 @@ Aether UI uses a four-layer architecture:
 ## Page Header
 - Name: page-header
 - Install: aether-ui add page-header
-- Source: https://registry.aetherui.dev/r/page-header.json
+- Source: https://registry.aether-ui.dev/r/page-header.json
 - Intent: Top-of-page heading block with title, description, optional breadcrumb, and an actions area
   Slots: title, description, breadcrumb, actions
   Often used with: button, badge, section-header
@@ -431,7 +431,7 @@ Aether UI uses a four-layer architecture:
 ## Section Header
 - Name: section-header
 - Install: aether-ui add section-header
-- Source: https://registry.aetherui.dev/r/section-header.json
+- Source: https://registry.aether-ui.dev/r/section-header.json
 - Intent: Label a content section with a title and optional action, or wrap it in a SettingsSection
   Slots: title, description, action, children
   Often used with: card, form-field, button
@@ -440,7 +440,7 @@ Aether UI uses a four-layer architecture:
 ## Stat Group
 - Name: stat-group
 - Install: aether-ui add stat-group
-- Source: https://registry.aetherui.dev/r/stat-group.json
+- Source: https://registry.aether-ui.dev/r/stat-group.json
 - Intent: Display multiple key metrics side-by-side in a responsive stat grid
   Slots: StatItem, cols
   Often used with: metric-card, card
@@ -449,7 +449,7 @@ Aether UI uses a four-layer architecture:
 ## Stepper
 - Name: stepper
 - Install: aether-ui add stepper
-- Source: https://registry.aetherui.dev/r/stepper.json
+- Source: https://registry.aether-ui.dev/r/stepper.json
 - Intent: Show progress through a multi-step form or onboarding wizard
   Slots: steps, currentStep, orientation
   Often used with: onboarding-checklist
@@ -458,7 +458,7 @@ Aether UI uses a four-layer architecture:
 ## Table Toolbar
 - Name: table-toolbar
 - Install: aether-ui add table-toolbar
-- Source: https://registry.aetherui.dev/r/table-toolbar.json
+- Source: https://registry.aether-ui.dev/r/table-toolbar.json
 - Intent: Provide a search input, active filter pills, and action buttons above a data table
   Slots: search, filters, actions, FilterPill
   Often used with: table, input, button, badge, select
@@ -469,7 +469,7 @@ Aether UI uses a four-layer architecture:
 ## Account Settings
 - Name: account-settings
 - Install: aether-ui add account-settings
-- Source: https://registry.aetherui.dev/r/account-settings.json
+- Source: https://registry.aether-ui.dev/r/account-settings.json
 - Intent: Let users update their profile information including avatar, name, email, and bio
   Slots: defaultValues, onSave
   Often used with: input, textarea, button, avatar, form-field
@@ -478,7 +478,7 @@ Aether UI uses a four-layer architecture:
 ## Billing Overview
 - Name: billing-overview
 - Install: aether-ui add billing-overview
-- Source: https://registry.aetherui.dev/r/billing-overview.json
+- Source: https://registry.aether-ui.dev/r/billing-overview.json
 - Intent: Show subscription plan details, usage metrics, and billing management actions
   Slots: plan, usage, nextBillingDate, onUpgrade, onManageBilling
   Often used with: progress, button, card, badge
@@ -487,7 +487,7 @@ Aether UI uses a four-layer architecture:
 ## Dashboard Shell
 - Name: dashboard-shell
 - Install: aether-ui add dashboard-shell
-- Source: https://registry.aetherui.dev/r/dashboard-shell.json
+- Source: https://registry.aether-ui.dev/r/dashboard-shell.json
 - Intent: Full-page SaaS app shell with a collapsible sidebar, search topbar, and a main content slot
   Slots: children, sidebar, topbar
   Often used with: nav, metric-card, table-toolbar, table, page-header
@@ -496,7 +496,7 @@ Aether UI uses a four-layer architecture:
 ## Empty Dashboard
 - Name: empty-dashboard
 - Install: aether-ui add empty-dashboard
-- Source: https://registry.aetherui.dev/r/empty-dashboard.json
+- Source: https://registry.aether-ui.dev/r/empty-dashboard.json
 - Intent: Show a welcoming placeholder when a dashboard has no data yet
   Slots: title, description, actions
   Often used with: empty-state, button
@@ -505,7 +505,7 @@ Aether UI uses a four-layer architecture:
 ## Login
 - Name: login-block
 - Install: aether-ui add login-block
-- Source: https://registry.aetherui.dev/r/login-block.json
+- Source: https://registry.aether-ui.dev/r/login-block.json
 - Intent: Ready-made login page block with email, password, remember-me, and forgot-password
   Slots: onSubmit, onForgotPassword, footer
   Often used with: form-field, input, button, checkbox, label
@@ -514,7 +514,7 @@ Aether UI uses a four-layer architecture:
 ## Notification Center
 - Name: notification-center
 - Install: aether-ui add notification-center
-- Source: https://registry.aetherui.dev/r/notification-center.json
+- Source: https://registry.aether-ui.dev/r/notification-center.json
 - Intent: Display a list of in-app notifications with read state and dismiss controls
   Slots: notifications, onMarkRead, onMarkAllRead, onDismiss
   Often used with: badge, button, activity-feed
@@ -523,7 +523,7 @@ Aether UI uses a four-layer architecture:
 ## Onboarding Checklist
 - Name: onboarding-checklist
 - Install: aether-ui add onboarding-checklist
-- Source: https://registry.aetherui.dev/r/onboarding-checklist.json
+- Source: https://registry.aether-ui.dev/r/onboarding-checklist.json
 - Intent: Guide new users through setup tasks with a checklist and progress bar
   Slots: steps, onStepToggle, title, description
   Often used with: checkbox, progress, stepper
@@ -532,7 +532,7 @@ Aether UI uses a four-layer architecture:
 ## Pricing Section
 - Name: pricing-section
 - Install: aether-ui add pricing-section
-- Source: https://registry.aetherui.dev/r/pricing-section.json
+- Source: https://registry.aether-ui.dev/r/pricing-section.json
 - Intent: Show pricing tiers with feature lists and CTA buttons for a marketing or landing page
   Slots: tiers, title, description
   Often used with: badge, button, card
@@ -541,7 +541,7 @@ Aether UI uses a four-layer architecture:
 ## Sign Up
 - Name: signup-block
 - Install: aether-ui add signup-block
-- Source: https://registry.aetherui.dev/r/signup-block.json
+- Source: https://registry.aether-ui.dev/r/signup-block.json
 - Intent: Ready-made sign-up page block with name, email, password validation, and terms acceptance
   Slots: onSubmit, onSignIn, footer
   Often used with: form-field, input, button, checkbox
@@ -550,7 +550,7 @@ Aether UI uses a four-layer architecture:
 ## Team Settings
 - Name: team-settings
 - Install: aether-ui add team-settings
-- Source: https://registry.aetherui.dev/r/team-settings.json
+- Source: https://registry.aether-ui.dev/r/team-settings.json
 - Intent: Manage team members, invite new members by email, and assign roles
   Slots: members, onInvite, onRoleChange, onRemove
   Often used with: avatar, badge, select, input, button

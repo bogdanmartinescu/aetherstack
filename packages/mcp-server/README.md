@@ -2,7 +2,7 @@
 
 > Aether UI MCP server — exposes the component registry to LLM agents via the Model Context Protocol.
 
-Part of the [Aetherstack](https://aetherui.dev) design system monorepo.
+Part of the [Aetherstack](https://aether-ui.dev) design system monorepo.
 
 ## What this is
 
@@ -49,7 +49,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 ## Documentation
 
-[aetherui.dev/llms](https://aetherui.dev/llms)
+[aether-ui.dev/llms](https://aether-ui.dev/llms)
 
 ## License
 

@@ -2,7 +2,7 @@
 
 > Shared utility functions for Aether UI — primarily the `cn` class-name helper.
 
-Part of the [Aetherstack](https://aetherui.dev) design system monorepo.
+Part of the [Aetherstack](https://aether-ui.dev) design system monorepo.
 
 ## Install
 

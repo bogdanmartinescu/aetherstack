@@ -4,7 +4,7 @@ import { CodeBlock } from "@/components/code-block"
 export const metadata: Metadata = {
   title: "AI & LLMs",
   description:
-    "Using Aether UI with AI agents — llms.txt, MCP server, prompt-driven CLI, and AI metadata.",
+    "Using Aether UI with AI agents — llms.txt, MCP server, prompt-driven CLI, AI metadata, and AI-native components.",
 }
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
@@ -86,7 +86,10 @@ export default function LlmsPage() {
           Every component ships with machine-readable AI metadata, the registry exposes a{" "}
           <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-base">llms.txt</code>{" "}
           index, and an MCP server lets agents browse and install components directly from
-          Cursor, Claude Desktop, or any MCP-compatible tool.
+          Cursor, Claude Desktop, or any MCP-compatible tool. The system also ships{" "}
+          <strong className="text-foreground">33 AI-native components</strong> — streaming text,
+          chat bubbles, prompt inputs, conversation threads, and full chat layouts — all
+          SDK-agnostic and installable via the same CLI.
         </p>
       </div>
 
@@ -102,7 +105,7 @@ export default function LlmsPage() {
         <p>Paste this URL into any agent context or system prompt:</p>
       </Prose>
       <CodeBlock
-        code="https://registry.aetherui.dev/llms.txt"
+        code="https://registry.aether-ui.dev/llms.txt"
         filename="URL"
       />
       <Prose>
@@ -268,6 +271,15 @@ aether-ui generate "login page"
 # Scaffold a settings form
 aether-ui generate "settings page"
 
+# Scaffold a full-page chat interface
+aether-ui generate "make me a chat interface"
+
+# Scaffold an AI assistant panel
+aether-ui generate "add an AI assistant panel"
+
+# Scaffold an agent task view
+aether-ui generate "agent task view"
+
 # Preview without writing files
 aether-ui generate "data table with users" --dry-run`}
         filename="terminal"
@@ -299,6 +311,22 @@ aether-ui generate "data table with users" --dry-run`}
                 components: "dashboard-shell, metric-card, table, table-toolbar, page-header, empty-state, loading-state, error-state, nav",
               },
               {
+                prompt: "make me a chat interface",
+                components: "ai-chat-layout, ai-chat-sidebar, ai-conversation-thread, ai-prompt-input, ai-streaming-text, ai-thinking-indicator, ai-conversation-starter",
+              },
+              {
+                prompt: "add an AI assistant panel",
+                components: "ai-assistant-panel, ai-conversation-thread, ai-prompt-input",
+              },
+              {
+                prompt: "agent task view",
+                components: "ai-agent-workspace, ai-tool-call-sequence, ai-tool-call-card, ai-response-card",
+              },
+              {
+                prompt: "prompt builder",
+                components: "ai-prompt-builder, ai-prompt-library, ai-model-selector",
+              },
+              {
                 prompt: "login page",
                 components: "login-block",
               },
@@ -313,6 +341,10 @@ aether-ui generate "data table with users" --dry-run`}
               {
                 prompt: "data table",
                 components: "table-toolbar, table, badge, button, empty-state, loading-state",
+              },
+              {
+                prompt: "marketing landing page",
+                components: "marketing-navbar, landing-hero, features-section, testimonials-section, pricing-section, cta-section, footer-section",
               },
             ].map((row, i) => (
               <tr key={i} className="border-b border-border/50 last:border-0">
@@ -333,15 +365,19 @@ aether-ui generate "data table with users" --dry-run`}
         </p>
       </Prose>
       <CodeBlock
-        code={`You are building a SaaS product with Aether UI, a design system for React and Next.js.
+        code={`You are building a product with Aether UI, a premium open-code design system for React and Next.js.
 
-Registry: https://registry.aetherui.dev
-llms.txt: https://registry.aetherui.dev/llms.txt
-Docs: https://aetherui.dev
+Registry: https://registry.aether-ui.dev
+llms.txt: https://registry.aether-ui.dev/llms.txt
+Docs: https://aether-ui.dev
 
 Key facts:
 - Install components with: aether-ui add <name>
+- 51 UI primitives + 14 AI-native primitives, 29 patterns + 10 AI patterns, 25 blocks + 9 AI blocks
+- AI-native components use prefix "ai-" (e.g. ai-chat-layout, ai-prompt-input, ai-streaming-text)
+- AI components accept string and AsyncIterable<string>; wire your own AI SDK
 - Components live in components/ui/, patterns in components/patterns/, blocks in components/blocks/
+- AI components live in components/ui/ai/, components/patterns/ai/, components/blocks/ai/
 - Import from @/components/ui/<name>, @/components/patterns/<name>, @/components/blocks/<name>
 - Use tailwind classes; design tokens are CSS custom properties (--color-primary, --radius, etc.)
 - Always compose from existing Aether UI components rather than building from scratch`}
