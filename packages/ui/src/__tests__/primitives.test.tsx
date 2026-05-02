@@ -1322,7 +1322,6 @@ describe("InputOTP", () => {
       </InputOTP>,
     )
     // The OTPGroup div wraps the slot divs; verify four children rendered
-    const group = container.querySelector("[role='group']") ?? container.querySelector("div > div")
     expect(container.querySelectorAll("div").length).toBeGreaterThan(4)
   })
 })
