@@ -1,17 +1,15 @@
 # Aether UI
 
-> Aether UI is a premium open-code design system for any modern web product — SaaS dashboards,
-> marketing sites, and AI-powered applications. Registry format is compatible with shadcn/ui.
-> Use the `aether-ui` CLI to install components. All items carry AI metadata.
+> Aether UI is a premium open-code design system for SaaS dashboards and admin interfaces.
+> Registry format is compatible with shadcn/ui. Use the `aether-ui` CLI to install components.
 
 ## Quick Start
 
 ```bash
-npx aether-ui init                                   # initialise project, creates aether.json
-npx aether-ui list                                   # browse available components
-npx aether-ui add button                             # install a component
+npx aether-ui init          # initialise project, creates aether.json
+npx aether-ui list          # browse available components
+npx aether-ui add button    # install a component
 npx aether-ui generate "build me a SaaS dashboard"  # AI-driven scaffolding
-npx aether-ui generate "make me a chat interface"   # scaffold AI chat UI
 ```
 
 ## Documentation
@@ -30,12 +28,7 @@ Aether UI uses a four-layer architecture:
 3. **Blocks** (registry:block) — full page-section assemblies
 4. **Tokens** — design tokens for colors, spacing, typography, and more
 
-AI-native items (registered under `@aether/ai-*`) live in `ai/` subdirectories within each layer
-and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` props.
-
----
-
-## Primitives (51)
+## Primitives (31)
 
 ## Accordion
 - Name: accordion
@@ -46,39 +39,12 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: card, separator
   Prompts: add an accordion | create a collapsible section | add an FAQ section
 
-## Alert
-- Name: alert
-- Install: aether-ui add alert
-- Source: https://registry.aether-ui.dev/r/alert.json
-- Intent: Display an inline contextual message for info, warning, success, or error states
-  Slots: AlertTitle, AlertDescription, variant
-  Often used with: card, form-field
-  Prompts: add an alert | show a warning message | add an info banner
-
-## Alert Dialog
-- Name: alert-dialog
-- Install: aether-ui add alert-dialog
-- Source: https://registry.aether-ui.dev/r/alert-dialog.json
-- Intent: Interrupt the user with a critical confirmation before a destructive action
-  Slots: AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel
-  Often used with: button, confirm-dialog
-  Prompts: add a delete confirmation dialog | add a destructive action dialog | add an irreversible action alert
-
-## Aspect Ratio
-- Name: aspect-ratio
-- Install: aether-ui add aspect-ratio
-- Source: https://registry.aether-ui.dev/r/aspect-ratio.json
-- Intent: Lock a container to a specific width-to-height ratio for consistent media layout
-  Slots: ratio, children
-  Often used with: card
-  Prompts: add a 16/9 video container | add a square image frame | lock an image aspect ratio
-
 ## Avatar
 - Name: avatar
 - Install: aether-ui add avatar
 - Source: https://registry.aether-ui.dev/r/avatar.json
 - Intent: Display user profile images with graceful fallback to initials
-  Slots: AvatarImage, AvatarFallback
+  Slots: AvatarImage, AvatarFallback, AvatarGroup
   Often used with: badge, card, team-settings
   Prompts: add a user avatar | show profile picture | add avatar with initials
 
@@ -87,7 +53,7 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
 - Install: aether-ui add badge
 - Source: https://registry.aether-ui.dev/r/badge.json
 - Intent: Display a small inline label for status, category, or count
-  Slots: children, variant
+  Slots: children
   Often used with: button, card, table, metric-card
   Prompts: add a status badge | show a label pill | display a count indicator
 
@@ -96,18 +62,9 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
 - Install: aether-ui add button
 - Source: https://registry.aether-ui.dev/r/button.json
 - Intent: Trigger an action or navigate; supports multiple visual styles and sizes
-  Slots: children, asChild, variant, size
+  Slots: children, asChild
   Often used with: form-field, dialog, card, page-header, empty-state
   Prompts: add a button | create a submit button | add a call to action
-
-## Button Group
-- Name: button-group
-- Install: aether-ui add button-group
-- Source: https://registry.aether-ui.dev/r/button-group.json
-- Intent: Render a set of related buttons as a visually joined segmented row
-  Slots: children, orientation
-  Often used with: button, toggle
-  Prompts: add a button group | add segmented buttons | add a toolbar button row
 
 ## Calendar
 - Name: calendar
@@ -115,7 +72,7 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
 - Source: https://registry.aether-ui.dev/r/calendar.json
 - Intent: Select a single date or date range from a month-view calendar
   Slots: onSelect, selected, mode
-  Often used with: button, combobox, date-picker
+  Often used with: button, combobox
   Prompts: add a date picker | add a calendar | select a date
 
 ## Card
@@ -127,24 +84,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: metric-card, login-block, signup-block, section-header
   Prompts: add a card | create a content card | add a panel with a title and description
 
-## Carousel
-- Name: carousel
-- Install: aether-ui add carousel
-- Source: https://registry.aether-ui.dev/r/carousel.json
-- Intent: Scroll through a series of cards or images with prev/next controls and dot indicators
-  Slots: CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
-  Often used with: card
-  Prompts: add a carousel | add an image slider | add a card slider
-
-## Chart
-- Name: chart
-- Install: aether-ui add chart
-- Source: https://registry.aether-ui.dev/r/chart.json
-- Intent: Render bar, line, area, pie, or donut charts powered by Recharts with a consistent theme
-  Slots: ChartContainer, ChartTooltip, ChartLegend, config, data
-  Often used with: card, stat-group
-  Prompts: add a bar chart | add a line chart | add a pie chart | add data visualisation
-
 ## Checkbox
 - Name: checkbox
 - Install: aether-ui add checkbox
@@ -153,15 +92,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Slots: checked, onCheckedChange
   Often used with: form-field, label, login-block
   Prompts: add a checkbox | add an accept terms checkbox | add a remember me option
-
-## Collapsible
-- Name: collapsible
-- Install: aether-ui add collapsible
-- Source: https://registry.aether-ui.dev/r/collapsible.json
-- Intent: Toggle the visibility of a content section without the list-item structure of Accordion
-  Slots: CollapsibleTrigger, CollapsibleContent, open, onOpenChange
-  Often used with: sidebar, card
-  Prompts: add a collapsible section | add a show/hide toggle | add an expandable panel
 
 ## Combobox
 - Name: combobox
@@ -181,15 +111,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: dropdown-menu, separator
   Prompts: add a right-click menu | add a context menu | show contextual actions
 
-## Date Picker
-- Name: date-picker
-- Install: aether-ui add date-picker
-- Source: https://registry.aether-ui.dev/r/date-picker.json
-- Intent: Single-date selection combining Calendar and Popover with a formatted display button
-  Slots: value, onChange, placeholder
-  Often used with: calendar, popover, button
-  Prompts: add a date picker | select a single date | add a date input
-
 ## Dialog
 - Name: dialog
 - Install: aether-ui add dialog
@@ -198,15 +119,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Slots: DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter
   Often used with: button, form-field, input
   Prompts: add a confirmation dialog | add a modal popup | add a delete confirmation modal
-
-## Drawer
-- Name: drawer
-- Install: aether-ui add drawer
-- Source: https://registry.aether-ui.dev/r/drawer.json
-- Intent: Slide-up sheet from the bottom edge — optimised for mobile and touch interactions
-  Slots: DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter
-  Often used with: button, sheet
-  Prompts: add a bottom drawer | add a mobile sheet | add a slide-up panel
 
 ## Dropdown Menu
 - Name: dropdown-menu
@@ -235,33 +147,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: form-field, label, table-toolbar, login-block, signup-block
   Prompts: add a text input | add a search field | add an email input
 
-## Input Group
-- Name: input-group
-- Install: aether-ui add input-group
-- Source: https://registry.aether-ui.dev/r/input-group.json
-- Intent: Attach a prefix icon, text, or button addon to an input field
-  Slots: InputGroupPrefix, InputGroupSuffix, children
-  Often used with: input, button
-  Prompts: add an input with icon prefix | add a search input with button | add an input with addon
-
-## Input OTP
-- Name: input-otp
-- Install: aether-ui add input-otp
-- Source: https://registry.aether-ui.dev/r/input-otp.json
-- Intent: Accessible one-time password / PIN input with individual digit slots
-  Slots: InputOTPSlot, InputOTPGroup, InputOTPSeparator, maxLength, value, onChange
-  Often used with: form-field, dialog
-  Prompts: add an OTP input | add a PIN entry field | add a verification code input
-
-## Kbd
-- Name: kbd
-- Install: aether-ui add kbd
-- Source: https://registry.aether-ui.dev/r/kbd.json
-- Intent: Render a keyboard shortcut key with consistent monospace styling
-  Slots: children
-  Often used with: tooltip, command-palette
-  Prompts: add a keyboard shortcut badge | display a key hint | add a hotkey indicator
-
 ## Label
 - Name: label
 - Install: aether-ui add label
@@ -270,24 +155,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Slots: children, htmlFor
   Often used with: form-field, input, checkbox, radio-group, switch
   Prompts: add a form label | label an input field | add an accessible label
-
-## Menubar
-- Name: menubar
-- Install: aether-ui add menubar
-- Source: https://registry.aether-ui.dev/r/menubar.json
-- Intent: Application-level horizontal menu bar with File, Edit, View-style menus
-  Slots: MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarSeparator
-  Often used with: separator
-  Prompts: add a menu bar | add a file/edit menu | add application menus
-
-## Navigation Menu
-- Name: navigation-menu
-- Install: aether-ui add navigation-menu
-- Source: https://registry.aether-ui.dev/r/navigation-menu.json
-- Intent: Full navigation menu with trigger links, dropdown panels, and keyboard support
-  Slots: NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink
-  Often used with: marketing-navbar, app-header
-  Prompts: add a navigation menu | add a mega menu | add a site nav with dropdowns
 
 ## Pagination
 - Name: pagination
@@ -298,22 +165,13 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: button, data-table
   Prompts: add pagination | add page navigation | add next previous buttons
 
-## Popover
-- Name: popover
-- Install: aether-ui add popover
-- Source: https://registry.aether-ui.dev/r/popover.json
-- Intent: Display floating non-modal content anchored to a trigger element
-  Slots: PopoverTrigger, PopoverContent
-  Often used with: button, date-picker, date-range-picker
-  Prompts: add a popover | add a floating panel | add a contextual popup
-
 ## Progress
 - Name: progress
 - Install: aether-ui add progress
 - Source: https://registry.aether-ui.dev/r/progress.json
 - Intent: Show completion percentage of a task or upload as a horizontal bar
   Slots: value
-  Often used with: billing-overview, onboarding-checklist, upload-progress
+  Often used with: billing-overview, onboarding-checklist
   Prompts: add a progress bar | show upload progress | show task completion
 
 ## Radio Group
@@ -325,22 +183,13 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: form-field, label
   Prompts: add a radio group | add a plan selector with radio buttons | add a single-choice option list
 
-## Resizable
-- Name: resizable
-- Install: aether-ui add resizable
-- Source: https://registry.aether-ui.dev/r/resizable.json
-- Intent: Split-pane layout panels that users can resize by dragging a handle
-  Slots: ResizablePanelGroup, ResizablePanel, ResizableHandle, direction
-  Often used with: sidebar, scroll-area
-  Prompts: add a resizable split panel | add a draggable divider | add a resizable layout
-
 ## Scroll Area
 - Name: scroll-area
 - Install: aether-ui add scroll-area
 - Source: https://registry.aether-ui.dev/r/scroll-area.json
 - Intent: Wrap content that overflows with a styled, accessible scroll container
   Slots: children, ScrollBar
-  Often used with: command-palette, activity-feed, conversation-thread
+  Often used with: command-palette, activity-feed
   Prompts: add a scroll area | make content scrollable | add a custom scrollbar
 
 ## Select
@@ -370,15 +219,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: button, form-field, input
   Prompts: add a side panel | add a slide-in drawer | add a detail sheet
 
-## Sidebar
-- Name: sidebar
-- Install: aether-ui add sidebar
-- Source: https://registry.aether-ui.dev/r/sidebar.json
-- Intent: Standalone collapsible sidebar primitive, decoupled from DashboardShell
-  Slots: SidebarHeader, SidebarContent, SidebarFooter, SidebarRail, defaultOpen
-  Often used with: nav, collapsible, dashboard-shell, chat-sidebar
-  Prompts: add a collapsible sidebar | add a navigation sidebar | add a side panel
-
 ## Skeleton
 - Name: skeleton
 - Install: aether-ui add skeleton
@@ -396,24 +236,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Slots: value, onValueChange, min, max, step
   Often used with: form-field
   Prompts: add a slider | add a range input | add a volume control
-
-## Sonner
-- Name: sonner
-- Install: aether-ui add sonner
-- Source: https://registry.aether-ui.dev/r/sonner.json
-- Intent: Modern opinionated toast notifications built on the sonner library
-  Slots: Toaster, toast, toast.success, toast.error, toast.loading, toast.promise
-  Often used with: button
-  Prompts: add toast notifications | add a success toast | add sonner toasts
-
-## Spinner
-- Name: spinner
-- Install: aether-ui add spinner
-- Source: https://registry.aether-ui.dev/r/spinner.json
-- Intent: Animated loading spinner for inline async indicators
-  Slots: size, className
-  Often used with: button, loading-state, thinking-indicator
-  Prompts: add a spinner | add a loading spinner | add an animated loader
 
 ## Switch
 - Name: switch
@@ -487,9 +309,7 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: button, badge
   Prompts: add a tooltip | show a hint on hover | add an icon with a tooltip
 
----
-
-## Patterns (29)
+## Patterns (17)
 
 ## Activity Feed
 - Name: activity-feed
@@ -499,15 +319,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Slots: ActivityItem, items
   Often used with: avatar, notification-center
   Prompts: add an activity feed | show recent events | add an audit log
-
-## Chat Message List
-- Name: chat-message-list
-- Install: aether-ui add chat-message-list
-- Source: https://registry.aether-ui.dev/r/chat-message-list.json
-- Intent: Scrollable list of chat messages with avatars, timestamps, and grouped sender runs
-  Slots: messages, currentUserId
-  Often used with: avatar, scroll-area, conversation-thread
-  Prompts: add a chat message list | show conversation messages | add a message history
 
 ## Color Picker
 - Name: color-picker
@@ -527,15 +338,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: dialog, combobox, scroll-area
   Prompts: add a command palette | add cmd+k search | add a quick search
 
-## Confirm Dialog
-- Name: confirm-dialog
-- Install: aether-ui add confirm-dialog
-- Source: https://registry.aether-ui.dev/r/confirm-dialog.json
-- Intent: Reusable confirmation dialog for destructive or irreversible actions
-  Slots: title, description, onConfirm, onCancel, confirmLabel, cancelLabel, variant
-  Often used with: alert-dialog, button
-  Prompts: add a confirm dialog | add a delete confirmation | add an are-you-sure dialog
-
 ## Data Table
 - Name: data-table
 - Install: aether-ui add data-table
@@ -544,15 +346,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Slots: columns, data, pageSize, searchable, searchKeys
   Often used with: table, input, button, pagination, table-toolbar
   Prompts: add a data table | show a sortable table | add a paginated list
-
-## Date Range Picker
-- Name: date-range-picker
-- Install: aether-ui add date-range-picker
-- Source: https://registry.aether-ui.dev/r/date-range-picker.json
-- Intent: Select a start and end date from a dual-month calendar in a popover
-  Slots: value, onChange, placeholder
-  Often used with: calendar, popover, button
-  Prompts: add a date range picker | select start and end date | add a date range filter
 
 ## Empty State
 - Name: empty-state
@@ -590,15 +383,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: input, textarea, select, checkbox, switch, label
   Prompts: add a form field with validation | add an email field with error message | add a labelled input with helper text
 
-## Inline Edit
-- Name: inline-edit
-- Install: aether-ui add inline-edit
-- Source: https://registry.aether-ui.dev/r/inline-edit.json
-- Intent: Click-to-edit text field that switches between display and edit mode with save/cancel
-  Slots: value, onSave, placeholder
-  Often used with: input, button
-  Prompts: add an inline edit | click to edit a field | add an editable label
-
 ## Kanban Board
 - Name: kanban
 - Install: aether-ui add kanban
@@ -626,23 +410,14 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: card, badge, dashboard-shell
   Prompts: add a metric card | add a KPI card | add a stat card with a trend
 
-## Multi Select
-- Name: multi-select
-- Install: aether-ui add multi-select
-- Source: https://registry.aether-ui.dev/r/multi-select.json
-- Intent: Checkbox-based multi-select with tag/chip display and search input
-  Slots: options, value, onChange, placeholder, searchable
-  Often used with: badge, input, form-field
-  Prompts: add a multi-select | add a tag selector | add a checkbox dropdown
-
-## Notification Bell
-- Name: notification-bell
-- Install: aether-ui add notification-bell
-- Source: https://registry.aether-ui.dev/r/notification-bell.json
-- Intent: Bell icon button with an unread-count badge and a notification dropdown panel
-  Slots: notifications, unreadCount, onMarkRead
-  Often used with: badge, dropdown-menu, avatar
-  Prompts: add a notification bell | add a notifications dropdown | show unread count
+## Sidebar Nav
+- Name: nav
+- Install: aether-ui add nav
+- Source: https://registry.aether-ui.dev/r/nav.json
+- Intent: Build a composable sidebar navigation with grouped nav items and active states
+  Slots: NavItem, NavGroup, SidebarNav, items, groups
+  Often used with: dashboard-shell, badge
+  Prompts: add a sidebar navigation | add nav items to a sidebar | add a grouped sidebar menu
 
 ## Page Header
 - Name: page-header
@@ -653,24 +428,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: button, badge, section-header
   Prompts: add a page header | add a page title with a breadcrumb | add a header with an action button
 
-## Profile Dropdown
-- Name: profile-dropdown
-- Install: aether-ui add profile-dropdown
-- Source: https://registry.aether-ui.dev/r/profile-dropdown.json
-- Intent: User avatar and name button that opens a dropdown with nav links and sign-out
-  Slots: user, links, onSignOut
-  Often used with: avatar, dropdown-menu, separator
-  Prompts: add a user profile dropdown | add a user menu | add an account dropdown
-
-## Search Input
-- Name: search-input
-- Install: aether-ui add search-input
-- Source: https://registry.aether-ui.dev/r/search-input.json
-- Intent: Input with a search icon, clear button, optional keyboard shortcut badge, and loading state
-  Slots: value, onChange, onClear, shortcut, loading
-  Often used with: input, kbd, button
-  Prompts: add a search input | add a search bar with clear button | add a keyboard shortcut search field
-
 ## Section Header
 - Name: section-header
 - Install: aether-ui add section-header
@@ -679,24 +436,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Slots: title, description, action, children
   Often used with: card, form-field, button
   Prompts: add a section heading | add a settings section | add a content block title
-
-## Sidebar Nav
-- Name: nav
-- Install: aether-ui add nav
-- Source: https://registry.aether-ui.dev/r/nav.json
-- Intent: Build a composable sidebar navigation with grouped nav items and active states
-  Slots: NavItem, NavGroup, SidebarNav, items, groups
-  Often used with: dashboard-shell, badge
-  Prompts: add a sidebar navigation | add nav items to a sidebar | add a grouped sidebar menu
-
-## Sortable List
-- Name: sortable-list
-- Install: aether-ui add sortable-list
-- Source: https://registry.aether-ui.dev/r/sortable-list.json
-- Intent: Drag-and-drop reorderable list using dnd-kit with drag handles and animated reordering
-  Slots: items, onReorder, renderItem
-  Often used with: card, button
-  Prompts: add a sortable list | add drag to reorder | add a draggable list
 
 ## Stat Group
 - Name: stat-group
@@ -713,7 +452,7 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
 - Source: https://registry.aether-ui.dev/r/stepper.json
 - Intent: Show progress through a multi-step form or onboarding wizard
   Slots: steps, currentStep, orientation
-  Often used with: onboarding-checklist, ai-onboarding
+  Often used with: onboarding-checklist
   Prompts: add a stepper | add a wizard | add multi-step form progress
 
 ## Table Toolbar
@@ -725,36 +464,7 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: table, input, button, badge, select
   Prompts: add a table toolbar with search and filters | add a search bar above a table | add filter chips to a data table
 
-## Theme Switcher
-- Name: theme-switcher
-- Install: aether-ui add theme-switcher
-- Source: https://registry.aether-ui.dev/r/theme-switcher.json
-- Intent: Light / dark / system theme toggle using next-themes with icon buttons or a dropdown
-  Slots: variant
-  Often used with: dropdown-menu, toggle-group
-  Prompts: add a dark mode toggle | add a theme switcher | add light/dark/system toggle
-
-## Timeline Feed
-- Name: timeline-feed
-- Install: aether-ui add timeline-feed
-- Source: https://registry.aether-ui.dev/r/timeline-feed.json
-- Intent: Vertical timeline with date-group markers and event entries with icons and descriptions
-  Slots: items, TimelineItem
-  Often used with: avatar, separator
-  Prompts: add a timeline | add a vertical event feed | add an activity timeline
-
-## Upload Progress
-- Name: upload-progress
-- Install: aether-ui add upload-progress
-- Source: https://registry.aether-ui.dev/r/upload-progress.json
-- Intent: File upload state card with filename, file size, progress bar, and cancel action
-  Slots: filename, size, progress, onCancel, status
-  Often used with: progress, button, file-dropzone
-  Prompts: add upload progress | show file upload status | add a file upload progress bar
-
----
-
-## Blocks (25)
+## Blocks (10)
 
 ## Account Settings
 - Name: account-settings
@@ -765,15 +475,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: input, textarea, button, avatar, form-field
   Prompts: add account settings | add profile settings | add user settings form
 
-## App Header
-- Name: app-header
-- Install: aether-ui add app-header
-- Source: https://registry.aether-ui.dev/r/app-header.json
-- Intent: Full application top navigation bar with logo, nav links, user menu, and optional CTA
-  Slots: logo, navLinks, userMenu, cta
-  Often used with: navigation-menu, profile-dropdown, button
-  Prompts: add an app header | add a top navigation bar | add a site header with logo and nav
-
 ## Billing Overview
 - Name: billing-overview
 - Install: aether-ui add billing-overview
@@ -782,24 +483,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Slots: plan, usage, nextBillingDate, onUpgrade, onManageBilling
   Often used with: progress, button, card, badge
   Prompts: add a billing overview | show subscription details | add plan usage
-
-## Changelog Block
-- Name: changelog-block
-- Install: aether-ui add changelog-block
-- Source: https://registry.aether-ui.dev/r/changelog-block.json
-- Intent: Release notes / changelog feed with version headers, dates, and categorized entries
-  Slots: releases, ReleaseEntry
-  Often used with: badge, separator, timeline-feed
-  Prompts: add a changelog | add release notes | add a version history
-
-## CTA Section
-- Name: cta-section
-- Install: aether-ui add cta-section
-- Source: https://registry.aether-ui.dev/r/cta-section.json
-- Intent: Full-width call-to-action banner with heading, subtext, and primary + secondary buttons
-  Slots: title, description, primaryAction, secondaryAction
-  Often used with: button, landing-hero
-  Prompts: add a CTA section | add a call to action banner | add a sign up section
 
 ## Dashboard Shell
 - Name: dashboard-shell
@@ -819,51 +502,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: empty-state, button
   Prompts: add an empty dashboard | show empty state for dashboard | add a welcome screen
 
-## Error Page
-- Name: error-page
-- Install: aether-ui add error-page
-- Source: https://registry.aether-ui.dev/r/error-page.json
-- Intent: Full-page 404 / 500 error state with illustration slot, heading, description, and back link
-  Slots: code, title, description, action
-  Often used with: button
-  Prompts: add a 404 page | add an error page | add a not found page
-
-## FAQ Section
-- Name: faq-section
-- Install: aether-ui add faq-section
-- Source: https://registry.aether-ui.dev/r/faq-section.json
-- Intent: FAQ list rendered as an Accordion inside a section header with title and description
-  Slots: items, title, description
-  Often used with: accordion, section-header
-  Prompts: add an FAQ section | add frequently asked questions | add a Q&A accordion
-
-## Features Section
-- Name: features-section
-- Install: aether-ui add features-section
-- Source: https://registry.aether-ui.dev/r/features-section.json
-- Intent: Features grid or alternating list with icon, title, and description per feature
-  Slots: features, title, description, layout
-  Often used with: card
-  Prompts: add a features section | add product features | add a feature grid
-
-## Footer Section
-- Name: footer-section
-- Install: aether-ui add footer-section
-- Source: https://registry.aether-ui.dev/r/footer-section.json
-- Intent: Site footer with multi-column link groups, social icons, and copyright line
-  Slots: columns, socialLinks, copyright
-  Often used with: separator
-  Prompts: add a site footer | add a footer with links | add a multi-column footer
-
-## Landing Hero
-- Name: landing-hero
-- Install: aether-ui add landing-hero
-- Source: https://registry.aether-ui.dev/r/landing-hero.json
-- Intent: Hero section with headline, subheading, primary + secondary CTA, and optional media slot
-  Slots: headline, subheading, primaryAction, secondaryAction, media
-  Often used with: button, badge
-  Prompts: add a hero section | add a landing page hero | add a homepage banner
-
 ## Login
 - Name: login-block
 - Install: aether-ui add login-block
@@ -872,24 +510,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Slots: onSubmit, onForgotPassword, footer
   Often used with: form-field, input, button, checkbox, label
   Prompts: add a login page | create an authentication screen | add a sign-in form
-
-## Logo Cloud
-- Name: logo-cloud
-- Install: aether-ui add logo-cloud
-- Source: https://registry.aether-ui.dev/r/logo-cloud.json
-- Intent: Partner / trusted-by logo grid with greyscale treatment and responsive layout
-  Slots: logos, title
-  Often used with: separator
-  Prompts: add a logo cloud | add trusted by logos | add partner logos
-
-## Marketing Navbar
-- Name: marketing-navbar
-- Install: aether-ui add marketing-navbar
-- Source: https://registry.aether-ui.dev/r/marketing-navbar.json
-- Intent: Marketing site nav with logo, link group, CTA button, and mobile hamburger menu
-  Slots: logo, links, cta, mobileMenu
-  Often used with: navigation-menu, button, sheet
-  Prompts: add a marketing navbar | add a site nav | add a landing page header
 
 ## Notification Center
 - Name: notification-center
@@ -909,15 +529,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: checkbox, progress, stepper
   Prompts: add an onboarding checklist | add a getting started guide | add setup steps
 
-## Pricing Comparison
-- Name: pricing-comparison
-- Install: aether-ui add pricing-comparison
-- Source: https://registry.aether-ui.dev/r/pricing-comparison.json
-- Intent: Feature comparison table across pricing tiers with checkmarks and tier headers
-  Slots: tiers, features
-  Often used with: badge, button, pricing-section
-  Prompts: add a pricing comparison table | compare pricing plans | add feature comparison
-
 ## Pricing Section
 - Name: pricing-section
 - Install: aether-ui add pricing-section
@@ -936,15 +547,6 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: form-field, input, button, checkbox
   Prompts: add a sign up page | create a registration form | add a new account form
 
-## Stats Section
-- Name: stats-section
-- Install: aether-ui add stats-section
-- Source: https://registry.aether-ui.dev/r/stats-section.json
-- Intent: Marketing stats row with large numbers, labels, and optional descriptions
-  Slots: stats, title
-  Often used with: separator
-  Prompts: add a stats section | show big numbers | add marketing metrics
-
 ## Team Settings
 - Name: team-settings
 - Install: aether-ui add team-settings
@@ -954,350 +556,9 @@ and are SDK-agnostic — they accept plain `string` and `AsyncIterable<string>` 
   Often used with: avatar, badge, select, input, button
   Prompts: add team settings | add team member management | add invite team members
 
-## Testimonials Section
-- Name: testimonials-section
-- Install: aether-ui add testimonials-section
-- Source: https://registry.aether-ui.dev/r/testimonials-section.json
-- Intent: Customer quotes grid with avatar, name, role, company, and quote text
-  Slots: testimonials, title, description
-  Often used with: avatar, card
-  Prompts: add testimonials | add customer quotes | add social proof
+## Compose a SaaS Dashboard
 
-## User Profile Page
-- Name: user-profile-page
-- Install: aether-ui add user-profile-page
-- Source: https://registry.aether-ui.dev/r/user-profile-page.json
-- Intent: User profile view block with avatar, bio, stat tiles, and optional action buttons
-  Slots: user, stats, actions
-  Often used with: avatar, badge, button, card
-  Prompts: add a user profile page | add a public profile | add a profile view
-
-## Waitlist Block
-- Name: waitlist-block
-- Install: aether-ui add waitlist-block
-- Source: https://registry.aether-ui.dev/r/waitlist-block.json
-- Intent: Email waitlist / early-access signup form with success state and social proof
-  Slots: onSubmit, title, description, successMessage
-  Often used with: input, button
-  Prompts: add a waitlist | add an early access form | add a coming soon signup
-
----
-
-## AI-Native Primitives (14) — @aether/ai-*
-
-All AI primitives are SDK-agnostic. They accept `string` and `AsyncIterable<string>` props;
-the consumer wires their own AI SDK (Vercel AI SDK, LangChain.js, OpenAI, etc.).
-
-## Attachment Chip
-- Name: ai-attachment-chip
-- Install: aether-ui add ai-attachment-chip
-- Source: https://registry.aether-ui.dev/r/ai-attachment-chip.json
-- Intent: Compact chip showing a file or image attached to the prompt area with remove button
-  Slots: filename, size, type, onRemove
-  Often used with: prompt-input
-  Prompts: add a file attachment chip | show attached file | add an attachment preview
-
-## Chat Bubble
-- Name: ai-chat-bubble
-- Install: aether-ui add ai-chat-bubble
-- Source: https://registry.aether-ui.dev/r/ai-chat-bubble.json
-- Intent: User or assistant message bubble with role avatar, timestamp, and trailing actions slot
-  Slots: role, content, timestamp, actions
-  Often used with: streaming-text, avatar, feedback-buttons
-  Prompts: add a chat bubble | add a message bubble | show a user message
-
-## Code Block
-- Name: ai-code-block
-- Install: aether-ui add ai-code-block
-- Source: https://registry.aether-ui.dev/r/ai-code-block.json
-- Intent: Syntax-highlighted code block with copy button, language badge, and optional filename
-  Slots: code, language, filename, showCopy
-  Often used with: markdown-renderer
-  Prompts: add a code block | display code with syntax highlighting | add a copyable code snippet
-
-## Feedback Buttons
-- Name: ai-feedback-buttons
-- Install: aether-ui add ai-feedback-buttons
-- Source: https://registry.aether-ui.dev/r/ai-feedback-buttons.json
-- Intent: Thumbs-up / thumbs-down buttons with toggled state for rating AI responses
-  Slots: onFeedback, value
-  Often used with: chat-bubble, ai-response-card
-  Prompts: add feedback buttons | add thumbs up thumbs down | add response rating
-
-## Markdown Renderer
-- Name: ai-markdown-renderer
-- Install: aether-ui add ai-markdown-renderer
-- Source: https://registry.aether-ui.dev/r/ai-markdown-renderer.json
-- Intent: Renders LLM markdown output — headings, lists, tables, inline code, and fenced code blocks
-  Slots: content
-  Often used with: code-block, ai-response-card, streaming-text
-  Prompts: add a markdown renderer | render LLM output | display formatted AI response
-
-## Model Badge
-- Name: ai-model-badge
-- Install: aether-ui add ai-model-badge
-- Source: https://registry.aether-ui.dev/r/ai-model-badge.json
-- Intent: Pill showing model name and optional provider icon (e.g. "GPT-4o", "Claude 3.5")
-  Slots: model, provider
-  Often used with: ai-response-card, model-selector
-  Prompts: add a model badge | show the AI model name | display model indicator
-
-## Prompt Input
-- Name: ai-prompt-input
-- Install: aether-ui add ai-prompt-input
-- Source: https://registry.aether-ui.dev/r/ai-prompt-input.json
-- Intent: Auto-growing textarea with send button, token counter, keyboard shortcut, and attach-file slot
-  Slots: value, onChange, onSubmit, disabled, attachments, maxTokens
-  Often used with: chat-layout, conversation-thread, attachment-chip
-  Prompts: add a prompt input | add a chat input | add a message composer
-
-## Prompt Suggestion
-- Name: ai-prompt-suggestion
-- Install: aether-ui add ai-prompt-suggestion
-- Source: https://registry.aether-ui.dev/r/ai-prompt-suggestion.json
-- Intent: Clickable suggested-prompt chip with optional icon prefix
-  Slots: label, icon, onClick
-  Often used with: conversation-starter, prompt-input
-  Prompts: add prompt suggestions | add suggested prompts | add example prompts
-
-## Reasoning Block
-- Name: ai-reasoning-block
-- Install: aether-ui add ai-reasoning-block
-- Source: https://registry.aether-ui.dev/r/ai-reasoning-block.json
-- Intent: Collapsible chain-of-thought / reasoning trace block with header toggle
-  Slots: content, defaultOpen
-  Often used with: ai-response-card, tool-call-card
-  Prompts: add a reasoning block | show thinking trace | add chain of thought display
-
-## Source Card
-- Name: ai-source-card
-- Install: aether-ui add ai-source-card
-- Source: https://registry.aether-ui.dev/r/ai-source-card.json
-- Intent: Citation / source reference card with title, URL, favicon, and optional excerpt
-  Slots: title, url, excerpt, favicon
-  Often used with: conversation-thread, ai-response-card
-  Prompts: add source cards | show AI citations | add reference cards
-
-## Streaming Text
-- Name: ai-streaming-text
-- Install: aether-ui add ai-streaming-text
-- Source: https://registry.aether-ui.dev/r/ai-streaming-text.json
-- Intent: Animated token-by-token text renderer with blinking cursor; accepts string or AsyncIterable<string>
-  Slots: content, speed, cursor
-  Often used with: chat-bubble, ai-response-card, conversation-thread
-  Prompts: add streaming text | animate text output | show live AI response
-
-## Thinking Indicator
-- Name: ai-thinking-indicator
-- Install: aether-ui add ai-thinking-indicator
-- Source: https://registry.aether-ui.dev/r/ai-thinking-indicator.json
-- Intent: Animated pulsing dots shown while the model is generating a response
-  Slots: state
-  Often used with: conversation-thread, chat-bubble
-  Prompts: add a thinking indicator | show AI loading | add a generating animation
-
-## Token Counter
-- Name: ai-token-counter
-- Install: aether-ui add ai-token-counter
-- Source: https://registry.aether-ui.dev/r/ai-token-counter.json
-- Intent: Live context-window usage bar (tokens used / max) with colour-coded danger threshold
-  Slots: used, max
-  Often used with: prompt-input, ai-settings-panel
-  Prompts: add a token counter | show context window usage | add token limit indicator
-
-## Tool Call Card
-- Name: ai-tool-call-card
-- Install: aether-ui add ai-tool-call-card
-- Source: https://registry.aether-ui.dev/r/ai-tool-call-card.json
-- Intent: Collapsed/expanded card showing an AI tool invocation (name, args) and its result or error
-  Slots: name, args, result, status, defaultOpen
-  Often used with: tool-call-sequence, ai-response-card
-  Prompts: add a tool call card | show AI tool use | display function call result
-
----
-
-## AI-Native Patterns (10) — @aether/ai-*
-
-## AI Error State
-- Name: ai-error-state
-- Install: aether-ui add ai-error-state
-- Source: https://registry.aether-ui.dev/r/ai-error-state.json
-- Intent: Error state for AI failures — rate-limit, context exceeded, provider outage — with recovery actions
-  Slots: type, onRetry, onNewChat
-  Often used with: conversation-thread, ai-response-card
-  Prompts: add an AI error state | show rate limit error | add provider error fallback
-
-## AI Response Card
-- Name: ai-response-card
-- Install: aether-ui add ai-response-card
-- Source: https://registry.aether-ui.dev/r/ai-response-card.json
-- Intent: Card wrapping MarkdownRenderer + StreamingText with model badge header and feedback footer
-  Slots: content, model, timestamp, onFeedback, onCopy, onRegenerate
-  Often used with: markdown-renderer, streaming-text, feedback-buttons, model-badge
-  Prompts: add an AI response card | display an AI answer | show a formatted model response
-
-## AI Settings Panel
-- Name: ai-settings-panel
-- Install: aether-ui add ai-settings-panel
-- Source: https://registry.aether-ui.dev/r/ai-settings-panel.json
-- Intent: Collapsible panel for temperature, max tokens, top-p, and system prompt override
-  Slots: value, onChange
-  Often used with: slider, textarea, token-counter
-  Prompts: add AI settings | add temperature slider | add model parameters panel
-
-## Conversation Starter
-- Name: ai-conversation-starter
-- Install: aether-ui add ai-conversation-starter
-- Source: https://registry.aether-ui.dev/r/ai-conversation-starter.json
-- Intent: Empty-state layout with suggested prompt chips shown before any messages exist
-  Slots: suggestions, onSelect, greeting
-  Often used with: prompt-suggestion, prompt-input, conversation-thread
-  Prompts: add a conversation starter | add example prompts for empty chat | add a welcome screen for chat
-
-## Conversation Thread
-- Name: ai-conversation-thread
-- Install: aether-ui add ai-conversation-thread
-- Source: https://registry.aether-ui.dev/r/ai-conversation-thread.json
-- Intent: Scrollable message list composing ChatBubble, StreamingText, ThinkingIndicator, and SourceCard
-  Slots: messages, isStreaming, streamingContent
-  Often used with: chat-bubble, streaming-text, thinking-indicator, source-card, scroll-area
-  Prompts: add a conversation thread | add a chat message list | add a streaming chat view
-
-## Model Selector
-- Name: ai-model-selector
-- Install: aether-ui add ai-model-selector
-- Source: https://registry.aether-ui.dev/r/ai-model-selector.json
-- Intent: Dropdown/combobox to switch between AI models grouped by provider with capability tags
-  Slots: models, value, onChange
-  Often used with: combobox, model-badge, dropdown-menu
-  Prompts: add a model selector | add model switcher | switch between AI models
-
-## Prompt Builder
-- Name: ai-prompt-builder
-- Install: aether-ui add ai-prompt-builder
-- Source: https://registry.aether-ui.dev/r/ai-prompt-builder.json
-- Intent: Structured prompt composer with system / user / assistant turn cards and character count
-  Slots: turns, onChange, onRun
-  Often used with: textarea, button, badge
-  Prompts: add a prompt builder | add system prompt editor | add a multi-turn prompt composer
-
-## Prompt Library
-- Name: ai-prompt-library
-- Install: aether-ui add ai-prompt-library
-- Source: https://registry.aether-ui.dev/r/ai-prompt-library.json
-- Intent: Searchable grid of saved and example prompts with category filter and one-click insert
-  Slots: prompts, onInsert, categories
-  Often used with: search-input, badge, card
-  Prompts: add a prompt library | add saved prompts | add example prompt browser
-
-## Tool Call Sequence
-- Name: ai-tool-call-sequence
-- Install: aether-ui add ai-tool-call-sequence
-- Source: https://registry.aether-ui.dev/r/ai-tool-call-sequence.json
-- Intent: Ordered list of tool calls with step number, name, and status indicator (pending/running/done/error)
-  Slots: steps
-  Often used with: tool-call-card, badge, spinner
-  Prompts: add tool call sequence | show agent steps | display function call log
-
-## Voice Input
-- Name: ai-voice-input
-- Install: aether-ui add ai-voice-input
-- Source: https://registry.aether-ui.dev/r/ai-voice-input.json
-- Intent: Mic button with waveform animation and live transcription display; toggles PromptInput content
-  Slots: onTranscript, onStop
-  Often used with: prompt-input
-  Prompts: add voice input | add speech to text | add a microphone button
-
----
-
-## AI-Native Blocks (9) — @aether/ai-*
-
-## Agent Workspace
-- Name: ai-agent-workspace
-- Install: aether-ui add ai-agent-workspace
-- Source: https://registry.aether-ui.dev/r/ai-agent-workspace.json
-- Intent: Multi-step agent task UI — task description, tool call sequence log, and final output
-  Slots: task, steps, output, status
-  Often used with: tool-call-sequence, ai-response-card, reasoning-block, progress
-  Prompts: add an agent workspace | build an agent task view | add a multi-step agent UI
-
-## AI Assistant Panel
-- Name: ai-assistant-panel
-- Install: aether-ui add ai-assistant-panel
-- Source: https://registry.aether-ui.dev/r/ai-assistant-panel.json
-- Intent: Slide-in sheet/drawer embedding a ConversationThread + PromptInput for in-app AI assistant
-  Slots: open, onClose, systemPrompt
-  Often used with: conversation-thread, prompt-input, sheet
-  Prompts: add an AI assistant panel | add an in-app chatbot | add a floating AI panel
-
-## AI Onboarding
-- Name: ai-onboarding
-- Install: aether-ui add ai-onboarding
-- Source: https://registry.aether-ui.dev/r/ai-onboarding.json
-- Intent: First-time AI feature setup — API key entry, model selection, and example prompts — using Stepper
-  Slots: onComplete, models
-  Often used with: stepper, model-selector, input, prompt-suggestion
-  Prompts: add AI onboarding | add AI setup wizard | add first-time AI configuration
-
-## AI Settings
-- Name: ai-settings
-- Install: aether-ui add ai-settings
-- Source: https://registry.aether-ui.dev/r/ai-settings.json
-- Intent: Settings block for model configuration, system prompt textarea, and masked API key management
-  Slots: defaultValues, onSave
-  Often used with: select, textarea, input, button, model-selector
-  Prompts: add AI settings | add model settings page | add API key settings
-
-## AI Usage Dashboard
-- Name: ai-usage-dashboard
-- Install: aether-ui add ai-usage-dashboard
-- Source: https://registry.aether-ui.dev/r/ai-usage-dashboard.json
-- Intent: Token usage and cost breakdown charts with request-count stats across models
-  Slots: usage, period
-  Often used with: chart, stat-group, badge, card
-  Prompts: add AI usage dashboard | show token usage | add AI cost tracking
-
-## Chat Layout
-- Name: ai-chat-layout
-- Install: aether-ui add ai-chat-layout
-- Source: https://registry.aether-ui.dev/r/ai-chat-layout.json
-- Intent: Full-page layout — ChatSidebar left, ConversationThread centre, PromptInput bottom; responsive
-  Slots: children, sidebar, header
-  Often used with: chat-sidebar, conversation-thread, prompt-input, sidebar
-  Prompts: make me a chat interface | add a full-page chat layout | build a ChatGPT-style layout
-
-## Chat Sidebar
-- Name: ai-chat-sidebar
-- Install: aether-ui add ai-chat-sidebar
-- Source: https://registry.aether-ui.dev/r/ai-chat-sidebar.json
-- Intent: Conversation history list with search, new chat button, date grouping, and rename/delete per item
-  Slots: conversations, onNew, onSelect, onDelete, onRename
-  Often used with: chat-layout, sidebar, search-input
-  Prompts: add a chat sidebar | add conversation history | add a chat list panel
-
-## Compare Output
-- Name: ai-compare-output
-- Install: aether-ui add ai-compare-output
-- Source: https://registry.aether-ui.dev/r/ai-compare-output.json
-- Intent: Side-by-side model output comparison with two AIResponseCard columns and diff highlighting
-  Slots: left, right
-  Often used with: ai-response-card, model-badge
-  Prompts: add model comparison | compare AI outputs side by side | add a diff view for AI responses
-
-## Prompt Library Page
-- Name: ai-prompt-library-page
-- Install: aether-ui add ai-prompt-library-page
-- Source: https://registry.aether-ui.dev/r/ai-prompt-library-page.json
-- Intent: Full-page prompt library with category sidebar, search, PromptLibrary grid, and CRUD modal
-  Slots: prompts, categories, onSave, onDelete
-  Often used with: ai-prompt-library, search-input, sidebar, dialog
-  Prompts: add a prompt library page | build a prompt management page | add a full prompt browser
-
----
-
-## Composition Recipes
-
-### Compose a SaaS Dashboard
+To build a standard SaaS dashboard, install these items in order:
 
 ```bash
 npx aether-ui add dashboard-shell   # full-page layout with sidebar and topbar
@@ -1310,68 +571,12 @@ npx aether-ui add loading-state     # async loading indicators
 npx aether-ui add error-state       # fetch error fallbacks
 ```
 
-### Compose an Authentication Flow
+## Compose an Authentication Flow
 
 ```bash
 npx aether-ui add login-block       # email + password login
 npx aether-ui add signup-block      # registration form
 ```
-
-### Compose a Marketing Site
-
-```bash
-npx aether-ui add marketing-navbar       # top nav with logo and CTA
-npx aether-ui add landing-hero           # hero section
-npx aether-ui add features-section      # features grid
-npx aether-ui add stats-section         # social proof numbers
-npx aether-ui add testimonials-section  # customer quotes
-npx aether-ui add logo-cloud            # trusted-by logos
-npx aether-ui add pricing-section       # pricing tiers
-npx aether-ui add pricing-comparison    # feature comparison table
-npx aether-ui add faq-section           # FAQ accordion
-npx aether-ui add cta-section           # call to action banner
-npx aether-ui add footer-section        # site footer
-```
-
-### Compose a Full-Page Chat Interface (AI)
-
-```bash
-npx aether-ui add ai-chat-layout        # full-page layout shell
-npx aether-ui add ai-chat-sidebar       # conversation history sidebar
-npx aether-ui add ai-conversation-thread # scrollable message list
-npx aether-ui add ai-prompt-input       # input with send button
-npx aether-ui add ai-streaming-text     # token-by-token output
-npx aether-ui add ai-thinking-indicator # generating animation
-npx aether-ui add ai-conversation-starter # empty state with suggestions
-```
-
-### Compose an In-App AI Assistant Panel
-
-```bash
-npx aether-ui add ai-assistant-panel    # slide-in sheet with full chat
-```
-
-### Compose an Agent Workspace
-
-```bash
-npx aether-ui add ai-agent-workspace    # task + tool call log + output
-npx aether-ui add ai-tool-call-sequence # ordered step list
-npx aether-ui add ai-tool-call-card     # individual tool call detail
-```
-
-### Compose a Settings Page
-
-```bash
-npx aether-ui add section-header        # section labels
-npx aether-ui add form-field            # validated form controls
-npx aether-ui add input                 # text fields
-npx aether-ui add switch                # toggles
-npx aether-ui add button               # save/cancel
-npx aether-ui add account-settings     # full account settings block
-npx aether-ui add team-settings        # team member management
-```
-
----
 
 ## Token-Driven Styling
 
