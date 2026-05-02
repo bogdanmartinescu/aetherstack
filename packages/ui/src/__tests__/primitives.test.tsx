@@ -2,6 +2,12 @@ import { describe, it, expect, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 
+// embla-carousel-react relies on matchMedia / ResizeObserver APIs that jsdom
+// does not implement. Mock the hook so Carousel tests run without a browser.
+vi.mock("embla-carousel-react", () => ({
+  default: () => [() => {}, undefined],
+}))
+
 import { Badge } from "../components/badge"
 import { Button } from "../components/button"
 import {
@@ -84,6 +90,25 @@ import {
   ComboboxEmpty,
   ComboboxItem,
 } from "../components/combobox"
+import { AspectRatio } from "../components/aspect-ratio"
+import { ButtonGroup } from "../components/button-group"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "../components/carousel"
+import {
+  InputGroup,
+  InputGroupAddon,
+} from "../components/input-group"
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "../components/input-otp"
+import { VisuallyHidden } from "../components/visually-hidden"
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
 
@@ -1150,5 +1175,168 @@ describe("Combobox", () => {
       </Combobox>,
     )
     expect(screen.getByText("Apple")).toBeInTheDocument()
+  })
+})
+
+// ─── AspectRatio ──────────────────────────────────────────────────────────────
+
+describe("AspectRatio", () => {
+  it("renders children", () => {
+    render(
+      <AspectRatio ratio={16 / 9}>
+        <img src="test.jpg" alt="Test" />
+      </AspectRatio>,
+    )
+    expect(screen.getByAltText("Test")).toBeInTheDocument()
+  })
+
+  it("wraps content in a container element", () => {
+    const { container } = render(
+      <AspectRatio ratio={1}>
+        <span>Content</span>
+      </AspectRatio>,
+    )
+    expect(container.firstChild).toBeInTheDocument()
+  })
+})
+
+// ─── ButtonGroup ──────────────────────────────────────────────────────────────
+
+describe("ButtonGroup", () => {
+  it("renders children with group role", () => {
+    const { container } = render(
+      <ButtonGroup>
+        <button>A</button>
+        <button>B</button>
+      </ButtonGroup>,
+    )
+    expect(container.querySelector('[role="group"]')).toBeInTheDocument()
+    expect(screen.getByText("A")).toBeInTheDocument()
+    expect(screen.getByText("B")).toBeInTheDocument()
+  })
+
+  it("applies horizontal layout by default", () => {
+    const { container } = render(
+      <ButtonGroup>
+        <button>A</button>
+      </ButtonGroup>,
+    )
+    expect(container.firstChild).toHaveClass("inline-flex")
+  })
+
+  it("applies custom className", () => {
+    const { container } = render(
+      <ButtonGroup className="custom-group">
+        <button>A</button>
+      </ButtonGroup>,
+    )
+    expect(container.firstChild).toHaveClass("custom-group")
+  })
+})
+
+// ─── Carousel ─────────────────────────────────────────────────────────────────
+
+describe("Carousel", () => {
+  it("renders carousel with items", () => {
+    render(
+      <Carousel>
+        <CarouselContent>
+          <CarouselItem>Slide 1</CarouselItem>
+          <CarouselItem>Slide 2</CarouselItem>
+        </CarouselContent>
+      </Carousel>,
+    )
+    expect(screen.getByText("Slide 1")).toBeInTheDocument()
+    expect(screen.getByText("Slide 2")).toBeInTheDocument()
+  })
+
+  it("renders Previous and Next controls when provided", () => {
+    render(
+      <Carousel>
+        <CarouselContent>
+          <CarouselItem>Slide 1</CarouselItem>
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>,
+    )
+    expect(screen.getByRole("button", { name: "Previous slide" })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Next slide" })).toBeInTheDocument()
+  })
+})
+
+// ─── InputGroup ───────────────────────────────────────────────────────────────
+
+describe("InputGroup", () => {
+  it("renders children", () => {
+    render(
+      <InputGroup>
+        <InputGroupAddon position="left">$</InputGroupAddon>
+        <input placeholder="Amount" />
+      </InputGroup>,
+    )
+    expect(screen.getByText("$")).toBeInTheDocument()
+    expect(screen.getByPlaceholderText("Amount")).toBeInTheDocument()
+  })
+
+  it("addon applies correct position class for left", () => {
+    const { container } = render(
+      <InputGroupAddon position="left">@</InputGroupAddon>,
+    )
+    expect(container.firstChild).toHaveClass("rounded-l-md")
+  })
+
+  it("addon applies correct position class for right", () => {
+    const { container } = render(
+      <InputGroupAddon position="right">.com</InputGroupAddon>,
+    )
+    expect(container.firstChild).toHaveClass("rounded-r-md")
+  })
+})
+
+// ─── InputOTP ─────────────────────────────────────────────────────────────────
+
+describe("InputOTP", () => {
+  it("renders OTP input group", () => {
+    const { container } = render(
+      <InputOTP maxLength={6}>
+        <InputOTPGroup>
+          <InputOTPSlot index={0} />
+          <InputOTPSlot index={1} />
+          <InputOTPSlot index={2} />
+        </InputOTPGroup>
+      </InputOTP>,
+    )
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders as many slot elements as provided", () => {
+    const { container } = render(
+      <InputOTP maxLength={4}>
+        <InputOTPGroup>
+          <InputOTPSlot index={0} />
+          <InputOTPSlot index={1} />
+          <InputOTPSlot index={2} />
+          <InputOTPSlot index={3} />
+        </InputOTPGroup>
+      </InputOTP>,
+    )
+    // The OTPGroup div wraps the slot divs; verify four children rendered
+    expect(container.querySelectorAll("div").length).toBeGreaterThan(4)
+  })
+})
+
+// ─── VisuallyHidden ───────────────────────────────────────────────────────────
+
+describe("VisuallyHidden", () => {
+  it("renders children in the DOM but visually hidden", () => {
+    render(<VisuallyHidden>Screen reader text</VisuallyHidden>)
+    expect(screen.getByText("Screen reader text")).toBeInTheDocument()
+  })
+
+  it("applies position absolute to visually hide content", () => {
+    const { container } = render(<VisuallyHidden>Hidden</VisuallyHidden>)
+    const el = container.firstChild as HTMLElement
+    expect(el).toBeInTheDocument()
   })
 })

@@ -1,12 +1,8 @@
-import type { Metadata } from "next"
+"use client"
+
 import { ComponentPage } from "@/components/component-page"
 import { CheckboxPreview } from "@/components/previews/interactive-previews"
 import { Label } from "@aetherstack/ui"
-
-export const metadata: Metadata = {
-  title: "Checkbox",
-  description: "A toggle input for binary choices.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox"

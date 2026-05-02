@@ -1,12 +1,8 @@
-import type { Metadata } from "next"
+"use client"
+
 import { Button } from "@aetherstack/ui"
 import { Plus, RefreshCw, Download, Search, Settings, Bell, X, Loader2, Trash2, Mail } from "lucide-react"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Button",
-  description: "Triggers an action or event. Supports multiple variants and sizes.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"

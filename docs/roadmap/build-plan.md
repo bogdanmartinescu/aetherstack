@@ -50,8 +50,9 @@ The system supports:
 | 4 | App Patterns | Reusable product-level UI patterns + first 3 blocks (Dashboard Shell, Login, Signup) |
 | 4.6 | Quality, Truth & Coverage | Reality stabilization — registry truth, reference apps, test coverage, CI hardening ✅ |
 | 5 | AI Foundations | LLM-friendly metadata, `llms.txt`, MCP server, prompt-driven CLI flow ✅ |
-| 6 | Component Gap-Fill | Net-new primitives, patterns, and blocks chosen by SaaS/AI value |
-| 7 | Public Registry hardened | Production-ready public registry, install flows, CDN, versioning |
+| 6 | Component Gap-Fill | Net-new primitives, patterns, and blocks chosen by SaaS/AI value ✅ |
+| 7 | Public Registry Hardened | Production-ready public registry, install flows, CDN, versioning (npm ✅) |
+| 7.5 | Component Completeness | Full shadcn parity + marketing blocks + SaaS patterns — "good for any web product" |
 | 8 | Pro Architecture | Auth, license gating, premium namespace, billing flow |
 | 9 | Pro Content + Launch | Vertical kits (CRM, Billing, Analytics), AI Recipes Pro, public launch |
 
@@ -342,6 +343,197 @@ Make the public registry production-quality: durable URLs, versioning, CDN deliv
 
 ---
 
+# Phase 7.5 — Component Completeness
+
+Status: In progress — Tracks A–D code complete ✅ · Registry/docs/tests (Track E) pending
+
+## Goal
+
+Reach full shadcn/ui component parity and add the marketing-site + SaaS utility blocks that make Aether UI usable for any web product — not just dashboards. After this phase the system should be "good enough for a complete commercial product" without any pro tier.
+
+## Context
+
+After Phase 6 the component inventory stands at **38 primitives · 17 patterns · 10 blocks**. Systematic comparison with shadcn/ui, common SaaS product requirements, and the AI-native product landscape reveals four categories of gaps:
+
+1. **Primitive gaps** — components that shadcn ships as primitives but we haven't yet built
+2. **Pattern gaps** — higher-level compositions that appear in every real SaaS product
+3. **Block gaps** — full page-section blocks needed for marketing sites, user profiles, and error handling
+4. **AI-native UI gaps** — purpose-built components, patterns, and layouts for AI-powered apps (chat interfaces, agent workspaces, prompt builders, streaming output)
+
+---
+
+## Deliverables
+
+### Track A — Missing Primitives (`packages/ui`)
+
+**High priority** (shadcn parity):
+
+- **ButtonGroup** — segmented/grouped button row with shared border treatment
+- **Carousel** — Embla-based card/image slider with prev/next controls and dots
+- **Chart** — standalone Recharts wrapper primitive (variant: Bar, Line, Area, Pie, Donut)
+- **DatePicker** — Calendar + Popover composite (single date; DateRangePicker lives in patterns)
+- **InputGroup** — Input with prefix/suffix slot addons (icon, text, or button)
+- **InputOTP** — accessible one-time password / PIN input (built on `input-otp` library)
+- **NavigationMenu** — full navigation menu with triggers, submenus, and keyboard support (Radix)
+- **Sidebar** — standalone collapsible sidebar primitive (decoupled from DashboardShell)
+- **Sonner** — modern opinionated toast built on `sonner` (complements existing Toast)
+
+**Medium priority** (coverage completeness):
+
+- **AspectRatio** — simple ratio-locking wrapper (Radix AspectRatio)
+- **Menubar** — application-level menu bar (File, Edit, View…) (Radix Menubar)
+- **Resizable** — split-pane resizable layout panels (react-resizable-panels)
+
+### Track B — Missing Patterns (`packages/patterns`)
+
+**High priority**:
+
+- **DateRangePicker** — date range selection built on Calendar + Popover
+- **MultiSelect** — checkbox-based multi-select with tag/chip display and search
+- **SearchInput** — input with clear button, keyboard shortcut badge, and loading state
+- **ConfirmDialog** — reusable confirmation / destructive-action dialog with slot for description
+- **NotificationBell** — bell icon with unread-count badge + notification dropdown
+- **ProfileDropdown** — user avatar + name + dropdown with nav links and sign-out
+
+**Medium priority**:
+
+- **InlineEdit** — click-to-edit text field with save/cancel controls
+- **SortableList** — drag-and-drop sortable list (dnd-kit)
+- **ThemeSwitcher** — light / dark / system toggle pattern
+- **ChatMessageList** — chat bubble list with avatar, timestamp, and message grouping
+- **UploadProgress** — file upload state with progress bar, filename, and cancel action
+- **TimelineFeed** — vertical timeline with date markers and event entries
+
+### Track C — Missing Blocks (`packages/blocks`)
+
+**High priority** (marketing site completeness):
+
+- **AppHeader** — full application top navigation bar with logo, nav links, and user menu
+- **MarketingNavbar** — marketing site nav with logo, link group, CTA button, mobile hamburger
+- **FooterSection** — site footer with multi-column link groups, social icons, copyright line
+- **LandingHero** — hero section with headline, subheading, primary + secondary CTA, optional media
+- **FeaturesSection** — features grid / alternating list with icon, title, and description per feature
+- **TestimonialsSection** — customer quotes grid with avatar, name, role, and quote text
+- **CTASection** — full-width call-to-action banner with heading, subtext, and button
+- **FAQSection** — FAQ list rendered with Accordion inside a section header
+
+**Medium priority**:
+
+- **LogoCloud** — partner / trusted-by logo grid (greyscale, responsive)
+- **StatsSection** — marketing stats row (large numbers with labels)
+- **UserProfilePage** — user profile view block with avatar, bio, and stat tiles
+- **ErrorPage** — 404 / 500 full-page error state with illustration slot and back link
+- **PricingComparison** — feature comparison table across tiers (complements PricingSection)
+
+**Low priority**:
+
+- **WaitlistBlock** — email waitlist / early-access signup with success state
+- **ChangelogBlock** — release notes / changelog feed block
+
+### Track D — AI-Native UI (`packages/ui`, `packages/patterns`, `packages/blocks`)
+
+These items live in `ai/` subdirectories within each package and are registered under the `@aether/ai-*` namespace. They depend only on existing primitives and must work standalone so teams can build AI features without adopting the full system.
+
+#### AI Primitives (`packages/ui/src/components/ai/`)
+
+**High priority**:
+
+- **StreamingText** — animated token-by-token text renderer with blinking cursor; accepts a streaming `string | AsyncIterable<string>` prop
+- **ThinkingIndicator** — animated dots / pulsing indicator shown while the model is generating; supports `thinking` and `loading` states
+- **MarkdownRenderer** — renders LLM markdown output (headings, paragraphs, ordered/unordered lists, tables, inline code, fenced code blocks via `CodeBlock`)
+- **CodeBlock** — syntax-highlighted code block with copy-to-clipboard button, language badge, and optional filename header (uses `shiki` or `highlight.js`)
+- **PromptInput** — auto-growing textarea with integrated send button, character/token counter, keyboard shortcut hint, and an attach-file slot
+- **ChatBubble** — user or assistant message bubble with role avatar, timestamp, and a trailing actions slot (copy, regenerate, feedback)
+- **SourceCard** — citation/source reference card with title, URL, favicon, and optional excerpt; used below AI responses
+- **FeedbackButtons** — thumbs-up / thumbs-down with toggled state and optional reason-selection follow-up
+
+**Medium priority**:
+
+- **ModelBadge** — pill displaying model name and provider logo/icon (e.g. "GPT-4o", "Claude 3.5")
+- **TokenCounter** — live context-window usage bar (tokens used / max) with colour-coded danger threshold
+- **PromptSuggestion** — clickable suggested-prompt chip; supports icon prefix
+- **ToolCallCard** — collapsed/expanded card showing an AI tool invocation (name, args) and its result or error state
+- **ReasoningBlock** — collapsible chain-of-thought / reasoning trace block with header toggle
+
+**Low priority**:
+
+- **AttachmentChip** — compact chip for a file or image attached to the prompt area; shows file icon, name, size, and remove button
+
+#### AI Patterns (`packages/patterns/src/components/ai/`)
+
+**High priority**:
+
+- **ConversationThread** — scrollable message list composing `ChatBubble`, `StreamingText`, `ThinkingIndicator`, and `SourceCard`; auto-scrolls to bottom on new messages
+- **PromptBuilder** — structured prompt composer with system / user / assistant turn cards, add-turn button, and character count per turn
+- **ModelSelector** — dropdown/combobox to switch between AI models grouped by provider; shows model capability tags (vision, tools, etc.)
+- **AIResponseCard** — card wrapping `MarkdownRenderer` + `StreamingText` output with header (model badge, timestamp) and footer (feedback, copy, regenerate)
+- **PromptLibrary** — searchable grid of saved and example prompts with category filter and one-click insert action
+
+**Medium priority**:
+
+- **ToolCallSequence** — ordered list of tool calls with step-number, name, and status indicator (pending / running / done / error)
+- **ConversationStarter** — empty-state layout with `PromptSuggestion` chips shown when no messages exist yet
+- **VoiceInput** — mic button with waveform animation and live transcription display; toggles PromptInput content
+- **AIErrorState** — error state specific to AI failures: rate-limit, context-length exceeded, provider outage, with appropriate recovery actions
+
+**Low priority**:
+
+- **AISettingsPanel** — collapsible panel for temperature, max tokens, top-p, and system prompt override
+
+#### AI Blocks / Layouts (`packages/blocks/src/components/ai/`)
+
+**High priority**:
+
+- **ChatLayout** — full-page layout: `ChatSidebar` on the left, main `ConversationThread` in the centre, `PromptInput` pinned at the bottom; responsive (sidebar collapses to sheet on mobile)
+- **ChatSidebar** — conversation history list with search, "New chat" button, date grouping, rename/delete per-item, and optional folder grouping
+- **AIAssistantPanel** — slide-in sheet/drawer embedding a `ConversationThread` + `PromptInput` for in-app AI assistant without a full-page layout
+- **AIOnboarding** — first-time AI feature setup: API key entry, model selection, and example prompts to try; step-by-step using `Stepper`
+- **AgentWorkspace** — multi-step agent task UI: task description at the top, `ToolCallSequence` log in the centre, scratchpad/reasoning panel on the right, final output at the bottom
+
+**Medium priority**:
+
+- **CompareOutput** — side-by-side model output comparison with two `AIResponseCard` columns and diff highlighting for changed spans
+- **AISettings** — settings block for model configuration (model, temperature, max tokens), system prompt textarea, and API key management with masked display
+- **PromptLibraryPage** — full-page prompt library with category sidebar, search, `PromptLibrary` grid, and CRUD modal
+
+**Low priority**:
+
+- **AIUsageDashboard** — token usage and cost breakdown charts with request-count stats; consumes `Chart` and `StatGroup`
+
+### Track E — Registry, Docs, and AI Metadata
+
+- Every new item: source code, vitest tests, docs page, AI metadata block, registry entry, per-item JSON
+- AI items registered under `@aether/ai-*` namespace in the public registry
+- `llms.txt` regenerated — all new items included with AI-specific composition recipes
+- Studio playground updated: new "AI UI" section alongside existing sections
+- `generate` CLI recipes extended: `"make me a chat app"`, `"add an AI assistant panel"`, `"prompt builder"`, `"agent task view"`
+
+---
+
+## Acceptance Criteria
+
+- `packages/ui` reaches **50 + 14 AI = ~64 primitives total**
+- `packages/patterns` reaches **29 + 10 AI = ~39 patterns total**
+- `packages/blocks` reaches **25 + 9 AI = ~34 blocks total**
+- Every item installable end-to-end via `aether-ui add <name>`
+- Every item has AI metadata; CI rejects items missing it
+- `apps/docs` has a docs page for each new item, with an "AI UI" section in the sidebar
+- No primitive hardcodes visual values that belong in tokens
+- `pnpm test` remains green across all packages
+- `ChatLayout` block renders a functional end-to-end chat UI using only `@aetherstack/*` packages
+
+---
+
+## Notes
+
+- Phase 7 remaining items (CDN, per-item versioning, `update`/`diff` CLI commands) can run in parallel with Tracks A–D above — they are independent
+- Do not start Phase 8 (Pro Architecture) until the Acceptance Criteria above are met
+- New peer dependencies: `embla-carousel-react` (Carousel), `@dnd-kit/sortable` (SortableList), `input-otp` (InputOTP), `sonner` (Sonner), `react-resizable-panels` (Resizable), `shiki` or `highlight.js` (CodeBlock), `react-markdown` or custom renderer (MarkdownRenderer)
+- Add peer deps in the lowest appropriate package; never in shared config packages
+- AI items must not depend on any specific AI SDK — they accept plain strings, `AsyncIterable<string>`, and callback props; the consumer wires their own SDK
+
+---
+
 # Phase 8 — Pro Architecture
 
 Status: Pending
@@ -407,18 +599,19 @@ Ship enough premium value to justify the paid tier — across advanced component
 ## Deliverables
 
 ### Advanced Components (pro-gated, `@aether-pro` namespace)
-- **DataTable** — sortable, filterable, paginated data grid with column visibility
-- **CommandPalette** — ⌘K fuzzy-search command surface
-- **Calendar & DatePicker** — date + date-range selection
-- **Combobox** — autocomplete select with async search
-- **FileDropzone** — drag-and-drop file upload with preview
-- **Toast / Notification system** — queue, variants, actions
-- **Avatar & AvatarGroup** — fallback initials, stacked groups
-- **Stepper / Wizard** — multi-step form flow
-- **RichText editor** — Tiptap-based rich text integration
-- **KanbanColumn** — drag-and-drop board column
-- **ActivityFeed** — timestamped event stream
-- **ColorPicker** — hex, HSL, and alpha controls
+- **RichText editor** — Tiptap-based rich text integration (public primitives shipped in Phase 7.5)
+
+Note: Many components originally listed here (DataTable, CommandPalette, DatePicker, Combobox, FileDropzone, Toast, Avatar, Stepper, Kanban, ActivityFeed, ColorPicker) were shipped as public items in Phases 6–7.5. Phase 9 advanced components focus on pro-tier extensions and vertical-specific compositions.
+
+### AI Pro Extensions (pro-gated, `@aether-pro/ai-*` namespace)
+Extends the public AI-native UI (shipped in Phase 7.5 Track D) with pro-tier capabilities:
+- **MultiAgentWorkspace** — multi-agent orchestration view with agent swimlanes and message routing
+- **FunctionCallingDebugger** — tool call inspector with full request/response diff and replay
+- **EmbeddingVisualizer** — 2D/3D embedding space visualization for semantic search UIs
+- **FineTuneMonitor** — training run metrics block (loss curve, eval, checkpoint status)
+- **AIAuditLog** — compliance-grade log of all AI interactions with filtering and export
+- **CustomModelCard** — model card block for showcasing self-hosted or fine-tuned models
+- **PromptVersionDiff** — side-by-side diff of two prompt versions with output comparison
 
 ### Page Templates (pro-gated)
 - SaaS landing page (hero, features, pricing, CTA)
@@ -437,8 +630,9 @@ Ship enough premium value to justify the paid tier — across advanced component
 - **CRM Kit** — Contacts page, Deal Pipeline kanban, Activity Timeline block, Contact Drawer
 - **Billing Kit** — Subscription management, Invoice history, Usage charts, Plan picker
 - **Analytics Kit** — Multi-chart dashboards, Funnel charts, Cohort retention, Custom report builder
-- **Marketing Kit** — Hero, features, testimonials, pricing, blog, footer sections
+- **Marketing Kit** — Hero, features, testimonials, pricing, blog, footer sections (built on Phase 7.5 marketing blocks)
 - **E-commerce Kit** — Product listing, detail, cart, checkout
+- **AI App Kit** — Full opinionated AI application scaffold: `ChatLayout` + `ChatSidebar` + `AgentWorkspace` + `AISettings` + `AIOnboarding` wired together with a model-provider config layer (built on Phase 7.5 AI blocks)
 
 ### Premium Themes (pro-gated)
 - **Slate Pro** — cool-gray, professional
@@ -451,7 +645,8 @@ Ship enough premium value to justify the paid tier — across advanced component
 - Pro `llms.txt` with all pro-item entries and kit composition recipes, gated behind license
 - 50+ extended `generate` recipes that resolve to pro blocks and templates
 - MCP `compose_block` and `compose_template` tools serving pro items when a valid JWT is present
-- AI Recipes Pro — opinionated prompt → feature-scaffold flows (e.g. "make me a project management tool"), each backed by composed pro blocks
+- AI Recipes Pro — opinionated prompt → feature-scaffold flows (e.g. "make me a project management tool", "build a chat app with agent tools"), each backed by composed pro blocks and the Phase 7.5 AI-native UI primitives
+- Pro AI extensions: MultiAgentWorkspace, FunctionCallingDebugger, EmbeddingVisualizer, FineTuneMonitor, AIAuditLog, CustomModelCard, PromptVersionDiff
 
 ### Figma Kit (pro-gated)
 - Full Figma component library matching the Aether UI system, with auto-layout and design tokens bound to the token system
@@ -486,10 +681,11 @@ Recommended order:
 3. ~~Phase 4 — App Patterns + First Blocks~~ ✅
 4. ~~Phase 4.6 — Quality, Truth & Coverage~~ ✅
 5. ~~Phase 5 — AI Foundations~~ ✅
-6. **Phase 6 — Component Gap-Fill** (current)
-7. Phase 7 — Public Registry Hardened
-8. Phase 8 — Pro Architecture
-9. Phase 9 — Pro Content + Launch
+6. ~~Phase 6 — Component Gap-Fill~~ ✅
+7. Phase 7 — Public Registry Hardened (npm ✅, CDN/versioning/CLI commands pending)
+8. **Phase 7.5 — Component Completeness** (current — parallel with Phase 7 remaining items)
+9. Phase 8 — Pro Architecture
+10. Phase 9 — Pro Content + Launch
 
 ---
 
@@ -508,7 +704,7 @@ Phase 4.6 — Truth, coverage, CI parity with claims
 Phase 5 — Differentiated, LLM-first design system
 
 ### Milestone D — Breadth
-Phases 6–7 — Public registry production-ready with broad component coverage
+Phases 6–7.5 — Public registry production-ready with full component coverage (shadcn parity + marketing blocks)
 
 ### Milestone E — Commercial
 Phases 8–9 — Pro tier live, launch ready

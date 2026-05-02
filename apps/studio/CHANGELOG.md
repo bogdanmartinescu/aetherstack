@@ -1,5 +1,14 @@
 # @aetherstack/studio
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @aetherstack/patterns@0.2.0
+  - @aetherstack/blocks@0.2.0
+  - @aetherstack/ui@0.3.0
+
 ## 0.0.3
 
 ### Patch Changes

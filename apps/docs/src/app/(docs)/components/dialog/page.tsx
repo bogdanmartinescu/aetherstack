@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { ComponentPage } from "@/components/component-page"
 import { DialogPreview } from "@/components/previews/interactive-previews"
-
-export const metadata: Metadata = {
-  title: "Dialog",
-  description: "A modal window that overlays the page.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"

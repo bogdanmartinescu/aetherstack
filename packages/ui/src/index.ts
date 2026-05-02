@@ -142,6 +142,7 @@ export type { ToastProps, ToastActionElement } from "./components/toast"
 
 export { Toggle, toggleVariants } from "./components/toggle"
 export { ToggleGroup, ToggleGroupItem } from "./components/toggle-group"
+export { VisuallyHidden } from "./components/visually-hidden"
 
 export { Button, buttonVariants } from "./components/button"
 export type { ButtonProps } from "./components/button"
@@ -231,3 +232,101 @@ export {
   TooltipContent,
   TooltipProvider,
 } from "./components/tooltip"
+
+// Phase 7.5 additions
+export { AspectRatio } from "./components/aspect-ratio"
+
+export { ButtonGroup } from "./components/button-group"
+export type { ButtonGroupProps } from "./components/button-group"
+
+export {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  useCarousel,
+} from "./components/carousel"
+export type { CarouselApi } from "./components/carousel"
+
+export {
+  BarChart,
+  LineChart,
+  AreaChart,
+  PieChart,
+  DonutChart,
+  ChartContainer,
+} from "./components/chart"
+export type { ChartProps, ChartSeries, PieChartProps } from "./components/chart"
+
+export { DatePicker } from "./components/date-picker"
+export type { DatePickerProps } from "./components/date-picker"
+
+export { InputGroup, InputGroupAddon, InputGroupText } from "./components/input-group"
+export type { InputGroupProps, InputGroupAddonProps } from "./components/input-group"
+
+export {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+  InputOTPSeparator,
+} from "./components/input-otp"
+
+export {
+  Menubar,
+  MenubarMenu,
+  MenubarGroup,
+  MenubarTrigger,
+  MenubarContent,
+  MenubarItem,
+  MenubarSeparator,
+  MenubarLabel,
+  MenubarCheckboxItem,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarPortal,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarSub,
+  MenubarShortcut,
+} from "./components/menubar"
+
+export {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuContent,
+  NavigationMenuTrigger,
+  NavigationMenuLink,
+  NavigationMenuIndicator,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle,
+} from "./components/navigation-menu"
+
+export {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from "./components/resizable"
+
+export {
+  SidebarProvider,
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarSeparator,
+  SidebarTrigger,
+  useSidebar,
+} from "./components/sidebar"
+
+export { Toaster as SonnerToaster, toast as sonnerToast } from "./components/sonner"
+
+// AI-native UI primitives (Phase 7.5 Track D)
+export * from "./components/ai"

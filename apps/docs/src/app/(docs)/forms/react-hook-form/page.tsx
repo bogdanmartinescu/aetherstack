@@ -1,4 +1,5 @@
-import type { Metadata } from "next"
+"use client"
+
 import Link from "next/link"
 import { CodeBlock, InlineCode } from "@/components/code-block"
 import {
@@ -11,11 +12,6 @@ import {
   SwitchDemo,
   ArrayFieldsDemo,
 } from "./demos"
-
-export const metadata: Metadata = {
-  title: "React Hook Form",
-  description: "Build forms in React using React Hook Form and Zod.",
-}
 
 // ── Prose helpers ──────────────────────────────────────────────────────────────
 

@@ -1,12 +1,8 @@
-import type { Metadata } from "next"
+"use client"
+
 import { ErrorState } from "@aetherstack/patterns"
 import { Button } from "@aetherstack/ui"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Error State",
-  description: "Error icon, title, description and retry CTA.",
-}
 
 export default function ErrorStatePage() {
   return (

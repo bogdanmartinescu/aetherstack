@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { PatternPage } from "@/components/pattern-page"
 import { ColorPickerPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "Color Picker",
-  description: "Hex color picker with native browser input, text field, and preset swatches.",
-}
 
 export default function ColorPickerPage() {
   return (

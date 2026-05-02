@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { Textarea, Label, Button } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Textarea",
-  description: "A multi-line text input field.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import { cn } from "@/lib/utils"

@@ -1,12 +1,8 @@
-import type { Metadata } from "next"
+"use client"
+
 import { EmptyDashboard } from "@aetherstack/blocks"
 import { Button } from "@aetherstack/ui"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Empty Dashboard",
-  description: "Zero-state landing screen for new users with illustration and CTA actions.",
-}
 
 export default function EmptyDashboardPage() {
   return (

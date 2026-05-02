@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { ComponentPage } from "@/components/component-page"
 import { RadioGroupPreview } from "@/components/previews/interactive-previews"
-
-export const metadata: Metadata = {
-  title: "Radio Group",
-  description: "A set of radio buttons for selecting a single option.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"

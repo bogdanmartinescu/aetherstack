@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { PatternPage } from "@/components/pattern-page"
 import { CommandPalettePreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "Command Palette",
-  description: "Keyboard-driven command palette dialog with search, grouped results, and keyboard navigation.",
-}
 
 export default function CommandPalettePage() {
   return (

@@ -1,14 +1,10 @@
-import type { Metadata } from "next"
+"use client"
+
 import { ComponentPage } from "@/components/component-page"
 import {
   ToastPreview,
   ToastDestructivePreview,
 } from "@/components/previews/interactive-previews"
-
-export const metadata: Metadata = {
-  title: "Toast",
-  description: "Transient notification messages that slide in from the bottom of the screen.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

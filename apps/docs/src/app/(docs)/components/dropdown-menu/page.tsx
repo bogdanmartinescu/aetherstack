@@ -1,4 +1,5 @@
-import type { Metadata } from "next"
+"use client"
+
 import { ComponentPage } from "@/components/component-page"
 import {
   DropdownMenuPreview,
@@ -6,11 +7,6 @@ import {
   DropdownMenuCheckboxPreview,
   DropdownMenuShortcutsPreview,
 } from "@/components/previews/interactive-previews"
-
-export const metadata: Metadata = {
-  title: "Dropdown Menu",
-  description: "A floating menu anchored to a trigger button. Supports groups, checkboxes, radio items, and keyboard shortcuts.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

@@ -1,5 +1,29 @@
 # @aetherstack/blocks
 
+## 0.2.0
+
+### Minor Changes
+
+- Phase 7.5 — Component Completeness
+
+  **@aetherstack/ui**
+  - Track A: Added ButtonGroup, Carousel, Chart, DatePicker, InputGroup, InputOTP, NavigationMenu, Sidebar, Sonner, AspectRatio, Menubar, Resizable, VisuallyHidden primitives
+  - Track D AI Primitives: StreamingText, ThinkingIndicator, MarkdownRenderer, CodeBlock, PromptInput, ChatBubble, SourceCard, FeedbackButtons, ModelBadge, TokenCounter, PromptSuggestion, ToolCallCard, ReasoningBlock, AttachmentChip
+
+  **@aetherstack/patterns**
+  - Track B SaaS Patterns: DateRangePicker, MultiSelect, SearchInput, ConfirmDialog, NotificationBell, ProfileDropdown, InlineEdit, SortableList, ThemeSwitcher, ChatMessageList, UploadProgress, TimelineFeed
+  - Track D AI Patterns: ConversationThread, PromptBuilder, ModelSelector, AIResponseCard, PromptLibrary, ToolCallSequence, ConversationStarter, VoiceInput, AIErrorState, AISettingsPanel
+
+  **@aetherstack/blocks**
+  - Track C Marketing Blocks: AppHeader, MarketingNavbar, FooterSection, LandingHero, FeaturesSection, TestimonialsSection, CTASection, FAQSection, LogoCloud, StatsSection, UserProfilePage, ErrorPage, PricingComparison, WaitlistBlock, ChangelogBlock
+  - Track D AI Blocks: ChatLayout, ChatSidebar, AIAssistantPanel, AIOnboarding, AgentWorkspace, CompareOutput, AISettings, PromptLibraryPage, AIUsageDashboard
+
+### Patch Changes
+
+- Updated dependencies
+  - @aetherstack/patterns@0.2.0
+  - @aetherstack/ui@0.3.0
+
 ## 0.1.1
 
 ### Patch Changes

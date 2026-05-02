@@ -1,6 +1,6 @@
 {
   "name": "@aetherstack/demo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "description": "Aether UI demo — reference SaaS/admin application built with Aether UI",
   "scripts": {

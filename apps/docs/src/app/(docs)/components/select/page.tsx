@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { ComponentPage } from "@/components/component-page"
 import { SelectPreview } from "@/components/previews/interactive-previews"
-
-export const metadata: Metadata = {
-  title: "Select",
-  description: "A single-select dropdown built on Radix UI.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
