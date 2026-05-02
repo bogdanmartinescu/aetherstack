@@ -178,7 +178,7 @@ See `docs/roadmap/build-plan.md` for full details. Key deliverables:
 - `.github/workflows/release.yml` automates future changeset-driven releases
 
 #### Remaining Phase 7 items
-- Production registry CDN (`registry.aetherui.dev`)
+- Production registry CDN (`registry.aether-ui.dev`)
 - Per-item semver versioning + stable `/r/<name>@<version>.json` URLs
 - `aether-ui update` and `aether-ui diff` CLI commands
 - `aether-ui registry list-namespaces`

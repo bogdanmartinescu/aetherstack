@@ -4,7 +4,7 @@ import { resolveGenerate } from "../generate"
 
 const MOCK_REGISTRY: Registry = {
   name: "aether-ui",
-  homepage: "https://aetherui.dev",
+  homepage: "https://aether-ui.dev",
   version: "0.0.1",
   items: [
     { name: "button", type: "registry:ui", title: "Button" },

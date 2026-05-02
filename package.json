@@ -1,7 +1,7 @@
 {
   "name": "aetherstack",
   "private": true,
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Aetherstack monorepo — Aether UI design system for premium SaaS products",
   "scripts": {
     "build": "turbo build",

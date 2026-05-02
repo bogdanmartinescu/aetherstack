@@ -24,7 +24,7 @@ and URLs stay consistent.
 | `@aether` | Namespace for the **public** registry manifest items |
 | `@aether-pro` | Namespace for the **premium** registry manifest items (license-gated) |
 | `aether-ui` | The CLI binary (`npx @aetherstack/cli` → runs `aether-ui`) |
-| `account.aetherui.dev` | The Pro account dashboard app (`apps/account`) |
+| `account.aether-ui.dev` | The Pro account dashboard app (`apps/account`) |
 
 ## Repository Structure
 
@@ -53,7 +53,7 @@ aetherstack/
 │   ├── registry-schema/  — Zod schemas + types for registry manifests
 │   ├── registry-build/   — Build tooling for validating/generating registries
 │   ├── mcp-server/       — Aether UI MCP server (list/get/install/compose tools)
-│   └── cli/              — `aether-ui` CLI (init / add / list / generate / login)
+│   └── cli/              — `aether-ui` CLI (init / add / list / generate)
 │
 ├── registry/
 │   ├── public/           — @aether public registry manifest (registry.json)
@@ -109,7 +109,7 @@ as external dependencies. It is not a shared package — it is a deployable prod
 |---|---|---|
 | Monorepo | pnpm workspaces + Turborepo | Industry standard, fast, great caching |
 | Language | TypeScript everywhere | Type safety across all boundaries |
-| UI framework | Next.js 14 (App Router) | SSR/SSG support, best-in-class DX |
+| UI framework | Next.js 16 (App Router) | SSR/SSG support, best-in-class DX |
 | Styling | Tailwind CSS 3 | Utility-first, token-driven |
 | Component model | Open-code, registry-installable | Users own the source; shadcn-format-compatible |
 | CLI bundler | tsup | Single-file CJS output with workspace deps inlined |
@@ -132,8 +132,7 @@ This trades a package build step for simplicity during development:
 - TypeScript errors surface in consuming apps
 - Zero-config hot reload across package boundaries
 
-When packages are eventually published to npm, a proper build step (e.g. `tsup`)
-will be added. The export shape stays the same.
+**npm publishing:** All 7 public packages (`tokens`, `ui`, `patterns`, `blocks`, `themes`, `utils`, `registry-schema`) plus `mcp-server` and `cli` are published to npm at `v0.1.0` under `@aetherstack`. Publishing uses `tsup` for CJS output with workspace deps inlined; the export shape is identical to the source exports.
 
 ---
 
@@ -143,7 +142,7 @@ Aether UI uses its own registry and CLI — not the shadcn CLI.
 
 - `registry/public/registry.json` — source of truth for the public registry, committed to git
 - `apps/registry-public/public/r/registry.json` — built artifact, copied by `build-registry` script
-- `apps/registry-public` — static Next.js export served from a CDN at `registry.aetherui.dev`
+- `apps/registry-public` — static Next.js export served from a CDN at `registry.aether-ui.dev`
 - `packages/cli` — the `aether-ui` CLI that reads from the registry and installs components
 
 ### CLI flow
@@ -181,7 +180,7 @@ User pays via Stripe Checkout
   → Clerk custom session template adds license_tier as a JWT claim
 
 User runs: aether-ui login
-  → CLI opens browser to account.aetherui.dev/cli-auth  (device-flow)
+  → CLI opens browser to account.aether-ui.dev/cli-auth  (device-flow)
   → User authenticates with Clerk
   → CLI polls /cli-auth for the token
   → JWT saved to ~/.aetherui/config.json (1-hour TTL, auto-refresh)

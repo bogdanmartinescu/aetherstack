@@ -46,8 +46,8 @@ export function AppHeader({
         {navItems.length > 0 && (
           <nav className="hidden flex-1 md:flex" aria-label="Main navigation">
             <ul className="flex items-center gap-1">
-              {navItems.map((item) => (
-                <li key={item.href}>
+              {navItems.map((item, index) => (
+                <li key={`${index}-${item.href}`}>
                   <Button
                     asChild
                     variant="ghost"
@@ -93,8 +93,8 @@ export function AppHeader({
                 </div>
                 <nav aria-label="Mobile navigation">
                   <ul className="space-y-1">
-                    {navItems.map((item) => (
-                      <li key={item.href}>
+                    {navItems.map((item, index) => (
+                      <li key={`${index}-${item.href}`}>
                         <a
                           href={item.href}
                           aria-current={item.active ? "page" : undefined}

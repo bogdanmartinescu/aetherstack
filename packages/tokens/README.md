@@ -2,7 +2,7 @@
 
 > Aether UI design tokens — colors, spacing, typography, radius, shadows, motion.
 
-Part of the [Aetherstack](https://aetherui.dev) design system monorepo.
+Part of the [Aetherstack](https://aether-ui.dev) design system monorepo.
 
 ## What this is
 

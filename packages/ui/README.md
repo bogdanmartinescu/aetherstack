@@ -2,7 +2,7 @@
 
 > Aether UI — 31 open-code, accessible UI primitives for modern web products.
 
-Part of the [Aetherstack](https://aetherui.dev) design system monorepo.
+Part of the [Aetherstack](https://aether-ui.dev) design system monorepo.
 
 ## What this is
 
@@ -74,7 +74,7 @@ npx aether-ui add button
 npx aether-ui add dialog
 ```
 
-See [aetherui.dev/installation](https://aetherui.dev/installation).
+See [aether-ui.dev/installation](https://aether-ui.dev/installation).
 
 ## License
 

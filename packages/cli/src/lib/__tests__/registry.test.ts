@@ -10,7 +10,7 @@ const BASE = "https://registry.example.com"
 
 const MANIFEST = {
   name: "aether-ui",
-  homepage: "https://aetherui.dev",
+  homepage: "https://aether-ui.dev",
   version: "0.0.1",
   items: [
     {

@@ -92,8 +92,8 @@ function inlineItemFiles(item: RegistryItem): RegistryItem {
 }
 
 function buildLlmsTxt(registry: Registry): string {
-  const registryUrl = "https://registry.aetherui.dev"
-  const docsUrl = "https://aetherui.dev"
+  const registryUrl = "https://registry.aether-ui.dev"
+  const docsUrl = "https://aether-ui.dev"
 
   const typeOrder: Record<string, number> = {
     "registry:ui": 0,

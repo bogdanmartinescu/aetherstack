@@ -1,5 +1,5 @@
 /** Default public registry URL. Override via aether.json or --registry flag. */
-export const DEFAULT_REGISTRY_URL = "https://registry.aetherui.dev"
+export const DEFAULT_REGISTRY_URL = "https://registry.aether-ui.dev"
 
 /** Registry manifest path, relative to the registry base URL. */
 export const REGISTRY_MANIFEST_PATH = "/r/registry.json"

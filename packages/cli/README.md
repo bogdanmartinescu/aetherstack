@@ -45,7 +45,7 @@ aether-ui init
 
 ## Documentation
 
-[aetherui.dev/cli](https://aetherui.dev/cli)
+[aether-ui.dev/cli](https://aether-ui.dev/cli)
 
 ## License
 
