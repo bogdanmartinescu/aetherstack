@@ -1,5 +1,18 @@
 # @aetherstack/docs
 
+## 0.0.5
+
+### Patch Changes
+
+- 287b767: missing components and blocks
+- Updated dependencies [df4b1eb]
+- Updated dependencies [287b767]
+  - @aetherstack/blocks@0.3.0
+  - @aetherstack/patterns@0.3.0
+  - @aetherstack/ui@0.4.0
+  - @aetherstack/utils@0.1.1
+  - @aetherstack/tokens@0.1.1
+
 ## 0.0.4
 
 ### Patch Changes

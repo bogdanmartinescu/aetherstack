@@ -1,6 +1,6 @@
 {
   "name": "@aetherstack/patterns",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Aether UI patterns — higher-level compositions of UI primitives (forms, nav, data displays)",
   "license": "MIT",
   "main": "./src/index.ts",
