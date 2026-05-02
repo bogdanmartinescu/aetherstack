@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { PatternPage } from "@/components/pattern-page"
 import { FileDropzonePreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "File Dropzone",
-  description: "Drag-and-drop file upload zone with click-to-browse, file type filtering, and size limits.",
-}
 
 export default function FileDropzonePage() {
   return (

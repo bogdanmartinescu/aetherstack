@@ -8,6 +8,41 @@ export const metadata: Metadata = {
 
 const BLOCKS = [
   {
+    category: "App navigation",
+    items: [
+      { slug: "app-header", label: "App Header", desc: "Sticky application top nav with logo, route links, and action slots." },
+      { slug: "marketing-navbar", label: "Marketing Navbar", desc: "Sticky marketing site nav with logo, centred links, and CTA button." },
+      { slug: "footer-section", label: "Footer Section", desc: "Multi-column site footer with links, social icons, and copyright line." },
+    ],
+  },
+  {
+    category: "Marketing",
+    items: [
+      { slug: "landing-hero", label: "Landing Hero", desc: "Hero section with headline, subheading, dual CTAs, and optional media." },
+      { slug: "features-section", label: "Features Section", desc: "Responsive feature card grid with icon, title, and description." },
+      { slug: "testimonials-section", label: "Testimonials", desc: "Social proof grid of customer quotes with avatar, name, and role." },
+      { slug: "cta-section", label: "CTA Section", desc: "Full-width call-to-action banner in default, muted, or primary variant." },
+      { slug: "faq-section", label: "FAQ Section", desc: "FAQ accordion with two-column layout when a section heading is provided." },
+      { slug: "logo-cloud", label: "Logo Cloud", desc: "Partner/trusted-by logo grid with optional greyscale filter." },
+      { slug: "stats-section", label: "Stats Section", desc: "Marketing statistics row with large bold numbers and labels." },
+    ],
+  },
+  {
+    category: "User & content",
+    items: [
+      { slug: "user-profile-page", label: "User Profile", desc: "Profile block with avatar, bio, stats row, and tabbed content." },
+      { slug: "pricing-comparison", label: "Pricing Comparison", desc: "Feature comparison table across tiers with checkmarks and highlighted column." },
+      { slug: "waitlist-block", label: "Waitlist", desc: "Email waitlist signup with success state after submission." },
+      { slug: "changelog-block", label: "Changelog", desc: "Release notes timeline with version, date, tags, and change groups." },
+    ],
+  },
+  {
+    category: "Errors",
+    items: [
+      { slug: "error-page", label: "Error Page", desc: "Full-page 404/500 error state with code, headline, and back link." },
+    ],
+  },
+  {
     category: "Shells",
     items: [
       { slug: "dashboard-shell", label: "Dashboard Shell", desc: "Full-page SaaS app shell with collapsible sidebar, topbar, and content slot." },
@@ -47,7 +82,7 @@ const BLOCKS = [
     ],
   },
   {
-    category: "Marketing",
+    category: "Marketing (legacy)",
     items: [
       { slug: "pricing-section", label: "Pricing Section", desc: "Responsive 3-tier pricing grid with feature lists and highlighted plan." },
     ],
@@ -72,11 +107,11 @@ export default function BlocksPage() {
         </p>
         <div className="mt-4 flex flex-wrap gap-4">
           <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">
-            <p className="text-2xl font-bold text-foreground">10</p>
+            <p className="text-2xl font-bold text-foreground">25</p>
             <p className="text-xs text-muted-foreground">Blocks</p>
           </div>
           <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">
-            <p className="text-2xl font-bold text-foreground">7</p>
+            <p className="text-2xl font-bold text-foreground">11</p>
             <p className="text-xs text-muted-foreground">Categories</p>
           </div>
           <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">

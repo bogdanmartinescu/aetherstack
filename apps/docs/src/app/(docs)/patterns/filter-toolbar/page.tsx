@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { PatternPage } from "@/components/pattern-page"
 import { FilterToolbarPreview } from "./previews"
-
-export const metadata: Metadata = {
-  title: "Filter Toolbar",
-  description: "Active filter pills with clear-all and additional filter controls.",
-}
 
 export default function FilterToolbarPage() {
   return (

@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { ComponentPage } from "@/components/component-page"
 import { SwitchPreview } from "@/components/previews/interactive-previews"
-
-export const metadata: Metadata = {
-  title: "Switch",
-  description: "An on/off toggle control.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import * as SwitchPrimitive from "@radix-ui/react-switch"

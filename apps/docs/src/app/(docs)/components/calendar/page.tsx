@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { Calendar } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Calendar",
-  description: "A date picker calendar built on react-day-picker v9. Supports single, multiple, and range selection.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

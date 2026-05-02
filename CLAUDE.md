@@ -121,7 +121,7 @@ Do not:
 
 ## Current Phase Context
 
-**Phases 1–6 complete · Phase 7 (Public Registry Hardened) in progress — npm publish done ✅**
+**Phases 1–6 complete · Phase 7 in progress (npm ✅) · Phase 7.5 (Component Completeness) next**
 
 ### Phases 1–4.6 (complete)
 See `docs/roadmap/build-plan.md` for full details. Key deliverables:
@@ -154,21 +154,20 @@ See `docs/roadmap/build-plan.md` for full details. Key deliverables:
 
 ### Phase 6 — Component Gap-Fill (complete)
 
-#### New Primitives (15 added, `packages/ui`)
-- Accordion, Avatar/AvatarGroup, Calendar, Combobox, ContextMenu, DropdownMenu, HoverCard, Pagination, Progress, ScrollArea, Separator, Slider, Toast (+ useToast hook), Toggle, ToggleGroup
-- **Total**: 31 UI primitives
+#### New Primitives (added, `packages/ui`)
+- Accordion, Alert, AlertDialog, Avatar, Calendar, Collapsible, Combobox, ContextMenu, Drawer, DropdownMenu, HoverCard, Kbd, Pagination, Popover, Progress, ScrollArea, Separator, Slider, Spinner, Toast, ToggleGroup, Toggle
+- **Total**: 38 UI primitives (actual count from `packages/ui/src/components/`)
 
-#### New Patterns (8 added, `packages/patterns`)
+#### New Patterns (added, `packages/patterns`)
 - StatGroup, Stepper, ActivityFeed, FileDropzone, DataTable, CommandPalette, Kanban, ColorPicker
-- **Total**: 20 patterns
+- **Total**: 17 patterns
 
-#### New Blocks (7 added, `packages/blocks`)
+#### New Blocks (added, `packages/blocks`)
 - EmptyDashboard, OnboardingChecklist, BillingOverview, AccountSettings, TeamSettings, NotificationCenter, PricingSection
 - **Total**: 10 blocks
 
 #### Registry
-- 58 items (was 28), all with AI metadata, per-item JSON, llms.txt updated
-- 105 Vitest tests in `packages/ui` alone
+- All items with AI metadata, per-item JSON, llms.txt updated
 
 ### Phase 7 — Public Registry Hardened (in progress)
 
@@ -184,3 +183,31 @@ See `docs/roadmap/build-plan.md` for full details. Key deliverables:
 - `aether-ui update` and `aether-ui diff` CLI commands
 - `aether-ui registry list-namespaces`
 - CI end-to-end install tests (Next.js, Vite, Remix fixtures)
+
+### Phase 7.5 — Component Completeness (next)
+
+Four tracks — shadcn parity, SaaS utilities, marketing blocks, and a new AI-native UI track:
+
+#### Track A — Shadcn Parity Primitives (12 items)
+**High priority**: ButtonGroup, Carousel, Chart, DatePicker, InputGroup, InputOTP, NavigationMenu, Sidebar, Sonner
+**Medium priority**: AspectRatio, Menubar, Resizable
+
+#### Track B — SaaS Patterns (12 items)
+**High priority**: DateRangePicker, MultiSelect, SearchInput, ConfirmDialog, NotificationBell, ProfileDropdown
+**Medium priority**: InlineEdit, SortableList, ThemeSwitcher, ChatMessageList, UploadProgress, TimelineFeed
+
+#### Track C — Marketing + Utility Blocks (15 items)
+**High priority**: AppHeader, MarketingNavbar, FooterSection, LandingHero, FeaturesSection, TestimonialsSection, CTASection, FAQSection
+**Medium priority**: LogoCloud, StatsSection, UserProfilePage, ErrorPage, PricingComparison
+**Low priority**: WaitlistBlock, ChangelogBlock
+
+#### Track D — AI-Native UI (33 items across primitives, patterns, blocks)
+Registered under `@aether/ai-*` namespace. SDK-agnostic — accepts strings and `AsyncIterable<string>`; consumer wires their own AI SDK.
+
+**AI Primitives** (14): StreamingText, ThinkingIndicator, MarkdownRenderer, CodeBlock, PromptInput, ChatBubble, SourceCard, FeedbackButtons, ModelBadge, TokenCounter, PromptSuggestion, ToolCallCard, ReasoningBlock, AttachmentChip
+
+**AI Patterns** (10): ConversationThread, PromptBuilder, ModelSelector, AIResponseCard, PromptLibrary, ToolCallSequence, ConversationStarter, VoiceInput, AIErrorState, AISettingsPanel
+
+**AI Blocks/Layouts** (9): ChatLayout, ChatSidebar, AIAssistantPanel, AIOnboarding, AgentWorkspace, CompareOutput, AISettings, PromptLibraryPage, AIUsageDashboard
+
+See `docs/roadmap/build-plan.md` Phase 7.5 for full deliverables, acceptance criteria, and notes.

@@ -18,6 +18,14 @@ import { ErrorState } from "../components/error-state"
 import { MetricCard } from "../components/metric-card"
 import { FilterPill, FilterToolbar, TableToolbar } from "../components/table-toolbar"
 import { NavItem, NavGroup, SidebarNav } from "../components/nav"
+import { StatGroup, StatItem } from "../components/stat-group"
+import { Stepper } from "../components/stepper"
+import { ActivityFeed } from "../components/activity-feed"
+import { FileDropzone } from "../components/file-dropzone"
+import { DataTable } from "../components/data-table"
+import { CommandPalette, CommandPaletteInput, CommandPaletteList, CommandPaletteEmpty, CommandItem } from "../components/command-palette"
+import { KanbanBoard, KanbanColumn } from "../components/kanban"
+import { ColorPicker, ColorSwatch } from "../components/color-picker"
 
 // ─── FormField ────────────────────────────────────────────────────────────────
 
@@ -676,5 +684,280 @@ describe("SidebarNav", () => {
     )
     expect(screen.getByText("Home")).toBeInTheDocument()
     expect(screen.getByText("Settings")).toBeInTheDocument()
+  })
+})
+
+// ─── StatGroup / StatItem ─────────────────────────────────────────────────────
+
+describe("StatItem", () => {
+  it("renders label and value", () => {
+    render(<StatItem label="Revenue" value="$12,400" />)
+    expect(screen.getByText("Revenue")).toBeInTheDocument()
+    expect(screen.getByText("$12,400")).toBeInTheDocument()
+  })
+
+  it("renders positive delta with green indicator", () => {
+    const { container } = render(<StatItem label="Revenue" value="$12,400" delta={8.2} />)
+    expect(screen.getByText(/8\.2/)).toBeInTheDocument()
+    expect(container.querySelector(".text-green-600")).toBeInTheDocument()
+  })
+
+  it("renders negative delta with red indicator", () => {
+    const { container } = render(<StatItem label="Churn" value="2.3%" delta={-1.5} />)
+    expect(screen.getByText(/-1\.5/)).toBeInTheDocument()
+    expect(container.querySelector(".text-red-500")).toBeInTheDocument()
+  })
+
+  it("renders icon slot", () => {
+    render(<StatItem label="Users" value={1024} icon={<svg data-testid="stat-icon" />} />)
+    expect(screen.getByTestId("stat-icon")).toBeInTheDocument()
+  })
+})
+
+describe("StatGroup", () => {
+  it("renders multiple StatItems", () => {
+    render(
+      <StatGroup>
+        <StatItem label="Revenue" value="$12k" />
+        <StatItem label="Users" value={1024} />
+      </StatGroup>,
+    )
+    expect(screen.getByText("Revenue")).toBeInTheDocument()
+    expect(screen.getByText("Users")).toBeInTheDocument()
+  })
+
+  it("applies custom className", () => {
+    const { container } = render(
+      <StatGroup className="custom-stat-group">
+        <StatItem label="A" value="1" />
+      </StatGroup>,
+    )
+    expect(container.firstChild).toHaveClass("custom-stat-group")
+  })
+})
+
+// ─── Stepper ──────────────────────────────────────────────────────────────────
+
+describe("Stepper", () => {
+  const steps = [
+    { id: "1", label: "Account" },
+    { id: "2", label: "Details" },
+    { id: "3", label: "Review" },
+  ]
+
+  it("renders all step labels", () => {
+    render(<Stepper steps={steps} currentStep={0} />)
+    expect(screen.getByText("Account")).toBeInTheDocument()
+    expect(screen.getByText("Details")).toBeInTheDocument()
+    expect(screen.getByText("Review")).toBeInTheDocument()
+  })
+
+  it("marks the current step as active", () => {
+    const { container } = render(<Stepper steps={steps} currentStep={1} />)
+    const activeStep = container.querySelector("[aria-current='step']")
+    expect(activeStep).toBeInTheDocument()
+  })
+
+  it("applies vertical orientation", () => {
+    const { container } = render(
+      <Stepper steps={steps} currentStep={0} orientation="vertical" />,
+    )
+    expect(container.firstChild).toHaveClass("flex-col")
+  })
+})
+
+// ─── ActivityFeed ─────────────────────────────────────────────────────────────
+
+describe("ActivityFeed", () => {
+  const now = new Date()
+  const twoMinsAgo = new Date(now.getTime() - 2 * 60 * 1000).toISOString()
+  const fiveMinsAgo = new Date(now.getTime() - 5 * 60 * 1000).toISOString()
+  const items = [
+    { id: "1", action: "created a file", timestamp: twoMinsAgo },
+    { id: "2", user: "Alice", action: "commented on", target: "PR #42", timestamp: fiveMinsAgo },
+  ]
+
+  it("renders activity actions", () => {
+    render(<ActivityFeed items={items} />)
+    expect(screen.getByText("created a file")).toBeInTheDocument()
+    expect(screen.getByText("commented on")).toBeInTheDocument()
+  })
+
+  it("renders user name when provided", () => {
+    render(<ActivityFeed items={items} />)
+    expect(screen.getByText("Alice")).toBeInTheDocument()
+  })
+
+  it("renders target when provided", () => {
+    render(<ActivityFeed items={items} />)
+    expect(screen.getByText("PR #42")).toBeInTheDocument()
+  })
+
+  it("renders timestamps as relative time", () => {
+    render(<ActivityFeed items={items} />)
+    expect(screen.getAllByText(/ago/i).length).toBeGreaterThanOrEqual(1)
+  })
+})
+
+// ─── FileDropzone ─────────────────────────────────────────────────────────────
+
+describe("FileDropzone", () => {
+  it("renders default drop zone UI", () => {
+    render(<FileDropzone onFilesSelected={() => {}} />)
+    expect(screen.getByRole("button")).toBeInTheDocument()
+  })
+
+  it("is disabled when disabled prop is set", () => {
+    render(<FileDropzone onFilesSelected={() => {}} disabled />)
+    expect(screen.getByRole("button")).toHaveAttribute("aria-disabled", "true")
+  })
+
+  it("applies custom className", () => {
+    const { container } = render(
+      <FileDropzone onFilesSelected={() => {}} className="custom-drop" />,
+    )
+    expect(container.firstChild).toHaveClass("custom-drop")
+  })
+})
+
+// ─── DataTable ────────────────────────────────────────────────────────────────
+
+describe("DataTable", () => {
+  const columns = [
+    { key: "name" as const, header: "Name" },
+    { key: "role" as const, header: "Role" },
+  ]
+  const data = [
+    { name: "Alice", role: "Admin" },
+    { name: "Bob", role: "User" },
+  ]
+
+  it("renders column headers", () => {
+    render(<DataTable columns={columns} data={data} />)
+    expect(screen.getByText("Name")).toBeInTheDocument()
+    expect(screen.getByText("Role")).toBeInTheDocument()
+  })
+
+  it("renders data rows", () => {
+    render(<DataTable columns={columns} data={data} />)
+    expect(screen.getByText("Alice")).toBeInTheDocument()
+    expect(screen.getByText("Bob")).toBeInTheDocument()
+    expect(screen.getByText("Admin")).toBeInTheDocument()
+  })
+
+  it("renders empty state when data is empty", () => {
+    render(<DataTable columns={columns} data={[]} />)
+    expect(screen.getByText(/no results/i)).toBeInTheDocument()
+  })
+})
+
+// ─── CommandPalette ───────────────────────────────────────────────────────────
+
+describe("CommandPalette", () => {
+  it("renders without crash", () => {
+    const { container } = render(
+      <CommandPalette>
+        <CommandPaletteInput placeholder="Search commands…" />
+        <CommandPaletteList>
+          <CommandPaletteEmpty>No results.</CommandPaletteEmpty>
+        </CommandPaletteList>
+      </CommandPalette>,
+    )
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders search input with placeholder", () => {
+    render(
+      <CommandPalette>
+        <CommandPaletteInput placeholder="Type a command…" />
+        <CommandPaletteList>
+          <CommandPaletteEmpty>No results.</CommandPaletteEmpty>
+        </CommandPaletteList>
+      </CommandPalette>,
+    )
+    expect(screen.getByPlaceholderText("Type a command…")).toBeInTheDocument()
+  })
+
+  it("renders items", () => {
+    render(
+      <CommandPalette>
+        <CommandPaletteInput placeholder="Search…" />
+        <CommandPaletteList>
+          <CommandItem>Settings</CommandItem>
+          <CommandItem>Help</CommandItem>
+        </CommandPaletteList>
+      </CommandPalette>,
+    )
+    expect(screen.getByText("Settings")).toBeInTheDocument()
+    expect(screen.getByText("Help")).toBeInTheDocument()
+  })
+})
+
+// ─── KanbanBoard ──────────────────────────────────────────────────────────────
+
+describe("KanbanBoard", () => {
+  const columns = [
+    {
+      id: "todo",
+      title: "To Do",
+      items: [
+        { id: "t1", title: "Write tests" },
+        { id: "t2", title: "Fix bug" },
+      ],
+    },
+    {
+      id: "done",
+      title: "Done",
+      items: [{ id: "d1", title: "Setup CI" }],
+    },
+  ]
+
+  it("renders column titles", () => {
+    render(<KanbanBoard columns={columns} />)
+    expect(screen.getByText("To Do")).toBeInTheDocument()
+    expect(screen.getByText("Done")).toBeInTheDocument()
+  })
+
+  it("renders item titles within columns", () => {
+    render(<KanbanBoard columns={columns} />)
+    expect(screen.getByText("Write tests")).toBeInTheDocument()
+    expect(screen.getByText("Fix bug")).toBeInTheDocument()
+    expect(screen.getByText("Setup CI")).toBeInTheDocument()
+  })
+})
+
+// ─── ColorPicker / ColorSwatch ────────────────────────────────────────────────
+
+describe("ColorSwatch", () => {
+  it("renders as a button with aria-label", () => {
+    render(<ColorSwatch color="#ff0000" />)
+    expect(screen.getByRole("button", { name: /select color #ff0000/i })).toBeInTheDocument()
+  })
+
+  it("reflects selected state with aria-pressed", () => {
+    render(<ColorSwatch color="#00ff00" selected />)
+    expect(screen.getByRole("button")).toHaveAttribute("aria-pressed", "true")
+  })
+
+  it("calls onClick when clicked", async () => {
+    const onClick = vi.fn()
+    render(<ColorSwatch color="#0000ff" onClick={onClick} />)
+    await userEvent.click(screen.getByRole("button"))
+    expect(onClick).toHaveBeenCalledOnce()
+  })
+})
+
+describe("ColorPicker", () => {
+  it("renders hex input", () => {
+    render(<ColorPicker value="#ff0000" onValueChange={() => {}} />)
+    expect(screen.getAllByDisplayValue("#ff0000").length).toBeGreaterThan(0)
+  })
+
+  it("renders preset swatches when presets are provided", () => {
+    const presets = ["#ff0000", "#00ff00", "#0000ff"]
+    render(<ColorPicker value="#ff0000" onValueChange={() => {}} presets={presets} />)
+    presets.forEach((color) => {
+      expect(screen.getByRole("button", { name: new RegExp(color, "i") })).toBeInTheDocument()
+    })
   })
 })

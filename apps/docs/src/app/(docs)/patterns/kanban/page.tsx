@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { PatternPage } from "@/components/pattern-page"
 import { KanbanPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "Kanban Board",
-  description: "Drag-and-drop Kanban board with columns, cards, badges, and drop-zone highlighting.",
-}
 
 export default function KanbanPage() {
   return (

@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { PatternPage } from "@/components/pattern-page"
 import { StepperPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "Stepper",
-  description: "Multi-step progress indicator with horizontal and vertical orientations.",
-}
 
 export default function StepperPage() {
   return (

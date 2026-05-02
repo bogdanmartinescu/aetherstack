@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { PatternPage } from "@/components/pattern-page"
 import { ContactFormPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "Contact Form",
-  description: "Contact and feedback form with success state, Select subject, and textarea character counter.",
-}
 
 const IMPORT_CODE = `import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"

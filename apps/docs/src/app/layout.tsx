@@ -9,7 +9,6 @@ import {
   Figtree,
   JetBrains_Mono,
 } from "next/font/google"
-import Script from "next/script"
 import { Providers } from "./providers"
 import { Toaster } from "@aetherstack/ui"
 import "./globals.css"
@@ -50,12 +49,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={fontClasses}>
+      <head>
+        {/* Runs synchronously before first paint to avoid font flash */}
+        <script dangerouslySetInnerHTML={{ __html: fontScript }} />
+      </head>
       <body className="font-sans antialiased">
-        <Script
-          id="font-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: fontScript }}
-        />
         <Providers>
           {children}
           <Toaster />

@@ -106,3 +106,59 @@ export type { KanbanBoardProps, KanbanColumnProps, KanbanCardProps, KanbanItem }
 // Color Picker
 export { ColorPicker, ColorSwatch } from "./components/color-picker"
 export type { ColorPickerProps, ColorSwatchProps } from "./components/color-picker"
+
+// Phase 7.5 additions
+
+// Date Range Picker
+export { DateRangePicker } from "./components/date-range-picker"
+export type { DateRangePickerProps, DateRange } from "./components/date-range-picker"
+
+// Multi Select
+export { MultiSelect } from "./components/multi-select"
+export type { MultiSelectProps, MultiSelectOption } from "./components/multi-select"
+
+// Search Input
+export { SearchInput } from "./components/search-input"
+export type { SearchInputProps } from "./components/search-input"
+
+// Confirm Dialog
+export { ConfirmDialog } from "./components/confirm-dialog"
+export type { ConfirmDialogProps } from "./components/confirm-dialog"
+
+// Notification Bell
+export { NotificationBell } from "./components/notification-bell"
+export type { NotificationBellProps, NotificationItem } from "./components/notification-bell"
+
+// Profile Dropdown
+export { ProfileDropdown } from "./components/profile-dropdown"
+export type {
+  ProfileDropdownProps,
+  ProfileDropdownUser,
+  ProfileDropdownItem,
+} from "./components/profile-dropdown"
+
+// Inline Edit
+export { InlineEdit } from "./components/inline-edit"
+export type { InlineEditProps } from "./components/inline-edit"
+
+// Sortable List
+export { SortableList, SortableItem } from "./components/sortable-list"
+export type { SortableListProps, SortableItemProps, SortableListItem } from "./components/sortable-list"
+
+// Theme Switcher
+export { ThemeSwitcher, ThemeSwitcherToggle, ThemeSwitcherDropdown } from "./components/theme-switcher"
+
+// Chat Message List
+export { ChatMessageList, ChatMessage } from "./components/chat-message-list"
+export type { ChatMessageListProps, ChatMessageProps, ChatMessageItem } from "./components/chat-message-list"
+
+// Upload Progress
+export { UploadProgress, UploadProgressItem } from "./components/upload-progress"
+export type { UploadProgressProps, UploadProgressItemProps, UploadFile } from "./components/upload-progress"
+
+// Timeline Feed
+export { TimelineFeed, TimelineItem } from "./components/timeline-feed"
+export type { TimelineFeedProps, TimelineItemProps, TimelineEntry } from "./components/timeline-feed"
+
+// AI-native patterns (Phase 7.5 Track D)
+export * from "./components/ai"

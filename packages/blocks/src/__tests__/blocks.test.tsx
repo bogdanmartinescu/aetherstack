@@ -2,6 +2,30 @@ import { describe, expect, it, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { DashboardShell, LoginBlock, SignupBlock } from "../index"
+import { AppHeader } from "../components/app-header"
+import { MarketingNavbar } from "../components/marketing-navbar"
+import { FooterSection } from "../components/footer-section"
+import { LandingHero } from "../components/landing-hero"
+import { FeaturesSection } from "../components/features-section"
+import { CTASection } from "../components/cta-section"
+import { FAQSection } from "../components/faq-section"
+import { TestimonialsSection } from "../components/testimonials-section"
+import { LogoCloud } from "../components/logo-cloud"
+import { StatsSection } from "../components/stats-section"
+import { PricingComparison } from "../components/pricing-comparison"
+import { UserProfilePage } from "../components/user-profile-page"
+import { ErrorPage } from "../components/error-page"
+import { WaitlistBlock } from "../components/waitlist-block"
+import { ChangelogBlock } from "../components/changelog-block"
+import { ChatLayout } from "../components/ai/chat-layout"
+import { ChatSidebar } from "../components/ai/chat-sidebar"
+import { AIAssistantPanel } from "../components/ai/ai-assistant-panel"
+import { AgentWorkspace } from "../components/ai/agent-workspace"
+import { AIOnboarding } from "../components/ai/ai-onboarding"
+import { CompareOutput } from "../components/ai/compare-output"
+import { AISettings } from "../components/ai/ai-settings"
+import { PromptLibraryPage } from "../components/ai/prompt-library-page"
+import { AIUsageDashboard } from "../components/ai/ai-usage-dashboard"
 
 // ── DashboardShell ────────────────────────────────────────────────────────────
 
@@ -283,5 +307,509 @@ describe("SignupBlock", () => {
       "href",
       "/login-page",
     )
+  })
+})
+
+// ── Marketing / Utility Blocks ────────────────────────────────────────────────
+
+describe("AppHeader", () => {
+  it("renders without crash", () => {
+    const { container } = render(<AppHeader />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders brand logo when provided", () => {
+    render(<AppHeader logo={<span>Aether UI</span>} />)
+    expect(screen.getByText("Aether UI")).toBeInTheDocument()
+  })
+
+  it("renders nav items", () => {
+    render(
+      <AppHeader
+        navItems={[
+          { label: "Home", href: "/" },
+          { label: "Docs", href: "/docs" },
+        ]}
+      />,
+    )
+    expect(screen.getByRole("link", { name: "Home" })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: "Docs" })).toBeInTheDocument()
+  })
+})
+
+describe("MarketingNavbar", () => {
+  it("renders without crash", () => {
+    const { container } = render(<MarketingNavbar />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders nav links", () => {
+    render(
+      <MarketingNavbar
+        navItems={[
+          { label: "Pricing", href: "/pricing" },
+          { label: "Blog", href: "/blog" },
+        ]}
+      />,
+    )
+    expect(screen.getByRole("link", { name: "Pricing" })).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: "Blog" })).toBeInTheDocument()
+  })
+})
+
+describe("FooterSection", () => {
+  it("renders without crash", () => {
+    const { container } = render(<FooterSection />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders column titles", () => {
+    render(
+      <FooterSection
+        columns={[
+          { title: "Product", links: [{ label: "Features", href: "/features" }] },
+          { title: "Company", links: [{ label: "About", href: "/about" }] },
+        ]}
+      />,
+    )
+    expect(screen.getByText("Product")).toBeInTheDocument()
+    expect(screen.getByText("Company")).toBeInTheDocument()
+  })
+
+  it("renders copyright text", () => {
+    render(<FooterSection copyright="© 2024 Aether UI" />)
+    expect(screen.getByText("© 2024 Aether UI")).toBeInTheDocument()
+  })
+})
+
+describe("LandingHero", () => {
+  it("renders headline", () => {
+    render(<LandingHero headline="Build faster products" />)
+    expect(screen.getByText("Build faster products")).toBeInTheDocument()
+  })
+
+  it("renders subheading", () => {
+    render(<LandingHero headline="Headline" subheading="A great subheading" />)
+    expect(screen.getByText("A great subheading")).toBeInTheDocument()
+  })
+
+  it("renders primary CTA link", () => {
+    render(
+      <LandingHero
+        headline="Start building"
+        primaryCta={{ label: "Get started", href: "/start" }}
+      />,
+    )
+    expect(screen.getByRole("link", { name: "Get started" })).toHaveAttribute(
+      "href",
+      "/start",
+    )
+  })
+})
+
+describe("FeaturesSection", () => {
+  const features = [
+    { title: "Fast", description: "Blazing fast performance" },
+    { title: "Accessible", description: "Built for everyone" },
+  ]
+
+  it("renders feature titles", () => {
+    render(<FeaturesSection features={features} />)
+    expect(screen.getByText("Fast")).toBeInTheDocument()
+    expect(screen.getByText("Accessible")).toBeInTheDocument()
+  })
+
+  it("renders feature descriptions", () => {
+    render(<FeaturesSection features={features} />)
+    expect(screen.getByText("Blazing fast performance")).toBeInTheDocument()
+  })
+})
+
+describe("CTASection", () => {
+  it("renders headline", () => {
+    render(<CTASection headline="Ready to get started?" />)
+    expect(screen.getByText("Ready to get started?")).toBeInTheDocument()
+  })
+
+  it("renders primary CTA", () => {
+    render(
+      <CTASection
+        headline="Start now"
+        primaryCta={{ label: "Sign up free", href: "/signup" }}
+      />,
+    )
+    expect(screen.getByRole("link", { name: "Sign up free" })).toBeInTheDocument()
+  })
+})
+
+describe("FAQSection", () => {
+  const items = [
+    { question: "What is this?", answer: "A design system" },
+    { question: "How does it work?", answer: "Install and use" },
+  ]
+
+  it("renders questions", () => {
+    render(<FAQSection items={items} />)
+    expect(screen.getByText("What is this?")).toBeInTheDocument()
+    expect(screen.getByText("How does it work?")).toBeInTheDocument()
+  })
+})
+
+describe("TestimonialsSection", () => {
+  const testimonials = [
+    { id: "1", quote: "Amazing product!", author: "Alice", role: "CEO" },
+    { id: "2", quote: "Highly recommend.", author: "Bob", role: "CTO" },
+  ]
+
+  it("renders testimonial quotes", () => {
+    render(<TestimonialsSection testimonials={testimonials} />)
+    expect(screen.getByText(/Amazing product!/)).toBeInTheDocument()
+    expect(screen.getByText(/Highly recommend\./)).toBeInTheDocument()
+  })
+
+  it("renders author names", () => {
+    render(<TestimonialsSection testimonials={testimonials} />)
+    expect(screen.getByText("Alice")).toBeInTheDocument()
+    expect(screen.getByText("Bob")).toBeInTheDocument()
+  })
+})
+
+describe("LogoCloud", () => {
+  it("renders without crash", () => {
+    const { container } = render(<LogoCloud logos={[]} />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders headline when provided", () => {
+    render(<LogoCloud logos={[]} headline="Trusted by industry leaders" />)
+    expect(screen.getByText("Trusted by industry leaders")).toBeInTheDocument()
+  })
+
+  it("renders logo names", () => {
+    render(
+      <LogoCloud
+        logos={[
+          { name: "Acme Corp" },
+          { name: "Globex" },
+        ]}
+      />,
+    )
+    expect(screen.getByText("Acme Corp")).toBeInTheDocument()
+    expect(screen.getByText("Globex")).toBeInTheDocument()
+  })
+})
+
+describe("StatsSection", () => {
+  it("renders without crash", () => {
+    const { container } = render(<StatsSection stats={[]} />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders stat values and labels", () => {
+    render(
+      <StatsSection
+        stats={[
+          { value: "10k+", label: "Users" },
+          { value: "99.9%", label: "Uptime" },
+        ]}
+      />,
+    )
+    expect(screen.getByText("10k+")).toBeInTheDocument()
+    expect(screen.getByText("Users")).toBeInTheDocument()
+    expect(screen.getByText("99.9%")).toBeInTheDocument()
+  })
+})
+
+describe("PricingComparison", () => {
+  it("renders without crash", () => {
+    const { container } = render(
+      <PricingComparison
+        tiers={[{ id: "free", name: "Free", price: "$0" }]}
+        features={[{ id: "f1", name: "Unlimited users", tiers: { free: true } }]}
+      />,
+    )
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders tier names", () => {
+    render(
+      <PricingComparison
+        tiers={[
+          { id: "free", name: "Free", price: "$0" },
+          { id: "pro", name: "Pro", price: "$19" },
+        ]}
+        features={[]}
+      />,
+    )
+    expect(screen.getByText("Free")).toBeInTheDocument()
+    expect(screen.getByText("Pro")).toBeInTheDocument()
+  })
+})
+
+describe("UserProfilePage", () => {
+  it("renders user name", () => {
+    render(
+      <UserProfilePage
+        user={{ id: "1", name: "Alice Johnson", email: "alice@example.com" }}
+      />,
+    )
+    expect(screen.getByText("Alice Johnson")).toBeInTheDocument()
+  })
+
+  it("renders user email", () => {
+    render(
+      <UserProfilePage
+        user={{ id: "1", name: "Alice", email: "alice@example.com" }}
+      />,
+    )
+    expect(screen.getByText("alice@example.com")).toBeInTheDocument()
+  })
+})
+
+describe("ErrorPage", () => {
+  it("renders default 404 status code", () => {
+    render(<ErrorPage />)
+    expect(screen.getByText("404")).toBeInTheDocument()
+  })
+
+  it("renders custom headline", () => {
+    render(<ErrorPage headline="This page does not exist" />)
+    expect(screen.getByText("This page does not exist")).toBeInTheDocument()
+  })
+
+  it("renders back link", () => {
+    render(<ErrorPage backHref="/home" />)
+    expect(screen.getByRole("link")).toHaveAttribute("href", "/home")
+  })
+})
+
+describe("WaitlistBlock", () => {
+  it("renders without crash", () => {
+    const { container } = render(<WaitlistBlock />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders email input", () => {
+    render(<WaitlistBlock />)
+    expect(screen.getByRole("textbox")).toBeInTheDocument()
+  })
+
+  it("renders submit button", () => {
+    render(<WaitlistBlock />)
+    expect(screen.getByRole("button")).toBeInTheDocument()
+  })
+
+  it("calls onSubmit with email", async () => {
+    const user = userEvent.setup()
+    const onSubmit = vi.fn()
+    render(<WaitlistBlock onSubmit={onSubmit} />)
+    await user.type(screen.getByRole("textbox"), "test@example.com")
+    await user.click(screen.getByRole("button"))
+    expect(onSubmit).toHaveBeenCalledWith("test@example.com")
+  })
+})
+
+describe("ChangelogBlock", () => {
+  it("renders without crash", () => {
+    const { container } = render(<ChangelogBlock entries={[]} />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders version and date", () => {
+    render(
+      <ChangelogBlock
+        entries={[
+          {
+            id: "1",
+            title: "Release",
+            version: "v1.2.0",
+            date: "2024-01-15",
+            changes: [{ type: "added", items: ["New feature"] }],
+          },
+        ]}
+      />,
+    )
+    expect(screen.getByText("v1.2.0")).toBeInTheDocument()
+    expect(screen.getByText("New feature")).toBeInTheDocument()
+  })
+})
+
+// ── AI Blocks ─────────────────────────────────────────────────────────────────
+
+describe("ChatLayout", () => {
+  it("renders children (main content area)", () => {
+    render(<ChatLayout><p>Chat content</p></ChatLayout>)
+    expect(screen.getByText("Chat content")).toBeInTheDocument()
+  })
+
+  it("renders sidebar when provided", () => {
+    render(
+      <ChatLayout sidebar={<nav>Sidebar nav</nav>}>
+        <p>Main</p>
+      </ChatLayout>,
+    )
+    expect(screen.getByText("Sidebar nav")).toBeInTheDocument()
+  })
+
+  it("renders footer when provided", () => {
+    render(
+      <ChatLayout footer={<div>Input area</div>}>
+        <p>Main</p>
+      </ChatLayout>,
+    )
+    expect(screen.getByText("Input area")).toBeInTheDocument()
+  })
+})
+
+describe("ChatSidebar", () => {
+  it("renders new chat button", () => {
+    render(<ChatSidebar />)
+    expect(screen.getByRole("button", { name: /new chat/i })).toBeInTheDocument()
+  })
+
+  it("renders conversations list", () => {
+    render(
+      <ChatSidebar
+        conversations={[
+          { id: "1", title: "First conversation" },
+          { id: "2", title: "Second conversation" },
+        ]}
+      />,
+    )
+    expect(screen.getByText("First conversation")).toBeInTheDocument()
+    expect(screen.getByText("Second conversation")).toBeInTheDocument()
+  })
+
+  it("calls onNewChat when new chat button is clicked", async () => {
+    const user = userEvent.setup()
+    const onNewChat = vi.fn()
+    render(<ChatSidebar onNewChat={onNewChat} />)
+    await user.click(screen.getByRole("button", { name: /new chat/i }))
+    expect(onNewChat).toHaveBeenCalledOnce()
+  })
+})
+
+describe("AIAssistantPanel", () => {
+  it("renders children when open", () => {
+    render(
+      <AIAssistantPanel open>
+        <p>Assistant content</p>
+      </AIAssistantPanel>,
+    )
+    expect(screen.getByText("Assistant content")).toBeInTheDocument()
+  })
+
+  it("renders title when provided", () => {
+    render(<AIAssistantPanel open title="AI Assistant" />)
+    expect(screen.getByText("AI Assistant")).toBeInTheDocument()
+  })
+})
+
+describe("AgentWorkspace", () => {
+  it("renders without crash", () => {
+    const { container } = render(<AgentWorkspace />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders task description when provided", () => {
+    render(<AgentWorkspace task="Summarize the document" />)
+    expect(screen.getByText("Summarize the document")).toBeInTheDocument()
+  })
+
+  it("renders steps with tool names", () => {
+    render(
+      <AgentWorkspace
+        steps={[
+          { id: "1", toolName: "read_file", status: "done" },
+          { id: "2", toolName: "summarize", status: "running" },
+        ]}
+      />,
+    )
+    expect(screen.getByText("read_file")).toBeInTheDocument()
+    expect(screen.getByText("summarize")).toBeInTheDocument()
+  })
+})
+
+describe("AIOnboarding", () => {
+  it("renders without crash", () => {
+    const { container } = render(<AIOnboarding />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders first step heading", () => {
+    render(<AIOnboarding />)
+    expect(screen.getByRole("heading")).toBeInTheDocument()
+  })
+})
+
+describe("CompareOutput", () => {
+  it("renders without crash", () => {
+    const { container } = render(<CompareOutput outputs={[]} />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders both output columns", () => {
+    render(
+      <CompareOutput
+        outputs={[
+          { model: "GPT-4o", content: "Response A" },
+          { model: "Claude", content: "Response B" },
+        ]}
+      />,
+    )
+    expect(screen.getByText("Response A")).toBeInTheDocument()
+    expect(screen.getByText("Response B")).toBeInTheDocument()
+  })
+})
+
+describe("AISettings", () => {
+  it("renders without crash", () => {
+    const { container } = render(<AISettings />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders temperature section", () => {
+    render(<AISettings />)
+    expect(screen.getByText(/temperature/i)).toBeInTheDocument()
+  })
+})
+
+describe("PromptLibraryPage", () => {
+  it("renders without crash", () => {
+    const { container } = render(<PromptLibraryPage prompts={[]} />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders search input", () => {
+    render(<PromptLibraryPage prompts={[]} />)
+    expect(screen.getByPlaceholderText(/search prompts/i)).toBeInTheDocument()
+  })
+
+  it("renders prompt titles when prompts are provided", () => {
+    render(
+      <PromptLibraryPage
+        prompts={[
+          { id: "1", title: "Summarize text", content: "Summarize:", category: "Writing" },
+        ]}
+      />,
+    )
+    expect(screen.getByText("Summarize text")).toBeInTheDocument()
+  })
+})
+
+describe("AIUsageDashboard", () => {
+  it("renders without crash", () => {
+    const { container } = render(<AIUsageDashboard />)
+    expect(container.firstChild).toBeInTheDocument()
+  })
+
+  it("renders stats when stats prop is provided", () => {
+    render(
+      <AIUsageDashboard
+        stats={{ totalRequests: 1200, totalTokens: 450000, estimatedCost: 0.9, period: "30d" }}
+      />,
+    )
+    expect(screen.getByText("Total tokens")).toBeInTheDocument()
+    expect(screen.getAllByRole("heading").length).toBeGreaterThan(0)
   })
 })

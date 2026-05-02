@@ -63,15 +63,52 @@ const PATTERNS = [
     ],
   },
   {
+    category: "Input utilities",
+    items: [
+      { slug: "date-range-picker", label: "Date Range Picker", desc: "A date range selector composing Calendar in range mode with a Popover trigger." },
+      { slug: "multi-select", label: "Multi Select", desc: "Combobox-style multi-select with removable tag chips and search." },
+      { slug: "search-input", label: "Search Input", desc: "Enhanced search field with clear button, loading state, and keyboard shortcut hint." },
+    ],
+  },
+  {
     category: "Overlays & commands",
     items: [
       { slug: "command-palette", label: "Command Palette", desc: "Keyboard-driven ⌘K command palette with grouped results and fuzzy search." },
     ],
   },
   {
+    category: "Actions & feedback",
+    items: [
+      { slug: "confirm-dialog", label: "Confirm Dialog", desc: "Reusable confirmation dialog for destructive or irreversible actions." },
+    ],
+  },
+  {
+    category: "User & navigation",
+    items: [
+      { slug: "notification-bell", label: "Notification Bell", desc: "Bell icon with unread count badge and a dropdown notification panel." },
+      { slug: "profile-dropdown", label: "Profile Dropdown", desc: "User avatar trigger with name, role, and a dropdown of nav links and sign-out." },
+      { slug: "theme-switcher", label: "Theme Switcher", desc: "Light/dark/system theme toggle with dropdown and icon-only variants." },
+    ],
+  },
+  {
+    category: "Content editing",
+    items: [
+      { slug: "inline-edit", label: "Inline Edit", desc: "Click-to-edit text field with save on Enter and cancel on Escape." },
+      { slug: "sortable-list", label: "Sortable List", desc: "Drag-and-drop sortable list with keyboard accessibility via dnd-kit." },
+    ],
+  },
+  {
     category: "Uploads",
     items: [
       { slug: "file-dropzone", label: "File Dropzone", desc: "Drag-and-drop upload zone with click-to-browse, type filtering, and size limits." },
+      { slug: "upload-progress", label: "Upload Progress", desc: "File upload progress display with status icons and remove action." },
+    ],
+  },
+  {
+    category: "Feeds & timelines",
+    items: [
+      { slug: "chat-message-list", label: "Chat Message List", desc: "Chat message list with user and assistant bubbles, avatars, and timestamps." },
+      { slug: "timeline-feed", label: "Timeline Feed", desc: "Vertical timeline with date markers and event entries." },
     ],
   },
   {
@@ -97,11 +134,11 @@ export default function PatternsPage() {
         </p>
         <div className="mt-4 flex flex-wrap gap-4">
           <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">
-            <p className="text-2xl font-bold text-foreground">24</p>
+            <p className="text-2xl font-bold text-foreground">36</p>
             <p className="text-xs text-muted-foreground">Patterns</p>
           </div>
           <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">
-            <p className="text-2xl font-bold text-foreground">10</p>
+            <p className="text-2xl font-bold text-foreground">15</p>
             <p className="text-xs text-muted-foreground">Categories</p>
           </div>
           <div className="rounded-lg border border-border bg-muted/30 px-4 py-3">

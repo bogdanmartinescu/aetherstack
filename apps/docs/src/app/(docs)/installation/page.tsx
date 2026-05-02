@@ -1,11 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
 import { CodeBlock } from "@/components/code-block"
 import { DocTabs } from "@/components/doc-tabs"
-
-export const metadata: Metadata = {
-  title: "Installation",
-  description: "How to add Aether UI to your project — React, Next.js, Remix, Astro, and more.",
-}
 
 function Step({
   number,

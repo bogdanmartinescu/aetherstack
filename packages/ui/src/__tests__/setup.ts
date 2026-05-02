@@ -11,6 +11,22 @@ global.ResizeObserver = class ResizeObserver {
 // cmdk calls scrollIntoView when selecting items; stub it for JSDOM.
 Element.prototype.scrollIntoView = function () {}
 
+// Embla Carousel uses window.matchMedia for responsive breakpoints. JSDOM does
+// not implement it, so we stub it here with a minimal no-op implementation.
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: (query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  }),
+})
+
 // Suppress known Radix UI + JSDOM false-positive act() warnings.
 // Radix's roving-focus (RadioGroup, Tabs) schedules state updates inside
 // keyboard event handlers. JSDOM doesn't run requestAnimationFrame so those
