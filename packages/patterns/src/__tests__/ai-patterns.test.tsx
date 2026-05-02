@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event"
 import * as React from "react"
 
 import { ConversationThread } from "../components/ai/conversation-thread"
-import { PromptBuilder } from "../components/ai/prompt-builder"
+import { PromptBuilder, type Turn } from "../components/ai/prompt-builder"
 import { ModelSelector } from "../components/ai/model-selector"
 import { AIResponseCard } from "../components/ai/ai-response-card"
 import { PromptLibrary } from "../components/ai/prompt-library"
@@ -55,8 +55,8 @@ describe("PromptBuilder", () => {
   it("adds a turn when add button is clicked (controlled)", async () => {
     const user = userEvent.setup()
     function Wrapper() {
-      const [turns, setTurns] = React.useState([{ role: "system" as const, content: "" }])
-      return <PromptBuilder turns={turns} onTurnsChange={setTurns} />
+      const [turns, setTurns] = React.useState<Turn[]>([{ role: "system" as const, content: "" }])
+      return <PromptBuilder turns={turns} onTurnsChange={(t) => setTurns(t)} />
     }
     render(<Wrapper />)
     const initialTurns = screen.getAllByRole("combobox").length
@@ -157,8 +157,8 @@ describe("PromptLibrary", () => {
     const onInsert = vi.fn()
     render(<PromptLibrary prompts={prompts} onInsert={onInsert} />)
     const insertBtns = screen.getAllByRole("button", { name: /use|insert/i })
-    await user.click(insertBtns[0])
-    expect(onInsert).toHaveBeenCalledWith(prompts[0].content)
+    await user.click(insertBtns[0]!)
+    expect(onInsert).toHaveBeenCalledWith(prompts[0]!.content)
   })
 })
 

@@ -444,8 +444,8 @@ describe("CTASection", () => {
 
 describe("FAQSection", () => {
   const items = [
-    { question: "What is this?", answer: "A design system" },
-    { question: "How does it work?", answer: "Install and use" },
+    { id: "1", question: "What is this?", answer: "A design system" },
+    { id: "2", question: "How does it work?", answer: "Install and use" },
   ]
 
   it("renders questions", () => {
@@ -525,7 +525,7 @@ describe("PricingComparison", () => {
     const { container } = render(
       <PricingComparison
         tiers={[{ id: "free", name: "Free", price: "$0" }]}
-        features={[{ id: "f1", name: "Unlimited users", tiers: { free: true } }]}
+        features={[{ label: "Unlimited users", tiers: { free: true } }]}
       />,
     )
     expect(container.firstChild).toBeInTheDocument()
@@ -550,7 +550,7 @@ describe("UserProfilePage", () => {
   it("renders user name", () => {
     render(
       <UserProfilePage
-        user={{ id: "1", name: "Alice Johnson", email: "alice@example.com" }}
+        user={{ name: "Alice Johnson", email: "alice@example.com" }}
       />,
     )
     expect(screen.getByText("Alice Johnson")).toBeInTheDocument()
@@ -559,7 +559,7 @@ describe("UserProfilePage", () => {
   it("renders user email", () => {
     render(
       <UserProfilePage
-        user={{ id: "1", name: "Alice", email: "alice@example.com" }}
+        user={{ name: "Alice", email: "alice@example.com" }}
       />,
     )
     expect(screen.getByText("alice@example.com")).toBeInTheDocument()

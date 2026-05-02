@@ -16,7 +16,7 @@ import {
 
 type Role = "system" | "user" | "assistant"
 
-interface Turn {
+export interface Turn {
   role: Role
   content: string
 }

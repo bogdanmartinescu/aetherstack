@@ -24,7 +24,7 @@ import { ActivityFeed } from "../components/activity-feed"
 import { FileDropzone } from "../components/file-dropzone"
 import { DataTable } from "../components/data-table"
 import { CommandPalette, CommandPaletteInput, CommandPaletteList, CommandPaletteEmpty, CommandItem } from "../components/command-palette"
-import { KanbanBoard, KanbanColumn } from "../components/kanban"
+import { KanbanBoard } from "../components/kanban"
 import { ColorPicker, ColorSwatch } from "../components/color-picker"
 
 // ─── FormField ────────────────────────────────────────────────────────────────
@@ -949,13 +949,13 @@ describe("ColorSwatch", () => {
 
 describe("ColorPicker", () => {
   it("renders hex input", () => {
-    render(<ColorPicker value="#ff0000" onValueChange={() => {}} />)
+    render(<ColorPicker value="#ff0000" onChange={() => {}} />)
     expect(screen.getAllByDisplayValue("#ff0000").length).toBeGreaterThan(0)
   })
 
   it("renders preset swatches when presets are provided", () => {
     const presets = ["#ff0000", "#00ff00", "#0000ff"]
-    render(<ColorPicker value="#ff0000" onValueChange={() => {}} presets={presets} />)
+    render(<ColorPicker value="#ff0000" onChange={() => {}} presets={presets} />)
     presets.forEach((color) => {
       expect(screen.getByRole("button", { name: new RegExp(color, "i") })).toBeInTheDocument()
     })

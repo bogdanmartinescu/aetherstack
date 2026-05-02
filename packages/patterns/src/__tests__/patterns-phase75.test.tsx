@@ -287,7 +287,7 @@ describe("UploadProgress", () => {
   it("calls onRemove when remove is clicked on a done file", async () => {
     const user = userEvent.setup()
     const onRemove = vi.fn()
-    render(<UploadProgress files={[files[1]]} onRemove={onRemove} />)
+    render(<UploadProgress files={[files[1]!]} onRemove={onRemove} />)
     await user.click(screen.getByRole("button", { name: /remove/i }))
     expect(onRemove).toHaveBeenCalledWith("2")
   })
@@ -397,7 +397,7 @@ describe("SortableList", () => {
       <SortableList
         items={items}
         onReorder={() => {}}
-        renderItem={(item) => <span>{item.label}</span>}
+        renderItem={(item) => <span>{item.label as string}</span>}
       />,
     )
     expect(screen.getByText("First item")).toBeInTheDocument()
@@ -410,7 +410,7 @@ describe("SortableList", () => {
       <SortableList
         items={items}
         onReorder={() => {}}
-        renderItem={(item) => <span>{item.label}</span>}
+        renderItem={(item) => <span>{item.label as string}</span>}
         className="custom-sortable"
       />,
     )
