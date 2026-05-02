@@ -1,6 +1,6 @@
 {
   "name": "@aetherstack/registry-public",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "Public Aether UI registry — static site serving the @aether component registry",
   "scripts": {

@@ -1,6 +1,6 @@
 {
   "name": "@aetherstack/themes",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Aether UI themes — CSS variable collections for light/dark and branded themes",
   "license": "MIT",
   "main": "./src/index.ts",
