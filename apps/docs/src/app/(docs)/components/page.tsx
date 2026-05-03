@@ -3,7 +3,8 @@ import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "Components",
-  description: "Aether UI core primitive components — token-driven, accessible, open-code.",
+  description:
+    "Browse 65 open-code React components — primitives, AI-native UI, and more. All token-driven, accessible by default, and installable via the Aether UI CLI.",
 }
 
 const components = [
@@ -95,16 +96,24 @@ export default function ComponentsPage() {
     <div className="max-w-3xl">
       <div className="mb-10">
         <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">Components</h1>
-        <p className="text-lg text-muted-foreground">
-          51 token-driven, fully accessible, open-code primitives. Each component ships as source
-          — you own it, edit it, extend it.
+        <p className="mb-4 text-lg text-muted-foreground">
+          65 token-driven, fully accessible, open-code primitives — including AI-native components
+          for streaming UIs, chat interfaces, and agent-powered applications. Each component ships
+          as plain TypeScript source that you install via the CLI and own outright.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          Components are organised into four layers: primitives (this page), patterns, blocks, and
+          AI-native UI. Unlike a runtime library, each component you add lives in your codebase
+          — edit it, extend it, or replace it at any time. Run{" "}
+          <code className="rounded bg-muted px-1 font-mono text-xs">npx aether-ui add &lt;name&gt;</code>{" "}
+          to install any component in seconds.
         </p>
       </div>
 
       {/* Quick stats */}
       <div className="mb-12 grid grid-cols-3 gap-4">
         {[
-          { label: "Components", value: "51" },
+          { label: "Primitives", value: "65" },
           { label: "Radix primitives", value: "20" },
           { label: "Test coverage", value: "105 tests" },
         ].map((stat) => (
@@ -140,8 +149,25 @@ export default function ComponentsPage() {
         ))}
       </div>
 
+      {/* AI-native callout */}
+      <div className="mt-12 rounded-lg border border-primary/20 bg-primary/5 p-5">
+        <p className="text-sm font-semibold text-foreground">AI-native components</p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Aether UI ships 14 AI-native primitives under <code className="rounded bg-muted px-1 font-mono text-xs">@aetherstack/ui/ai</code> —
+          StreamingText, PromptInput, ChatBubble, MarkdownRenderer, ThinkingIndicator, and more.
+          They accept both plain strings and <code className="rounded bg-muted px-1 font-mono text-xs">AsyncIterable&lt;string&gt;</code> for streaming,
+          and are SDK-agnostic — wire in your own AI provider.
+        </p>
+        <Link
+          href="/llms"
+          className="mt-3 inline-flex items-center gap-1.5 text-sm text-primary hover:underline underline-offset-4"
+        >
+          AI & LLMs documentation →
+        </Link>
+      </div>
+
       {/* Footer note */}
-      <div className="mt-12 rounded-lg border border-border bg-muted/50 p-5">
+      <div className="mt-4 rounded-lg border border-border bg-muted/50 p-5">
         <p className="text-sm font-medium text-foreground">Open code</p>
         <p className="mt-1 text-sm text-muted-foreground">
           Unlike a traditional component library, Aether UI copies component source directly into

@@ -3,7 +3,8 @@ import { CodeBlock } from "@/components/code-block"
 
 export const metadata: Metadata = {
   title: "CLI",
-  description: "The aether-ui CLI adds components directly into your codebase — you own the code.",
+  description:
+    "The aether-ui CLI installs components, generates pages from prompts, and keeps your components up to date. Works with Next.js, Vite, Remix, Astro, and TanStack Start.",
 }
 
 function Callout({ title, children }: { title?: string; children: React.ReactNode }) {
@@ -79,9 +80,10 @@ export default function CLIPage() {
       <div className="mb-10">
         <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">CLI</h1>
         <p className="text-lg text-muted-foreground">
-          The <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-base">aether-ui</code> CLI 
-          adds components directly into your project. No library to install — the component source lives 
-          in your codebase and you own it entirely.
+          One command adds a production-quality component directly to your codebase. The{" "}
+          <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-base">aether-ui</code> CLI
+          installs components, generates full pages from natural-language prompts, and keeps everything
+          up to date — all without a runtime library to maintain.
         </p>
       </div>
 
@@ -119,7 +121,7 @@ pnpm add -g aether-ui`}
 
         <CommandRef
           command="aether-ui init"
-          description="Initialize Aether UI in a project. Creates aether.config.json, installs shared dependencies, and sets up the utility function."
+          description="Initialize Aether UI in a project. Creates aether.json, installs shared dependencies, and sets up the utility function."
           options={[
             { flag: "--cwd <path>", description: "Working directory. Defaults to the current directory." },
             { flag: "--yes, -y", description: "Skip confirmation prompts and use defaults." },
@@ -185,16 +187,50 @@ pnpm add -g aether-ui`}
             { flag: "--category <name>", description: "Filter by category (primitives, patterns, blocks)." },
           ]}
         />
+
+        <CommandRef
+          command={`aether-ui generate "<prompt>"`}
+          description="Generate a starter page or feature scaffold from a natural-language prompt. Installs the required components and writes a page.tsx with the composition wired together."
+          args={[
+            {
+              name: "prompt",
+              description: "Natural-language description of the UI to generate.",
+              required: true,
+            },
+          ]}
+          options={[
+            { flag: "--cwd <path>", description: "Working directory. Defaults to the current directory." },
+          ]}
+        />
+
+        <div className="mb-10 rounded-lg border border-border bg-muted/30 p-4">
+          <p className="mb-3 text-sm font-semibold text-foreground">Generate examples</p>
+          <CodeBlock
+            code={`# SaaS dashboard with charts and activity feed
+npx aether-ui generate "a dashboard page with a stat strip, recent activity feed, and data table"
+
+# AI chat interface
+npx aether-ui generate "an AI chat layout with a sidebar for conversations and a streaming message thread"
+
+# Marketing landing page
+npx aether-ui generate "a landing page with a hero section, feature grid, and pricing table"`}
+            filename="terminal"
+          />
+          <p className="mt-3 text-xs text-muted-foreground">
+            The CLI installs required components, then writes a <code className="rounded bg-muted px-1 font-mono text-xs">page.tsx</code> with
+            all components composed and ready to customise.
+          </p>
+        </div>
       </section>
 
       {/* Config file */}
       <section className="mb-12">
         <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">
-          Configuration — <code className="font-mono text-xl">aether.config.json</code>
+          Configuration — <code className="font-mono text-xl">aether.json</code>
         </h2>
         <p className="mb-4 text-sm text-muted-foreground">
           Running <code className="rounded bg-muted px-1 font-mono text-xs">aether-ui init</code> creates 
-          an <code className="rounded bg-muted px-1 font-mono text-xs">aether.config.json</code> file at 
+          an <code className="rounded bg-muted px-1 font-mono text-xs">aether.json</code> file at 
           your project root. All CLI commands read from this file.
         </p>
         <CodeBlock
@@ -218,7 +254,7 @@ pnpm add -g aether-ui`}
     "hooks": "@/hooks"
   }
 }`}
-          filename="aether.config.json"
+          filename="aether.json"
         />
 
         <div className="mt-6 overflow-hidden rounded-lg border border-border">
@@ -310,67 +346,6 @@ npx aether-ui add button --path src/design-system/ui`}
             />
           </div>
         </div>
-      </section>
-
-      {/* npm publishing */}
-      <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Publishing packages to npm</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          The core Aether UI packages (<code className="rounded bg-muted px-1 font-mono text-xs">@aetherstack/ui</code>,{" "}
-          <code className="rounded bg-muted px-1 font-mono text-xs">@aetherstack/tokens</code>,{" "}
-          <code className="rounded bg-muted px-1 font-mono text-xs">@aetherstack/utils</code>) are published as 
-          pre-built ESM+CJS packages. The build pipeline uses{" "}
-          <a href="https://tsup.egoist.dev" target="_blank" rel="noreferrer" className="text-primary underline-offset-4 hover:underline">tsup</a>.
-        </p>
-
-        <div className="space-y-4">
-          <div>
-            <p className="mb-2 text-sm font-medium text-foreground">1. Build all packages</p>
-            <CodeBlock
-              code={`# From the monorepo root
-pnpm build
-
-# Or build a single package
-pnpm --filter @aetherstack/ui build`}
-              filename="terminal"
-            />
-          </div>
-
-          <div>
-            <p className="mb-2 text-sm font-medium text-foreground">2. Version packages</p>
-            <CodeBlock
-              code={`# Bump version in package.json before publishing
-# Follow semver: patch for bugfixes, minor for new features, major for breaking changes
-npm version patch   # 0.0.1 → 0.0.2
-npm version minor   # 0.0.1 → 0.1.0
-npm version major   # 0.0.1 → 1.0.0`}
-              filename="terminal"
-            />
-          </div>
-
-          <div>
-            <p className="mb-2 text-sm font-medium text-foreground">3. Publish to npm</p>
-            <CodeBlock
-              code={`# Publish from package directory
-cd packages/ui
-npm publish --access public
-
-# Or publish all publishable packages from root
-pnpm -r publish --access public`}
-              filename="terminal"
-            />
-          </div>
-        </div>
-
-        <Callout title="publishConfig">
-          Each package uses <code className="rounded bg-muted px-0.5 font-mono text-xs">publishConfig</code> in 
-          its <code className="rounded bg-muted px-0.5 font-mono text-xs">package.json</code> to override 
-          exports when publishing. In the monorepo workspace, imports resolve to{" "}
-          <code className="rounded bg-muted px-0.5 font-mono text-xs">./src/*.ts</code> (raw TypeScript, 
-          compiled by the consuming app). On npm, consumers receive pre-built{" "}
-          <code className="rounded bg-muted px-0.5 font-mono text-xs">./dist/*.mjs</code> and{" "}
-          <code className="rounded bg-muted px-0.5 font-mono text-xs">./dist/*.js</code> files.
-        </Callout>
       </section>
 
       {/* Monorepo */}

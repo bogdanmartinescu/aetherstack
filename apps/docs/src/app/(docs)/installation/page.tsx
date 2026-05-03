@@ -1,7 +1,12 @@
-"use client"
-
+import type { Metadata } from "next"
 import { CodeBlock } from "@/components/code-block"
 import { DocTabs } from "@/components/doc-tabs"
+
+export const metadata: Metadata = {
+  title: "Installation",
+  description:
+    "Add Aether UI to any React project in minutes. Works with Next.js, Vite, Remix, Astro, and TanStack Start. Components install directly into your codebase — no lock-in.",
+}
 
 function Step({
   number,
@@ -742,7 +747,9 @@ export default function InstallationPage() {
         </h1>
         <p className="text-lg text-muted-foreground">
           Add Aether UI to any React project. Components are copied directly into your
-          codebase — no wrapper library, no lock-in. You own the source.
+          codebase — no wrapper library, no lock-in. You own the source. After setup, run{" "}
+          <code className="rounded bg-muted px-1 font-mono text-base">npx aether-ui add button</code>{" "}
+          to copy any of the 65+ components directly into your project.
         </p>
       </div>
 
