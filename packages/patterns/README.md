@@ -1,12 +1,12 @@
 # @aetherstack/patterns
 
-> Aether UI — 20 higher-level UI patterns built on `@aetherstack/ui` primitives.
+> Aether UI — 39 higher-level UI patterns built on `@aetherstack/ui` primitives.
 
 Part of the [Aetherstack](https://aether-ui.dev) design system monorepo.
 
 ## What this is
 
-`@aetherstack/patterns` provides product-level UI compositions that combine multiple primitives into common SaaS interface elements: forms, data tables, navigation, stat displays, command palettes, and more.
+`@aetherstack/patterns` provides product-level UI compositions that combine multiple primitives into common SaaS interface elements: forms, data tables, navigation, stat displays, command palettes, kanban boards, and more.
 
 ## Install
 
@@ -44,27 +44,56 @@ export function UsersPage() {
 }
 ```
 
-## Patterns (20)
+## Patterns (29)
 
-**Data display:** DataTable, StatGroup, MetricCard  
+**Data display:** DataTable, MetricCard, StatGroup  
 **Commands:** CommandPalette  
-**Navigation:** PageHeader, Breadcrumb, SectionHeader, SettingsSection, SidebarNav  
-**Forms:** FormField  
+**Navigation:** PageHeader (+ Breadcrumb), SectionHeader (+ SettingsSection), SidebarNav (+ NavItem, NavGroup)  
+**Forms:** FormField, InlineEdit  
+**Filtering:** TableToolbar (+ FilterToolbar), MultiSelect, DateRangePicker, SearchInput  
 **State:** EmptyState, LoadingState, ErrorState  
-**Activity:** ActivityFeed  
-**Task management:** Stepper, Kanban  
-**File handling:** FileDropzone  
+**Task management:** Kanban, Stepper, SortableList  
+**File handling:** FileDropzone, UploadProgress  
+**User:** ProfileDropdown, NotificationBell, ThemeSwitcher  
 **Styling:** ColorPicker  
-**Filtering:** TableToolbar, FilterToolbar  
+**Content:** ActivityFeed, ChatMessageList, ConfirmDialog, TimelineFeed  
+
+## AI-native patterns (10)
+
+SDK-agnostic conversation and agent UI. Accept both `string` and `AsyncIterable<string>` props.
+
+```tsx
+import {
+  ConversationThread,
+  PromptBuilder,
+  ModelSelector,
+  AIResponseCard,
+  PromptLibrary,
+  ToolCallSequence,
+  ConversationStarter,
+  VoiceInput,
+  AIErrorState,
+  AISettingsPanel,
+} from "@aetherstack/patterns/ai"
+```
 
 ## CLI-first workflow
 
 ```bash
 npx aether-ui add data-table
 npx aether-ui add command-palette
+npx aether-ui add kanban
+npx aether-ui add date-range-picker
 ```
 
 See [aether-ui.dev/patterns](https://aether-ui.dev/patterns).
+
+## Documentation
+
+- [Pattern reference](https://aether-ui.dev/patterns) — all 39 patterns with props, usage, and examples
+- [Component reference](https://aether-ui.dev/components) — underlying UI primitives
+- [Installation guide](https://aether-ui.dev/installation) — project setup
+- [CLI reference](https://aether-ui.dev/cli) — `aether-ui add`, `init`, `generate`
 
 ## License
 
