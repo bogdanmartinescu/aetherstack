@@ -192,6 +192,8 @@ This single command:
 - Writes a per-item `<name>.json` for every registry entry
 - **Regenerates `apps/registry-public/public/llms.txt`** — do NOT hand-edit this file
 
+The file is served at `https://aether-ui.dev/llms.txt` via a Next.js route handler at `apps/docs/src/app/llms.txt/route.ts` that reads it at build time.
+
 Commit all generated artefacts alongside the registry change.
 
 ---

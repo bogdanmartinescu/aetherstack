@@ -15,6 +15,7 @@ npx aether-ui generate "build me a SaaS dashboard"  # AI-driven scaffolding
 ## Documentation
 
 - Full docs: https://aether-ui.dev
+- llms.txt: https://aether-ui.dev/llms.txt
 - Registry API: https://registry.aether-ui.dev/r/registry.json
 - AI usage guide: https://aether-ui.dev/llms
 - Tokens reference: https://aether-ui.dev/tokens

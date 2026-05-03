@@ -1,64 +1,108 @@
-import { readdirSync } from "node:fs"
+import { existsSync, readdirSync, statSync } from "node:fs"
 import { resolve } from "node:path"
 import type { MetadataRoute } from "next"
 
 const BASE_URL = "https://aether-ui.dev"
 
 /**
- * Read directory slugs for a given docs sub-path.
- * Each entry that contains a page.tsx is a valid route.
+ * Returns the last-modified date of a file, falling back to now.
+ * Used to give Google accurate freshness signals per page.
  */
-function slugs(docsSubPath: string): string[] {
-  const dir = resolve(process.cwd(), "src/app/(docs)", docsSubPath)
+function mtime(filePath: string): Date {
   try {
-    return readdirSync(dir, { withFileTypes: true })
-      .filter((e) => e.isDirectory())
-      .map((e) => e.name)
+    return statSync(filePath).mtime
   } catch {
-    return []
+    return new Date()
+  }
+}
+
+/**
+ * Scans a docs sub-path and returns the slugs of every direct subdirectory
+ * that contains a page.tsx. Directories with only preview.tsx or other files
+ * are excluded — they don't produce real navigable routes.
+ */
+function pageRoutes(
+  docsSubPath: string,
+  prefix: string,
+  priority = 0.8,
+): MetadataRoute.Sitemap {
+  const dir = resolve(process.cwd(), "src/app/(docs)", docsSubPath)
+  if (!existsSync(dir)) return []
+
+  return readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => {
+      if (!entry.isDirectory()) return false
+      const pagePath = resolve(dir, entry.name, "page.tsx")
+      return existsSync(pagePath)
+    })
+    .map((entry) => {
+      const pagePath = resolve(dir, entry.name, "page.tsx")
+      return {
+        url: `${BASE_URL}/${prefix}/${entry.name}`,
+        lastModified: mtime(pagePath),
+        changeFrequency: "monthly" as const,
+        priority,
+      }
+    })
+    .sort((a, b) => a.url.localeCompare(b.url))
+}
+
+/**
+ * Scans a flat docs sub-path for a page.tsx and returns a single entry.
+ * Used for top-level section pages like /components, /patterns, /blocks.
+ */
+function staticEntry(
+  docsSubPath: string,
+  priority = 0.8,
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "monthly",
+): MetadataRoute.Sitemap[number] {
+  const pagePath = resolve(process.cwd(), "src/app/(docs)", docsSubPath, "page.tsx")
+  return {
+    url: `${BASE_URL}/${docsSubPath}`,
+    lastModified: mtime(pagePath),
+    changeFrequency,
+    priority,
   }
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date()
+  const rootPage = resolve(process.cwd(), "src/app/page.tsx")
 
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/`, lastModified: now, changeFrequency: "monthly", priority: 1.0 },
-    { url: `${BASE_URL}/introduction`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE_URL}/installation`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE_URL}/cli`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/components`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${BASE_URL}/patterns`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${BASE_URL}/blocks`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${BASE_URL}/tokens`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/icons`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE_URL}/fonts`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${BASE_URL}/llms`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE_URL}/charts`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE_URL}/forms/react-hook-form`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+  return [
+    // ── Home ─────────────────────────────────────────────────────────────
+    {
+      url: `${BASE_URL}/`,
+      lastModified: mtime(rootPage),
+      changeFrequency: "monthly",
+      priority: 1.0,
+    },
+
+    // ── Primary docs pages ────────────────────────────────────────────────
+    staticEntry("introduction", 0.9, "monthly"),
+    staticEntry("installation", 0.9, "monthly"),
+    staticEntry("cli", 0.85, "monthly"),
+    staticEntry("llms", 0.8, "monthly"),
+    staticEntry("tokens", 0.75, "monthly"),
+    staticEntry("pricing", 0.65, "monthly"),
+    staticEntry("icons", 0.65, "monthly"),
+    staticEntry("fonts", 0.6, "monthly"),
+    staticEntry("charts", 0.65, "monthly"),
+
+    // ── Section index pages ───────────────────────────────────────────────
+    staticEntry("components", 0.9, "weekly"),
+    staticEntry("patterns", 0.9, "weekly"),
+    staticEntry("blocks", 0.9, "weekly"),
+
+    // ── Forms (nested, discover dynamically) ─────────────────────────────
+    ...pageRoutes("forms", "forms", 0.6),
+
+    // ── Component pages (auto-discovered, page.tsx required) ──────────────
+    ...pageRoutes("components", "components", 0.8),
+
+    // ── Pattern pages (auto-discovered, page.tsx required) ────────────────
+    ...pageRoutes("patterns", "patterns", 0.8),
+
+    // ── Block pages (auto-discovered, page.tsx required) ──────────────────
+    ...pageRoutes("blocks", "blocks", 0.8),
   ]
-
-  const componentRoutes: MetadataRoute.Sitemap = slugs("components").map((slug) => ({
-    url: `${BASE_URL}/components/${slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }))
-
-  const patternRoutes: MetadataRoute.Sitemap = slugs("patterns").map((slug) => ({
-    url: `${BASE_URL}/patterns/${slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }))
-
-  const blockRoutes: MetadataRoute.Sitemap = slugs("blocks").map((slug) => ({
-    url: `${BASE_URL}/blocks/${slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }))
-
-  return [...staticRoutes, ...componentRoutes, ...patternRoutes, ...blockRoutes]
 }

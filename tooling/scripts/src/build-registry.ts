@@ -153,6 +153,7 @@ function buildLlmsTxt(registry: Registry): string {
     `## Documentation`,
     ``,
     `- Full docs: ${docsUrl}`,
+    `- llms.txt: ${docsUrl}/llms.txt`,
     `- Registry API: ${registryUrl}/r/registry.json`,
     `- AI usage guide: ${docsUrl}/llms`,
     `- Tokens reference: ${docsUrl}/tokens`,

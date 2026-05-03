@@ -105,7 +105,7 @@ export default function LlmsPage() {
         <p>Paste this URL into any agent context or system prompt:</p>
       </Prose>
       <CodeBlock
-        code="https://registry.aether-ui.dev/llms.txt"
+        code="https://aether-ui.dev/llms.txt"
         filename="URL"
       />
       <Prose>
@@ -368,7 +368,7 @@ aether-ui generate "data table with users" --dry-run`}
         code={`You are building a product with Aether UI, a premium open-code design system for React and Next.js.
 
 Registry: https://registry.aether-ui.dev
-llms.txt: https://registry.aether-ui.dev/llms.txt
+llms.txt: https://aether-ui.dev/llms.txt
 Docs: https://aether-ui.dev
 
 Key facts:
