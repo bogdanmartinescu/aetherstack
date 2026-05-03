@@ -12,6 +12,7 @@
  * Run with: pnpm --filter @aetherstack/scripts build-registry
  */
 import {
+  copyFileSync,
   existsSync,
   mkdirSync,
   readdirSync,
@@ -67,6 +68,13 @@ console.log(`  ✓ Written ${aggregate.items.length} per-item JSON files`)
 const llmsTxt = buildLlmsTxt(aggregate)
 writeFileSync(LLMS_TXT_FILE, llmsTxt)
 console.log(`  ✓ Written llms.txt`)
+
+// Mirror llms.txt into the docs app's public folder so it is served as a
+// static asset at https://aether-ui.dev/llms.txt without a runtime read.
+const DOCS_PUBLIC_LLMS = resolve(ROOT, "apps/docs/public/llms.txt")
+mkdirSync(resolve(ROOT, "apps/docs/public"), { recursive: true })
+copyFileSync(LLMS_TXT_FILE, DOCS_PUBLIC_LLMS)
+console.log(`  ✓ Mirrored llms.txt → apps/docs/public/llms.txt`)
 
 // ---------------------------------------------------------------------------
 // Helpers

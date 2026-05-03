@@ -5,6 +5,7 @@
   "description": "Aether UI public documentation site",
   "scripts": {
     "dev": "next dev --port 3000",
+    "prebuild": "node -e \"const {cpSync,mkdirSync}=require('fs');mkdirSync('public',{recursive:true});cpSync('../../apps/registry-public/public/llms.txt','public/llms.txt')\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
