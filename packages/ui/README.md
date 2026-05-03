@@ -1,6 +1,6 @@
 # @aetherstack/ui
 
-> Aether UI — 31 open-code, accessible UI primitives for modern web products.
+> Aether UI — 65 open-code, accessible UI primitives for modern web products.
 
 Part of the [Aetherstack](https://aether-ui.dev) design system monorepo.
 
@@ -45,11 +45,32 @@ import { Button } from "@aetherstack/ui/button"
 import { Dialog, DialogContent } from "@aetherstack/ui/dialog"
 ```
 
-## Components (31)
+## Components (51)
 
-**Original 16:** Badge, Button, Card, Checkbox, Dialog, Input, Label, RadioGroup, Select, Sheet, Skeleton, Switch, Table, Tabs, Textarea, Tooltip
+**Accordion, Alert, AlertDialog, AspectRatio, Avatar** (+ AvatarGroup)**, Badge, Button, ButtonGroup, Calendar, Card, Carousel, Chart, Checkbox, Collapsible, Combobox, ContextMenu, DatePicker, Dialog, Drawer, DropdownMenu, HoverCard, Input, InputGroup, InputOTP, Kbd, Label, Menubar, NavigationMenu, Pagination, Popover, Progress, RadioGroup, Resizable, ScrollArea, Select, Separator, Sheet, Sidebar, Skeleton, Slider, Sonner, Spinner, Switch, Table, Tabs, Textarea, Toast** (+ `useToast`)**, Toggle, ToggleGroup, Tooltip, VisuallyHidden**
 
-**Phase 6 additions (15):** Accordion, Avatar/AvatarGroup, Calendar, Combobox, ContextMenu, DropdownMenu, HoverCard, Pagination, Progress, ScrollArea, Separator, Slider, Toast (+ `useToast`), Toggle, ToggleGroup
+## AI-native primitives (14)
+
+SDK-agnostic streaming-ready components. Accept both `string` and `AsyncIterable<string>` props; you wire your own AI SDK.
+
+```tsx
+import {
+  StreamingText,
+  PromptInput,
+  ChatBubble,
+  ThinkingIndicator,
+  MarkdownRenderer,
+  CodeBlock,
+  SourceCard,
+  FeedbackButtons,
+  ModelBadge,
+  TokenCounter,
+  PromptSuggestion,
+  ToolCallCard,
+  ReasoningBlock,
+  AttachmentChip,
+} from "@aetherstack/ui/ai"
+```
 
 ## CSS setup
 
@@ -72,9 +93,18 @@ For the recommended open-code workflow where you own component source:
 ```bash
 npx aether-ui add button
 npx aether-ui add dialog
+npx aether-ui add sidebar
 ```
 
 See [aether-ui.dev/installation](https://aether-ui.dev/installation).
+
+## Documentation
+
+- [Component reference](https://aether-ui.dev/components) — all 65 components with props, usage, and examples
+- [Installation guide](https://aether-ui.dev/installation) — Next.js, Vite, Remix, Astro setup
+- [CLI reference](https://aether-ui.dev/cli) — `aether-ui add`, `init`, `generate`
+- [AI & MCP](https://aether-ui.dev/llms) — MCP server setup, AI metadata, prompt recipes
+- [Design tokens](https://aether-ui.dev/tokens) — color, spacing, typography, radius reference
 
 ## License
 

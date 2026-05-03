@@ -1,12 +1,12 @@
 # @aetherstack/blocks
 
-> Aether UI — 10 full-section layout blocks for SaaS dashboards and product UIs.
+> Aether UI — 34 full-section layout blocks for SaaS, marketing, and AI-powered products.
 
 Part of the [Aetherstack](https://aether-ui.dev) design system monorepo.
 
 ## What this is
 
-`@aetherstack/blocks` ships complete, installable UI sections — auth pages, settings panels, billing flows, team management, notification centers. Each block is self-contained and ready to drop into a Next.js route.
+`@aetherstack/blocks` ships complete, installable UI sections — auth pages, settings panels, billing flows, marketing pages, and AI-native chat layouts. Each block is self-contained and ready to drop into a Next.js route.
 
 ## Install
 
@@ -37,7 +37,7 @@ export default function SettingsPage() {
 }
 ```
 
-## Blocks (10)
+## Blocks (25)
 
 **Dashboard:** DashboardShell, EmptyDashboard  
 **Auth:** LoginBlock, SignupBlock  
@@ -45,17 +45,44 @@ export default function SettingsPage() {
 **Billing:** BillingOverview  
 **Onboarding:** OnboardingChecklist  
 **Notifications:** NotificationCenter  
-**Marketing:** PricingSection  
+**Marketing:** AppHeader, MarketingNavbar, FooterSection, LandingHero, FeaturesSection, TestimonialsSection, CTASection, FAQSection, LogoCloud, StatsSection, PricingSection, PricingComparison  
+**Pages:** UserProfilePage, ErrorPage, WaitlistBlock, ChangelogBlock  
+
+## AI-native blocks (9)
+
+Full-page AI application layouts. SDK-agnostic — wire your own AI SDK.
+
+```tsx
+import {
+  ChatLayout,
+  ChatSidebar,
+  AIAssistantPanel,
+  AIOnboarding,
+  AgentWorkspace,
+  CompareOutput,
+  AISettings,
+  PromptLibraryPage,
+  AIUsageDashboard,
+} from "@aetherstack/blocks/ai"
+```
 
 ## CLI-first workflow
 
 ```bash
 npx aether-ui add dashboard-shell
 npx aether-ui add account-settings
-npx aether-ui add pricing-section
+npx aether-ui add landing-hero
+npx aether-ui add chat-layout
 ```
 
 See [aether-ui.dev/blocks](https://aether-ui.dev/blocks).
+
+## Documentation
+
+- [Block reference](https://aether-ui.dev/blocks) — all 34 blocks with props, usage, and examples
+- [Pattern reference](https://aether-ui.dev/patterns) — composable patterns used inside blocks
+- [Installation guide](https://aether-ui.dev/installation) — project setup
+- [CLI reference](https://aether-ui.dev/cli) — `aether-ui add`, `init`, `generate`
 
 ## License
 

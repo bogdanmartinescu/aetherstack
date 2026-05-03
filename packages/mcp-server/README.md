@@ -49,7 +49,9 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 ## Documentation
 
-[aether-ui.dev/llms](https://aether-ui.dev/llms)
+- [AI & MCP guide](https://aether-ui.dev/llms) — MCP setup, tool reference, AI metadata, prompt recipes
+- [Component reference](https://aether-ui.dev/components) — components the MCP server exposes
+- [CLI reference](https://aether-ui.dev/cli) — `aether-ui generate` powered by the same registry
 
 ## License
 

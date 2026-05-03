@@ -25,6 +25,11 @@ const className = cn(
 
 `cn` combines [clsx](https://github.com/lukeed/clsx) and [tailwind-merge](https://github.com/dcastil/tailwind-merge) so conflicting Tailwind utilities are resolved correctly.
 
+## Documentation
+
+- [Installation guide](https://aether-ui.dev/installation) — full project setup including utils
+- [Component reference](https://aether-ui.dev/components) — components that use `cn` internally
+
 ## License
 
 MIT — see [LICENSE](../../LICENSE)
