@@ -5,7 +5,9 @@ import { REGISTRY_STATS } from "@/lib/registry-stats"
 
 export const metadata: Metadata = {
   title: "Introduction",
-  description: "Aether UI — a premium open-code design system for SaaS dashboards and admin interfaces.",
+  description:
+    "Aether UI is a premium open-code design system for SaaS, marketing, and AI-powered products. " +
+    "65+ components, 39 patterns, 34 blocks — install via CLI and own every line of source.",
 }
 
 function Principle({
@@ -23,44 +25,100 @@ function Principle({
   )
 }
 
+function AudienceCard({
+  title,
+  description,
+}: {
+  title: string
+  description: string
+}) {
+  return (
+    <div className="rounded-lg border border-border bg-card p-5">
+      <h3 className="mb-2 text-sm font-semibold text-foreground">{title}</h3>
+      <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
+    </div>
+  )
+}
+
 export default function IntroductionPage() {
   return (
     <div className="max-w-3xl">
       {/* Header */}
       <div className="mb-10">
         <div className="mb-4 inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
-          Aether UI · v0.1.0
+          Aether UI · v0.3.0
         </div>
-        <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground">Introduction</h1>
+        <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground">
+          Build production UI, faster.
+        </h1>
         <p className="text-lg leading-relaxed text-muted-foreground">
-          Aether UI is a <strong className="text-foreground">premium open-code design system</strong> for 
-          building SaaS dashboards and admin interfaces. Components are installed directly into your project 
-          via the CLI — you own the source, not a dependency.
+          Aether UI is a <strong className="text-foreground">premium open-code design system</strong> for
+          SaaS dashboards, marketing sites, and AI-powered applications. Components are installed
+          directly into your project via the CLI — you own the source, not a dependency.
         </p>
+
+        {/* Stat strip */}
+        <div className="mt-6 flex flex-wrap gap-2">
+          {[
+            { label: `${REGISTRY_STATS.primitives} primitives`, href: "/components" },
+            { label: `${REGISTRY_STATS.patterns} patterns`, href: "/patterns" },
+            { label: `${REGISTRY_STATS.blocks} blocks`, href: "/blocks" },
+            { label: "AI-native UI", href: "/llms" },
+            { label: "MCP server", href: "/llms" },
+          ].map((stat) => (
+            <Link
+              key={stat.label}
+              href={stat.href}
+              className="inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium text-foreground transition-colors hover:bg-muted/80"
+            >
+              {stat.label}
+            </Link>
+          ))}
+        </div>
       </div>
 
       {/* What it is */}
       <section className="mb-12">
         <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">What is Aether UI?</h2>
         <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-          Aether UI is <strong className="text-foreground">not a component library</strong> in the traditional 
-          sense. You don&apos;t install it as a package and import components from it in your app. 
-          Instead, the CLI copies component source files into your project — you get the full source code, 
-          tailored to your path aliases and configuration.
+          Aether UI is <strong className="text-foreground">not a component library</strong> in the traditional
+          sense. You don&apos;t import components from a package at runtime. Instead, the CLI copies
+          battle-tested component source files directly into your project — you get readable TypeScript and
+          JSX that you can edit, extend, and version like any other file in your codebase.
         </p>
         <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-          This approach solves a common pain point: with traditional libraries you end up fighting the 
-          library when you need to customize a component. With Aether UI you simply edit the file.
+          This solves the customisation dead-end that comes with traditional libraries. Need to change how
+          a Dialog animates? Just edit the file. Need a Button variant that doesn&apos;t exist? Add it.
+          No overrides, no wrappers, no fighting the API — the component is yours.
         </p>
         <div className="rounded-lg border border-border bg-muted/20 p-4 font-mono text-sm">
           <span className="text-muted-foreground"># Install a component into your project</span>
           <br />
-          <span className="text-foreground">npx aether-ui add button</span>
+          <span className="text-foreground">npx aether-ui add dashboard-shell</span>
           <br />
           <br />
-          <span className="text-muted-foreground"># The component now lives in your project</span>
+          <span className="text-muted-foreground"># The source now lives in your repo — edit freely</span>
           <br />
-          <span className="text-foreground">src/components/ui/button.tsx</span>
+          <span className="text-foreground">src/components/blocks/dashboard-shell.tsx</span>
+        </div>
+      </section>
+
+      {/* Who is this for */}
+      <section className="mb-12">
+        <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">Who is this for?</h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <AudienceCard
+            title="SaaS product teams"
+            description="Ship dashboards, settings pages, and billing flows without building each component from scratch. The blocks layer gives you complete page sections in one CLI command."
+          />
+          <AudienceCard
+            title="Indie hackers and solo builders"
+            description="Go from idea to working UI in an afternoon. Install only what you need, own everything you install, and move fast without a design team."
+          />
+          <AudienceCard
+            title="Agencies and consultancies"
+            description="A consistent, high-quality component foundation that works across projects. Token-driven theming means each client gets their brand without duplicated component logic."
+          />
         </div>
       </section>
 
@@ -69,28 +127,28 @@ export default function IntroductionPage() {
         <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">Design principles</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Principle title="Open code">
-            Every component is plain, readable TypeScript and JSX. No magic, no wrappers, no black boxes. 
-            What you see in the docs is what lives in your project.
+            Every component is plain, readable TypeScript and JSX. No magic, no wrappers, no black boxes.
+            What you see in the docs is exactly what lives in your project.
           </Principle>
           <Principle title="Token-driven">
-            All visual values — colors, radius, shadows, motion — are CSS variables backed by a design token 
+            All visual values — colors, radius, shadows, motion — are CSS variables backed by a design token
             system. Theming is a single CSS override, not a rebuild.
           </Principle>
           <Principle title="Accessible by default">
-            Built on Radix UI primitives — keyboard navigation, ARIA roles, focus management, and screen 
+            Built on Radix UI primitives — keyboard navigation, ARIA roles, focus management, and screen
             reader support are built in, not bolted on.
           </Principle>
           <Principle title="Composable">
-            Every component uses a consistent, composable API. Primitives compose into patterns, patterns 
+            Every component uses a consistent, composable API. Primitives compose into patterns, patterns
             compose into blocks. Nothing is a one-off.
           </Principle>
-          <Principle title="Registry-native">
-            The component registry format is compatible with shadcn/ui — components can be distributed, 
-            versioned, and diffed from any registry endpoint.
-          </Principle>
           <Principle title="AI-ready">
-            Plain source in your project means LLMs can read, understand, and improve your components 
-            without library-specific knowledge.
+            Plain source in your project means LLMs can read, understand, and improve your components
+            without library-specific knowledge. First-class MCP server and AI metadata included.
+          </Principle>
+          <Principle title="Registry-native">
+            Compatible with the shadcn/ui registry format — components can be distributed, versioned,
+            and updated from any registry endpoint using the CLI.
           </Principle>
         </div>
       </section>
@@ -106,17 +164,17 @@ export default function IntroductionPage() {
             {
               layer: "4 — Blocks",
               pkg: "@aetherstack/blocks",
-              desc: `${REGISTRY_STATS.blocks} page-level compositions: dashboard shells, auth pages, full-page layouts.`,
+              desc: `${REGISTRY_STATS.blocks} page-level compositions: dashboard shells, auth pages, marketing sections, AI chat layouts.`,
             },
             {
               layer: "3 — Patterns",
               pkg: "@aetherstack/patterns",
-              desc: `${REGISTRY_STATS.patterns} app-level compound components: Form Field, Page Header, Table Toolbar, etc.`,
+              desc: `${REGISTRY_STATS.patterns} app-level compound components: DataTable, CommandPalette, PageHeader, Kanban, and more.`,
             },
             {
               layer: "2 — Primitives",
               pkg: "@aetherstack/ui",
-              desc: `${REGISTRY_STATS.primitives} foundational components: Button, Input, Dialog, Tabs, etc.`,
+              desc: `${REGISTRY_STATS.primitives} foundational components: Button, Input, Dialog, Tabs, Sidebar, and AI-native primitives.`,
             },
             {
               layer: "1 — Tokens",
@@ -187,8 +245,8 @@ import { Input } from "@/components/ui/input"`}
           How is this different from shadcn/ui?
         </h2>
         <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-          Aether UI follows the same open-code philosophy as shadcn/ui and its registry format is compatible 
-          with the shadcn/ui convention. The key differences:
+          Aether UI follows the same open-code philosophy as shadcn/ui and its registry format is
+          compatible with the shadcn/ui convention. The key differences:
         </p>
         <div className="overflow-hidden rounded-lg border border-border text-sm">
           <div className="grid grid-cols-3 gap-0 border-b border-border bg-muted/50 px-4 py-2.5 font-medium text-foreground">
@@ -197,14 +255,19 @@ import { Input } from "@/components/ui/input"`}
             <span>shadcn/ui</span>
           </div>
           {[
-            ["Focus", "SaaS dashboards, admin UI", "General purpose"],
+            ["Focus", "SaaS, marketing, AI apps", "General purpose"],
             ["CLI", "aether-ui (own binary)", "shadcn@latest"],
-            ["Token system", "Dedicated @aetherstack/tokens package", "CSS variables in globals.css"],
+            ["Token system", "@aetherstack/tokens package", "CSS variables in globals.css"],
             ["Registry", "Self-hosted compatible", "ui.shadcn.com"],
-            ["Component style", "Default + New York", "Default + New York"],
-            ["Icons", "Lucide React (pre-wired)", "Lucide React"],
+            ["AI-native components", "65+ including streaming UI", "Not included"],
+            ["Marketing blocks", "15 sections (hero, features, CTA…)", "Community only"],
+            ["MCP server", "Built-in (@aetherstack/mcp-server)", "Third-party"],
+            ["AI generate command", "aether-ui generate \"…\"", "Not included"],
           ].map(([feature, ours, theirs]) => (
-            <div key={feature as string} className="grid grid-cols-3 gap-0 border-b border-border px-4 py-2.5 last:border-0 hover:bg-muted/20 transition-colors">
+            <div
+              key={feature as string}
+              className="grid grid-cols-3 gap-0 border-b border-border px-4 py-2.5 last:border-0 transition-colors hover:bg-muted/20"
+            >
               <span className="text-muted-foreground">{feature}</span>
               <span className="text-foreground">{ours}</span>
               <span className="text-muted-foreground">{theirs}</span>
@@ -216,11 +279,14 @@ import { Input } from "@/components/ui/input"`}
       {/* Next steps */}
       <section>
         <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Next steps</h2>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {[
             { href: "/installation", title: "Installation", desc: "Set up Aether UI in your framework" },
-            { href: "/cli", title: "CLI reference", desc: "All commands and configuration options" },
+            { href: "/cli", title: "CLI reference", desc: "Commands, flags, and aether.json config" },
             { href: "/components", title: "Components", desc: `Browse all ${REGISTRY_STATS.primitives} primitives` },
+            { href: "/patterns", title: "Patterns", desc: `${REGISTRY_STATS.patterns} app-level compositions` },
+            { href: "/blocks", title: "Blocks", desc: `${REGISTRY_STATS.blocks} full-page sections` },
+            { href: "/llms", title: "AI & LLMs", desc: "MCP server, generate command, AI metadata" },
           ].map((link) => (
             <Link
               key={link.href}
