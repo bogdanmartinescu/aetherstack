@@ -1,0 +1,28 @@
+{
+  "name": "prompt-suggestion",
+  "type": "registry:ui",
+  "title": "Prompt Suggestion",
+  "description": "Clickable suggested prompt chip to seed a conversation.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/ai/prompt-suggestion.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/ai/prompt-suggestion.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\ninterface PromptSuggestionProps\n  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, \"children\"> {\n  label: string\n  icon?: React.ReactNode\n}\n\nconst PromptSuggestion = React.forwardRef<HTMLButtonElement, PromptSuggestionProps>(\n  ({ label, icon, className, type = \"button\", ...props }, ref) => (\n    <button\n      ref={ref}\n      type={type}\n      className={cn(\n        \"inline-flex max-w-full items-center gap-2 rounded-lg border border-input bg-background px-3 py-2 text-left text-sm\",\n        \"ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n        \"disabled:pointer-events-none disabled:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      {icon && (\n        <span aria-hidden=\"true\" className=\"shrink-0 text-muted-foreground [&_svg]:size-4\">\n          {icon}\n        </span>\n      )}\n      <span className=\"min-w-0\">{label}</span>\n    </button>\n  ),\n)\nPromptSuggestion.displayName = \"PromptSuggestion\"\n\nexport { PromptSuggestion }\nexport type { PromptSuggestionProps }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Offer a one-click starter prompt",
+    "prompts": [
+      "add prompt suggestions",
+      "add starter prompts",
+      "add suggestion chips"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

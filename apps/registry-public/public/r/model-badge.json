@@ -1,0 +1,31 @@
+{
+  "name": "model-badge",
+  "type": "registry:ui",
+  "title": "Model Badge",
+  "description": "Small badge naming the model that produced a response.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [
+    "badge"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/ai/model-badge.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/ai/model-badge.tsx",
+      "content": "import { cn } from \"@aetherstack/utils\"\nimport { Badge } from \"../badge\"\n\ninterface ModelBadgeProps {\n  model: string\n  provider?: string\n  className?: string\n}\n\nfunction ModelBadge({ model, provider, className }: ModelBadgeProps) {\n  return (\n    <Badge variant=\"outline\" className={cn(\"gap-1 font-normal\", className)}>\n      {provider && (\n        <span className=\"text-muted-foreground\">{provider}/</span>\n      )}\n      <span>{model}</span>\n    </Badge>\n  )\n}\n\nexport { ModelBadge }\nexport type { ModelBadgeProps }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Label which model generated the current answer",
+    "prompts": [
+      "add a model badge",
+      "show the model name",
+      "label the LLM"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "confirm-dialog",
+  "type": "registry:pattern",
+  "title": "Confirm Dialog",
+  "description": "Confirm Dialog component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [
+    "button",
+    "dialog",
+    "visually-hidden"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/confirm-dialog.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/confirm-dialog.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  Button,\n  Dialog,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogTitle,\n  DialogTrigger,\n  VisuallyHidden,\n} from \"@aetherstack/ui\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface ConfirmDialogProps {\n  open?: boolean\n  onOpenChange?: (open: boolean) => void\n  title: string\n  description?: React.ReactNode\n  confirmLabel?: string\n  cancelLabel?: string\n  variant?: \"default\" | \"destructive\"\n  onConfirm: () => void | Promise<void>\n  onCancel?: () => void\n  isLoading?: boolean\n  children?: React.ReactNode\n  className?: string\n}\n\nexport function ConfirmDialog({\n  open,\n  onOpenChange,\n  title,\n  description,\n  confirmLabel = \"Confirm\",\n  cancelLabel = \"Cancel\",\n  variant = \"default\",\n  onConfirm,\n  onCancel,\n  isLoading = false,\n  children,\n  className,\n}: ConfirmDialogProps) {\n  const handleCancel = () => {\n    onCancel?.()\n    onOpenChange?.(false)\n  }\n\n  const handleConfirm = async () => {\n    await onConfirm()\n    onOpenChange?.(false)\n  }\n\n  const dialogContent = (\n    <DialogContent className={cn(\"sm:max-w-md\", className)}>\n      <DialogHeader>\n        <DialogTitle>{title}</DialogTitle>\n        {description ? (\n          <DialogDescription>{description}</DialogDescription>\n        ) : (\n          <VisuallyHidden>\n            <DialogDescription>Confirm action</DialogDescription>\n          </VisuallyHidden>\n        )}\n      </DialogHeader>\n      <DialogFooter className=\"mt-2 gap-2\">\n        <Button variant=\"outline\" onClick={handleCancel} disabled={isLoading}>\n          {cancelLabel}\n        </Button>\n        <Button variant={variant} onClick={handleConfirm} disabled={isLoading}>\n          {confirmLabel}\n        </Button>\n      </DialogFooter>\n    </DialogContent>\n  )\n\n  const controlledProps = {\n    ...(open !== undefined ? { open } : {}),\n    ...(onOpenChange !== undefined ? { onOpenChange } : {}),\n  }\n\n  if (children) {\n    return (\n      <Dialog {...controlledProps}>\n        <DialogTrigger asChild>{children}</DialogTrigger>\n        {dialogContent}\n      </Dialog>\n    )\n  }\n\n  return <Dialog {...controlledProps}>{dialogContent}</Dialog>\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Confirm Dialog component.",
+    "prompts": [
+      "add a confirm dialog"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

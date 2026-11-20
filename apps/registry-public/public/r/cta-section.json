@@ -1,0 +1,30 @@
+{
+  "name": "cta-section",
+  "type": "registry:block",
+  "title": "Cta Section",
+  "description": "Cta Section component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/cta-section.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/cta-section.tsx",
+      "content": "import { cn } from \"@aetherstack/utils\"\nimport { Button } from \"@aetherstack/ui\"\n\nexport interface CTASectionCta {\n  label: string\n  href: string\n}\n\nexport interface CTASectionProps {\n  headline: string\n  subheading?: string\n  primaryCta?: CTASectionCta\n  secondaryCta?: CTASectionCta\n  variant?: \"default\" | \"muted\" | \"primary\"\n  className?: string\n}\n\nexport function CTASection({\n  headline,\n  subheading,\n  primaryCta,\n  secondaryCta,\n  variant = \"default\",\n  className,\n}: CTASectionProps) {\n  return (\n    <section\n      className={cn(\n        \"w-full py-16 px-4\",\n        variant === \"primary\" && \"bg-primary text-primary-foreground\",\n        variant === \"muted\" && \"bg-muted\",\n        variant === \"default\" && \"border-y border-border bg-background\",\n        className,\n      )}\n    >\n      <div className=\"mx-auto max-w-3xl text-center\">\n        <h2\n          className={cn(\n            \"text-3xl font-bold tracking-tight sm:text-4xl\",\n            variant === \"primary\" ? \"text-primary-foreground\" : \"text-foreground\",\n          )}\n        >\n          {headline}\n        </h2>\n        {subheading && (\n          <p\n            className={cn(\n              \"mt-4 text-base\",\n              variant === \"primary\"\n                ? \"text-primary-foreground/80\"\n                : \"text-muted-foreground\",\n            )}\n          >\n            {subheading}\n          </p>\n        )}\n        {(primaryCta || secondaryCta) && (\n          <div className=\"mt-10 flex flex-wrap items-center justify-center gap-4\">\n            {primaryCta && (\n              <Button\n                asChild\n                size=\"lg\"\n                variant={variant === \"primary\" ? \"secondary\" : \"default\"}\n              >\n                <a href={primaryCta.href}>{primaryCta.label}</a>\n              </Button>\n            )}\n            {secondaryCta && (\n              <Button\n                asChild\n                size=\"lg\"\n                variant={variant === \"primary\" ? \"ghost\" : \"outline\"}\n                className={cn(\n                  variant === \"primary\" &&\n                    \"text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10\",\n                )}\n              >\n                <a href={secondaryCta.href}>{secondaryCta.label}</a>\n              </Button>\n            )}\n          </div>\n        )}\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Cta Section component.",
+    "prompts": [
+      "add a cta section"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

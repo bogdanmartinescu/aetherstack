@@ -1,0 +1,27 @@
+{
+  "name": "visually-hidden",
+  "type": "registry:ui",
+  "title": "Visually Hidden",
+  "description": "Hides content visually while keeping it available to assistive technology.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@radix-ui/react-visually-hidden"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/visually-hidden.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/visually-hidden.tsx",
+      "content": "import * as VisuallyHiddenPrimitive from \"@radix-ui/react-visually-hidden\"\n\nconst VisuallyHidden = VisuallyHiddenPrimitive.Root\n\nexport { VisuallyHidden }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Expose text to screen readers without showing it on screen",
+    "prompts": [
+      "add visually hidden text",
+      "add a screen reader only label"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

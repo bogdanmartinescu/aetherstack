@@ -1,0 +1,30 @@
+{
+  "name": "footer-section",
+  "type": "registry:block",
+  "title": "Footer Section",
+  "description": "Footer Section component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [
+    "separator"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/footer-section.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/footer-section.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Separator } from \"@aetherstack/ui\"\n\nexport interface FooterColumn {\n  title: string\n  links: { label: string; href: string }[]\n}\n\nexport interface FooterSocialLink {\n  platform: string\n  href: string\n  icon?: React.ReactNode\n}\n\nexport interface FooterLegalLink {\n  label: string\n  href: string\n}\n\nexport interface FooterSectionProps {\n  brand?: string\n  tagline?: string\n  columns?: FooterColumn[]\n  socialLinks?: FooterSocialLink[]\n  legalLinks?: FooterLegalLink[]\n  copyright?: string\n  className?: string\n}\n\nexport function FooterSection({\n  brand,\n  tagline,\n  columns = [],\n  socialLinks = [],\n  legalLinks = [],\n  copyright,\n  className,\n}: FooterSectionProps) {\n  const year = new Date().getFullYear()\n\n  return (\n    <footer className={cn(\"w-full border-t border-border bg-background\", className)}>\n      <div className=\"mx-auto max-w-screen-xl px-4 py-12 sm:px-6\">\n        {/* Top grid */}\n        <div\n          className={cn(\n            \"grid gap-8\",\n            columns.length > 0\n              ? \"grid-cols-1 sm:grid-cols-2 lg:grid-cols-4\"\n              : \"grid-cols-1\",\n          )}\n        >\n          {/* Brand column */}\n          <div className=\"space-y-3\">\n            {brand && (\n              <p className=\"text-base font-bold text-foreground\">{brand}</p>\n            )}\n            {tagline && (\n              <p className=\"text-sm text-muted-foreground\">{tagline}</p>\n            )}\n            {socialLinks.length > 0 && (\n              <ul className=\"flex flex-wrap gap-3 pt-2\">\n                {socialLinks.map((s) => (\n                  <li key={s.platform}>\n                    <a\n                      href={s.href}\n                      aria-label={s.platform}\n                      className=\"flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground\"\n                    >\n                      {s.icon ?? <span>{s.platform}</span>}\n                    </a>\n                  </li>\n                ))}\n              </ul>\n            )}\n          </div>\n\n          {/* Link columns */}\n          {columns.map((col) => (\n            <div key={col.title} className=\"space-y-3\">\n              <p className=\"text-sm font-semibold text-foreground\">{col.title}</p>\n              <ul className=\"space-y-2\">\n                {col.links.map((link) => (\n                  <li key={link.href}>\n                    <a\n                      href={link.href}\n                      className=\"text-sm text-muted-foreground transition-colors hover:text-foreground\"\n                    >\n                      {link.label}\n                    </a>\n                  </li>\n                ))}\n              </ul>\n            </div>\n          ))}\n        </div>\n\n        <Separator className=\"my-8\" />\n\n        {/* Bottom bar */}\n        <div className=\"flex flex-col items-center justify-between gap-4 sm:flex-row\">\n          <p className=\"text-xs text-muted-foreground\">\n            {copyright ?? `© ${year} ${brand ?? \"\"}. All rights reserved.`}\n          </p>\n          {legalLinks.length > 0 && (\n            <ul className=\"flex flex-wrap gap-4\">\n              {legalLinks.map((link) => (\n                <li key={link.href}>\n                  <a\n                    href={link.href}\n                    className=\"text-xs text-muted-foreground transition-colors hover:text-foreground\"\n                  >\n                    {link.label}\n                  </a>\n                </li>\n              ))}\n            </ul>\n          )}\n        </div>\n      </div>\n    </footer>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Footer Section component.",
+    "prompts": [
+      "add a footer section"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

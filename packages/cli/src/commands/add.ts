@@ -74,9 +74,20 @@ async function addOne(
   }
 
   if (dryRun) {
-    spinner.info(pc.dim(`[dry-run] Would write:`))
-    for (const file of item.files ?? []) {
-      console.log(`  ${pc.dim("→")} ${file.target ?? file.path}`)
+    try {
+      const preview = await installItem(item, config, cwd, {
+        overwrite,
+        baseUrl: registryUrl,
+        dryRun: true,
+      })
+      spinner.info(pc.dim(`[dry-run] Would write:`))
+      for (const f of preview.filesWritten) {
+        console.log(`  ${pc.dim("→")} ${f}`)
+      }
+    } catch (err) {
+      spinner.fail(pc.red(`Dry-run failed for ${name}`))
+      console.error(pc.red(`  ${err instanceof Error ? err.message : String(err)}`))
+      process.exit(1)
     }
     return
   }

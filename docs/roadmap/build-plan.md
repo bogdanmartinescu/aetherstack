@@ -355,7 +355,7 @@ Reach full shadcn/ui component parity and add the marketing-site + SaaS utility 
 
 ## Context
 
-After Phase 6 the component inventory stood at **38 primitives · 17 patterns · 10 blocks**. Tracks A–D have been completed, bringing the total to **65 primitives (51 + 14 AI) · 39 patterns (29 + 10 AI) · 34 blocks (25 + 9 AI)**. Systematic comparison with shadcn/ui, common SaaS product requirements, and the AI-native product landscape identified four categories of gaps, all now addressed:
+After Phase 6 the component inventory stood at **38 primitives · 17 patterns · 10 blocks**. Tracks A–D were completed at **65 primitives (51 + 14 AI) · 39 patterns (29 + 10 AI) · 34 blocks (25 + 9 AI)**. Later registry completeness (M0-03) registered the remaining source modules; the live public registry is **78 ui / 39 patterns / 34 blocks (151 items)** — see `registry/public/registry.json` and `docs/roadmap/execution-state.md`. Systematic comparison with shadcn/ui, common SaaS product requirements, and the AI-native product landscape identified four categories of gaps, all now addressed:
 
 1. **Primitive gaps** — components that shadcn ships as primitives but we haven't yet built
 2. **Pattern gaps** — higher-level compositions that appear in every real SaaS product

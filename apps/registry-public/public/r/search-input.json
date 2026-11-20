@@ -1,0 +1,32 @@
+{
+  "name": "search-input",
+  "type": "registry:pattern",
+  "title": "Search Input",
+  "description": "Search Input component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "input",
+    "spinner"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/search-input.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/search-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Search, X } from \"lucide-react\"\nimport { Input, Spinner } from \"@aetherstack/ui\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface SearchInputProps {\n  value?: string\n  onValueChange?: (v: string) => void\n  placeholder?: string\n  shortcut?: string\n  loading?: boolean\n  className?: string\n  defaultValue?: string\n}\n\nexport function SearchInput({\n  value,\n  onValueChange,\n  placeholder = \"Search...\",\n  shortcut,\n  loading = false,\n  className,\n  defaultValue,\n}: SearchInputProps) {\n  const isControlled = value !== undefined\n  const [internalValue, setInternalValue] = React.useState(defaultValue ?? \"\")\n  const displayValue = isControlled ? value : internalValue\n\n  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n    const next = e.target.value\n    if (!isControlled) setInternalValue(next)\n    onValueChange?.(next)\n  }\n\n  const handleClear = () => {\n    if (!isControlled) setInternalValue(\"\")\n    onValueChange?.(\"\")\n  }\n\n  const showClear = !loading && Boolean(displayValue)\n  const showShortcut = !loading && !displayValue && Boolean(shortcut)\n\n  return (\n    <div className={cn(\"relative flex items-center\", className)}>\n      <Search\n        className=\"pointer-events-none absolute left-3 h-4 w-4 text-muted-foreground\"\n        aria-hidden=\"true\"\n      />\n      <Input\n        type=\"search\"\n        role=\"searchbox\"\n        placeholder={placeholder}\n        value={displayValue}\n        onChange={handleChange}\n        aria-label={placeholder}\n        className={cn(\"pl-9\", (showClear || showShortcut || loading) && \"pr-9\")}\n      />\n      <div className=\"absolute right-3 flex items-center gap-1.5\">\n        {loading && <Spinner size=\"sm\" aria-label=\"Loading search results\" />}\n        {showClear && (\n          <button\n            type=\"button\"\n            aria-label=\"Clear search\"\n            onClick={handleClear}\n            className=\"rounded text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-1 focus:ring-ring\"\n          >\n            <X className=\"h-3.5 w-3.5\" aria-hidden=\"true\" />\n          </button>\n        )}\n        {showShortcut && (\n          <kbd className=\"pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground\">\n            {shortcut}\n          </kbd>\n        )}\n      </div>\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Search Input component.",
+    "prompts": [
+      "add a search input"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

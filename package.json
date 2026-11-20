@@ -16,7 +16,9 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo build --filter='./packages/*' && changeset publish",
-    "install-hooks": "bash scripts/install-hooks.sh"
+    "install-hooks": "bash scripts/install-hooks.sh",
+    "consumer-install": "pnpm --filter @aetherstack/scripts consumer-install",
+    "m0-rc-verify": "pnpm --filter @aetherstack/scripts m0-rc-verify"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",

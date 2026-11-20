@@ -3,7 +3,8 @@ import { resolve } from "node:path"
 import { Command } from "commander"
 import ora from "ora"
 import pc from "picocolors"
-import { loadConfig, writeConfig } from "../config"
+import { writeConfig } from "../config"
+import { resolveInsideProject } from "../lib/paths"
 import {
   CONFIG_FILE_NAME,
   DEFAULT_REGISTRY_URL,
@@ -18,11 +19,12 @@ export const initCommand = new Command("init")
   .option("--components-dir <path>", "Component output directory", DEFAULT_COMPONENTS_DIR)
   .option("--utils-dir <path>", "Utilities output directory", DEFAULT_UTILS_DIR)
   .option("--force", "Overwrite existing aether.json", false)
+  .option("--dry-run", "Preview the config that would be written", false)
   .action(async (opts) => {
     const cwd: string = resolve(opts.cwd)
     const configPath = resolve(cwd, CONFIG_FILE_NAME)
 
-    if (existsSync(configPath) && !opts.force) {
+    if (existsSync(configPath) && !opts.force && !opts.dryRun) {
       console.log(
         pc.yellow(`  ${CONFIG_FILE_NAME} already exists. Use --force to overwrite.`),
       )
@@ -32,12 +34,23 @@ export const initCommand = new Command("init")
     const spinner = ora("Initializing Aether UI…").start()
 
     try {
+      // Reject alias paths that escape the project root.
+      resolveInsideProject(cwd, opts.componentsDir)
+      resolveInsideProject(cwd, opts.utilsDir)
+
       const config = {
         registry: opts.registry,
         aliases: {
           components: opts.componentsDir,
           utils: opts.utilsDir,
         },
+      }
+
+      if (opts.dryRun) {
+        spinner.info(pc.dim(`[dry-run] Would write ${CONFIG_FILE_NAME}:`))
+        console.log(JSON.stringify(config, null, 2))
+        console.log("")
+        return
       }
 
       writeConfig(config, cwd)

@@ -1,0 +1,32 @@
+{
+  "name": "waitlist-block",
+  "type": "registry:block",
+  "title": "Waitlist Block",
+  "description": "Waitlist Block component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "input"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/waitlist-block.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/waitlist-block.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { CheckCircle2, Loader2 } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Button, Input } from \"@aetherstack/ui\"\n\nexport interface WaitlistBlockProps {\n  headline?: string\n  subheading?: string\n  placeholder?: string\n  ctaLabel?: string\n  onSubmit?: (email: string) => Promise<void>\n  successMessage?: string\n  className?: string\n}\n\nexport function WaitlistBlock({\n  headline = \"Join the waitlist\",\n  subheading,\n  placeholder = \"Enter your email address\",\n  ctaLabel = \"Get early access\",\n  onSubmit,\n  successMessage = \"You're on the list! We'll be in touch soon.\",\n  className,\n}: WaitlistBlockProps) {\n  const [email, setEmail] = React.useState(\"\")\n  const [loading, setLoading] = React.useState(false)\n  const [success, setSuccess] = React.useState(false)\n  const [error, setError] = React.useState<string | null>(null)\n\n  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {\n    e.preventDefault()\n    if (!email) return\n    setLoading(true)\n    setError(null)\n    try {\n      await onSubmit?.(email)\n      setSuccess(true)\n    } catch (err) {\n      setError(err instanceof Error ? err.message : \"Something went wrong. Please try again.\")\n    } finally {\n      setLoading(false)\n    }\n  }\n\n  return (\n    <section className={cn(\"w-full py-16 px-4\", className)}>\n      <div className=\"mx-auto max-w-md text-center\">\n        {headline && (\n          <h2 className=\"text-2xl font-bold tracking-tight text-foreground sm:text-3xl\">\n            {headline}\n          </h2>\n        )}\n        {subheading && (\n          <p className=\"mt-3 text-sm text-muted-foreground\">{subheading}</p>\n        )}\n\n        {success ? (\n          <div className=\"mt-8 flex flex-col items-center gap-3 rounded-lg border border-border bg-card p-6\">\n            <CheckCircle2 className=\"h-8 w-8 text-primary\" />\n            <p className=\"text-sm font-medium text-foreground\">{successMessage}</p>\n          </div>\n        ) : (\n          <form onSubmit={handleSubmit} className=\"mt-8 flex flex-col gap-3 sm:flex-row\">\n            <Input\n              type=\"email\"\n              required\n              placeholder={placeholder}\n              value={email}\n              onChange={(e) => setEmail(e.target.value)}\n              className=\"flex-1\"\n              aria-label=\"Email address\"\n              disabled={loading}\n            />\n            <Button type=\"submit\" disabled={loading || !email} className=\"shrink-0\">\n              {loading && <Loader2 className=\"mr-2 h-4 w-4 animate-spin\" aria-hidden />}\n              {ctaLabel}\n            </Button>\n          </form>\n        )}\n\n        {error && (\n          <p className=\"mt-3 text-xs text-destructive\" role=\"alert\">\n            {error}\n          </p>\n        )}\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Waitlist Block component.",
+    "prompts": [
+      "add a waitlist block"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

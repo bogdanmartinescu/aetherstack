@@ -1,0 +1,31 @@
+{
+  "name": "changelog-block",
+  "type": "registry:block",
+  "title": "Changelog Block",
+  "description": "Changelog Block component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [
+    "badge",
+    "separator"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/changelog-block.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/changelog-block.tsx",
+      "content": "import { cn } from \"@aetherstack/utils\"\nimport { Badge, Separator } from \"@aetherstack/ui\"\n\nexport type ChangeType = \"added\" | \"changed\" | \"fixed\" | \"removed\"\n\nexport interface ChangeGroup {\n  type: ChangeType\n  items: string[]\n}\n\nexport interface ChangelogEntry {\n  id: string\n  version?: string\n  date: string\n  title: string\n  description?: string\n  tags?: string[]\n  changes?: ChangeGroup[]\n}\n\nexport interface ChangelogBlockProps {\n  entries: ChangelogEntry[]\n  className?: string\n}\n\nconst changeTypeConfig: Record<ChangeType, { label: string; variant: \"default\" | \"secondary\" | \"destructive\" | \"outline\" }> = {\n  added: { label: \"Added\", variant: \"default\" },\n  changed: { label: \"Changed\", variant: \"secondary\" },\n  fixed: { label: \"Fixed\", variant: \"outline\" },\n  removed: { label: \"Removed\", variant: \"destructive\" },\n}\n\nexport function ChangelogBlock({ entries, className }: ChangelogBlockProps) {\n  return (\n    <div className={cn(\"w-full\", className)}>\n      <div className=\"relative mx-auto max-w-3xl space-y-0\">\n        {entries.map((entry, i) => (\n          <div key={entry.id} className=\"relative flex gap-6 pb-10\">\n            {/* Timeline line */}\n            <div className=\"flex flex-col items-center\">\n              <div className=\"mt-1.5 h-3 w-3 shrink-0 rounded-full border-2 border-primary bg-background\" />\n              {i < entries.length - 1 && (\n                <div className=\"mt-1 flex-1 w-px bg-border\" />\n              )}\n            </div>\n\n            {/* Content */}\n            <div className=\"flex-1 pb-2\">\n              <div className=\"flex flex-wrap items-center gap-2\">\n                {entry.version && (\n                  <Badge variant=\"secondary\" className=\"font-mono text-xs\">\n                    {entry.version}\n                  </Badge>\n                )}\n                <time className=\"text-xs text-muted-foreground\">{entry.date}</time>\n                {entry.tags?.map((tag) => (\n                  <Badge key={tag} variant=\"outline\" className=\"text-xs\">\n                    {tag}\n                  </Badge>\n                ))}\n              </div>\n\n              <h3 className=\"mt-2 text-base font-semibold text-foreground\">\n                {entry.title}\n              </h3>\n\n              {entry.description && (\n                <p className=\"mt-1.5 text-sm text-muted-foreground\">\n                  {entry.description}\n                </p>\n              )}\n\n              {entry.changes && entry.changes.length > 0 && (\n                <div className=\"mt-4 space-y-3\">\n                  {entry.changes.map((group) => {\n                    const config = changeTypeConfig[group.type]\n                    return (\n                      <div key={group.type}>\n                        <div className=\"mb-1.5 flex items-center gap-2\">\n                          <Badge variant={config.variant} className=\"text-xs\">\n                            {config.label}\n                          </Badge>\n                        </div>\n                        <ul className=\"space-y-1 pl-1\">\n                          {group.items.map((item, j) => (\n                            <li key={j} className=\"flex items-start gap-2 text-sm text-foreground\">\n                              <span className=\"mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-foreground\" aria-hidden />\n                              {item}\n                            </li>\n                          ))}\n                        </ul>\n                      </div>\n                    )\n                  })}\n                </div>\n              )}\n\n              {i < entries.length - 1 && (\n                <Separator className=\"mt-6 hidden\" />\n              )}\n            </div>\n          </div>\n        ))}\n      </div>\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Changelog Block component.",
+    "prompts": [
+      "add a changelog block"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

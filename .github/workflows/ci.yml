@@ -213,6 +213,42 @@ jobs:
           fi
           echo "Changeset check OK."
 
+  # ─── Consumer install fixtures (M0-07) ──────────────────────────────────────
+  # Packs publishable tarballs (publishConfig applied, workspace:* rewritten)
+  # and builds isolated Next.js + Vite fixtures outside the workspace.
+  consumer-install:
+    name: Consumer install
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.1.0
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Assert Node/pnpm engines
+        run: |
+          node -e "const major=Number(process.versions.node.split('.')[0]); if(major<20){console.error('Node >=20 required'); process.exit(1)}"
+          pnpm -v | awk -F. '{ if ($1+0 < 9) { print "pnpm >=9 required"; exit 1 } }'
+
+      - name: Consumer install fixtures (Next + Vite + CLI add)
+        run: pnpm --filter @aetherstack/scripts consumer-install
+
   # ─── Build ──────────────────────────────────────────────────────────────────
   # Verifies the workspace builds end-to-end on every push AND every PR.
   build:
