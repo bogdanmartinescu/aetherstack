@@ -6,6 +6,7 @@
   "scripts": {
     "validate-registry": "tsx src/validate-registry.ts",
     "build-registry": "tsx src/build-registry.ts",
+    "audit-inventory": "tsx src/audit-inventory.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
