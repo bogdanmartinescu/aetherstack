@@ -4,5 +4,10 @@
   "private": true,
   "description": "Shared TypeScript configurations for Aetherstack",
   "license": "MIT",
-  "files": ["base.json", "nextjs.json", "react-library.json"]
+  "files": [
+    "LICENSE",
+    "base.json",
+    "nextjs.json",
+    "react-library.json"
+  ]
 }

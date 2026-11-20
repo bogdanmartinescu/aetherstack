@@ -53,6 +53,7 @@ All 7 core packages are published to npm at `v0.1.0` under the `@aetherstack` or
 | [`docs/product/positioning.md`](docs/product/positioning.md) | Product vision and audience |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Dev setup, branching, commit style, pre-PR checklist |
 | [`CLAUDE.md`](CLAUDE.md) | Working rules for AI assistants in this repo |
+| [`LICENSE`](LICENSE) | MIT — free for personal and commercial use |
 
 ---
 

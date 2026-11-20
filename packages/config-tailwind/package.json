@@ -11,6 +11,7 @@
     ".": "./index.ts"
   },
   "files": [
+    "LICENSE",
     "index.ts"
   ],
   "dependencies": {
