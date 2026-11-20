@@ -27,9 +27,11 @@ is not built on top of shadcn/ui.
 
 ## What's shipped
 
-| Layer | Public | + AI-native | Total |
+Counts match the public registry (`registry/public/registry.json` — **151** items):
+
+| Layer | Core | + AI-native | Total |
 |---|---|---|---|
-| Primitives (`@aetherstack/ui`) | 51 | 14 | **65** |
+| Primitives (`@aetherstack/ui`) | 64 | 14 | **78** |
 | Patterns (`@aetherstack/patterns`) | 29 | 10 | **39** |
 | Blocks (`@aetherstack/blocks`) | 25 | 9 | **34** |
 
@@ -37,7 +39,7 @@ All items carry AI metadata, are installable via the CLI, and have per-item regi
 items (`@aether/ai-*`) are SDK-agnostic — they accept plain strings and `AsyncIterable<string>`;
 consumers wire their own AI SDK.
 
-All 7 core packages are published to npm at `v0.1.0` under the `@aetherstack` org.
+Core packages are published to npm under the `@aetherstack` org (see versions in the package table below).
 
 ---
 
@@ -72,7 +74,7 @@ aetherstack/
 │   ├── config-typescript/
 │   ├── config-tailwind/
 │   ├── tokens/           — Design tokens (colors, spacing, typography, …)
-│   ├── ui/               — Core component library (51 + 14 AI primitives)
+│   ├── ui/               — Core component library (64 + 14 AI primitives)
 │   ├── patterns/         — Higher-level UI compositions (29 + 10 AI patterns)
 │   ├── blocks/           — Full page-section blocks (25 + 9 AI blocks)
 │   ├── themes/           — CSS variable theme collections
@@ -202,15 +204,15 @@ See [`apps/docs/src/app/(docs)/llms`](apps/docs/src/app/%28docs%29/llms) or your
 
 | Package | npm | Description |
 |---|---|---|
-| `@aetherstack/tokens` | ✅ 0.1.0 | Design tokens — colors, spacing, typography, radius, shadows |
-| `@aetherstack/ui` | ✅ 0.1.0 | Core UI components — 51 primitives + 14 AI-native primitives |
-| `@aetherstack/patterns` | ✅ 0.1.0 | Higher-level compositions — 29 patterns + 10 AI-native patterns |
-| `@aetherstack/blocks` | ✅ 0.1.0 | Full page-section layout blocks — 25 blocks + 9 AI-native blocks |
-| `@aetherstack/themes` | ✅ 0.1.0 | CSS variable theme collections |
-| `@aetherstack/utils` | ✅ 0.1.0 | `cn()` and shared utility functions |
-| `@aetherstack/registry-schema` | ✅ 0.1.0 | Zod schemas and TypeScript types for registry data + AI metadata |
-| `@aetherstack/mcp-server` | ✅ 0.1.0 | stdio MCP server for AI agent integration |
-| `@aetherstack/cli` | ✅ 0.1.0 | `aether-ui` CLI — `init`, `add`, `list`, `generate` commands |
+| `@aetherstack/tokens` | ✅ 0.1.1 | Design tokens — colors, spacing, typography, radius, shadows |
+| `@aetherstack/ui` | ✅ 0.4.0 | Core UI components — 64 primitives + 14 AI-native primitives |
+| `@aetherstack/patterns` | ✅ 0.3.0 | Higher-level compositions — 29 patterns + 10 AI-native patterns |
+| `@aetherstack/blocks` | ✅ 0.3.0 | Full page-section layout blocks — 25 blocks + 9 AI-native blocks |
+| `@aetherstack/themes` | ✅ 0.0.3 | CSS variable theme collections |
+| `@aetherstack/utils` | ✅ 0.1.1 | `cn()` and shared utility functions |
+| `@aetherstack/registry-schema` | ✅ 0.0.2 | Zod schemas and TypeScript types for registry data + AI metadata |
+| `@aetherstack/mcp-server` | ✅ 0.1.1 | stdio MCP server for AI agent integration |
+| `@aetherstack/cli` | ✅ 0.1.1 | `aether-ui` CLI — `init`, `add`, `list`, `generate` commands |
 | `@aetherstack/registry-build` | internal | Registry validation and build utilities |
 | `@aetherstack/eslint-config` | internal | Shared ESLint configurations |
 | `@aetherstack/typescript-config` | internal | Shared TypeScript configurations |

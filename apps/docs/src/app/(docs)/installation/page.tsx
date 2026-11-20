@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { CodeBlock } from "@/components/code-block"
 import { DocTabs } from "@/components/doc-tabs"
+import { REGISTRY_STATS } from "@/lib/registry-stats"
 
 export const metadata: Metadata = {
   title: "Installation",
@@ -749,7 +750,7 @@ export default function InstallationPage() {
           Add Aether UI to any React project. Components are copied directly into your
           codebase — no wrapper library, no lock-in. You own the source. After setup, run{" "}
           <code className="rounded bg-muted px-1 font-mono text-base">npx aether-ui add button</code>{" "}
-          to copy any of the 65+ components directly into your project.
+          to copy any of the {REGISTRY_STATS.total} registry items directly into your project.
         </p>
       </div>
 

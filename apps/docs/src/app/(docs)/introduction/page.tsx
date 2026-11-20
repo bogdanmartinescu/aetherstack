@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Introduction",
   description:
     "Aether UI is a premium open-code design system for SaaS, marketing, and AI-powered products. " +
-    "65+ components, 39 patterns, 34 blocks — install via CLI and own every line of source.",
+    `${REGISTRY_STATS.primitives} primitives, ${REGISTRY_STATS.patterns} patterns, ${REGISTRY_STATS.blocks} blocks — install via CLI and own every line of source.`,
 }
 
 function Principle({
@@ -259,7 +259,7 @@ import { Input } from "@/components/ui/input"`}
             ["CLI", "aether-ui (own binary)", "shadcn@latest"],
             ["Token system", "@aetherstack/tokens package", "CSS variables in globals.css"],
             ["Registry", "Self-hosted compatible", "ui.shadcn.com"],
-            ["AI-native components", "65+ including streaming UI", "Not included"],
+            ["AI-native components", "33 (streaming, chat, agents)", "Not included"],
             ["Marketing blocks", "15 sections (hero, features, CTA…)", "Community only"],
             ["MCP server", "Built-in (@aetherstack/mcp-server)", "Third-party"],
             ["AI generate command", "aether-ui generate \"…\"", "Not included"],
