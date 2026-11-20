@@ -17,7 +17,7 @@ import {
   writeFileSync,
 } from "node:fs"
 import { tmpdir } from "node:os"
-import { basename, dirname, join, resolve } from "node:path"
+import { basename, join, resolve } from "node:path"
 import { execFileSync } from "node:child_process"
 
 export interface PackageManifest {

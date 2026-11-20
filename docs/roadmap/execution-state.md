@@ -3,10 +3,10 @@
 Initialized 2026-11-20. No implementation or release checks have been run as part of this planning change. Historical completion claims are not verified here.
 
 - Active milestone: M0 — truth, stability and public distribution.
-- Last completed task: M0-09 — governance/docs/metadata (pending PR merge).
-- Next task: M0-08 CDN deploy (owner); then M0-10 release-candidate gate.
-- Baseline reviewed for planning: main at 6942f57; stack PRs #8–#15 (M0-01..M0-09).
-- Known prior observations (reverify): live registry 404 until owner deploys (M0-08 runbook ready). Public registry **151** items; published npm MCP may remain stale until authorized release.
+- Last completed task: M0-10 local RC harness + audit (external gates still BLOCKED).
+- Next task: Owner M0-08 CDN deploy + authorized npm release; then re-run `pnpm m0-rc-verify` to clear blockers and mark M0 DONE.
+- Baseline reviewed for planning: main at 6942f57; stack PRs #8–#15 (M0-01..M0-09); M0-10 branch on tip.
+- Known prior observations (reverify): live registry 404 until owner deploys (M0-08 runbook + `vercel.json` ready). Public registry **151** items; npm publish still gated.
 - Commercial status: M4 discovery only; paid kit implementation and M6 require explicit owner approval and demand evidence.
 - Publishing status: no release or external submission authority granted by this plan.
 
@@ -22,6 +22,7 @@ Initialized 2026-11-20. No implementation or release checks have been run as par
 | M0-07 | VERIFIED | `chore/m0-07-consumer-install` / PR #14 | Publishable pack helper; Next+Vite fixtures build from packed tarballs; CLI add smoke; CI job; flat UI dist exports; CLI engines>=20; `pnpm consumer-install` pass | DONE once PR merges |
 | M0-08 | BLOCKED | runbook in `docs/roadmap/audits/m0-08-cdn-runbook.md` | Readiness + caching/rollback runbook written; live `registry.aether-ui.dev` still `DEPLOYMENT_NOT_FOUND` | Owner: Vercel/DNS deploy + smoke curls; then mark VERIFIED |
 | M0-09 | VERIFIED | `chore/m0-09-governance` / PR #15 | CONTRIBUTING fixed (Node>=20, real scripts); SECURITY + CoC + governance docs; sponsorship proposal without FUNDING.yml; GitHub description/topics applied | DONE once PR merges; Sponsors enablement remains owner action |
+| M0-10 | VERIFIED (local) / BLOCKED (external) | `chore/m0-10-rc-verification` / PR #16 | `pnpm m0-rc-verify` — 8 required local PASS (validate/build-registry, freshness, typecheck, lint, test, build-packages, consumer-install); `format:check` FAIL non-enforced; live-registry BLOCKED (404 DEPLOYMENT_NOT_FOUND); npm-publish BLOCKED (no authority). Report: `docs/roadmap/audits/m0-10-rc-verification.md` | M0 not DONE until owner clears CDN + npm gates and re-runs harness; DONE once PR merges after gates clear or remains VERIFIED-local until then |
 
 All other tasks in platform-backlog.md are TODO unless gated. Add/update a row per task as work proceeds; never delete evidence for previous completed tasks. Use linked issue/PR and exact command/results, not just "tests pass."
 
@@ -124,5 +125,21 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Status: M0-09 VERIFIED; M0-08 BLOCKED on owner deploy.
 - Next smallest action: merge #8→#15; owner deploys registry CDN; then M0-10 RC gate.
 
+### Checkpoint 2026-11-20 — M0-10 (+ M0-08 vercel.json)
+- Date/time and agent/session: 2026-11-20, Cursor agent session.
+- Milestone and task ID: M0 / M0-10 (M0-08 deploy config hardening only).
+- Base and working branch: `chore/m0-09-governance` → `chore/m0-10-rc-verification`.
+- Changes and affected paths: `tooling/scripts/src/m0-rc-verify.ts` + package scripts; `apps/registry-public/vercel.json`; m0-08 runbook deploy steps; unused `dirname` import fix in `pack-publishable.ts`; audit `docs/roadmap/audits/m0-10-rc-verification.md`; this file.
+- Acceptance criteria and evidence: `pnpm m0-rc-verify` exit 0 with **0 required local FAIL**; 8 PASS; live-registry + npm-publish recorded BLOCKED (owner). First run failed typecheck on unused `dirname` — fixed before re-run.
+- Required checks not run / blockers: production CDN smoke (M0-08); authorized `changeset publish` / npm; Sponsors account. `format:check` still fails pre-existing (not CI-enforced).
+- Commit/PR and remote verification: PR #16 → https://github.com/bogdanmartinescu/aetherstack/pull/16 (base `chore/m0-09-governance`).
+- Status: VERIFIED locally; BLOCKED externally — **do not mark M0 or M0-10 DONE**.
+- Next smallest action: merge #8→#16 stack; owner deploys CDN per runbook; grant release authority; re-run `pnpm m0-rc-verify`.
+
 ## Phase gate log
 Record milestone, all required task IDs, exact suite/results, known limitations, remaining blockers and owner decisions. No milestone marked completed until all applicable requirements are verified. On restart inspect git history and reconcile this file rather than blindly redoing work.
+
+### Phase gate — M0 (partial, 2026-11-20)
+- Required tasks M0-01..M0-10: local engineering VERIFIED on stack tip; M0-08 live deploy BLOCKED; M0-10 external npm/CDN BLOCKED.
+- Suite: see `docs/roadmap/audits/m0-10-rc-verification.md` (HEAD at run: `eb3628c`; report regenerated after typecheck fix).
+- Milestone exit: **not satisfied** until live `registry.aether-ui.dev` returns 200 for `/r/registry.json` and authorized publish path is verified.

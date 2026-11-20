@@ -9,6 +9,7 @@
     "audit-inventory": "tsx src/audit-inventory.ts",
     "register-missing": "tsx src/register-missing-modules.ts",
     "consumer-install": "tsx src/consumer-install.ts",
+    "m0-rc-verify": "tsx src/m0-rc-verify.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },

@@ -20,15 +20,21 @@ endpoint is verified.
 Source of artefacts today: `apps/registry-public` (static files from
 `pnpm --filter @aetherstack/scripts build-registry`).
 
+Cache headers for Vercel are declared in `apps/registry-public/vercel.json`
+(manifest short TTL + SWR; per-item JSON medium TTL; `llms.txt` medium TTL).
+
 ## Deploy checklist (owner)
 
 1. Confirm ownership of the Vercel project and DNS for `registry.aether-ui.dev`.
-2. Connect this repo (or the `apps/registry-public` output) as a static deployment.
-3. Ensure the production build runs `build-registry` (or deploys committed `public/r` artefacts
-   that pass the CI stale-artefact check).
+2. Create/connect a Vercel project with **Root Directory** `apps/registry-public`
+   (Next.js `output: "export"` → `out/`).
+3. Build command: ensure registry artefacts are current before `next build`, e.g.
+   from repo root in CI: `pnpm --filter @aetherstack/scripts build-registry && pnpm --filter @aetherstack/registry-public build`,
+   or deploy committed `public/r` that already passes the CI stale-artefact check.
 4. Preview deploy: smoke `GET /r/registry.json` and `GET /r/button.json` (200 + JSON).
-5. Production promote only after preview checks pass.
-6. Record the deployment URL/commit in `docs/roadmap/execution-state.md`.
+5. Confirm response `Cache-Control` matches `vercel.json` intent.
+6. Production promote only after preview checks pass.
+7. Record the deployment URL/commit in `docs/roadmap/execution-state.md`.
 
 ## Caching / versioning plan (interim → M2)
 
