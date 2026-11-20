@@ -4,8 +4,11 @@ name: Deploy public registry
 # (intended production host: registry.aether-ui.dev).
 #
 # Disabled until the owner sets:
-#   - repository variable ENABLE_REGISTRY_DEPLOY=true
-#   - secrets VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
+#   - repository VARIABLE (Settings → Secrets and variables → Actions → Variables)
+#       ENABLE_REGISTRY_DEPLOY=true
+#     (Must be a variable, not a secret — GitHub cannot use secrets in job `if:`.)
+#   - repository SECRETS:
+#       VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
 # See docs/roadmap/audits/m0-08-cdn-runbook.md.
 
 on:
@@ -34,6 +37,29 @@ jobs:
     if: ${{ vars.ENABLE_REGISTRY_DEPLOY == 'true' }}
 
     steps:
+      - name: Preflight — require Vercel secrets
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          missing=0
+          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            # Indirect expansion without printing values.
+            eval "val=\${$name:-}"
+            if [ -z "$val" ]; then
+              echo "::error::Missing repository secret $name"
+              missing=1
+            else
+              echo "OK $name is set"
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "::error::Add VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID under Settings → Secrets and variables → Actions → Secrets. ENABLE_REGISTRY_DEPLOY must be a Variable (already checked via job if)."
+            exit 1
+          fi
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -65,8 +91,7 @@ jobs:
           npx --yes vercel@41 deploy out \
             --prod \
             --yes \
-            --token="$VERCEL_TOKEN" \
-            --name aetherstack-registry
+            --token="$VERCEL_TOKEN"
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}

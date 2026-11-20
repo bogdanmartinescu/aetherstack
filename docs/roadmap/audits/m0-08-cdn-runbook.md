@@ -32,9 +32,13 @@ Workflow: `.github/workflows/deploy-registry.yml` (skipped until enabled).
 1. Confirm ownership of the Vercel project and DNS for `registry.aether-ui.dev`.
 2. Create a Vercel project that can receive a static upload of `apps/registry-public/out`
    (Framework Preset: Other / static; attach the `registry.aether-ui.dev` domain).
-3. In the GitHub repo settings:
-   - Variable `ENABLE_REGISTRY_DEPLOY` = `true`
-   - Secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
+3. In the GitHub repo settings → **Settings → Secrets and variables → Actions**:
+   - **Variables** tab (not Secrets): `ENABLE_REGISTRY_DEPLOY` = `true`  
+     GitHub cannot evaluate secrets in workflow `if:` conditions — a secret with this
+     name will not enable the job.
+   - **Secrets** tab: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`  
+     From a linked Vercel project: Project Settings → General (Project ID) and
+     Account Settings → Tokens.
 4. Run **Actions → Deploy public registry → Run workflow**, or push a change under
    `apps/registry-public/**` / registry sources.
 5. Confirm the job’s smoke step passes (`/r/registry.json`, `/r/button.json`, `/llms.txt` → 200).
