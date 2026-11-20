@@ -1,0 +1,28 @@
+{
+  "name": "thinking-indicator",
+  "type": "registry:ui",
+  "title": "Thinking Indicator",
+  "description": "Lightweight indicator that the model is still generating.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/ai/thinking-indicator.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/ai/thinking-indicator.tsx",
+      "content": "import { cn } from \"@aetherstack/utils\"\n\ninterface ThinkingIndicatorProps {\n  /** `thinking` shows bouncing dots; `loading` shows a spinner ring. */\n  state?: \"thinking\" | \"loading\"\n  label?: string\n  className?: string\n}\n\nconst DOT_DELAYS = [\"0ms\", \"150ms\", \"300ms\"] as const\n\nfunction ThinkingIndicator({\n  state = \"thinking\",\n  label = \"Thinking…\",\n  className,\n}: ThinkingIndicatorProps) {\n  return (\n    <div\n      role=\"status\"\n      aria-live=\"polite\"\n      data-state={state}\n      className={cn(\"flex items-center gap-2 text-sm text-muted-foreground\", className)}\n    >\n      {state === \"thinking\" ? (\n        <span aria-hidden=\"true\" className=\"flex items-center gap-1\">\n          {DOT_DELAYS.map((delay) => (\n            <span\n              key={delay}\n              className=\"inline-block h-1.5 w-1.5 animate-bounce rounded-full bg-current motion-reduce:animate-none\"\n              style={{ animationDelay: delay }}\n            />\n          ))}\n        </span>\n      ) : (\n        <span\n          aria-hidden=\"true\"\n          className=\"h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent motion-reduce:animate-none\"\n        />\n      )}\n      <span>{label}</span>\n    </div>\n  )\n}\n\nexport { ThinkingIndicator }\nexport type { ThinkingIndicatorProps }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Show that the assistant is thinking or generating",
+    "prompts": [
+      "add a thinking indicator",
+      "show AI is thinking",
+      "add a generating state"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

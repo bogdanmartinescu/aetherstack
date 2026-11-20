@@ -1,0 +1,33 @@
+{
+  "name": "theme-switcher",
+  "type": "registry:pattern",
+  "title": "Theme Switcher",
+  "description": "Theme Switcher component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils",
+    "lucide-react",
+    "next-themes"
+  ],
+  "registryDependencies": [
+    "button",
+    "dropdown-menu"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/theme-switcher.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/theme-switcher.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Moon, Monitor, Sun } from \"lucide-react\"\nimport { useTheme } from \"next-themes\"\nimport {\n  Button,\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuItem,\n  DropdownMenuTrigger,\n} from \"@aetherstack/ui\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst THEMES = [\n  { value: \"light\", label: \"Light\", Icon: Sun },\n  { value: \"dark\", label: \"Dark\", Icon: Moon },\n  { value: \"system\", label: \"System\", Icon: Monitor },\n] as const\n\ntype ThemeValue = (typeof THEMES)[number][\"value\"]\n\nfunction useMountedTheme() {\n  const { theme, setTheme } = useTheme()\n  const [mounted, setMounted] = React.useState(false)\n  React.useEffect(() => setMounted(true), [])\n  return { theme: theme as ThemeValue | undefined, setTheme, mounted }\n}\n\nexport function ThemeSwitcherToggle({ className }: { className?: string }) {\n  const { theme, setTheme, mounted } = useMountedTheme()\n\n  if (!mounted) return null\n\n  const cycle = () => {\n    const order: ThemeValue[] = [\"light\", \"dark\", \"system\"]\n    const current = order.indexOf(theme ?? \"system\")\n    const next = order[(current + 1) % order.length] ?? \"system\"\n    setTheme(next)\n  }\n\n  const entry = THEMES.find((t) => t.value === (theme ?? \"system\")) ?? THEMES[2]\n\n  return (\n    <Button\n      variant=\"ghost\"\n      size=\"icon\"\n      onClick={cycle}\n      aria-label={`Current theme: ${entry.label}. Click to cycle theme`}\n      className={className}\n    >\n      <entry.Icon className=\"h-4 w-4\" aria-hidden=\"true\" />\n    </Button>\n  )\n}\n\nexport function ThemeSwitcherDropdown({ className }: { className?: string }) {\n  const { theme, setTheme, mounted } = useMountedTheme()\n\n  if (!mounted) return null\n\n  const current = THEMES.find((t) => t.value === (theme ?? \"system\")) ?? THEMES[2]\n\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger asChild>\n        <Button\n          variant=\"ghost\"\n          size=\"icon\"\n          aria-label={`Current theme: ${current.label}. Open theme menu`}\n          className={className}\n        >\n          <current.Icon className=\"h-4 w-4\" aria-hidden=\"true\" />\n        </Button>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent align=\"end\">\n        {THEMES.map(({ value, label, Icon }) => (\n          <DropdownMenuItem\n            key={value}\n            onClick={() => setTheme(value)}\n            className={cn(\"gap-2\", theme === value && \"font-medium\")}\n          >\n            <Icon className=\"h-4 w-4\" aria-hidden=\"true\" />\n            {label}\n          </DropdownMenuItem>\n        ))}\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n\nexport function ThemeSwitcher({ className }: { className?: string }) {\n  return <ThemeSwitcherDropdown {...(className !== undefined ? { className } : {})} />\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Theme Switcher component.",
+    "prompts": [
+      "add a theme switcher"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

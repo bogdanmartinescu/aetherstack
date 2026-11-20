@@ -1,0 +1,34 @@
+{
+  "name": "user-profile-page",
+  "type": "registry:block",
+  "title": "User Profile Page",
+  "description": "User Profile Page component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "avatar",
+    "badge",
+    "separator",
+    "tabs"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/user-profile-page.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/user-profile-page.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { MapPin, Globe, Calendar, Mail } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\nimport {\n  Avatar,\n  AvatarFallback,\n  AvatarImage,\n  Badge,\n  Separator,\n  Tabs,\n  TabsContent,\n  TabsList,\n  TabsTrigger,\n} from \"@aetherstack/ui\"\n\nexport interface UserProfileUser {\n  name: string\n  username?: string\n  email?: string\n  bio?: string\n  avatarUrl?: string\n  role?: string\n  location?: string\n  website?: string\n  joinedAt?: string\n}\n\nexport interface UserProfileStat {\n  label: string\n  value: string | number\n}\n\nexport interface UserProfileTab {\n  label: string\n  content: React.ReactNode\n}\n\nexport interface UserProfilePageProps {\n  user: UserProfileUser\n  stats?: UserProfileStat[]\n  tabs?: UserProfileTab[]\n  actions?: React.ReactNode\n  className?: string\n}\n\nexport function UserProfilePage({\n  user,\n  stats = [],\n  tabs = [],\n  actions,\n  className,\n}: UserProfilePageProps) {\n  const initials = user.name\n    .split(\" \")\n    .map((n) => n[0])\n    .join(\"\")\n    .slice(0, 2)\n    .toUpperCase()\n\n  return (\n    <div className={cn(\"w-full\", className)}>\n      {/* Cover / header */}\n      <div className=\"h-32 rounded-xl bg-muted sm:h-48\" />\n\n      <div className=\"mx-auto max-w-4xl px-4 sm:px-6\">\n        <div className=\"-mt-12 flex flex-col gap-4 sm:-mt-16 sm:flex-row sm:items-end sm:justify-between\">\n          {/* Avatar */}\n          <Avatar className=\"h-24 w-24 ring-4 ring-background sm:h-32 sm:w-32\">\n            <AvatarImage src={user.avatarUrl} alt={user.name} />\n            <AvatarFallback className=\"text-2xl\">{initials}</AvatarFallback>\n          </Avatar>\n\n          {/* Actions */}\n          {actions && <div className=\"flex items-center gap-2\">{actions}</div>}\n        </div>\n\n        {/* Profile info */}\n        <div className=\"mt-4 space-y-3\">\n          <div className=\"flex flex-wrap items-center gap-2\">\n            <h1 className=\"text-xl font-bold text-foreground sm:text-2xl\">{user.name}</h1>\n            {user.role && (\n              <Badge variant=\"secondary\">{user.role}</Badge>\n            )}\n          </div>\n          {user.username && (\n            <p className=\"text-sm text-muted-foreground\">@{user.username}</p>\n          )}\n          {user.bio && (\n            <p className=\"max-w-2xl text-sm text-foreground\">{user.bio}</p>\n          )}\n\n          {/* Meta */}\n          <div className=\"flex flex-wrap gap-4\">\n            {user.location && (\n              <span className=\"flex items-center gap-1.5 text-xs text-muted-foreground\">\n                <MapPin className=\"h-3.5 w-3.5\" aria-hidden />\n                {user.location}\n              </span>\n            )}\n            {user.website && (\n              <a\n                href={user.website}\n                className=\"flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors\"\n              >\n                <Globe className=\"h-3.5 w-3.5\" aria-hidden />\n                {user.website.replace(/^https?:\\/\\//, \"\")}\n              </a>\n            )}\n            {user.email && (\n              <a\n                href={`mailto:${user.email}`}\n                className=\"flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors\"\n              >\n                <Mail className=\"h-3.5 w-3.5\" aria-hidden />\n                {user.email}\n              </a>\n            )}\n            {user.joinedAt && (\n              <span className=\"flex items-center gap-1.5 text-xs text-muted-foreground\">\n                <Calendar className=\"h-3.5 w-3.5\" aria-hidden />\n                Joined {user.joinedAt}\n              </span>\n            )}\n          </div>\n        </div>\n\n        {/* Stats row */}\n        {stats.length > 0 && (\n          <>\n            <Separator className=\"my-6\" />\n            <div className=\"flex flex-wrap gap-8\">\n              {stats.map((stat, i) => (\n                <div key={i} className=\"text-center\">\n                  <p className=\"text-xl font-bold text-foreground\">{stat.value}</p>\n                  <p className=\"text-xs text-muted-foreground\">{stat.label}</p>\n                </div>\n              ))}\n            </div>\n          </>\n        )}\n\n        {/* Tabs */}\n        {tabs.length > 0 && (\n          <>\n            <Separator className=\"my-6\" />\n            <Tabs defaultValue={tabs[0]?.label ?? \"\"} className=\"w-full\">\n              <TabsList>\n                {tabs.map((tab) => (\n                  <TabsTrigger key={tab.label} value={tab.label}>\n                    {tab.label}\n                  </TabsTrigger>\n                ))}\n              </TabsList>\n              {tabs.map((tab) => (\n                <TabsContent key={tab.label} value={tab.label} className=\"mt-6\">\n                  {tab.content}\n                </TabsContent>\n              ))}\n            </Tabs>\n          </>\n        )}\n      </div>\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the User Profile Page component.",
+    "prompts": [
+      "add a user profile page"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

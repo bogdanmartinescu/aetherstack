@@ -1,0 +1,27 @@
+{
+  "name": "voice-input",
+  "type": "registry:pattern",
+  "title": "Voice Input",
+  "description": "Voice Input component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/ai/voice-input.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/ai/voice-input.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Mic, MicOff } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\ninterface VoiceInputProps {\n  onTranscript?: (text: string) => void\n  disabled?: boolean\n  className?: string\n}\n\ntype SpeechRecognitionConstructor = new () => {\n  continuous: boolean\n  interimResults: boolean\n  start(): void\n  stop(): void\n  onresult: ((event: { results: SpeechRecognitionResultList }) => void) | null\n  onerror: (() => void) | null\n  onend: (() => void) | null\n}\n\nfunction getSpeechRecognition(): SpeechRecognitionConstructor | null {\n  if (typeof window === \"undefined\") return null\n  const win = window as typeof window & {\n    SpeechRecognition?: SpeechRecognitionConstructor\n    webkitSpeechRecognition?: SpeechRecognitionConstructor\n  }\n  return win.SpeechRecognition ?? win.webkitSpeechRecognition ?? null\n}\n\nfunction VoiceInput({ onTranscript, disabled = false, className }: VoiceInputProps) {\n  const [isRecording, setIsRecording] = React.useState(false)\n  const recognitionRef = React.useRef<InstanceType<SpeechRecognitionConstructor> | null>(null)\n\n  function startRecording() {\n    const SpeechRecognitionCtor = getSpeechRecognition()\n\n    if (!SpeechRecognitionCtor) {\n      onTranscript?.(\"[Voice input not supported in this browser]\")\n      return\n    }\n\n    const recognition = new SpeechRecognitionCtor()\n    recognition.continuous = false\n    recognition.interimResults = false\n\n    recognition.onresult = (event) => {\n      const transcript = event.results[0]?.[0]?.transcript ?? \"\"\n      onTranscript?.(transcript)\n      setIsRecording(false)\n    }\n\n    recognition.onerror = () => {\n      setIsRecording(false)\n    }\n\n    recognition.onend = () => {\n      setIsRecording(false)\n    }\n\n    recognitionRef.current = recognition\n    recognition.start()\n    setIsRecording(true)\n  }\n\n  function stopRecording() {\n    recognitionRef.current?.stop()\n    setIsRecording(false)\n  }\n\n  function toggle() {\n    if (isRecording) {\n      stopRecording()\n    } else {\n      startRecording()\n    }\n  }\n\n  return (\n    <div className={cn(\"flex flex-col items-center gap-2\", className)}>\n      <button\n        onClick={toggle}\n        disabled={disabled}\n        aria-label={isRecording ? \"Stop recording\" : \"Start recording\"}\n        className={cn(\n          \"flex h-12 w-12 items-center justify-center rounded-full border-2 transition-all\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n          \"disabled:pointer-events-none disabled:opacity-40\",\n          isRecording\n            ? \"border-destructive bg-destructive text-destructive-foreground animate-pulse\"\n            : \"border-input bg-background hover:bg-accent hover:text-accent-foreground\",\n        )}\n      >\n        {isRecording ? (\n          <MicOff className=\"h-5 w-5\" />\n        ) : (\n          <Mic className=\"h-5 w-5\" />\n        )}\n      </button>\n      {isRecording && (\n        <span className=\"text-xs text-muted-foreground animate-pulse\">Recording…</span>\n      )}\n    </div>\n  )\n}\n\nexport { VoiceInput }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Voice Input component.",
+    "prompts": [
+      "add a voice input"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

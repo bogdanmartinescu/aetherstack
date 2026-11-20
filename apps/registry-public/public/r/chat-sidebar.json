@@ -1,0 +1,33 @@
+{
+  "name": "chat-sidebar",
+  "type": "registry:block",
+  "title": "Chat Sidebar",
+  "description": "Chat Sidebar component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "dropdown-menu",
+    "input"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/ai/chat-sidebar.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/ai/chat-sidebar.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Plus, Search, Trash2, Pencil, MoreHorizontal, Check, X } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\nimport {\n  Button,\n  Input,\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuItem,\n  DropdownMenuTrigger,\n} from \"@aetherstack/ui\"\n\ninterface Conversation {\n  id: string\n  title: string\n  timestamp?: string\n  active?: boolean\n}\n\ninterface ChatSidebarProps {\n  conversations?: Conversation[]\n  onNewChat?: () => void\n  onConversationClick?: (id: string) => void\n  onConversationDelete?: (id: string) => void\n  onConversationRename?: (id: string, title: string) => void\n  className?: string\n}\n\nfunction ChatSidebar({\n  conversations = [],\n  onNewChat,\n  onConversationClick,\n  onConversationDelete,\n  onConversationRename,\n  className,\n}: ChatSidebarProps) {\n  const [search, setSearch] = React.useState(\"\")\n  const [editingId, setEditingId] = React.useState<string | null>(null)\n  const [editValue, setEditValue] = React.useState(\"\")\n\n  const filtered = conversations.filter((c) =>\n    c.title.toLowerCase().includes(search.toLowerCase()),\n  )\n\n  function startEdit(conv: Conversation) {\n    setEditingId(conv.id)\n    setEditValue(conv.title)\n  }\n\n  function commitEdit(id: string) {\n    if (editValue.trim()) {\n      onConversationRename?.(id, editValue.trim())\n    }\n    setEditingId(null)\n  }\n\n  return (\n    <div className={cn(\"flex h-full flex-col gap-2 p-3\", className)}>\n      <Button className=\"w-full justify-start gap-2\" variant=\"outline\" onClick={onNewChat}>\n        <Plus className=\"h-4 w-4\" />\n        New chat\n      </Button>\n\n      <div className=\"relative\">\n        <Search className=\"absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground\" />\n        <Input\n          placeholder=\"Search chats…\"\n          className=\"pl-8\"\n          value={search}\n          onChange={(e) => setSearch(e.target.value)}\n        />\n      </div>\n\n      <div className=\"flex-1 overflow-y-auto space-y-1\">\n        {filtered.map((conv) => (\n          <div\n            key={conv.id}\n            className={cn(\n              \"group flex items-center gap-1 rounded-md px-2 py-1.5\",\n              conv.active ? \"bg-accent text-accent-foreground\" : \"hover:bg-accent/50\",\n            )}\n          >\n            {editingId === conv.id ? (\n              <div className=\"flex flex-1 items-center gap-1\">\n                <input\n                  autoFocus\n                  value={editValue}\n                  onChange={(e) => setEditValue(e.target.value)}\n                  onKeyDown={(e) => {\n                    if (e.key === \"Enter\") commitEdit(conv.id)\n                    if (e.key === \"Escape\") setEditingId(null)\n                  }}\n                  className=\"flex-1 bg-transparent text-sm outline-none\"\n                />\n                <button onClick={() => commitEdit(conv.id)} aria-label=\"Save\">\n                  <Check className=\"h-3.5 w-3.5 text-primary\" />\n                </button>\n                <button onClick={() => setEditingId(null)} aria-label=\"Cancel\">\n                  <X className=\"h-3.5 w-3.5 text-muted-foreground\" />\n                </button>\n              </div>\n            ) : (\n              <button\n                className=\"flex-1 truncate text-left text-sm\"\n                onClick={() => onConversationClick?.(conv.id)}\n              >\n                {conv.title}\n              </button>\n            )}\n\n            {editingId !== conv.id && (\n              <DropdownMenu>\n                <DropdownMenuTrigger asChild>\n                  <button\n                    className=\"opacity-0 group-hover:opacity-100 transition-opacity\"\n                    aria-label=\"More options\"\n                  >\n                    <MoreHorizontal className=\"h-4 w-4 text-muted-foreground\" />\n                  </button>\n                </DropdownMenuTrigger>\n                <DropdownMenuContent align=\"end\">\n                  <DropdownMenuItem onClick={() => startEdit(conv)}>\n                    <Pencil className=\"h-3.5 w-3.5 mr-2\" />\n                    Rename\n                  </DropdownMenuItem>\n                  <DropdownMenuItem\n                    className=\"text-destructive focus:text-destructive\"\n                    onClick={() => onConversationDelete?.(conv.id)}\n                  >\n                    <Trash2 className=\"h-3.5 w-3.5 mr-2\" />\n                    Delete\n                  </DropdownMenuItem>\n                </DropdownMenuContent>\n              </DropdownMenu>\n            )}\n          </div>\n        ))}\n      </div>\n    </div>\n  )\n}\n\nexport { ChatSidebar }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Chat Sidebar component.",
+    "prompts": [
+      "add a chat sidebar"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

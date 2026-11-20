@@ -1,0 +1,34 @@
+{
+  "name": "prompt-library",
+  "type": "registry:pattern",
+  "title": "Prompt Library",
+  "description": "Prompt Library component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "badge",
+    "button",
+    "card",
+    "input"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/ai/prompt-library.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/ai/prompt-library.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Copy, Plus } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Button, Badge, Input, Card, CardContent, CardHeader, CardTitle, CardDescription } from \"@aetherstack/ui\"\n\ninterface Prompt {\n  id: string\n  title: string\n  description?: string\n  content: string\n  category?: string\n  tags?: string[]\n}\n\ninterface PromptLibraryProps {\n  prompts: Prompt[]\n  categories?: string[]\n  onInsert?: (content: string) => void\n  onCopy?: (content: string) => void\n  className?: string\n}\n\nfunction PromptLibrary({ prompts, categories = [], onInsert, onCopy, className }: PromptLibraryProps) {\n  const [search, setSearch] = React.useState(\"\")\n  const [activeCategory, setActiveCategory] = React.useState<string | null>(null)\n\n  const filtered = prompts.filter((p) => {\n    const matchesSearch =\n      search === \"\" ||\n      p.title.toLowerCase().includes(search.toLowerCase()) ||\n      (p.description?.toLowerCase().includes(search.toLowerCase()) ?? false)\n    const matchesCategory = activeCategory === null || p.category === activeCategory\n    return matchesSearch && matchesCategory\n  })\n\n  const allCategories = categories.length > 0\n    ? categories\n    : Array.from(new Set(prompts.map((p) => p.category).filter(Boolean))) as string[]\n\n  return (\n    <div className={cn(\"flex flex-col gap-4\", className)}>\n      <div className=\"flex flex-col gap-3\">\n        <Input\n          placeholder=\"Search prompts…\"\n          value={search}\n          onChange={(e) => setSearch(e.target.value)}\n        />\n        {allCategories.length > 0 && (\n          <div className=\"flex flex-wrap gap-2\">\n            <button\n              onClick={() => setActiveCategory(null)}\n              className={cn(\n                \"rounded-full border px-3 py-1 text-xs transition-colors\",\n                activeCategory === null\n                  ? \"border-primary bg-primary text-primary-foreground\"\n                  : \"border-border hover:bg-accent\",\n              )}\n            >\n              All\n            </button>\n            {allCategories.map((cat) => (\n              <button\n                key={cat}\n                onClick={() => setActiveCategory(cat === activeCategory ? null : cat)}\n                className={cn(\n                  \"rounded-full border px-3 py-1 text-xs transition-colors\",\n                  activeCategory === cat\n                    ? \"border-primary bg-primary text-primary-foreground\"\n                    : \"border-border hover:bg-accent\",\n                )}\n              >\n                {cat}\n              </button>\n            ))}\n          </div>\n        )}\n      </div>\n\n      {filtered.length === 0 ? (\n        <p className=\"text-center text-sm text-muted-foreground py-8\">No prompts found</p>\n      ) : (\n        <div className=\"grid gap-3 sm:grid-cols-2\">\n          {filtered.map((p) => (\n            <Card key={p.id} className=\"flex flex-col\">\n              <CardHeader className=\"pb-2\">\n                <CardTitle className=\"text-base\">{p.title}</CardTitle>\n                {p.description && (\n                  <CardDescription>{p.description}</CardDescription>\n                )}\n              </CardHeader>\n              <CardContent className=\"flex flex-col gap-3 mt-auto\">\n                {p.tags && p.tags.length > 0 && (\n                  <div className=\"flex flex-wrap gap-1\">\n                    {p.tags.map((tag) => (\n                      <Badge key={tag} variant=\"secondary\" className=\"text-xs\">\n                        {tag}\n                      </Badge>\n                    ))}\n                  </div>\n                )}\n                <div className=\"flex items-center gap-2\">\n                  {onInsert && (\n                    <Button size=\"sm\" onClick={() => onInsert(p.content)}>\n                      <Plus className=\"h-3.5 w-3.5 mr-1.5\" />\n                      Insert\n                    </Button>\n                  )}\n                  {onCopy && (\n                    <Button variant=\"outline\" size=\"sm\" onClick={() => onCopy(p.content)}>\n                      <Copy className=\"h-3.5 w-3.5 mr-1.5\" />\n                      Copy\n                    </Button>\n                  )}\n                </div>\n              </CardContent>\n            </Card>\n          ))}\n        </div>\n      )}\n    </div>\n  )\n}\n\nexport { PromptLibrary }\nexport type { Prompt }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Prompt Library component.",
+    "prompts": [
+      "add a prompt library"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

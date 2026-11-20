@@ -1,0 +1,31 @@
+{
+  "name": "ai-error-state",
+  "type": "registry:pattern",
+  "title": "Ai Error State",
+  "description": "Ai Error State component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/ai/ai-error-state.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/ai/ai-error-state.tsx",
+      "content": "import * as React from \"react\"\nimport { WifiOff, Clock, AlertTriangle, ServerOff, Zap } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Button } from \"@aetherstack/ui\"\n\ntype ErrorType = \"rate-limit\" | \"context-length\" | \"provider-outage\" | \"network\" | \"generic\"\n\ninterface ErrorConfig {\n  icon: React.ReactNode\n  headline: string\n  description: string\n  action: string\n}\n\nconst ERROR_CONFIGS: Record<ErrorType, ErrorConfig> = {\n  \"rate-limit\": {\n    icon: <Clock className=\"h-8 w-8\" />,\n    headline: \"Rate limit reached\",\n    description: \"You've hit the API rate limit. Please wait a moment before trying again.\",\n    action: \"Try again\",\n  },\n  \"context-length\": {\n    icon: <Zap className=\"h-8 w-8\" />,\n    headline: \"Context window full\",\n    description: \"The conversation is too long for this model. Start a new chat to continue.\",\n    action: \"New chat\",\n  },\n  \"provider-outage\": {\n    icon: <ServerOff className=\"h-8 w-8\" />,\n    headline: \"Provider outage\",\n    description: \"The AI provider is experiencing issues. Check their status page for updates.\",\n    action: \"Retry\",\n  },\n  network: {\n    icon: <WifiOff className=\"h-8 w-8\" />,\n    headline: \"Connection lost\",\n    description: \"Check your internet connection and try again.\",\n    action: \"Retry\",\n  },\n  generic: {\n    icon: <AlertTriangle className=\"h-8 w-8\" />,\n    headline: \"Something went wrong\",\n    description: \"An unexpected error occurred. Please try again.\",\n    action: \"Try again\",\n  },\n}\n\ninterface AIErrorStateProps {\n  type?: ErrorType\n  message?: string\n  onRetry?: () => void\n  className?: string\n}\n\nfunction AIErrorState({\n  type = \"generic\",\n  message,\n  onRetry,\n  className,\n}: AIErrorStateProps) {\n  const config = ERROR_CONFIGS[type]\n\n  return (\n    <div\n      className={cn(\n        \"flex flex-col items-center gap-4 rounded-lg border border-border bg-card p-8 text-center\",\n        className,\n      )}\n    >\n      <span className=\"text-muted-foreground\">{config.icon}</span>\n      <div className=\"space-y-1\">\n        <h3 className=\"font-semibold text-foreground\">{config.headline}</h3>\n        <p className=\"text-sm text-muted-foreground\">{message ?? config.description}</p>\n      </div>\n      {onRetry && (\n        <Button variant=\"outline\" onClick={onRetry}>\n          {config.action}\n        </Button>\n      )}\n    </div>\n  )\n}\n\nexport { AIErrorState }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Ai Error State component.",
+    "prompts": [
+      "add a ai error state"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

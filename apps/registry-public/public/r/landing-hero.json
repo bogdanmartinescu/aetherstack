@@ -1,0 +1,31 @@
+{
+  "name": "landing-hero",
+  "type": "registry:block",
+  "title": "Landing Hero",
+  "description": "Landing Hero component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [
+    "badge",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/landing-hero.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/landing-hero.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Badge, Button } from \"@aetherstack/ui\"\n\nexport interface LandingHeroCta {\n  label: string\n  href: string\n}\n\nexport interface LandingHeroProps {\n  eyebrow?: string\n  headline: string\n  subheading?: string\n  primaryCta?: LandingHeroCta\n  secondaryCta?: LandingHeroCta\n  media?: React.ReactNode\n  className?: string\n}\n\nexport function LandingHero({\n  eyebrow,\n  headline,\n  subheading,\n  primaryCta,\n  secondaryCta,\n  media,\n  className,\n}: LandingHeroProps) {\n  return (\n    <section className={cn(\"w-full py-20 px-4 sm:py-28\", className)}>\n      <div className=\"mx-auto max-w-4xl text-center\">\n        {eyebrow && (\n          <div className=\"mb-6 flex justify-center\">\n            <Badge variant=\"secondary\" className=\"px-3 py-1 text-xs font-medium\">\n              {eyebrow}\n            </Badge>\n          </div>\n        )}\n\n        <h1 className=\"text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl\">\n          {headline}\n        </h1>\n\n        {subheading && (\n          <p className=\"mx-auto mt-6 max-w-2xl text-lg text-muted-foreground\">\n            {subheading}\n          </p>\n        )}\n\n        {(primaryCta || secondaryCta) && (\n          <div className=\"mt-10 flex flex-wrap items-center justify-center gap-4\">\n            {primaryCta && (\n              <Button asChild size=\"lg\">\n                <a href={primaryCta.href}>{primaryCta.label}</a>\n              </Button>\n            )}\n            {secondaryCta && (\n              <Button asChild variant=\"outline\" size=\"lg\">\n                <a href={secondaryCta.href}>{secondaryCta.label}</a>\n              </Button>\n            )}\n          </div>\n        )}\n\n        {media && (\n          <div className=\"mt-14 overflow-hidden rounded-xl border border-border shadow-lg\">\n            {media}\n          </div>\n        )}\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Landing Hero component.",
+    "prompts": [
+      "add a landing hero"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

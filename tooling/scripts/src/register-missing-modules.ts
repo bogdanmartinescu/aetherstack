@@ -157,6 +157,90 @@ const UI_META: Record<string, { title: string; description: string; intent: stri
     intent: "Expose text to screen readers without showing it on screen",
     prompts: ["add visually hidden text", "add a screen reader only label"],
   },
+  "attachment-chip": {
+    title: "Attachment Chip",
+    description: "Compact chip for a file or attachment in an AI prompt or message.",
+    intent: "Show an attached file the user can remove or open",
+    prompts: ["add an attachment chip", "show a file attachment", "add a prompt attachment"],
+  },
+  "chat-bubble": {
+    title: "Chat Bubble",
+    description: "Message bubble for user and assistant turns in a chat thread.",
+    intent: "Render one chat message from the user or the assistant",
+    prompts: ["add a chat bubble", "add a message bubble", "show an assistant message"],
+  },
+  "code-block": {
+    title: "Code Block",
+    description: "Syntax-ready code panel with copy support for AI responses.",
+    intent: "Display a copyable code sample inside an AI answer",
+    prompts: ["add a code block", "show AI generated code", "add a copyable code panel"],
+  },
+  "feedback-buttons": {
+    title: "Feedback Buttons",
+    description: "Thumbs-up and thumbs-down controls for rating an AI response.",
+    intent: "Collect positive or negative feedback on a generated answer",
+    prompts: ["add feedback buttons", "add thumbs up thumbs down", "rate an AI response"],
+  },
+  "markdown-renderer": {
+    title: "Markdown Renderer",
+    description: "Renders Markdown with token-styled code blocks for AI output.",
+    intent: "Render assistant Markdown including fenced code",
+    prompts: ["render markdown", "add a markdown renderer", "show AI markdown"],
+  },
+  "model-badge": {
+    title: "Model Badge",
+    description: "Small badge naming the model that produced a response.",
+    intent: "Label which model generated the current answer",
+    prompts: ["add a model badge", "show the model name", "label the LLM"],
+  },
+  "prompt-input": {
+    title: "Prompt Input",
+    description: "Composer for sending prompts with submit and stop controls.",
+    intent: "Let the user type and send a prompt, or stop a generation",
+    prompts: ["add a prompt input", "add a chat composer", "add send and stop buttons"],
+  },
+  "prompt-suggestion": {
+    title: "Prompt Suggestion",
+    description: "Clickable suggested prompt chip to seed a conversation.",
+    intent: "Offer a one-click starter prompt",
+    prompts: ["add prompt suggestions", "add starter prompts", "add suggestion chips"],
+  },
+  "reasoning-block": {
+    title: "Reasoning Block",
+    description: "Collapsible block for model reasoning or chain-of-thought text.",
+    intent: "Show optional model reasoning the user can expand",
+    prompts: ["add a reasoning block", "show chain of thought", "add collapsible thinking"],
+  },
+  "source-card": {
+    title: "Source Card",
+    description: "Citation card linking to a source used in an AI answer.",
+    intent: "Cite a source URL or document next to generated text",
+    prompts: ["add a source card", "show citations", "add a reference card"],
+  },
+  "streaming-text": {
+    title: "Streaming Text",
+    description: "Renders growing text from a string or async iterable stream.",
+    intent: "Display token streaming assistant text as it arrives",
+    prompts: ["add streaming text", "stream an AI answer", "type out the response"],
+  },
+  "thinking-indicator": {
+    title: "Thinking Indicator",
+    description: "Lightweight indicator that the model is still generating.",
+    intent: "Show that the assistant is thinking or generating",
+    prompts: ["add a thinking indicator", "show AI is thinking", "add a generating state"],
+  },
+  "token-counter": {
+    title: "Token Counter",
+    description: "Token usage readout with an optional progress meter.",
+    intent: "Show how many tokens a prompt or response is using",
+    prompts: ["add a token counter", "show token usage", "add a context meter"],
+  },
+  "tool-call-card": {
+    title: "Tool Call Card",
+    description: "Card for a tool invocation with status and expandable details.",
+    intent: "Surface a tool call the model made and its result state",
+    prompts: ["add a tool call card", "show tool use", "display a function call"],
+  },
 }
 
 interface ManifestItem {
@@ -219,14 +303,34 @@ function titleCase(slug: string): string {
     .join(" ")
 }
 
-function collectImports(source: string): string[] {
-  const specs: string[] = []
-  const re = /from\s+["']([^"']+)["']/g
+function collectImports(source: string): { spec: string; names: string[] }[] {
+  const out: { spec: string; names: string[] }[] = []
+  const re =
+    /import\s+(?:type\s+)?(?:\{([^}]*)\}|[\w*]+(?:\s*,\s*\{([^}]*)\})?)\s+from\s+["']([^"']+)["']/g
   let match: RegExpExecArray | null
   while ((match = re.exec(source))) {
-    if (match[1]) specs.push(match[1])
+    const namesRaw = `${match[1] ?? ""},${match[2] ?? ""}`
+    const names = namesRaw
+      .split(",")
+      .map((part) => part.trim().split(/\s+as\s+/i)[0]?.trim())
+      .filter((name): name is string => Boolean(name) && name !== "type")
+    if (match[3]) out.push({ spec: match[3], names })
   }
-  return specs
+  // Fallback for side-effect or atypical imports.
+  const simple = /from\s+["']([^"']+)["']/g
+  while ((match = simple.exec(source))) {
+    if (match[1] && !out.some((entry) => entry.spec === match![1])) {
+      out.push({ spec: match[1], names: [] })
+    }
+  }
+  return out
+}
+
+function toKebabName(exportName: string): string {
+  return exportName
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/([A-Z])([A-Z][a-z])/g, "$1-$2")
+    .toLowerCase()
 }
 
 function resolveLocalRegistryName(fromFile: string, spec: string, layer: Layer): string | null {
@@ -250,7 +354,7 @@ function draftItem(modulePath: string, layer: Layer, registeredNames: Set<string
   const dependencies = new Set<string>()
   const registryDependencies = new Set<string>()
 
-  for (const spec of imports) {
+  for (const { spec, names } of imports) {
     if (spec === "react" || spec === "react-dom" || spec.startsWith("react/")) continue
     if (spec.startsWith(".")) {
       const local = resolveLocalRegistryName(modulePath, spec, layer)
@@ -258,6 +362,28 @@ function draftItem(modulePath: string, layer: Layer, registeredNames: Set<string
       continue
     }
     if (spec.startsWith("@/")) continue
+    if (spec === "@aetherstack/ui" || spec.startsWith("@aetherstack/ui/")) {
+      dependencies.add("@aetherstack/ui")
+      if (spec.startsWith("@aetherstack/ui/")) {
+        registryDependencies.add(spec.slice("@aetherstack/ui/".length))
+      } else {
+        for (const name of names) {
+          // Skip obvious non-component exports.
+          if (["cn"].includes(name)) continue
+          registryDependencies.add(toKebabName(name))
+        }
+      }
+      continue
+    }
+    if (spec === "@aetherstack/patterns" || spec.startsWith("@aetherstack/patterns/")) {
+      dependencies.add("@aetherstack/patterns")
+      if (spec.startsWith("@aetherstack/patterns/")) {
+        registryDependencies.add(spec.slice("@aetherstack/patterns/".length))
+      } else {
+        for (const name of names) registryDependencies.add(toKebabName(name))
+      }
+      continue
+    }
     const pkg = spec.startsWith("@") ? spec.split("/").slice(0, 2).join("/") : spec.split("/")[0]
     if (pkg) dependencies.add(pkg)
   }

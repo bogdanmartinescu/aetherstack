@@ -1,0 +1,30 @@
+{
+  "name": "features-section",
+  "type": "registry:block",
+  "title": "Features Section",
+  "description": "Features Section component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [
+    "card"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/features-section.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/features-section.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Card, CardContent } from \"@aetherstack/ui\"\n\nexport interface Feature {\n  icon?: React.ReactNode\n  title: string\n  description: string\n}\n\nexport interface FeaturesSectionProps {\n  eyebrow?: string\n  headline?: string\n  subheading?: string\n  features: Feature[]\n  cols?: 2 | 3 | 4\n  layout?: \"grid\" | \"list\"\n  className?: string\n}\n\nconst colsMap: Record<2 | 3 | 4, string> = {\n  2: \"grid-cols-1 sm:grid-cols-2\",\n  3: \"grid-cols-1 sm:grid-cols-2 lg:grid-cols-3\",\n  4: \"grid-cols-1 sm:grid-cols-2 lg:grid-cols-4\",\n}\n\nexport function FeaturesSection({\n  eyebrow,\n  headline,\n  subheading,\n  features,\n  cols = 3,\n  layout = \"grid\",\n  className,\n}: FeaturesSectionProps) {\n  return (\n    <section className={cn(\"w-full py-16 px-4\", className)}>\n      {(eyebrow || headline || subheading) && (\n        <div className=\"mx-auto mb-12 max-w-2xl text-center\">\n          {eyebrow && (\n            <p className=\"mb-3 text-sm font-semibold uppercase tracking-wider text-primary\">\n              {eyebrow}\n            </p>\n          )}\n          {headline && (\n            <h2 className=\"text-3xl font-bold tracking-tight text-foreground sm:text-4xl\">\n              {headline}\n            </h2>\n          )}\n          {subheading && (\n            <p className=\"mt-4 text-base text-muted-foreground\">{subheading}</p>\n          )}\n        </div>\n      )}\n\n      {layout === \"grid\" ? (\n        <div className={cn(\"mx-auto grid max-w-6xl gap-6\", colsMap[cols])}>\n          {features.map((feature, i) => (\n            <Card key={i} className=\"border-border bg-card\">\n              <CardContent className=\"pt-6\">\n                {feature.icon && (\n                  <div className=\"mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary\">\n                    {feature.icon}\n                  </div>\n                )}\n                <h3 className=\"mb-2 text-base font-semibold text-foreground\">\n                  {feature.title}\n                </h3>\n                <p className=\"text-sm text-muted-foreground\">{feature.description}</p>\n              </CardContent>\n            </Card>\n          ))}\n        </div>\n      ) : (\n        <div className=\"mx-auto max-w-4xl space-y-10\">\n          {features.map((feature, i) => (\n            <div\n              key={i}\n              className={cn(\n                \"flex flex-col gap-6 sm:flex-row\",\n                i % 2 !== 0 && \"lg:flex-row-reverse\",\n              )}\n            >\n              {feature.icon && (\n                <div className=\"flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary\">\n                  {feature.icon}\n                </div>\n              )}\n              <div>\n                <h3 className=\"text-lg font-semibold text-foreground\">{feature.title}</h3>\n                <p className=\"mt-2 text-sm text-muted-foreground\">{feature.description}</p>\n              </div>\n            </div>\n          ))}\n        </div>\n      )}\n    </section>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Features Section component.",
+    "prompts": [
+      "add a features section"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

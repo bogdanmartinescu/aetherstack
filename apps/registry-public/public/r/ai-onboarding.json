@@ -1,0 +1,33 @@
+{
+  "name": "ai-onboarding",
+  "type": "registry:block",
+  "title": "Ai Onboarding",
+  "description": "Ai Onboarding component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/patterns",
+    "@aetherstack/ui",
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [
+    "button",
+    "card",
+    "stepper"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/ai/ai-onboarding.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/ai/ai-onboarding.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Button, Card, CardContent, CardHeader, CardTitle, CardDescription } from \"@aetherstack/ui\"\nimport { Stepper } from \"@aetherstack/patterns\"\n\ninterface OnboardingStep {\n  id: string\n  title: string\n  description?: string\n  content: React.ReactNode\n}\n\nconst DEFAULT_STEPS: OnboardingStep[] = [\n  {\n    id: \"api-key\",\n    title: \"Add your API key\",\n    description: \"Connect your AI provider\",\n    content: <p className=\"text-sm text-muted-foreground\">Enter your API key to get started.</p>,\n  },\n  {\n    id: \"model\",\n    title: \"Choose a model\",\n    description: \"Select your preferred AI model\",\n    content: <p className=\"text-sm text-muted-foreground\">Pick a model that fits your needs.</p>,\n  },\n  {\n    id: \"try\",\n    title: \"Try an example\",\n    description: \"See AI in action\",\n    content: <p className=\"text-sm text-muted-foreground\">Send your first message to see how it works.</p>,\n  },\n]\n\ninterface AIOnboardingProps {\n  steps?: OnboardingStep[]\n  onComplete?: () => void\n  className?: string\n}\n\nfunction AIOnboarding({\n  steps = DEFAULT_STEPS,\n  onComplete,\n  className,\n}: AIOnboardingProps) {\n  const [currentStep, setCurrentStep] = React.useState(0)\n  const step = steps[currentStep]\n  const isLast = currentStep === steps.length - 1\n\n  function next() {\n    if (isLast) {\n      onComplete?.()\n    } else {\n      setCurrentStep((s) => s + 1)\n    }\n  }\n\n  function back() {\n    setCurrentStep((s) => Math.max(0, s - 1))\n  }\n\n  const stepperItems = steps.map((s) => ({\n    id: s.id,\n    label: s.title,\n    ...(s.description !== undefined ? { description: s.description } : {}),\n  }))\n\n  return (\n    <div className={cn(\"flex flex-col gap-6 max-w-lg mx-auto py-8\", className)}>\n      <Stepper steps={stepperItems} currentStep={currentStep} orientation=\"horizontal\" />\n\n      {step && (\n        <Card>\n          <CardHeader>\n            <CardTitle>{step.title}</CardTitle>\n            {step.description && <CardDescription>{step.description}</CardDescription>}\n          </CardHeader>\n          <CardContent className=\"flex flex-col gap-4\">\n            {step.content}\n            <div className=\"flex items-center justify-between pt-2\">\n              <Button\n                variant=\"outline\"\n                onClick={back}\n                disabled={currentStep === 0}\n              >\n                Back\n              </Button>\n              <Button onClick={next}>\n                {isLast ? \"Get started\" : \"Continue\"}\n              </Button>\n            </div>\n          </CardContent>\n        </Card>\n      )}\n    </div>\n  )\n}\n\nexport { AIOnboarding }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Ai Onboarding component.",
+    "prompts": [
+      "add a ai onboarding"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

@@ -114,6 +114,260 @@
       }
     },
     {
+      "name": "agent-workspace",
+      "type": "registry:block",
+      "title": "Agent Workspace",
+      "description": "Agent Workspace component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "progress",
+        "scroll-area"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/ai/agent-workspace.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/ai/agent-workspace.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Agent Workspace component.",
+        "prompts": [
+          "add a agent workspace"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "ai-assistant-panel",
+      "type": "registry:block",
+      "title": "Ai Assistant Panel",
+      "description": "Ai Assistant Panel component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/ai/ai-assistant-panel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/ai/ai-assistant-panel.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Ai Assistant Panel component.",
+        "prompts": [
+          "add a ai assistant panel"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "ai-error-state",
+      "type": "registry:pattern",
+      "title": "Ai Error State",
+      "description": "Ai Error State component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/ai/ai-error-state.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/ai/ai-error-state.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Ai Error State component.",
+        "prompts": [
+          "add a ai error state"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "ai-onboarding",
+      "type": "registry:block",
+      "title": "Ai Onboarding",
+      "description": "Ai Onboarding component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/patterns",
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "stepper"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/ai/ai-onboarding.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/ai/ai-onboarding.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Ai Onboarding component.",
+        "prompts": [
+          "add a ai onboarding"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "ai-response-card",
+      "type": "registry:pattern",
+      "title": "Ai Response Card",
+      "description": "Ai Response Card component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/ai/ai-response-card.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/ai/ai-response-card.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Ai Response Card component.",
+        "prompts": [
+          "add a ai response card"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "ai-settings",
+      "type": "registry:block",
+      "title": "Ai Settings",
+      "description": "Ai Settings component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "card",
+        "input",
+        "label",
+        "select",
+        "separator",
+        "slider",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/ai/ai-settings.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/ai/ai-settings.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Ai Settings component.",
+        "prompts": [
+          "add a ai settings"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "ai-settings-panel",
+      "type": "registry:pattern",
+      "title": "Ai Settings Panel",
+      "description": "Ai Settings Panel component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "label",
+        "slider",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/ai/ai-settings-panel.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/ai/ai-settings-panel.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Ai Settings Panel component.",
+        "prompts": [
+          "add a ai settings panel"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "ai-usage-dashboard",
+      "type": "registry:block",
+      "title": "Ai Usage Dashboard",
+      "description": "Ai Usage Dashboard component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/ai/ai-usage-dashboard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/ai/ai-usage-dashboard.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Ai Usage Dashboard component.",
+        "prompts": [
+          "add a ai usage dashboard"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
@@ -202,6 +456,37 @@
       }
     },
     {
+      "name": "app-header",
+      "type": "registry:block",
+      "title": "App Header",
+      "description": "App Header component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/app-header.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/app-header.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the App Header component.",
+        "prompts": [
+          "add a app header"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
@@ -222,6 +507,34 @@
         "prompts": [
           "add an aspect ratio box",
           "constrain an image to 16:9"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "attachment-chip",
+      "type": "registry:ui",
+      "title": "Attachment Chip",
+      "description": "Compact chip for a file or attachment in an AI prompt or message.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/attachment-chip.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/attachment-chip.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show an attached file the user can remove or open",
+        "prompts": [
+          "add an attachment chip",
+          "show a file attachment",
+          "add a prompt attachment"
         ],
         "composition": [],
         "slots": []
@@ -522,6 +835,36 @@
       }
     },
     {
+      "name": "changelog-block",
+      "type": "registry:block",
+      "title": "Changelog Block",
+      "description": "Changelog Block component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "badge",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/changelog-block.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/changelog-block.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Changelog Block component.",
+        "prompts": [
+          "add a changelog block"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "chart",
       "type": "registry:ui",
       "title": "Chart",
@@ -545,6 +888,125 @@
           "add a bar chart",
           "add a line chart",
           "add a pie chart"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "chat-bubble",
+      "type": "registry:ui",
+      "title": "Chat Bubble",
+      "description": "Message bubble for user and assistant turns in a chat thread.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/chat-bubble.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/chat-bubble.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Render one chat message from the user or the assistant",
+        "prompts": [
+          "add a chat bubble",
+          "add a message bubble",
+          "show an assistant message"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "chat-layout",
+      "type": "registry:block",
+      "title": "Chat Layout",
+      "description": "Chat Layout component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/ai/chat-layout.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/ai/chat-layout.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Chat Layout component.",
+        "prompts": [
+          "add a chat layout"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "chat-message-list",
+      "type": "registry:pattern",
+      "title": "Chat Message List",
+      "description": "Chat Message List component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/chat-message-list.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/chat-message-list.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Chat Message List component.",
+        "prompts": [
+          "add a chat message list"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "chat-sidebar",
+      "type": "registry:block",
+      "title": "Chat Sidebar",
+      "description": "Chat Sidebar component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "dropdown-menu",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/ai/chat-sidebar.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/ai/chat-sidebar.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Chat Sidebar component.",
+        "prompts": [
+          "add a chat sidebar"
         ],
         "composition": [],
         "slots": []
@@ -585,6 +1047,34 @@
           "checked",
           "onCheckedChange"
         ]
+      }
+    },
+    {
+      "name": "code-block",
+      "type": "registry:ui",
+      "title": "Code Block",
+      "description": "Syntax-ready code panel with copy support for AI responses.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/code-block.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/code-block.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Display a copyable code sample inside an AI answer",
+        "prompts": [
+          "add a code block",
+          "show AI generated code",
+          "add a copyable code panel"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -728,6 +1218,67 @@
       }
     },
     {
+      "name": "compare-output",
+      "type": "registry:block",
+      "title": "Compare Output",
+      "description": "Compare Output component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "badge",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/ai/compare-output.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/ai/compare-output.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Compare Output component.",
+        "prompts": [
+          "add a compare output"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "confirm-dialog",
+      "type": "registry:pattern",
+      "title": "Confirm Dialog",
+      "description": "Confirm Dialog component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "button",
+        "dialog",
+        "visually-hidden"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/confirm-dialog.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/confirm-dialog.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Confirm Dialog component.",
+        "prompts": [
+          "add a confirm dialog"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "context-menu",
       "type": "registry:ui",
       "title": "Context Menu",
@@ -762,6 +1313,85 @@
           "ContextMenuItem",
           "ContextMenuSeparator"
         ]
+      }
+    },
+    {
+      "name": "conversation-starter",
+      "type": "registry:pattern",
+      "title": "Conversation Starter",
+      "description": "Conversation Starter component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/ai/conversation-starter.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/ai/conversation-starter.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Conversation Starter component.",
+        "prompts": [
+          "add a conversation starter"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "conversation-thread",
+      "type": "registry:pattern",
+      "title": "Conversation Thread",
+      "description": "Conversation Thread component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/ai/conversation-thread.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/ai/conversation-thread.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Conversation Thread component.",
+        "prompts": [
+          "add a conversation thread"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "cta-section",
+      "type": "registry:block",
+      "title": "Cta Section",
+      "description": "Cta Section component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/cta-section.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/cta-section.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Cta Section component.",
+        "prompts": [
+          "add a cta section"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -879,6 +1509,38 @@
           "add a date picker",
           "add a calendar input",
           "pick a date"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "date-range-picker",
+      "type": "registry:pattern",
+      "title": "Date Range Picker",
+      "description": "Date Range Picker component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "calendar",
+        "popover"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/date-range-picker.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/date-range-picker.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Date Range Picker component.",
+        "prompts": [
+          "add a date range picker"
         ],
         "composition": [],
         "slots": []
@@ -1068,6 +1730,35 @@
       }
     },
     {
+      "name": "error-page",
+      "type": "registry:block",
+      "title": "Error Page",
+      "description": "Error Page component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/error-page.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-page.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Error Page component.",
+        "prompts": [
+          "add a error page"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "error-state",
       "type": "registry:pattern",
       "title": "Error State",
@@ -1099,6 +1790,92 @@
           "description",
           "onRetry"
         ]
+      }
+    },
+    {
+      "name": "faq-section",
+      "type": "registry:block",
+      "title": "Faq Section",
+      "description": "Faq Section component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/faq-section.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-section.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Faq Section component.",
+        "prompts": [
+          "add a faq section"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "features-section",
+      "type": "registry:block",
+      "title": "Features Section",
+      "description": "Features Section component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/features-section.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-section.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Features Section component.",
+        "prompts": [
+          "add a features section"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "feedback-buttons",
+      "type": "registry:ui",
+      "title": "Feedback Buttons",
+      "description": "Thumbs-up and thumbs-down controls for rating an AI response.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/feedback-buttons.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/feedback-buttons.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Collect positive or negative feedback on a generated answer",
+        "prompts": [
+          "add feedback buttons",
+          "add thumbs up thumbs down",
+          "rate an AI response"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -1159,6 +1936,35 @@
         "prompts": [
           "add a floating dock",
           "pin a player to the corner"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "footer-section",
+      "type": "registry:block",
+      "title": "Footer Section",
+      "description": "Footer Section component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/footer-section.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-section.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Footer Section component.",
+        "prompts": [
+          "add a footer section"
         ],
         "composition": [],
         "slots": []
@@ -1271,6 +2077,36 @@
           "HoverCardTrigger",
           "HoverCardContent"
         ]
+      }
+    },
+    {
+      "name": "inline-edit",
+      "type": "registry:pattern",
+      "title": "Inline Edit",
+      "description": "Inline Edit component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "input"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/inline-edit.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/inline-edit.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Inline Edit component.",
+        "prompts": [
+          "add a inline edit"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -1471,6 +2307,36 @@
       }
     },
     {
+      "name": "landing-hero",
+      "type": "registry:block",
+      "title": "Landing Hero",
+      "description": "Landing Hero component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/landing-hero.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/landing-hero.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Landing Hero component.",
+        "prompts": [
+          "add a landing hero"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "loading-state",
       "type": "registry:pattern",
       "title": "Loading State",
@@ -1556,6 +2422,93 @@
       }
     },
     {
+      "name": "logo-cloud",
+      "type": "registry:block",
+      "title": "Logo Cloud",
+      "description": "Logo Cloud component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/logo-cloud.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Logo Cloud component.",
+        "prompts": [
+          "add a logo cloud"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "markdown-renderer",
+      "type": "registry:ui",
+      "title": "Markdown Renderer",
+      "description": "Renders Markdown with token-styled code blocks for AI output.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "react-markdown"
+      ],
+      "registryDependencies": [
+        "code-block"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/markdown-renderer.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/markdown-renderer.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Render assistant Markdown including fenced code",
+        "prompts": [
+          "render markdown",
+          "add a markdown renderer",
+          "show AI markdown"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "marketing-navbar",
+      "type": "registry:block",
+      "title": "Marketing Navbar",
+      "description": "Marketing Navbar component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/marketing-navbar.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/marketing-navbar.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Marketing Navbar component.",
+        "prompts": [
+          "add a marketing navbar"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "menubar",
       "type": "registry:ui",
       "title": "Menubar",
@@ -1629,6 +2582,99 @@
       }
     },
     {
+      "name": "model-badge",
+      "type": "registry:ui",
+      "title": "Model Badge",
+      "description": "Small badge naming the model that produced a response.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/model-badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/model-badge.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Label which model generated the current answer",
+        "prompts": [
+          "add a model badge",
+          "show the model name",
+          "label the LLM"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "model-selector",
+      "type": "registry:pattern",
+      "title": "Model Selector",
+      "description": "Model Selector component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "badge",
+        "select"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/ai/model-selector.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/ai/model-selector.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Model Selector component.",
+        "prompts": [
+          "add a model selector"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "multi-select",
+      "type": "registry:pattern",
+      "title": "Multi Select",
+      "description": "Multi Select component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "cmdk",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "popover"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/multi-select.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/multi-select.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Multi Select component.",
+        "prompts": [
+          "add a multi select"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "nav",
       "type": "registry:pattern",
       "title": "Sidebar Nav",
@@ -1691,6 +2737,38 @@
           "add a navigation menu",
           "add a navbar dropdown",
           "add site navigation"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "notification-bell",
+      "type": "registry:pattern",
+      "title": "Notification Bell",
+      "description": "Notification Bell component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "dropdown-menu",
+        "scroll-area"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/notification-bell.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/notification-bell.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Notification Bell component.",
+        "prompts": [
+          "add a notification bell"
         ],
         "composition": [],
         "slots": []
@@ -1940,6 +3018,37 @@
       }
     },
     {
+      "name": "pricing-comparison",
+      "type": "registry:block",
+      "title": "Pricing Comparison",
+      "description": "Pricing Comparison component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/pricing-comparison.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/pricing-comparison.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Pricing Comparison component.",
+        "prompts": [
+          "add a pricing comparison"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "pricing-section",
       "type": "registry:block",
       "title": "Pricing Section",
@@ -2003,6 +3112,37 @@
       }
     },
     {
+      "name": "profile-dropdown",
+      "type": "registry:pattern",
+      "title": "Profile Dropdown",
+      "description": "Profile Dropdown component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/profile-dropdown.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/profile-dropdown.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Profile Dropdown component.",
+        "prompts": [
+          "add a profile dropdown"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
@@ -2034,6 +3174,163 @@
         "slots": [
           "value"
         ]
+      }
+    },
+    {
+      "name": "prompt-builder",
+      "type": "registry:pattern",
+      "title": "Prompt Builder",
+      "description": "Prompt Builder component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "select",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/ai/prompt-builder.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/ai/prompt-builder.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Prompt Builder component.",
+        "prompts": [
+          "add a prompt builder"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "prompt-input",
+      "type": "registry:ui",
+      "title": "Prompt Input",
+      "description": "Composer for sending prompts with submit and stop controls.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/prompt-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/prompt-input.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Let the user type and send a prompt, or stop a generation",
+        "prompts": [
+          "add a prompt input",
+          "add a chat composer",
+          "add send and stop buttons"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "prompt-library",
+      "type": "registry:pattern",
+      "title": "Prompt Library",
+      "description": "Prompt Library component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "card",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/ai/prompt-library.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/ai/prompt-library.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Prompt Library component.",
+        "prompts": [
+          "add a prompt library"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "prompt-library-page",
+      "type": "registry:block",
+      "title": "Prompt Library Page",
+      "description": "Prompt Library Page component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "card",
+        "dialog",
+        "input",
+        "label",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/ai/prompt-library-page.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/ai/prompt-library-page.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Prompt Library Page component.",
+        "prompts": [
+          "add a prompt library page"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "prompt-suggestion",
+      "type": "registry:ui",
+      "title": "Prompt Suggestion",
+      "description": "Clickable suggested prompt chip to seed a conversation.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/prompt-suggestion.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/prompt-suggestion.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Offer a one-click starter prompt",
+        "prompts": [
+          "add prompt suggestions",
+          "add starter prompts",
+          "add suggestion chips"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -2071,6 +3368,37 @@
           "onValueChange",
           "RadioGroupItem"
         ]
+      }
+    },
+    {
+      "name": "reasoning-block",
+      "type": "registry:ui",
+      "title": "Reasoning Block",
+      "description": "Collapsible block for model reasoning or chain-of-thought text.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "collapsible"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/reasoning-block.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/reasoning-block.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show optional model reasoning the user can expand",
+        "prompts": [
+          "add a reasoning block",
+          "show chain of thought",
+          "add collapsible thinking"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -2134,6 +3462,37 @@
           "children",
           "ScrollBar"
         ]
+      }
+    },
+    {
+      "name": "search-input",
+      "type": "registry:pattern",
+      "title": "Search Input",
+      "description": "Search Input component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "input",
+        "spinner"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/search-input.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/search-input.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Search Input component.",
+        "prompts": [
+          "add a search input"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -2531,6 +3890,63 @@
       }
     },
     {
+      "name": "sortable-list",
+      "type": "registry:pattern",
+      "title": "Sortable List",
+      "description": "Sortable List component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@dnd-kit/core",
+        "@dnd-kit/sortable",
+        "@dnd-kit/utilities",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/sortable-list.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/sortable-list.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Sortable List component.",
+        "prompts": [
+          "add a sortable list"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "source-card",
+      "type": "registry:ui",
+      "title": "Source Card",
+      "description": "Citation card linking to a source used in an AI answer.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/source-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/source-card.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Cite a source URL or document next to generated text",
+        "prompts": [
+          "add a source card",
+          "show citations",
+          "add a reference card"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "spinner",
       "type": "registry:ui",
       "title": "Spinner",
@@ -2591,6 +4007,31 @@
           "StatItem",
           "cols"
         ]
+      }
+    },
+    {
+      "name": "stats-section",
+      "type": "registry:block",
+      "title": "Stats Section",
+      "description": "Stats Section component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/stats-section.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/stats-section.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Stats Section component.",
+        "prompts": [
+          "add a stats section"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -2655,6 +4096,33 @@
           "currentStep",
           "orientation"
         ]
+      }
+    },
+    {
+      "name": "streaming-text",
+      "type": "registry:ui",
+      "title": "Streaming Text",
+      "description": "Renders growing text from a string or async iterable stream.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/streaming-text.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/streaming-text.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Display token streaming assistant text as it arrives",
+        "prompts": [
+          "add streaming text",
+          "stream an AI answer",
+          "type out the response"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -2880,6 +4348,37 @@
       }
     },
     {
+      "name": "testimonials-section",
+      "type": "registry:block",
+      "title": "Testimonials Section",
+      "description": "Testimonials Section component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/testimonials-section.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/testimonials-section.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Testimonials Section component.",
+        "prompts": [
+          "add a testimonials section"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
@@ -2917,6 +4416,65 @@
       }
     },
     {
+      "name": "theme-switcher",
+      "type": "registry:pattern",
+      "title": "Theme Switcher",
+      "description": "Theme Switcher component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "button",
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/theme-switcher.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/theme-switcher.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Theme Switcher component.",
+        "prompts": [
+          "add a theme switcher"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "thinking-indicator",
+      "type": "registry:ui",
+      "title": "Thinking Indicator",
+      "description": "Lightweight indicator that the model is still generating.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/thinking-indicator.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/thinking-indicator.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show that the assistant is thinking or generating",
+        "prompts": [
+          "add a thinking indicator",
+          "show AI is thinking",
+          "add a generating state"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "time-slots",
       "type": "registry:ui",
       "title": "Time Slots",
@@ -2943,6 +4501,31 @@
           "radio-group",
           "button"
         ],
+        "slots": []
+      }
+    },
+    {
+      "name": "timeline-feed",
+      "type": "registry:pattern",
+      "title": "Timeline Feed",
+      "description": "Timeline Feed component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/timeline-feed.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/timeline-feed.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Timeline Feed component.",
+        "prompts": [
+          "add a timeline feed"
+        ],
+        "composition": [],
         "slots": []
       }
     },
@@ -3087,6 +4670,93 @@
       }
     },
     {
+      "name": "token-counter",
+      "type": "registry:ui",
+      "title": "Token Counter",
+      "description": "Token usage readout with an optional progress meter.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/token-counter.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/token-counter.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show how many tokens a prompt or response is using",
+        "prompts": [
+          "add a token counter",
+          "show token usage",
+          "add a context meter"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "tool-call-card",
+      "type": "registry:ui",
+      "title": "Tool Call Card",
+      "description": "Card for a tool invocation with status and expandable details.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "collapsible"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/ai/tool-call-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ai/tool-call-card.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Surface a tool call the model made and its result state",
+        "prompts": [
+          "add a tool call card",
+          "show tool use",
+          "display a function call"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "tool-call-sequence",
+      "type": "registry:pattern",
+      "title": "Tool Call Sequence",
+      "description": "Tool Call Sequence component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/ai/tool-call-sequence.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/ai/tool-call-sequence.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Tool Call Sequence component.",
+        "prompts": [
+          "add a tool call sequence"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
@@ -3123,6 +4793,38 @@
       }
     },
     {
+      "name": "upload-progress",
+      "type": "registry:pattern",
+      "title": "Upload Progress",
+      "description": "Upload Progress component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "progress",
+        "spinner"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/upload-progress.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/upload-progress.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Upload Progress component.",
+        "prompts": [
+          "add a upload progress"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "uptime-bar",
       "type": "registry:ui",
       "title": "Uptime Bar",
@@ -3150,6 +4852,39 @@
       }
     },
     {
+      "name": "user-profile-page",
+      "type": "registry:block",
+      "title": "User Profile Page",
+      "description": "User Profile Page component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "separator",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/user-profile-page.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/user-profile-page.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the User Profile Page component.",
+        "prompts": [
+          "add a user profile page"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "visually-hidden",
       "type": "registry:ui",
       "title": "Visually Hidden",
@@ -3170,6 +4905,63 @@
         "prompts": [
           "add visually hidden text",
           "add a screen reader only label"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "voice-input",
+      "type": "registry:pattern",
+      "title": "Voice Input",
+      "description": "Voice Input component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/ai/voice-input.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/ai/voice-input.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Voice Input component.",
+        "prompts": [
+          "add a voice input"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "waitlist-block",
+      "type": "registry:block",
+      "title": "Waitlist Block",
+      "description": "Waitlist Block component.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/ui",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/waitlist-block.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/waitlist-block.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Use the Waitlist Block component.",
+        "prompts": [
+          "add a waitlist block"
         ],
         "composition": [],
         "slots": []

@@ -1,0 +1,33 @@
+{
+  "name": "date-range-picker",
+  "type": "registry:pattern",
+  "title": "Date Range Picker",
+  "description": "Date Range Picker component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "calendar",
+    "popover"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/date-range-picker.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/date-range-picker.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { CalendarIcon } from \"lucide-react\"\nimport { Button, Calendar, Popover, PopoverContent, PopoverTrigger } from \"@aetherstack/ui\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface DateRange {\n  from?: Date\n  to?: Date\n}\n\nexport interface DateRangePickerProps {\n  value?: DateRange\n  onValueChange?: (range: DateRange | undefined) => void\n  placeholder?: string\n  disabled?: boolean\n  className?: string\n}\n\nfunction formatDate(date: Date): string {\n  return date.toLocaleDateString(\"en-US\", {\n    month: \"short\",\n    day: \"numeric\",\n    year: \"numeric\",\n  })\n}\n\nexport function DateRangePicker({\n  value,\n  onValueChange,\n  placeholder = \"Pick a date range\",\n  disabled = false,\n  className,\n}: DateRangePickerProps) {\n  const [open, setOpen] = React.useState(false)\n\n  const displayValue = React.useMemo(() => {\n    if (!value?.from) return placeholder\n    if (!value.to) return formatDate(value.from)\n    return `${formatDate(value.from)} – ${formatDate(value.to)}`\n  }, [value, placeholder])\n\n  return (\n    <Popover open={open} onOpenChange={setOpen}>\n      <PopoverTrigger asChild>\n        <Button\n          variant=\"outline\"\n          disabled={disabled}\n          className={cn(\n            \"justify-start gap-2 text-left font-normal\",\n            !value?.from && \"text-muted-foreground\",\n            className,\n          )}\n          aria-label=\"Open date range picker\"\n          aria-expanded={open}\n          aria-haspopup=\"dialog\"\n        >\n          <CalendarIcon className=\"h-4 w-4 shrink-0\" aria-hidden=\"true\" />\n          <span>{displayValue}</span>\n        </Button>\n      </PopoverTrigger>\n      <PopoverContent className=\"w-auto p-0\" align=\"start\">\n        <Calendar\n          mode=\"range\"\n          selected={value as { from: Date; to: Date }}\n          onSelect={(range) => onValueChange?.(range as DateRange | undefined)}\n          numberOfMonths={2}\n          initialFocus\n        />\n      </PopoverContent>\n    </Popover>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Date Range Picker component.",
+    "prompts": [
+      "add a date range picker"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

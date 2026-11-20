@@ -1,0 +1,32 @@
+{
+  "name": "app-header",
+  "type": "registry:block",
+  "title": "App Header",
+  "description": "App Header component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "sheet"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/app-header.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/app-header.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Menu } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Button, Sheet, SheetContent, SheetTrigger } from \"@aetherstack/ui\"\n\nexport interface AppHeaderNavItem {\n  label: string\n  href: string\n  active?: boolean\n}\n\nexport interface AppHeaderProps {\n  logo?: React.ReactNode\n  appName?: string\n  navItems?: AppHeaderNavItem[]\n  actions?: React.ReactNode\n  className?: string\n}\n\nexport function AppHeader({\n  logo,\n  appName = \"App\",\n  navItems = [],\n  actions,\n  className,\n}: AppHeaderProps) {\n  return (\n    <header\n      className={cn(\n        \"sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur-sm\",\n        className,\n      )}\n    >\n      <div className=\"mx-auto flex h-14 max-w-screen-xl items-center gap-4 px-4 sm:px-6\">\n        {/* Logo / brand */}\n        <div className=\"flex shrink-0 items-center gap-2\">\n          {logo}\n          {appName && (\n            <span className=\"text-sm font-semibold text-foreground\">{appName}</span>\n          )}\n        </div>\n\n        {/* Desktop nav */}\n        {navItems.length > 0 && (\n          <nav className=\"hidden flex-1 md:flex\" aria-label=\"Main navigation\">\n            <ul className=\"flex items-center gap-1\">\n              {navItems.map((item, index) => (\n                <li key={`${index}-${item.href}`}>\n                  <Button\n                    asChild\n                    variant=\"ghost\"\n                    size=\"sm\"\n                    className={cn(\n                      \"text-sm\",\n                      item.active\n                        ? \"text-foreground font-medium\"\n                        : \"text-muted-foreground\",\n                    )}\n                  >\n                    <a href={item.href} aria-current={item.active ? \"page\" : undefined}>\n                      {item.label}\n                    </a>\n                  </Button>\n                </li>\n              ))}\n            </ul>\n          </nav>\n        )}\n\n        {/* Spacer when no nav */}\n        {navItems.length === 0 && <div className=\"flex-1\" />}\n\n        {/* Desktop actions */}\n        {actions && <div className=\"hidden md:flex items-center gap-2\">{actions}</div>}\n\n        {/* Mobile hamburger */}\n        {navItems.length > 0 && (\n          <div className=\"flex flex-1 justify-end md:hidden\">\n            <Sheet>\n              <SheetTrigger asChild>\n                <Button variant=\"ghost\" size=\"icon\" aria-label=\"Open navigation\">\n                  <Menu className=\"h-5 w-5\" />\n                </Button>\n              </SheetTrigger>\n              <SheetContent side=\"left\" className=\"w-64\">\n                <div className=\"flex items-center gap-2 pb-4\">\n                  {logo}\n                  {appName && (\n                    <span className=\"text-sm font-semibold text-foreground\">{appName}</span>\n                  )}\n                </div>\n                <nav aria-label=\"Mobile navigation\">\n                  <ul className=\"space-y-1\">\n                    {navItems.map((item, index) => (\n                      <li key={`${index}-${item.href}`}>\n                        <a\n                          href={item.href}\n                          aria-current={item.active ? \"page\" : undefined}\n                          className={cn(\n                            \"flex w-full items-center rounded-md px-3 py-2 text-sm transition-colors\",\n                            item.active\n                              ? \"bg-accent text-accent-foreground font-medium\"\n                              : \"text-muted-foreground hover:bg-accent hover:text-accent-foreground\",\n                          )}\n                        >\n                          {item.label}\n                        </a>\n                      </li>\n                    ))}\n                  </ul>\n                </nav>\n                {actions && <div className=\"mt-4 flex flex-col gap-2\">{actions}</div>}\n              </SheetContent>\n            </Sheet>\n          </div>\n        )}\n      </div>\n    </header>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the App Header component.",
+    "prompts": [
+      "add a app header"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

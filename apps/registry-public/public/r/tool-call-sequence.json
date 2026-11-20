@@ -1,0 +1,27 @@
+{
+  "name": "tool-call-sequence",
+  "type": "registry:pattern",
+  "title": "Tool Call Sequence",
+  "description": "Tool Call Sequence component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/ai/tool-call-sequence.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/ai/tool-call-sequence.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { CheckCircle, XCircle, ChevronDown, ChevronRight } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\ninterface Step {\n  id: string\n  toolName: string\n  status: \"pending\" | \"running\" | \"done\" | \"error\"\n  args?: Record<string, unknown>\n  result?: unknown\n  error?: string\n}\n\ninterface ToolCallSequenceProps {\n  steps: Step[]\n  className?: string\n}\n\nfunction StepStatusIcon({ status }: { status: Step[\"status\"] }) {\n  switch (status) {\n    case \"pending\":\n      return <span className=\"h-4 w-4 rounded-full border-2 border-muted-foreground/40 shrink-0\" />\n    case \"running\":\n      return (\n        <span className=\"h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-primary border-t-transparent\" />\n      )\n    case \"done\":\n      return <CheckCircle className=\"h-4 w-4 shrink-0 text-green-500\" />\n    case \"error\":\n      return <XCircle className=\"h-4 w-4 shrink-0 text-destructive\" />\n  }\n}\n\nfunction StepRow({ step, index }: { step: Step; index: number }) {\n  const [open, setOpen] = React.useState(false)\n  const hasDetails = step.args ?? step.result ?? step.error\n\n  return (\n    <div className=\"border border-border rounded-lg overflow-hidden\">\n      <button\n        className=\"flex w-full items-center gap-3 px-4 py-3 text-sm hover:bg-accent/50 transition-colors\"\n        onClick={() => hasDetails && setOpen((o) => !o)}\n        disabled={!hasDetails}\n      >\n        <span className=\"flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground\">\n          {index + 1}\n        </span>\n        <StepStatusIcon status={step.status} />\n        <span className=\"flex-1 text-left font-mono font-medium\">{step.toolName}</span>\n        <span className=\"text-xs text-muted-foreground capitalize\">{step.status}</span>\n        {hasDetails && (\n          open ? <ChevronDown className=\"h-4 w-4 text-muted-foreground\" /> : <ChevronRight className=\"h-4 w-4 text-muted-foreground\" />\n        )}\n      </button>\n      {open && hasDetails && (\n        <div className=\"border-t border-border px-4 pb-4 pt-3 space-y-3\">\n          {step.args && (\n            <div>\n              <p className=\"mb-1 text-xs font-medium text-muted-foreground uppercase tracking-wide\">Arguments</p>\n              <pre className=\"rounded bg-muted p-3 text-xs overflow-x-auto font-mono\">\n                {JSON.stringify(step.args, null, 2)}\n              </pre>\n            </div>\n          )}\n          {step.error && (\n            <div>\n              <p className=\"mb-1 text-xs font-medium text-destructive uppercase tracking-wide\">Error</p>\n              <pre className=\"rounded bg-destructive/10 p-3 text-xs overflow-x-auto font-mono text-destructive\">\n                {step.error}\n              </pre>\n            </div>\n          )}\n          {step.result !== undefined && !step.error && (\n            <div>\n              <p className=\"mb-1 text-xs font-medium text-muted-foreground uppercase tracking-wide\">Result</p>\n              <pre className=\"rounded bg-muted p-3 text-xs overflow-x-auto font-mono\">\n                {JSON.stringify(step.result, null, 2)}\n              </pre>\n            </div>\n          )}\n        </div>\n      )}\n    </div>\n  )\n}\n\nfunction ToolCallSequence({ steps, className }: ToolCallSequenceProps) {\n  return (\n    <div className={cn(\"flex flex-col gap-2\", className)}>\n      {steps.map((step, i) => (\n        <StepRow key={step.id} step={step} index={i} />\n      ))}\n    </div>\n  )\n}\n\nexport { ToolCallSequence }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Tool Call Sequence component.",
+    "prompts": [
+      "add a tool call sequence"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}
