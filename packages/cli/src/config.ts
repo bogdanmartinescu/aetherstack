@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs"
-import { resolve } from "node:path"
+import { isAbsolute, resolve } from "node:path"
 import { z } from "zod"
 import {
   CONFIG_FILE_NAME,
@@ -12,6 +12,16 @@ import {
 // Schema
 // ---------------------------------------------------------------------------
 
+const relativeProjectPath = z
+  .string()
+  .min(1)
+  .refine((value) => !isAbsolute(value), {
+    message: "Alias paths must be relative to the project root",
+  })
+  .refine((value) => !value.split(/[/\\]/).includes(".."), {
+    message: "Alias paths must not contain '..'",
+  })
+
 export const aetherConfigSchema = z.object({
   $schema: z.string().optional(),
   /** Base URL of the registry to install from. */
@@ -19,9 +29,9 @@ export const aetherConfigSchema = z.object({
   aliases: z
     .object({
       /** Where UI components are written (e.g. "src/components/ui"). */
-      components: z.string().default(DEFAULT_COMPONENTS_DIR),
+      components: relativeProjectPath.default(DEFAULT_COMPONENTS_DIR),
       /** Where utility files are written (e.g. "src/lib"). */
-      utils: z.string().default(DEFAULT_UTILS_DIR),
+      utils: relativeProjectPath.default(DEFAULT_UTILS_DIR),
     })
     .default({}),
 })

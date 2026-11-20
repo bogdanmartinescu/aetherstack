@@ -65,6 +65,28 @@ describe("loadConfig", () => {
     writeFileSync(resolve(cwd, CONFIG_FILE_NAME), "{ not valid json")
     expect(() => loadConfig(cwd)).toThrow(/Failed to parse aether\.json/)
   })
+
+  it("rejects alias paths with parent-directory segments", () => {
+    writeFileSync(
+      resolve(cwd, CONFIG_FILE_NAME),
+      JSON.stringify({
+        registry: "https://example.com",
+        aliases: { components: "../outside", utils: "src/lib" },
+      }),
+    )
+    expect(() => loadConfig(cwd)).toThrow(/Failed to parse aether\.json/)
+  })
+
+  it("rejects absolute alias paths", () => {
+    writeFileSync(
+      resolve(cwd, CONFIG_FILE_NAME),
+      JSON.stringify({
+        registry: "https://example.com",
+        aliases: { components: "/tmp/ui", utils: "src/lib" },
+      }),
+    )
+    expect(() => loadConfig(cwd)).toThrow(/Failed to parse aether\.json/)
+  })
 })
 
 describe("writeConfig", () => {
