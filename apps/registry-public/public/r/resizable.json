@@ -1,0 +1,30 @@
+{
+  "name": "resizable",
+  "type": "registry:ui",
+  "title": "Resizable",
+  "description": "Draggable split-pane panels for adjustable layouts.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils",
+    "lucide-react",
+    "react-resizable-panels"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/resizable.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/resizable.tsx",
+      "content": "\"use client\"\n\nimport { Group, Panel, Separator } from \"react-resizable-panels\"\nimport type { GroupProps, SeparatorProps } from \"react-resizable-panels\"\nimport { GripVerticalIcon } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\nfunction ResizablePanelGroup({ className, ...props }: GroupProps) {\n  return (\n    <Group\n      className={cn(\n        \"flex h-full w-full data-[panel-group-direction=vertical]:flex-col\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\nResizablePanelGroup.displayName = \"ResizablePanelGroup\"\n\nconst ResizablePanel = Panel\n\ninterface ResizableHandleProps extends SeparatorProps {\n  withHandle?: boolean\n}\n\nfunction ResizableHandle({ className, withHandle, ...props }: ResizableHandleProps) {\n  return (\n    <Separator\n      className={cn(\n        \"relative flex w-px items-center justify-center bg-border\",\n        \"after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2\",\n        \"focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1\",\n        \"data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full\",\n        \"data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-1 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0\",\n        \"[&[data-panel-group-direction=vertical]>div]:rotate-90\",\n        className,\n      )}\n      {...props}\n    >\n      {withHandle && (\n        <div className=\"z-10 flex h-4 w-3 items-center justify-center rounded-sm border border-border bg-border\">\n          <GripVerticalIcon className=\"h-2.5 w-2.5\" />\n        </div>\n      )}\n    </Separator>\n  )\n}\nResizableHandle.displayName = \"ResizableHandle\"\n\nexport { ResizablePanelGroup, ResizablePanel, ResizableHandle }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Let the user resize adjacent panels by dragging a handle",
+    "prompts": [
+      "add resizable panels",
+      "add a split pane",
+      "add a draggable sidebar"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

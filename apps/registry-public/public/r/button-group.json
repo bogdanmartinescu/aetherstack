@@ -1,0 +1,27 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "title": "Button Group",
+  "description": "Segmented row of buttons with shared border treatment.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/button-group.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/button-group.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {\n  orientation?: \"horizontal\" | \"vertical\"\n}\n\nconst ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(\n  ({ className, orientation = \"horizontal\", ...props }, ref) => (\n    <div\n      ref={ref}\n      role=\"group\"\n      className={cn(\n        \"inline-flex\",\n        orientation === \"horizontal\"\n          ? [\n              \"flex-row\",\n              \"[&>*:not(:first-child)]:rounded-l-none\",\n              \"[&>*:not(:last-child)]:rounded-r-none\",\n              \"[&>*:not(:first-child)]:border-l-0\",\n            ]\n          : [\n              \"flex-col\",\n              \"[&>*:not(:first-child)]:rounded-t-none\",\n              \"[&>*:not(:last-child)]:rounded-b-none\",\n              \"[&>*:not(:first-child)]:border-t-0\",\n            ],\n        className,\n      )}\n      {...props}\n    />\n  ),\n)\nButtonGroup.displayName = \"ButtonGroup\"\n\nexport { ButtonGroup }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Group related actions in a connected button row",
+    "prompts": [
+      "add a button group",
+      "add segmented action buttons"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

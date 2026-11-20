@@ -5,12 +5,278 @@
   "version": "0.0.1",
   "items": [
     {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Vertically stacked set of interactive headings that each reveal a section of content.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-accordion",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/accordion.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/accordion.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Collapsible content sections for FAQs, settings panels, or any expandable content",
+        "prompts": [
+          "add an accordion",
+          "create a collapsible section",
+          "add an FAQ section",
+          "add expandable panels"
+        ],
+        "composition": [
+          "card",
+          "separator"
+        ],
+        "slots": [
+          "AccordionItem",
+          "AccordionTrigger",
+          "AccordionContent"
+        ]
+      }
+    },
+    {
+      "name": "account-settings",
+      "type": "registry:block",
+      "title": "Account Settings",
+      "description": "Profile settings form with avatar, name, email, and bio fields.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/account-settings.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/account-settings.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Let users update their profile information including avatar, name, email, and bio",
+        "prompts": [
+          "add account settings",
+          "add profile settings",
+          "add user settings form",
+          "add edit profile"
+        ],
+        "composition": [
+          "input",
+          "textarea",
+          "button",
+          "avatar",
+          "form-field"
+        ],
+        "slots": [
+          "defaultValues",
+          "onSave"
+        ]
+      }
+    },
+    {
+      "name": "activity-feed",
+      "type": "registry:pattern",
+      "title": "Activity Feed",
+      "description": "Vertical timeline of timestamped activity events with user avatars.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/activity-feed.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/activity-feed.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show a chronological feed of user actions or system events",
+        "prompts": [
+          "add an activity feed",
+          "show recent events",
+          "add an audit log",
+          "show user activity",
+          "add a timeline"
+        ],
+        "composition": [
+          "avatar",
+          "notification-center"
+        ],
+        "slots": [
+          "ActivityItem",
+          "items"
+        ]
+      }
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Contextual feedback banner with severity variants.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/alert.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/alert.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show inline status, warning, success, or error feedback",
+        "prompts": [
+          "add an alert",
+          "show a warning banner",
+          "add a success message",
+          "add an error alert"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "Blocking confirmation dialog for destructive actions.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@radix-ui/react-alert-dialog"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/alert-dialog.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Confirm a destructive or irreversible action before it runs",
+        "prompts": [
+          "add a confirm dialog",
+          "add a delete confirmation",
+          "add an alert dialog"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "animated-number",
+      "type": "registry:ui",
+      "title": "Animated Number",
+      "description": "A formatted number for money, percents, and live metrics.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/animated-number.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/animated-number.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show a formatted number for money, percents, and live metrics.",
+        "prompts": [
+          "add an animated number",
+          "roll a metric up to its value",
+          "add a number ticker"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "Constrains content to a fixed width/height ratio.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-aspect-ratio"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/aspect-ratio.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/aspect-ratio.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Keep media or embeds at a consistent aspect ratio",
+        "prompts": [
+          "add an aspect ratio box",
+          "constrain an image to 16:9"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "User image with fallback initials and stacked group variant.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-avatar",
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "status-dot"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/avatar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/avatar.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Display user profile images with graceful fallback to initials",
+        "prompts": [
+          "add a user avatar",
+          "show profile picture",
+          "add avatar with initials",
+          "show stacked user avatars"
+        ],
+        "composition": [
+          "badge",
+          "card",
+          "team-settings"
+        ],
+        "slots": [
+          "AvatarImage",
+          "AvatarFallback",
+          "AvatarGroup"
+        ]
+      }
+    },
+    {
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
       "description": "Status, category, or count label.",
       "author": "aetherstack",
-      "dependencies": ["class-variance-authority", "@aetherstack/utils"],
+      "dependencies": [
+        "class-variance-authority",
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/badge.tsx",
@@ -27,8 +293,54 @@
           "add a tag chip",
           "show a category badge"
         ],
-        "composition": ["button", "card", "table", "metric-card"],
-        "slots": ["children"]
+        "composition": [
+          "button",
+          "card",
+          "table",
+          "metric-card"
+        ],
+        "slots": [
+          "children"
+        ]
+      }
+    },
+    {
+      "name": "billing-overview",
+      "type": "registry:block",
+      "title": "Billing Overview",
+      "description": "Current plan, usage meters, and billing management block.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/billing-overview.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/billing-overview.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show subscription plan details, usage metrics, and billing management actions",
+        "prompts": [
+          "add a billing overview",
+          "show subscription details",
+          "add plan usage",
+          "add billing section"
+        ],
+        "composition": [
+          "progress",
+          "button",
+          "card",
+          "badge"
+        ],
+        "slots": [
+          "plan",
+          "usage",
+          "nextBillingDate",
+          "onUpgrade",
+          "onManageBilling"
+        ]
       }
     },
     {
@@ -60,8 +372,81 @@
           "add an icon button",
           "add a ghost button"
         ],
-        "composition": ["form-field", "dialog", "card", "page-header", "empty-state"],
-        "slots": ["children", "asChild"]
+        "composition": [
+          "form-field",
+          "dialog",
+          "card",
+          "page-header",
+          "empty-state"
+        ],
+        "slots": [
+          "children",
+          "asChild"
+        ]
+      }
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Segmented row of buttons with shared border treatment.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/button-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button-group.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Group related actions in a connected button row",
+        "prompts": [
+          "add a button group",
+          "add segmented action buttons"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Month-view date picker built on react-day-picker with full token styling.",
+      "author": "aetherstack",
+      "dependencies": [
+        "react-day-picker",
+        "date-fns",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Select a single date or date range from a month-view calendar",
+        "prompts": [
+          "add a date picker",
+          "add a calendar",
+          "select a date",
+          "add a date range picker"
+        ],
+        "composition": [
+          "button",
+          "combobox"
+        ],
+        "slots": [
+          "onSelect",
+          "selected",
+          "mode"
+        ]
       }
     },
     {
@@ -70,7 +455,9 @@
       "title": "Card",
       "description": "Surface container with header, content, and footer subcomponents.",
       "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/card.tsx",
@@ -87,8 +474,80 @@
           "wrap content in a card",
           "add a settings card"
         ],
-        "composition": ["metric-card", "login-block", "signup-block", "section-header"],
-        "slots": ["CardHeader", "CardTitle", "CardDescription", "CardContent", "CardFooter"]
+        "composition": [
+          "metric-card",
+          "login-block",
+          "signup-block",
+          "section-header"
+        ],
+        "slots": [
+          "CardHeader",
+          "CardTitle",
+          "CardDescription",
+          "CardContent",
+          "CardFooter"
+        ]
+      }
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Touch-friendly slider with previous and next controls.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "embla-carousel-react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/carousel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Browse a horizontal set of slides or cards",
+        "prompts": [
+          "add a carousel",
+          "add an image slider",
+          "add a product carousel"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "Recharts wrappers with token-based colors for bar, line, area, and pie charts.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "recharts"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/chart.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/chart.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Render a token-styled chart for dashboard metrics",
+        "prompts": [
+          "add a chart",
+          "add a bar chart",
+          "add a line chart",
+          "add a pie chart"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -97,7 +556,11 @@
       "title": "Checkbox",
       "description": "Binary toggle with indeterminate support, built on Radix UI.",
       "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-checkbox", "lucide-react", "@aetherstack/utils"],
+      "dependencies": [
+        "@radix-ui/react-checkbox",
+        "lucide-react",
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/checkbox.tsx",
@@ -113,8 +576,312 @@
           "add a remember me option",
           "add a multi-select checkbox list"
         ],
-        "composition": ["form-field", "label", "login-block"],
-        "slots": ["checked", "onCheckedChange"]
+        "composition": [
+          "form-field",
+          "label",
+          "login-block"
+        ],
+        "slots": [
+          "checked",
+          "onCheckedChange"
+        ]
+      }
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Show and hide a content region with a trigger.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-collapsible"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/collapsible.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/collapsible.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Expand or collapse a section of content",
+        "prompts": [
+          "add a collapsible section",
+          "add an expandable panel"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:pattern",
+      "title": "Color Picker",
+      "description": "Hex color input with preset swatches and native color picker.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/color-picker.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/color-picker.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Let users select or input a color using hex input, native picker, or preset swatches",
+        "prompts": [
+          "add a color picker",
+          "add a color selector",
+          "pick a hex color",
+          "add theme color input"
+        ],
+        "composition": [
+          "button",
+          "input"
+        ],
+        "slots": [
+          "value",
+          "onChange",
+          "presets"
+        ]
+      }
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Autocomplete select with search, powered by cmdk and Radix Popover.",
+      "author": "aetherstack",
+      "dependencies": [
+        "cmdk",
+        "@radix-ui/react-popover",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/combobox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Searchable dropdown select for large option sets with async support",
+        "prompts": [
+          "add a combobox",
+          "add a searchable select",
+          "add autocomplete input",
+          "add a filterable dropdown"
+        ],
+        "composition": [
+          "button",
+          "command-palette"
+        ],
+        "slots": [
+          "ComboboxTrigger",
+          "ComboboxContent",
+          "ComboboxInput",
+          "ComboboxItem",
+          "ComboboxEmpty"
+        ]
+      }
+    },
+    {
+      "name": "command-palette",
+      "type": "registry:pattern",
+      "title": "Command Palette",
+      "description": "⌘K fuzzy-search command surface built on cmdk.",
+      "author": "aetherstack",
+      "dependencies": [
+        "cmdk",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/command-palette.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/command-palette.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Open a keyboard-driven search palette for quick navigation and action execution",
+        "prompts": [
+          "add a command palette",
+          "add cmd+k search",
+          "add a quick search",
+          "add keyboard navigation"
+        ],
+        "composition": [
+          "dialog",
+          "combobox",
+          "scroll-area"
+        ],
+        "slots": [
+          "CommandPaletteInput",
+          "CommandGroup",
+          "CommandItem",
+          "CommandPaletteDialog"
+        ]
+      }
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Right-click contextual menu with nested submenus and keyboard navigation.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-context-menu",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/context-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/context-menu.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show a contextual right-click menu with actions for a target element",
+        "prompts": [
+          "add a right-click menu",
+          "add a context menu",
+          "show contextual actions"
+        ],
+        "composition": [
+          "dropdown-menu",
+          "separator"
+        ],
+        "slots": [
+          "ContextMenuTrigger",
+          "ContextMenuContent",
+          "ContextMenuItem",
+          "ContextMenuSeparator"
+        ]
+      }
+    },
+    {
+      "name": "dashboard-shell",
+      "type": "registry:block",
+      "title": "Dashboard Shell",
+      "description": "Full-page SaaS dashboard layout with collapsible sidebar, topbar with search and notifications, and a content slot.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@aetherstack/ui",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "input"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/dashboard-shell.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/dashboard-shell.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Full-page SaaS app shell with a collapsible sidebar, search topbar, and a main content slot",
+        "prompts": [
+          "build me a SaaS dashboard",
+          "add a dashboard layout",
+          "create an admin panel shell",
+          "add a sidebar navigation layout",
+          "add a full-page app layout with a sidebar",
+          "build an internal tool layout"
+        ],
+        "composition": [
+          "nav",
+          "metric-card",
+          "table-toolbar",
+          "table",
+          "page-header"
+        ],
+        "slots": [
+          "children",
+          "sidebar",
+          "topbar"
+        ]
+      }
+    },
+    {
+      "name": "data-table",
+      "type": "registry:pattern",
+      "title": "Data Table",
+      "description": "Sortable, searchable, and paginated data table with column configuration.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/data-table.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/data-table.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Display tabular data with sorting, search filtering, and pagination",
+        "prompts": [
+          "add a data table",
+          "show a sortable table",
+          "add a paginated list",
+          "add a users table",
+          "create a data grid"
+        ],
+        "composition": [
+          "table",
+          "input",
+          "button",
+          "pagination",
+          "table-toolbar"
+        ],
+        "slots": [
+          "columns",
+          "data",
+          "pageSize",
+          "searchable",
+          "searchKeys"
+        ]
+      }
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Date selection field composed from Calendar and Popover.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "calendar",
+        "popover"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/date-picker.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Let the user pick a single date from a calendar popover",
+        "prompts": [
+          "add a date picker",
+          "add a calendar input",
+          "pick a date"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -123,7 +890,11 @@
       "title": "Dialog",
       "description": "Modal window with focus trap and backdrop.",
       "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-dialog", "lucide-react", "@aetherstack/utils"],
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "lucide-react",
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/dialog.tsx",
@@ -140,8 +911,366 @@
           "add a dialog with a form",
           "create an alert dialog"
         ],
-        "composition": ["button", "form-field", "input"],
-        "slots": ["DialogTrigger", "DialogContent", "DialogHeader", "DialogTitle", "DialogDescription", "DialogFooter"]
+        "composition": [
+          "button",
+          "form-field",
+          "input"
+        ],
+        "slots": [
+          "DialogTrigger",
+          "DialogContent",
+          "DialogHeader",
+          "DialogTitle",
+          "DialogDescription",
+          "DialogFooter"
+        ]
+      }
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Bottom-sheet drawer with drag-to-dismiss.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "vaul"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/drawer.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/drawer.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Present a mobile-friendly sheet that slides up from the bottom",
+        "prompts": [
+          "add a drawer",
+          "add a bottom sheet",
+          "add a mobile drawer"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Accessible dropdown menu with submenus, checkboxes, radio items, and shortcuts.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-dropdown-menu",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dropdown-menu.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show a list of actions or options in a floating dropdown triggered by a button",
+        "prompts": [
+          "add a dropdown menu",
+          "add action menu",
+          "add options menu",
+          "add a kebab menu",
+          "add more actions"
+        ],
+        "composition": [
+          "button",
+          "separator",
+          "badge"
+        ],
+        "slots": [
+          "DropdownMenuTrigger",
+          "DropdownMenuContent",
+          "DropdownMenuItem",
+          "DropdownMenuSeparator",
+          "DropdownMenuLabel"
+        ]
+      }
+    },
+    {
+      "name": "empty-dashboard",
+      "type": "registry:block",
+      "title": "Empty Dashboard",
+      "description": "Welcoming empty state for a dashboard with no data, with action slots.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/empty-dashboard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/empty-dashboard.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show a welcoming placeholder when a dashboard has no data yet",
+        "prompts": [
+          "add an empty dashboard",
+          "show empty state for dashboard",
+          "add a welcome screen",
+          "add a getting started screen"
+        ],
+        "composition": [
+          "empty-state",
+          "button"
+        ],
+        "slots": [
+          "title",
+          "description",
+          "actions"
+        ]
+      }
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:pattern",
+      "title": "Empty State",
+      "description": "Icon, title, description and optional CTA for zero-data views.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/empty-state.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/empty-state.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show a helpful empty-view when a list or collection has no data yet",
+        "prompts": [
+          "add an empty state",
+          "show a no results message",
+          "add a zero-data placeholder",
+          "add an empty list with a create button",
+          "add a no users found state"
+        ],
+        "composition": [
+          "button",
+          "card"
+        ],
+        "slots": [
+          "icon",
+          "title",
+          "description",
+          "action"
+        ]
+      }
+    },
+    {
+      "name": "error-state",
+      "type": "registry:pattern",
+      "title": "Error State",
+      "description": "Error icon, title, description and retry CTA.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/error-state.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/error-state.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Communicate a data-loading or network failure and offer a retry action",
+        "prompts": [
+          "add an error state",
+          "show an error message with a retry button",
+          "add a fetch error fallback",
+          "add an error boundary UI"
+        ],
+        "composition": [
+          "button"
+        ],
+        "slots": [
+          "title",
+          "description",
+          "onRetry"
+        ]
+      }
+    },
+    {
+      "name": "file-dropzone",
+      "type": "registry:pattern",
+      "title": "File Dropzone",
+      "description": "Drag-and-drop file upload zone with click-to-browse fallback.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/file-dropzone.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/file-dropzone.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Let users upload files by dragging them onto a target zone or clicking to browse",
+        "prompts": [
+          "add a file upload",
+          "add a drag and drop zone",
+          "add a file picker",
+          "add an image uploader"
+        ],
+        "composition": [
+          "button"
+        ],
+        "slots": [
+          "onFilesSelected",
+          "accept",
+          "multiple",
+          "maxSize"
+        ]
+      }
+    },
+    {
+      "name": "floating-dock",
+      "type": "registry:ui",
+      "title": "Floating Dock",
+      "description": "Pin a small panel to a corner of the screen or a parent.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/floating-dock.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/floating-dock.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Pin a small panel to a corner of the screen or a parent.",
+        "prompts": [
+          "add a floating dock",
+          "pin a player to the corner"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "form-field",
+      "type": "registry:pattern",
+      "title": "Form Field",
+      "description": "Label + control + helper text + error message composition with context hook.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@aetherstack/ui"
+      ],
+      "registryDependencies": [
+        "label"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/form-field.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/form-field.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Compose a labelled form control with helper text and validation error message",
+        "prompts": [
+          "add a form field with validation",
+          "add an email field with error message",
+          "add a labelled input with helper text",
+          "add form fields for a settings form",
+          "add a password field with requirements hint"
+        ],
+        "composition": [
+          "input",
+          "textarea",
+          "select",
+          "checkbox",
+          "switch",
+          "label"
+        ],
+        "slots": [
+          "FormLabel",
+          "FormControl",
+          "FormDescription",
+          "FormMessage",
+          "children"
+        ]
+      }
+    },
+    {
+      "name": "heatmap",
+      "type": "registry:ui",
+      "title": "Heatmap",
+      "description": "A grid of values, such as weekday by hour, inspected from the keyboard.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/heatmap.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/heatmap.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show a grid of values, such as weekday by hour, with keyboard inspection.",
+        "prompts": [
+          "add a heatmap",
+          "show activity by hour"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Rich preview card that appears on hover over a trigger element.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-hover-card",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/hover-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/hover-card.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show a rich preview popup when hovering over a link or user mention",
+        "prompts": [
+          "add a hover card",
+          "show preview on hover",
+          "add user card preview",
+          "show tooltip with content"
+        ],
+        "composition": [
+          "avatar",
+          "card",
+          "tooltip"
+        ],
+        "slots": [
+          "HoverCardTrigger",
+          "HoverCardContent"
+        ]
       }
     },
     {
@@ -150,7 +1279,9 @@
       "title": "Input",
       "description": "Single-line text field supporting all HTML input types.",
       "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/input.tsx",
@@ -167,8 +1298,138 @@
           "add a password field",
           "add a name input"
         ],
-        "composition": ["form-field", "label", "table-toolbar", "login-block", "signup-block"],
-        "slots": ["value", "onChange", "placeholder", "type"]
+        "composition": [
+          "form-field",
+          "label",
+          "table-toolbar",
+          "login-block",
+          "signup-block"
+        ],
+        "slots": [
+          "value",
+          "onChange",
+          "placeholder",
+          "type"
+        ]
+      }
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Input with left and right addon slots for icons and labels.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/input-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-group.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Compose an input with leading or trailing addons",
+        "prompts": [
+          "add an input with an icon",
+          "add an input group",
+          "add a prefixed input"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "Input OTP",
+      "description": "One-time password input with individual digit slots.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "input-otp",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-otp.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Collect a one-time passcode one character at a time",
+        "prompts": [
+          "add an OTP input",
+          "add a verification code field",
+          "add a PIN input"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "kanban",
+      "type": "registry:pattern",
+      "title": "Kanban Board",
+      "description": "Drag-and-drop kanban columns using native HTML5 drag events.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/kanban.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/kanban.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Organize items into drag-and-drop status columns for task management",
+        "prompts": [
+          "add a kanban board",
+          "add a task board",
+          "add drag and drop columns",
+          "add a project board"
+        ],
+        "composition": [
+          "card",
+          "badge"
+        ],
+        "slots": [
+          "KanbanColumn",
+          "KanbanCard",
+          "KanbanBoard",
+          "columns"
+        ]
+      }
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Keyboard key badge for shortcuts and hotkeys.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/kbd.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kbd.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Display a keyboard shortcut as a key badge",
+        "prompts": [
+          "add a keyboard shortcut badge",
+          "show a hotkey",
+          "add a kbd element"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -177,7 +1438,11 @@
       "title": "Label",
       "description": "Accessible form label built on Radix UI.",
       "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-label", "class-variance-authority", "@aetherstack/utils"],
+      "dependencies": [
+        "@radix-ui/react-label",
+        "class-variance-authority",
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/label.tsx",
@@ -192,8 +1457,583 @@
           "label an input field",
           "add an accessible label"
         ],
-        "composition": ["form-field", "input", "checkbox", "radio-group", "switch"],
-        "slots": ["children", "htmlFor"]
+        "composition": [
+          "form-field",
+          "input",
+          "checkbox",
+          "radio-group",
+          "switch"
+        ],
+        "slots": [
+          "children",
+          "htmlFor"
+        ]
+      }
+    },
+    {
+      "name": "loading-state",
+      "type": "registry:pattern",
+      "title": "Loading State",
+      "description": "Centered spinner or skeleton-row variant for async loading.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@aetherstack/ui"
+      ],
+      "registryDependencies": [
+        "skeleton"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/loading-state.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/loading-state.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Display a centered loading indicator while async data is being fetched",
+        "prompts": [
+          "add a loading state",
+          "show a spinner while data loads",
+          "add a loading indicator",
+          "add skeleton rows while loading"
+        ],
+        "composition": [
+          "skeleton"
+        ],
+        "slots": [
+          "variant",
+          "rows"
+        ]
+      }
+    },
+    {
+      "name": "login-block",
+      "type": "registry:block",
+      "title": "Login",
+      "description": "Centered login card with email, password, remember-me, and forgot-password link.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@aetherstack/ui",
+        "@aetherstack/patterns"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "checkbox",
+        "label",
+        "form-field"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/login-block.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/login-block.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Ready-made login page block with email, password, remember-me, and forgot-password",
+        "prompts": [
+          "add a login page",
+          "create an authentication screen",
+          "add a sign-in form",
+          "build a login card",
+          "add an email and password login"
+        ],
+        "composition": [
+          "form-field",
+          "input",
+          "button",
+          "checkbox",
+          "label"
+        ],
+        "slots": [
+          "onSubmit",
+          "onForgotPassword",
+          "footer"
+        ]
+      }
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "Horizontal application menu bar with nested menus.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@radix-ui/react-menubar",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/menubar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/menubar.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Provide a desktop-style top menubar for application commands",
+        "prompts": [
+          "add a menubar",
+          "add an application menu",
+          "add a File Edit menu"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "metric-card",
+      "type": "registry:pattern",
+      "title": "Metric Card",
+      "description": "Dashboard stat card: label, value, trend badge, icon.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@aetherstack/ui"
+      ],
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/metric-card.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/metric-card.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show a single KPI metric with a label, value, trend indicator, and icon",
+        "prompts": [
+          "add a metric card",
+          "add a KPI card",
+          "add a stat card with a trend",
+          "show a dashboard metric",
+          "add a revenue card",
+          "add a users count card"
+        ],
+        "composition": [
+          "card",
+          "badge",
+          "dashboard-shell"
+        ],
+        "slots": [
+          "label",
+          "value",
+          "trend",
+          "icon",
+          "description"
+        ]
+      }
+    },
+    {
+      "name": "nav",
+      "type": "registry:pattern",
+      "title": "Sidebar Nav",
+      "description": "NavItem, NavGroup, and SidebarNav composable building blocks.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/nav.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/nav.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Build a composable sidebar navigation with grouped nav items and active states",
+        "prompts": [
+          "add a sidebar navigation",
+          "add nav items to a sidebar",
+          "add a grouped sidebar menu",
+          "add navigation links with icons",
+          "add a sidebar nav with sections"
+        ],
+        "composition": [
+          "dashboard-shell",
+          "badge"
+        ],
+        "slots": [
+          "NavItem",
+          "NavGroup",
+          "SidebarNav",
+          "items",
+          "groups"
+        ]
+      }
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "Accessible site navigation with optional dropdown panels.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@radix-ui/react-navigation-menu",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/navigation-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/navigation-menu.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Build the primary site or product navigation",
+        "prompts": [
+          "add a navigation menu",
+          "add a navbar dropdown",
+          "add site navigation"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "notification-center",
+      "type": "registry:block",
+      "title": "Notification Center",
+      "description": "In-app notification feed with read/unread state and dismiss actions.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/notification-center.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/notification-center.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Display a list of in-app notifications with read state and dismiss controls",
+        "prompts": [
+          "add a notification center",
+          "show notifications",
+          "add in-app notifications",
+          "add alerts feed"
+        ],
+        "composition": [
+          "badge",
+          "button",
+          "activity-feed"
+        ],
+        "slots": [
+          "notifications",
+          "onMarkRead",
+          "onMarkAllRead",
+          "onDismiss"
+        ]
+      }
+    },
+    {
+      "name": "onboarding-checklist",
+      "type": "registry:block",
+      "title": "Onboarding Checklist",
+      "description": "Step-by-step onboarding widget with progress tracking and checkbox steps.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/onboarding-checklist.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/onboarding-checklist.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Guide new users through setup tasks with a checklist and progress bar",
+        "prompts": [
+          "add an onboarding checklist",
+          "add a getting started guide",
+          "add setup steps",
+          "add a progress checklist"
+        ],
+        "composition": [
+          "checkbox",
+          "progress",
+          "stepper"
+        ],
+        "slots": [
+          "steps",
+          "onStepToggle",
+          "title",
+          "description"
+        ]
+      }
+    },
+    {
+      "name": "page-header",
+      "type": "registry:pattern",
+      "title": "Page Header",
+      "description": "Title, description, optional breadcrumb, and actions slot. Includes Breadcrumb.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/page-header.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/page-header.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Top-of-page heading block with title, description, optional breadcrumb, and an actions area",
+        "prompts": [
+          "add a page header",
+          "add a page title with a breadcrumb",
+          "add a header with an action button",
+          "add a dashboard page header",
+          "add a settings page title area"
+        ],
+        "composition": [
+          "button",
+          "badge",
+          "section-header"
+        ],
+        "slots": [
+          "title",
+          "description",
+          "breadcrumb",
+          "actions"
+        ]
+      }
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Accessible pagination navigation with previous, next, and page links.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pagination.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Navigate between pages of content with previous, next, and numbered page links",
+        "prompts": [
+          "add pagination",
+          "add page navigation",
+          "add next previous buttons",
+          "paginate a list"
+        ],
+        "composition": [
+          "button",
+          "data-table"
+        ],
+        "slots": [
+          "PaginationPrevious",
+          "PaginationNext",
+          "PaginationLink",
+          "PaginationEllipsis"
+        ]
+      }
+    },
+    {
+      "name": "password-field",
+      "type": "registry:ui",
+      "title": "Password Field",
+      "description": "Password input with a show/hide toggle and a Caps Lock warning.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "input",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/password-field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/password-field.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Collect a password with a show/hide toggle and a Caps Lock warning.",
+        "prompts": [
+          "add a password field",
+          "add a show password toggle"
+        ],
+        "composition": [
+          "input",
+          "button"
+        ],
+        "slots": []
+      }
+    },
+    {
+      "name": "password-strength",
+      "type": "registry:ui",
+      "title": "Password Strength",
+      "description": "Score a password and generate one that passes the rules.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/password-strength.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/password-strength.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show how strong a password is and generate one that passes the rules.",
+        "prompts": [
+          "add a password strength meter",
+          "generate a strong password"
+        ],
+        "composition": [
+          "button"
+        ],
+        "slots": []
+      }
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Floating overlay anchored to a trigger for detail panels.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@radix-ui/react-popover"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/popover.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/popover.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show anchored contextual content without blocking the page",
+        "prompts": [
+          "add a popover",
+          "add a floating panel",
+          "add an anchored detail card"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "pricing-section",
+      "type": "registry:block",
+      "title": "Pricing Section",
+      "description": "Responsive pricing tier cards for marketing and landing pages.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/pricing-section.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/pricing-section.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show pricing tiers with feature lists and CTA buttons for a marketing or landing page",
+        "prompts": [
+          "add a pricing section",
+          "add pricing plans",
+          "show subscription tiers",
+          "add a pricing table"
+        ],
+        "composition": [
+          "badge",
+          "button",
+          "card"
+        ],
+        "slots": [
+          "tiers",
+          "title",
+          "description"
+        ]
+      }
+    },
+    {
+      "name": "priority-bars",
+      "type": "registry:ui",
+      "title": "Priority Bars",
+      "description": "Priority shown as rising bars, or an urgent mark.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/priority-bars.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/priority-bars.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show low, medium, high, or urgent priority beside a row.",
+        "prompts": [
+          "add a priority indicator",
+          "show task priority"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Linear progress bar with smooth animation and accessible role.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-progress",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/progress.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/progress.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show completion percentage of a task or upload as a horizontal bar",
+        "prompts": [
+          "add a progress bar",
+          "show upload progress",
+          "show task completion",
+          "add a loading bar"
+        ],
+        "composition": [
+          "billing-overview",
+          "onboarding-checklist"
+        ],
+        "slots": [
+          "value"
+        ]
       }
     },
     {
@@ -202,7 +2042,11 @@
       "title": "Radio Group",
       "description": "Single-select control over a set of options.",
       "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-radio-group", "lucide-react", "@aetherstack/utils"],
+      "dependencies": [
+        "@radix-ui/react-radio-group",
+        "lucide-react",
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/radio-group.tsx",
@@ -218,8 +2062,147 @@
           "add a single-choice option list",
           "add a payment method selector"
         ],
-        "composition": ["form-field", "label"],
-        "slots": ["value", "onValueChange", "RadioGroupItem"]
+        "composition": [
+          "form-field",
+          "label"
+        ],
+        "slots": [
+          "value",
+          "onValueChange",
+          "RadioGroupItem"
+        ]
+      }
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Draggable split-pane panels for adjustable layouts.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react",
+        "react-resizable-panels"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/resizable.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/resizable.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Let the user resize adjacent panels by dragging a handle",
+        "prompts": [
+          "add resizable panels",
+          "add a split pane",
+          "add a draggable sidebar"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Custom-styled scroll container with consistent cross-browser scrollbar appearance.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-scroll-area",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/scroll-area.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Wrap content that overflows with a styled, accessible scroll container",
+        "prompts": [
+          "add a scroll area",
+          "make content scrollable",
+          "add a custom scrollbar"
+        ],
+        "composition": [
+          "command-palette",
+          "activity-feed"
+        ],
+        "slots": [
+          "children",
+          "ScrollBar"
+        ]
+      }
+    },
+    {
+      "name": "section-header",
+      "type": "registry:pattern",
+      "title": "Section Header",
+      "description": "Lightweight block heading with optional action. Includes SettingsSection.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/section-header.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/section-header.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Label a content section with a title and optional action, or wrap it in a SettingsSection",
+        "prompts": [
+          "add a section heading",
+          "add a settings section",
+          "add a content block title",
+          "add a section with a title and description",
+          "wrap settings fields in a section"
+        ],
+        "composition": [
+          "card",
+          "form-field",
+          "button"
+        ],
+        "slots": [
+          "title",
+          "description",
+          "action",
+          "children"
+        ]
+      }
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented Control",
+      "description": "Single-select control with a sliding thumb.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "radio-group"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/segmented-control.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/segmented-control.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Pick one of a few options with a sliding thumb.",
+        "prompts": [
+          "add a segmented control",
+          "add a day week month switch"
+        ],
+        "composition": [
+          "radio-group"
+        ],
+        "slots": []
       }
     },
     {
@@ -228,7 +2211,11 @@
       "title": "Select",
       "description": "Accessible single-select dropdown built on Radix UI.",
       "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-select", "lucide-react", "@aetherstack/utils"],
+      "dependencies": [
+        "@radix-ui/react-select",
+        "lucide-react",
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/select.tsx",
@@ -244,8 +2231,52 @@
           "add a role selector",
           "add a dropdown menu for filtering"
         ],
-        "composition": ["form-field", "label", "table-toolbar"],
-        "slots": ["SelectTrigger", "SelectContent", "SelectItem", "value", "onValueChange"]
+        "composition": [
+          "form-field",
+          "label",
+          "table-toolbar"
+        ],
+        "slots": [
+          "SelectTrigger",
+          "SelectContent",
+          "SelectItem",
+          "value",
+          "onValueChange"
+        ]
+      }
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Thin horizontal or vertical divider line.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-separator",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/separator.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/separator.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Visually separate groups of content with a thin divider line",
+        "prompts": [
+          "add a divider",
+          "add a separator",
+          "separate content sections"
+        ],
+        "composition": [
+          "dropdown-menu",
+          "card",
+          "sidebar-nav"
+        ],
+        "slots": [
+          "orientation"
+        ]
       }
     },
     {
@@ -254,7 +2285,12 @@
       "title": "Sheet",
       "description": "Slide-in panel from any screen edge.",
       "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-dialog", "class-variance-authority", "lucide-react", "@aetherstack/utils"],
+      "dependencies": [
+        "@radix-ui/react-dialog",
+        "class-variance-authority",
+        "lucide-react",
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/sheet.tsx",
@@ -271,8 +2307,97 @@
           "add a mobile navigation drawer",
           "add an edit panel that slides in from the right"
         ],
-        "composition": ["button", "form-field", "input"],
-        "slots": ["SheetTrigger", "SheetContent", "SheetHeader", "SheetTitle", "SheetDescription", "SheetFooter", "side"]
+        "composition": [
+          "button",
+          "form-field",
+          "input"
+        ],
+        "slots": [
+          "SheetTrigger",
+          "SheetContent",
+          "SheetHeader",
+          "SheetTitle",
+          "SheetDescription",
+          "SheetFooter",
+          "side"
+        ]
+      }
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "Application sidebar with collapse, inset, and mobile sheet modes.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@radix-ui/react-slot",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/sidebar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sidebar.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Provide the primary app navigation sidebar shell",
+        "prompts": [
+          "add a sidebar",
+          "add an app shell sidebar",
+          "add a collapsible nav"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "signup-block",
+      "type": "registry:block",
+      "title": "Sign Up",
+      "description": "Sign-up form with name, email, password fields, validation, and terms/privacy links.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "@aetherstack/ui",
+        "@aetherstack/patterns"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "form-field"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/signup-block.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/signup-block.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Ready-made sign-up page block with name, email, password validation, and terms acceptance",
+        "prompts": [
+          "add a sign up page",
+          "create a registration form",
+          "add a new account form",
+          "build a user registration screen"
+        ],
+        "composition": [
+          "form-field",
+          "input",
+          "button",
+          "checkbox"
+        ],
+        "slots": [
+          "onSubmit",
+          "onSignIn",
+          "footer"
+        ]
       }
     },
     {
@@ -281,7 +2406,9 @@
       "title": "Skeleton",
       "description": "Loading placeholder that mimics content shape.",
       "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/skeleton.tsx",
@@ -297,8 +2424,237 @@
           "add a skeleton card",
           "show loading state with skeleton"
         ],
-        "composition": ["loading-state", "card", "table"],
-        "slots": ["className"]
+        "composition": [
+          "loading-state",
+          "card",
+          "table"
+        ],
+        "slots": [
+          "className"
+        ]
+      }
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Range input slider with accessible keyboard navigation.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-slider",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/slider.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Let users select a numeric value within a range by dragging a thumb",
+        "prompts": [
+          "add a slider",
+          "add a range input",
+          "add a volume control",
+          "add a price range slider"
+        ],
+        "composition": [
+          "form-field"
+        ],
+        "slots": [
+          "value",
+          "onValueChange",
+          "min",
+          "max",
+          "step"
+        ]
+      }
+    },
+    {
+      "name": "social-button",
+      "type": "registry:ui",
+      "title": "Social Button",
+      "description": "Sign in or sign up with a named provider.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/social-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/social-button.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Start a sign-in or sign-up with a named provider.",
+        "prompts": [
+          "add a Google sign in button",
+          "add social login"
+        ],
+        "composition": [
+          "button"
+        ],
+        "slots": []
+      }
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "Opinionated toast queue with promise support.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "sonner"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/sonner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sonner.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show stacked toast notifications including promise states",
+        "prompts": [
+          "add sonner toasts",
+          "add a toast queue",
+          "add promise toasts"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Animated loading indicator with four sizes.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/spinner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/spinner.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Indicate that a short action or region is loading",
+        "prompts": [
+          "add a spinner",
+          "add a loading indicator",
+          "show a loading spinner"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "stat-group",
+      "type": "registry:pattern",
+      "title": "Stat Group",
+      "description": "Responsive grid of metric stats with value, label, and optional trend delta.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/stat-group.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/stat-group.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Display multiple key metrics side-by-side in a responsive stat grid",
+        "prompts": [
+          "add a stats row",
+          "show key metrics",
+          "add KPI cards",
+          "show stat overview",
+          "add a metrics grid"
+        ],
+        "composition": [
+          "metric-card",
+          "card"
+        ],
+        "slots": [
+          "StatItem",
+          "cols"
+        ]
+      }
+    },
+    {
+      "name": "status-dot",
+      "type": "registry:ui",
+      "title": "Status Dot",
+      "description": "Coloured status dot with a spoken label.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/status-dot.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/status-dot.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show whether a person, service, or job is idle, busy, blocked, failed, or finished.",
+        "prompts": [
+          "add a status dot",
+          "show if a user is online",
+          "add a presence indicator"
+        ],
+        "composition": [
+          "avatar"
+        ],
+        "slots": []
+      }
+    },
+    {
+      "name": "stepper",
+      "type": "registry:pattern",
+      "title": "Stepper",
+      "description": "Multi-step progress indicator for wizards and onboarding flows.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/stepper.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/stepper.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show progress through a multi-step form or onboarding wizard",
+        "prompts": [
+          "add a stepper",
+          "add a wizard",
+          "add multi-step form progress",
+          "add onboarding steps"
+        ],
+        "composition": [
+          "onboarding-checklist"
+        ],
+        "slots": [
+          "steps",
+          "currentStep",
+          "orientation"
+        ]
       }
     },
     {
@@ -307,7 +2663,10 @@
       "title": "Switch",
       "description": "On/off slide toggle built on Radix UI.",
       "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-switch", "@aetherstack/utils"],
+      "dependencies": [
+        "@radix-ui/react-switch",
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/switch.tsx",
@@ -323,8 +2682,14 @@
           "add a notifications on/off switch",
           "add a feature flag toggle"
         ],
-        "composition": ["form-field", "label"],
-        "slots": ["checked", "onCheckedChange"]
+        "composition": [
+          "form-field",
+          "label"
+        ],
+        "slots": [
+          "checked",
+          "onCheckedChange"
+        ]
       }
     },
     {
@@ -333,7 +2698,9 @@
       "title": "Table",
       "description": "Semantic data table with header, body, and footer subcomponents.",
       "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/table.tsx",
@@ -349,8 +2716,59 @@
           "add a table with sortable columns",
           "display records in a table"
         ],
-        "composition": ["table-toolbar", "badge", "button", "skeleton"],
-        "slots": ["TableHeader", "TableBody", "TableRow", "TableHead", "TableCell", "TableFooter"]
+        "composition": [
+          "table-toolbar",
+          "badge",
+          "button",
+          "skeleton"
+        ],
+        "slots": [
+          "TableHeader",
+          "TableBody",
+          "TableRow",
+          "TableHead",
+          "TableCell",
+          "TableFooter"
+        ]
+      }
+    },
+    {
+      "name": "table-toolbar",
+      "type": "registry:pattern",
+      "title": "Table Toolbar",
+      "description": "Search + filter + actions layout above a Table. Includes FilterToolbar and FilterPill.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/patterns/src/components/table-toolbar.tsx",
+          "type": "registry:pattern",
+          "target": "components/patterns/table-toolbar.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Provide a search input, active filter pills, and action buttons above a data table",
+        "prompts": [
+          "add a table toolbar with search and filters",
+          "add a search bar above a table",
+          "add filter chips to a data table",
+          "add table actions toolbar"
+        ],
+        "composition": [
+          "table",
+          "input",
+          "button",
+          "badge",
+          "select"
+        ],
+        "slots": [
+          "search",
+          "filters",
+          "actions",
+          "FilterPill"
+        ]
       }
     },
     {
@@ -359,7 +2777,10 @@
       "title": "Tabs",
       "description": "Layered content panels with tab navigation.",
       "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-tabs", "@aetherstack/utils"],
+      "dependencies": [
+        "@radix-ui/react-tabs",
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/tabs.tsx",
@@ -375,8 +2796,16 @@
           "add a settings page with tabs",
           "add a profile page with tabs for overview and activity"
         ],
-        "composition": ["card", "section-header"],
-        "slots": ["TabsList", "TabsTrigger", "TabsContent", "defaultValue"]
+        "composition": [
+          "card",
+          "section-header"
+        ],
+        "slots": [
+          "TabsList",
+          "TabsTrigger",
+          "TabsContent",
+          "defaultValue"
+        ]
       }
     },
     {
@@ -385,7 +2814,10 @@
       "title": "Tag",
       "description": "Selectable and removable chips with roving focus.",
       "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "lucide-react"],
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -396,9 +2828,55 @@
       ],
       "ai": {
         "intent": "Filter or label a collection with quiet chips the user can select or remove.",
-        "prompts": ["add tags", "add removable chips", "add a tag group"],
+        "prompts": [
+          "add tags",
+          "add removable chips",
+          "add a tag group"
+        ],
         "composition": [],
-        "slots": ["Tag", "TagGroup"]
+        "slots": [
+          "Tag",
+          "TagGroup"
+        ]
+      }
+    },
+    {
+      "name": "team-settings",
+      "type": "registry:block",
+      "title": "Team Settings",
+      "description": "Team member management with invite form, role management, and member list.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/blocks/src/components/team-settings.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-settings.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Manage team members, invite new members by email, and assign roles",
+        "prompts": [
+          "add team settings",
+          "add team member management",
+          "add invite team members",
+          "add user roles"
+        ],
+        "composition": [
+          "avatar",
+          "badge",
+          "select",
+          "input",
+          "button"
+        ],
+        "slots": [
+          "members",
+          "onInvite",
+          "onRoleChange",
+          "onRemove"
+        ]
       }
     },
     {
@@ -407,7 +2885,9 @@
       "title": "Textarea",
       "description": "Multi-line text field.",
       "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/textarea.tsx",
@@ -424,8 +2904,16 @@
           "add a notes field",
           "add a bio input"
         ],
-        "composition": ["form-field", "label"],
-        "slots": ["value", "onChange", "placeholder", "rows"]
+        "composition": [
+          "form-field",
+          "label"
+        ],
+        "slots": [
+          "value",
+          "onChange",
+          "placeholder",
+          "rows"
+        ]
       }
     },
     {
@@ -434,7 +2922,10 @@
       "title": "Time Slots",
       "description": "Pick one bookable time and confirm it.",
       "author": "aetherstack",
-      "registryDependencies": ["radio-group", "button"],
+      "registryDependencies": [
+        "radio-group",
+        "button"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/time-slots.tsx",
@@ -444,8 +2935,14 @@
       ],
       "ai": {
         "intent": "Pick one bookable time and confirm it.",
-        "prompts": ["add time slots", "add a booking time picker"],
-        "composition": ["radio-group", "button"],
+        "prompts": [
+          "add time slots",
+          "add a booking time picker"
+        ],
+        "composition": [
+          "radio-group",
+          "button"
+        ],
         "slots": []
       }
     },
@@ -464,9 +2961,129 @@
       ],
       "ai": {
         "intent": "Move one marker along a time range.",
-        "prompts": ["add a timeline scrubber", "scrub a recording"],
+        "prompts": [
+          "add a timeline scrubber",
+          "scrub a recording"
+        ],
         "composition": [],
         "slots": []
+      }
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Transient notification messages with default and destructive variants.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-toast",
+        "class-variance-authority",
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/toast.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toast.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show brief non-blocking notifications at the bottom of the screen",
+        "prompts": [
+          "add a toast notification",
+          "show a success toast",
+          "add a notification",
+          "show an error toast"
+        ],
+        "composition": [
+          "button"
+        ],
+        "slots": [
+          "ToastTitle",
+          "ToastDescription",
+          "ToastAction",
+          "ToastProvider",
+          "ToastViewport"
+        ]
+      }
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "Two-state button that can be on or off, with variant and size support.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-toggle",
+        "class-variance-authority",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "A pressable button that toggles between active and inactive states",
+        "prompts": [
+          "add a toggle button",
+          "add a press-to-activate button",
+          "add a bold/italic toggle"
+        ],
+        "composition": [
+          "toggle-group",
+          "toolbar"
+        ],
+        "slots": [
+          "pressed",
+          "onPressedChange",
+          "variant",
+          "size"
+        ]
+      }
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "Group of toggles where one or multiple items can be selected.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@radix-ui/react-toggle-group",
+        "@aetherstack/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle-group.tsx"
+        },
+        {
+          "path": "packages/ui/src/components/toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Allow single or multiple selection from a set of toggle buttons",
+        "prompts": [
+          "add toggle group",
+          "add a toolbar button group",
+          "add text alignment toggles",
+          "add view mode switcher"
+        ],
+        "composition": [
+          "toggle"
+        ],
+        "slots": [
+          "ToggleGroupItem",
+          "value",
+          "onValueChange",
+          "type"
+        ]
       }
     },
     {
@@ -475,7 +3092,10 @@
       "title": "Tooltip",
       "description": "Contextual label on hover or focus, built on Radix UI.",
       "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-tooltip", "@aetherstack/utils"],
+      "dependencies": [
+        "@radix-ui/react-tooltip",
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/tooltip.tsx",
@@ -491,8 +3111,15 @@
           "add an icon with a tooltip",
           "add help text on hover"
         ],
-        "composition": ["button", "badge"],
-        "slots": ["TooltipTrigger", "TooltipContent", "children"]
+        "composition": [
+          "button",
+          "badge"
+        ],
+        "slots": [
+          "TooltipTrigger",
+          "TooltipContent",
+          "children"
+        ]
       }
     },
     {
@@ -501,7 +3128,9 @@
       "title": "Uptime Bar",
       "description": "Day-by-day uptime and a percent that ignores days with no data.",
       "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -512,989 +3141,38 @@
       ],
       "ai": {
         "intent": "Show day-by-day uptime for one service and the percent that excludes days with no data.",
-        "prompts": ["add an uptime bar", "show service uptime"],
+        "prompts": [
+          "add an uptime bar",
+          "show service uptime"
+        ],
         "composition": [],
         "slots": []
       }
     },
     {
-      "name": "form-field",
-      "type": "registry:pattern",
-      "title": "Form Field",
-      "description": "Label + control + helper text + error message composition with context hook.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "@aetherstack/ui"],
-      "registryDependencies": ["label"],
-      "files": [
-        {
-          "path": "packages/patterns/src/components/form-field.tsx",
-          "type": "registry:pattern",
-          "target": "components/patterns/form-field.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Compose a labelled form control with helper text and validation error message",
-        "prompts": [
-          "add a form field with validation",
-          "add an email field with error message",
-          "add a labelled input with helper text",
-          "add form fields for a settings form",
-          "add a password field with requirements hint"
-        ],
-        "composition": ["input", "textarea", "select", "checkbox", "switch", "label"],
-        "slots": ["FormLabel", "FormControl", "FormDescription", "FormMessage", "children"]
-      }
-    },
-    {
-      "name": "page-header",
-      "type": "registry:pattern",
-      "title": "Page Header",
-      "description": "Title, description, optional breadcrumb, and actions slot. Includes Breadcrumb.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [
-        {
-          "path": "packages/patterns/src/components/page-header.tsx",
-          "type": "registry:pattern",
-          "target": "components/patterns/page-header.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Top-of-page heading block with title, description, optional breadcrumb, and an actions area",
-        "prompts": [
-          "add a page header",
-          "add a page title with a breadcrumb",
-          "add a header with an action button",
-          "add a dashboard page header",
-          "add a settings page title area"
-        ],
-        "composition": ["button", "badge", "section-header"],
-        "slots": ["title", "description", "breadcrumb", "actions"]
-      }
-    },
-    {
-      "name": "section-header",
-      "type": "registry:pattern",
-      "title": "Section Header",
-      "description": "Lightweight block heading with optional action. Includes SettingsSection.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [
-        {
-          "path": "packages/patterns/src/components/section-header.tsx",
-          "type": "registry:pattern",
-          "target": "components/patterns/section-header.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Label a content section with a title and optional action, or wrap it in a SettingsSection",
-        "prompts": [
-          "add a section heading",
-          "add a settings section",
-          "add a content block title",
-          "add a section with a title and description",
-          "wrap settings fields in a section"
-        ],
-        "composition": ["card", "form-field", "button"],
-        "slots": ["title", "description", "action", "children"]
-      }
-    },
-    {
-      "name": "empty-state",
-      "type": "registry:pattern",
-      "title": "Empty State",
-      "description": "Icon, title, description and optional CTA for zero-data views.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [
-        {
-          "path": "packages/patterns/src/components/empty-state.tsx",
-          "type": "registry:pattern",
-          "target": "components/patterns/empty-state.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Show a helpful empty-view when a list or collection has no data yet",
-        "prompts": [
-          "add an empty state",
-          "show a no results message",
-          "add a zero-data placeholder",
-          "add an empty list with a create button",
-          "add a no users found state"
-        ],
-        "composition": ["button", "card"],
-        "slots": ["icon", "title", "description", "action"]
-      }
-    },
-    {
-      "name": "loading-state",
-      "type": "registry:pattern",
-      "title": "Loading State",
-      "description": "Centered spinner or skeleton-row variant for async loading.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "@aetherstack/ui"],
-      "registryDependencies": ["skeleton"],
-      "files": [
-        {
-          "path": "packages/patterns/src/components/loading-state.tsx",
-          "type": "registry:pattern",
-          "target": "components/patterns/loading-state.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Display a centered loading indicator while async data is being fetched",
-        "prompts": [
-          "add a loading state",
-          "show a spinner while data loads",
-          "add a loading indicator",
-          "add skeleton rows while loading"
-        ],
-        "composition": ["skeleton"],
-        "slots": ["variant", "rows"]
-      }
-    },
-    {
-      "name": "error-state",
-      "type": "registry:pattern",
-      "title": "Error State",
-      "description": "Error icon, title, description and retry CTA.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [
-        {
-          "path": "packages/patterns/src/components/error-state.tsx",
-          "type": "registry:pattern",
-          "target": "components/patterns/error-state.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Communicate a data-loading or network failure and offer a retry action",
-        "prompts": [
-          "add an error state",
-          "show an error message with a retry button",
-          "add a fetch error fallback",
-          "add an error boundary UI"
-        ],
-        "composition": ["button"],
-        "slots": ["title", "description", "onRetry"]
-      }
-    },
-    {
-      "name": "metric-card",
-      "type": "registry:pattern",
-      "title": "Metric Card",
-      "description": "Dashboard stat card: label, value, trend badge, icon.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "@aetherstack/ui"],
-      "registryDependencies": ["card"],
-      "files": [
-        {
-          "path": "packages/patterns/src/components/metric-card.tsx",
-          "type": "registry:pattern",
-          "target": "components/patterns/metric-card.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Show a single KPI metric with a label, value, trend indicator, and icon",
-        "prompts": [
-          "add a metric card",
-          "add a KPI card",
-          "add a stat card with a trend",
-          "show a dashboard metric",
-          "add a revenue card",
-          "add a users count card"
-        ],
-        "composition": ["card", "badge", "dashboard-shell"],
-        "slots": ["label", "value", "trend", "icon", "description"]
-      }
-    },
-    {
-      "name": "table-toolbar",
-      "type": "registry:pattern",
-      "title": "Table Toolbar",
-      "description": "Search + filter + actions layout above a Table. Includes FilterToolbar and FilterPill.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [
-        {
-          "path": "packages/patterns/src/components/table-toolbar.tsx",
-          "type": "registry:pattern",
-          "target": "components/patterns/table-toolbar.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Provide a search input, active filter pills, and action buttons above a data table",
-        "prompts": [
-          "add a table toolbar with search and filters",
-          "add a search bar above a table",
-          "add filter chips to a data table",
-          "add table actions toolbar"
-        ],
-        "composition": ["table", "input", "button", "badge", "select"],
-        "slots": ["search", "filters", "actions", "FilterPill"]
-      }
-    },
-    {
-      "name": "nav",
-      "type": "registry:pattern",
-      "title": "Sidebar Nav",
-      "description": "NavItem, NavGroup, and SidebarNav composable building blocks.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [
-        {
-          "path": "packages/patterns/src/components/nav.tsx",
-          "type": "registry:pattern",
-          "target": "components/patterns/nav.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Build a composable sidebar navigation with grouped nav items and active states",
-        "prompts": [
-          "add a sidebar navigation",
-          "add nav items to a sidebar",
-          "add a grouped sidebar menu",
-          "add navigation links with icons",
-          "add a sidebar nav with sections"
-        ],
-        "composition": ["dashboard-shell", "badge"],
-        "slots": ["NavItem", "NavGroup", "SidebarNav", "items", "groups"]
-      }
-    },
-    {
-      "name": "dashboard-shell",
-      "type": "registry:block",
-      "title": "Dashboard Shell",
-      "description": "Full-page SaaS dashboard layout with collapsible sidebar, topbar with search and notifications, and a content slot.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "@aetherstack/ui", "lucide-react"],
-      "registryDependencies": ["input"],
-      "files": [
-        {
-          "path": "packages/blocks/src/components/dashboard-shell.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/dashboard-shell.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Full-page SaaS app shell with a collapsible sidebar, search topbar, and a main content slot",
-        "prompts": [
-          "build me a SaaS dashboard",
-          "add a dashboard layout",
-          "create an admin panel shell",
-          "add a sidebar navigation layout",
-          "add a full-page app layout with a sidebar",
-          "build an internal tool layout"
-        ],
-        "composition": ["nav", "metric-card", "table-toolbar", "table", "page-header"],
-        "slots": ["children", "sidebar", "topbar"]
-      }
-    },
-    {
-      "name": "login-block",
-      "type": "registry:block",
-      "title": "Login",
-      "description": "Centered login card with email, password, remember-me, and forgot-password link.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "@aetherstack/ui", "@aetherstack/patterns"],
-      "registryDependencies": ["button", "input", "checkbox", "label", "form-field"],
-      "files": [
-        {
-          "path": "packages/blocks/src/components/login-block.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/login-block.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Ready-made login page block with email, password, remember-me, and forgot-password",
-        "prompts": [
-          "add a login page",
-          "create an authentication screen",
-          "add a sign-in form",
-          "build a login card",
-          "add an email and password login"
-        ],
-        "composition": ["form-field", "input", "button", "checkbox", "label"],
-        "slots": ["onSubmit", "onForgotPassword", "footer"]
-      }
-    },
-    {
-      "name": "signup-block",
-      "type": "registry:block",
-      "title": "Sign Up",
-      "description": "Sign-up form with name, email, password fields, validation, and terms/privacy links.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "@aetherstack/ui", "@aetherstack/patterns"],
-      "registryDependencies": ["button", "input", "form-field"],
-      "files": [
-        {
-          "path": "packages/blocks/src/components/signup-block.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/signup-block.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Ready-made sign-up page block with name, email, password validation, and terms acceptance",
-        "prompts": [
-          "add a sign up page",
-          "create a registration form",
-          "add a new account form",
-          "build a user registration screen"
-        ],
-        "composition": ["form-field", "input", "button", "checkbox"],
-        "slots": ["onSubmit", "onSignIn", "footer"]
-      }
-    },
-    {
-      "name": "accordion",
+      "name": "visually-hidden",
       "type": "registry:ui",
-      "title": "Accordion",
-      "description": "Vertically stacked set of interactive headings that each reveal a section of content.",
+      "title": "Visually Hidden",
+      "description": "Hides content visually while keeping it available to assistive technology.",
       "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-accordion", "@aetherstack/utils", "lucide-react"],
-      "files": [{ "path": "packages/ui/src/components/accordion.tsx", "type": "registry:ui", "target": "components/ui/accordion.tsx" }],
-      "ai": {
-        "intent": "Collapsible content sections for FAQs, settings panels, or any expandable content",
-        "prompts": ["add an accordion", "create a collapsible section", "add an FAQ section", "add expandable panels"],
-        "composition": ["card", "separator"],
-        "slots": ["AccordionItem", "AccordionTrigger", "AccordionContent"]
-      }
-    },
-    {
-      "name": "animated-number",
-      "type": "registry:ui",
-      "title": "Animated Number",
-      "description": "A formatted number for money, percents, and live metrics.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "registryDependencies": [],
+      "dependencies": [
+        "@radix-ui/react-visually-hidden"
+      ],
       "files": [
         {
-          "path": "packages/ui/src/components/animated-number.tsx",
+          "path": "packages/ui/src/components/visually-hidden.tsx",
           "type": "registry:ui",
-          "target": "components/ui/animated-number.tsx"
+          "target": "components/ui/visually-hidden.tsx"
         }
       ],
       "ai": {
-        "intent": "Show a formatted number for money, percents, and live metrics.",
-        "prompts": ["add an animated number", "roll a metric up to its value", "add a number ticker"],
+        "intent": "Expose text to screen readers without showing it on screen",
+        "prompts": [
+          "add visually hidden text",
+          "add a screen reader only label"
+        ],
         "composition": [],
         "slots": []
-      }
-    },
-    {
-      "name": "avatar",
-      "type": "registry:ui",
-      "title": "Avatar",
-      "description": "User image with fallback initials and stacked group variant.",
-      "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-avatar", "@aetherstack/utils"],
-      "registryDependencies": ["status-dot"],
-      "files": [{ "path": "packages/ui/src/components/avatar.tsx", "type": "registry:ui", "target": "components/ui/avatar.tsx" }],
-      "ai": {
-        "intent": "Display user profile images with graceful fallback to initials",
-        "prompts": ["add a user avatar", "show profile picture", "add avatar with initials", "show stacked user avatars"],
-        "composition": ["badge", "card", "team-settings"],
-        "slots": ["AvatarImage", "AvatarFallback", "AvatarGroup"]
-      }
-    },
-    {
-      "name": "calendar",
-      "type": "registry:ui",
-      "title": "Calendar",
-      "description": "Month-view date picker built on react-day-picker with full token styling.",
-      "author": "aetherstack",
-      "dependencies": ["react-day-picker", "date-fns", "@aetherstack/utils", "lucide-react"],
-      "files": [{ "path": "packages/ui/src/components/calendar.tsx", "type": "registry:ui", "target": "components/ui/calendar.tsx" }],
-      "ai": {
-        "intent": "Select a single date or date range from a month-view calendar",
-        "prompts": ["add a date picker", "add a calendar", "select a date", "add a date range picker"],
-        "composition": ["button", "combobox"],
-        "slots": ["onSelect", "selected", "mode"]
-      }
-    },
-    {
-      "name": "combobox",
-      "type": "registry:ui",
-      "title": "Combobox",
-      "description": "Autocomplete select with search, powered by cmdk and Radix Popover.",
-      "author": "aetherstack",
-      "dependencies": ["cmdk", "@radix-ui/react-popover", "@aetherstack/utils", "lucide-react"],
-      "files": [{ "path": "packages/ui/src/components/combobox.tsx", "type": "registry:ui", "target": "components/ui/combobox.tsx" }],
-      "ai": {
-        "intent": "Searchable dropdown select for large option sets with async support",
-        "prompts": ["add a combobox", "add a searchable select", "add autocomplete input", "add a filterable dropdown"],
-        "composition": ["button", "command-palette"],
-        "slots": ["ComboboxTrigger", "ComboboxContent", "ComboboxInput", "ComboboxItem", "ComboboxEmpty"]
-      }
-    },
-    {
-      "name": "context-menu",
-      "type": "registry:ui",
-      "title": "Context Menu",
-      "description": "Right-click contextual menu with nested submenus and keyboard navigation.",
-      "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-context-menu", "@aetherstack/utils", "lucide-react"],
-      "files": [{ "path": "packages/ui/src/components/context-menu.tsx", "type": "registry:ui", "target": "components/ui/context-menu.tsx" }],
-      "ai": {
-        "intent": "Show a contextual right-click menu with actions for a target element",
-        "prompts": ["add a right-click menu", "add a context menu", "show contextual actions"],
-        "composition": ["dropdown-menu", "separator"],
-        "slots": ["ContextMenuTrigger", "ContextMenuContent", "ContextMenuItem", "ContextMenuSeparator"]
-      }
-    },
-    {
-      "name": "dropdown-menu",
-      "type": "registry:ui",
-      "title": "Dropdown Menu",
-      "description": "Accessible dropdown menu with submenus, checkboxes, radio items, and shortcuts.",
-      "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-dropdown-menu", "@aetherstack/utils", "lucide-react"],
-      "files": [{ "path": "packages/ui/src/components/dropdown-menu.tsx", "type": "registry:ui", "target": "components/ui/dropdown-menu.tsx" }],
-      "ai": {
-        "intent": "Show a list of actions or options in a floating dropdown triggered by a button",
-        "prompts": ["add a dropdown menu", "add action menu", "add options menu", "add a kebab menu", "add more actions"],
-        "composition": ["button", "separator", "badge"],
-        "slots": ["DropdownMenuTrigger", "DropdownMenuContent", "DropdownMenuItem", "DropdownMenuSeparator", "DropdownMenuLabel"]
-      }
-    },
-    {
-      "name": "floating-dock",
-      "type": "registry:ui",
-      "title": "Floating Dock",
-      "description": "Pin a small panel to a corner of the screen or a parent.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "packages/ui/src/components/floating-dock.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/floating-dock.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Pin a small panel to a corner of the screen or a parent.",
-        "prompts": ["add a floating dock", "pin a player to the corner"],
-        "composition": [],
-        "slots": []
-      }
-    },
-    {
-      "name": "heatmap",
-      "type": "registry:ui",
-      "title": "Heatmap",
-      "description": "A grid of values, such as weekday by hour, inspected from the keyboard.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "packages/ui/src/components/heatmap.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/heatmap.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Show a grid of values, such as weekday by hour, with keyboard inspection.",
-        "prompts": ["add a heatmap", "show activity by hour"],
-        "composition": [],
-        "slots": []
-      }
-    },
-    {
-      "name": "hover-card",
-      "type": "registry:ui",
-      "title": "Hover Card",
-      "description": "Rich preview card that appears on hover over a trigger element.",
-      "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-hover-card", "@aetherstack/utils"],
-      "files": [{ "path": "packages/ui/src/components/hover-card.tsx", "type": "registry:ui", "target": "components/ui/hover-card.tsx" }],
-      "ai": {
-        "intent": "Show a rich preview popup when hovering over a link or user mention",
-        "prompts": ["add a hover card", "show preview on hover", "add user card preview", "show tooltip with content"],
-        "composition": ["avatar", "card", "tooltip"],
-        "slots": ["HoverCardTrigger", "HoverCardContent"]
-      }
-    },
-    {
-      "name": "pagination",
-      "type": "registry:ui",
-      "title": "Pagination",
-      "description": "Accessible pagination navigation with previous, next, and page links.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "lucide-react", "class-variance-authority"],
-      "files": [{ "path": "packages/ui/src/components/pagination.tsx", "type": "registry:ui", "target": "components/ui/pagination.tsx" }],
-      "ai": {
-        "intent": "Navigate between pages of content with previous, next, and numbered page links",
-        "prompts": ["add pagination", "add page navigation", "add next previous buttons", "paginate a list"],
-        "composition": ["button", "data-table"],
-        "slots": ["PaginationPrevious", "PaginationNext", "PaginationLink", "PaginationEllipsis"]
-      }
-    },
-    {
-      "name": "password-field",
-      "type": "registry:ui",
-      "title": "Password Field",
-      "description": "Password input with a show/hide toggle and a Caps Lock warning.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "lucide-react"],
-      "registryDependencies": ["input", "button"],
-      "files": [
-        {
-          "path": "packages/ui/src/components/password-field.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/password-field.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Collect a password with a show/hide toggle and a Caps Lock warning.",
-        "prompts": ["add a password field", "add a show password toggle"],
-        "composition": ["input", "button"],
-        "slots": []
-      }
-    },
-    {
-      "name": "password-strength",
-      "type": "registry:ui",
-      "title": "Password Strength",
-      "description": "Score a password and generate one that passes the rules.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "registryDependencies": ["button"],
-      "files": [
-        {
-          "path": "packages/ui/src/components/password-strength.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/password-strength.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Show how strong a password is and generate one that passes the rules.",
-        "prompts": ["add a password strength meter", "generate a strong password"],
-        "composition": ["button"],
-        "slots": []
-      }
-    },
-    {
-      "name": "priority-bars",
-      "type": "registry:ui",
-      "title": "Priority Bars",
-      "description": "Priority shown as rising bars, or an urgent mark.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "packages/ui/src/components/priority-bars.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/priority-bars.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Show low, medium, high, or urgent priority beside a row.",
-        "prompts": ["add a priority indicator", "show task priority"],
-        "composition": [],
-        "slots": []
-      }
-    },
-    {
-      "name": "progress",
-      "type": "registry:ui",
-      "title": "Progress",
-      "description": "Linear progress bar with smooth animation and accessible role.",
-      "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-progress", "@aetherstack/utils"],
-      "files": [{ "path": "packages/ui/src/components/progress.tsx", "type": "registry:ui", "target": "components/ui/progress.tsx" }],
-      "ai": {
-        "intent": "Show completion percentage of a task or upload as a horizontal bar",
-        "prompts": ["add a progress bar", "show upload progress", "show task completion", "add a loading bar"],
-        "composition": ["billing-overview", "onboarding-checklist"],
-        "slots": ["value"]
-      }
-    },
-    {
-      "name": "scroll-area",
-      "type": "registry:ui",
-      "title": "Scroll Area",
-      "description": "Custom-styled scroll container with consistent cross-browser scrollbar appearance.",
-      "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-scroll-area", "@aetherstack/utils"],
-      "files": [{ "path": "packages/ui/src/components/scroll-area.tsx", "type": "registry:ui", "target": "components/ui/scroll-area.tsx" }],
-      "ai": {
-        "intent": "Wrap content that overflows with a styled, accessible scroll container",
-        "prompts": ["add a scroll area", "make content scrollable", "add a custom scrollbar"],
-        "composition": ["command-palette", "activity-feed"],
-        "slots": ["children", "ScrollBar"]
-      }
-    },
-    {
-      "name": "segmented-control",
-      "type": "registry:ui",
-      "title": "Segmented Control",
-      "description": "Single-select control with a sliding thumb.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "registryDependencies": ["radio-group"],
-      "files": [
-        {
-          "path": "packages/ui/src/components/segmented-control.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/segmented-control.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Pick one of a few options with a sliding thumb.",
-        "prompts": ["add a segmented control", "add a day week month switch"],
-        "composition": ["radio-group"],
-        "slots": []
-      }
-    },
-    {
-      "name": "separator",
-      "type": "registry:ui",
-      "title": "Separator",
-      "description": "Thin horizontal or vertical divider line.",
-      "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-separator", "@aetherstack/utils"],
-      "files": [{ "path": "packages/ui/src/components/separator.tsx", "type": "registry:ui", "target": "components/ui/separator.tsx" }],
-      "ai": {
-        "intent": "Visually separate groups of content with a thin divider line",
-        "prompts": ["add a divider", "add a separator", "separate content sections"],
-        "composition": ["dropdown-menu", "card", "sidebar-nav"],
-        "slots": ["orientation"]
-      }
-    },
-    {
-      "name": "slider",
-      "type": "registry:ui",
-      "title": "Slider",
-      "description": "Range input slider with accessible keyboard navigation.",
-      "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-slider", "@aetherstack/utils"],
-      "files": [{ "path": "packages/ui/src/components/slider.tsx", "type": "registry:ui", "target": "components/ui/slider.tsx" }],
-      "ai": {
-        "intent": "Let users select a numeric value within a range by dragging a thumb",
-        "prompts": ["add a slider", "add a range input", "add a volume control", "add a price range slider"],
-        "composition": ["form-field"],
-        "slots": ["value", "onValueChange", "min", "max", "step"]
-      }
-    },
-    {
-      "name": "social-button",
-      "type": "registry:ui",
-      "title": "Social Button",
-      "description": "Sign in or sign up with a named provider.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "registryDependencies": ["button"],
-      "files": [
-        {
-          "path": "packages/ui/src/components/social-button.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/social-button.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Start a sign-in or sign-up with a named provider.",
-        "prompts": ["add a Google sign in button", "add social login"],
-        "composition": ["button"],
-        "slots": []
-      }
-    },
-    {
-      "name": "status-dot",
-      "type": "registry:ui",
-      "title": "Status Dot",
-      "description": "Coloured status dot with a spoken label.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "packages/ui/src/components/status-dot.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/status-dot.tsx"
-        }
-      ],
-      "ai": {
-        "intent": "Show whether a person, service, or job is idle, busy, blocked, failed, or finished.",
-        "prompts": ["add a status dot", "show if a user is online", "add a presence indicator"],
-        "composition": ["avatar"],
-        "slots": []
-      }
-    },
-    {
-      "name": "toast",
-      "type": "registry:ui",
-      "title": "Toast",
-      "description": "Transient notification messages with default and destructive variants.",
-      "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-toast", "class-variance-authority", "@aetherstack/utils", "lucide-react"],
-      "files": [{ "path": "packages/ui/src/components/toast.tsx", "type": "registry:ui", "target": "components/ui/toast.tsx" }],
-      "ai": {
-        "intent": "Show brief non-blocking notifications at the bottom of the screen",
-        "prompts": ["add a toast notification", "show a success toast", "add a notification", "show an error toast"],
-        "composition": ["button"],
-        "slots": ["ToastTitle", "ToastDescription", "ToastAction", "ToastProvider", "ToastViewport"]
-      }
-    },
-    {
-      "name": "toggle",
-      "type": "registry:ui",
-      "title": "Toggle",
-      "description": "Two-state button that can be on or off, with variant and size support.",
-      "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-toggle", "class-variance-authority", "@aetherstack/utils"],
-      "files": [{ "path": "packages/ui/src/components/toggle.tsx", "type": "registry:ui", "target": "components/ui/toggle.tsx" }],
-      "ai": {
-        "intent": "A pressable button that toggles between active and inactive states",
-        "prompts": ["add a toggle button", "add a press-to-activate button", "add a bold/italic toggle"],
-        "composition": ["toggle-group", "toolbar"],
-        "slots": ["pressed", "onPressedChange", "variant", "size"]
-      }
-    },
-    {
-      "name": "toggle-group",
-      "type": "registry:ui",
-      "title": "Toggle Group",
-      "description": "Group of toggles where one or multiple items can be selected.",
-      "author": "aetherstack",
-      "dependencies": ["@radix-ui/react-toggle-group", "@aetherstack/utils"],
-      "files": [
-        { "path": "packages/ui/src/components/toggle-group.tsx", "type": "registry:ui", "target": "components/ui/toggle-group.tsx" },
-        { "path": "packages/ui/src/components/toggle.tsx", "type": "registry:ui", "target": "components/ui/toggle.tsx" }
-      ],
-      "ai": {
-        "intent": "Allow single or multiple selection from a set of toggle buttons",
-        "prompts": ["add toggle group", "add a toolbar button group", "add text alignment toggles", "add view mode switcher"],
-        "composition": ["toggle"],
-        "slots": ["ToggleGroupItem", "value", "onValueChange", "type"]
-      }
-    },
-    {
-      "name": "stat-group",
-      "type": "registry:pattern",
-      "title": "Stat Group",
-      "description": "Responsive grid of metric stats with value, label, and optional trend delta.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/patterns/src/components/stat-group.tsx", "type": "registry:pattern", "target": "components/patterns/stat-group.tsx" }],
-      "ai": {
-        "intent": "Display multiple key metrics side-by-side in a responsive stat grid",
-        "prompts": ["add a stats row", "show key metrics", "add KPI cards", "show stat overview", "add a metrics grid"],
-        "composition": ["metric-card", "card"],
-        "slots": ["StatItem", "cols"]
-      }
-    },
-    {
-      "name": "stepper",
-      "type": "registry:pattern",
-      "title": "Stepper",
-      "description": "Multi-step progress indicator for wizards and onboarding flows.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/patterns/src/components/stepper.tsx", "type": "registry:pattern", "target": "components/patterns/stepper.tsx" }],
-      "ai": {
-        "intent": "Show progress through a multi-step form or onboarding wizard",
-        "prompts": ["add a stepper", "add a wizard", "add multi-step form progress", "add onboarding steps"],
-        "composition": ["onboarding-checklist"],
-        "slots": ["steps", "currentStep", "orientation"]
-      }
-    },
-    {
-      "name": "activity-feed",
-      "type": "registry:pattern",
-      "title": "Activity Feed",
-      "description": "Vertical timeline of timestamped activity events with user avatars.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/patterns/src/components/activity-feed.tsx", "type": "registry:pattern", "target": "components/patterns/activity-feed.tsx" }],
-      "ai": {
-        "intent": "Show a chronological feed of user actions or system events",
-        "prompts": ["add an activity feed", "show recent events", "add an audit log", "show user activity", "add a timeline"],
-        "composition": ["avatar", "notification-center"],
-        "slots": ["ActivityItem", "items"]
-      }
-    },
-    {
-      "name": "file-dropzone",
-      "type": "registry:pattern",
-      "title": "File Dropzone",
-      "description": "Drag-and-drop file upload zone with click-to-browse fallback.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "lucide-react"],
-      "files": [{ "path": "packages/patterns/src/components/file-dropzone.tsx", "type": "registry:pattern", "target": "components/patterns/file-dropzone.tsx" }],
-      "ai": {
-        "intent": "Let users upload files by dragging them onto a target zone or clicking to browse",
-        "prompts": ["add a file upload", "add a drag and drop zone", "add a file picker", "add an image uploader"],
-        "composition": ["button"],
-        "slots": ["onFilesSelected", "accept", "multiple", "maxSize"]
-      }
-    },
-    {
-      "name": "data-table",
-      "type": "registry:pattern",
-      "title": "Data Table",
-      "description": "Sortable, searchable, and paginated data table with column configuration.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "lucide-react"],
-      "files": [{ "path": "packages/patterns/src/components/data-table.tsx", "type": "registry:pattern", "target": "components/patterns/data-table.tsx" }],
-      "ai": {
-        "intent": "Display tabular data with sorting, search filtering, and pagination",
-        "prompts": ["add a data table", "show a sortable table", "add a paginated list", "add a users table", "create a data grid"],
-        "composition": ["table", "input", "button", "pagination", "table-toolbar"],
-        "slots": ["columns", "data", "pageSize", "searchable", "searchKeys"]
-      }
-    },
-    {
-      "name": "command-palette",
-      "type": "registry:pattern",
-      "title": "Command Palette",
-      "description": "⌘K fuzzy-search command surface built on cmdk.",
-      "author": "aetherstack",
-      "dependencies": ["cmdk", "@aetherstack/utils", "lucide-react"],
-      "files": [{ "path": "packages/patterns/src/components/command-palette.tsx", "type": "registry:pattern", "target": "components/patterns/command-palette.tsx" }],
-      "ai": {
-        "intent": "Open a keyboard-driven search palette for quick navigation and action execution",
-        "prompts": ["add a command palette", "add cmd+k search", "add a quick search", "add keyboard navigation"],
-        "composition": ["dialog", "combobox", "scroll-area"],
-        "slots": ["CommandPaletteInput", "CommandGroup", "CommandItem", "CommandPaletteDialog"]
-      }
-    },
-    {
-      "name": "kanban",
-      "type": "registry:pattern",
-      "title": "Kanban Board",
-      "description": "Drag-and-drop kanban columns using native HTML5 drag events.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/patterns/src/components/kanban.tsx", "type": "registry:pattern", "target": "components/patterns/kanban.tsx" }],
-      "ai": {
-        "intent": "Organize items into drag-and-drop status columns for task management",
-        "prompts": ["add a kanban board", "add a task board", "add drag and drop columns", "add a project board"],
-        "composition": ["card", "badge"],
-        "slots": ["KanbanColumn", "KanbanCard", "KanbanBoard", "columns"]
-      }
-    },
-    {
-      "name": "color-picker",
-      "type": "registry:pattern",
-      "title": "Color Picker",
-      "description": "Hex color input with preset swatches and native color picker.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/patterns/src/components/color-picker.tsx", "type": "registry:pattern", "target": "components/patterns/color-picker.tsx" }],
-      "ai": {
-        "intent": "Let users select or input a color using hex input, native picker, or preset swatches",
-        "prompts": ["add a color picker", "add a color selector", "pick a hex color", "add theme color input"],
-        "composition": ["button", "input"],
-        "slots": ["value", "onChange", "presets"]
-      }
-    },
-    {
-      "name": "empty-dashboard",
-      "type": "registry:block",
-      "title": "Empty Dashboard",
-      "description": "Welcoming empty state for a dashboard with no data, with action slots.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/blocks/src/components/empty-dashboard.tsx", "type": "registry:block", "target": "components/blocks/empty-dashboard.tsx" }],
-      "ai": {
-        "intent": "Show a welcoming placeholder when a dashboard has no data yet",
-        "prompts": ["add an empty dashboard", "show empty state for dashboard", "add a welcome screen", "add a getting started screen"],
-        "composition": ["empty-state", "button"],
-        "slots": ["title", "description", "actions"]
-      }
-    },
-    {
-      "name": "onboarding-checklist",
-      "type": "registry:block",
-      "title": "Onboarding Checklist",
-      "description": "Step-by-step onboarding widget with progress tracking and checkbox steps.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/blocks/src/components/onboarding-checklist.tsx", "type": "registry:block", "target": "components/blocks/onboarding-checklist.tsx" }],
-      "ai": {
-        "intent": "Guide new users through setup tasks with a checklist and progress bar",
-        "prompts": ["add an onboarding checklist", "add a getting started guide", "add setup steps", "add a progress checklist"],
-        "composition": ["checkbox", "progress", "stepper"],
-        "slots": ["steps", "onStepToggle", "title", "description"]
-      }
-    },
-    {
-      "name": "billing-overview",
-      "type": "registry:block",
-      "title": "Billing Overview",
-      "description": "Current plan, usage meters, and billing management block.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/blocks/src/components/billing-overview.tsx", "type": "registry:block", "target": "components/blocks/billing-overview.tsx" }],
-      "ai": {
-        "intent": "Show subscription plan details, usage metrics, and billing management actions",
-        "prompts": ["add a billing overview", "show subscription details", "add plan usage", "add billing section"],
-        "composition": ["progress", "button", "card", "badge"],
-        "slots": ["plan", "usage", "nextBillingDate", "onUpgrade", "onManageBilling"]
-      }
-    },
-    {
-      "name": "account-settings",
-      "type": "registry:block",
-      "title": "Account Settings",
-      "description": "Profile settings form with avatar, name, email, and bio fields.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/blocks/src/components/account-settings.tsx", "type": "registry:block", "target": "components/blocks/account-settings.tsx" }],
-      "ai": {
-        "intent": "Let users update their profile information including avatar, name, email, and bio",
-        "prompts": ["add account settings", "add profile settings", "add user settings form", "add edit profile"],
-        "composition": ["input", "textarea", "button", "avatar", "form-field"],
-        "slots": ["defaultValues", "onSave"]
-      }
-    },
-    {
-      "name": "team-settings",
-      "type": "registry:block",
-      "title": "Team Settings",
-      "description": "Team member management with invite form, role management, and member list.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/blocks/src/components/team-settings.tsx", "type": "registry:block", "target": "components/blocks/team-settings.tsx" }],
-      "ai": {
-        "intent": "Manage team members, invite new members by email, and assign roles",
-        "prompts": ["add team settings", "add team member management", "add invite team members", "add user roles"],
-        "composition": ["avatar", "badge", "select", "input", "button"],
-        "slots": ["members", "onInvite", "onRoleChange", "onRemove"]
-      }
-    },
-    {
-      "name": "notification-center",
-      "type": "registry:block",
-      "title": "Notification Center",
-      "description": "In-app notification feed with read/unread state and dismiss actions.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/blocks/src/components/notification-center.tsx", "type": "registry:block", "target": "components/blocks/notification-center.tsx" }],
-      "ai": {
-        "intent": "Display a list of in-app notifications with read state and dismiss controls",
-        "prompts": ["add a notification center", "show notifications", "add in-app notifications", "add alerts feed"],
-        "composition": ["badge", "button", "activity-feed"],
-        "slots": ["notifications", "onMarkRead", "onMarkAllRead", "onDismiss"]
-      }
-    },
-    {
-      "name": "pricing-section",
-      "type": "registry:block",
-      "title": "Pricing Section",
-      "description": "Responsive pricing tier cards for marketing and landing pages.",
-      "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils"],
-      "files": [{ "path": "packages/blocks/src/components/pricing-section.tsx", "type": "registry:block", "target": "components/blocks/pricing-section.tsx" }],
-      "ai": {
-        "intent": "Show pricing tiers with feature lists and CTA buttons for a marketing or landing page",
-        "prompts": ["add a pricing section", "add pricing plans", "show subscription tiers", "add a pricing table"],
-        "composition": ["badge", "button", "card"],
-        "slots": ["tiers", "title", "description"]
       }
     }
   ]

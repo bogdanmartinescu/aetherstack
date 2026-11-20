@@ -5,7 +5,11 @@
  */
 import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
-import { validateRegistry, findMissingDependencies } from "@aetherstack/registry-build"
+import {
+  validateRegistry,
+  findMissingDependencies,
+  findDependencyCycles,
+} from "@aetherstack/registry-build"
 import type { Registry } from "@aetherstack/registry-schema"
 
 // Items in this list are exempt from the AI metadata requirement (pro placeholders, etc.)
@@ -41,28 +45,49 @@ for (const { label, path } of registries) {
     continue
   }
 
-  const missing = findMissingDependencies(raw as Registry)
+  const registry = raw as Registry
+  let registryFailed = false
+
+  const missing = findMissingDependencies(registry)
   if (missing.length > 0) {
-    console.warn("  ⚠ Missing registry dependencies:")
-    missing.forEach((m) => console.warn(`    - ${m}`))
+    // Public registry must resolve every dependency. Pro may reference public
+    // items the validator cannot see across namespaces — keep those as warnings.
+    if (label === "public") {
+      console.error("  ✗ Missing registry dependencies:")
+      missing.forEach((m) => console.error(`    - ${m}`))
+      registryFailed = true
+    } else {
+      console.warn("  ⚠ Missing registry dependencies:")
+      missing.forEach((m) => console.warn(`    - ${m}`))
+    }
+  }
+
+  const cycles = findDependencyCycles(registry)
+  if (cycles.length > 0) {
+    console.error("  ✗ Dependency cycles:")
+    cycles.forEach((cycle) => console.error(`    - ${cycle.join(" → ")}`))
+    registryFailed = true
   }
 
   // Enforce AI metadata for public registry items (Phase 5 requirement).
   // Pro registry items are excluded — they may ship AI metadata later.
   if (label === "public") {
-    const registry = raw as Registry
     const missingAi = registry.items.filter(
       (item) => !item.ai && !AI_METADATA_EXEMPT.includes(item.name),
     )
     if (missingAi.length > 0) {
       console.error("  ✗ Items missing required AI metadata (add an `ai` block):")
       missingAi.forEach((item) => console.error(`    - ${item.name}`))
-      hasErrors = true
-      continue
+      registryFailed = true
     }
   }
 
-  console.log(`  ✓ Valid (${(raw as Registry).items.length} items)`)
+  if (registryFailed) {
+    hasErrors = true
+    continue
+  }
+
+  console.log(`  ✓ Valid (${registry.items.length} items)`)
 }
 
 if (hasErrors) {

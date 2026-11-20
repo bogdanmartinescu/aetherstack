@@ -1,0 +1,29 @@
+{
+  "name": "sonner",
+  "type": "registry:ui",
+  "title": "Sonner",
+  "description": "Opinionated toast queue with promise support.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils",
+    "sonner"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/sonner.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport { Toaster as SonnerToaster, toast } from \"sonner\"\nimport type { ToasterProps } from \"sonner\"\nimport { cn } from \"@aetherstack/utils\"\n\nfunction Toaster({ className, toastOptions, ...props }: ToasterProps) {\n  return (\n    <SonnerToaster\n      className={cn(className)}\n      toastOptions={{\n        classNames: {\n          toast: \"bg-background text-foreground border border-border shadow-md\",\n          title: \"font-medium text-sm\",\n          description: \"text-muted-foreground text-sm\",\n          actionButton: \"bg-primary text-primary-foreground\",\n          cancelButton: \"bg-muted text-muted-foreground\",\n          closeButton: \"border-border\",\n          error: \"text-destructive border-destructive/50\",\n          success: \"border-border\",\n          warning: \"border-border\",\n          info: \"border-border\",\n        },\n        ...toastOptions,\n      }}\n      {...props}\n    />\n  )\n}\nToaster.displayName = \"Toaster\"\n\nexport { Toaster, toast }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Show stacked toast notifications including promise states",
+    "prompts": [
+      "add sonner toasts",
+      "add a toast queue",
+      "add promise toasts"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}
