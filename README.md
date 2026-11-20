@@ -43,6 +43,8 @@ All 7 core packages are published to npm at `v0.1.0` under the `@aetherstack` or
 
 ## Project Docs
 
+**Continuous development:** [GOAL.md](GOAL.md) · [AGENTS.md](AGENTS.md) · [ROADMAP.md](ROADMAP.md) · [Task backlog](docs/roadmap/platform-backlog.md) · [Execution state](docs/roadmap/execution-state.md). Future platform features and monetization proposals are planning documents, not shipped functionality.
+
 | Doc | Purpose |
 |---|---|
 | [`docs/architecture/overview.md`](docs/architecture/overview.md) | Repo layout, dependency graph, naming glossary |
