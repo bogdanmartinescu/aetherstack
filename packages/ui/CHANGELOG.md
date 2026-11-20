@@ -1,5 +1,11 @@
 # @aetherstack/ui
 
+## 0.5.1
+
+### Patch Changes
+
+- e3bed25: Emit flat `dist/<name>` build outputs so published subpath imports (`@aetherstack/ui/button`) resolve correctly.
+
 ## 0.5.0
 
 ### Minor Changes

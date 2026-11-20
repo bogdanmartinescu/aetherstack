@@ -1,5 +1,14 @@
 # @aetherstack/docs
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [e3bed25]
+  - @aetherstack/ui@0.5.1
+  - @aetherstack/blocks@0.3.2
+  - @aetherstack/patterns@0.3.2
+
 ## 0.0.6
 
 ### Patch Changes
