@@ -1,12 +1,13 @@
-import { resolve, join } from "node:path"
+import { resolve, join, dirname } from "node:path"
 import { writeFileSync, mkdirSync, existsSync } from "node:fs"
 import { Command } from "commander"
 import ora from "ora"
 import pc from "picocolors"
 import { loadConfig } from "../config"
-import { resolveItem } from "../lib/registry"
+import { fetchRegistry, resolveItem } from "../lib/registry"
 import { installItem } from "../lib/installer"
 import { resolveGenerate } from "../lib/generate"
+import { resolveInsideProject } from "../lib/paths"
 import { DEFAULT_REGISTRY_URL } from "../constants"
 import type { RegistryItem } from "@aetherstack/registry-schema"
 
@@ -35,10 +36,8 @@ export const generateCommand = new Command("generate")
 
     let allItems: RegistryItem[]
     try {
-      const res = await fetch(`${registryUrl}/registry.json`)
-      if (!res.ok) throw new Error(`Registry responded with ${res.status}`)
-      const data = (await res.json()) as { items?: RegistryItem[] }
-      allItems = data.items ?? []
+      const registry = await fetchRegistry(registryUrl)
+      allItems = registry.items
       fetchSpinner.succeed(pc.dim(`Registry loaded (${allItems.length} items)`))
     } catch (err) {
       fetchSpinner.fail(pc.red("Failed to fetch registry"))
@@ -113,7 +112,10 @@ export const generateCommand = new Command("generate")
       }
 
       try {
-        const result = await installItem(item, config, cwd, { overwrite: false, baseUrl: registryUrl })
+        const result = await installItem(item, config, cwd, {
+          overwrite: false,
+          baseUrl: registryUrl,
+        })
         spinner.succeed(pc.green(`Added ${name}`))
         for (const f of result.filesWritten) {
           console.log(`    ${pc.dim("→")} ${f}`)
@@ -128,12 +130,12 @@ export const generateCommand = new Command("generate")
     // ------------------------------------------------------------------
     if (plan.starterCode && opts.starter) {
       const pagesDir = join(cwd, "app")
-      const outputDir = existsSync(pagesDir) ? pagesDir : join(cwd, "src", "app")
-      mkdirSync(outputDir, { recursive: true })
-
+      const outputDirRel = existsSync(pagesDir) ? "app" : join("src", "app")
       const filename = deriveFilename(description)
-      const outputPath = join(outputDir, filename)
+      const relativeOut = join(outputDirRel, filename)
+      const outputPath = resolveInsideProject(cwd, relativeOut)
 
+      mkdirSync(dirname(outputPath), { recursive: true })
       writeFileSync(outputPath, plan.starterCode)
       console.log("")
       console.log(`  ${pc.green("✓")} Starter file written: ${pc.cyan(outputPath)}`)

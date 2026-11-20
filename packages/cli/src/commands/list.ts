@@ -1,3 +1,4 @@
+import { resolve } from "node:path"
 import { Command } from "commander"
 import ora from "ora"
 import pc from "picocolors"
@@ -11,7 +12,8 @@ export const listCommand = new Command("list")
   .option("--registry <url>", "Override registry URL")
   .option("--type <type>", "Filter by type (ui, block, pattern, theme, …)")
   .action(async (opts) => {
-    const config = loadConfig(opts.cwd)
+    const cwd = resolve(opts.cwd)
+    const config = loadConfig(cwd)
     const registryUrl = opts.registry ?? config?.registry ?? DEFAULT_REGISTRY_URL
 
     const spinner = ora("Fetching registry…").start()

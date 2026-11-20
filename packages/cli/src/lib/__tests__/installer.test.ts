@@ -207,6 +207,94 @@ describe("installItem", () => {
       installItem(item, CONFIG, cwd, { baseUrl: "https://registry.example.com" }),
     ).rejects.toThrow(/Failed to fetch/)
   })
+
+  it("rejects targets that escape the project root", async () => {
+    await expect(
+      installItem(
+        inlineItem({
+          files: [
+            {
+              path: "evil.tsx",
+              type: "registry:ui",
+              target: "../../../etc/passwd",
+              content: "x",
+            },
+          ],
+        }),
+        CONFIG,
+        cwd,
+      ),
+    ).rejects.toThrow(/outside project/)
+  })
+
+  it("rejects absolute targets", async () => {
+    await expect(
+      installItem(
+        inlineItem({
+          files: [
+            {
+              path: "evil.tsx",
+              type: "registry:ui",
+              target: "/tmp/evil.tsx",
+              content: "x",
+            },
+          ],
+        }),
+        CONFIG,
+        cwd,
+      ),
+    ).rejects.toThrow(/absolute/i)
+  })
+
+  it("dry-run validates paths without writing files", async () => {
+    const result = await installItem(inlineItem(), CONFIG, cwd, { dryRun: true })
+    expect(result.filesWritten).toEqual(["components/ui/button.tsx"])
+    expect(existsSync(resolve(cwd, "components/ui/button.tsx"))).toBe(false)
+  })
+
+  it("rolls back newly written files when a later file fails", async () => {
+    const item = inlineItem({
+      files: [
+        {
+          path: "ok.tsx",
+          type: "registry:ui",
+          target: "components/ui/ok.tsx",
+          content: "ok",
+        },
+        {
+          path: "bad.tsx",
+          type: "registry:ui",
+          target: "components/ui/bad.tsx",
+          // no content and no baseUrl → fails after first write
+        },
+      ],
+    })
+
+    await expect(installItem(item, CONFIG, cwd)).rejects.toThrow(/No inline content/)
+    expect(existsSync(resolve(cwd, "components/ui/ok.tsx"))).toBe(false)
+  })
+
+  it("rejects unsafe remote file paths", async () => {
+    vi.stubGlobal("fetch", vi.fn())
+
+    await expect(
+      installItem(
+        inlineItem({
+          files: [
+            {
+              path: "../secret.tsx",
+              type: "registry:ui",
+              target: "components/ui/secret.tsx",
+            },
+          ],
+        }),
+        CONFIG,
+        cwd,
+        { baseUrl: "https://registry.example.com" },
+      ),
+    ).rejects.toThrow(/Unsafe registry file path/)
+    expect(fetch).not.toHaveBeenCalled()
+  })
 })
 
 describe("getConflictingFiles", () => {
