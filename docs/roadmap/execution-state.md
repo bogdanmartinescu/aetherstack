@@ -176,6 +176,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Base and working branch: `main` `13f4c46` → `chore/m0-08-deploy-and-release-gate`.
 - Changes: `deploy-registry.yml` (gated on `ENABLE_REGISTRY_DEPLOY`); `release.yml` publish only on `workflow_dispatch`; runbook Option A + npm note; ledger REL-001.
 - Evidence: Release failure log E404 PUT `@aetherstack/*`; npm view ui=0.4.0 vs workspace ahead; live registry still 404.
+- Commit/PR: https://github.com/bogdanmartinescu/aetherstack/pull/22
 - Status: IN_PROGRESS until PR merges; M0-08/REL-001 remain BLOCKED on owner.
 - Next: owner configures Vercel + npm org; enable var; dispatch workflows; smoke; `pnpm m0-rc-verify`.
 
