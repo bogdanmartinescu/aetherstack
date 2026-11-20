@@ -32,9 +32,7 @@ export function PageWithAssistant() {
         title="AI Assistant"
         footer={
           <PromptInput
-            value=""
-            onChange={() => {}}
-            onSubmit={() => {}}
+            onSubmit={(message) => console.log(message)}
             placeholder="Ask me anything…"
           />
         }

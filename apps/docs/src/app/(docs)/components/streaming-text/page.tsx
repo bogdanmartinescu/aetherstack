@@ -40,12 +40,24 @@ export default function StreamingTextPage() {
         {
           name: "onComplete",
           type: "() => void",
-          description: "Called when the stream finishes.",
+          description: "Called once when an AsyncIterable finishes. Safe to pass an inline function.",
+        },
+        {
+          name: "onError",
+          type: "(error: unknown) => void",
+          description: "Called if the AsyncIterable throws. Text received so far is kept.",
+        },
+        {
+          name: "showCursor",
+          type: "boolean",
+          default: "true",
+          description: "Shows the blinking caret while streaming.",
         },
       ]}
       a11yNotes={[
-        "Streamed content is rendered in a live region so screen readers announce updates.",
-        "Use onComplete to signal when streaming has ended so assistive technology can summarise.",
+        "The element is marked aria-busy while streaming; the caret is aria-hidden.",
+        "Token-by-token updates are deliberately not a live region. Announce the finished message from onComplete if needed.",
+        "The caret animation is disabled when the user prefers reduced motion.",
       ]}
     />
   )

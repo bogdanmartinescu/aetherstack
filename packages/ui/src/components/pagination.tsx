@@ -1,5 +1,6 @@
 import * as React from "react"
 import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
+import type { VariantProps } from "class-variance-authority"
 import { cn } from "@aetherstack/utils"
 import { buttonVariants } from "./button"
 
@@ -37,21 +38,31 @@ PaginationItem.displayName = "PaginationItem"
 
 type PaginationLinkProps = {
   isActive?: boolean
-} & React.ComponentProps<"a">
+  /** Renders the link inert (e.g. "Previous" on the first page) while keeping its layout. */
+  isDisabled?: boolean
+} & Pick<VariantProps<typeof buttonVariants>, "size"> &
+  React.ComponentProps<"a">
 
 function PaginationLink({
   className,
   isActive,
+  isDisabled,
+  size = "icon",
+  href,
   ...props
 }: PaginationLinkProps) {
   return (
     <a
       aria-current={isActive ? "page" : undefined}
+      aria-disabled={isDisabled || undefined}
+      tabIndex={isDisabled ? -1 : undefined}
+      href={isDisabled ? undefined : href}
       className={cn(
         buttonVariants({
           variant: isActive ? "outline" : "ghost",
-          size: "icon",
+          size,
         }),
+        isDisabled && "pointer-events-none opacity-50",
         className,
       )}
       {...props}
@@ -67,6 +78,7 @@ function PaginationPrevious({
   return (
     <PaginationLink
       aria-label="Go to previous page"
+      size="default"
       className={cn("gap-1 pl-2.5", className)}
       {...props}
     >
@@ -84,6 +96,7 @@ function PaginationNext({
   return (
     <PaginationLink
       aria-label="Go to next page"
+      size="default"
       className={cn("gap-1 pr-2.5", className)}
       {...props}
     >

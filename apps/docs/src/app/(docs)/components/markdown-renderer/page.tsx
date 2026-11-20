@@ -44,6 +44,11 @@ Here is the answer with **formatting** support.
           required: true,
         },
         {
+          name: "components",
+          type: "Components (from react-markdown)",
+          description: "Per-element renderer overrides, merged over the defaults.",
+        },
+        {
           name: "className",
           type: "string",
           description: "Additional CSS classes.",
@@ -51,7 +56,8 @@ Here is the answer with **formatting** support.
       ]}
       a11yNotes={[
         "Rendered output uses semantic HTML elements (h2, ul, strong, etc.) for correct screen reader navigation.",
-        "Code blocks inside the rendered output include a visually-hidden language label for assistive technology.",
+        "Fenced code blocks render through CodeBlock, so they get a language label, a copy button, and a keyboard-focusable scroll region.",
+        "Links open in a new tab and include visually-hidden '(opens in a new tab)' text.",
       ]}
     />
   )

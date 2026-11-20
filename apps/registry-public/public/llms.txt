@@ -29,7 +29,7 @@ Aether UI uses a four-layer architecture:
 3. **Blocks** (registry:block) — full page-section assemblies
 4. **Tokens** — design tokens for colors, spacing, typography, and more
 
-## Primitives (31)
+## Primitives (44)
 
 ## Accordion
 - Name: accordion
@@ -39,6 +39,13 @@ Aether UI uses a four-layer architecture:
   Slots: AccordionItem, AccordionTrigger, AccordionContent
   Often used with: card, separator
   Prompts: add an accordion | create a collapsible section | add an FAQ section
+
+## Animated Number
+- Name: animated-number
+- Install: aether-ui add animated-number
+- Source: https://registry.aether-ui.dev/r/animated-number.json
+- Intent: Show a formatted number for money, percents, and live metrics.
+  Prompts: add an animated number | roll a metric up to its value | add a number ticker
 
 ## Avatar
 - Name: avatar
@@ -130,6 +137,20 @@ Aether UI uses a four-layer architecture:
   Often used with: button, separator, badge
   Prompts: add a dropdown menu | add action menu | add options menu
 
+## Floating Dock
+- Name: floating-dock
+- Install: aether-ui add floating-dock
+- Source: https://registry.aether-ui.dev/r/floating-dock.json
+- Intent: Pin a small panel to a corner of the screen or a parent.
+  Prompts: add a floating dock | pin a player to the corner
+
+## Heatmap
+- Name: heatmap
+- Install: aether-ui add heatmap
+- Source: https://registry.aether-ui.dev/r/heatmap.json
+- Intent: Show a grid of values, such as weekday by hour, with keyboard inspection.
+  Prompts: add a heatmap | show activity by hour
+
 ## Hover Card
 - Name: hover-card
 - Install: aether-ui add hover-card
@@ -166,6 +187,29 @@ Aether UI uses a four-layer architecture:
   Often used with: button, data-table
   Prompts: add pagination | add page navigation | add next previous buttons
 
+## Password Field
+- Name: password-field
+- Install: aether-ui add password-field
+- Source: https://registry.aether-ui.dev/r/password-field.json
+- Intent: Collect a password with a show/hide toggle and a Caps Lock warning.
+  Often used with: input, button
+  Prompts: add a password field | add a show password toggle
+
+## Password Strength
+- Name: password-strength
+- Install: aether-ui add password-strength
+- Source: https://registry.aether-ui.dev/r/password-strength.json
+- Intent: Show how strong a password is and generate one that passes the rules.
+  Often used with: button
+  Prompts: add a password strength meter | generate a strong password
+
+## Priority Bars
+- Name: priority-bars
+- Install: aether-ui add priority-bars
+- Source: https://registry.aether-ui.dev/r/priority-bars.json
+- Intent: Show low, medium, high, or urgent priority beside a row.
+  Prompts: add a priority indicator | show task priority
+
 ## Progress
 - Name: progress
 - Install: aether-ui add progress
@@ -192,6 +236,14 @@ Aether UI uses a four-layer architecture:
   Slots: children, ScrollBar
   Often used with: command-palette, activity-feed
   Prompts: add a scroll area | make content scrollable | add a custom scrollbar
+
+## Segmented Control
+- Name: segmented-control
+- Install: aether-ui add segmented-control
+- Source: https://registry.aether-ui.dev/r/segmented-control.json
+- Intent: Pick one of a few options with a sliding thumb.
+  Often used with: radio-group
+  Prompts: add a segmented control | add a day week month switch
 
 ## Select
 - Name: select
@@ -238,6 +290,22 @@ Aether UI uses a four-layer architecture:
   Often used with: form-field
   Prompts: add a slider | add a range input | add a volume control
 
+## Social Button
+- Name: social-button
+- Install: aether-ui add social-button
+- Source: https://registry.aether-ui.dev/r/social-button.json
+- Intent: Start a sign-in or sign-up with a named provider.
+  Often used with: button
+  Prompts: add a Google sign in button | add social login
+
+## Status Dot
+- Name: status-dot
+- Install: aether-ui add status-dot
+- Source: https://registry.aether-ui.dev/r/status-dot.json
+- Intent: Show whether a person, service, or job is idle, busy, blocked, failed, or finished.
+  Often used with: avatar
+  Prompts: add a status dot | show if a user is online | add a presence indicator
+
 ## Switch
 - Name: switch
 - Install: aether-ui add switch
@@ -265,6 +333,14 @@ Aether UI uses a four-layer architecture:
   Often used with: card, section-header
   Prompts: add tabs | add a tabbed interface | add a settings page with tabs
 
+## Tag
+- Name: tag
+- Install: aether-ui add tag
+- Source: https://registry.aether-ui.dev/r/tag.json
+- Intent: Filter or label a collection with quiet chips the user can select or remove.
+  Slots: Tag, TagGroup
+  Prompts: add tags | add removable chips | add a tag group
+
 ## Textarea
 - Name: textarea
 - Install: aether-ui add textarea
@@ -273,6 +349,21 @@ Aether UI uses a four-layer architecture:
   Slots: value, onChange, placeholder, rows
   Often used with: form-field, label
   Prompts: add a textarea | add a description field | add a multiline text input
+
+## Time Slots
+- Name: time-slots
+- Install: aether-ui add time-slots
+- Source: https://registry.aether-ui.dev/r/time-slots.json
+- Intent: Pick one bookable time and confirm it.
+  Often used with: radio-group, button
+  Prompts: add time slots | add a booking time picker
+
+## Timeline Scrubber
+- Name: timeline-scrubber
+- Install: aether-ui add timeline-scrubber
+- Source: https://registry.aether-ui.dev/r/timeline-scrubber.json
+- Intent: Move one marker along a time range.
+  Prompts: add a timeline scrubber | scrub a recording
 
 ## Toast
 - Name: toast
@@ -309,6 +400,13 @@ Aether UI uses a four-layer architecture:
   Slots: TooltipTrigger, TooltipContent, children
   Often used with: button, badge
   Prompts: add a tooltip | show a hint on hover | add an icon with a tooltip
+
+## Uptime Bar
+- Name: uptime-bar
+- Install: aether-ui add uptime-bar
+- Source: https://registry.aether-ui.dev/r/uptime-bar.json
+- Intent: Show day-by-day uptime for one service and the percent that excludes days with no data.
+  Prompts: add an uptime bar | show service uptime
 
 ## Patterns (17)
 

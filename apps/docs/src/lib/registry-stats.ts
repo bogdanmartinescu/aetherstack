@@ -10,9 +10,14 @@ import registry from "../../../../registry/public/registry.json"
 interface RegistryItem {
   name: string
   type: string
+  title: string
 }
 
 const items = (registry as { items: RegistryItem[] }).items
+
+export const REGISTRY_BLOCKS: readonly Pick<RegistryItem, "name" | "title">[] = items
+  .filter((i) => i.type === "registry:block")
+  .map(({ name, title }) => ({ name, title }))
 
 export const REGISTRY_STATS = {
   primitives: items.filter((i) => i.type === "registry:ui").length,

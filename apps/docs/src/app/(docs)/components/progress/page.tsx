@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Progress } from "@aetherstack/ui"
+import { Progress, ProgressRing } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
 
 export const metadata: Metadata = {
@@ -33,7 +33,63 @@ const Progress = React.forwardRef<
 ))
 Progress.displayName = "Progress"
 
-export { Progress }`
+function ProgressRing({
+  value,
+  max,
+  indeterminate,
+  "aria-label": ariaLabel,
+  className,
+}: {
+  value?: number
+  max?: number
+  indeterminate?: boolean
+  "aria-label": string
+  className?: string
+}) {
+  const safeMax = max == null || max <= 0 ? 100 : max
+  const R = 15.9155
+  const C = 2 * Math.PI * R
+  const clamped =
+    indeterminate || typeof value !== "number"
+      ? null
+      : Math.min(Math.max(value, 0), safeMax)
+  const percent = clamped == null ? 0 : (clamped / safeMax) * 100
+  const dashOffset = C - (percent / 100) * C
+  const ariaNow =
+    indeterminate !== true && typeof value === "number"
+      ? Math.min(Math.max(value, 0), safeMax)
+      : undefined
+  return (
+    <svg
+      role="progressbar"
+      aria-label={ariaLabel}
+      aria-valuemin={0}
+      aria-valuemax={safeMax}
+      {...(ariaNow !== undefined ? { "aria-valuenow": ariaNow } : {})}
+      viewBox="0 0 36 36"
+      className={cn(
+        "h-10 w-10",
+        indeterminate && "motion-safe:animate-spin",
+        className,
+      )}
+    >
+      <circle className="fill-none stroke-muted" cx="18" cy="18" r={R} strokeWidth="3" />
+      <circle
+        className="fill-none stroke-primary"
+        cx="18"
+        cy="18"
+        r={R}
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeDasharray={indeterminate ? \`\${C * 0.25} \${C}\` : String(C)}
+        strokeDashoffset={indeterminate ? 0 : dashOffset}
+        transform="rotate(-90 18 18)"
+      />
+    </svg>
+  )
+}
+
+export { Progress, ProgressRing }`
 
 export default function ProgressPage() {
   return (
@@ -115,12 +171,35 @@ export function ProgressDemo() {
 <Progress value={65} className="h-2" />
 <Progress value={65} className="h-4" />`,
         },
+        {
+          title: "Ring",
+          description: "Circular progress for compact layouts. Provide aria-label for accessibility.",
+          preview: (
+            <div className="flex items-center gap-6">
+              <ProgressRing value={25} aria-label="Upload" />
+              <ProgressRing indeterminate aria-label="Loading" />
+            </div>
+          ),
+          code: `<ProgressRing value={25} aria-label="Upload" />
+<ProgressRing indeterminate aria-label="Loading" />`,
+        },
       ]}
       props={[
         {
           name: "value",
           type: "number | null",
-          description: "Current progress value between 0 and 100. Pass null for indeterminate state.",
+          description: "Current progress value between 0 and max. Out-of-range values are clamped. Pass null for indeterminate state.",
+        },
+        {
+          name: "max",
+          type: "number",
+          default: "100",
+          description: "Upper bound of the value range.",
+        },
+        {
+          name: "indicatorClassName",
+          type: "string",
+          description: "Classes for the filled indicator — e.g. bg-destructive for an over-limit state.",
         },
         {
           name: "className",
@@ -131,6 +210,17 @@ export function ProgressDemo() {
           name: "...props",
           type: "React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>",
           description: "All Radix Progress Root props are forwarded, including max and getValueLabel.",
+        },
+        {
+          name: "indeterminate",
+          type: "boolean",
+          description:
+            "ProgressRing only. When true, the ring spins and aria-valuenow is omitted.",
+        },
+        {
+          name: "aria-label",
+          type: "string",
+          description: "ProgressRing only. Required accessible name for the circular progress indicator.",
         },
       ]}
       a11yNotes={[

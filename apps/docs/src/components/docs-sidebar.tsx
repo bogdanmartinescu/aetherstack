@@ -48,6 +48,7 @@ const nav = [
       { label: "Accordion", href: "/components/accordion" },
       { label: "Alert", href: "/components/alert" },
       { label: "Alert Dialog", href: "/components/alert-dialog" },
+      { label: "Animated Number", href: "/components/animated-number" },
       { label: "Aspect Ratio", href: "/components/aspect-ratio" },
       { label: "Avatar", href: "/components/avatar" },
       { label: "Badge", href: "/components/badge" },
@@ -65,6 +66,8 @@ const nav = [
       { label: "Dialog", href: "/components/dialog" },
       { label: "Drawer", href: "/components/drawer" },
       { label: "Dropdown Menu", href: "/components/dropdown-menu" },
+      { label: "Floating Dock", href: "/components/floating-dock" },
+      { label: "Heatmap", href: "/components/heatmap" },
       { label: "Hover Card", href: "/components/hover-card" },
       { label: "Input", href: "/components/input" },
       { label: "Input Group", href: "/components/input-group" },
@@ -74,27 +77,37 @@ const nav = [
       { label: "Menubar", href: "/components/menubar" },
       { label: "Navigation Menu", href: "/components/navigation-menu" },
       { label: "Pagination", href: "/components/pagination" },
+      { label: "Password Field", href: "/components/password-field" },
+      { label: "Password Strength", href: "/components/password-strength" },
       { label: "Popover", href: "/components/popover" },
+      { label: "Priority Bars", href: "/components/priority-bars" },
       { label: "Progress", href: "/components/progress" },
       { label: "Radio Group", href: "/components/radio-group" },
       { label: "Resizable", href: "/components/resizable" },
       { label: "Scroll Area", href: "/components/scroll-area" },
+      { label: "Segmented Control", href: "/components/segmented-control" },
       { label: "Select", href: "/components/select" },
       { label: "Separator", href: "/components/separator" },
       { label: "Sheet", href: "/components/sheet" },
       { label: "Sidebar", href: "/components/sidebar" },
       { label: "Skeleton", href: "/components/skeleton" },
       { label: "Slider", href: "/components/slider" },
+      { label: "Social Button", href: "/components/social-button" },
       { label: "Sonner", href: "/components/sonner" },
       { label: "Spinner", href: "/components/spinner" },
+      { label: "Status Dot", href: "/components/status-dot" },
       { label: "Switch", href: "/components/switch" },
       { label: "Table", href: "/components/table" },
       { label: "Tabs", href: "/components/tabs" },
+      { label: "Tag", href: "/components/tag" },
       { label: "Textarea", href: "/components/textarea" },
+      { label: "Time Slots", href: "/components/time-slots" },
+      { label: "Timeline Scrubber", href: "/components/timeline-scrubber" },
       { label: "Toast", href: "/components/toast" },
       { label: "Toggle", href: "/components/toggle" },
       { label: "Toggle Group", href: "/components/toggle-group" },
       { label: "Tooltip", href: "/components/tooltip" },
+      { label: "Uptime Bar", href: "/components/uptime-bar" },
       { label: "Visually Hidden", href: "/components/visually-hidden" },
     ],
   },
@@ -245,7 +258,7 @@ function getSection(pathname: string): string {
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
 
-function GitHubIcon({ className }: { className?: string }) {
+export function GitHubIcon({ className }: { className?: string }) {
   return (
     <svg
       className={className}

@@ -85,6 +85,17 @@ export default function ToolCallCardPage() {
           description: "Error message shown when status is 'error'.",
         },
         {
+          name: "duration",
+          type: "number",
+          description: "Execution time in milliseconds, shown next to the status (e.g. 250ms, 1.5s).",
+        },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          default: "false",
+          description: "Whether the details section starts expanded.",
+        },
+        {
           name: "className",
           type: "string",
           description: "Additional CSS classes.",
@@ -92,7 +103,8 @@ export default function ToolCallCardPage() {
       ]}
       a11yNotes={[
         "Status is communicated via both color and an icon — never color alone.",
-        "Collapsible args/result section uses a button with aria-expanded.",
+        "Collapsible args/result section uses a button with aria-expanded. Cards with no details render a static header instead.",
+        "String results render as-is; objects are pretty-printed, and unserialisable values never crash the render.",
       ]}
     />
   )

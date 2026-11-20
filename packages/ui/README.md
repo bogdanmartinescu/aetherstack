@@ -45,9 +45,9 @@ import { Button } from "@aetherstack/ui/button"
 import { Dialog, DialogContent } from "@aetherstack/ui/dialog"
 ```
 
-## Components (51)
+## Components (64)
 
-**Accordion, Alert, AlertDialog, AspectRatio, Avatar** (+ AvatarGroup)**, Badge, Button, ButtonGroup, Calendar, Card, Carousel, Chart, Checkbox, Collapsible, Combobox, ContextMenu, DatePicker, Dialog, Drawer, DropdownMenu, HoverCard, Input, InputGroup, InputOTP, Kbd, Label, Menubar, NavigationMenu, Pagination, Popover, Progress, RadioGroup, Resizable, ScrollArea, Select, Separator, Sheet, Sidebar, Skeleton, Slider, Sonner, Spinner, Switch, Table, Tabs, Textarea, Toast** (+ `useToast`)**, Toggle, ToggleGroup, Tooltip, VisuallyHidden**
+**Accordion, Alert, AlertDialog, AnimatedNumber, AspectRatio, Avatar** (+ AvatarGroup)**, Badge, Button, ButtonGroup, Calendar, Card, Carousel, Chart, Checkbox, Collapsible, Combobox, ContextMenu, DatePicker, Dialog, Drawer, DropdownMenu, FloatingDock, Heatmap, HoverCard, Input, InputGroup, InputOTP, Kbd, Label, Menubar, NavigationMenu, Pagination, PasswordField, PasswordStrength, Popover, PriorityBars, Progress** (+ ProgressRing)**, RadioGroup, Resizable, ScrollArea, SegmentedControl, Select, Separator, Sheet, Sidebar, Skeleton, Slider, SocialButton, Sonner, Spinner, StatusDot, Switch, Table, Tabs, Tag** (+ TagGroup)**, Textarea, TimeSlots, TimelineScrubber, Toast** (+ `useToast`)**, Toggle, ToggleGroup, Tooltip, UptimeBar, VisuallyHidden**
 
 ## AI-native primitives (14)
 

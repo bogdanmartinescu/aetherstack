@@ -1,0 +1,31 @@
+{
+  "name": "time-slots",
+  "type": "registry:ui",
+  "title": "Time Slots",
+  "description": "Pick one bookable time and confirm it.",
+  "author": "aetherstack",
+  "registryDependencies": [
+    "radio-group",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/time-slots.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/time-slots.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Button } from \"./button\"\nimport { RadioGroup, RadioGroupItem } from \"./radio-group\"\n\nexport interface TimeSlot {\n  id: string\n  label: string\n  disabled?: boolean\n}\n\nexport interface TimeSlotsProps {\n  timeZoneLabel: string\n  slots: readonly TimeSlot[]\n  value?: string\n  onValueChange?: (id: string) => void\n  onConfirm?: (id: string) => void\n  confirmLabel?: string\n  className?: string\n}\n\nexport function TimeSlots({\n  timeZoneLabel,\n  slots,\n  value,\n  onValueChange,\n  onConfirm,\n  confirmLabel = \"Confirm\",\n  className,\n}: TimeSlotsProps) {\n  const [internal, setInternal] = React.useState<string | undefined>(undefined)\n\n  const resolvedValue = value !== undefined ? value : internal ?? \"\"\n  const confirmDisabled = resolvedValue === \"\"\n\n  const handleValueChange = React.useCallback(\n    (next: string) => {\n      if (value === undefined) {\n        setInternal(next)\n      }\n      onValueChange?.(next)\n    },\n    [onValueChange, value],\n  )\n\n  const handleConfirm = React.useCallback(() => {\n    if (resolvedValue === \"\" || onConfirm === undefined) return\n    onConfirm(resolvedValue)\n  }, [onConfirm, resolvedValue])\n\n  return (\n    <div {...(className !== undefined ? { className } : {})}>\n      <p className=\"text-sm text-muted-foreground\">{timeZoneLabel}</p>\n      <RadioGroup\n        aria-label=\"Times\"\n        className=\"mt-3\"\n        value={resolvedValue}\n        onValueChange={handleValueChange}\n      >\n        {slots.map((slot) => (\n          <RadioGroupItem\n            key={slot.id}\n            value={slot.id}\n            className=\"flex items-center gap-2 text-sm font-medium leading-none\"\n            {...(slot.disabled === true ? { disabled: true } : {})}\n          >\n            {slot.label}\n          </RadioGroupItem>\n        ))}\n      </RadioGroup>\n      <Button\n        type=\"button\"\n        className=\"mt-4\"\n        disabled={confirmDisabled}\n        onClick={handleConfirm}\n      >\n        {confirmLabel}\n      </Button>\n    </div>\n  )\n}"
+    }
+  ],
+  "ai": {
+    "intent": "Pick one bookable time and confirm it.",
+    "prompts": [
+      "add time slots",
+      "add a booking time picker"
+    ],
+    "composition": [
+      "radio-group",
+      "button"
+    ],
+    "slots": []
+  }
+}

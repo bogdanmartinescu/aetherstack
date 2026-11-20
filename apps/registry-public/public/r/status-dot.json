@@ -1,0 +1,31 @@
+{
+  "name": "status-dot",
+  "type": "registry:ui",
+  "title": "Status Dot",
+  "description": "Coloured status dot with a spoken label.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "packages/ui/src/components/status-dot.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/status-dot.tsx",
+      "content": "import { cn } from \"@aetherstack/utils\"\n\nconst LABELS = {\n  idle: \"Idle\",\n  busy: \"Busy\",\n  blocked: \"Blocked\",\n  failed: \"Failed\",\n  finished: \"Finished\",\n} as const\n\nconst TONES = {\n  idle: \"bg-muted-foreground\",\n  busy: \"bg-primary\",\n  blocked: \"bg-amber-500\",\n  failed: \"bg-destructive\",\n  finished: \"bg-emerald-500\",\n} as const\n\nexport type StatusDotStatus = keyof typeof LABELS\n\nexport interface StatusDotProps {\n  status: StatusDotStatus\n  label?: string\n  pulse?: boolean\n  className?: string\n}\n\nexport function StatusDot({ status, label, pulse, className }: StatusDotProps) {\n  const text = label ?? LABELS[status]\n  const shouldPulse = pulse ?? status === \"busy\"\n  return (\n    <span role=\"img\" aria-label={text} className={cn(\"inline-flex\", className)}>\n      <span\n        aria-hidden=\"true\"\n        className={cn(\n          \"h-2 w-2 rounded-full\",\n          TONES[status],\n          shouldPulse && \"motion-safe:animate-pulse\",\n        )}\n      />\n    </span>\n  )\n}"
+    }
+  ],
+  "ai": {
+    "intent": "Show whether a person, service, or job is idle, busy, blocked, failed, or finished.",
+    "prompts": [
+      "add a status dot",
+      "show if a user is online",
+      "add a presence indicator"
+    ],
+    "composition": [
+      "avatar"
+    ],
+    "slots": []
+  }
+}

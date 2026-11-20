@@ -12,19 +12,28 @@ const MANUAL_SOURCE = `"use client"
 import * as React from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 import { cn } from "@/lib/utils"
+import { StatusDot, type StatusDotStatus } from "./status-dot"
+
+type AvatarProps = React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> & {
+  status?: StatusDotStatus
+}
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
->(({ className, ...props }, ref) => (
+  AvatarProps
+>(({ className, status, children, ...props }, ref) => (
   <AvatarPrimitive.Root
     ref={ref}
-    className={cn(
-      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
-      className,
-    )}
+    className={cn("relative flex h-10 w-10 shrink-0 rounded-full", className)}
     {...props}
-  />
+  >
+    <span className="size-full overflow-hidden rounded-full">{children}</span>
+    {status ? (
+      <span className="absolute bottom-0 right-0 translate-x-0.5 translate-y-0.5">
+        <StatusDot status={status} />
+      </span>
+    ) : null}
+  </AvatarPrimitive.Root>
 ))
 Avatar.displayName = "Avatar"
 
@@ -67,11 +76,16 @@ function AvatarGroup({ children, className, max }: AvatarGroupProps) {
   const overflow = max !== undefined ? childArray.length - max : 0
 
   return (
-    <div className={cn("flex items-center -space-x-2", className)}>
+    <div
+      className={cn(
+        "flex items-center -space-x-2 [&>*]:ring-2 [&>*]:ring-background",
+        className,
+      )}
+    >
       {visible}
       {overflow > 0 && (
-        <Avatar>
-          <AvatarFallback>+{overflow}</AvatarFallback>
+        <Avatar aria-label={\`\${overflow} more\`} role="img">
+          <AvatarFallback aria-hidden="true">+{overflow}</AvatarFallback>
         </Avatar>
       )}
     </div>
@@ -90,6 +104,7 @@ export default function AvatarPage() {
       features={[
         "Graceful fallback — shows initials or placeholder when image fails or is absent",
         "AvatarGroup stacks multiple avatars with configurable max and overflow count",
+        "Optional status shows a StatusDot on the corner",
         "Consistent 40×40 px default size, fully overridable via className",
         "Forwards refs to underlying Radix primitives",
       ]}
@@ -152,6 +167,11 @@ export function AvatarDemo() {
           code: `npm install @radix-ui/react-avatar`,
           filename: "terminal",
         },
+        {
+          title: "Registry dependency",
+          code: `npx aether-ui add status-dot`,
+          filename: "terminal",
+        },
       ]}
       examples={[
         {
@@ -166,6 +186,18 @@ export function AvatarDemo() {
           code: `<Avatar>
   <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
   <AvatarFallback>SC</AvatarFallback>
+</Avatar>`,
+        },
+        {
+          title: "With status",
+          description: "Pass status to render a StatusDot on the bottom-right corner.",
+          preview: (
+            <Avatar status="finished">
+              <AvatarFallback>AM</AvatarFallback>
+            </Avatar>
+          ),
+          code: `<Avatar status="finished">
+  <AvatarFallback>AM</AvatarFallback>
 </Avatar>`,
         },
         {
@@ -225,6 +257,11 @@ export function AvatarDemo() {
         },
       ]}
       props={[
+        {
+          name: "status",
+          type: "StatusDotStatus",
+          description: "Shows a StatusDot on the corner.",
+        },
         {
           name: "className",
           type: "string",
