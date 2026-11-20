@@ -10,7 +10,10 @@
   "exports": {
     ".": "./index.ts"
   },
-  "files": ["index.ts"],
+  "files": [
+    "LICENSE",
+    "index.ts"
+  ],
   "dependencies": {
     "tailwindcss-animate": "^1.0.7"
   },

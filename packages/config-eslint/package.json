@@ -9,7 +9,12 @@
     "./next": "./next.js",
     "./react-internal": "./react-internal.js"
   },
-  "files": ["index.js", "next.js", "react-internal.js"],
+  "files": [
+    "LICENSE",
+    "index.js",
+    "next.js",
+    "react-internal.js"
+  ],
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
