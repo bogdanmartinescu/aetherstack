@@ -8,6 +8,8 @@
     "build-registry": "tsx src/build-registry.ts",
     "audit-inventory": "tsx src/audit-inventory.ts",
     "register-missing": "tsx src/register-missing-modules.ts",
+    "consumer-install": "tsx src/consumer-install.ts",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -16,9 +18,10 @@
   },
   "devDependencies": {
     "@aetherstack/typescript-config": "workspace:*",
+    "@types/node": "^20.12.7",
     "tsx": "^4.9.3",
     "typescript": "^5.4.5",
-    "@types/node": "^20.12.7"
+    "vitest": "^1.6.0"
   },
   "license": "MIT"
 }
