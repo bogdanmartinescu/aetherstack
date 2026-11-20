@@ -21,10 +21,11 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod"
 import { loadRegistry } from "./registry.js"
 import { resolveGenerate } from "./generate.js"
+import { getPackageVersion } from "./version.js"
 
 const server = new McpServer({
   name: "aether-ui",
-  version: "0.0.1",
+  version: getPackageVersion(),
 })
 
 // ---------------------------------------------------------------------------
