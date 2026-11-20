@@ -3,6 +3,7 @@ import {
   validateRegistry,
   validateRegistryItem,
   findMissingDependencies,
+  findDependencyCycles,
 } from "../validate"
 import type { Registry } from "@aetherstack/registry-schema"
 
@@ -103,5 +104,32 @@ describe("findMissingDependencies", () => {
       ],
     }
     expect(findMissingDependencies(reg)).toEqual([])
+  })
+})
+
+describe("findDependencyCycles", () => {
+  it("returns no cycles for an acyclic graph", () => {
+    const reg: Registry = {
+      name: "test",
+      items: [
+        { name: "a", type: "registry:ui" },
+        { name: "b", type: "registry:ui", registryDependencies: ["a"] },
+        { name: "c", type: "registry:ui", registryDependencies: ["b"] },
+      ],
+    }
+    expect(findDependencyCycles(reg)).toEqual([])
+  })
+
+  it("returns the cycle path when two items depend on each other", () => {
+    const reg: Registry = {
+      name: "test",
+      items: [
+        { name: "a", type: "registry:ui", registryDependencies: ["b"] },
+        { name: "b", type: "registry:ui", registryDependencies: ["a"] },
+      ],
+    }
+    const cycles = findDependencyCycles(reg)
+    expect(cycles).toHaveLength(1)
+    expect(cycles[0]?.join(" → ")).toMatch(/a → b → a|b → a → b/)
   })
 })

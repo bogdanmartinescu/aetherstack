@@ -29,7 +29,7 @@ Aether UI uses a four-layer architecture:
 3. **Blocks** (registry:block) — full page-section assemblies
 4. **Tokens** — design tokens for colors, spacing, typography, and more
 
-## Primitives (44)
+## Primitives (78)
 
 ## Accordion
 - Name: accordion
@@ -40,12 +40,40 @@ Aether UI uses a four-layer architecture:
   Often used with: card, separator
   Prompts: add an accordion | create a collapsible section | add an FAQ section
 
+## Alert
+- Name: alert
+- Install: aether-ui add alert
+- Source: https://registry.aether-ui.dev/r/alert.json
+- Intent: Show inline status, warning, success, or error feedback
+  Prompts: add an alert | show a warning banner | add a success message
+
+## Alert Dialog
+- Name: alert-dialog
+- Install: aether-ui add alert-dialog
+- Source: https://registry.aether-ui.dev/r/alert-dialog.json
+- Intent: Confirm a destructive or irreversible action before it runs
+  Prompts: add a confirm dialog | add a delete confirmation | add an alert dialog
+
 ## Animated Number
 - Name: animated-number
 - Install: aether-ui add animated-number
 - Source: https://registry.aether-ui.dev/r/animated-number.json
 - Intent: Show a formatted number for money, percents, and live metrics.
   Prompts: add an animated number | roll a metric up to its value | add a number ticker
+
+## Aspect Ratio
+- Name: aspect-ratio
+- Install: aether-ui add aspect-ratio
+- Source: https://registry.aether-ui.dev/r/aspect-ratio.json
+- Intent: Keep media or embeds at a consistent aspect ratio
+  Prompts: add an aspect ratio box | constrain an image to 16:9
+
+## Attachment Chip
+- Name: attachment-chip
+- Install: aether-ui add attachment-chip
+- Source: https://registry.aether-ui.dev/r/attachment-chip.json
+- Intent: Show an attached file the user can remove or open
+  Prompts: add an attachment chip | show a file attachment | add a prompt attachment
 
 ## Avatar
 - Name: avatar
@@ -74,6 +102,13 @@ Aether UI uses a four-layer architecture:
   Often used with: form-field, dialog, card, page-header, empty-state
   Prompts: add a button | create a submit button | add a call to action
 
+## Button Group
+- Name: button-group
+- Install: aether-ui add button-group
+- Source: https://registry.aether-ui.dev/r/button-group.json
+- Intent: Group related actions in a connected button row
+  Prompts: add a button group | add segmented action buttons
+
 ## Calendar
 - Name: calendar
 - Install: aether-ui add calendar
@@ -92,6 +127,27 @@ Aether UI uses a four-layer architecture:
   Often used with: metric-card, login-block, signup-block, section-header
   Prompts: add a card | create a content card | add a panel with a title and description
 
+## Carousel
+- Name: carousel
+- Install: aether-ui add carousel
+- Source: https://registry.aether-ui.dev/r/carousel.json
+- Intent: Browse a horizontal set of slides or cards
+  Prompts: add a carousel | add an image slider | add a product carousel
+
+## Chart
+- Name: chart
+- Install: aether-ui add chart
+- Source: https://registry.aether-ui.dev/r/chart.json
+- Intent: Render a token-styled chart for dashboard metrics
+  Prompts: add a chart | add a bar chart | add a line chart
+
+## Chat Bubble
+- Name: chat-bubble
+- Install: aether-ui add chat-bubble
+- Source: https://registry.aether-ui.dev/r/chat-bubble.json
+- Intent: Render one chat message from the user or the assistant
+  Prompts: add a chat bubble | add a message bubble | show an assistant message
+
 ## Checkbox
 - Name: checkbox
 - Install: aether-ui add checkbox
@@ -100,6 +156,20 @@ Aether UI uses a four-layer architecture:
   Slots: checked, onCheckedChange
   Often used with: form-field, label, login-block
   Prompts: add a checkbox | add an accept terms checkbox | add a remember me option
+
+## Code Block
+- Name: code-block
+- Install: aether-ui add code-block
+- Source: https://registry.aether-ui.dev/r/code-block.json
+- Intent: Display a copyable code sample inside an AI answer
+  Prompts: add a code block | show AI generated code | add a copyable code panel
+
+## Collapsible
+- Name: collapsible
+- Install: aether-ui add collapsible
+- Source: https://registry.aether-ui.dev/r/collapsible.json
+- Intent: Expand or collapse a section of content
+  Prompts: add a collapsible section | add an expandable panel
 
 ## Combobox
 - Name: combobox
@@ -119,6 +189,13 @@ Aether UI uses a four-layer architecture:
   Often used with: dropdown-menu, separator
   Prompts: add a right-click menu | add a context menu | show contextual actions
 
+## Date Picker
+- Name: date-picker
+- Install: aether-ui add date-picker
+- Source: https://registry.aether-ui.dev/r/date-picker.json
+- Intent: Let the user pick a single date from a calendar popover
+  Prompts: add a date picker | add a calendar input | pick a date
+
 ## Dialog
 - Name: dialog
 - Install: aether-ui add dialog
@@ -128,6 +205,13 @@ Aether UI uses a four-layer architecture:
   Often used with: button, form-field, input
   Prompts: add a confirmation dialog | add a modal popup | add a delete confirmation modal
 
+## Drawer
+- Name: drawer
+- Install: aether-ui add drawer
+- Source: https://registry.aether-ui.dev/r/drawer.json
+- Intent: Present a mobile-friendly sheet that slides up from the bottom
+  Prompts: add a drawer | add a bottom sheet | add a mobile drawer
+
 ## Dropdown Menu
 - Name: dropdown-menu
 - Install: aether-ui add dropdown-menu
@@ -136,6 +220,13 @@ Aether UI uses a four-layer architecture:
   Slots: DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel
   Often used with: button, separator, badge
   Prompts: add a dropdown menu | add action menu | add options menu
+
+## Feedback Buttons
+- Name: feedback-buttons
+- Install: aether-ui add feedback-buttons
+- Source: https://registry.aether-ui.dev/r/feedback-buttons.json
+- Intent: Collect positive or negative feedback on a generated answer
+  Prompts: add feedback buttons | add thumbs up thumbs down | rate an AI response
 
 ## Floating Dock
 - Name: floating-dock
@@ -169,6 +260,27 @@ Aether UI uses a four-layer architecture:
   Often used with: form-field, label, table-toolbar, login-block, signup-block
   Prompts: add a text input | add a search field | add an email input
 
+## Input Group
+- Name: input-group
+- Install: aether-ui add input-group
+- Source: https://registry.aether-ui.dev/r/input-group.json
+- Intent: Compose an input with leading or trailing addons
+  Prompts: add an input with an icon | add an input group | add a prefixed input
+
+## Input OTP
+- Name: input-otp
+- Install: aether-ui add input-otp
+- Source: https://registry.aether-ui.dev/r/input-otp.json
+- Intent: Collect a one-time passcode one character at a time
+  Prompts: add an OTP input | add a verification code field | add a PIN input
+
+## Kbd
+- Name: kbd
+- Install: aether-ui add kbd
+- Source: https://registry.aether-ui.dev/r/kbd.json
+- Intent: Display a keyboard shortcut as a key badge
+  Prompts: add a keyboard shortcut badge | show a hotkey | add a kbd element
+
 ## Label
 - Name: label
 - Install: aether-ui add label
@@ -177,6 +289,34 @@ Aether UI uses a four-layer architecture:
   Slots: children, htmlFor
   Often used with: form-field, input, checkbox, radio-group, switch
   Prompts: add a form label | label an input field | add an accessible label
+
+## Markdown Renderer
+- Name: markdown-renderer
+- Install: aether-ui add markdown-renderer
+- Source: https://registry.aether-ui.dev/r/markdown-renderer.json
+- Intent: Render assistant Markdown including fenced code
+  Prompts: render markdown | add a markdown renderer | show AI markdown
+
+## Menubar
+- Name: menubar
+- Install: aether-ui add menubar
+- Source: https://registry.aether-ui.dev/r/menubar.json
+- Intent: Provide a desktop-style top menubar for application commands
+  Prompts: add a menubar | add an application menu | add a File Edit menu
+
+## Model Badge
+- Name: model-badge
+- Install: aether-ui add model-badge
+- Source: https://registry.aether-ui.dev/r/model-badge.json
+- Intent: Label which model generated the current answer
+  Prompts: add a model badge | show the model name | label the LLM
+
+## Navigation Menu
+- Name: navigation-menu
+- Install: aether-ui add navigation-menu
+- Source: https://registry.aether-ui.dev/r/navigation-menu.json
+- Intent: Build the primary site or product navigation
+  Prompts: add a navigation menu | add a navbar dropdown | add site navigation
 
 ## Pagination
 - Name: pagination
@@ -203,6 +343,13 @@ Aether UI uses a four-layer architecture:
   Often used with: button
   Prompts: add a password strength meter | generate a strong password
 
+## Popover
+- Name: popover
+- Install: aether-ui add popover
+- Source: https://registry.aether-ui.dev/r/popover.json
+- Intent: Show anchored contextual content without blocking the page
+  Prompts: add a popover | add a floating panel | add an anchored detail card
+
 ## Priority Bars
 - Name: priority-bars
 - Install: aether-ui add priority-bars
@@ -219,6 +366,20 @@ Aether UI uses a four-layer architecture:
   Often used with: billing-overview, onboarding-checklist
   Prompts: add a progress bar | show upload progress | show task completion
 
+## Prompt Input
+- Name: prompt-input
+- Install: aether-ui add prompt-input
+- Source: https://registry.aether-ui.dev/r/prompt-input.json
+- Intent: Let the user type and send a prompt, or stop a generation
+  Prompts: add a prompt input | add a chat composer | add send and stop buttons
+
+## Prompt Suggestion
+- Name: prompt-suggestion
+- Install: aether-ui add prompt-suggestion
+- Source: https://registry.aether-ui.dev/r/prompt-suggestion.json
+- Intent: Offer a one-click starter prompt
+  Prompts: add prompt suggestions | add starter prompts | add suggestion chips
+
 ## Radio Group
 - Name: radio-group
 - Install: aether-ui add radio-group
@@ -227,6 +388,20 @@ Aether UI uses a four-layer architecture:
   Slots: value, onValueChange, RadioGroupItem
   Often used with: form-field, label
   Prompts: add a radio group | add a plan selector with radio buttons | add a single-choice option list
+
+## Reasoning Block
+- Name: reasoning-block
+- Install: aether-ui add reasoning-block
+- Source: https://registry.aether-ui.dev/r/reasoning-block.json
+- Intent: Show optional model reasoning the user can expand
+  Prompts: add a reasoning block | show chain of thought | add collapsible thinking
+
+## Resizable
+- Name: resizable
+- Install: aether-ui add resizable
+- Source: https://registry.aether-ui.dev/r/resizable.json
+- Intent: Let the user resize adjacent panels by dragging a handle
+  Prompts: add resizable panels | add a split pane | add a draggable sidebar
 
 ## Scroll Area
 - Name: scroll-area
@@ -272,6 +447,13 @@ Aether UI uses a four-layer architecture:
   Often used with: button, form-field, input
   Prompts: add a side panel | add a slide-in drawer | add a detail sheet
 
+## Sidebar
+- Name: sidebar
+- Install: aether-ui add sidebar
+- Source: https://registry.aether-ui.dev/r/sidebar.json
+- Intent: Provide the primary app navigation sidebar shell
+  Prompts: add a sidebar | add an app shell sidebar | add a collapsible nav
+
 ## Skeleton
 - Name: skeleton
 - Install: aether-ui add skeleton
@@ -298,6 +480,27 @@ Aether UI uses a four-layer architecture:
   Often used with: button
   Prompts: add a Google sign in button | add social login
 
+## Sonner
+- Name: sonner
+- Install: aether-ui add sonner
+- Source: https://registry.aether-ui.dev/r/sonner.json
+- Intent: Show stacked toast notifications including promise states
+  Prompts: add sonner toasts | add a toast queue | add promise toasts
+
+## Source Card
+- Name: source-card
+- Install: aether-ui add source-card
+- Source: https://registry.aether-ui.dev/r/source-card.json
+- Intent: Cite a source URL or document next to generated text
+  Prompts: add a source card | show citations | add a reference card
+
+## Spinner
+- Name: spinner
+- Install: aether-ui add spinner
+- Source: https://registry.aether-ui.dev/r/spinner.json
+- Intent: Indicate that a short action or region is loading
+  Prompts: add a spinner | add a loading indicator | show a loading spinner
+
 ## Status Dot
 - Name: status-dot
 - Install: aether-ui add status-dot
@@ -305,6 +508,13 @@ Aether UI uses a four-layer architecture:
 - Intent: Show whether a person, service, or job is idle, busy, blocked, failed, or finished.
   Often used with: avatar
   Prompts: add a status dot | show if a user is online | add a presence indicator
+
+## Streaming Text
+- Name: streaming-text
+- Install: aether-ui add streaming-text
+- Source: https://registry.aether-ui.dev/r/streaming-text.json
+- Intent: Display token streaming assistant text as it arrives
+  Prompts: add streaming text | stream an AI answer | type out the response
 
 ## Switch
 - Name: switch
@@ -350,6 +560,13 @@ Aether UI uses a four-layer architecture:
   Often used with: form-field, label
   Prompts: add a textarea | add a description field | add a multiline text input
 
+## Thinking Indicator
+- Name: thinking-indicator
+- Install: aether-ui add thinking-indicator
+- Source: https://registry.aether-ui.dev/r/thinking-indicator.json
+- Intent: Show that the assistant is thinking or generating
+  Prompts: add a thinking indicator | show AI is thinking | add a generating state
+
 ## Time Slots
 - Name: time-slots
 - Install: aether-ui add time-slots
@@ -392,6 +609,20 @@ Aether UI uses a four-layer architecture:
   Often used with: toggle
   Prompts: add toggle group | add a toolbar button group | add text alignment toggles
 
+## Token Counter
+- Name: token-counter
+- Install: aether-ui add token-counter
+- Source: https://registry.aether-ui.dev/r/token-counter.json
+- Intent: Show how many tokens a prompt or response is using
+  Prompts: add a token counter | show token usage | add a context meter
+
+## Tool Call Card
+- Name: tool-call-card
+- Install: aether-ui add tool-call-card
+- Source: https://registry.aether-ui.dev/r/tool-call-card.json
+- Intent: Surface a tool call the model made and its result state
+  Prompts: add a tool call card | show tool use | display a function call
+
 ## Tooltip
 - Name: tooltip
 - Install: aether-ui add tooltip
@@ -408,7 +639,14 @@ Aether UI uses a four-layer architecture:
 - Intent: Show day-by-day uptime for one service and the percent that excludes days with no data.
   Prompts: add an uptime bar | show service uptime
 
-## Patterns (17)
+## Visually Hidden
+- Name: visually-hidden
+- Install: aether-ui add visually-hidden
+- Source: https://registry.aether-ui.dev/r/visually-hidden.json
+- Intent: Expose text to screen readers without showing it on screen
+  Prompts: add visually hidden text | add a screen reader only label
+
+## Patterns (39)
 
 ## Activity Feed
 - Name: activity-feed
@@ -418,6 +656,34 @@ Aether UI uses a four-layer architecture:
   Slots: ActivityItem, items
   Often used with: avatar, notification-center
   Prompts: add an activity feed | show recent events | add an audit log
+
+## Ai Error State
+- Name: ai-error-state
+- Install: aether-ui add ai-error-state
+- Source: https://registry.aether-ui.dev/r/ai-error-state.json
+- Intent: Use the Ai Error State component.
+  Prompts: add a ai error state
+
+## Ai Response Card
+- Name: ai-response-card
+- Install: aether-ui add ai-response-card
+- Source: https://registry.aether-ui.dev/r/ai-response-card.json
+- Intent: Use the Ai Response Card component.
+  Prompts: add a ai response card
+
+## Ai Settings Panel
+- Name: ai-settings-panel
+- Install: aether-ui add ai-settings-panel
+- Source: https://registry.aether-ui.dev/r/ai-settings-panel.json
+- Intent: Use the Ai Settings Panel component.
+  Prompts: add a ai settings panel
+
+## Chat Message List
+- Name: chat-message-list
+- Install: aether-ui add chat-message-list
+- Source: https://registry.aether-ui.dev/r/chat-message-list.json
+- Intent: Use the Chat Message List component.
+  Prompts: add a chat message list
 
 ## Color Picker
 - Name: color-picker
@@ -437,6 +703,27 @@ Aether UI uses a four-layer architecture:
   Often used with: dialog, combobox, scroll-area
   Prompts: add a command palette | add cmd+k search | add a quick search
 
+## Confirm Dialog
+- Name: confirm-dialog
+- Install: aether-ui add confirm-dialog
+- Source: https://registry.aether-ui.dev/r/confirm-dialog.json
+- Intent: Use the Confirm Dialog component.
+  Prompts: add a confirm dialog
+
+## Conversation Starter
+- Name: conversation-starter
+- Install: aether-ui add conversation-starter
+- Source: https://registry.aether-ui.dev/r/conversation-starter.json
+- Intent: Use the Conversation Starter component.
+  Prompts: add a conversation starter
+
+## Conversation Thread
+- Name: conversation-thread
+- Install: aether-ui add conversation-thread
+- Source: https://registry.aether-ui.dev/r/conversation-thread.json
+- Intent: Use the Conversation Thread component.
+  Prompts: add a conversation thread
+
 ## Data Table
 - Name: data-table
 - Install: aether-ui add data-table
@@ -445,6 +732,13 @@ Aether UI uses a four-layer architecture:
   Slots: columns, data, pageSize, searchable, searchKeys
   Often used with: table, input, button, pagination, table-toolbar
   Prompts: add a data table | show a sortable table | add a paginated list
+
+## Date Range Picker
+- Name: date-range-picker
+- Install: aether-ui add date-range-picker
+- Source: https://registry.aether-ui.dev/r/date-range-picker.json
+- Intent: Use the Date Range Picker component.
+  Prompts: add a date range picker
 
 ## Empty State
 - Name: empty-state
@@ -482,6 +776,13 @@ Aether UI uses a four-layer architecture:
   Often used with: input, textarea, select, checkbox, switch, label
   Prompts: add a form field with validation | add an email field with error message | add a labelled input with helper text
 
+## Inline Edit
+- Name: inline-edit
+- Install: aether-ui add inline-edit
+- Source: https://registry.aether-ui.dev/r/inline-edit.json
+- Intent: Use the Inline Edit component.
+  Prompts: add a inline edit
+
 ## Kanban Board
 - Name: kanban
 - Install: aether-ui add kanban
@@ -509,6 +810,20 @@ Aether UI uses a four-layer architecture:
   Often used with: card, badge, dashboard-shell
   Prompts: add a metric card | add a KPI card | add a stat card with a trend
 
+## Model Selector
+- Name: model-selector
+- Install: aether-ui add model-selector
+- Source: https://registry.aether-ui.dev/r/model-selector.json
+- Intent: Use the Model Selector component.
+  Prompts: add a model selector
+
+## Multi Select
+- Name: multi-select
+- Install: aether-ui add multi-select
+- Source: https://registry.aether-ui.dev/r/multi-select.json
+- Intent: Use the Multi Select component.
+  Prompts: add a multi select
+
 ## Sidebar Nav
 - Name: nav
 - Install: aether-ui add nav
@@ -517,6 +832,13 @@ Aether UI uses a four-layer architecture:
   Slots: NavItem, NavGroup, SidebarNav, items, groups
   Often used with: dashboard-shell, badge
   Prompts: add a sidebar navigation | add nav items to a sidebar | add a grouped sidebar menu
+
+## Notification Bell
+- Name: notification-bell
+- Install: aether-ui add notification-bell
+- Source: https://registry.aether-ui.dev/r/notification-bell.json
+- Intent: Use the Notification Bell component.
+  Prompts: add a notification bell
 
 ## Page Header
 - Name: page-header
@@ -527,6 +849,34 @@ Aether UI uses a four-layer architecture:
   Often used with: button, badge, section-header
   Prompts: add a page header | add a page title with a breadcrumb | add a header with an action button
 
+## Profile Dropdown
+- Name: profile-dropdown
+- Install: aether-ui add profile-dropdown
+- Source: https://registry.aether-ui.dev/r/profile-dropdown.json
+- Intent: Use the Profile Dropdown component.
+  Prompts: add a profile dropdown
+
+## Prompt Builder
+- Name: prompt-builder
+- Install: aether-ui add prompt-builder
+- Source: https://registry.aether-ui.dev/r/prompt-builder.json
+- Intent: Use the Prompt Builder component.
+  Prompts: add a prompt builder
+
+## Prompt Library
+- Name: prompt-library
+- Install: aether-ui add prompt-library
+- Source: https://registry.aether-ui.dev/r/prompt-library.json
+- Intent: Use the Prompt Library component.
+  Prompts: add a prompt library
+
+## Search Input
+- Name: search-input
+- Install: aether-ui add search-input
+- Source: https://registry.aether-ui.dev/r/search-input.json
+- Intent: Use the Search Input component.
+  Prompts: add a search input
+
 ## Section Header
 - Name: section-header
 - Install: aether-ui add section-header
@@ -535,6 +885,13 @@ Aether UI uses a four-layer architecture:
   Slots: title, description, action, children
   Often used with: card, form-field, button
   Prompts: add a section heading | add a settings section | add a content block title
+
+## Sortable List
+- Name: sortable-list
+- Install: aether-ui add sortable-list
+- Source: https://registry.aether-ui.dev/r/sortable-list.json
+- Intent: Use the Sortable List component.
+  Prompts: add a sortable list
 
 ## Stat Group
 - Name: stat-group
@@ -563,7 +920,42 @@ Aether UI uses a four-layer architecture:
   Often used with: table, input, button, badge, select
   Prompts: add a table toolbar with search and filters | add a search bar above a table | add filter chips to a data table
 
-## Blocks (10)
+## Theme Switcher
+- Name: theme-switcher
+- Install: aether-ui add theme-switcher
+- Source: https://registry.aether-ui.dev/r/theme-switcher.json
+- Intent: Use the Theme Switcher component.
+  Prompts: add a theme switcher
+
+## Timeline Feed
+- Name: timeline-feed
+- Install: aether-ui add timeline-feed
+- Source: https://registry.aether-ui.dev/r/timeline-feed.json
+- Intent: Use the Timeline Feed component.
+  Prompts: add a timeline feed
+
+## Tool Call Sequence
+- Name: tool-call-sequence
+- Install: aether-ui add tool-call-sequence
+- Source: https://registry.aether-ui.dev/r/tool-call-sequence.json
+- Intent: Use the Tool Call Sequence component.
+  Prompts: add a tool call sequence
+
+## Upload Progress
+- Name: upload-progress
+- Install: aether-ui add upload-progress
+- Source: https://registry.aether-ui.dev/r/upload-progress.json
+- Intent: Use the Upload Progress component.
+  Prompts: add a upload progress
+
+## Voice Input
+- Name: voice-input
+- Install: aether-ui add voice-input
+- Source: https://registry.aether-ui.dev/r/voice-input.json
+- Intent: Use the Voice Input component.
+  Prompts: add a voice input
+
+## Blocks (34)
 
 ## Account Settings
 - Name: account-settings
@@ -574,6 +966,48 @@ Aether UI uses a four-layer architecture:
   Often used with: input, textarea, button, avatar, form-field
   Prompts: add account settings | add profile settings | add user settings form
 
+## Agent Workspace
+- Name: agent-workspace
+- Install: aether-ui add agent-workspace
+- Source: https://registry.aether-ui.dev/r/agent-workspace.json
+- Intent: Use the Agent Workspace component.
+  Prompts: add a agent workspace
+
+## Ai Assistant Panel
+- Name: ai-assistant-panel
+- Install: aether-ui add ai-assistant-panel
+- Source: https://registry.aether-ui.dev/r/ai-assistant-panel.json
+- Intent: Use the Ai Assistant Panel component.
+  Prompts: add a ai assistant panel
+
+## Ai Onboarding
+- Name: ai-onboarding
+- Install: aether-ui add ai-onboarding
+- Source: https://registry.aether-ui.dev/r/ai-onboarding.json
+- Intent: Use the Ai Onboarding component.
+  Prompts: add a ai onboarding
+
+## Ai Settings
+- Name: ai-settings
+- Install: aether-ui add ai-settings
+- Source: https://registry.aether-ui.dev/r/ai-settings.json
+- Intent: Use the Ai Settings component.
+  Prompts: add a ai settings
+
+## Ai Usage Dashboard
+- Name: ai-usage-dashboard
+- Install: aether-ui add ai-usage-dashboard
+- Source: https://registry.aether-ui.dev/r/ai-usage-dashboard.json
+- Intent: Use the Ai Usage Dashboard component.
+  Prompts: add a ai usage dashboard
+
+## App Header
+- Name: app-header
+- Install: aether-ui add app-header
+- Source: https://registry.aether-ui.dev/r/app-header.json
+- Intent: Use the App Header component.
+  Prompts: add a app header
+
 ## Billing Overview
 - Name: billing-overview
 - Install: aether-ui add billing-overview
@@ -582,6 +1016,41 @@ Aether UI uses a four-layer architecture:
   Slots: plan, usage, nextBillingDate, onUpgrade, onManageBilling
   Often used with: progress, button, card, badge
   Prompts: add a billing overview | show subscription details | add plan usage
+
+## Changelog Block
+- Name: changelog-block
+- Install: aether-ui add changelog-block
+- Source: https://registry.aether-ui.dev/r/changelog-block.json
+- Intent: Use the Changelog Block component.
+  Prompts: add a changelog block
+
+## Chat Layout
+- Name: chat-layout
+- Install: aether-ui add chat-layout
+- Source: https://registry.aether-ui.dev/r/chat-layout.json
+- Intent: Use the Chat Layout component.
+  Prompts: add a chat layout
+
+## Chat Sidebar
+- Name: chat-sidebar
+- Install: aether-ui add chat-sidebar
+- Source: https://registry.aether-ui.dev/r/chat-sidebar.json
+- Intent: Use the Chat Sidebar component.
+  Prompts: add a chat sidebar
+
+## Compare Output
+- Name: compare-output
+- Install: aether-ui add compare-output
+- Source: https://registry.aether-ui.dev/r/compare-output.json
+- Intent: Use the Compare Output component.
+  Prompts: add a compare output
+
+## Cta Section
+- Name: cta-section
+- Install: aether-ui add cta-section
+- Source: https://registry.aether-ui.dev/r/cta-section.json
+- Intent: Use the Cta Section component.
+  Prompts: add a cta section
 
 ## Dashboard Shell
 - Name: dashboard-shell
@@ -601,6 +1070,41 @@ Aether UI uses a four-layer architecture:
   Often used with: empty-state, button
   Prompts: add an empty dashboard | show empty state for dashboard | add a welcome screen
 
+## Error Page
+- Name: error-page
+- Install: aether-ui add error-page
+- Source: https://registry.aether-ui.dev/r/error-page.json
+- Intent: Use the Error Page component.
+  Prompts: add a error page
+
+## Faq Section
+- Name: faq-section
+- Install: aether-ui add faq-section
+- Source: https://registry.aether-ui.dev/r/faq-section.json
+- Intent: Use the Faq Section component.
+  Prompts: add a faq section
+
+## Features Section
+- Name: features-section
+- Install: aether-ui add features-section
+- Source: https://registry.aether-ui.dev/r/features-section.json
+- Intent: Use the Features Section component.
+  Prompts: add a features section
+
+## Footer Section
+- Name: footer-section
+- Install: aether-ui add footer-section
+- Source: https://registry.aether-ui.dev/r/footer-section.json
+- Intent: Use the Footer Section component.
+  Prompts: add a footer section
+
+## Landing Hero
+- Name: landing-hero
+- Install: aether-ui add landing-hero
+- Source: https://registry.aether-ui.dev/r/landing-hero.json
+- Intent: Use the Landing Hero component.
+  Prompts: add a landing hero
+
 ## Login
 - Name: login-block
 - Install: aether-ui add login-block
@@ -609,6 +1113,20 @@ Aether UI uses a four-layer architecture:
   Slots: onSubmit, onForgotPassword, footer
   Often used with: form-field, input, button, checkbox, label
   Prompts: add a login page | create an authentication screen | add a sign-in form
+
+## Logo Cloud
+- Name: logo-cloud
+- Install: aether-ui add logo-cloud
+- Source: https://registry.aether-ui.dev/r/logo-cloud.json
+- Intent: Use the Logo Cloud component.
+  Prompts: add a logo cloud
+
+## Marketing Navbar
+- Name: marketing-navbar
+- Install: aether-ui add marketing-navbar
+- Source: https://registry.aether-ui.dev/r/marketing-navbar.json
+- Intent: Use the Marketing Navbar component.
+  Prompts: add a marketing navbar
 
 ## Notification Center
 - Name: notification-center
@@ -628,6 +1146,13 @@ Aether UI uses a four-layer architecture:
   Often used with: checkbox, progress, stepper
   Prompts: add an onboarding checklist | add a getting started guide | add setup steps
 
+## Pricing Comparison
+- Name: pricing-comparison
+- Install: aether-ui add pricing-comparison
+- Source: https://registry.aether-ui.dev/r/pricing-comparison.json
+- Intent: Use the Pricing Comparison component.
+  Prompts: add a pricing comparison
+
 ## Pricing Section
 - Name: pricing-section
 - Install: aether-ui add pricing-section
@@ -636,6 +1161,13 @@ Aether UI uses a four-layer architecture:
   Slots: tiers, title, description
   Often used with: badge, button, card
   Prompts: add a pricing section | add pricing plans | show subscription tiers
+
+## Prompt Library Page
+- Name: prompt-library-page
+- Install: aether-ui add prompt-library-page
+- Source: https://registry.aether-ui.dev/r/prompt-library-page.json
+- Intent: Use the Prompt Library Page component.
+  Prompts: add a prompt library page
 
 ## Sign Up
 - Name: signup-block
@@ -646,6 +1178,13 @@ Aether UI uses a four-layer architecture:
   Often used with: form-field, input, button, checkbox
   Prompts: add a sign up page | create a registration form | add a new account form
 
+## Stats Section
+- Name: stats-section
+- Install: aether-ui add stats-section
+- Source: https://registry.aether-ui.dev/r/stats-section.json
+- Intent: Use the Stats Section component.
+  Prompts: add a stats section
+
 ## Team Settings
 - Name: team-settings
 - Install: aether-ui add team-settings
@@ -654,6 +1193,27 @@ Aether UI uses a four-layer architecture:
   Slots: members, onInvite, onRoleChange, onRemove
   Often used with: avatar, badge, select, input, button
   Prompts: add team settings | add team member management | add invite team members
+
+## Testimonials Section
+- Name: testimonials-section
+- Install: aether-ui add testimonials-section
+- Source: https://registry.aether-ui.dev/r/testimonials-section.json
+- Intent: Use the Testimonials Section component.
+  Prompts: add a testimonials section
+
+## User Profile Page
+- Name: user-profile-page
+- Install: aether-ui add user-profile-page
+- Source: https://registry.aether-ui.dev/r/user-profile-page.json
+- Intent: Use the User Profile Page component.
+  Prompts: add a user profile page
+
+## Waitlist Block
+- Name: waitlist-block
+- Install: aether-ui add waitlist-block
+- Source: https://registry.aether-ui.dev/r/waitlist-block.json
+- Intent: Use the Waitlist Block component.
+  Prompts: add a waitlist block
 
 ## Compose a SaaS Dashboard
 

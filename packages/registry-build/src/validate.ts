@@ -57,4 +57,36 @@ export function findMissingDependencies(registry: Registry): string[] {
   return missing
 }
 
+/**
+ * Detects cycles in `registryDependencies` within a single registry.
+ * Each cycle is returned as the path of item names ending back at the start.
+ */
+export function findDependencyCycles(registry: Registry): string[][] {
+  const deps = new Map(
+    registry.items.map((item) => [item.name, item.registryDependencies ?? []] as const),
+  )
+  const cycles: string[][] = []
+  const state = new Map<string, "visiting" | "done">()
+  const stack: string[] = []
+
+  const visit = (name: string) => {
+    const current = state.get(name)
+    if (current === "done") return
+    if (current === "visiting") {
+      cycles.push([...stack.slice(stack.indexOf(name)), name])
+      return
+    }
+    state.set(name, "visiting")
+    stack.push(name)
+    for (const dep of deps.get(name) ?? []) {
+      if (deps.has(dep)) visit(dep)
+    }
+    stack.pop()
+    state.set(name, "done")
+  }
+
+  for (const name of deps.keys()) visit(name)
+  return cycles
+}
+
 export type { Registry, RegistryItem }

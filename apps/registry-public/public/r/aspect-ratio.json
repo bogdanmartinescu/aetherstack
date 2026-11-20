@@ -1,0 +1,27 @@
+{
+  "name": "aspect-ratio",
+  "type": "registry:ui",
+  "title": "Aspect Ratio",
+  "description": "Constrains content to a fixed width/height ratio.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@radix-ui/react-aspect-ratio"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/aspect-ratio.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/aspect-ratio.tsx",
+      "content": "import * as AspectRatioPrimitive from \"@radix-ui/react-aspect-ratio\"\n\nconst AspectRatio = AspectRatioPrimitive.Root\nAspectRatio.displayName = \"AspectRatio\"\n\nexport { AspectRatio }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Keep media or embeds at a consistent aspect ratio",
+    "prompts": [
+      "add an aspect ratio box",
+      "constrain an image to 16:9"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

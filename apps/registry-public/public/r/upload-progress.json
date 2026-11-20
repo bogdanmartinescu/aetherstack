@@ -1,0 +1,33 @@
+{
+  "name": "upload-progress",
+  "type": "registry:pattern",
+  "title": "Upload Progress",
+  "description": "Upload Progress component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "progress",
+    "spinner"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/upload-progress.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/upload-progress.tsx",
+      "content": "\"use client\"\n\nimport { CheckCircle, X, XCircle } from \"lucide-react\"\nimport { Button, Progress, Spinner } from \"@aetherstack/ui\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface UploadFile {\n  id: string\n  name: string\n  size?: number\n  progress: number\n  status: \"uploading\" | \"done\" | \"error\"\n  error?: string\n}\n\nexport interface UploadProgressItemProps {\n  file: UploadFile\n  onRemove?: (id: string) => void\n}\n\nfunction formatBytes(bytes: number): string {\n  if (bytes < 1024) return `${bytes} B`\n  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`\n  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`\n}\n\nexport function UploadProgressItem({ file, onRemove }: UploadProgressItemProps) {\n  return (\n    <div\n      role=\"listitem\"\n      aria-label={`${file.name} — ${file.status}`}\n      className={cn(\n        \"rounded-lg border border-border bg-card p-3\",\n        file.status === \"error\" && \"border-destructive/50\",\n      )}\n    >\n      <div className=\"flex items-start gap-3\">\n        <div className=\"min-w-0 flex-1\">\n          <div className=\"flex items-center justify-between gap-2\">\n            <p className=\"truncate text-sm font-medium text-foreground\">{file.name}</p>\n            <div className=\"flex shrink-0 items-center gap-1\">\n              {file.status === \"uploading\" && (\n                <Spinner size=\"sm\" aria-label=\"Uploading\" />\n              )}\n              {file.status === \"done\" && (\n                <CheckCircle\n                  className=\"h-4 w-4 text-green-600 dark:text-green-400\"\n                  aria-label=\"Upload complete\"\n                />\n              )}\n              {file.status === \"error\" && (\n                <XCircle\n                  className=\"h-4 w-4 text-destructive\"\n                  aria-label=\"Upload failed\"\n                />\n              )}\n              {onRemove && (\n                <Button\n                  variant=\"ghost\"\n                  size=\"icon\"\n                  className=\"h-5 w-5 text-muted-foreground\"\n                  aria-label={`Remove ${file.name}`}\n                  onClick={() => onRemove(file.id)}\n                >\n                  <X className=\"h-3 w-3\" aria-hidden=\"true\" />\n                </Button>\n              )}\n            </div>\n          </div>\n          {file.size !== undefined && (\n            <p className=\"mt-0.5 text-xs text-muted-foreground\">{formatBytes(file.size)}</p>\n          )}\n          {file.status !== \"error\" ? (\n            <Progress\n              value={file.progress}\n              className=\"mt-2 h-1.5\"\n              aria-label={`${file.name} upload progress`}\n              aria-valuenow={file.progress}\n              aria-valuemin={0}\n              aria-valuemax={100}\n            />\n          ) : (\n            <p className=\"mt-1 text-xs text-destructive\">{file.error ?? \"Upload failed\"}</p>\n          )}\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport interface UploadProgressProps {\n  files: UploadFile[]\n  onRemove?: (id: string) => void\n  className?: string\n}\n\nexport function UploadProgress({ files, onRemove, className }: UploadProgressProps) {\n  return (\n    <div role=\"list\" aria-label=\"Upload progress\" className={cn(\"flex flex-col gap-2\", className)}>\n      {files.map((file) => (\n        <UploadProgressItem\n          key={file.id}\n          file={file}\n          {...(onRemove !== undefined ? { onRemove } : {})}\n        />\n      ))}\n    </div>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Upload Progress component.",
+    "prompts": [
+      "add a upload progress"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

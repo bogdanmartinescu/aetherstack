@@ -1,0 +1,28 @@
+{
+  "name": "streaming-text",
+  "type": "registry:ui",
+  "title": "Streaming Text",
+  "description": "Renders growing text from a string or async iterable stream.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/ai/streaming-text.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/ai/streaming-text.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\ninterface StreamingTextProps {\n  content: string | AsyncIterable<string>\n  className?: string\n  /** Called once an `AsyncIterable` finishes. Not called for plain strings. */\n  onComplete?: () => void\n  /** Called if the `AsyncIterable` throws. Text received so far is kept. */\n  onError?: (error: unknown) => void\n  /** Show the blinking caret while streaming. Defaults to `true`. */\n  showCursor?: boolean\n}\n\nfunction StreamingText({\n  content,\n  className,\n  onComplete,\n  onError,\n  showCursor = true,\n}: StreamingTextProps) {\n  const [displayed, setDisplayed] = React.useState(typeof content === \"string\" ? content : \"\")\n  const [isStreaming, setIsStreaming] = React.useState(false)\n\n  // Callbacks live in refs so an inline handler doesn't restart the effect,\n  // which would re-iterate a one-shot AsyncIterable.\n  const onCompleteRef = React.useRef(onComplete)\n  const onErrorRef = React.useRef(onError)\n  onCompleteRef.current = onComplete\n  onErrorRef.current = onError\n\n  React.useEffect(() => {\n    if (typeof content === \"string\") {\n      setDisplayed(content)\n      setIsStreaming(false)\n      return\n    }\n\n    let cancelled = false\n    setDisplayed(\"\")\n    setIsStreaming(true)\n\n    async function consume(stream: AsyncIterable<string>) {\n      try {\n        for await (const chunk of stream) {\n          if (cancelled) return\n          setDisplayed((prev) => prev + chunk)\n        }\n        if (!cancelled) onCompleteRef.current?.()\n      } catch (error) {\n        if (!cancelled) onErrorRef.current?.(error)\n      } finally {\n        if (!cancelled) setIsStreaming(false)\n      }\n    }\n\n    void consume(content)\n\n    return () => {\n      cancelled = true\n    }\n  }, [content])\n\n  return (\n    <span\n      className={cn(\"whitespace-pre-wrap\", className)}\n      aria-busy={isStreaming || undefined}\n      data-streaming={isStreaming || undefined}\n    >\n      {displayed}\n      {isStreaming && showCursor && (\n        <span\n          aria-hidden=\"true\"\n          className=\"ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-current align-middle motion-reduce:animate-none\"\n        />\n      )}\n    </span>\n  )\n}\n\nexport { StreamingText }\nexport type { StreamingTextProps }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Display token streaming assistant text as it arrives",
+    "prompts": [
+      "add streaming text",
+      "stream an AI answer",
+      "type out the response"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "token-counter",
+  "type": "registry:ui",
+  "title": "Token Counter",
+  "description": "Token usage readout with an optional progress meter.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [
+    "progress"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/ai/token-counter.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/ai/token-counter.tsx",
+      "content": "import { cn } from \"@aetherstack/utils\"\nimport { Progress } from \"../progress\"\n\ninterface TokenCounterProps {\n  used: number\n  max: number\n  label?: string\n  /** Fraction of `max` (0–1) at which the counter turns to a warning colour. Defaults to 0.8. */\n  warnAt?: number\n  className?: string\n}\n\nfunction TokenCounter({\n  used,\n  max,\n  label = \"Context window\",\n  warnAt = 0.8,\n  className,\n}: TokenCounterProps) {\n  const ratio = max > 0 ? used / max : 0\n  const percentage = Math.min(Math.max(ratio * 100, 0), 100)\n  const level = ratio >= 1 ? \"critical\" : ratio >= warnAt ? \"warning\" : \"normal\"\n\n  return (\n    <div data-level={level} className={cn(\"flex flex-col gap-1.5\", className)}>\n      <div className=\"flex items-center justify-between gap-2 text-xs\">\n        <span className=\"text-muted-foreground\">{label}</span>\n        <span\n          className={cn(\n            \"font-mono tabular-nums\",\n            level === \"critical\" && \"text-destructive\",\n            level === \"warning\" && \"text-amber-600 dark:text-amber-400\",\n            level === \"normal\" && \"text-muted-foreground\",\n          )}\n        >\n          {used.toLocaleString()} / {max.toLocaleString()} tokens\n        </span>\n      </div>\n      <Progress\n        value={percentage}\n        aria-label={label}\n        getValueLabel={() => `${used.toLocaleString()} of ${max.toLocaleString()} tokens used`}\n        className=\"h-1.5\"\n        indicatorClassName={cn(\n          level === \"critical\" && \"bg-destructive\",\n          level === \"warning\" && \"bg-amber-500\",\n        )}\n      />\n    </div>\n  )\n}\n\nexport { TokenCounter }\nexport type { TokenCounterProps }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Show how many tokens a prompt or response is using",
+    "prompts": [
+      "add a token counter",
+      "show token usage",
+      "add a context meter"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

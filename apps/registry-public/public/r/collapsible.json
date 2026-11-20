@@ -1,0 +1,27 @@
+{
+  "name": "collapsible",
+  "type": "registry:ui",
+  "title": "Collapsible",
+  "description": "Show and hide a content region with a trigger.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@radix-ui/react-collapsible"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/collapsible.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/collapsible.tsx",
+      "content": "\"use client\"\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\"\n\nconst Collapsible = CollapsiblePrimitive.Root\nconst CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger\nconst CollapsibleContent = CollapsiblePrimitive.CollapsibleContent\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Expand or collapse a section of content",
+    "prompts": [
+      "add a collapsible section",
+      "add an expandable panel"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

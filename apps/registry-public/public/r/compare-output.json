@@ -1,0 +1,31 @@
+{
+  "name": "compare-output",
+  "type": "registry:block",
+  "title": "Compare Output",
+  "description": "Compare Output component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/ui",
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [
+    "badge",
+    "card"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/ai/compare-output.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/ai/compare-output.tsx",
+      "content": "import { cn } from \"@aetherstack/utils\"\nimport { Card, CardContent, CardHeader, CardTitle } from \"@aetherstack/ui\"\nimport { Badge } from \"@aetherstack/ui\"\n\ninterface OutputItem {\n  model: string\n  content: string\n  timestamp?: string\n}\n\ninterface CompareOutputProps {\n  outputs: OutputItem[]\n  className?: string\n}\n\nfunction CompareOutput({ outputs, className }: CompareOutputProps) {\n  return (\n    <div\n      className={cn(\n        \"grid gap-4\",\n        outputs.length === 1 ? \"grid-cols-1\" : \"grid-cols-1 sm:grid-cols-2\",\n        className,\n      )}\n    >\n      {outputs.map((output, i) => (\n        <Card key={i} className=\"flex flex-col\">\n          <CardHeader className=\"pb-3\">\n            <div className=\"flex items-center justify-between gap-2\">\n              <CardTitle className=\"text-sm font-medium\">\n                <Badge variant=\"outline\" className=\"font-normal\">\n                  {output.model}\n                </Badge>\n              </CardTitle>\n              {output.timestamp && (\n                <span className=\"text-xs text-muted-foreground\">{output.timestamp}</span>\n              )}\n            </div>\n          </CardHeader>\n          <CardContent className=\"flex-1\">\n            <div className=\"text-sm leading-relaxed whitespace-pre-wrap\">{output.content}</div>\n          </CardContent>\n        </Card>\n      ))}\n    </div>\n  )\n}\n\nexport { CompareOutput }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Compare Output component.",
+    "prompts": [
+      "add a compare output"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "attachment-chip",
+  "type": "registry:ui",
+  "title": "Attachment Chip",
+  "description": "Compact chip for a file or attachment in an AI prompt or message.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/ai/attachment-chip.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/ai/attachment-chip.tsx",
+      "content": "import {\n  CircleAlert,\n  FileArchive,\n  FileAudio,\n  FileCode,\n  FileImage,\n  FileText,\n  FileVideo,\n  X,\n  type LucideIcon,\n} from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\ninterface AttachmentChipProps {\n  name: string\n  /** File size in bytes. */\n  size?: number\n  /** MIME type. Used to pick an icon; falls back to the file extension. */\n  type?: string\n  status?: \"idle\" | \"uploading\" | \"error\"\n  onRemove?: () => void\n  className?: string\n}\n\nfunction formatBytes(bytes: number): string {\n  if (bytes < 1024) return `${bytes} B`\n  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`\n  if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`\n  return `${(bytes / (1024 * 1024 * 1024)).toFixed(1)} GB`\n}\n\nconst CODE_EXTENSIONS = new Set([\n  \"js\", \"jsx\", \"ts\", \"tsx\", \"json\", \"py\", \"rb\", \"go\", \"rs\", \"java\", \"c\", \"cpp\", \"h\",\n  \"css\", \"html\", \"sh\", \"yml\", \"yaml\", \"sql\",\n])\nconst IMAGE_EXTENSIONS = new Set([\"png\", \"jpg\", \"jpeg\", \"gif\", \"webp\", \"svg\", \"avif\"])\nconst ARCHIVE_EXTENSIONS = new Set([\"zip\", \"tar\", \"gz\", \"tgz\", \"rar\", \"7z\"])\nconst AUDIO_EXTENSIONS = new Set([\"mp3\", \"wav\", \"ogg\", \"m4a\", \"flac\"])\nconst VIDEO_EXTENSIONS = new Set([\"mp4\", \"mov\", \"webm\", \"mkv\", \"avi\"])\n\nfunction getFileIcon(name: string, type?: string): LucideIcon {\n  const mime = type?.toLowerCase() ?? \"\"\n  const ext = name.includes(\".\") ? (name.split(\".\").pop()?.toLowerCase() ?? \"\") : \"\"\n\n  if (mime.startsWith(\"image/\") || IMAGE_EXTENSIONS.has(ext)) return FileImage\n  if (mime.startsWith(\"audio/\") || AUDIO_EXTENSIONS.has(ext)) return FileAudio\n  if (mime.startsWith(\"video/\") || VIDEO_EXTENSIONS.has(ext)) return FileVideo\n  if (/zip|tar|compressed|archive/.test(mime) || ARCHIVE_EXTENSIONS.has(ext)) return FileArchive\n  if (/json|javascript|typescript|x-python|x-sh|xml/.test(mime) || CODE_EXTENSIONS.has(ext)) {\n    return FileCode\n  }\n  return FileText\n}\n\nfunction AttachmentChip({\n  name,\n  size,\n  type,\n  status = \"idle\",\n  onRemove,\n  className,\n}: AttachmentChipProps) {\n  const Icon = getFileIcon(name, type)\n\n  return (\n    <div\n      title={name}\n      data-status={status}\n      aria-busy={status === \"uploading\" || undefined}\n      className={cn(\n        \"inline-flex max-w-full items-center gap-1.5 rounded-md border border-border bg-muted py-1 pl-2.5 text-sm\",\n        onRemove ? \"pr-1\" : \"pr-2.5\",\n        status === \"error\" && \"border-destructive/50 bg-destructive/10 text-destructive\",\n        className,\n      )}\n    >\n      {status === \"uploading\" ? (\n        <span\n          aria-hidden=\"true\"\n          className=\"h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-muted-foreground border-t-transparent motion-reduce:animate-none\"\n        />\n      ) : status === \"error\" ? (\n        <CircleAlert className=\"h-3.5 w-3.5 shrink-0\" aria-hidden=\"true\" />\n      ) : (\n        <Icon className=\"h-3.5 w-3.5 shrink-0 text-muted-foreground\" aria-hidden=\"true\" />\n      )}\n      <span className=\"max-w-[160px] truncate font-medium\">{name}</span>\n      {size !== undefined && (\n        <span className=\"shrink-0 text-xs text-muted-foreground\">{formatBytes(size)}</span>\n      )}\n      {status === \"uploading\" && <span className=\"sr-only\">Uploading</span>}\n      {status === \"error\" && <span className=\"sr-only\">Upload failed</span>}\n      {onRemove && (\n        <button\n          type=\"button\"\n          onClick={onRemove}\n          aria-label={`Remove ${name}`}\n          className={cn(\n            \"ml-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded text-muted-foreground\",\n            \"ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground\",\n            \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n          )}\n        >\n          <X className=\"h-3 w-3\" aria-hidden=\"true\" />\n        </button>\n      )}\n    </div>\n  )\n}\n\nexport { AttachmentChip }\nexport type { AttachmentChipProps }\n"
+    }
+  ],
+  "ai": {
+    "intent": "Show an attached file the user can remove or open",
+    "prompts": [
+      "add an attachment chip",
+      "show a file attachment",
+      "add a prompt attachment"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

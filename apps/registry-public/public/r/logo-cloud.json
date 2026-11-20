@@ -1,0 +1,26 @@
+{
+  "name": "logo-cloud",
+  "type": "registry:block",
+  "title": "Logo Cloud",
+  "description": "Logo Cloud component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/blocks/src/components/logo-cloud.tsx",
+      "type": "registry:block",
+      "target": "components/blocks/logo-cloud.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface LogoCloudLogo {\n  name: string\n  src?: string\n  icon?: React.ReactNode\n  href?: string\n}\n\nexport interface LogoCloudProps {\n  headline?: string\n  logos: LogoCloudLogo[]\n  grayscale?: boolean\n  className?: string\n}\n\nexport function LogoCloud({\n  headline,\n  logos,\n  grayscale = true,\n  className,\n}: LogoCloudProps) {\n  return (\n    <section className={cn(\"w-full py-12 px-4\", className)}>\n      {headline && (\n        <p className=\"mb-8 text-center text-sm font-medium text-muted-foreground\">\n          {headline}\n        </p>\n      )}\n      <div className=\"mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-8 sm:gap-12\">\n        {logos.map((logo) => {\n          const content = logo.src ? (\n            <img\n              src={logo.src}\n              alt={logo.name}\n              className={cn(\n                \"h-8 w-auto object-contain transition-all\",\n                grayscale && \"opacity-60 grayscale hover:opacity-100 hover:grayscale-0\",\n              )}\n            />\n          ) : logo.icon ? (\n            <span\n              className={cn(\n                \"flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-all\",\n                grayscale && \"opacity-60 hover:opacity-100\",\n              )}\n            >\n              {logo.icon}\n              {logo.name}\n            </span>\n          ) : (\n            <span\n              className={cn(\n                \"text-sm font-semibold text-muted-foreground transition-all\",\n                grayscale && \"opacity-60 hover:opacity-100\",\n              )}\n            >\n              {logo.name}\n            </span>\n          )\n\n          return logo.href ? (\n            <a\n              key={logo.name}\n              href={logo.href}\n              aria-label={logo.name}\n              className=\"flex items-center\"\n            >\n              {content}\n            </a>\n          ) : (\n            <div key={logo.name} className=\"flex items-center\">\n              {content}\n            </div>\n          )\n        })}\n      </div>\n    </section>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Logo Cloud component.",
+    "prompts": [
+      "add a logo cloud"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

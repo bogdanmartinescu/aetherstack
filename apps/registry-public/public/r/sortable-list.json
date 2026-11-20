@@ -1,0 +1,30 @@
+{
+  "name": "sortable-list",
+  "type": "registry:pattern",
+  "title": "Sortable List",
+  "description": "Sortable List component.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils",
+    "@dnd-kit/core",
+    "@dnd-kit/sortable",
+    "@dnd-kit/utilities",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "packages/patterns/src/components/sortable-list.tsx",
+      "type": "registry:pattern",
+      "target": "components/patterns/sortable-list.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  DndContext,\n  closestCenter,\n  KeyboardSensor,\n  PointerSensor,\n  useSensor,\n  useSensors,\n  type DragEndEvent,\n} from \"@dnd-kit/core\"\nimport {\n  SortableContext,\n  sortableKeyboardCoordinates,\n  useSortable,\n  verticalListSortingStrategy,\n  arrayMove,\n} from \"@dnd-kit/sortable\"\nimport { CSS } from \"@dnd-kit/utilities\"\nimport { GripVertical } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface SortableListItem {\n  id: string\n  [key: string]: unknown\n}\n\nexport interface SortableItemProps {\n  item: SortableListItem\n  renderItem: (item: SortableListItem, isDragging: boolean) => React.ReactNode\n}\n\nexport function SortableItem({ item, renderItem }: SortableItemProps) {\n  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({\n    id: item.id,\n  })\n\n  const style: React.CSSProperties = {\n    transform: CSS.Transform.toString(transform),\n    transition,\n  }\n\n  return (\n    <div\n      ref={setNodeRef}\n      style={style}\n      className={cn(\"flex items-center gap-2\", isDragging && \"z-50 opacity-75\")}\n    >\n      <button\n        type=\"button\"\n        aria-label=\"Drag to reorder\"\n        {...attributes}\n        {...listeners}\n        className=\"cursor-grab touch-none rounded p-0.5 text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring active:cursor-grabbing\"\n      >\n        <GripVertical className=\"h-4 w-4\" aria-hidden=\"true\" />\n      </button>\n      <div className=\"min-w-0 flex-1\">{renderItem(item, isDragging)}</div>\n    </div>\n  )\n}\n\nexport interface SortableListProps {\n  items: SortableListItem[]\n  onReorder: (items: SortableListItem[]) => void\n  renderItem: (item: SortableListItem, isDragging: boolean) => React.ReactNode\n  className?: string\n}\n\nexport function SortableList({ items, onReorder, renderItem, className }: SortableListProps) {\n  const sensors = useSensors(\n    useSensor(PointerSensor),\n    useSensor(KeyboardSensor, {\n      coordinateGetter: sortableKeyboardCoordinates,\n    }),\n  )\n\n  const handleDragEnd = (event: DragEndEvent) => {\n    const { active, over } = event\n    if (over && active.id !== over.id) {\n      const oldIndex = items.findIndex((i) => i.id === active.id)\n      const newIndex = items.findIndex((i) => i.id === over.id)\n      onReorder(arrayMove(items, oldIndex, newIndex))\n    }\n  }\n\n  return (\n    <DndContext\n      sensors={sensors}\n      collisionDetection={closestCenter}\n      onDragEnd={handleDragEnd}\n    >\n      <SortableContext items={items.map((i) => i.id)} strategy={verticalListSortingStrategy}>\n        <div\n          role=\"list\"\n          aria-label=\"Sortable list\"\n          className={cn(\"flex flex-col gap-2\", className)}\n        >\n          {items.map((item) => (\n            <div key={item.id} role=\"listitem\">\n              <SortableItem item={item} renderItem={renderItem} />\n            </div>\n          ))}\n        </div>\n      </SortableContext>\n    </DndContext>\n  )\n}\n"
+    }
+  ],
+  "ai": {
+    "intent": "Use the Sortable List component.",
+    "prompts": [
+      "add a sortable list"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}
