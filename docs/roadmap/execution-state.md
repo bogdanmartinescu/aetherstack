@@ -21,7 +21,7 @@ Initialized 2026-11-20. No implementation or release checks have been run as par
 | M0-06 | VERIFIED | `chore/m0-06-docs-counts` / PR #13 | Align README/package READMEs/CLAUDE/docs intro+install with registry 78/39/34 (151) and live package versions; docs pages use `REGISTRY_STATS` | DONE once PR merges; CONTRIBUTING cleanup is M0-09 |
 | M0-07 | VERIFIED | `chore/m0-07-consumer-install` / PR #14 | Publishable pack helper; Next+Vite fixtures build from packed tarballs; CLI add smoke; CI job; flat UI dist exports; CLI engines>=20; `pnpm consumer-install` pass | DONE once PR merges |
 | M0-08 | BLOCKED | runbook in `docs/roadmap/audits/m0-08-cdn-runbook.md` | Readiness + caching/rollback runbook written; live `registry.aether-ui.dev` still `DEPLOYMENT_NOT_FOUND` | Owner: Vercel/DNS deploy + smoke curls; then mark VERIFIED |
-| M0-09 | VERIFIED | `chore/m0-09-governance` / PR pending | CONTRIBUTING fixed (Node>=20, real scripts); SECURITY + CoC + governance docs; sponsorship proposal without FUNDING.yml; GitHub description/topics applied | DONE once PR merges; Sponsors enablement remains owner action |
+| M0-09 | VERIFIED | `chore/m0-09-governance` / PR #15 | CONTRIBUTING fixed (Node>=20, real scripts); SECURITY + CoC + governance docs; sponsorship proposal without FUNDING.yml; GitHub description/topics applied | DONE once PR merges; Sponsors enablement remains owner action |
 
 All other tasks in platform-backlog.md are TODO unless gated. Add/update a row per task as work proceeds; never delete evidence for previous completed tasks. Use linked issue/PR and exact command/results, not just "tests pass."
 
@@ -120,9 +120,9 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Changes and affected paths: CONTRIBUTING, SECURITY, CODE_OF_CONDUCT, docs/governance/*, README links, PR template, m0-08 CDN runbook; GitHub description/topics via `gh repo edit`.
 - Acceptance criteria and evidence: CONTRIBUTING matches engines/scripts; no FUNDING.yml; sponsorship proposal documents owner gate; `gh repo view` shows description + topics.
 - Required checks not run / blockers: M0-08 live deploy; Sponsors account; M0-10 full RC suite after merges.
-- Commit/PR and remote verification: pending.
+- Commit/PR and remote verification: PR #15 → https://github.com/bogdanmartinescu/aetherstack/pull/15
 - Status: M0-09 VERIFIED; M0-08 BLOCKED on owner deploy.
-- Next smallest action: open PR; owner deploys registry CDN; then M0-10.
+- Next smallest action: merge #8→#15; owner deploys registry CDN; then M0-10 RC gate.
 
 ## Phase gate log
 Record milestone, all required task IDs, exact suite/results, known limitations, remaining blockers and owner decisions. No milestone marked completed until all applicable requirements are verified. On restart inspect git history and reconcile this file rather than blindly redoing work.
