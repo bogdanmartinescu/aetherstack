@@ -22,7 +22,7 @@ Initialized 2026-11-20. No implementation or release checks have been run as par
 | M0-07 | VERIFIED | `chore/m0-07-consumer-install` / PR #14 | Publishable pack helper; Next+Vite fixtures build from packed tarballs; CLI add smoke; CI job; flat UI dist exports; CLI engines>=20; `pnpm consumer-install` pass | DONE once PR merges |
 | M0-08 | BLOCKED | runbook in `docs/roadmap/audits/m0-08-cdn-runbook.md` | Readiness + caching/rollback runbook written; live `registry.aether-ui.dev` still `DEPLOYMENT_NOT_FOUND` | Owner: Vercel/DNS deploy + smoke curls; then mark VERIFIED |
 | M0-09 | VERIFIED | `chore/m0-09-governance` / PR #15 | CONTRIBUTING fixed (Node>=20, real scripts); SECURITY + CoC + governance docs; sponsorship proposal without FUNDING.yml; GitHub description/topics applied | DONE once PR merges; Sponsors enablement remains owner action |
-| M0-10 | VERIFIED (local) / BLOCKED (external) | `chore/m0-10-rc-verification` | `pnpm m0-rc-verify` — 8 required local PASS (validate/build-registry, freshness, typecheck, lint, test, build-packages, consumer-install); `format:check` FAIL non-enforced; live-registry BLOCKED (404 DEPLOYMENT_NOT_FOUND); npm-publish BLOCKED (no authority). Report: `docs/roadmap/audits/m0-10-rc-verification.md` | M0 not DONE until owner clears CDN + npm gates and re-runs harness |
+| M0-10 | VERIFIED (local) / BLOCKED (external) | `chore/m0-10-rc-verification` / PR #16 | `pnpm m0-rc-verify` — 8 required local PASS (validate/build-registry, freshness, typecheck, lint, test, build-packages, consumer-install); `format:check` FAIL non-enforced; live-registry BLOCKED (404 DEPLOYMENT_NOT_FOUND); npm-publish BLOCKED (no authority). Report: `docs/roadmap/audits/m0-10-rc-verification.md` | M0 not DONE until owner clears CDN + npm gates and re-runs harness; DONE once PR merges after gates clear or remains VERIFIED-local until then |
 
 All other tasks in platform-backlog.md are TODO unless gated. Add/update a row per task as work proceeds; never delete evidence for previous completed tasks. Use linked issue/PR and exact command/results, not just "tests pass."
 
@@ -132,7 +132,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Changes and affected paths: `tooling/scripts/src/m0-rc-verify.ts` + package scripts; `apps/registry-public/vercel.json`; m0-08 runbook deploy steps; unused `dirname` import fix in `pack-publishable.ts`; audit `docs/roadmap/audits/m0-10-rc-verification.md`; this file.
 - Acceptance criteria and evidence: `pnpm m0-rc-verify` exit 0 with **0 required local FAIL**; 8 PASS; live-registry + npm-publish recorded BLOCKED (owner). First run failed typecheck on unused `dirname` — fixed before re-run.
 - Required checks not run / blockers: production CDN smoke (M0-08); authorized `changeset publish` / npm; Sponsors account. `format:check` still fails pre-existing (not CI-enforced).
-- Commit/PR and remote verification: stacked PR targeting `chore/m0-09-governance` (see PR link once opened).
+- Commit/PR and remote verification: PR #16 → https://github.com/bogdanmartinescu/aetherstack/pull/16 (base `chore/m0-09-governance`).
 - Status: VERIFIED locally; BLOCKED externally — **do not mark M0 or M0-10 DONE**.
 - Next smallest action: merge #8→#16 stack; owner deploys CDN per runbook; grant release authority; re-run `pnpm m0-rc-verify`.
 
