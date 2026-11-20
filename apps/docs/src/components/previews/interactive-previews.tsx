@@ -43,6 +43,13 @@ import {
   DropdownMenuShortcut,
   DropdownMenuGroup,
   DropdownMenuCheckboxItem,
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
   HoverCard,
   HoverCardTrigger,
   HoverCardContent,
@@ -259,6 +266,29 @@ export function DropdownMenuCheckboxPreview() {
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
+  )
+}
+
+export function ContextMenuPreview() {
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger className="border-border bg-muted/40 flex h-32 w-64 items-center justify-center rounded-md border border-dashed text-sm">
+        Right-click here
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-48">
+        <ContextMenuLabel>Actions</ContextMenuLabel>
+        <ContextMenuSeparator />
+        <ContextMenuItem>
+          Back <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          Forward <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuItem>Reload</ContextMenuItem>
+        <ContextMenuItem>Save as…</ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
   )
 }
 

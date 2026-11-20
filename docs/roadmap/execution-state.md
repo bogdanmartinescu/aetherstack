@@ -3,8 +3,8 @@
 Initialized 2026-11-20. No implementation or release checks have been run as part of this planning change. Historical completion claims are not verified here.
 
 - Active milestone: M0 — truth, stability and public distribution.
-- Last completed task: REG-001 merged (PR #21). Advancing M0-08 deploy automation + release publish gate.
-- Next task: owner enables `ENABLE_REGISTRY_DEPLOY` + Vercel secrets; fix npm org publish rights; dispatch Release; re-run `pnpm m0-rc-verify`.
+- Last completed task: M0-08 deploy workflow + release publish gate (PR #22).
+- Next task: owner enables `ENABLE_REGISTRY_DEPLOY` + Vercel secrets; fix npm org publish rights; dispatch Release; re-run `pnpm m0-rc-verify`. Parallel: docs route gap fix in flight.
 - Baseline reviewed: `main` at `13f4c46`. Live registry still 404 `DEPLOYMENT_NOT_FOUND` (rechecked 2026-11-20).
 - Known prior observations (reverify): CDN BLOCKED; npm Release job E404 on `@aetherstack/*` PUT (org/token). Workspace versions ahead of npm (e.g. ui local 0.5.x vs npm 0.4.0).
 - Commercial status: M4 discovery only; paid kit implementation and M6 require explicit owner approval and demand evidence.
@@ -12,19 +12,19 @@ Initialized 2026-11-20. No implementation or release checks have been run as par
 
 ## Task ledger
 
-| Task    | Status                                | Branch/commit/PR                          | Verification evidence                                         | Blocker / next action                                     |
-| ------- | ------------------------------------- | ----------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------- |
-| M0-01   | DONE                                  | PR #8 → `main` (via #17)                  | baseline audit committed                                      | —                                                         |
-| M0-02   | DONE                                  | PR #9 → `main`                            | LICENSE + provenance                                          | optional owner entity rename                              |
-| M0-03   | DONE                                  | PR #10 → `main` (via #17)                 | registry 151; graph checks                                    | —                                                         |
-| M0-04   | DONE                                  | PR #11 → `main` (via #17)                 | CLI path/schema/dry-run tests                                 | —                                                         |
-| M0-05   | DONE                                  | PR #12 → `main` (via #17)                 | MCP pack/stdio; publish still gated                           | authorized npm release                                    |
-| M0-06   | DONE                                  | PR #13 → `main` (via #17)                 | counts/versions reconciled                                    | docs route name mismatches remain low-priority            |
-| M0-07   | DONE                                  | PR #14 → `main` (via #17)                 | consumer-install fixtures + CI                                | —                                                         |
-| M0-08   | BLOCKED                               | runbook + `vercel.json` + deploy workflow | live still 404; GHA deploy gated on `ENABLE_REGISTRY_DEPLOY`  | Owner: Vercel project + secrets/var + smoke               |
-| REL-001 | BLOCKED                               | `release.yml` publish gated               | Release on main tried npm publish → E404 for `@aetherstack/*` | Owner: npm org publish rights; manual workflow_dispatch   |
-| M0-09   | DONE                                  | PR #15 → `main` (via #17)                 | governance docs + repo metadata                               | Sponsors enablement owner action                          |
-| M0-10   | VERIFIED (local) / BLOCKED (external) | PR #16 → stack; stack → `main` PR #17     | local RC 8 PASS; CDN + npm BLOCKED                            | Owner CDN + release authority; re-run `pnpm m0-rc-verify` |
+| Task    | Status                                | Branch/commit/PR                          | Verification evidence                                         | Blocker / next action                                          |
+| ------- | ------------------------------------- | ----------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------- |
+| M0-01   | DONE                                  | PR #8 → `main` (via #17)                  | baseline audit committed                                      | —                                                              |
+| M0-02   | DONE                                  | PR #9 → `main`                            | LICENSE + provenance                                          | optional owner entity rename                                   |
+| M0-03   | DONE                                  | PR #10 → `main` (via #17)                 | registry 151; graph checks                                    | —                                                              |
+| M0-04   | DONE                                  | PR #11 → `main` (via #17)                 | CLI path/schema/dry-run tests                                 | —                                                              |
+| M0-05   | DONE                                  | PR #12 → `main` (via #17)                 | MCP pack/stdio; publish still gated                           | authorized npm release                                         |
+| M0-06   | DONE                                  | PR #13 → `main` (via #17)                 | counts/versions reconciled                                    | docs route gaps closed in follow-up (context-menu, code-block) |
+| M0-07   | DONE                                  | PR #14 → `main` (via #17)                 | consumer-install fixtures + CI                                | —                                                              |
+| M0-08   | BLOCKED                               | runbook + `vercel.json` + deploy workflow | live still 404; GHA deploy gated on `ENABLE_REGISTRY_DEPLOY`  | Owner: Vercel project + secrets/var + smoke                    |
+| REL-001 | BLOCKED                               | `release.yml` publish gated               | Release on main tried npm publish → E404 for `@aetherstack/*` | Owner: npm org publish rights; manual workflow_dispatch        |
+| M0-09   | DONE                                  | PR #15 → `main` (via #17)                 | governance docs + repo metadata                               | Sponsors enablement owner action                               |
+| M0-10   | VERIFIED (local) / BLOCKED (external) | PR #16 → stack; stack → `main` PR #17     | local RC 8 PASS; CDN + npm BLOCKED                            | Owner CDN + release authority; re-run `pnpm m0-rc-verify`      |
 
 All other tasks in platform-backlog.md are TODO unless gated. Add/update a row per task as work proceeds; never delete evidence for previous completed tasks. Use linked issue/PR and exact command/results, not just "tests pass."
 
@@ -179,6 +179,17 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Commit/PR: https://github.com/bogdanmartinescu/aetherstack/pull/22
 - Status: IN_PROGRESS until PR merges; M0-08/REL-001 remain BLOCKED on owner.
 - Next: owner configures Vercel + npm org; enable var; dispatch workflows; smoke; `pnpm m0-rc-verify`.
+
+### Checkpoint 2026-11-20 — docs route gaps (context-menu / code-block)
+
+- Date/time and agent/session: 2026-11-20, Cursor agent session.
+- Milestone and task ID: M0 / M0-06 follow-up (docs routes).
+- Base and working branch: `main` `1a687b9` → `chore/m0-docs-route-gaps`.
+- Changes: add `/components/context-menu`; move docs from `code-block-ai` → `code-block` with redirect; sidebar + preview.
+- Evidence: `pnpm --filter @aetherstack/docs typecheck` exit 0. CDN still 404; no Vercel CLI/secrets in environment.
+- Commit/PR: https://github.com/bogdanmartinescu/aetherstack/pull/24
+- Status: IN_PROGRESS until PR merges.
+- Next: owner CDN/npm gates unchanged.
 
 ## Phase gate log
 

@@ -118,7 +118,7 @@ const nav = [
       { label: "Streaming Text", href: "/components/streaming-text" },
       { label: "Thinking Indicator", href: "/components/thinking-indicator" },
       { label: "Markdown Renderer", href: "/components/markdown-renderer" },
-      { label: "Code Block", href: "/components/code-block-ai" },
+      { label: "Code Block", href: "/components/code-block" },
       { label: "Prompt Input", href: "/components/prompt-input" },
       { label: "Chat Bubble", href: "/components/chat-bubble" },
       { label: "Source Card", href: "/components/source-card" },
