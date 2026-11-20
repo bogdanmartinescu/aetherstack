@@ -33,10 +33,10 @@ export default function SkeletonPage() {
         "No JS, no dependencies",
       ]}
       preview={
-        <div className="flex flex-col gap-3 w-64">
+        <div className="flex w-64 flex-col gap-3">
           <div className="flex items-center gap-3">
             <Skeleton className="h-10 w-10 rounded-full" />
-            <div className="space-y-2 flex-1">
+            <div className="flex-1 space-y-2">
               <Skeleton className="h-3.5 w-full" />
               <Skeleton className="h-3 w-4/5" />
             </div>
@@ -88,7 +88,7 @@ export function SkeletonDemo() {
           description: "Match the shape of an avatar with accompanying text lines.",
           preview: (
             <div className="flex w-64 items-center gap-3">
-              <Skeleton className="h-10 w-10 rounded-full shrink-0" />
+              <Skeleton className="h-10 w-10 shrink-0 rounded-full" />
               <div className="flex-1 space-y-2">
                 <Skeleton className="h-3.5 w-full" />
                 <Skeleton className="h-3 w-3/4" />
@@ -138,7 +138,7 @@ export function SkeletonDemo() {
           preview: (
             <div className="w-full space-y-2">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="flex gap-4 rounded-md border border-border px-4 py-3">
+                <div key={i} className="border-border flex gap-4 rounded-md border px-4 py-3">
                   <Skeleton className="h-3.5 w-1/4" />
                   <Skeleton className="h-3.5 w-1/4" />
                   <Skeleton className="h-3.5 w-1/4" />

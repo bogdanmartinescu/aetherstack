@@ -20,29 +20,26 @@ export function TimelineItem({ item, isLast = false, className }: TimelineItemPr
   return (
     <li className={cn("relative flex gap-4", !isLast && "pb-6", className)}>
       {!isLast && (
-        <div
-          className="absolute bottom-0 left-3.5 top-7 w-px bg-border"
-          aria-hidden="true"
-        />
+        <div className="bg-border absolute bottom-0 left-3.5 top-7 w-px" aria-hidden="true" />
       )}
 
       <div
         className={cn(
-          "relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border bg-background",
+          "border-border bg-background relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border",
           item.iconClassName,
         )}
         aria-hidden="true"
       >
-        {item.icon ?? <div className="h-2 w-2 rounded-full bg-primary" />}
+        {item.icon ?? <div className="bg-primary h-2 w-2 rounded-full" />}
       </div>
 
       <div className="min-w-0 flex-1 pt-0.5">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-0.5">
-          <p className="text-sm font-medium text-foreground">{item.title}</p>
-          <time className="shrink-0 text-xs text-muted-foreground">{item.timestamp}</time>
+          <p className="text-foreground text-sm font-medium">{item.title}</p>
+          <time className="text-muted-foreground shrink-0 text-xs">{item.timestamp}</time>
         </div>
         {item.description && (
-          <p className="mt-0.5 text-sm text-muted-foreground">{item.description}</p>
+          <p className="text-muted-foreground mt-0.5 text-sm">{item.description}</p>
         )}
       </div>
     </li>

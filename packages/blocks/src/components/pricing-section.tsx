@@ -36,7 +36,7 @@ const CheckIcon = () => (
     strokeWidth="2.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="shrink-0 text-primary"
+    className="text-primary shrink-0"
     aria-hidden
   >
     <polyline points="20 6 9 17 4 12" />
@@ -54,7 +54,7 @@ const XIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="shrink-0 text-muted-foreground/40"
+    className="text-muted-foreground/40 shrink-0"
     aria-hidden
   >
     <path d="M18 6 6 18" />
@@ -66,9 +66,9 @@ function PricingCard({ tier }: { tier: PricingTier }) {
   return (
     <div
       className={cn(
-        "relative flex flex-col rounded-2xl border bg-card p-7 shadow-sm transition-shadow",
+        "bg-card relative flex flex-col rounded-2xl border p-7 shadow-sm transition-shadow",
         tier.highlighted
-          ? "border-primary ring-2 ring-primary shadow-lg"
+          ? "border-primary ring-primary shadow-lg ring-2"
           : "border-border hover:shadow-md",
       )}
     >
@@ -81,19 +81,15 @@ function PricingCard({ tier }: { tier: PricingTier }) {
 
       {/* Tier header */}
       <div className="mb-5">
-        <h3 className="text-base font-semibold text-foreground">{tier.name}</h3>
+        <h3 className="text-foreground text-base font-semibold">{tier.name}</h3>
         <div className="mt-2 flex items-end gap-1">
-          <span className="text-4xl font-bold tracking-tight text-foreground">
-            {tier.price}
-          </span>
+          <span className="text-foreground text-4xl font-bold tracking-tight">{tier.price}</span>
           {tier.period && (
-            <span className="mb-1 text-sm text-muted-foreground">
-              / {tier.period}
-            </span>
+            <span className="text-muted-foreground mb-1 text-sm">/ {tier.period}</span>
           )}
         </div>
         {tier.description && (
-          <p className="mt-2 text-sm text-muted-foreground">{tier.description}</p>
+          <p className="text-muted-foreground mt-2 text-sm">{tier.description}</p>
         )}
       </div>
 
@@ -103,11 +99,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
         variant={tier.highlighted ? "default" : "outline"}
         className="w-full"
       >
-        {tier.ctaHref ? (
-          <a href={tier.ctaHref}>{tier.cta}</a>
-        ) : (
-          <span>{tier.cta}</span>
-        )}
+        {tier.ctaHref ? <a href={tier.ctaHref}>{tier.cta}</a> : <span>{tier.cta}</span>}
       </Button>
 
       {/* Features */}
@@ -119,9 +111,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
               <span
                 className={cn(
                   "text-sm",
-                  feature.included
-                    ? "text-foreground"
-                    : "text-muted-foreground/50 line-through",
+                  feature.included ? "text-foreground" : "text-muted-foreground/50 line-through",
                 )}
               >
                 {feature.text}
@@ -141,15 +131,11 @@ export function PricingSection({
   className,
 }: PricingSectionProps) {
   return (
-    <section className={cn("w-full py-16 px-4", className)}>
+    <section className={cn("w-full px-4 py-16", className)}>
       {/* Section header */}
       <div className="mx-auto mb-12 max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-          {title}
-        </h2>
-        {description && (
-          <p className="mt-4 text-base text-muted-foreground">{description}</p>
-        )}
+        <h2 className="text-foreground text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
+        {description && <p className="text-muted-foreground mt-4 text-base">{description}</p>}
       </div>
 
       {/* Tier grid */}

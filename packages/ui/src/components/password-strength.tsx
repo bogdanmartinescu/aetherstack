@@ -111,7 +111,7 @@ function PasswordStrength({ password, onPasswordChange }: PasswordStrengthProps)
         aria-valuemax={4}
         aria-valuenow={score}
         aria-valuetext={SCORE_LABELS[score]}
-        className="h-2 w-full overflow-hidden rounded-full bg-secondary"
+        className="bg-secondary h-2 w-full overflow-hidden rounded-full"
       >
         <div
           className={cn(
@@ -121,14 +121,12 @@ function PasswordStrength({ password, onPasswordChange }: PasswordStrengthProps)
         />
       </div>
 
-      <ul className="space-y-1 text-sm text-muted-foreground">
+      <ul className="text-muted-foreground space-y-1 text-sm">
         {RULES.map((rule) => (
           <li
             key={rule.key}
             data-met={checks[rule.key] ? "true" : "false"}
-            className={cn(
-              checks[rule.key] && "text-foreground",
-            )}
+            className={cn(checks[rule.key] && "text-foreground")}
           >
             {rule.label}
           </li>

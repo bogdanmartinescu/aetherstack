@@ -7,7 +7,14 @@ import { Button } from "@aetherstack/ui"
 
 const INITIAL: Message[] = [
   { id: "1", role: "user", content: "What is React?", name: "You", timestamp: "2:40 PM" },
-  { id: "2", role: "assistant", content: "React is a JavaScript library for building user interfaces. It lets you compose complex UIs from small, isolated pieces of code called components.", name: "AI", timestamp: "2:40 PM" },
+  {
+    id: "2",
+    role: "assistant",
+    content:
+      "React is a JavaScript library for building user interfaces. It lets you compose complex UIs from small, isolated pieces of code called components.",
+    name: "AI",
+    timestamp: "2:40 PM",
+  },
 ]
 
 export function ConversationThreadPreview() {
@@ -20,14 +27,27 @@ export function ConversationThreadPreview() {
       setThinking(false)
       setMessages((m) => [
         ...m,
-        { id: String(Date.now() - 1), role: "user", content: "Can you give an example?", name: "You", timestamp: "2:41 PM" },
-        { id: String(Date.now()), role: "assistant", content: "Sure! Here's a simple component:\n\nfunction Hello({ name }) {\n  return <h1>Hello, {name}!</h1>\n}", name: "AI", timestamp: "2:41 PM" },
+        {
+          id: String(Date.now() - 1),
+          role: "user",
+          content: "Can you give an example?",
+          name: "You",
+          timestamp: "2:41 PM",
+        },
+        {
+          id: String(Date.now()),
+          role: "assistant",
+          content:
+            "Sure! Here's a simple component:\n\nfunction Hello({ name }) {\n  return <h1>Hello, {name}!</h1>\n}",
+          name: "AI",
+          timestamp: "2:41 PM",
+        },
       ])
     }, 1500)
   }
 
   return (
-    <div className="flex flex-col gap-3 w-full max-w-lg">
+    <div className="flex w-full max-w-lg flex-col gap-3">
       <div className="max-h-64 overflow-y-auto">
         <ConversationThread messages={messages} isThinking={thinking} />
       </div>

@@ -1,10 +1,7 @@
 "use client"
 
 import { ComponentPage } from "@/components/component-page"
-import {
-  ToastPreview,
-  ToastDestructivePreview,
-} from "@/components/previews/interactive-previews"
+import { ToastPreview, ToastDestructivePreview } from "@/components/previews/interactive-previews"
 
 const MANUAL_SOURCE = `"use client"
 
@@ -138,7 +135,8 @@ toast({ variant: "destructive", title: "Error", description: "Something went wro
       examples={[
         {
           title: "All variants",
-          description: "Five semantic variants — each includes an automatic icon and colour-coded background.",
+          description:
+            "Five semantic variants — each includes an automatic icon and colour-coded background.",
           preview: <ToastPreview />,
           code: `toast({ title: "Saved!", description: "Changes have been saved." })
 toast({ variant: "success", title: "Success!", description: "Action completed." })
@@ -193,7 +191,8 @@ toast({
               name: "variant",
               type: '"default" | "success" | "warning" | "info" | "destructive"',
               default: '"default"',
-              description: "Controls the colour scheme and automatic icon. Choose based on the semantic meaning of the notification.",
+              description:
+                "Controls the colour scheme and automatic icon. Choose based on the semantic meaning of the notification.",
             },
             {
               name: "duration",
@@ -229,7 +228,8 @@ toast({
             {
               name: "toast(input)",
               type: "(input: ToastInput) => { id, dismiss, update }",
-              description: "Imperative function to fire a toast. Returns controls to dismiss or update it.",
+              description:
+                "Imperative function to fire a toast. Returns controls to dismiss or update it.",
             },
             {
               name: "dismiss(toastId?)",

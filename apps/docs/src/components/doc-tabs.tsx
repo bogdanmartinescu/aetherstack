@@ -20,25 +20,23 @@ export function DocTabs({ tabs, defaultTab, className }: DocTabsProps) {
 
   return (
     <div className={cn("w-full", className)}>
-      <div className="flex gap-1 border-b border-border">
+      <div className="border-border flex gap-1 border-b">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActive(tab.id)}
             className={cn(
-              "px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px",
+              "-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors",
               active === tab.id
                 ? "border-primary text-foreground"
-                : "border-transparent text-muted-foreground hover:text-foreground",
+                : "text-muted-foreground hover:text-foreground border-transparent",
             )}
           >
             {tab.label}
           </button>
         ))}
       </div>
-      <div className="mt-4">
-        {tabs.find((t) => t.id === active)?.content}
-      </div>
+      <div className="mt-4">{tabs.find((t) => t.id === active)?.content}</div>
     </div>
   )
 }
@@ -60,18 +58,18 @@ export function PreviewTabs({ preview, code, filename }: PreviewTabsProps) {
   }
 
   return (
-    <div className="rounded-lg border border-border overflow-hidden">
-      <div className="flex items-center justify-between border-b border-border bg-muted/50 px-4">
+    <div className="border-border overflow-hidden rounded-lg border">
+      <div className="border-border bg-muted/50 flex items-center justify-between border-b px-4">
         <div className="flex gap-1">
           {(["preview", "code"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActive(tab)}
               className={cn(
-                "px-3 py-2.5 text-sm font-medium capitalize transition-colors border-b-2 -mb-px",
+                "-mb-px border-b-2 px-3 py-2.5 text-sm font-medium capitalize transition-colors",
                 active === tab
                   ? "border-primary text-foreground"
-                  : "border-transparent text-muted-foreground hover:text-foreground",
+                  : "text-muted-foreground hover:text-foreground border-transparent",
               )}
             >
               {tab}
@@ -81,22 +79,22 @@ export function PreviewTabs({ preview, code, filename }: PreviewTabsProps) {
         {active === "code" && (
           <button
             onClick={handleCopy}
-            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            className="text-muted-foreground hover:text-foreground text-xs transition-colors"
           >
             {copied ? "Copied!" : "Copy"}
           </button>
         )}
       </div>
       {active === "preview" ? (
-        <div className="flex min-h-[160px] items-center justify-center bg-background p-8">
+        <div className="bg-background flex min-h-[160px] items-center justify-center p-8">
           {preview}
         </div>
       ) : (
-        <pre className="overflow-x-auto bg-muted/50 p-4 text-sm leading-relaxed">
+        <pre className="bg-muted/50 overflow-x-auto p-4 text-sm leading-relaxed">
           {filename && (
-            <div className="mb-3 font-mono text-xs text-muted-foreground">{filename}</div>
+            <div className="text-muted-foreground mb-3 font-mono text-xs">{filename}</div>
           )}
-          <code className="font-mono text-foreground">{code.trim()}</code>
+          <code className="text-foreground font-mono">{code.trim()}</code>
         </pre>
       )}
     </div>

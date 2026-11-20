@@ -82,11 +82,7 @@ export function TextareaDemo() {
           preview: (
             <div className="w-80 space-y-2">
               <Label htmlFor="dis-ta">Bio</Label>
-              <Textarea
-                id="dis-ta"
-                defaultValue="This field is read-only."
-                disabled
-              />
+              <Textarea id="dis-ta" defaultValue="This field is read-only." disabled />
             </div>
           ),
           code: `<Textarea defaultValue="Read-only content" disabled />`,
@@ -120,7 +116,7 @@ export function TextareaDemo() {
                 rows={3}
                 maxLength={160}
               />
-              <p className="text-xs text-muted-foreground text-right">0 / 160</p>
+              <p className="text-muted-foreground text-right text-xs">0 / 160</p>
             </div>
           ),
           code: `"use client"
@@ -152,7 +148,12 @@ export function TextareaWithCount() {
             <div className="w-80 space-y-3">
               <div className="space-y-2">
                 <Label htmlFor="reply-ta">Reply</Label>
-                <Textarea id="reply-ta" placeholder="Write a reply…" className="resize-none" rows={3} />
+                <Textarea
+                  id="reply-ta"
+                  placeholder="Write a reply…"
+                  className="resize-none"
+                  rows={3}
+                />
               </div>
               <div className="flex justify-end">
                 <Button size="sm">Post reply</Button>
@@ -175,7 +176,8 @@ export function TextareaWithCount() {
           name: "rows",
           type: "number",
           default: "—",
-          description: "Sets the visible number of text lines. The textarea can still be resized by the user unless resize-none is applied.",
+          description:
+            "Sets the visible number of text lines. The textarea can still be resized by the user unless resize-none is applied.",
         },
         {
           name: "placeholder",
@@ -196,7 +198,8 @@ export function TextareaWithCount() {
         {
           name: "...props",
           type: "React.TextareaHTMLAttributes<HTMLTextAreaElement>",
-          description: "All standard HTML textarea attributes (onChange, value, defaultValue, maxLength, etc.).",
+          description:
+            "All standard HTML textarea attributes (onChange, value, defaultValue, maxLength, etc.).",
         },
       ]}
       a11yNotes={[

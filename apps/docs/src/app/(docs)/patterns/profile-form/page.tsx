@@ -4,7 +4,8 @@ import { ProfileFormPreview } from "./preview"
 
 export const metadata: Metadata = {
   title: "Profile Settings Form",
-  description: "Multi-section profile settings form with Select and Switch fields, character counter, and dirty-state detection.",
+  description:
+    "Multi-section profile settings form with Select and Switch fields, character counter, and dirty-state detection.",
 }
 
 const IMPORT_CODE = `import { useForm, Controller } from "react-hook-form"
@@ -84,27 +85,32 @@ export default function ProfileFormPage() {
         {
           name: "Controller",
           type: "react-hook-form",
-          description: "Required for Radix UI components (Select, Switch, RadioGroup, Checkbox) that manage state internally rather than through a native DOM input. Controller bridges the gap by providing field.value and field.onChange.",
+          description:
+            "Required for Radix UI components (Select, Switch, RadioGroup, Checkbox) that manage state internally rather than through a native DOM input. Controller bridges the gap by providing field.value and field.onChange.",
         },
         {
           name: "defaultValues",
           type: "Partial<FormValues>",
-          description: "Pre-fills the form on first render. react-hook-form uses these to calculate isDirty — fields are considered dirty only when their current value differs from the default.",
+          description:
+            "Pre-fills the form on first render. react-hook-form uses these to calculate isDirty — fields are considered dirty only when their current value differs from the default.",
         },
         {
           name: "isDirty",
           type: "boolean",
-          description: "True when any field has changed from its default value. Used to disable the Save and Discard buttons, preventing unnecessary API calls.",
+          description:
+            "True when any field has changed from its default value. Used to disable the Save and Discard buttons, preventing unnecessary API calls.",
         },
         {
           name: "watch",
           type: "UseFormWatch",
-          description: "Subscribes to the bio field to render the live character count (current/max) without re-running validation on every keystroke.",
+          description:
+            "Subscribes to the bio field to render the live character count (current/max) without re-running validation on every keystroke.",
         },
         {
           name: "website validation",
-          type: "z.string().url().or(z.literal(\"\"))",
-          description: "Using .or(z.literal('')) makes the field optional: an empty string bypasses URL validation, but any non-empty value must be a valid URL.",
+          type: 'z.string().url().or(z.literal(""))',
+          description:
+            "Using .or(z.literal('')) makes the field optional: an empty string bypasses URL validation, but any non-empty value must be a valid URL.",
         },
       ]}
       a11yNotes={[

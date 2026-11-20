@@ -19,7 +19,7 @@ export function EmptyDashboard({
   return (
     <div
       className={cn(
-        "relative flex min-h-[480px] w-full flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed border-border bg-background p-12",
+        "border-border bg-background relative flex min-h-[480px] w-full flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed p-12",
         className,
       )}
     >
@@ -35,7 +35,7 @@ export function EmptyDashboard({
       />
 
       {/* Illustration placeholder */}
-      <div className="relative mb-8 flex h-32 w-32 items-center justify-center rounded-2xl border border-border bg-muted/50 shadow-sm">
+      <div className="border-border bg-muted/50 relative mb-8 flex h-32 w-32 items-center justify-center rounded-2xl border shadow-sm">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="56"
@@ -56,15 +56,13 @@ export function EmptyDashboard({
           <path d="M11 6h.01" />
         </svg>
         {/* Corner accent dots */}
-        <span className="absolute -right-1.5 -top-1.5 h-3 w-3 rounded-full bg-primary/30" />
-        <span className="absolute -bottom-1.5 -left-1.5 h-3 w-3 rounded-full bg-primary/20" />
+        <span className="bg-primary/30 absolute -right-1.5 -top-1.5 h-3 w-3 rounded-full" />
+        <span className="bg-primary/20 absolute -bottom-1.5 -left-1.5 h-3 w-3 rounded-full" />
       </div>
 
       {/* Text */}
-      <h2 className="relative text-xl font-semibold tracking-tight text-foreground">
-        {title}
-      </h2>
-      <p className="relative mt-2 max-w-sm text-center text-sm text-muted-foreground">
+      <h2 className="text-foreground relative text-xl font-semibold tracking-tight">{title}</h2>
+      <p className="text-muted-foreground relative mt-2 max-w-sm text-center text-sm">
         {description}
       </p>
 

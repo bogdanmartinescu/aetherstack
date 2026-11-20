@@ -45,18 +45,58 @@ export function DeleteButton() {
 }`}
       preview={<ConfirmDialogPreview />}
       props={[
-        { name: "open", type: "boolean", required: true, description: "Controls dialog visibility." },
-        { name: "onOpenChange", type: "(open: boolean) => void", required: true, description: "Callback to sync the open state." },
+        {
+          name: "open",
+          type: "boolean",
+          required: true,
+          description: "Controls dialog visibility.",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          required: true,
+          description: "Callback to sync the open state.",
+        },
         { name: "title", type: "string", required: true, description: "Dialog heading." },
-        { name: "description", type: "string", required: true, description: "Body copy explaining the action." },
-        { name: "confirmLabel", type: "string", default: '"Confirm"', description: "Label for the confirm button." },
-        { name: "cancelLabel", type: "string", default: '"Cancel"', description: "Label for the cancel button." },
-        { name: "variant", type: '"default" | "destructive"', default: '"default"', description: "Confirm button variant." },
-        { name: "onConfirm", type: "() => void | Promise<void>", required: true, description: "Handler called when the user confirms." },
-        { name: "isLoading", type: "boolean", default: "false", description: "Shows a spinner on the confirm button while the async action runs." },
+        {
+          name: "description",
+          type: "string",
+          required: true,
+          description: "Body copy explaining the action.",
+        },
+        {
+          name: "confirmLabel",
+          type: "string",
+          default: '"Confirm"',
+          description: "Label for the confirm button.",
+        },
+        {
+          name: "cancelLabel",
+          type: "string",
+          default: '"Cancel"',
+          description: "Label for the cancel button.",
+        },
+        {
+          name: "variant",
+          type: '"default" | "destructive"',
+          default: '"default"',
+          description: "Confirm button variant.",
+        },
+        {
+          name: "onConfirm",
+          type: "() => void | Promise<void>",
+          required: true,
+          description: "Handler called when the user confirms.",
+        },
+        {
+          name: "isLoading",
+          type: "boolean",
+          default: "false",
+          description: "Shows a spinner on the confirm button while the async action runs.",
+        },
       ]}
       a11yNotes={[
-        "Built on the AlertDialog primitive — uses role=\"alertdialog\" so screen readers announce it immediately.",
+        'Built on the AlertDialog primitive — uses role="alertdialog" so screen readers announce it immediately.',
         "Focus is trapped inside the dialog while it is open.",
         "Escape closes the dialog without confirming the action.",
         "The confirm button receives focus first to prevent accidental dismissal.",

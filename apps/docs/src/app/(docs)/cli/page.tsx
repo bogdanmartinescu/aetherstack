@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 function Callout({ title, children }: { title?: string; children: React.ReactNode }) {
   return (
-    <div className="my-4 rounded-lg border border-border bg-muted/40 px-4 py-3">
-      {title && <p className="mb-1 text-sm font-semibold text-foreground">{title}</p>}
-      <div className="text-sm text-muted-foreground">{children}</div>
+    <div className="border-border bg-muted/40 my-4 rounded-lg border px-4 py-3">
+      {title && <p className="text-foreground mb-1 text-sm font-semibold">{title}</p>}
+      <div className="text-muted-foreground text-sm">{children}</div>
     </div>
   )
 }
@@ -28,22 +28,24 @@ function CommandRef({
   options?: { flag: string; description: string; default?: string }[]
 }) {
   return (
-    <div className="mb-10 rounded-lg border border-border bg-card overflow-hidden">
-      <div className="border-b border-border bg-muted/30 px-4 py-3">
-        <code className="font-mono text-sm font-semibold text-foreground">{command}</code>
-        <p className="mt-1 text-xs text-muted-foreground">{description}</p>
+    <div className="border-border bg-card mb-10 overflow-hidden rounded-lg border">
+      <div className="border-border bg-muted/30 border-b px-4 py-3">
+        <code className="text-foreground font-mono text-sm font-semibold">{command}</code>
+        <p className="text-muted-foreground mt-1 text-xs">{description}</p>
       </div>
       {args && args.length > 0 && (
-        <div className="border-b border-border px-4 py-3">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Arguments</p>
+        <div className="border-border border-b px-4 py-3">
+          <p className="text-muted-foreground mb-2 text-xs font-semibold uppercase tracking-wider">
+            Arguments
+          </p>
           <div className="space-y-1.5">
             {args.map((a) => (
               <div key={a.name} className="flex items-start gap-3">
-                <code className="mt-0.5 shrink-0 rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">
+                <code className="bg-muted text-foreground mt-0.5 shrink-0 rounded px-1.5 py-0.5 font-mono text-xs">
                   {a.name}
-                  {a.required && <span className="ml-1 text-destructive">*</span>}
+                  {a.required && <span className="text-destructive ml-1">*</span>}
                 </code>
-                <span className="text-xs text-muted-foreground">{a.description}</span>
+                <span className="text-muted-foreground text-xs">{a.description}</span>
               </div>
             ))}
           </div>
@@ -51,17 +53,19 @@ function CommandRef({
       )}
       {options && options.length > 0 && (
         <div className="px-4 py-3">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Options</p>
+          <p className="text-muted-foreground mb-2 text-xs font-semibold uppercase tracking-wider">
+            Options
+          </p>
           <div className="space-y-1.5">
             {options.map((o) => (
               <div key={o.flag} className="flex items-start gap-3">
-                <code className="mt-0.5 shrink-0 rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">
+                <code className="bg-muted text-foreground mt-0.5 shrink-0 rounded px-1.5 py-0.5 font-mono text-xs">
                   {o.flag}
                 </code>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-muted-foreground text-xs">
                   {o.description}
                   {o.default && (
-                    <span className="ml-1 text-muted-foreground/60">(default: {o.default})</span>
+                    <span className="text-muted-foreground/60 ml-1">(default: {o.default})</span>
                   )}
                 </span>
               </div>
@@ -78,34 +82,33 @@ export default function CLIPage() {
     <div className="max-w-3xl">
       {/* Header */}
       <div className="mb-10">
-        <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">CLI</h1>
-        <p className="text-lg text-muted-foreground">
+        <h1 className="text-foreground mb-3 text-4xl font-bold tracking-tight">CLI</h1>
+        <p className="text-muted-foreground text-lg">
           One command adds a production-quality component directly to your codebase. The{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-base">aether-ui</code> CLI
-          installs components, generates full pages from natural-language prompts, and keeps everything
-          up to date — all without a runtime library to maintain.
+          <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-base">aether-ui</code> CLI
+          installs components, generates full pages from natural-language prompts, and keeps
+          everything up to date — all without a runtime library to maintain.
         </p>
       </div>
 
       {/* Philosophy callout */}
       <Callout title="Open code, not a dependency">
-        Unlike traditional component libraries, Aether UI copies component source files into your project
-        via the CLI. You get full transparency, full control, and zero API lock-in. Update components 
-        by running the CLI again — or just edit them directly.
+        Unlike traditional component libraries, Aether UI copies component source files into your
+        project via the CLI. You get full transparency, full control, and zero API lock-in. Update
+        components by running the CLI again — or just edit them directly.
       </Callout>
 
       {/* Installation */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          No global install required. Run the CLI directly with <code className="rounded bg-muted px-1 font-mono text-xs">npx</code>:
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Installation</h2>
+        <p className="text-muted-foreground mb-4 text-sm">
+          No global install required. Run the CLI directly with{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">npx</code>:
         </p>
-        <CodeBlock
-          code={`npx aether-ui@latest init`}
-          filename="terminal"
-        />
-        <p className="mt-4 text-sm text-muted-foreground">
-          Or install globally to use the shorter <code className="rounded bg-muted px-1 font-mono text-xs">aether-ui</code> command:
+        <CodeBlock code={`npx aether-ui@latest init`} filename="terminal" />
+        <p className="text-muted-foreground mt-4 text-sm">
+          Or install globally to use the shorter{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui</code> command:
         </p>
         <CodeBlock
           code={`npm install -g aether-ui
@@ -117,15 +120,21 @@ pnpm add -g aether-ui`}
 
       {/* Commands */}
       <section className="mb-12">
-        <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">Commands</h2>
+        <h2 className="text-foreground mb-6 text-2xl font-semibold tracking-tight">Commands</h2>
 
         <CommandRef
           command="aether-ui init"
           description="Initialize Aether UI in a project. Creates aether.json, installs shared dependencies, and sets up the utility function."
           options={[
-            { flag: "--cwd <path>", description: "Working directory. Defaults to the current directory." },
+            {
+              flag: "--cwd <path>",
+              description: "Working directory. Defaults to the current directory.",
+            },
             { flag: "--yes, -y", description: "Skip confirmation prompts and use defaults." },
-            { flag: "--defaults, -d", description: "Use default configuration values without prompting." },
+            {
+              flag: "--defaults, -d",
+              description: "Use default configuration values without prompting.",
+            },
             { flag: "--force, -f", description: "Force overwrite of existing configuration." },
           ]}
         />
@@ -136,14 +145,21 @@ pnpm add -g aether-ui`}
           args={[
             {
               name: "components",
-              description: "One or more component names to add. Runs interactive selection if omitted.",
+              description:
+                "One or more component names to add. Runs interactive selection if omitted.",
             },
           ]}
           options={[
             { flag: "--all", description: "Add all available components." },
             { flag: "--path <path>", description: "Custom path to write the component files." },
-            { flag: "--overwrite", description: "Overwrite existing component files without prompting." },
-            { flag: "--cwd <path>", description: "Working directory. Defaults to the current directory." },
+            {
+              flag: "--overwrite",
+              description: "Overwrite existing component files without prompting.",
+            },
+            {
+              flag: "--cwd <path>",
+              description: "Working directory. Defaults to the current directory.",
+            },
             { flag: "--yes, -y", description: "Skip confirmation prompts." },
           ]}
         />
@@ -159,7 +175,10 @@ pnpm add -g aether-ui`}
           ]}
           options={[
             { flag: "--yes, -y", description: "Skip confirmation prompts." },
-            { flag: "--cwd <path>", description: "Working directory. Defaults to the current directory." },
+            {
+              flag: "--cwd <path>",
+              description: "Working directory. Defaults to the current directory.",
+            },
           ]}
         />
 
@@ -175,7 +194,10 @@ pnpm add -g aether-ui`}
           options={[
             { flag: "--all", description: "Update all installed components." },
             { flag: "--yes, -y", description: "Skip confirmation and overwrite automatically." },
-            { flag: "--cwd <path>", description: "Working directory. Defaults to the current directory." },
+            {
+              flag: "--cwd <path>",
+              description: "Working directory. Defaults to the current directory.",
+            },
           ]}
         />
 
@@ -183,8 +205,14 @@ pnpm add -g aether-ui`}
           command="aether-ui list"
           description="List all available components in the Aether UI registry."
           options={[
-            { flag: "--installed", description: "Only show components already installed in the project." },
-            { flag: "--category <name>", description: "Filter by category (primitives, patterns, blocks)." },
+            {
+              flag: "--installed",
+              description: "Only show components already installed in the project.",
+            },
+            {
+              flag: "--category <name>",
+              description: "Filter by category (primitives, patterns, blocks).",
+            },
           ]}
         />
 
@@ -199,12 +227,15 @@ pnpm add -g aether-ui`}
             },
           ]}
           options={[
-            { flag: "--cwd <path>", description: "Working directory. Defaults to the current directory." },
+            {
+              flag: "--cwd <path>",
+              description: "Working directory. Defaults to the current directory.",
+            },
           ]}
         />
 
-        <div className="mb-10 rounded-lg border border-border bg-muted/30 p-4">
-          <p className="mb-3 text-sm font-semibold text-foreground">Generate examples</p>
+        <div className="border-border bg-muted/30 mb-10 rounded-lg border p-4">
+          <p className="text-foreground mb-3 text-sm font-semibold">Generate examples</p>
           <CodeBlock
             code={`# SaaS dashboard with charts and activity feed
 npx aether-ui generate "a dashboard page with a stat strip, recent activity feed, and data table"
@@ -216,22 +247,23 @@ npx aether-ui generate "an AI chat layout with a sidebar for conversations and a
 npx aether-ui generate "a landing page with a hero section, feature grid, and pricing table"`}
             filename="terminal"
           />
-          <p className="mt-3 text-xs text-muted-foreground">
-            The CLI installs required components, then writes a <code className="rounded bg-muted px-1 font-mono text-xs">page.tsx</code> with
-            all components composed and ready to customise.
+          <p className="text-muted-foreground mt-3 text-xs">
+            The CLI installs required components, then writes a{" "}
+            <code className="bg-muted rounded px-1 font-mono text-xs">page.tsx</code> with all
+            components composed and ready to customise.
           </p>
         </div>
       </section>
 
       {/* Config file */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
           Configuration — <code className="font-mono text-xl">aether.json</code>
         </h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          Running <code className="rounded bg-muted px-1 font-mono text-xs">aether-ui init</code> creates 
-          an <code className="rounded bg-muted px-1 font-mono text-xs">aether.json</code> file at 
-          your project root. All CLI commands read from this file.
+        <p className="text-muted-foreground mb-4 text-sm">
+          Running <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui init</code>{" "}
+          creates an <code className="bg-muted rounded px-1 font-mono text-xs">aether.json</code>{" "}
+          file at your project root. All CLI commands read from this file.
         </p>
         <CodeBlock
           code={`{
@@ -257,33 +289,57 @@ npx aether-ui generate "a landing page with a hero section, feature grid, and pr
           filename="aether.json"
         />
 
-        <div className="mt-6 overflow-hidden rounded-lg border border-border">
+        <div className="border-border mt-6 overflow-hidden rounded-lg border">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border bg-muted/50">
-                <th className="px-4 py-2.5 text-left font-medium text-foreground">Key</th>
-                <th className="px-4 py-2.5 text-left font-medium text-foreground">Type</th>
-                <th className="px-4 py-2.5 text-left font-medium text-foreground">Description</th>
+              <tr className="border-border bg-muted/50 border-b">
+                <th className="text-foreground px-4 py-2.5 text-left font-medium">Key</th>
+                <th className="text-foreground px-4 py-2.5 text-left font-medium">Type</th>
+                <th className="text-foreground px-4 py-2.5 text-left font-medium">Description</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody className="divide-border divide-y">
               {[
                 ["style", `"default" | "new-york"`, "Visual style variant for components."],
-                ["rsc", "boolean", "Enable React Server Component support. Adds \"use client\" directives where needed."],
-                ["tsx", "boolean", "Use TypeScript (.tsx) or JavaScript (.jsx) for component files."],
+                [
+                  "rsc",
+                  "boolean",
+                  'Enable React Server Component support. Adds "use client" directives where needed.',
+                ],
+                [
+                  "tsx",
+                  "boolean",
+                  "Use TypeScript (.tsx) or JavaScript (.jsx) for component files.",
+                ],
                 ["tailwind.config", "string", "Path to your Tailwind CSS config file."],
-                ["tailwind.css", "string", "Path to the CSS file where global styles and tokens are imported."],
-                ["tailwind.baseColor", "string", "Base color palette used for generated CSS variables."],
-                ["tailwind.cssVariables", "boolean", "Use CSS variables (true) or Tailwind utility classes (false) for theming."],
-                ["tailwind.prefix", "string", "Tailwind class prefix, e.g. \"tw-\". Leave empty for no prefix."],
+                [
+                  "tailwind.css",
+                  "string",
+                  "Path to the CSS file where global styles and tokens are imported.",
+                ],
+                [
+                  "tailwind.baseColor",
+                  "string",
+                  "Base color palette used for generated CSS variables.",
+                ],
+                [
+                  "tailwind.cssVariables",
+                  "boolean",
+                  "Use CSS variables (true) or Tailwind utility classes (false) for theming.",
+                ],
+                [
+                  "tailwind.prefix",
+                  "string",
+                  'Tailwind class prefix, e.g. "tw-". Leave empty for no prefix.',
+                ],
                 ["aliases.components", "string", "Import alias for your components directory."],
                 ["aliases.utils", "string", "Import alias for the cn utility function."],
                 ["aliases.ui", "string", "Import alias for Aether UI component files."],
               ].map(([key, type, desc]) => (
                 <tr key={key as string} className="hover:bg-muted/20 transition-colors">
-                  <td className="px-4 py-2.5 font-mono text-xs text-foreground">{key}</td>
-                  <td className="px-4 py-2.5 font-mono text-xs text-muted-foreground">{type}</td>
-                  <td className="px-4 py-2.5 text-xs text-muted-foreground">{desc}</td>
+                  <td className="text-foreground px-4 py-2.5 font-mono text-xs">{key}</td>
+                  <td className="text-muted-foreground px-4 py-2.5 font-mono text-xs">{type}</td>
+                  <td className="text-muted-foreground px-4 py-2.5 text-xs">{desc}</td>
                 </tr>
               ))}
             </tbody>
@@ -293,11 +349,13 @@ npx aether-ui generate "a landing page with a hero section, feature grid, and pr
 
       {/* Common workflows */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Common workflows</h2>
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+          Common workflows
+        </h2>
 
         <div className="space-y-6">
           <div>
-            <p className="mb-2 text-sm font-medium text-foreground">Set up a new project</p>
+            <p className="text-foreground mb-2 text-sm font-medium">Set up a new project</p>
             <CodeBlock
               code={`# 1. Create your app (Next.js example)
 npx create-next-app@latest my-app --typescript --tailwind --app
@@ -313,7 +371,9 @@ npx aether-ui add button`}
           </div>
 
           <div>
-            <p className="mb-2 text-sm font-medium text-foreground">Add multiple components at once</p>
+            <p className="text-foreground mb-2 text-sm font-medium">
+              Add multiple components at once
+            </p>
             <CodeBlock
               code={`npx aether-ui add button input label badge card
 # or interactively (omit component names)
@@ -323,7 +383,7 @@ npx aether-ui add`}
           </div>
 
           <div>
-            <p className="mb-2 text-sm font-medium text-foreground">Check for upstream updates</p>
+            <p className="text-foreground mb-2 text-sm font-medium">Check for upstream updates</p>
             <CodeBlock
               code={`# See what changed in the registry vs. your local files
 npx aether-ui diff
@@ -338,7 +398,7 @@ npx aether-ui update --all`}
           </div>
 
           <div>
-            <p className="mb-2 text-sm font-medium text-foreground">Use a custom component path</p>
+            <p className="text-foreground mb-2 text-sm font-medium">Use a custom component path</p>
             <CodeBlock
               code={`# Write components to a custom directory
 npx aether-ui add button --path src/design-system/ui`}
@@ -350,11 +410,13 @@ npx aether-ui add button --path src/design-system/ui`}
 
       {/* Monorepo */}
       <section>
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Monorepo support</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+          Monorepo support
+        </h2>
+        <p className="text-muted-foreground mb-4 text-sm">
           Using Aether UI inside a pnpm or npm workspace? Pass the{" "}
-          <code className="rounded bg-muted px-1 font-mono text-xs">--cwd</code> flag to point the CLI 
-          at the app where you want components installed:
+          <code className="bg-muted rounded px-1 font-mono text-xs">--cwd</code> flag to point the
+          CLI at the app where you want components installed:
         </p>
         <CodeBlock
           code={`# Add a component to a specific workspace app

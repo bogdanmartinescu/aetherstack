@@ -17,7 +17,10 @@ import {
 
 function H2({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <h2 id={id} className="mt-12 mb-4 scroll-mt-20 text-xl font-bold tracking-tight text-foreground">
+    <h2
+      id={id}
+      className="text-foreground mb-4 mt-12 scroll-mt-20 text-xl font-bold tracking-tight"
+    >
       {children}
     </h2>
   )
@@ -25,20 +28,20 @@ function H2({ id, children }: { id: string; children: React.ReactNode }) {
 
 function H3({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <h3 id={id} className="mt-8 mb-3 scroll-mt-20 text-base font-semibold text-foreground">
+    <h3 id={id} className="text-foreground mb-3 mt-8 scroll-mt-20 text-base font-semibold">
       {children}
     </h3>
   )
 }
 
 function P({ children }: { children: React.ReactNode }) {
-  return <p className="leading-7 text-muted-foreground [&+p]:mt-4">{children}</p>
+  return <p className="text-muted-foreground leading-7 [&+p]:mt-4">{children}</p>
 }
 
 function Note({ children }: { children: React.ReactNode }) {
   return (
-    <div className="my-4 rounded-lg border border-border bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
-      <strong className="font-medium text-foreground">Note: </strong>
+    <div className="border-border bg-muted/40 text-muted-foreground my-4 rounded-lg border px-4 py-3 text-sm">
+      <strong className="text-foreground font-medium">Note: </strong>
       {children}
     </div>
   )
@@ -46,7 +49,7 @@ function Note({ children }: { children: React.ReactNode }) {
 
 function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <div className="my-6 flex items-center justify-center rounded-xl border border-border bg-muted/20 p-6 sm:p-10">
+    <div className="border-border bg-muted/20 my-6 flex items-center justify-center rounded-xl border p-6 sm:p-10">
       {children}
     </div>
   )
@@ -83,24 +86,36 @@ export default function ReactHookFormPage() {
       {/* ── Main content ── */}
       <div className="min-w-0 flex-1">
         <div className="mb-8">
-          <p className="mb-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">Forms</p>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground">React Hook Form</h1>
-          <p className="mt-3 text-lg text-muted-foreground">
+          <p className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-wider">
+            Forms
+          </p>
+          <h1 className="text-foreground text-4xl font-bold tracking-tight">React Hook Form</h1>
+          <p className="text-muted-foreground mt-3 text-lg">
             Build forms in React using{" "}
-            <a href="https://react-hook-form.com" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://react-hook-form.com"
+              className="text-primary hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               React Hook Form
             </a>{" "}
             and{" "}
-            <a href="https://zod.dev" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://zod.dev"
+              className="text-primary hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Zod
             </a>
             .
           </p>
-          <p className="mt-3 leading-7 text-muted-foreground">
+          <p className="text-muted-foreground mt-3 leading-7">
             In this guide we cover building forms with the Aether UI primitives (
             <InlineCode>Input</InlineCode>, <InlineCode>Select</InlineCode>,{" "}
-            <InlineCode>Checkbox</InlineCode>, <InlineCode>Switch</InlineCode>, and more),
-            schema validation with Zod, error display, validation modes, and dynamic array fields.
+            <InlineCode>Checkbox</InlineCode>, <InlineCode>Switch</InlineCode>, and more), schema
+            validation with Zod, error display, validation modes, and dynamic array fields.
           </p>
         </div>
 
@@ -131,26 +146,36 @@ export default function ReactHookFormPage() {
         {/* ── Approach ── */}
         <H2 id="approach">Approach</H2>
         <P>
-          This guide uses React Hook Form{"'"}s <InlineCode>useForm</InlineCode> hook for form
-          state and{" "}
-          <InlineCode>{"<Controller />"}</InlineCode> for Radix UI components that don{"'"}t
+          This guide uses React Hook Form{"'"}s <InlineCode>useForm</InlineCode> hook for form state
+          and <InlineCode>{"<Controller />"}</InlineCode> for Radix UI components that don{"'"}t
           expose a native DOM input (Select, Switch, Checkbox, RadioGroup). Simple inputs and
           textareas use the <InlineCode>register</InlineCode> API.
         </P>
-        <ul className="my-4 ml-6 list-disc space-y-1.5 text-sm leading-7 text-muted-foreground">
-          <li><InlineCode>useForm</InlineCode> — manages form state (values, errors, submission)</li>
-          <li><InlineCode>zodResolver</InlineCode> — wires Zod schema validation into the form</li>
-          <li><InlineCode>register</InlineCode> — connects native inputs to the form state</li>
-          <li><InlineCode>{"<Controller />"}</InlineCode> — connects Radix UI components to the form state</li>
-          <li><InlineCode>useFieldArray</InlineCode> — manages dynamic array fields</li>
+        <ul className="text-muted-foreground my-4 ml-6 list-disc space-y-1.5 text-sm leading-7">
+          <li>
+            <InlineCode>useForm</InlineCode> — manages form state (values, errors, submission)
+          </li>
+          <li>
+            <InlineCode>zodResolver</InlineCode> — wires Zod schema validation into the form
+          </li>
+          <li>
+            <InlineCode>register</InlineCode> — connects native inputs to the form state
+          </li>
+          <li>
+            <InlineCode>{"<Controller />"}</InlineCode> — connects Radix UI components to the form
+            state
+          </li>
+          <li>
+            <InlineCode>useFieldArray</InlineCode> — manages dynamic array fields
+          </li>
         </ul>
 
         {/* ── Anatomy ── */}
         <H2 id="anatomy">Anatomy</H2>
         <P>
           The pattern for every field is: wrap the control in a <InlineCode>{"<div>"}</InlineCode>,
-          add a <InlineCode>{"<Label>"}</InlineCode>, render the input, then conditionally render
-          an error message beneath it.
+          add a <InlineCode>{"<Label>"}</InlineCode>, render the input, then conditionally render an
+          error message beneath it.
         </P>
         <CodeBlock
           className="my-4"
@@ -318,25 +343,28 @@ export function BugReportForm() {
   mode: "onBlur", // validate when the user leaves a field
 })`}
         />
-        <div className="my-4 overflow-hidden rounded-lg border border-border">
+        <div className="border-border my-4 overflow-hidden rounded-lg border">
           <table className="w-full text-sm">
             <thead className="bg-muted/60">
               <tr>
-                <th className="px-4 py-2.5 text-left font-medium text-foreground">Mode</th>
-                <th className="px-4 py-2.5 text-left font-medium text-foreground">Description</th>
+                <th className="text-foreground px-4 py-2.5 text-left font-medium">Mode</th>
+                <th className="text-foreground px-4 py-2.5 text-left font-medium">Description</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody className="divide-border divide-y">
               {[
-                ["onSubmit", "Validates only on submit (default). Best UX — no red errors while typing."],
+                [
+                  "onSubmit",
+                  "Validates only on submit (default). Best UX — no red errors while typing.",
+                ],
                 ["onBlur", "Validates when the user leaves a field."],
                 ["onChange", "Validates on every keystroke. Useful for real-time feedback."],
                 ["onTouched", "Validates on first blur, then on every change."],
                 ["all", "Validates on both blur and change."],
               ].map(([mode, desc]) => (
                 <tr key={mode}>
-                  <td className="px-4 py-2.5 font-mono text-xs text-foreground">{`"${mode}"`}</td>
-                  <td className="px-4 py-2.5 text-muted-foreground">{desc}</td>
+                  <td className="text-foreground px-4 py-2.5 font-mono text-xs">{`"${mode}"`}</td>
+                  <td className="text-muted-foreground px-4 py-2.5">{desc}</td>
                 </tr>
               ))}
             </tbody>
@@ -346,8 +374,8 @@ export function BugReportForm() {
         <H3 id="displaying-errors">Displaying errors</H3>
         <P>
           Read error messages from <InlineCode>formState.errors</InlineCode>. Always set{" "}
-          <InlineCode>aria-invalid</InlineCode> on the control so assistive technology announces
-          the invalid state.
+          <InlineCode>aria-invalid</InlineCode> on the control so assistive technology announces the
+          invalid state.
         </P>
         <CodeBlock
           className="my-4"
@@ -368,8 +396,8 @@ export function BugReportForm() {
         <H2 id="field-input">Input</H2>
         <P>
           Spread <InlineCode>{`register("name")`}</InlineCode> directly onto{" "}
-          <InlineCode>{"<Input />"}</InlineCode>. Add <InlineCode>aria-invalid</InlineCode> when
-          the field has an error.
+          <InlineCode>{"<Input />"}</InlineCode>. Add <InlineCode>aria-invalid</InlineCode> when the
+          field has an error.
         </P>
         <DemoWrapper>
           <InputDemo />
@@ -393,8 +421,8 @@ export function BugReportForm() {
         <H2 id="field-textarea">Textarea</H2>
         <P>
           Same pattern as <InlineCode>{"<Input />"}</InlineCode> — spread{" "}
-          <InlineCode>register</InlineCode> and add <InlineCode>aria-invalid</InlineCode>.
-          Use <InlineCode>watch</InlineCode> to drive a live character counter without triggering
+          <InlineCode>register</InlineCode> and add <InlineCode>aria-invalid</InlineCode>. Use{" "}
+          <InlineCode>watch</InlineCode> to drive a live character counter without triggering
           re-validation.
         </P>
         <DemoWrapper>
@@ -421,10 +449,10 @@ export function BugReportForm() {
 
         <H2 id="field-select">Select</H2>
         <P>
-          Radix UI{"'"}s <InlineCode>{"<Select />"}</InlineCode> manages its own state, so it
-          needs <InlineCode>{"<Controller />"}</InlineCode>. Use <InlineCode>field.value</InlineCode>{" "}
-          and <InlineCode>field.onChange</InlineCode>, and set{" "}
-          <InlineCode>aria-invalid</InlineCode> on the <InlineCode>{"<SelectTrigger />"}</InlineCode>.
+          Radix UI{"'"}s <InlineCode>{"<Select />"}</InlineCode> manages its own state, so it needs{" "}
+          <InlineCode>{"<Controller />"}</InlineCode>. Use <InlineCode>field.value</InlineCode> and{" "}
+          <InlineCode>field.onChange</InlineCode>, and set <InlineCode>aria-invalid</InlineCode> on
+          the <InlineCode>{"<SelectTrigger />"}</InlineCode>.
         </P>
         <DemoWrapper>
           <SelectDemo />
@@ -451,8 +479,8 @@ export function BugReportForm() {
 
         <H2 id="field-checkbox">Checkbox</H2>
         <P>
-          For multi-select checkboxes, use <InlineCode>{"<Controller />"}</InlineCode> and manage
-          an array of selected IDs in <InlineCode>field.value</InlineCode>.
+          For multi-select checkboxes, use <InlineCode>{"<Controller />"}</InlineCode> and manage an
+          array of selected IDs in <InlineCode>field.value</InlineCode>.
         </P>
         <DemoWrapper>
           <CheckboxDemo />
@@ -489,8 +517,8 @@ export function BugReportForm() {
         <H2 id="field-radio">Radio Group</H2>
         <P>
           Use <InlineCode>field.value</InlineCode> and <InlineCode>field.onValueChange</InlineCode>{" "}
-          on <InlineCode>{"<RadioGroup />"}</InlineCode>. Set{" "}
-          <InlineCode>aria-invalid</InlineCode> on each <InlineCode>{"<RadioGroupItem />"}</InlineCode>.
+          on <InlineCode>{"<RadioGroup />"}</InlineCode>. Set <InlineCode>aria-invalid</InlineCode>{" "}
+          on each <InlineCode>{"<RadioGroupItem />"}</InlineCode>.
         </P>
         <DemoWrapper>
           <RadioGroupDemo />
@@ -651,36 +679,52 @@ const { fields, append, remove } = useFieldArray({
         />
 
         {/* ── Next steps ── */}
-        <div className="mt-16 border-t border-border pt-8">
-          <p className="text-sm font-medium text-foreground">Continue reading</p>
+        <div className="border-border mt-16 border-t pt-8">
+          <p className="text-foreground text-sm font-medium">Continue reading</p>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <Link
               href="/patterns/login-form"
-              className="group rounded-lg border border-border p-4 transition-colors hover:bg-muted/40"
+              className="border-border hover:bg-muted/40 group rounded-lg border p-4 transition-colors"
             >
-              <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Login Form →</p>
-              <p className="mt-1 text-xs text-muted-foreground">Email + password with remember-me and Zod validation.</p>
+              <p className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
+                Login Form →
+              </p>
+              <p className="text-muted-foreground mt-1 text-xs">
+                Email + password with remember-me and Zod validation.
+              </p>
             </Link>
             <Link
               href="/patterns/signup-form"
-              className="group rounded-lg border border-border p-4 transition-colors hover:bg-muted/40"
+              className="border-border hover:bg-muted/40 group rounded-lg border p-4 transition-colors"
             >
-              <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Sign Up Form →</p>
-              <p className="mt-1 text-xs text-muted-foreground">Registration with password strength meter and cross-field validation.</p>
+              <p className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
+                Sign Up Form →
+              </p>
+              <p className="text-muted-foreground mt-1 text-xs">
+                Registration with password strength meter and cross-field validation.
+              </p>
             </Link>
             <Link
               href="/patterns/profile-form"
-              className="group rounded-lg border border-border p-4 transition-colors hover:bg-muted/40"
+              className="border-border hover:bg-muted/40 group rounded-lg border p-4 transition-colors"
             >
-              <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Profile Settings Form →</p>
-              <p className="mt-1 text-xs text-muted-foreground">Multi-section form with Select, Switch, and dirty detection.</p>
+              <p className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
+                Profile Settings Form →
+              </p>
+              <p className="text-muted-foreground mt-1 text-xs">
+                Multi-section form with Select, Switch, and dirty detection.
+              </p>
             </Link>
             <Link
               href="/patterns/contact-form"
-              className="group rounded-lg border border-border p-4 transition-colors hover:bg-muted/40"
+              className="border-border hover:bg-muted/40 group rounded-lg border p-4 transition-colors"
             >
-              <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">Contact Form →</p>
-              <p className="mt-1 text-xs text-muted-foreground">Contact form with post-submit success state.</p>
+              <p className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
+                Contact Form →
+              </p>
+              <p className="text-muted-foreground mt-1 text-xs">
+                Contact form with post-submit success state.
+              </p>
             </Link>
           </div>
         </div>
@@ -689,7 +733,7 @@ const { fields, append, remove } = useFieldArray({
       {/* ── On this page ── */}
       <aside className="hidden w-48 shrink-0 xl:block">
         <div className="sticky top-20">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="text-muted-foreground mb-3 text-xs font-semibold uppercase tracking-wider">
             On this page
           </p>
           <nav className="space-y-1">
@@ -697,7 +741,7 @@ const { fields, append, remove } = useFieldArray({
               <a
                 key={item.href}
                 href={item.href}
-                className="block text-xs text-muted-foreground transition-colors hover:text-foreground"
+                className="text-muted-foreground hover:text-foreground block text-xs transition-colors"
               >
                 {item.label}
               </a>

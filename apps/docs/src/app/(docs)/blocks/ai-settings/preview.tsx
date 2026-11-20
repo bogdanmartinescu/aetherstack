@@ -15,12 +15,10 @@ export function AISettingsPreview() {
   const [model, setModel] = React.useState("gpt-4o")
   const [temperature, setTemperature] = React.useState(0.7)
   const [maxTokens, setMaxTokens] = React.useState(2048)
-  const [systemPrompt, setSystemPrompt] = React.useState(
-    "You are a helpful AI assistant.",
-  )
+  const [systemPrompt, setSystemPrompt] = React.useState("You are a helpful AI assistant.")
 
   return (
-    <div className="overflow-y-auto h-full p-4">
+    <div className="h-full overflow-y-auto p-4">
       <AISettings
         apiKey={apiKey}
         onApiKeyChange={setApiKey}

@@ -64,23 +64,59 @@ export default function ProfilePage() {
             { label: "Following", value: 91 },
           ]}
           tabs={[
-            { label: "Projects", content: <div className="py-4 text-sm text-muted-foreground">Projects will appear here.</div> },
-            { label: "Activity", content: <div className="py-4 text-sm text-muted-foreground">Recent activity will appear here.</div> },
+            {
+              label: "Projects",
+              content: (
+                <div className="text-muted-foreground py-4 text-sm">Projects will appear here.</div>
+              ),
+            },
+            {
+              label: "Activity",
+              content: (
+                <div className="text-muted-foreground py-4 text-sm">
+                  Recent activity will appear here.
+                </div>
+              ),
+            },
           ]}
           actions={
             <>
-              <Button variant="outline" size="sm">Message</Button>
+              <Button variant="outline" size="sm">
+                Message
+              </Button>
               <Button size="sm">Follow</Button>
             </>
           }
         />
       }
       props={[
-        { name: "user", type: "UserProfileUser", required: true, description: "User data. Fields: name, username, email, bio, avatarUrl, role, location, website, joinedAt." },
-        { name: "stats", type: "{ label: string; value: string | number }[]", description: "Stat items displayed in the stats row." },
-        { name: "tabs", type: "{ label: string; content: ReactNode }[]", description: "Tab sections below the stats row." },
-        { name: "actions", type: "ReactNode", description: "Action buttons rendered to the right of the avatar." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "user",
+          type: "UserProfileUser",
+          required: true,
+          description:
+            "User data. Fields: name, username, email, bio, avatarUrl, role, location, website, joinedAt.",
+        },
+        {
+          name: "stats",
+          type: "{ label: string; value: string | number }[]",
+          description: "Stat items displayed in the stats row.",
+        },
+        {
+          name: "tabs",
+          type: "{ label: string; content: ReactNode }[]",
+          description: "Tab sections below the stats row.",
+        },
+        {
+          name: "actions",
+          type: "ReactNode",
+          description: "Action buttons rendered to the right of the avatar.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={[
         "Avatar image includes alt set to the user name.",

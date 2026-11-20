@@ -63,7 +63,8 @@ export default function SocialProof() {
             },
             {
               id: "3",
-              quote: "Finally a component library where I actually own the code. No version lock-in.",
+              quote:
+                "Finally a component library where I actually own the code. No version lock-in.",
               author: "Priya Nair",
               role: "Frontend Engineer",
               company: "Orbit",
@@ -74,11 +75,25 @@ export default function SocialProof() {
         />
       }
       props={[
-        { name: "testimonials", type: "Testimonial[]", required: true, description: "Array of testimonial objects. Each has id, quote, author, and optional role, company, avatarUrl, rating." },
-        { name: "eyebrow", type: "string", description: "Small uppercase label above the headline." },
+        {
+          name: "testimonials",
+          type: "Testimonial[]",
+          required: true,
+          description:
+            "Array of testimonial objects. Each has id, quote, author, and optional role, company, avatarUrl, rating.",
+        },
+        {
+          name: "eyebrow",
+          type: "string",
+          description: "Small uppercase label above the headline.",
+        },
         { name: "headline", type: "string", description: "Section heading." },
         { name: "cols", type: "2 | 3", default: "3", description: "Grid column count." },
-        { name: "className", type: "string", description: "Additional classes on the section wrapper." },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the section wrapper.",
+        },
       ]}
       a11yNotes={[
         "Each quote is wrapped in a <blockquote> element.",

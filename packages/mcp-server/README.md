@@ -10,12 +10,12 @@ Part of the [Aetherstack](https://aether-ui.dev) design system monorepo.
 
 ## MCP tools exposed
 
-| Tool | Description |
-|---|---|
-| `list_components` | List all available registry items with descriptions |
-| `get_component` | Get full details (props, AI metadata, source) for a component |
-| `install_component` | Install a component into the current project via the CLI |
-| `compose_block` | Compose a block from multiple components based on a description |
+| Tool                | Description                                                     |
+| ------------------- | --------------------------------------------------------------- |
+| `list_components`   | List all available registry items with descriptions             |
+| `get_component`     | Get full details (props, AI metadata, source) for a component   |
+| `install_component` | Install a component into the current project via the CLI        |
+| `compose_block`     | Compose a block from multiple components based on a description |
 
 ## Setup — Cursor
 

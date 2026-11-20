@@ -28,7 +28,7 @@ export default function AspectRatioPage() {
       preview={
         <div className="w-full max-w-sm">
           <AspectRatio ratio={16 / 9}>
-            <div className="flex h-full w-full items-center justify-center rounded-lg bg-muted text-muted-foreground text-sm font-medium">
+            <div className="bg-muted text-muted-foreground flex h-full w-full items-center justify-center rounded-lg text-sm font-medium">
               16:9
             </div>
           </AspectRatio>
@@ -61,11 +61,12 @@ export function AspectRatioDemo() {
       examples={[
         {
           title: "Image with 16:9 ratio",
-          description: "Use AspectRatio to constrain an image to a specific ratio without layout shift.",
+          description:
+            "Use AspectRatio to constrain an image to a specific ratio without layout shift.",
           preview: (
             <div className="w-full max-w-xs">
               <AspectRatio ratio={16 / 9}>
-                <div className="flex h-full w-full items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 text-primary text-sm font-medium">
+                <div className="from-primary/20 to-primary/5 text-primary flex h-full w-full items-center justify-center rounded-lg bg-gradient-to-br text-sm font-medium">
                   16 : 9
                 </div>
               </AspectRatio>
@@ -81,7 +82,7 @@ export function AspectRatioDemo() {
           preview: (
             <div className="w-32">
               <AspectRatio ratio={1}>
-                <div className="flex h-full w-full items-center justify-center rounded-lg bg-muted text-muted-foreground text-sm font-medium">
+                <div className="bg-muted text-muted-foreground flex h-full w-full items-center justify-center rounded-lg text-sm font-medium">
                   1:1
                 </div>
               </AspectRatio>
@@ -99,7 +100,7 @@ export function AspectRatioDemo() {
           preview: (
             <div className="w-full max-w-xs">
               <AspectRatio ratio={4 / 3}>
-                <div className="flex h-full w-full items-center justify-center rounded-lg bg-muted text-muted-foreground text-sm font-medium">
+                <div className="bg-muted text-muted-foreground flex h-full w-full items-center justify-center rounded-lg text-sm font-medium">
                   4:3
                 </div>
               </AspectRatio>
@@ -115,7 +116,8 @@ export function AspectRatioDemo() {
           name: "ratio",
           type: "number",
           default: "1",
-          description: "The desired width/height ratio. Pass a fraction like 16/9 or a decimal like 1.78.",
+          description:
+            "The desired width/height ratio. Pass a fraction like 16/9 or a decimal like 1.78.",
         },
         {
           name: "className",

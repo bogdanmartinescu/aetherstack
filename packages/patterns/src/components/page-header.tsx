@@ -16,17 +16,14 @@ export interface BreadcrumbProps {
 export function Breadcrumb({ items, className }: BreadcrumbProps) {
   return (
     <nav aria-label="Breadcrumb" className={cn("mb-2", className)}>
-      <ol className="flex flex-wrap items-center gap-x-1.5 text-sm text-muted-foreground">
+      <ol className="text-muted-foreground flex flex-wrap items-center gap-x-1.5 text-sm">
         {items.map((item, i) => {
           const isLast = i === items.length - 1
           return (
             <React.Fragment key={i}>
               <li>
                 {item.href && !isLast ? (
-                  <a
-                    href={item.href}
-                    className="transition-colors hover:text-foreground"
-                  >
+                  <a href={item.href} className="hover:text-foreground transition-colors">
                     {item.label}
                   </a>
                 ) : (
@@ -71,23 +68,13 @@ export function PageHeader({
 }: PageHeaderProps) {
   return (
     <div className={cn("mb-6", className)}>
-      {breadcrumb && breadcrumb.length > 0 && (
-        <Breadcrumb items={breadcrumb} />
-      )}
+      {breadcrumb && breadcrumb.length > 0 && <Breadcrumb items={breadcrumb} />}
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-            {title}
-          </h1>
-          {description && (
-            <p className="mt-1 text-sm text-muted-foreground">{description}</p>
-          )}
+          <h1 className="text-foreground text-2xl font-semibold tracking-tight">{title}</h1>
+          {description && <p className="text-muted-foreground mt-1 text-sm">{description}</p>}
         </div>
-        {actions && (
-          <div className="flex shrink-0 flex-wrap items-center gap-2">
-            {actions}
-          </div>
-        )}
+        {actions && <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>}
       </div>
     </div>
   )

@@ -33,9 +33,23 @@ const [filters, setFilters] = useState([
         </div>
       }
       props={[
-        { name: "activeFilters", type: "ActiveFilter[]", default: "[]", description: "List of applied filters. Each needs an id, label, and onRemove handler." },
-        { name: "onClearAll", type: "() => void", description: "Shown when there are active filters. Clears all at once." },
-        { name: "children", type: "ReactNode", description: "Additional filter trigger controls rendered before the active filter pills." },
+        {
+          name: "activeFilters",
+          type: "ActiveFilter[]",
+          default: "[]",
+          description: "List of applied filters. Each needs an id, label, and onRemove handler.",
+        },
+        {
+          name: "onClearAll",
+          type: "() => void",
+          description: "Shown when there are active filters. Clears all at once.",
+        },
+        {
+          name: "children",
+          type: "ReactNode",
+          description:
+            "Additional filter trigger controls rendered before the active filter pills.",
+        },
         { name: "className", type: "string", description: "Additional classes on the wrapper." },
       ]}
     />

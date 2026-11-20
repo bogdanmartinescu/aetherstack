@@ -44,11 +44,9 @@ export function SegmentedControl({
 }: SegmentedControlProps) {
   const [internalValue, setInternalValue] = React.useState(defaultValue)
 
-  const resolvedValue = value !== undefined ? value : internalValue ?? defaultValue
+  const resolvedValue = value !== undefined ? value : (internalValue ?? defaultValue)
   const resolvedIndex =
-    resolvedValue !== undefined
-      ? options.findIndex((option) => option.value === resolvedValue)
-      : -1
+    resolvedValue !== undefined ? options.findIndex((option) => option.value === resolvedValue) : -1
   const showThumb = resolvedValue === undefined || resolvedIndex >= 0
   const thumbIndex = resolvedValue === undefined ? 0 : resolvedIndex
   const count = options.length
@@ -101,7 +99,7 @@ export function SegmentedControl({
           data-index={String(thumbIndex)}
           aria-hidden="true"
           className={cn(
-            "pointer-events-none absolute inset-y-1 left-1 rounded-md bg-background",
+            "bg-background pointer-events-none absolute inset-y-1 left-1 rounded-md",
             "motion-safe:transition-transform",
           )}
           style={{
@@ -117,7 +115,7 @@ export function SegmentedControl({
           className={cn(
             "relative z-10 aspect-auto h-8 w-auto rounded-md border-0 bg-transparent px-3",
             "text-sm font-medium shadow-none",
-            "data-[state=checked]:bg-transparent data-[state=checked]:text-foreground",
+            "data-[state=checked]:text-foreground data-[state=checked]:bg-transparent",
             "[&>span[data-state]]:hidden",
           )}
           {...(option.disabled === true ? { disabled: true } : {})}

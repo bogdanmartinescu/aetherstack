@@ -4,7 +4,8 @@ import { ToolCallSequencePreview } from "./preview"
 
 export const metadata: Metadata = {
   title: "Tool Call Sequence",
-  description: "A collapsible step list that visualises the status and details of sequential AI tool calls.",
+  description:
+    "A collapsible step list that visualises the status and details of sequential AI tool calls.",
 }
 
 export default function ToolCallSequencePage() {
@@ -43,8 +44,18 @@ export function MyToolCallSequence() {
 }`}
       preview={<ToolCallSequencePreview />}
       props={[
-        { name: "steps", type: "Step[]", required: true, description: 'Array of tool call steps. Each step requires id, toolName, and status ("pending" | "running" | "done" | "error").' },
-        { name: "className", type: "string", description: "Additional CSS classes applied to the list container." },
+        {
+          name: "steps",
+          type: "Step[]",
+          required: true,
+          description:
+            'Array of tool call steps. Each step requires id, toolName, and status ("pending" | "running" | "done" | "error").',
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional CSS classes applied to the list container.",
+        },
       ]}
       a11yNotes={[
         "Each step row is a button element — keyboard users can expand and collapse details with Enter or Space.",

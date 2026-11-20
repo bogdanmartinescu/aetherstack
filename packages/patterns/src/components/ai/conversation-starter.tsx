@@ -27,22 +27,22 @@ function ConversationStarter({
       <div className="space-y-2">
         <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
         {description && (
-          <p className="text-sm text-muted-foreground max-w-sm mx-auto">{description}</p>
+          <p className="text-muted-foreground mx-auto max-w-sm text-sm">{description}</p>
         )}
       </div>
       {suggestions.length > 0 && (
-        <div className="grid gap-2 sm:grid-cols-2 w-full max-w-lg">
+        <div className="grid w-full max-w-lg gap-2 sm:grid-cols-2">
           {suggestions.map((s, i) => (
             <button
               key={i}
               onClick={() => onSuggestionClick?.(s.prompt)}
               className={cn(
-                "flex items-center gap-2 rounded-lg border border-input bg-background px-4 py-3 text-sm text-left",
+                "border-input bg-background flex items-center gap-2 rounded-lg border px-4 py-3 text-left text-sm",
                 "hover:bg-accent hover:text-accent-foreground transition-colors",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                "focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
               )}
             >
-              {s.icon && <span className="shrink-0 text-muted-foreground">{s.icon}</span>}
+              {s.icon && <span className="text-muted-foreground shrink-0">{s.icon}</span>}
               <span>{s.label}</span>
             </button>
           ))}

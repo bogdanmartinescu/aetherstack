@@ -3,12 +3,7 @@
 import * as React from "react"
 import { cn } from "@aetherstack/utils"
 import { Button, Input } from "@aetherstack/ui"
-import {
-  FormField,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from "@aetherstack/patterns"
+import { FormField, FormLabel, FormControl, FormMessage } from "@aetherstack/patterns"
 
 export interface SignupBlockProps {
   /** App / product name */
@@ -57,15 +52,15 @@ export function SignupBlock({
   }
 
   return (
-    <div className={cn("flex min-h-screen items-center justify-center bg-muted/20 p-6", className)}>
-      <div className="w-full max-w-sm rounded-xl border border-border bg-card p-8 shadow-sm">
+    <div className={cn("bg-muted/20 flex min-h-screen items-center justify-center p-6", className)}>
+      <div className="border-border bg-card w-full max-w-sm rounded-xl border p-8 shadow-sm">
         {/* Logo / heading */}
         <div className="mb-8 flex flex-col items-center text-center">
-          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-lg font-bold text-primary-foreground">
+          <div className="bg-primary text-primary-foreground mb-3 flex h-10 w-10 items-center justify-center rounded-xl text-lg font-bold">
             {appName.charAt(0)}
           </div>
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">Create account</h1>
-          <p className="mt-1 text-sm text-muted-foreground">{tagline}</p>
+          <h1 className="text-foreground text-2xl font-semibold tracking-tight">Create account</h1>
+          <p className="text-muted-foreground mt-1 text-sm">{tagline}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4" noValidate>
@@ -116,7 +111,7 @@ export function SignupBlock({
           </Button>
         </form>
 
-        <p className="mt-4 text-center text-xs text-muted-foreground">
+        <p className="text-muted-foreground mt-4 text-center text-xs">
           By creating an account you agree to our{" "}
           <a href={termsHref} className="text-primary underline-offset-4 hover:underline">
             Terms
@@ -128,9 +123,12 @@ export function SignupBlock({
           .
         </p>
 
-        <p className="mt-4 text-center text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-4 text-center text-sm">
           Already have an account?{" "}
-          <a href={signInHref} className="text-primary underline-offset-4 hover:underline font-medium">
+          <a
+            href={signInHref}
+            className="text-primary font-medium underline-offset-4 hover:underline"
+          >
             Sign in
           </a>
         </p>

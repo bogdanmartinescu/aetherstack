@@ -58,20 +58,39 @@ import { MetricCard } from "@aetherstack/patterns"
             trend="up"
             icon={<TrendingUp className="h-5 w-5" />}
           />
-          <MetricCard
-            label="Orders"
-            value="1,429"
-            icon={<ShoppingCart className="h-5 w-5" />}
-          />
+          <MetricCard label="Orders" value="1,429" icon={<ShoppingCart className="h-5 w-5" />} />
         </div>
       }
       props={[
-        { name: "label", type: "string", required: true, description: "Metric name displayed above the value." },
-        { name: "value", type: "string | number", required: true, description: "Primary metric value." },
-        { name: "change", type: "string", description: "Change indicator, e.g. \"+20.1%\"." },
-        { name: "trend", type: '"up" | "down" | "neutral"', default: '"neutral"', description: "Controls color of the change badge and arrow direction." },
-        { name: "icon", type: "ReactNode", description: "Icon displayed in the top-right. Recommended: Lucide icon h-5 w-5." },
-        { name: "sublabel", type: "string", description: "Optional sublabel below the value, e.g. \"from last month\"." },
+        {
+          name: "label",
+          type: "string",
+          required: true,
+          description: "Metric name displayed above the value.",
+        },
+        {
+          name: "value",
+          type: "string | number",
+          required: true,
+          description: "Primary metric value.",
+        },
+        { name: "change", type: "string", description: 'Change indicator, e.g. "+20.1%".' },
+        {
+          name: "trend",
+          type: '"up" | "down" | "neutral"',
+          default: '"neutral"',
+          description: "Controls color of the change badge and arrow direction.",
+        },
+        {
+          name: "icon",
+          type: "ReactNode",
+          description: "Icon displayed in the top-right. Recommended: Lucide icon h-5 w-5.",
+        },
+        {
+          name: "sublabel",
+          type: "string",
+          description: 'Optional sublabel below the value, e.g. "from last month".',
+        },
         { name: "className", type: "string", description: "Additional classes on the Card." },
       ]}
     />

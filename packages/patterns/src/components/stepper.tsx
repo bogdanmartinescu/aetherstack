@@ -88,10 +88,7 @@ export function StepperStep({
             )}
             aria-hidden="true"
           />
-          <div
-            className={circleClass}
-            aria-current={isCurrent ? "step" : undefined}
-          >
+          <div className={circleClass} aria-current={isCurrent ? "step" : undefined}>
             {isCompleted ? <CheckIcon /> : <span>{index + 1}</span>}
           </div>
           <div
@@ -107,7 +104,7 @@ export function StepperStep({
         <div className="text-center">
           <p className={labelClass}>{item.label}</p>
           {item.description && (
-            <p className="mt-0.5 text-xs text-muted-foreground">{item.description}</p>
+            <p className="text-muted-foreground mt-0.5 text-xs">{item.description}</p>
           )}
         </div>
       </li>
@@ -119,10 +116,7 @@ export function StepperStep({
     <li className="flex gap-4">
       {/* Circle + connector column */}
       <div className="flex flex-col items-center">
-        <div
-          className={circleClass}
-          aria-current={isCurrent ? "step" : undefined}
-        >
+        <div className={circleClass} aria-current={isCurrent ? "step" : undefined}>
           {isCompleted ? <CheckIcon /> : <span>{index + 1}</span>}
         </div>
         {!isLast && (
@@ -140,7 +134,7 @@ export function StepperStep({
       <div className={cn("min-w-0 pt-1", !isLast && "pb-8")}>
         <p className={labelClass}>{item.label}</p>
         {item.description && (
-          <p className="mt-0.5 text-sm text-muted-foreground">{item.description}</p>
+          <p className="text-muted-foreground mt-0.5 text-sm">{item.description}</p>
         )}
       </div>
     </li>
@@ -157,10 +151,7 @@ export function Stepper({
 }: StepperProps) {
   return (
     <ol
-      className={cn(
-        orientation === "horizontal" ? "flex items-start" : "flex flex-col",
-        className,
-      )}
+      className={cn(orientation === "horizontal" ? "flex items-start" : "flex flex-col", className)}
       aria-label="Progress steps"
     >
       {steps.map((step, index) => (

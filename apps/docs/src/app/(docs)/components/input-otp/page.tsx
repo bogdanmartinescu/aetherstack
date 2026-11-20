@@ -1,10 +1,5 @@
 import type { Metadata } from "next"
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-  InputOTPSeparator,
-} from "@aetherstack/ui"
+import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
 
 export const metadata: Metadata = {

@@ -43,10 +43,15 @@ import { LayoutDashboard, Users, Settings } from "lucide-react"
   </NavGroup>
 </SidebarNav>`}
       preview={
-        <div className="w-56 rounded-lg border border-border bg-card p-3">
+        <div className="border-border bg-card w-56 rounded-lg border p-3">
           <SidebarNav>
             <NavGroup label="Main">
-              <NavItem href="#" label="Dashboard" icon={<LayoutDashboard className="h-4 w-4" />} active />
+              <NavItem
+                href="#"
+                label="Dashboard"
+                icon={<LayoutDashboard className="h-4 w-4" />}
+                active
+              />
               <NavItem href="#" label="Analytics" icon={<BarChart2 className="h-4 w-4" />} />
               <NavItem href="#" label="Team" icon={<Users className="h-4 w-4" />} badge={3} />
               <NavItem href="#" label="Notifications" icon={<Bell className="h-4 w-4" />} />
@@ -61,18 +66,44 @@ import { LayoutDashboard, Users, Settings } from "lucide-react"
       props={[
         { name: "NavItem.href", type: "string", required: true, description: "Link destination." },
         { name: "NavItem.label", type: "string", required: true, description: "Link text." },
-        { name: "NavItem.icon", type: "ReactNode", description: "Icon to the left of the label. Recommended: Lucide icon, h-4 w-4." },
-        { name: "NavItem.badge", type: "string | number", description: "Count badge shown on the right." },
-        { name: "NavItem.active", type: "boolean", description: "Highlights the item as the current page." },
-        { name: "NavItem.disabled", type: "boolean", description: "Makes the item non-interactive." },
+        {
+          name: "NavItem.icon",
+          type: "ReactNode",
+          description: "Icon to the left of the label. Recommended: Lucide icon, h-4 w-4.",
+        },
+        {
+          name: "NavItem.badge",
+          type: "string | number",
+          description: "Count badge shown on the right.",
+        },
+        {
+          name: "NavItem.active",
+          type: "boolean",
+          description: "Highlights the item as the current page.",
+        },
+        {
+          name: "NavItem.disabled",
+          type: "boolean",
+          description: "Makes the item non-interactive.",
+        },
         { name: "NavGroup.label", type: "string", description: "Section heading above the group." },
-        { name: "NavGroup.collapsible", type: "boolean", default: "false", description: "Makes the group toggleable." },
-        { name: "NavGroup.defaultCollapsed", type: "boolean", default: "false", description: "Whether the group starts collapsed." },
+        {
+          name: "NavGroup.collapsible",
+          type: "boolean",
+          default: "false",
+          description: "Makes the group toggleable.",
+        },
+        {
+          name: "NavGroup.defaultCollapsed",
+          type: "boolean",
+          default: "false",
+          description: "Whether the group starts collapsed.",
+        },
       ]}
       a11yNotes={[
-        "SidebarNav renders as <nav aria-label=\"Sidebar navigation\"> — a landmark region.",
-        "Active NavItem gets aria-current=\"page\" automatically.",
-        "Disabled NavItem gets aria-disabled=\"true\" and tabIndex={-1}.",
+        'SidebarNav renders as <nav aria-label="Sidebar navigation"> — a landmark region.',
+        'Active NavItem gets aria-current="page" automatically.',
+        'Disabled NavItem gets aria-disabled="true" and tabIndex={-1}.',
         "Collapsible NavGroup toggles aria-expanded on the heading button.",
       ]}
     />

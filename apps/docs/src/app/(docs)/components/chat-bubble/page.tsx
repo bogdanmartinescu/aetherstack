@@ -4,7 +4,8 @@ import { PatternPage } from "@/components/pattern-page"
 
 export const metadata: Metadata = {
   title: "ChatBubble",
-  description: "A single message bubble for AI chat UIs, aligned left for assistant messages and right for user messages.",
+  description:
+    "A single message bubble for AI chat UIs, aligned left for assistant messages and right for user messages.",
 }
 
 export default function ChatBubblePage() {
@@ -14,7 +15,7 @@ export default function ChatBubblePage() {
       description="A single message bubble for AI chat UIs, aligned left for assistant messages and right for user messages."
       packageName="@aetherstack/ui"
       preview={
-        <div className="flex flex-col gap-3 w-full max-w-sm">
+        <div className="flex w-full max-w-sm flex-col gap-3">
           <ChatBubble
             role="user"
             content="How do I center a div in CSS?"
@@ -48,7 +49,8 @@ export default function ChatBubblePage() {
         {
           name: "role",
           type: '"user" | "assistant" | "system"',
-          description: "Determines bubble alignment (user = right, assistant/system = left) and background color.",
+          description:
+            "Determines bubble alignment (user = right, assistant/system = left) and background color.",
           required: true,
         },
         {

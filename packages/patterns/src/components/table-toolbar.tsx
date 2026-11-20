@@ -13,7 +13,7 @@ export function FilterPill({ label, onRemove, className }: FilterPillProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border border-border bg-muted px-2.5 py-0.5 text-xs font-medium text-foreground",
+        "border-border bg-muted text-foreground inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium",
         className,
       )}
     >
@@ -22,7 +22,7 @@ export function FilterPill({ label, onRemove, className }: FilterPillProps) {
         <button
           type="button"
           onClick={onRemove}
-          className="ml-0.5 rounded-full p-0.5 text-muted-foreground transition-colors hover:bg-muted-foreground/20 hover:text-foreground"
+          className="text-muted-foreground hover:bg-muted-foreground/20 hover:text-foreground ml-0.5 rounded-full p-0.5 transition-colors"
           aria-label={`Remove filter: ${label}`}
         >
           <svg
@@ -74,7 +74,7 @@ export function FilterToolbar({
       {children}
       {hasFilters && (
         <>
-          <div className="h-4 w-px bg-border" aria-hidden="true" />
+          <div className="bg-border h-4 w-px" aria-hidden="true" />
           {activeFilters.map((f) => (
             <FilterPill key={f.id} label={f.label} onRemove={f.onRemove} />
           ))}
@@ -82,7 +82,7 @@ export function FilterToolbar({
             <button
               type="button"
               onClick={onClearAll}
-              className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground text-xs transition-colors"
             >
               Clear all
             </button>
@@ -105,26 +105,14 @@ export interface TableToolbarProps {
   className?: string
 }
 
-export function TableToolbar({
-  search,
-  filters,
-  actions,
-  className,
-}: TableToolbarProps) {
+export function TableToolbar({ search, filters, actions, className }: TableToolbarProps) {
   return (
-    <div
-      className={cn(
-        "flex flex-wrap items-center justify-between gap-3 py-3",
-        className,
-      )}
-    >
+    <div className={cn("flex flex-wrap items-center justify-between gap-3 py-3", className)}>
       <div className="flex flex-1 flex-wrap items-center gap-2">
         {search}
         {filters}
       </div>
-      {actions && (
-        <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>
-      )}
+      {actions && <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>}
     </div>
   )
 }

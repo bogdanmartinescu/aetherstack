@@ -52,7 +52,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           ]}
           actions={
             <>
-              <Button variant="outline" size="sm">Invite</Button>
+              <Button variant="outline" size="sm">
+                Invite
+              </Button>
               <Button size="sm">Upgrade</Button>
             </>
           }
@@ -61,9 +63,21 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       props={[
         { name: "appName", type: "string", description: "Application name text." },
         { name: "logo", type: "ReactNode", description: "Custom logo element." },
-        { name: "navItems", type: "{ label: string; href: string; active?: boolean }[]", description: "Navigation items. Set active: true on the current route." },
-        { name: "actions", type: "ReactNode", description: "Right-side action slot (buttons, avatar, etc.)." },
-        { name: "className", type: "string", description: "Additional classes on the header element." },
+        {
+          name: "navItems",
+          type: "{ label: string; href: string; active?: boolean }[]",
+          description: "Navigation items. Set active: true on the current route.",
+        },
+        {
+          name: "actions",
+          type: "ReactNode",
+          description: "Right-side action slot (buttons, avatar, etc.).",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the header element.",
+        },
       ]}
       a11yNotes={[
         "Active nav item receives aria-current='page'.",

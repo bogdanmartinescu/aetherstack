@@ -80,7 +80,9 @@ describe("resolveGenerate — keyword fallback", () => {
   it("resolves a description with a modal keyword", () => {
     const plan = resolveGenerate("add a confirmation modal", MOCK_REGISTRY)
     // dialog is not in MOCK_REGISTRY so it shouldn't appear
-    expect(plan.components.every((c) => MOCK_REGISTRY.items.map((i) => i.name).includes(c))).toBe(true)
+    expect(plan.components.every((c) => MOCK_REGISTRY.items.map((i) => i.name).includes(c))).toBe(
+      true,
+    )
   })
 
   it("resolves a metric keyword to metric-card", () => {

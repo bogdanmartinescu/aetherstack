@@ -40,13 +40,42 @@ export default function HeroPage() {
         />
       }
       props={[
-        { name: "headline", type: "string", required: true, description: "The primary heading text." },
-        { name: "eyebrow", type: "string", description: "Small badge label shown above the headline." },
-        { name: "subheading", type: "string", description: "Supporting paragraph below the headline." },
-        { name: "primaryCta", type: "{ label: string; href: string }", description: "Primary call-to-action button." },
-        { name: "secondaryCta", type: "{ label: string; href: string }", description: "Secondary outline CTA button." },
-        { name: "media", type: "ReactNode", description: "Optional media element (image, video, screenshot) below the CTAs." },
-        { name: "className", type: "string", description: "Additional classes on the section wrapper." },
+        {
+          name: "headline",
+          type: "string",
+          required: true,
+          description: "The primary heading text.",
+        },
+        {
+          name: "eyebrow",
+          type: "string",
+          description: "Small badge label shown above the headline.",
+        },
+        {
+          name: "subheading",
+          type: "string",
+          description: "Supporting paragraph below the headline.",
+        },
+        {
+          name: "primaryCta",
+          type: "{ label: string; href: string }",
+          description: "Primary call-to-action button.",
+        },
+        {
+          name: "secondaryCta",
+          type: "{ label: string; href: string }",
+          description: "Secondary outline CTA button.",
+        },
+        {
+          name: "media",
+          type: "ReactNode",
+          description: "Optional media element (image, video, screenshot) below the CTAs.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the section wrapper.",
+        },
       ]}
       a11yNotes={[
         "The headline renders as an <h1> — do not nest this inside another page <h1>.",

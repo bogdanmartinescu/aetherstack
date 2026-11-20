@@ -91,7 +91,9 @@ describe("Button loading state", () => {
         Run
       </Button>,
     )
-    expect(screen.getByRole("button").querySelector(".animate-button-sweep")).not.toBeInTheDocument()
+    expect(
+      screen.getByRole("button").querySelector(".animate-button-sweep"),
+    ).not.toBeInTheDocument()
   })
 
   it("renders a decorative spinner before the label", () => {

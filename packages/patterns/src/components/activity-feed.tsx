@@ -52,9 +52,9 @@ function formatRelativeTime(timestamp: Date | string): string {
 
 export function ActivityItem({ item, className }: ActivityItemProps) {
   return (
-    <li className={cn("relative flex gap-3 pl-8 pb-6 last:pb-0", className)}>
+    <li className={cn("relative flex gap-3 pb-6 pl-8 last:pb-0", className)}>
       {/* Avatar / icon */}
-      <div className="absolute left-0 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold text-muted-foreground ring-2 ring-background">
+      <div className="bg-muted text-muted-foreground ring-background absolute left-0 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold ring-2">
         {item.icon ? (
           item.icon
         ) : item.user ? (
@@ -76,19 +76,13 @@ export function ActivityItem({ item, className }: ActivityItemProps) {
         )}
       </div>
 
-      <div className="flex-1 min-w-0">
-        <p className="text-sm text-foreground">
-          {item.user && (
-            <span className="font-medium">{item.user} </span>
-          )}
+      <div className="min-w-0 flex-1">
+        <p className="text-foreground text-sm">
+          {item.user && <span className="font-medium">{item.user} </span>}
           <span>{item.action}</span>
-          {item.target && (
-            <span className="font-medium"> {item.target}</span>
-          )}
+          {item.target && <span className="font-medium"> {item.target}</span>}
         </p>
-        <p className="mt-0.5 text-xs text-muted-foreground">
-          {formatRelativeTime(item.timestamp)}
-        </p>
+        <p className="text-muted-foreground mt-0.5 text-xs">{formatRelativeTime(item.timestamp)}</p>
       </div>
     </li>
   )
@@ -100,10 +94,7 @@ export function ActivityFeed({ items, className }: ActivityFeedProps) {
   return (
     <div className={cn("relative", className)}>
       {/* Vertical connecting line */}
-      <div
-        className="absolute left-3.5 top-0 h-full w-px bg-border"
-        aria-hidden="true"
-      />
+      <div className="bg-border absolute left-3.5 top-0 h-full w-px" aria-hidden="true" />
       <ul className="space-y-0" role="list" aria-label="Activity feed">
         {items.map((item) => (
           <ActivityItem key={item.id} item={item} />

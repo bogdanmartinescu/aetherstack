@@ -9,12 +9,12 @@ export function VoiceInputPreview() {
     <div className="flex flex-col items-center gap-4">
       <VoiceInput onTranscript={setTranscript} />
       {transcript && (
-        <p className="text-sm text-muted-foreground max-w-xs text-center">
+        <p className="text-muted-foreground max-w-xs text-center text-sm">
           Transcript: <span className="text-foreground">{transcript}</span>
         </p>
       )}
       {!transcript && (
-        <p className="text-xs text-muted-foreground">Click the mic to start recording</p>
+        <p className="text-muted-foreground text-xs">Click the mic to start recording</p>
       )}
     </div>
   )

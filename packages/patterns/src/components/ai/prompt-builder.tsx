@@ -47,12 +47,9 @@ function PromptBuilder({ turns = DEFAULT_TURNS, onTurnsChange, className }: Prom
     <div className={cn("flex flex-col gap-3", className)}>
       {turns.map((turn, i) => (
         <Card key={i}>
-          <CardContent className="pt-4 flex flex-col gap-2">
+          <CardContent className="flex flex-col gap-2 pt-4">
             <div className="flex items-center justify-between gap-2">
-              <Select
-                value={turn.role}
-                onValueChange={(v) => updateTurn(i, { role: v as Role })}
-              >
+              <Select value={turn.role} onValueChange={(v) => updateTurn(i, { role: v as Role })}>
                 <SelectTrigger className="w-36">
                   <SelectValue />
                 </SelectTrigger>
@@ -63,9 +60,7 @@ function PromptBuilder({ turns = DEFAULT_TURNS, onTurnsChange, className }: Prom
                 </SelectContent>
               </Select>
               <div className="flex items-center gap-2">
-                <span className="text-xs text-muted-foreground">
-                  {turn.content.length} chars
-                </span>
+                <span className="text-muted-foreground text-xs">{turn.content.length} chars</span>
                 {turns.length > 1 && (
                   <Button
                     variant="ghost"
@@ -89,7 +84,7 @@ function PromptBuilder({ turns = DEFAULT_TURNS, onTurnsChange, className }: Prom
         </Card>
       ))}
       <Button variant="outline" onClick={addTurn} className="w-full">
-        <Plus className="h-4 w-4 mr-2" />
+        <Plus className="mr-2 h-4 w-4" />
         Add turn
       </Button>
     </div>

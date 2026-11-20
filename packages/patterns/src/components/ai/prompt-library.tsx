@@ -3,7 +3,16 @@
 import * as React from "react"
 import { Copy, Plus } from "lucide-react"
 import { cn } from "@aetherstack/utils"
-import { Button, Badge, Input, Card, CardContent, CardHeader, CardTitle, CardDescription } from "@aetherstack/ui"
+import {
+  Button,
+  Badge,
+  Input,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@aetherstack/ui"
 
 interface Prompt {
   id: string
@@ -22,7 +31,13 @@ interface PromptLibraryProps {
   className?: string
 }
 
-function PromptLibrary({ prompts, categories = [], onInsert, onCopy, className }: PromptLibraryProps) {
+function PromptLibrary({
+  prompts,
+  categories = [],
+  onInsert,
+  onCopy,
+  className,
+}: PromptLibraryProps) {
   const [search, setSearch] = React.useState("")
   const [activeCategory, setActiveCategory] = React.useState<string | null>(null)
 
@@ -35,9 +50,10 @@ function PromptLibrary({ prompts, categories = [], onInsert, onCopy, className }
     return matchesSearch && matchesCategory
   })
 
-  const allCategories = categories.length > 0
-    ? categories
-    : Array.from(new Set(prompts.map((p) => p.category).filter(Boolean))) as string[]
+  const allCategories =
+    categories.length > 0
+      ? categories
+      : (Array.from(new Set(prompts.map((p) => p.category).filter(Boolean))) as string[])
 
   return (
     <div className={cn("flex flex-col gap-4", className)}>
@@ -79,18 +95,16 @@ function PromptLibrary({ prompts, categories = [], onInsert, onCopy, className }
       </div>
 
       {filtered.length === 0 ? (
-        <p className="text-center text-sm text-muted-foreground py-8">No prompts found</p>
+        <p className="text-muted-foreground py-8 text-center text-sm">No prompts found</p>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2">
           {filtered.map((p) => (
             <Card key={p.id} className="flex flex-col">
               <CardHeader className="pb-2">
                 <CardTitle className="text-base">{p.title}</CardTitle>
-                {p.description && (
-                  <CardDescription>{p.description}</CardDescription>
-                )}
+                {p.description && <CardDescription>{p.description}</CardDescription>}
               </CardHeader>
-              <CardContent className="flex flex-col gap-3 mt-auto">
+              <CardContent className="mt-auto flex flex-col gap-3">
                 {p.tags && p.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1">
                     {p.tags.map((tag) => (
@@ -103,13 +117,13 @@ function PromptLibrary({ prompts, categories = [], onInsert, onCopy, className }
                 <div className="flex items-center gap-2">
                   {onInsert && (
                     <Button size="sm" onClick={() => onInsert(p.content)}>
-                      <Plus className="h-3.5 w-3.5 mr-1.5" />
+                      <Plus className="mr-1.5 h-3.5 w-3.5" />
                       Insert
                     </Button>
                   )}
                   {onCopy && (
                     <Button variant="outline" size="sm" onClick={() => onCopy(p.content)}>
-                      <Copy className="h-3.5 w-3.5 mr-1.5" />
+                      <Copy className="mr-1.5 h-3.5 w-3.5" />
                       Copy
                     </Button>
                   )}

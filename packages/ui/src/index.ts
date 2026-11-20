@@ -40,7 +40,13 @@ export {
 export { Kbd } from "./components/kbd"
 export type { KbdProps } from "./components/kbd"
 
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor, PopoverClose } from "./components/popover"
+export {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverAnchor,
+  PopoverClose,
+} from "./components/popover"
 
 export { Spinner, spinnerVariants } from "./components/spinner"
 export type { SpinnerProps } from "./components/spinner"
@@ -100,11 +106,7 @@ export {
   DropdownMenuShortcut,
 } from "./components/dropdown-menu"
 
-export {
-  HoverCard,
-  HoverCardTrigger,
-  HoverCardContent,
-} from "./components/hover-card"
+export { HoverCard, HoverCardTrigger, HoverCardContent } from "./components/hover-card"
 
 export {
   Pagination,
@@ -227,12 +229,7 @@ export { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/tabs"
 export { Textarea } from "./components/textarea"
 export type { TextareaProps } from "./components/textarea"
 
-export {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "./components/tooltip"
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./components/tooltip"
 
 // Phase 7.5 additions
 export { AspectRatio } from "./components/aspect-ratio"
@@ -266,12 +263,7 @@ export type { DatePickerProps } from "./components/date-picker"
 export { InputGroup, InputGroupAddon, InputGroupText } from "./components/input-group"
 export type { InputGroupProps, InputGroupAddonProps } from "./components/input-group"
 
-export {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-  InputOTPSeparator,
-} from "./components/input-otp"
+export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "./components/input-otp"
 
 export {
   Menubar,
@@ -304,11 +296,7 @@ export {
   navigationMenuTriggerStyle,
 } from "./components/navigation-menu"
 
-export {
-  ResizablePanelGroup,
-  ResizablePanel,
-  ResizableHandle,
-} from "./components/resizable"
+export { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "./components/resizable"
 
 export {
   SidebarProvider,
@@ -353,10 +341,7 @@ export {
   checkPassword,
   generatePassword,
 } from "./components/password-strength"
-export type {
-  PasswordStrengthProps,
-  PasswordCheckResult,
-} from "./components/password-strength"
+export type { PasswordStrengthProps, PasswordCheckResult } from "./components/password-strength"
 
 export { AnimatedNumber } from "./components/animated-number"
 export type { AnimatedNumberProps } from "./components/animated-number"

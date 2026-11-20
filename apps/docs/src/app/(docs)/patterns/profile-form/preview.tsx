@@ -69,18 +69,23 @@ export function ProfileFormPreview() {
 
   async function onSubmit() {
     await new Promise((r) => setTimeout(r, 700))
-    toast({ variant: "success", title: "Profile saved", description: "Your changes have been applied." })
+    toast({
+      variant: "success",
+      title: "Profile saved",
+      description: "Your changes have been applied.",
+    })
   }
 
   return (
     <div className="w-full max-w-lg">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8" noValidate>
-
         {/* Profile info */}
         <section className="space-y-4">
           <div>
             <h3 className="text-sm font-semibold">Public profile</h3>
-            <p className="text-xs text-muted-foreground mt-0.5">This information is visible to everyone.</p>
+            <p className="text-muted-foreground mt-0.5 text-xs">
+              This information is visible to everyone.
+            </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -93,14 +98,14 @@ export function ProfileFormPreview() {
                 {...register("displayName")}
               />
               {errors.displayName && (
-                <p className="text-xs text-destructive">{errors.displayName.message}</p>
+                <p className="text-destructive text-xs">{errors.displayName.message}</p>
               )}
             </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="pf-username">Username</Label>
               <div className="flex">
-                <span className="inline-flex items-center rounded-l-md border border-r-0 border-border bg-muted px-3 text-xs text-muted-foreground">
+                <span className="border-border bg-muted text-muted-foreground inline-flex items-center rounded-l-md border border-r-0 px-3 text-xs">
                   @
                 </span>
                 <Input
@@ -112,7 +117,7 @@ export function ProfileFormPreview() {
                 />
               </div>
               {errors.username && (
-                <p className="text-xs text-destructive">{errors.username.message}</p>
+                <p className="text-destructive text-xs">{errors.username.message}</p>
               )}
             </div>
           </div>
@@ -120,7 +125,7 @@ export function ProfileFormPreview() {
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <Label htmlFor="pf-bio">Bio</Label>
-              <span className="text-xs text-muted-foreground">{(bio ?? "").length}/160</span>
+              <span className="text-muted-foreground text-xs">{(bio ?? "").length}/160</span>
             </div>
             <Textarea
               id="pf-bio"
@@ -129,9 +134,7 @@ export function ProfileFormPreview() {
               aria-invalid={!!errors.bio}
               {...register("bio")}
             />
-            {errors.bio && (
-              <p className="text-xs text-destructive">{errors.bio.message}</p>
-            )}
+            {errors.bio && <p className="text-destructive text-xs">{errors.bio.message}</p>}
           </div>
 
           <div className="space-y-1.5">
@@ -143,9 +146,7 @@ export function ProfileFormPreview() {
               aria-invalid={!!errors.website}
               {...register("website")}
             />
-            {errors.website && (
-              <p className="text-xs text-destructive">{errors.website.message}</p>
-            )}
+            {errors.website && <p className="text-destructive text-xs">{errors.website.message}</p>}
           </div>
         </section>
 
@@ -155,7 +156,7 @@ export function ProfileFormPreview() {
         <section className="space-y-4">
           <div>
             <h3 className="text-sm font-semibold">Preferences</h3>
-            <p className="text-xs text-muted-foreground mt-0.5">Manage your account settings.</p>
+            <p className="text-muted-foreground mt-0.5 text-xs">Manage your account settings.</p>
           </div>
 
           <div className="space-y-1.5">
@@ -179,7 +180,7 @@ export function ProfileFormPreview() {
               )}
             />
             {errors.timezone && (
-              <p className="text-xs text-destructive">{errors.timezone.message}</p>
+              <p className="text-destructive text-xs">{errors.timezone.message}</p>
             )}
           </div>
         </section>
@@ -190,7 +191,9 @@ export function ProfileFormPreview() {
         <section className="space-y-4">
           <div>
             <h3 className="text-sm font-semibold">Email notifications</h3>
-            <p className="text-xs text-muted-foreground mt-0.5">Choose which emails you want to receive.</p>
+            <p className="text-muted-foreground mt-0.5 text-xs">
+              Choose which emails you want to receive.
+            </p>
           </div>
 
           <div className="space-y-3">
@@ -199,7 +202,7 @@ export function ProfileFormPreview() {
                 <Label htmlFor="pf-email-notif" className="leading-none">
                   Activity notifications
                 </Label>
-                <p className="mt-0.5 text-xs text-muted-foreground">
+                <p className="text-muted-foreground mt-0.5 text-xs">
                   Receive emails about comments, mentions, and replies.
                 </p>
               </div>
@@ -221,7 +224,7 @@ export function ProfileFormPreview() {
                 <Label htmlFor="pf-marketing" className="leading-none">
                   Marketing emails
                 </Label>
-                <p className="mt-0.5 text-xs text-muted-foreground">
+                <p className="text-muted-foreground mt-0.5 text-xs">
                   News, tips, and product announcements.
                 </p>
               </div>

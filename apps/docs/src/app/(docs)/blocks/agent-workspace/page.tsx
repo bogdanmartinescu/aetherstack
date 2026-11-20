@@ -66,12 +66,38 @@ export function RunningAgent() {
         />
       }
       props={[
-        { name: "task", type: "string", description: "The task description shown at the top of the workspace." },
-        { name: "steps", type: "AgentStep[]", default: "[]", description: "Array of tool-call step objects to display." },
-        { name: "reasoning", type: "string", description: "Optional reasoning text shown in a collapsible side panel." },
-        { name: "output", type: "string", description: "Final agent output shown in a card with a copy button." },
-        { name: "isRunning", type: "boolean", default: "false", description: "When true, shows a progress bar in the task card." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "task",
+          type: "string",
+          description: "The task description shown at the top of the workspace.",
+        },
+        {
+          name: "steps",
+          type: "AgentStep[]",
+          default: "[]",
+          description: "Array of tool-call step objects to display.",
+        },
+        {
+          name: "reasoning",
+          type: "string",
+          description: "Optional reasoning text shown in a collapsible side panel.",
+        },
+        {
+          name: "output",
+          type: "string",
+          description: "Final agent output shown in a card with a copy button.",
+        },
+        {
+          name: "isRunning",
+          type: "boolean",
+          default: "false",
+          description: "When true, shows a progress bar in the task card.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={[
         "Step expand/collapse buttons are keyboard-focusable and include an implicit label from the tool name text.",

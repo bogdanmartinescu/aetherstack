@@ -30,14 +30,29 @@ export function FileUploadList() {
 }`}
       preview={<UploadProgressPreview />}
       props={[
-        { name: "files", type: "UploadFile[]", required: true, description: "Array of file entries to display. Each entry has id, name, size (bytes), progress (0–100), status, and optional error string." },
-        { name: "onRemove", type: "(id: string) => void", required: true, description: "Called when the user clicks the remove button on a file row." },
-        { name: "className", type: "string", description: "Additional classes on the list container." },
+        {
+          name: "files",
+          type: "UploadFile[]",
+          required: true,
+          description:
+            "Array of file entries to display. Each entry has id, name, size (bytes), progress (0–100), status, and optional error string.",
+        },
+        {
+          name: "onRemove",
+          type: "(id: string) => void",
+          required: true,
+          description: "Called when the user clicks the remove button on a file row.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the list container.",
+        },
       ]}
       a11yNotes={[
-        "Each progress bar uses role=\"progressbar\" with aria-valuenow, aria-valuemin=\"0\", and aria-valuemax=\"100\".",
+        'Each progress bar uses role="progressbar" with aria-valuenow, aria-valuemin="0", and aria-valuemax="100".',
         "Status icons (spinner, check, error) are aria-hidden; the status is also conveyed via the aria-label on the row.",
-        "Remove buttons carry aria-label=\"Remove {filename}\".",
+        'Remove buttons carry aria-label="Remove {filename}".',
         "Error messages are associated with their file row via aria-describedby.",
       ]}
     />

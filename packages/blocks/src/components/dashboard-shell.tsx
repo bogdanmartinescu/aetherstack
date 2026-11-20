@@ -59,7 +59,12 @@ export interface DashboardShellProps {
 const DEFAULT_NAV: DashboardNavGroup[] = [
   {
     items: [
-      { icon: <LayoutDashboard className="h-4 w-4" />, label: "Dashboard", href: "/dashboard", active: true },
+      {
+        icon: <LayoutDashboard className="h-4 w-4" />,
+        label: "Dashboard",
+        href: "/dashboard",
+        active: true,
+      },
       { icon: <Users className="h-4 w-4" />, label: "Users", href: "/users", badge: 4 },
       { icon: <BarChart3 className="h-4 w-4" />, label: "Analytics", href: "/analytics" },
       { icon: <CreditCard className="h-4 w-4" />, label: "Billing", href: "/billing" },
@@ -94,7 +99,7 @@ function SidebarNavItem({ item }: { item: DashboardNavItem }) {
       )}
       <span className="flex-1 truncate">{item.label}</span>
       {item.badge !== undefined && (
-        <span className="rounded-full bg-primary/15 px-1.5 py-0.5 text-[10px] font-medium text-primary">
+        <span className="bg-primary/15 text-primary rounded-full px-1.5 py-0.5 text-[10px] font-medium">
           {item.badge}
         </span>
       )}
@@ -117,32 +122,32 @@ export function DashboardShell({
   const [sidebarOpen, setSidebarOpen] = React.useState(true)
 
   return (
-    <div className={cn("flex h-screen overflow-hidden bg-background", className)}>
+    <div className={cn("bg-background flex h-screen overflow-hidden", className)}>
       {/* ── Sidebar ──────────────────────────────────────────────────────── */}
       <aside
         className={cn(
-          "flex shrink-0 flex-col border-r border-sidebar-border bg-sidebar-background transition-all duration-200",
+          "border-sidebar-border bg-sidebar-background flex shrink-0 flex-col border-r transition-all duration-200",
           sidebarOpen ? "w-60" : "w-[60px]",
         )}
       >
         {/* Logo / app name */}
-        <div className="flex h-14 items-center gap-2.5 border-b border-sidebar-border px-3">
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-primary text-[11px] font-bold text-primary-foreground">
+        <div className="border-sidebar-border flex h-14 items-center gap-2.5 border-b px-3">
+          <div className="bg-primary text-primary-foreground flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-[11px] font-bold">
             {appName.charAt(0)}
           </div>
           {sidebarOpen && (
-            <span className="truncate text-sm font-semibold text-sidebar-foreground">
+            <span className="text-sidebar-foreground truncate text-sm font-semibold">
               {appName}
             </span>
           )}
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto px-2 py-3 space-y-4">
+        <nav className="flex-1 space-y-4 overflow-y-auto px-2 py-3">
           {navGroups.map((group, gi) => (
             <div key={gi} className="space-y-0.5">
               {group.label && sidebarOpen && (
-                <p className="mb-1 px-3 text-[10px] font-semibold uppercase tracking-wider text-sidebar-foreground/40">
+                <p className="text-sidebar-foreground/40 mb-1 px-3 text-[10px] font-semibold uppercase tracking-wider">
                   {group.label}
                 </p>
               )}
@@ -156,7 +161,7 @@ export function DashboardShell({
                     title={item.label}
                     aria-current={item.active ? "page" : undefined}
                     className={cn(
-                      "flex h-9 w-9 items-center justify-center rounded-md text-sm transition-colors mx-auto",
+                      "mx-auto flex h-9 w-9 items-center justify-center rounded-md text-sm transition-colors",
                       item.active
                         ? "bg-sidebar-accent text-sidebar-accent-foreground"
                         : "text-sidebar-foreground/60 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground",
@@ -171,20 +176,20 @@ export function DashboardShell({
         </nav>
 
         {/* User / bottom */}
-        <div className="border-t border-sidebar-border p-2">
+        <div className="border-sidebar-border border-t p-2">
           {sidebarOpen ? (
-            <div className="flex items-center gap-2.5 rounded-md px-2 py-2 hover:bg-sidebar-accent/50 transition-colors cursor-pointer">
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
+            <div className="hover:bg-sidebar-accent/50 flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-2 transition-colors">
+              <div className="bg-primary/15 text-primary flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold">
                 {userName.charAt(0)}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-xs font-medium text-sidebar-foreground">{userName}</p>
-                <p className="truncate text-[10px] text-sidebar-foreground/50">{userEmail}</p>
+                <p className="text-sidebar-foreground truncate text-xs font-medium">{userName}</p>
+                <p className="text-sidebar-foreground/50 truncate text-[10px]">{userEmail}</p>
               </div>
-              <LogOut className="h-3.5 w-3.5 shrink-0 text-sidebar-foreground/40" />
+              <LogOut className="text-sidebar-foreground/40 h-3.5 w-3.5 shrink-0" />
             </div>
           ) : (
-            <div className="flex h-9 w-9 mx-auto items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary cursor-pointer">
+            <div className="bg-primary/15 text-primary mx-auto flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-xs font-semibold">
               {userName.charAt(0)}
             </div>
           )}
@@ -194,10 +199,10 @@ export function DashboardShell({
       {/* ── Main ─────────────────────────────────────────────────────────── */}
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
         {/* Topbar */}
-        <header className="flex h-14 shrink-0 items-center gap-3 border-b border-border bg-background px-4">
+        <header className="border-border bg-background flex h-14 shrink-0 items-center gap-3 border-b px-4">
           <button
             onClick={() => setSidebarOpen((v) => !v)}
-            className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="text-muted-foreground hover:bg-muted hover:text-foreground flex h-8 w-8 items-center justify-center rounded-md transition-colors"
             aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
           >
             {sidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -206,8 +211,8 @@ export function DashboardShell({
           {typeof pageTitle === "string" ? (
             <div className="flex items-center gap-1.5 text-sm">
               <span className="text-muted-foreground">Home</span>
-              <ChevronRight className="h-3.5 w-3.5 text-muted-foreground" />
-              <span className="font-medium text-foreground">{pageTitle}</span>
+              <ChevronRight className="text-muted-foreground h-3.5 w-3.5" />
+              <span className="text-foreground font-medium">{pageTitle}</span>
             </div>
           ) : (
             pageTitle
@@ -215,18 +220,15 @@ export function DashboardShell({
 
           <div className="ml-auto flex items-center gap-2">
             <div className="relative hidden sm:block">
-              <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                placeholder="Search…"
-                className="h-8 w-48 pl-8 text-xs"
-              />
+              <Search className="text-muted-foreground absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2" />
+              <Input placeholder="Search…" className="h-8 w-48 pl-8 text-xs" />
             </div>
             <button
-              className="relative flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              className="text-muted-foreground hover:bg-muted hover:text-foreground relative flex h-8 w-8 items-center justify-center rounded-md transition-colors"
               aria-label="Notifications"
             >
               <Bell className="h-4 w-4" />
-              <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-primary" />
+              <span className="bg-primary absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full" />
             </button>
             {headerActions}
           </div>

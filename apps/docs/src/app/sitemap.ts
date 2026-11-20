@@ -21,11 +21,7 @@ function mtime(filePath: string): Date {
  * that contains a page.tsx. Directories with only preview.tsx or other files
  * are excluded — they don't produce real navigable routes.
  */
-function pageRoutes(
-  docsSubPath: string,
-  prefix: string,
-  priority = 0.8,
-): MetadataRoute.Sitemap {
+function pageRoutes(docsSubPath: string, prefix: string, priority = 0.8): MetadataRoute.Sitemap {
   const dir = resolve(process.cwd(), "src/app/(docs)", docsSubPath)
   if (!existsSync(dir)) return []
 

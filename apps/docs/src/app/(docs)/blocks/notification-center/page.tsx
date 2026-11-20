@@ -81,16 +81,33 @@ export default function NotificationsPage() {
         </div>
       }
       props={[
-        { name: "notifications", type: "NotificationEntry[]", description: "List of notifications. Each has id, title, optional description, timestamp, read state, and type." },
-        { name: "onMarkRead", type: "(id: string) => void", description: "Called when the user marks a single notification as read." },
-        { name: "onMarkAllRead", type: "() => void", description: "Called when the user clicks 'Mark all read'." },
-        { name: "onDismiss", type: "(id: string) => void", description: "Called when the user dismisses a notification." },
+        {
+          name: "notifications",
+          type: "NotificationEntry[]",
+          description:
+            "List of notifications. Each has id, title, optional description, timestamp, read state, and type.",
+        },
+        {
+          name: "onMarkRead",
+          type: "(id: string) => void",
+          description: "Called when the user marks a single notification as read.",
+        },
+        {
+          name: "onMarkAllRead",
+          type: "() => void",
+          description: "Called when the user clicks 'Mark all read'.",
+        },
+        {
+          name: "onDismiss",
+          type: "(id: string) => void",
+          description: "Called when the user dismisses a notification.",
+        },
         { name: "className", type: "string", description: "Additional classes on the wrapper." },
       ]}
       a11yNotes={[
         "Unread notifications are visually distinguished with a dot indicator and background tint.",
         "Each action button (mark read, dismiss) has an aria-label describing its target notification.",
-        "Timestamps use human-readable relative text (e.g. \"3 min ago\").",
+        'Timestamps use human-readable relative text (e.g. "3 min ago").',
       ]}
     />
   )

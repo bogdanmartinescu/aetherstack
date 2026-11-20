@@ -3,30 +3,32 @@
 Initialized 2026-11-20. No implementation or release checks have been run as part of this planning change. Historical completion claims are not verified here.
 
 - Active milestone: M0 — truth, stability and public distribution.
-- Last completed task: M0-10 local RC harness + audit (external gates still BLOCKED).
-- Next task: Owner M0-08 CDN deploy + authorized npm release; then re-run `pnpm m0-rc-verify` to clear blockers and mark M0 DONE.
-- Baseline reviewed for planning: main at 6942f57; stack PRs #8–#15 (M0-01..M0-09); M0-10 branch on tip.
+- Last completed task: M0 stack landed on `main` via PR #17 (`030dd2a`); local M0-01..M0-10 engineering complete.
+- Next task: Owner M0-08 CDN deploy + authorized npm release; then re-run `pnpm m0-rc-verify` to clear blockers and mark M0 DONE. Parallel maintenance: format:check cleanup.
+- Baseline reviewed: `main` at `030dd2a` (PR #17). Live registry still 404 `DEPLOYMENT_NOT_FOUND` (rechecked 2026-11-20).
 - Known prior observations (reverify): live registry 404 until owner deploys (M0-08 runbook + `vercel.json` ready). Public registry **151** items; npm publish still gated.
 - Commercial status: M4 discovery only; paid kit implementation and M6 require explicit owner approval and demand evidence.
 - Publishing status: no release or external submission authority granted by this plan.
 
 ## Task ledger
-| Task | Status | Branch/commit/PR | Verification evidence | Blocker / next action |
-| --- | --- | --- | --- | --- |
-| M0-01 | VERIFIED | `chore/m0-01-baseline-audit` / PR #8 | `audit-inventory.ts` JSON; install, validate/build-registry (no drift), typecheck, lint, test (728), build pass; `format:check` fails (528 tracked files, pre-existing, not in CI); live registry 404 `DEPLOYMENT_NOT_FOUND`; npm versions match workspace | DONE once PR #8 is merged |
-| M0-02 | VERIFIED | `chore/m0-02-licenses` / PR #9 (base: M0-01 branch) | Provenance report; root + 14 package LICENSE files (MIT, Copyright (c) 2026 Bogdan Martinescu); `license` on root/apps/tooling; package `files` arrays include `LICENSE`; `npm pack --dry-run` for `@aetherstack/utils` lists LICENSE | DONE once PR is merged; optional owner rename of copyright line to a legal entity |
-| M0-03 | VERIFIED | `chore/m0-03-registry-completeness` / PR #10 | Public registry 71→151; every source module registered; `register-missing` script; cycle + public dangling-dep errors in validate-registry; build-registry + audit (`sourceModulesNotInRegistry` = 0/0/0). Remaining docs-only mismatches (`code-block-ai`, `context-menu`, 7 pattern docs routes) deferred to M0-06 | DONE once PR #10 merges |
-| M0-04 | VERIFIED | `chore/m0-04-cli-hardening` / PR #11 | `generate` uses `fetchRegistry` (`/r/registry.json` + Zod); path confinement + alias validation; install rollback; dry-run on init/add; CLI tests 62 pass (`pnpm --filter @aetherstack/cli test`) | DONE once PR merges |
-| M0-05 | VERIFIED | `chore/m0-05-mcp-packaging` / PR #12 | Build fails without registry; bundles 151 items from canonical source; `noExternal` for workspace pkgs; shebang fixed; version from package.json; pack smoke + stdio tools; MCP tests 24 pass | DONE once PR merges; npm publish deferred to authorized release |
-| M0-06 | VERIFIED | `chore/m0-06-docs-counts` / PR #13 | Align README/package READMEs/CLAUDE/docs intro+install with registry 78/39/34 (151) and live package versions; docs pages use `REGISTRY_STATS` | DONE once PR merges; CONTRIBUTING cleanup is M0-09 |
-| M0-07 | VERIFIED | `chore/m0-07-consumer-install` / PR #14 | Publishable pack helper; Next+Vite fixtures build from packed tarballs; CLI add smoke; CI job; flat UI dist exports; CLI engines>=20; `pnpm consumer-install` pass | DONE once PR merges |
-| M0-08 | BLOCKED | runbook in `docs/roadmap/audits/m0-08-cdn-runbook.md` | Readiness + caching/rollback runbook written; live `registry.aether-ui.dev` still `DEPLOYMENT_NOT_FOUND` | Owner: Vercel/DNS deploy + smoke curls; then mark VERIFIED |
-| M0-09 | VERIFIED | `chore/m0-09-governance` / PR #15 | CONTRIBUTING fixed (Node>=20, real scripts); SECURITY + CoC + governance docs; sponsorship proposal without FUNDING.yml; GitHub description/topics applied | DONE once PR merges; Sponsors enablement remains owner action |
-| M0-10 | VERIFIED (local) / BLOCKED (external) | `chore/m0-10-rc-verification` / PR #16 | `pnpm m0-rc-verify` — 8 required local PASS (validate/build-registry, freshness, typecheck, lint, test, build-packages, consumer-install); `format:check` FAIL non-enforced; live-registry BLOCKED (404 DEPLOYMENT_NOT_FOUND); npm-publish BLOCKED (no authority). Report: `docs/roadmap/audits/m0-10-rc-verification.md` | M0 not DONE until owner clears CDN + npm gates and re-runs harness; DONE once PR merges after gates clear or remains VERIFIED-local until then |
+
+| Task  | Status                                | Branch/commit/PR                      | Verification evidence                                                      | Blocker / next action                                     |
+| ----- | ------------------------------------- | ------------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------- |
+| M0-01 | DONE                                  | PR #8 → `main` (via #17)              | baseline audit committed                                                   | —                                                         |
+| M0-02 | DONE                                  | PR #9 → `main`                        | LICENSE + provenance                                                       | optional owner entity rename                              |
+| M0-03 | DONE                                  | PR #10 → `main` (via #17)             | registry 151; graph checks                                                 | —                                                         |
+| M0-04 | DONE                                  | PR #11 → `main` (via #17)             | CLI path/schema/dry-run tests                                              | —                                                         |
+| M0-05 | DONE                                  | PR #12 → `main` (via #17)             | MCP pack/stdio; publish still gated                                        | authorized npm release                                    |
+| M0-06 | DONE                                  | PR #13 → `main` (via #17)             | counts/versions reconciled                                                 | docs route name mismatches remain low-priority            |
+| M0-07 | DONE                                  | PR #14 → `main` (via #17)             | consumer-install fixtures + CI                                             | —                                                         |
+| M0-08 | BLOCKED                               | runbook + `vercel.json` on `main`     | live `registry.aether-ui.dev` still 404 `DEPLOYMENT_NOT_FOUND` (rechecked) | Owner: Vercel/DNS deploy + smoke curls                    |
+| M0-09 | DONE                                  | PR #15 → `main` (via #17)             | governance docs + repo metadata                                            | Sponsors enablement owner action                          |
+| M0-10 | VERIFIED (local) / BLOCKED (external) | PR #16 → stack; stack → `main` PR #17 | local RC 8 PASS; CDN + npm BLOCKED                                         | Owner CDN + release authority; re-run `pnpm m0-rc-verify` |
 
 All other tasks in platform-backlog.md are TODO unless gated. Add/update a row per task as work proceeds; never delete evidence for previous completed tasks. Use linked issue/PR and exact command/results, not just "tests pass."
 
 ## Checkpoint format (append per session)
+
 - Date/time and agent/session:
 - Milestone and task ID:
 - Base and working branch:
@@ -38,6 +40,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Next smallest action and prerequisites:
 
 ### Checkpoint 2026-11-20 — M0-01
+
 - Date/time and agent/session: 2026-11-20, Cursor agent session.
 - Milestone and task ID: M0 / M0-01.
 - Base and working branch: `main` 6942f57 → `chore/m0-01-baseline-audit`.
@@ -49,6 +52,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Next smallest action and prerequisites: merge PR #8; then M0-02 (started in parallel on top of `ebabd81`).
 
 ### Checkpoint 2026-11-20 — M0-02
+
 - Date/time and agent/session: 2026-11-20, Cursor agent session.
 - Milestone and task ID: M0 / M0-02.
 - Base and working branch: `ebabd81` (M0-01) → `chore/m0-02-licenses`.
@@ -60,6 +64,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Next smallest action and prerequisites: merge PR #8 then #9 (or retarget #9 to main after #8); start M0-03 registry completeness.
 
 ### Checkpoint 2026-11-20 — M0-03
+
 - Date/time and agent/session: 2026-11-20, Cursor agent session.
 - Milestone and task ID: M0 / M0-03.
 - Base and working branch: `chore/m0-02-licenses` → `chore/m0-03-registry-completeness`.
@@ -71,6 +76,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Next smallest action: merge #8→#9→#10 into main; start M0-04 CLI hardening.
 
 ### Checkpoint 2026-11-20 — M0-04
+
 - Date/time and agent/session: 2026-11-20, Cursor agent session.
 - Milestone and task ID: M0 / M0-04.
 - Base and working branch: `chore/m0-03-registry-completeness` → `chore/m0-04-cli-hardening`.
@@ -82,6 +88,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Next smallest action: merge #8→#11; start M0-05 MCP packaging.
 
 ### Checkpoint 2026-11-20 — M0-05
+
 - Date/time and agent/session: 2026-11-20, Cursor agent session.
 - Milestone and task ID: M0 / M0-05.
 - Base and working branch: `chore/m0-04-cli-hardening` → `chore/m0-05-mcp-packaging`.
@@ -93,6 +100,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Next smallest action: merge #8→#12; then M0-06 docs/count reconcile.
 
 ### Checkpoint 2026-11-20 — M0-06
+
 - Date/time and agent/session: 2026-11-20, Cursor agent session.
 - Milestone and task ID: M0 / M0-06.
 - Base and working branch: `chore/m0-05-mcp-packaging` → `chore/m0-06-docs-counts`.
@@ -104,6 +112,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Next smallest action: merge #8→#13; start M0-07 clean-install fixtures (blocked on merge for CI against tip; can begin on stack tip).
 
 ### Checkpoint 2026-11-20 — M0-07
+
 - Date/time and agent/session: 2026-11-20, Cursor agent session.
 - Milestone and task ID: M0 / M0-07.
 - Base and working branch: `chore/m0-06-docs-counts` → `chore/m0-07-consumer-install`.
@@ -115,10 +124,11 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Next smallest action: merge #8→#14; M0-08 needs owner for CDN; M0-09 governance is next code-ready P0.
 
 ### Checkpoint 2026-11-20 — M0-09 (+ M0-08 readiness docs)
+
 - Date/time and agent/session: 2026-11-20, Cursor agent session.
 - Milestone and task ID: M0 / M0-09 (M0-08 runbook only).
 - Base and working branch: `chore/m0-07-consumer-install` → `chore/m0-09-governance`.
-- Changes and affected paths: CONTRIBUTING, SECURITY, CODE_OF_CONDUCT, docs/governance/*, README links, PR template, m0-08 CDN runbook; GitHub description/topics via `gh repo edit`.
+- Changes and affected paths: CONTRIBUTING, SECURITY, CODE_OF_CONDUCT, docs/governance/\*, README links, PR template, m0-08 CDN runbook; GitHub description/topics via `gh repo edit`.
 - Acceptance criteria and evidence: CONTRIBUTING matches engines/scripts; no FUNDING.yml; sponsorship proposal documents owner gate; `gh repo view` shows description + topics.
 - Required checks not run / blockers: M0-08 live deploy; Sponsors account; M0-10 full RC suite after merges.
 - Commit/PR and remote verification: PR #15 → https://github.com/bogdanmartinescu/aetherstack/pull/15
@@ -126,6 +136,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Next smallest action: merge #8→#15; owner deploys registry CDN; then M0-10 RC gate.
 
 ### Checkpoint 2026-11-20 — M0-10 (+ M0-08 vercel.json)
+
 - Date/time and agent/session: 2026-11-20, Cursor agent session.
 - Milestone and task ID: M0 / M0-10 (M0-08 deploy config hardening only).
 - Base and working branch: `chore/m0-09-governance` → `chore/m0-10-rc-verification`.
@@ -136,10 +147,22 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Status: VERIFIED locally; BLOCKED externally — **do not mark M0 or M0-10 DONE**.
 - Next smallest action: merge #8→#16 stack; owner deploys CDN per runbook; grant release authority; re-run `pnpm m0-rc-verify`.
 
+### Checkpoint 2026-11-20 — post-merge maintenance (format)
+
+- Date/time and agent/session: 2026-11-20, Cursor agent session.
+- Milestone and task ID: M0 / maintenance while M0-08 BLOCKED.
+- Base and working branch: `main` `030dd2a` → `chore/m0-format-and-ledger-sync`.
+- Changes: Prettier across tracked sources; `.prettierignore` excludes `.worktrees` + generated registry artefacts; CI enforces `format:check`; ledger marks M0-01..09 DONE after PR #17.
+- Evidence: `pnpm format:check` exit 0; `pnpm typecheck` exit 0; live registry still 404 `DEPLOYMENT_NOT_FOUND`.
+- Status: IN_PROGRESS until PR merges.
+- Next: owner M0-08 deploy; do not start M1 until M0 exit gate clears.
+
 ## Phase gate log
+
 Record milestone, all required task IDs, exact suite/results, known limitations, remaining blockers and owner decisions. No milestone marked completed until all applicable requirements are verified. On restart inspect git history and reconcile this file rather than blindly redoing work.
 
 ### Phase gate — M0 (partial, 2026-11-20)
-- Required tasks M0-01..M0-10: local engineering VERIFIED on stack tip; M0-08 live deploy BLOCKED; M0-10 external npm/CDN BLOCKED.
+
+- Required tasks M0-01..M0-10: local engineering on `main` via PR #17; M0-08 live deploy BLOCKED; M0-10 external npm/CDN BLOCKED.
 - Suite: see `docs/roadmap/audits/m0-10-rc-verification.md` (HEAD at run: `eb3628c`; report regenerated after typecheck fix).
 - Milestone exit: **not satisfied** until live `registry.aether-ui.dev` returns 200 for `/r/registry.json` and authorized publish path is verified.

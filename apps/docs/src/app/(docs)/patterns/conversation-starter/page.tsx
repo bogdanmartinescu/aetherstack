@@ -37,11 +37,33 @@ export function MyConversationStarter() {
 }`}
       preview={<ConversationStarterPreview />}
       props={[
-        { name: "title", type: "string", default: '"How can I help you today?"', description: "Heading text displayed at the top of the component." },
-        { name: "description", type: "string", description: "Optional subheading text shown below the title." },
-        { name: "suggestions", type: "Suggestion[]", description: "Array of suggestion chips. Each item requires label and prompt; icon is optional." },
-        { name: "onSuggestionClick", type: "(prompt: string) => void", description: "Called with the prompt string when the user clicks a suggestion chip." },
-        { name: "className", type: "string", description: "Additional CSS classes applied to the root container." },
+        {
+          name: "title",
+          type: "string",
+          default: '"How can I help you today?"',
+          description: "Heading text displayed at the top of the component.",
+        },
+        {
+          name: "description",
+          type: "string",
+          description: "Optional subheading text shown below the title.",
+        },
+        {
+          name: "suggestions",
+          type: "Suggestion[]",
+          description:
+            "Array of suggestion chips. Each item requires label and prompt; icon is optional.",
+        },
+        {
+          name: "onSuggestionClick",
+          type: "(prompt: string) => void",
+          description: "Called with the prompt string when the user clicks a suggestion chip.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional CSS classes applied to the root container.",
+        },
       ]}
       a11yNotes={[
         "Suggestion chips are rendered as button elements with the full prompt text as aria-label.",

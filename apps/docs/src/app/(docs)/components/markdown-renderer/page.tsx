@@ -4,7 +4,8 @@ import { PatternPage } from "@/components/pattern-page"
 
 export const metadata: Metadata = {
   title: "MarkdownRenderer",
-  description: "Renders a markdown string as styled HTML — headings, lists, bold, italic, inline code and more.",
+  description:
+    "Renders a markdown string as styled HTML — headings, lists, bold, italic, inline code and more.",
 }
 
 const SAMPLE = `## Hello world

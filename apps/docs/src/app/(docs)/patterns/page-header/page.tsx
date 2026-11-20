@@ -41,25 +41,39 @@ export default function PageHeaderPage() {
           <PageHeader
             title="Team Members"
             description="Manage your team and their account permissions."
-            breadcrumb={[
-              { label: "Settings", href: "#" },
-              { label: "Team" },
-            ]}
+            breadcrumb={[{ label: "Settings", href: "#" }, { label: "Team" }]}
             actions={<Button size="sm">Invite member</Button>}
           />
         </div>
       }
       props={[
-        { name: "title", type: "string", required: true, description: "Page title rendered as an h1." },
+        {
+          name: "title",
+          type: "string",
+          required: true,
+          description: "Page title rendered as an h1.",
+        },
         { name: "description", type: "string", description: "Optional subtitle below the title." },
-        { name: "breadcrumb", type: "BreadcrumbItem[]", description: "Crumb trail rendered above the title." },
-        { name: "actions", type: "ReactNode", description: "Right-aligned slot for primary actions." },
-        { name: "className", type: "string", description: "Additional classes on the wrapper div." },
+        {
+          name: "breadcrumb",
+          type: "BreadcrumbItem[]",
+          description: "Crumb trail rendered above the title.",
+        },
+        {
+          name: "actions",
+          type: "ReactNode",
+          description: "Right-aligned slot for primary actions.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the wrapper div.",
+        },
       ]}
       a11yNotes={[
         "Title renders as <h1> — ensure only one PageHeader exists per page.",
-        "Breadcrumb uses a <nav aria-label=\"Breadcrumb\"> with an ordered list.",
-        "The current page crumb has aria-current=\"page\" applied automatically.",
+        'Breadcrumb uses a <nav aria-label="Breadcrumb"> with an ordered list.',
+        'The current page crumb has aria-current="page" applied automatically.',
       ]}
     />
   )

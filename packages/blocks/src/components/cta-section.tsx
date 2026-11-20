@@ -26,10 +26,10 @@ export function CTASection({
   return (
     <section
       className={cn(
-        "w-full py-16 px-4",
+        "w-full px-4 py-16",
         variant === "primary" && "bg-primary text-primary-foreground",
         variant === "muted" && "bg-muted",
-        variant === "default" && "border-y border-border bg-background",
+        variant === "default" && "border-border bg-background border-y",
         className,
       )}
     >
@@ -46,9 +46,7 @@ export function CTASection({
           <p
             className={cn(
               "mt-4 text-base",
-              variant === "primary"
-                ? "text-primary-foreground/80"
-                : "text-muted-foreground",
+              variant === "primary" ? "text-primary-foreground/80" : "text-muted-foreground",
             )}
           >
             {subheading}
@@ -57,11 +55,7 @@ export function CTASection({
         {(primaryCta || secondaryCta) && (
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             {primaryCta && (
-              <Button
-                asChild
-                size="lg"
-                variant={variant === "primary" ? "secondary" : "default"}
-              >
+              <Button asChild size="lg" variant={variant === "primary" ? "secondary" : "default"}>
                 <a href={primaryCta.href}>{primaryCta.label}</a>
               </Button>
             )}

@@ -8,12 +8,8 @@ export function InlineEditPreview() {
 
   return (
     <div className="w-full max-w-sm space-y-3">
-      <InlineEdit
-        value={value}
-        onValueChange={setValue}
-        placeholder="Enter a title…"
-      />
-      <p className="text-xs text-muted-foreground text-center">
+      <InlineEdit value={value} onValueChange={setValue} placeholder="Enter a title…" />
+      <p className="text-muted-foreground text-center text-xs">
         Saved value: <strong>{value}</strong>
       </p>
     </div>

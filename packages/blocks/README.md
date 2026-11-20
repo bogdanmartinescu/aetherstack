@@ -46,7 +46,7 @@ export default function SettingsPage() {
 **Onboarding:** OnboardingChecklist  
 **Notifications:** NotificationCenter  
 **Marketing:** AppHeader, MarketingNavbar, FooterSection, LandingHero, FeaturesSection, TestimonialsSection, CTASection, FAQSection, LogoCloud, StatsSection, PricingSection, PricingComparison  
-**Pages:** UserProfilePage, ErrorPage, WaitlistBlock, ChangelogBlock  
+**Pages:** UserProfilePage, ErrorPage, WaitlistBlock, ChangelogBlock
 
 ## AI-native blocks (9)
 

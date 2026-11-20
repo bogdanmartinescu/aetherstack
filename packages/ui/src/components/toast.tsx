@@ -45,8 +45,7 @@ const toastVariants = cva(
           "border-emerald-500/30 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-100 dark:border-emerald-500/20",
         warning:
           "border-amber-500/30 bg-amber-50 text-amber-900 dark:bg-amber-950/60 dark:text-amber-100 dark:border-amber-500/20",
-        info:
-          "border-blue-500/30 bg-blue-50 text-blue-900 dark:bg-blue-950/60 dark:text-blue-100 dark:border-blue-500/20",
+        info: "border-blue-500/30 bg-blue-50 text-blue-900 dark:bg-blue-950/60 dark:text-blue-100 dark:border-blue-500/20",
         destructive:
           "destructive group border-destructive/30 bg-destructive/10 text-destructive dark:bg-destructive/20",
       },
@@ -58,22 +57,19 @@ const toastVariants = cva(
 )
 
 const VARIANT_ICONS: Record<string, React.ReactNode> = {
-  success: <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />,
+  success: (
+    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+  ),
   warning: <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" />,
   info: <Info className="mt-0.5 h-5 w-5 shrink-0 text-blue-600 dark:text-blue-400" />,
-  destructive: <XCircle className="mt-0.5 h-5 w-5 shrink-0 text-destructive" />,
+  destructive: <XCircle className="text-destructive mt-0.5 h-5 w-5 shrink-0" />,
 }
 
 const Toast = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ToastPrimitive.Root> &
-    VariantProps<typeof toastVariants>
+  React.ComponentPropsWithoutRef<typeof ToastPrimitive.Root> & VariantProps<typeof toastVariants>
 >(({ className, variant, ...props }, ref) => (
-  <ToastPrimitive.Root
-    ref={ref}
-    className={cn(toastVariants({ variant }), className)}
-    {...props}
-  />
+  <ToastPrimitive.Root ref={ref} className={cn(toastVariants({ variant }), className)} {...props} />
 ))
 Toast.displayName = "Toast"
 
@@ -84,8 +80,8 @@ const ToastAction = React.forwardRef<
   <ToastPrimitive.Action
     ref={ref}
     className={cn(
-      "shrink-0 rounded-md border bg-transparent px-3 py-1.5 text-sm font-medium ring-offset-background transition-colors",
-      "hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+      "ring-offset-background shrink-0 rounded-md border bg-transparent px-3 py-1.5 text-sm font-medium transition-colors",
+      "hover:bg-secondary focus:ring-ring focus:outline-none focus:ring-2 focus:ring-offset-2",
       "disabled:pointer-events-none disabled:opacity-50",
       "group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive",
       className,
@@ -102,7 +98,7 @@ const ToastClose = React.forwardRef<
   <ToastPrimitive.Close
     ref={ref}
     className={cn(
-      "ml-auto shrink-0 rounded-md p-1 text-foreground/40 opacity-0 transition-opacity",
+      "text-foreground/40 ml-auto shrink-0 rounded-md p-1 opacity-0 transition-opacity",
       "hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100",
       "group-[.destructive]:text-destructive/60 group-[.destructive]:hover:text-destructive group-[.destructive]:focus:ring-destructive",
       className,
@@ -133,7 +129,7 @@ const ToastDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitive.Description
     ref={ref}
-    className={cn("mt-0.5 text-sm opacity-80 leading-snug", className)}
+    className={cn("mt-0.5 text-sm leading-snug opacity-80", className)}
     {...props}
   />
 ))
@@ -197,9 +193,7 @@ function reducer(state: State, action: ActionType): State {
     case "UPDATE_TOAST":
       return {
         ...state,
-        toasts: state.toasts.map((t) =>
-          t.id === action.toast.id ? { ...t, ...action.toast } : t,
-        ),
+        toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t)),
       }
     case "DISMISS_TOAST": {
       const { toastId } = action
@@ -211,9 +205,7 @@ function reducer(state: State, action: ActionType): State {
       return {
         ...state,
         toasts: state.toasts.map((t) =>
-          t.id === toastId || toastId === undefined
-            ? { ...t, open: false }
-            : t,
+          t.id === toastId || toastId === undefined ? { ...t, open: false } : t,
         ),
       }
     }

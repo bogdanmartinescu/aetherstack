@@ -46,18 +46,13 @@ function getInitials(name: string): string {
     .slice(0, 2)
 }
 
-export function ProfileDropdown({
-  user,
-  items = [],
-  onSignOut,
-  className,
-}: ProfileDropdownProps) {
+export function ProfileDropdown({ user, items = [], onSignOut, className }: ProfileDropdownProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
         aria-label={`Open profile menu for ${user.name}`}
         className={cn(
-          "rounded-full outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "ring-offset-background focus-visible:ring-ring rounded-full outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
           className,
         )}
       >
@@ -69,11 +64,9 @@ export function ProfileDropdown({
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col gap-0.5">
-            <span className="font-semibold text-foreground">{user.name}</span>
-            <span className="text-xs text-muted-foreground">{user.email}</span>
-            {user.role && (
-              <span className="text-xs text-muted-foreground">{user.role}</span>
-            )}
+            <span className="text-foreground font-semibold">{user.name}</span>
+            <span className="text-muted-foreground text-xs">{user.email}</span>
+            {user.role && <span className="text-muted-foreground text-xs">{user.role}</span>}
           </div>
         </DropdownMenuLabel>
         {items.length > 0 && (
@@ -110,7 +103,7 @@ export function ProfileDropdown({
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={onSignOut}
-              className="gap-2 text-destructive focus:text-destructive"
+              className="text-destructive focus:text-destructive gap-2"
             >
               <LogOut className="h-4 w-4" aria-hidden="true" />
               Sign out

@@ -31,13 +31,22 @@ export default function BreadcrumbPage() {
         />
       }
       props={[
-        { name: "items", type: "BreadcrumbItem[]", required: true, description: "Array of crumbs. Last item is the current page." },
-        { name: "className", type: "string", description: "Additional classes on the <nav> element." },
+        {
+          name: "items",
+          type: "BreadcrumbItem[]",
+          required: true,
+          description: "Array of crumbs. Last item is the current page.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the <nav> element.",
+        },
       ]}
       a11yNotes={[
-        "Wraps in <nav aria-label=\"Breadcrumb\"> for landmark navigation.",
+        'Wraps in <nav aria-label="Breadcrumb"> for landmark navigation.',
         "Rendered as an ordered list (<ol>) — correct semantic structure for a sequence.",
-        "The last item receives aria-current=\"page\" automatically.",
+        'The last item receives aria-current="page" automatically.',
         "Separators are aria-hidden to avoid being read aloud.",
       ]}
     />

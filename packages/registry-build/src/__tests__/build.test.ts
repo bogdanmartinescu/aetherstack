@@ -24,17 +24,13 @@ describe("buildRegistry", () => {
   })
 
   it("throws on schema validation failures", () => {
-    expect(() => buildRegistry({ items: "nope" })).toThrow(
-      /Registry validation failed/,
-    )
+    expect(() => buildRegistry({ items: "nope" })).toThrow(/Registry validation failed/)
   })
 
   it("warns about missing registry dependencies (non-strict)", () => {
     const data = {
       name: "test",
-      items: [
-        { name: "a", type: "registry:ui", registryDependencies: ["missing"] },
-      ],
+      items: [{ name: "a", type: "registry:ui", registryDependencies: ["missing"] }],
     }
     const result = buildRegistry(data)
     expect(result.warnings).toHaveLength(1)
@@ -45,13 +41,9 @@ describe("buildRegistry", () => {
   it("throws on missing dependencies in strict mode", () => {
     const data = {
       name: "test",
-      items: [
-        { name: "a", type: "registry:ui", registryDependencies: ["missing"] },
-      ],
+      items: [{ name: "a", type: "registry:ui", registryDependencies: ["missing"] }],
     }
-    expect(() => buildRegistry(data, { strict: true })).toThrow(
-      /Missing registry dependencies/,
-    )
+    expect(() => buildRegistry(data, { strict: true })).toThrow(/Missing registry dependencies/)
   })
 
   it("does not warn when all deps resolve", () => {

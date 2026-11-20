@@ -12,10 +12,10 @@ const InputGroupAddon = React.forwardRef<HTMLDivElement, InputGroupAddonProps>(
     <div
       ref={ref}
       className={cn(
-        "flex items-center border border-input bg-muted px-3 text-sm text-muted-foreground",
+        "border-input bg-muted text-muted-foreground flex items-center border px-3 text-sm",
         position === "left"
           ? "rounded-l-md rounded-r-none border-r-0"
-          : "rounded-r-md rounded-l-none border-l-0",
+          : "rounded-l-none rounded-r-md border-l-0",
         className,
       )}
       {...props}
@@ -24,12 +24,11 @@ const InputGroupAddon = React.forwardRef<HTMLDivElement, InputGroupAddonProps>(
 )
 InputGroupAddon.displayName = "InputGroupAddon"
 
-const InputGroupText = React.forwardRef<
-  HTMLSpanElement,
-  React.HTMLAttributes<HTMLSpanElement>
->(({ className, ...props }, ref) => (
-  <span ref={ref} className={cn("text-sm", className)} {...props} />
-))
+const InputGroupText = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(
+  ({ className, ...props }, ref) => (
+    <span ref={ref} className={cn("text-sm", className)} {...props} />
+  ),
+)
 InputGroupText.displayName = "InputGroupText"
 
 const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(

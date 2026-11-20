@@ -76,7 +76,9 @@ function assertNoWorkspaceSpecs(tarballDir: string, artifacts: PackedArtifact[])
         throw new Error(`${artifact.name}: packed package.json still has publishConfig`)
       }
       if (pkg.main?.endsWith(".ts")) {
-        throw new Error(`${artifact.name}: packed main still points at TypeScript source (${pkg.main})`)
+        throw new Error(
+          `${artifact.name}: packed main still points at TypeScript source (${pkg.main})`,
+        )
       }
       for (const [name, spec] of Object.entries(pkg.dependencies ?? {})) {
         if (spec.startsWith("workspace:")) {
@@ -161,7 +163,10 @@ server.listen(0, "127.0.0.1", () => {
         return { child, baseUrl: `http://127.0.0.1:${listenPort}` }
       }
     }
-    execFileSync(process.execPath, ["-e", "Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,50)"])
+    execFileSync(process.execPath, [
+      "-e",
+      "Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,50)",
+    ])
   }
 
   child.kill("SIGTERM")
@@ -176,7 +181,8 @@ function cliAddSmoke(workRoot: string, artifacts: PackedArtifact[], registryUrl:
   mkdirSync(project, { recursive: true })
   writeFileSync(
     join(project, "package.json"),
-    JSON.stringify({ name: "aether-cli-consumer", private: true, version: "0.0.0" }, null, 2) + "\n",
+    JSON.stringify({ name: "aether-cli-consumer", private: true, version: "0.0.0" }, null, 2) +
+      "\n",
   )
   writeFileSync(
     join(project, "aether.json"),
@@ -264,6 +270,8 @@ function main(): void {
 try {
   main()
 } catch (err: unknown) {
-  process.stderr.write(`consumer-install failed: ${err instanceof Error ? err.message : String(err)}\n`)
+  process.stderr.write(
+    `consumer-install failed: ${err instanceof Error ? err.message : String(err)}\n`,
+  )
   process.exit(1)
 }

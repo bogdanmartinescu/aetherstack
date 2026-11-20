@@ -30,9 +30,22 @@ export function MyPromptEditor() {
 }`}
       preview={<PromptBuilderPreview />}
       props={[
-        { name: "turns", type: "Turn[]", default: '[{role:"system",content:""}]', description: "Array of conversation turns. Each turn has a role and content string." },
-        { name: "onTurnsChange", type: "(turns: Turn[]) => void", description: "Called whenever the user adds, edits, reorders, or removes a turn." },
-        { name: "className", type: "string", description: "Additional CSS classes applied to the root container." },
+        {
+          name: "turns",
+          type: "Turn[]",
+          default: '[{role:"system",content:""}]',
+          description: "Array of conversation turns. Each turn has a role and content string.",
+        },
+        {
+          name: "onTurnsChange",
+          type: "(turns: Turn[]) => void",
+          description: "Called whenever the user adds, edits, reorders, or removes a turn.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional CSS classes applied to the root container.",
+        },
       ]}
       a11yNotes={[
         "Each turn row includes a labelled role selector and a textarea with a descriptive aria-label.",

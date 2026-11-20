@@ -23,7 +23,7 @@ export function TimelineScrubber({
 
   return (
     <div {...(className !== undefined ? { className } : {})}>
-      <span className="text-sm text-muted-foreground">{value}</span>
+      <span className="text-muted-foreground text-sm">{value}</span>
       <input
         type="range"
         role="slider"

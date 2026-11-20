@@ -73,9 +73,7 @@ export function writeConfig(config: AetherConfig, cwd = process.cwd()): void {
 export function requireConfig(cwd = process.cwd()): AetherConfig {
   const config = loadConfig(cwd)
   if (!config) {
-    throw new Error(
-      `No ${CONFIG_FILE_NAME} found. Run \`aether-ui init\` to set up your project.`,
-    )
+    throw new Error(`No ${CONFIG_FILE_NAME} found. Run \`aether-ui init\` to set up your project.`)
   }
   return config
 }

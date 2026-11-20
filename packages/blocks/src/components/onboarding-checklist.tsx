@@ -39,41 +39,30 @@ export function OnboardingChecklist({
   const progressPct = total === 0 ? 0 : Math.round((completed / total) * 100)
 
   function handleToggle(id: string) {
-    setLocalSteps((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, completed: !s.completed } : s)),
-    )
+    setLocalSteps((prev) => prev.map((s) => (s.id === id ? { ...s, completed: !s.completed } : s)))
     const step = localSteps.find((s) => s.id === id)
     if (step) onStepToggle?.(id, !step.completed)
   }
 
-  const visibleSteps = hideCompleted
-    ? localSteps.filter((s) => !s.completed)
-    : localSteps
+  const visibleSteps = hideCompleted ? localSteps.filter((s) => !s.completed) : localSteps
 
   return (
-    <div
-      className={cn(
-        "w-full rounded-xl border border-border bg-card p-6 shadow-sm",
-        className,
-      )}
-    >
+    <div className={cn("border-border bg-card w-full rounded-xl border p-6 shadow-sm", className)}>
       {/* Header */}
       <div className="mb-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-semibold text-foreground">{title}</h2>
-          <span className="text-xs text-muted-foreground">
+          <h2 className="text-foreground text-base font-semibold">{title}</h2>
+          <span className="text-muted-foreground text-xs">
             {completed} of {total} completed
           </span>
         </div>
-        {description && (
-          <p className="mt-1 text-sm text-muted-foreground">{description}</p>
-        )}
+        {description && <p className="text-muted-foreground mt-1 text-sm">{description}</p>}
       </div>
 
       {/* Progress bar */}
-      <div className="mb-5 h-1.5 w-full overflow-hidden rounded-full bg-muted">
+      <div className="bg-muted mb-5 h-1.5 w-full overflow-hidden rounded-full">
         <div
-          className="h-1.5 rounded-full bg-primary transition-all duration-500"
+          className="bg-primary h-1.5 rounded-full transition-all duration-500"
           style={{ width: `${progressPct}%` }}
         />
       </div>
@@ -85,9 +74,7 @@ export function OnboardingChecklist({
             key={step.id}
             className={cn(
               "flex items-start gap-3 rounded-lg border border-transparent p-3 transition-colors",
-              step.completed
-                ? "opacity-60"
-                : "hover:border-border hover:bg-muted/40",
+              step.completed ? "opacity-60" : "hover:border-border hover:bg-muted/40",
             )}
           >
             <Checkbox
@@ -101,22 +88,18 @@ export function OnboardingChecklist({
                 htmlFor={`step-${step.id}`}
                 className={cn(
                   "block cursor-pointer text-sm font-medium",
-                  step.completed
-                    ? "line-through text-muted-foreground"
-                    : "text-foreground",
+                  step.completed ? "text-muted-foreground line-through" : "text-foreground",
                 )}
               >
                 {step.title}
               </label>
               {step.description && (
-                <p className="mt-0.5 text-xs text-muted-foreground">
-                  {step.description}
-                </p>
+                <p className="text-muted-foreground mt-0.5 text-xs">{step.description}</p>
               )}
               {step.href && !step.completed && (
                 <a
                   href={step.href}
-                  className="mt-1 inline-block text-xs font-medium text-primary underline-offset-4 hover:underline"
+                  className="text-primary mt-1 inline-block text-xs font-medium underline-offset-4 hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -133,7 +116,7 @@ export function OnboardingChecklist({
         <button
           type="button"
           onClick={() => setHideCompleted((v) => !v)}
-          className="mt-4 text-xs text-muted-foreground underline-offset-4 hover:underline focus-visible:outline-none"
+          className="text-muted-foreground mt-4 text-xs underline-offset-4 hover:underline focus-visible:outline-none"
         >
           {hideCompleted ? "Show completed steps" : "Hide completed steps"}
         </button>

@@ -3,54 +3,120 @@ import { CodeBlock } from "@/components/code-block"
 
 export const metadata: Metadata = {
   title: "Icons",
-  description: "Aether UI ships with Lucide React as the default icon library — lightweight, consistent, and tree-shakeable.",
+  description:
+    "Aether UI ships with Lucide React as the default icon library — lightweight, consistent, and tree-shakeable.",
 }
 
 const ICON_GROUPS = [
   {
     label: "Navigation & actions",
     icons: [
-      "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown",
-      "ChevronLeft", "ChevronRight", "ChevronUp", "ChevronDown",
-      "ChevronsUpDown", "Menu", "X", "Plus", "Minus",
-      "MoreHorizontal", "MoreVertical", "ExternalLink",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowUp",
+      "ArrowDown",
+      "ChevronLeft",
+      "ChevronRight",
+      "ChevronUp",
+      "ChevronDown",
+      "ChevronsUpDown",
+      "Menu",
+      "X",
+      "Plus",
+      "Minus",
+      "MoreHorizontal",
+      "MoreVertical",
+      "ExternalLink",
     ],
   },
   {
     label: "Status & feedback",
     icons: [
-      "Check", "CheckCircle", "CheckCircle2", "AlertCircle", "AlertTriangle",
-      "Info", "XCircle", "Loader2", "RefreshCw", "RotateCcw",
-      "Clock", "Timer", "Hourglass",
+      "Check",
+      "CheckCircle",
+      "CheckCircle2",
+      "AlertCircle",
+      "AlertTriangle",
+      "Info",
+      "XCircle",
+      "Loader2",
+      "RefreshCw",
+      "RotateCcw",
+      "Clock",
+      "Timer",
+      "Hourglass",
     ],
   },
   {
     label: "Objects & UI",
     icons: [
-      "Search", "Settings", "Settings2", "Filter", "SlidersHorizontal",
-      "Bell", "BellOff", "Star", "Bookmark", "Heart",
-      "Share2", "Link", "Copy", "Clipboard", "Download", "Upload",
+      "Search",
+      "Settings",
+      "Settings2",
+      "Filter",
+      "SlidersHorizontal",
+      "Bell",
+      "BellOff",
+      "Star",
+      "Bookmark",
+      "Heart",
+      "Share2",
+      "Link",
+      "Copy",
+      "Clipboard",
+      "Download",
+      "Upload",
     ],
   },
   {
     label: "Files & data",
     icons: [
-      "File", "FileText", "FilePlus", "FileX", "Folder", "FolderOpen",
-      "Database", "Table2", "BarChart", "BarChart2", "LineChart", "PieChart",
+      "File",
+      "FileText",
+      "FilePlus",
+      "FileX",
+      "Folder",
+      "FolderOpen",
+      "Database",
+      "Table2",
+      "BarChart",
+      "BarChart2",
+      "LineChart",
+      "PieChart",
     ],
   },
   {
     label: "Users & auth",
     icons: [
-      "User", "Users", "UserPlus", "UserX", "UserCheck",
-      "Lock", "Unlock", "Key", "Shield", "ShieldCheck", "LogIn", "LogOut",
+      "User",
+      "Users",
+      "UserPlus",
+      "UserX",
+      "UserCheck",
+      "Lock",
+      "Unlock",
+      "Key",
+      "Shield",
+      "ShieldCheck",
+      "LogIn",
+      "LogOut",
     ],
   },
   {
     label: "Communication",
     icons: [
-      "Mail", "MessageSquare", "MessageCircle", "Phone", "Send",
-      "Inbox", "Archive", "Trash", "Trash2", "Edit", "Edit2", "Edit3",
+      "Mail",
+      "MessageSquare",
+      "MessageCircle",
+      "Phone",
+      "Send",
+      "Inbox",
+      "Archive",
+      "Trash",
+      "Trash2",
+      "Edit",
+      "Edit2",
+      "Edit3",
     ],
   },
 ]
@@ -60,18 +126,18 @@ export default function IconsPage() {
     <div className="max-w-3xl">
       {/* Header */}
       <div className="mb-10">
-        <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">Icons</h1>
-        <p className="text-lg text-muted-foreground">
-          Aether UI ships <strong className="text-foreground">Lucide React</strong> as its default icon library — 
-          a community-maintained set of beautifully consistent, MIT-licensed SVG icons. 
-          Over 1,500 icons, all tree-shakeable.
+        <h1 className="text-foreground mb-3 text-4xl font-bold tracking-tight">Icons</h1>
+        <p className="text-muted-foreground text-lg">
+          Aether UI ships <strong className="text-foreground">Lucide React</strong> as its default
+          icon library — a community-maintained set of beautifully consistent, MIT-licensed SVG
+          icons. Over 1,500 icons, all tree-shakeable.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <a
             href="https://lucide.dev/icons"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-md border border-border bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="border-border bg-muted text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors"
           >
             Browse all icons →
           </a>
@@ -79,7 +145,7 @@ export default function IconsPage() {
             href="https://github.com/lucide-icons/lucide"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-md border border-border bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="border-border bg-muted text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors"
           >
             GitHub →
           </a>
@@ -88,10 +154,10 @@ export default function IconsPage() {
 
       {/* Installation */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          Lucide React is included automatically when you use the CLI to add any Aether UI component. 
-          To install it manually:
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Installation</h2>
+        <p className="text-muted-foreground mb-4 text-sm">
+          Lucide React is included automatically when you use the CLI to add any Aether UI
+          component. To install it manually:
         </p>
         <CodeBlock
           code={`npm install lucide-react
@@ -105,10 +171,11 @@ yarn add lucide-react`}
 
       {/* Basic usage */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Basic usage</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          Import any icon by name from <code className="rounded bg-muted px-1 font-mono text-xs">lucide-react</code>. 
-          Icons are React components that render a 24×24 SVG by default.
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Basic usage</h2>
+        <p className="text-muted-foreground mb-4 text-sm">
+          Import any icon by name from{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">lucide-react</code>. Icons are
+          React components that render a 24×24 SVG by default.
         </p>
         <CodeBlock
           code={`import { Search, Settings, ArrowRight } from "lucide-react"
@@ -124,30 +191,33 @@ export function Example() {
 }`}
           filename="example.tsx"
         />
-        <div className="mt-4 rounded-lg border border-border bg-muted/30 p-4">
-          <p className="text-sm font-medium text-foreground mb-1">Icon sizing</p>
-          <p className="text-sm text-muted-foreground">
-            Use Tailwind&apos;s <code className="rounded bg-muted px-1 font-mono text-xs">h-*</code> and{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">w-*</code> classes — or the shorthand{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">size-*</code> — to control icon dimensions. 
-            Common sizes: <code className="rounded bg-muted px-1 font-mono text-xs">size-3.5</code> (14px), {" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">size-4</code> (16px), {" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">size-5</code> (20px).
+        <div className="border-border bg-muted/30 mt-4 rounded-lg border p-4">
+          <p className="text-foreground mb-1 text-sm font-medium">Icon sizing</p>
+          <p className="text-muted-foreground text-sm">
+            Use Tailwind&apos;s <code className="bg-muted rounded px-1 font-mono text-xs">h-*</code>{" "}
+            and <code className="bg-muted rounded px-1 font-mono text-xs">w-*</code> classes — or
+            the shorthand <code className="bg-muted rounded px-1 font-mono text-xs">size-*</code> —
+            to control icon dimensions. Common sizes:{" "}
+            <code className="bg-muted rounded px-1 font-mono text-xs">size-3.5</code> (14px),{" "}
+            <code className="bg-muted rounded px-1 font-mono text-xs">size-4</code> (16px),{" "}
+            <code className="bg-muted rounded px-1 font-mono text-xs">size-5</code> (20px).
           </p>
         </div>
       </section>
 
       {/* Usage with Button */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Icons in buttons</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          The <code className="rounded bg-muted px-1 font-mono text-xs">Button</code> component includes 
-          built-in SVG handling — icons are automatically sized to 16px and never intercept pointer events. 
-          No extra classes needed.
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+          Icons in buttons
+        </h2>
+        <p className="text-muted-foreground mb-4 text-sm">
+          The <code className="bg-muted rounded px-1 font-mono text-xs">Button</code> component
+          includes built-in SVG handling — icons are automatically sized to 16px and never intercept
+          pointer events. No extra classes needed.
         </p>
 
         <div className="mb-4 space-y-3">
-          <p className="text-sm font-medium text-foreground">Button with leading icon</p>
+          <p className="text-foreground text-sm font-medium">Button with leading icon</p>
           <CodeBlock
             code={`import { Plus, Download, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -174,10 +244,13 @@ import { Button } from "@/components/ui/button"
         </div>
 
         <div className="mb-4 space-y-3">
-          <p className="text-sm font-medium text-foreground">Icon-only button</p>
-          <p className="text-sm text-muted-foreground">
-            Use <code className="rounded bg-muted px-1 font-mono text-xs">size=&quot;icon&quot;</code> for a square button. 
-            Always include <code className="rounded bg-muted px-1 font-mono text-xs">aria-label</code> for accessibility.
+          <p className="text-foreground text-sm font-medium">Icon-only button</p>
+          <p className="text-muted-foreground text-sm">
+            Use{" "}
+            <code className="bg-muted rounded px-1 font-mono text-xs">size=&quot;icon&quot;</code>{" "}
+            for a square button. Always include{" "}
+            <code className="bg-muted rounded px-1 font-mono text-xs">aria-label</code> for
+            accessibility.
           </p>
           <CodeBlock
             code={`import { Search, Settings, Bell, X } from "lucide-react"
@@ -205,11 +278,13 @@ import { Button } from "@/components/ui/button"
 
       {/* Usage with other components */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Icons in other components</h2>
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+          Icons in other components
+        </h2>
 
         <div className="space-y-6">
           <div>
-            <p className="mb-3 text-sm font-medium text-foreground">Input with icon</p>
+            <p className="text-foreground mb-3 text-sm font-medium">Input with icon</p>
             <CodeBlock
               code={`import { Search } from "lucide-react"
 
@@ -223,7 +298,7 @@ import { Button } from "@/components/ui/button"
           </div>
 
           <div>
-            <p className="mb-3 text-sm font-medium text-foreground">Badge with icon</p>
+            <p className="text-foreground mb-3 text-sm font-medium">Badge with icon</p>
             <CodeBlock
               code={`import { CheckCircle2, Clock, XCircle } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
@@ -247,7 +322,7 @@ import { Badge } from "@/components/ui/badge"
           </div>
 
           <div>
-            <p className="mb-3 text-sm font-medium text-foreground">Select trigger with icon</p>
+            <p className="text-foreground mb-3 text-sm font-medium">Select trigger with icon</p>
             <CodeBlock
               code={`import { Globe } from "lucide-react"
 
@@ -264,11 +339,13 @@ import { Badge } from "@/components/ui/badge"
 
       {/* Icon reference */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Common icons reference</h2>
-        <p className="mb-6 text-sm text-muted-foreground">
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+          Common icons reference
+        </h2>
+        <p className="text-muted-foreground mb-6 text-sm">
           A curated set of frequently used icons. All available from{" "}
-          <code className="rounded bg-muted px-1 font-mono text-xs">lucide-react</code>.
-          Browse the complete set at{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">lucide-react</code>. Browse the
+          complete set at{" "}
           <a
             href="https://lucide.dev/icons"
             target="_blank"
@@ -276,21 +353,22 @@ import { Badge } from "@/components/ui/badge"
             className="text-primary underline-offset-4 hover:underline"
           >
             lucide.dev/icons
-          </a>.
+          </a>
+          .
         </p>
 
         <div className="space-y-8">
           {ICON_GROUPS.map((group) => (
             <div key={group.label}>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <p className="text-muted-foreground mb-3 text-xs font-semibold uppercase tracking-wider">
                 {group.label}
               </p>
-              <div className="rounded-lg border border-border bg-muted/20 p-4">
+              <div className="border-border bg-muted/20 rounded-lg border p-4">
                 <div className="flex flex-wrap gap-x-2 gap-y-1">
                   {group.icons.map((icon) => (
                     <code
                       key={icon}
-                      className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground hover:text-foreground cursor-default transition-colors"
+                      className="bg-muted text-muted-foreground hover:text-foreground cursor-default rounded px-1.5 py-0.5 font-mono text-xs transition-colors"
                     >
                       {icon}
                     </code>
@@ -304,12 +382,15 @@ import { Badge } from "@/components/ui/badge"
 
       {/* Stroke width */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Customization</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          All Lucide icons accept <code className="rounded bg-muted px-1 font-mono text-xs">size</code>, {" "}
-          <code className="rounded bg-muted px-1 font-mono text-xs">strokeWidth</code>, and {" "}
-          <code className="rounded bg-muted px-1 font-mono text-xs">color</code> props, 
-          plus all standard SVG attributes.
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+          Customization
+        </h2>
+        <p className="text-muted-foreground mb-4 text-sm">
+          All Lucide icons accept{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">size</code>,{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">strokeWidth</code>, and{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">color</code> props, plus all
+          standard SVG attributes.
         </p>
         <CodeBlock
           code={`import { Star } from "lucide-react"
@@ -331,16 +412,18 @@ import { Badge } from "@/components/ui/badge"
 
       {/* A11y */}
       <section>
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+          Accessibility
+        </h2>
         <ul className="space-y-2">
           {[
-            "Decorative icons (next to visible text) should be hidden from screen readers with aria-hidden=\"true\".",
+            'Decorative icons (next to visible text) should be hidden from screen readers with aria-hidden="true".',
             "Icon-only interactive elements (buttons, links) must have an aria-label describing the action.",
             "Avoid using icons as the sole means of conveying status — pair with visible text or a tooltip.",
-            "Lucide icons render aria-hidden=\"true\" by default when used inside a labelled element.",
+            'Lucide icons render aria-hidden="true" by default when used inside a labelled element.',
           ].map((note) => (
-            <li key={note} className="flex items-start gap-2 text-sm text-muted-foreground">
-              <span className="mt-0.5 shrink-0 text-primary">→</span>
+            <li key={note} className="text-muted-foreground flex items-start gap-2 text-sm">
+              <span className="text-primary mt-0.5 shrink-0">→</span>
               {note}
             </li>
           ))}

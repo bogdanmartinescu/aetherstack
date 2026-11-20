@@ -7,3 +7,10 @@ build
 *.tsbuildinfo
 pnpm-lock.yaml
 CHANGELOG.md
+.worktrees
+agent-transcripts
+# Generated / content-bearing registry artefacts (build-registry owns formatting)
+apps/registry-public/public/r
+apps/registry-public/public/llms.txt
+apps/docs/public/llms.txt
+registry/**/registry.json

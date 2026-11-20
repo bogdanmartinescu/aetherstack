@@ -26,11 +26,7 @@ export function FilterToolbarPreview() {
       }))}
       onClearAll={() => setActive([])}
     >
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => setActive(INITIAL_FILTERS)}
-      >
+      <Button variant="outline" size="sm" onClick={() => setActive(INITIAL_FILTERS)}>
         <SlidersHorizontal />
         Filter
       </Button>

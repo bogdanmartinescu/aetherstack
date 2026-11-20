@@ -52,7 +52,7 @@ export function SortableItem({ item, renderItem }: SortableItemProps) {
         aria-label="Drag to reorder"
         {...attributes}
         {...listeners}
-        className="cursor-grab touch-none rounded p-0.5 text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring active:cursor-grabbing"
+        className="text-muted-foreground hover:text-foreground focus-visible:ring-ring cursor-grab touch-none rounded p-0.5 transition-colors focus:outline-none focus-visible:ring-2 active:cursor-grabbing"
       >
         <GripVertical className="h-4 w-4" aria-hidden="true" />
       </button>
@@ -86,11 +86,7 @@ export function SortableList({ items, onReorder, renderItem, className }: Sortab
   }
 
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragEnd={handleDragEnd}
-    >
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={items.map((i) => i.id)} strategy={verticalListSortingStrategy}>
         <div
           role="list"

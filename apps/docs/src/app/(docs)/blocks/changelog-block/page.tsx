@@ -47,7 +47,8 @@ export default function ChangelogPage() {
               version: "0.2.0",
               date: "May 2026",
               title: "AI-native UI components",
-              description: "Introducing 33 new AI-native UI components across primitives, patterns, and blocks.",
+              description:
+                "Introducing 33 new AI-native UI components across primitives, patterns, and blocks.",
               tags: ["major"],
               changes: [
                 {
@@ -77,9 +78,7 @@ export default function ChangelogPage() {
                 },
                 {
                   type: "changed",
-                  items: [
-                    "LandingHero eyebrow now uses Badge component for consistency",
-                  ],
+                  items: ["LandingHero eyebrow now uses Badge component for consistency"],
                 },
               ],
             },
@@ -87,8 +86,18 @@ export default function ChangelogPage() {
         />
       }
       props={[
-        { name: "entries", type: "ChangelogEntry[]", required: true, description: "Array of changelog entries. Each has id, date, and title. Optional: version, description, tags, changes." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "entries",
+          type: "ChangelogEntry[]",
+          required: true,
+          description:
+            "Array of changelog entries. Each has id, date, and title. Optional: version, description, tags, changes.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={[
         "Dates are wrapped in a <time> element.",

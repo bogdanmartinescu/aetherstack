@@ -56,10 +56,10 @@ export function ComponentPage({
     <div className="max-w-3xl">
       {/* ── Header ─────────────────────────────────────────────────────── */}
       <div className="mb-10">
-        <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">{name}</h1>
-        <p className="text-lg text-muted-foreground">{description}</p>
+        <h1 className="text-foreground mb-3 text-4xl font-bold tracking-tight">{name}</h1>
+        <p className="text-muted-foreground text-lg">{description}</p>
         {radixSource && (
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-sm">
             Built on{" "}
             <a
               href={radixSource}
@@ -75,8 +75,8 @@ export function ComponentPage({
         {features && features.length > 0 && (
           <ul className="mt-4 space-y-1">
             {features.map((f) => (
-              <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <span className="mt-0.5 text-primary">✓</span>
+              <li key={f} className="text-muted-foreground flex items-start gap-2 text-sm">
+                <span className="text-primary mt-0.5">✓</span>
                 {f}
               </li>
             ))}
@@ -93,12 +93,12 @@ export function ComponentPage({
             content: (
               <div className="space-y-4">
                 {/* Hero preview */}
-                <div className="rounded-lg border border-border bg-card overflow-hidden">
-                  <div className="flex min-h-[180px] items-center justify-center bg-background/60 p-8">
+                <div className="border-border bg-card overflow-hidden rounded-lg border">
+                  <div className="bg-background/60 flex min-h-[180px] items-center justify-center p-8">
                     {preview}
                   </div>
-                  <div className="border-t border-border bg-muted/50 px-4 py-3">
-                    <p className="font-mono text-xs text-muted-foreground">
+                  <div className="border-border bg-muted/50 border-t px-4 py-3">
+                    <p className="text-muted-foreground font-mono text-xs">
                       import {"{"} {name} {"}"} from &quot;@aetherstack/ui&quot;
                     </p>
                   </div>
@@ -120,9 +120,9 @@ export function ComponentPage({
                     label: "CLI",
                     content: (
                       <div className="space-y-4">
-                        <p className="text-sm text-muted-foreground">
-                          Run the Aether UI CLI to add this component directly to your project.
-                          The CLI copies the component source into your codebase — you own the code.
+                        <p className="text-muted-foreground text-sm">
+                          Run the Aether UI CLI to add this component directly to your project. The
+                          CLI copies the component source into your codebase — you own the code.
                         </p>
                         <CodeBlock code={cliInstall} filename="terminal" />
                       </div>
@@ -134,12 +134,12 @@ export function ComponentPage({
                     content: (
                       <div className="space-y-6">
                         <div>
-                          <h3 className="mb-2 text-sm font-medium text-foreground">
+                          <h3 className="text-foreground mb-2 text-sm font-medium">
                             1. Copy the component source
                           </h3>
-                          <p className="mb-3 text-sm text-muted-foreground">
+                          <p className="text-muted-foreground mb-3 text-sm">
                             Create{" "}
-                            <code className="rounded bg-muted px-1 font-mono text-xs">
+                            <code className="bg-muted rounded px-1 font-mono text-xs">
                               components/ui/{name.toLowerCase()}.tsx
                             </code>{" "}
                             in your project and paste the following:
@@ -151,7 +151,7 @@ export function ComponentPage({
                         </div>
                         {manualSteps?.map((step, i) => (
                           <div key={i}>
-                            <h3 className="mb-2 text-sm font-medium text-foreground">
+                            <h3 className="text-foreground mb-2 text-sm font-medium">
                               {i + 2}. {step.title}
                             </h3>
                             <CodeBlock code={step.code} filename={step.filename} />
@@ -170,15 +170,13 @@ export function ComponentPage({
       {/* ── Usage examples ──────────────────────────────────────────────── */}
       {examples.length > 0 && (
         <section className="mt-14">
-          <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
-            Usage
-          </h2>
+          <h2 className="text-foreground mb-6 text-2xl font-semibold tracking-tight">Usage</h2>
           <div className="space-y-10">
             {examples.map((ex) => (
               <div key={ex.title}>
-                <h3 className="mb-1 text-base font-semibold text-foreground">{ex.title}</h3>
+                <h3 className="text-foreground mb-1 text-base font-semibold">{ex.title}</h3>
                 {ex.description && (
-                  <p className="mb-4 text-sm text-muted-foreground">{ex.description}</p>
+                  <p className="text-muted-foreground mb-4 text-sm">{ex.description}</p>
                 )}
                 <DocTabs
                   tabs={[
@@ -186,7 +184,7 @@ export function ComponentPage({
                       id: "preview",
                       label: "Preview",
                       content: (
-                        <div className="flex flex-wrap items-center justify-center gap-3 rounded-lg border border-border bg-background p-8">
+                        <div className="border-border bg-background flex flex-wrap items-center justify-center gap-3 rounded-lg border p-8">
                           {ex.preview}
                         </div>
                       ),
@@ -206,15 +204,15 @@ export function ComponentPage({
 
       {/* ── Props ────────────────────────────────────────────────────────── */}
       <section className="mt-14">
-        <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">Props</h2>
+        <h2 className="text-foreground mb-6 text-2xl font-semibold tracking-tight">Props</h2>
         <PropsTable props={props} />
         {propGroups?.map((group) => (
           <div key={group.title} className="mt-8">
-            <h3 className="mb-4 text-base font-semibold text-foreground">{group.title}</h3>
+            <h3 className="text-foreground mb-4 text-base font-semibold">{group.title}</h3>
             <PropsTable props={group.props} />
           </div>
         ))}
-        <p className="mt-3 text-xs text-muted-foreground">
+        <p className="text-muted-foreground mt-3 text-xs">
           <span className="text-destructive">*</span> Required props
         </p>
       </section>
@@ -222,13 +220,13 @@ export function ComponentPage({
       {/* ── Accessibility ────────────────────────────────────────────────── */}
       {a11yNotes && a11yNotes.length > 0 && (
         <section className="mt-14">
-          <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">
+          <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
             Accessibility
           </h2>
           <ul className="space-y-2">
             {a11yNotes.map((note) => (
-              <li key={note} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <span className="mt-0.5 shrink-0 text-primary">→</span>
+              <li key={note} className="text-muted-foreground flex items-start gap-2 text-sm">
+                <span className="text-primary mt-0.5 shrink-0">→</span>
                 {note}
               </li>
             ))}

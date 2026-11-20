@@ -312,7 +312,8 @@ export function BasicCombobox() {
         },
         {
           title: "With groups",
-          description: "Use ComboboxGroup with a heading to visually separate items into categories.",
+          description:
+            "Use ComboboxGroup with a heading to visually separate items into categories.",
           preview: (
             <div className="flex justify-center">
               <GroupedComboboxDemo />
@@ -408,12 +409,14 @@ export function MultiCombobox() {
         {
           name: "Combobox",
           type: "PopoverPrimitive.Root",
-          description: "Root wrapper — manages open/closed state. Accepts open, onOpenChange, defaultOpen.",
+          description:
+            "Root wrapper — manages open/closed state. Accepts open, onOpenChange, defaultOpen.",
         },
         {
           name: "ComboboxTrigger",
           type: "PopoverPrimitive.Trigger",
-          description: "The element that toggles the combobox open. Use asChild to render as a Button.",
+          description:
+            "The element that toggles the combobox open. Use asChild to render as a Button.",
         },
         {
           name: "ComboboxContent",
@@ -443,7 +446,8 @@ export function MultiCombobox() {
         {
           name: "ComboboxGroup",
           type: "React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group>",
-          description: "Groups items under a labeled heading. Pass heading prop for the group label.",
+          description:
+            "Groups items under a labeled heading. Pass heading prop for the group label.",
         },
       ]}
       a11yNotes={[

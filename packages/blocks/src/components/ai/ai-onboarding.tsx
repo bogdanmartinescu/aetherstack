@@ -17,19 +17,21 @@ const DEFAULT_STEPS: OnboardingStep[] = [
     id: "api-key",
     title: "Add your API key",
     description: "Connect your AI provider",
-    content: <p className="text-sm text-muted-foreground">Enter your API key to get started.</p>,
+    content: <p className="text-muted-foreground text-sm">Enter your API key to get started.</p>,
   },
   {
     id: "model",
     title: "Choose a model",
     description: "Select your preferred AI model",
-    content: <p className="text-sm text-muted-foreground">Pick a model that fits your needs.</p>,
+    content: <p className="text-muted-foreground text-sm">Pick a model that fits your needs.</p>,
   },
   {
     id: "try",
     title: "Try an example",
     description: "See AI in action",
-    content: <p className="text-sm text-muted-foreground">Send your first message to see how it works.</p>,
+    content: (
+      <p className="text-muted-foreground text-sm">Send your first message to see how it works.</p>
+    ),
   },
 ]
 
@@ -39,11 +41,7 @@ interface AIOnboardingProps {
   className?: string
 }
 
-function AIOnboarding({
-  steps = DEFAULT_STEPS,
-  onComplete,
-  className,
-}: AIOnboardingProps) {
+function AIOnboarding({ steps = DEFAULT_STEPS, onComplete, className }: AIOnboardingProps) {
   const [currentStep, setCurrentStep] = React.useState(0)
   const step = steps[currentStep]
   const isLast = currentStep === steps.length - 1
@@ -67,7 +65,7 @@ function AIOnboarding({
   }))
 
   return (
-    <div className={cn("flex flex-col gap-6 max-w-lg mx-auto py-8", className)}>
+    <div className={cn("mx-auto flex max-w-lg flex-col gap-6 py-8", className)}>
       <Stepper steps={stepperItems} currentStep={currentStep} orientation="horizontal" />
 
       {step && (
@@ -79,16 +77,10 @@ function AIOnboarding({
           <CardContent className="flex flex-col gap-4">
             {step.content}
             <div className="flex items-center justify-between pt-2">
-              <Button
-                variant="outline"
-                onClick={back}
-                disabled={currentStep === 0}
-              >
+              <Button variant="outline" onClick={back} disabled={currentStep === 0}>
                 Back
               </Button>
-              <Button onClick={next}>
-                {isLast ? "Get started" : "Continue"}
-              </Button>
+              <Button onClick={next}>{isLast ? "Get started" : "Continue"}</Button>
             </div>
           </CardContent>
         </Card>

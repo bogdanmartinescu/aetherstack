@@ -29,7 +29,7 @@ export function AppHeader({
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur-sm",
+        "border-border bg-background/95 sticky top-0 z-40 w-full border-b backdrop-blur-sm",
         className,
       )}
     >
@@ -37,9 +37,7 @@ export function AppHeader({
         {/* Logo / brand */}
         <div className="flex shrink-0 items-center gap-2">
           {logo}
-          {appName && (
-            <span className="text-sm font-semibold text-foreground">{appName}</span>
-          )}
+          {appName && <span className="text-foreground text-sm font-semibold">{appName}</span>}
         </div>
 
         {/* Desktop nav */}
@@ -54,9 +52,7 @@ export function AppHeader({
                     size="sm"
                     className={cn(
                       "text-sm",
-                      item.active
-                        ? "text-foreground font-medium"
-                        : "text-muted-foreground",
+                      item.active ? "text-foreground font-medium" : "text-muted-foreground",
                     )}
                   >
                     <a href={item.href} aria-current={item.active ? "page" : undefined}>
@@ -73,7 +69,7 @@ export function AppHeader({
         {navItems.length === 0 && <div className="flex-1" />}
 
         {/* Desktop actions */}
-        {actions && <div className="hidden md:flex items-center gap-2">{actions}</div>}
+        {actions && <div className="hidden items-center gap-2 md:flex">{actions}</div>}
 
         {/* Mobile hamburger */}
         {navItems.length > 0 && (
@@ -88,7 +84,7 @@ export function AppHeader({
                 <div className="flex items-center gap-2 pb-4">
                   {logo}
                   {appName && (
-                    <span className="text-sm font-semibold text-foreground">{appName}</span>
+                    <span className="text-foreground text-sm font-semibold">{appName}</span>
                   )}
                 </div>
                 <nav aria-label="Mobile navigation">

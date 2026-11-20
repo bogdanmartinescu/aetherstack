@@ -41,23 +41,67 @@ export default function FeaturesPage() {
           subheading="Production-ready components, tokens, patterns, and blocks — all in one system."
           cols={3}
           features={[
-            { title: "Open code", description: "Copy components directly into your project. You own and control every file." },
-            { title: "Token-driven", description: "Every visual value is a CSS custom property. Override anything without forking." },
-            { title: "Accessible", description: "Built on Radix UI primitives with WCAG 2.1 AA compliance out of the box." },
-            { title: "Dark mode", description: "Light and dark themes via CSS variables. Respects system preference automatically." },
-            { title: "TypeScript", description: "Fully typed props and exported interfaces for every component." },
-            { title: "CLI installer", description: "One command to add any component, pattern, or block to your project." },
+            {
+              title: "Open code",
+              description:
+                "Copy components directly into your project. You own and control every file.",
+            },
+            {
+              title: "Token-driven",
+              description:
+                "Every visual value is a CSS custom property. Override anything without forking.",
+            },
+            {
+              title: "Accessible",
+              description:
+                "Built on Radix UI primitives with WCAG 2.1 AA compliance out of the box.",
+            },
+            {
+              title: "Dark mode",
+              description:
+                "Light and dark themes via CSS variables. Respects system preference automatically.",
+            },
+            {
+              title: "TypeScript",
+              description: "Fully typed props and exported interfaces for every component.",
+            },
+            {
+              title: "CLI installer",
+              description: "One command to add any component, pattern, or block to your project.",
+            },
           ]}
         />
       }
       props={[
-        { name: "features", type: "{ icon?: ReactNode; title: string; description: string }[]", required: true, description: "Array of feature items to display." },
-        { name: "eyebrow", type: "string", description: "Small uppercase label above the headline." },
+        {
+          name: "features",
+          type: "{ icon?: ReactNode; title: string; description: string }[]",
+          required: true,
+          description: "Array of feature items to display.",
+        },
+        {
+          name: "eyebrow",
+          type: "string",
+          description: "Small uppercase label above the headline.",
+        },
         { name: "headline", type: "string", description: "Section heading." },
-        { name: "subheading", type: "string", description: "Supporting paragraph below the headline." },
+        {
+          name: "subheading",
+          type: "string",
+          description: "Supporting paragraph below the headline.",
+        },
         { name: "cols", type: "2 | 3 | 4", default: "3", description: "Grid column count." },
-        { name: "layout", type: "'grid' | 'list'", default: "'grid'", description: "Card grid or alternating list layout." },
-        { name: "className", type: "string", description: "Additional classes on the section wrapper." },
+        {
+          name: "layout",
+          type: "'grid' | 'list'",
+          default: "'grid'",
+          description: "Card grid or alternating list layout.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the section wrapper.",
+        },
       ]}
       a11yNotes={[
         "Feature icons are decorative; the title and description carry the meaning.",

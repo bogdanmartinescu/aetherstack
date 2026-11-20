@@ -20,9 +20,7 @@ export default function TimeSlotsPage() {
         "Confirm action once a slot is selected",
         "Controlled and uncontrolled selection",
       ]}
-      preview={
-        <TimeSlots timeZoneLabel="Europe/Bucharest" slots={previewSlots} />
-      }
+      preview={<TimeSlots timeZoneLabel="Europe/Bucharest" slots={previewSlots} />}
       previewCode={`import { TimeSlots } from "@/components/ui/time-slots"
 
 const slots = [
@@ -99,7 +97,7 @@ export function TimeSlotsDemo() {
         },
       ]}
       a11yNotes={[
-        "The radio group uses aria-label=\"Times\".",
+        'The radio group uses aria-label="Times".',
         "Each radio's accessible name comes from the slot label.",
         "The confirm button stays disabled until a slot is selected.",
       ]}

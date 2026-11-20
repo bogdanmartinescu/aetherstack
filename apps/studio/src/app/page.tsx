@@ -85,16 +85,10 @@ import {
 } from "@aetherstack/patterns"
 import { DashboardShell, LoginBlock, SignupBlock } from "@aetherstack/blocks"
 
-function Section({
-  title,
-  children,
-}: {
-  title: string
-  children: React.ReactNode
-}) {
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mb-12">
-      <h2 className="mb-4 text-lg font-semibold text-foreground border-b border-border pb-2">
+      <h2 className="text-foreground border-border mb-4 border-b pb-2 text-lg font-semibold">
         {title}
       </h2>
       <div className="space-y-4">{children}</div>
@@ -104,7 +98,7 @@ function Section({
 
 function Preview({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-wrap items-start gap-3 rounded-lg border border-border bg-card p-6">
+    <div className="border-border bg-card flex flex-wrap items-start gap-3 rounded-lg border p-6">
       {children}
     </div>
   )
@@ -116,27 +110,36 @@ export default function StudioPage() {
 
   return (
     <TooltipProvider>
-      <main className="min-h-screen bg-background p-8">
+      <main className="bg-background min-h-screen p-8">
         <div className="mx-auto max-w-5xl">
           {/* Header */}
-          <div className="mb-10 border-b border-border pb-6">
-            <div className="mb-1 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+          <div className="border-border mb-10 border-b pb-6">
+            <div className="text-muted-foreground mb-1 text-xs font-medium uppercase tracking-widest">
               Aetherstack · Internal
             </div>
-            <h1 className="text-3xl font-bold text-foreground">Aether Studio</h1>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <h1 className="text-foreground text-3xl font-bold">Aether Studio</h1>
+            <p className="text-muted-foreground mt-1 text-sm">
               Live playground for primitives, patterns, and blocks.
             </p>
             <div className="mt-3 flex flex-wrap gap-2 text-xs">
-              <a href="#primitives" className="text-primary hover:underline">Primitives</a>
+              <a href="#primitives" className="text-primary hover:underline">
+                Primitives
+              </a>
               <span className="text-border">·</span>
-              <a href="#patterns" className="text-primary hover:underline">Patterns</a>
+              <a href="#patterns" className="text-primary hover:underline">
+                Patterns
+              </a>
               <span className="text-border">·</span>
-              <a href="#blocks" className="text-primary hover:underline">Blocks</a>
+              <a href="#blocks" className="text-primary hover:underline">
+                Blocks
+              </a>
             </div>
           </div>
 
-          <h2 id="primitives" className="mb-6 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          <h2
+            id="primitives"
+            className="text-muted-foreground mb-6 text-xs font-semibold uppercase tracking-widest"
+          >
             Primitives
           </h2>
 
@@ -241,14 +244,8 @@ export default function StudioPage() {
           <Section title="Switch">
             <Preview>
               <div className="flex items-center space-x-2">
-                <Switch
-                  id="airplane-mode"
-                  checked={switched}
-                  onCheckedChange={setSwitched}
-                />
-                <Label htmlFor="airplane-mode">
-                  Airplane mode {switched ? "(on)" : "(off)"}
-                </Label>
+                <Switch id="airplane-mode" checked={switched} onCheckedChange={setSwitched} />
+                <Label htmlFor="airplane-mode">Airplane mode {switched ? "(on)" : "(off)"}</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <Switch id="disabled-sw" disabled />
@@ -285,16 +282,13 @@ export default function StudioPage() {
                   <TabsTrigger value="password">Password</TabsTrigger>
                   <TabsTrigger value="notifications">Notifications</TabsTrigger>
                 </TabsList>
-                <TabsContent value="account" className="pt-4 text-sm text-muted-foreground">
+                <TabsContent value="account" className="text-muted-foreground pt-4 text-sm">
                   Manage your account settings and preferences.
                 </TabsContent>
-                <TabsContent value="password" className="pt-4 text-sm text-muted-foreground">
+                <TabsContent value="password" className="text-muted-foreground pt-4 text-sm">
                   Change your password and security options.
                 </TabsContent>
-                <TabsContent
-                  value="notifications"
-                  className="pt-4 text-sm text-muted-foreground"
-                >
+                <TabsContent value="notifications" className="text-muted-foreground pt-4 text-sm">
                   Configure how you receive notifications.
                 </TabsContent>
               </Tabs>
@@ -309,7 +303,7 @@ export default function StudioPage() {
                   <CardTitle>Account Summary</CardTitle>
                   <CardDescription>Your current plan and usage</CardDescription>
                 </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
+                <CardContent className="text-muted-foreground text-sm">
                   Pro plan · 12 of 50 seats used
                 </CardContent>
                 <CardFooter>
@@ -324,7 +318,7 @@ export default function StudioPage() {
           {/* ── Skeleton ───────────────────────────────────────────────────── */}
           <Section title="Skeleton">
             <Preview>
-              <div className="flex flex-col gap-3 w-72">
+              <div className="flex w-72 flex-col gap-3">
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-4/5" />
                 <Skeleton className="h-4 w-3/5" />
@@ -356,15 +350,11 @@ export default function StudioPage() {
                       <TableCell className="font-medium">{row.name}</TableCell>
                       <TableCell>{row.role}</TableCell>
                       <TableCell>
-                        <Badge
-                          variant={row.status === "Active" ? "default" : "secondary"}
-                        >
+                        <Badge variant={row.status === "Active" ? "default" : "secondary"}>
                           {row.status}
                         </Badge>
                       </TableCell>
-                      <TableCell className="text-right text-muted-foreground">
-                        {row.date}
-                      </TableCell>
+                      <TableCell className="text-muted-foreground text-right">{row.date}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -397,8 +387,7 @@ export default function StudioPage() {
                   <DialogHeader>
                     <DialogTitle>Confirm action</DialogTitle>
                     <DialogDescription>
-                      Are you sure you want to perform this action? It cannot be
-                      undone.
+                      Are you sure you want to perform this action? It cannot be undone.
                     </DialogDescription>
                   </DialogHeader>
                   <DialogFooter>
@@ -423,9 +412,7 @@ export default function StudioPage() {
                   <SheetContent side={side}>
                     <SheetHeader>
                       <SheetTitle>Sheet ({side})</SheetTitle>
-                      <SheetDescription>
-                        This sheet slides in from the {side}.
-                      </SheetDescription>
+                      <SheetDescription>This sheet slides in from the {side}.</SheetDescription>
                     </SheetHeader>
                   </SheetContent>
                 </Sheet>
@@ -436,7 +423,7 @@ export default function StudioPage() {
           {/* ── Patterns ───────────────────────────────────────────────────── */}
           <h2
             id="patterns"
-            className="mb-6 mt-16 text-xs font-semibold uppercase tracking-widest text-muted-foreground"
+            className="text-muted-foreground mb-6 mt-16 text-xs font-semibold uppercase tracking-widest"
           >
             Patterns
           </h2>
@@ -447,13 +434,12 @@ export default function StudioPage() {
                 <PageHeader
                   title="Project settings"
                   description="Manage members, permissions, and integrations."
-                  breadcrumb={[
-                    { label: "Workspace", href: "#" },
-                    { label: "Acme" },
-                  ]}
+                  breadcrumb={[{ label: "Workspace", href: "#" }, { label: "Acme" }]}
                   actions={
                     <>
-                      <Button variant="outline" size="sm">Cancel</Button>
+                      <Button variant="outline" size="sm">
+                        Cancel
+                      </Button>
                       <Button size="sm">Save</Button>
                     </>
                   }
@@ -488,7 +474,7 @@ export default function StudioPage() {
                   description="Generate keys for programmatic access."
                   footer={<Button size="sm">Save</Button>}
                 >
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     No API keys yet. Generate one to start using the API.
                   </p>
                 </SettingsSection>
@@ -557,7 +543,7 @@ export default function StudioPage() {
                 <TableToolbar
                   search={
                     <div className="relative w-full max-w-sm">
-                      <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Search className="text-muted-foreground absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2" />
                       <Input placeholder="Search…" className="pl-8" />
                     </div>
                   }
@@ -603,7 +589,7 @@ export default function StudioPage() {
 
           <Section title="SidebarNav · NavGroup · NavItem">
             <Preview>
-              <div className="w-64 rounded-lg border border-border bg-card p-2">
+              <div className="border-border bg-card w-64 rounded-lg border p-2">
                 <SidebarNav>
                   <NavGroup>
                     <NavItem
@@ -620,11 +606,7 @@ export default function StudioPage() {
                     />
                   </NavGroup>
                   <NavGroup label="Settings">
-                    <NavItem
-                      href="#"
-                      icon={<Settings className="h-4 w-4" />}
-                      label="General"
-                    />
+                    <NavItem href="#" icon={<Settings className="h-4 w-4" />} label="General" />
                   </NavGroup>
                 </SidebarNav>
               </div>
@@ -634,7 +616,7 @@ export default function StudioPage() {
           {/* ── Blocks ─────────────────────────────────────────────────────── */}
           <h2
             id="blocks"
-            className="mb-6 mt-16 text-xs font-semibold uppercase tracking-widest text-muted-foreground"
+            className="text-muted-foreground mb-6 mt-16 text-xs font-semibold uppercase tracking-widest"
           >
             Blocks
           </h2>
@@ -642,7 +624,7 @@ export default function StudioPage() {
           <Section title="DashboardShell">
             <Preview>
               <div
-                className="w-full overflow-hidden rounded-md border border-border"
+                className="border-border w-full overflow-hidden rounded-md border"
                 style={{ height: 480 }}
               >
                 <div
@@ -668,7 +650,7 @@ export default function StudioPage() {
           <Section title="LoginBlock">
             <Preview>
               <div
-                className="w-full overflow-hidden rounded-md border border-border"
+                className="border-border w-full overflow-hidden rounded-md border"
                 style={{ height: 560 }}
               >
                 <div
@@ -688,7 +670,7 @@ export default function StudioPage() {
           <Section title="SignupBlock">
             <Preview>
               <div
-                className="w-full overflow-hidden rounded-md border border-border"
+                className="border-border w-full overflow-hidden rounded-md border"
                 style={{ height: 560 }}
               >
                 <div

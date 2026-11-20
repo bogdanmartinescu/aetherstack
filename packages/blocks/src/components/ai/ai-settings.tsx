@@ -58,7 +58,7 @@ function AISettings({
   const [showKey, setShowKey] = React.useState(false)
 
   return (
-    <div className={cn("flex flex-col gap-6 max-w-2xl", className)}>
+    <div className={cn("flex max-w-2xl flex-col gap-6", className)}>
       <Card>
         <CardHeader>
           <CardTitle className="text-base">API Configuration</CardTitle>
@@ -77,7 +77,7 @@ function AISettings({
               <button
                 type="button"
                 onClick={() => setShowKey((s) => !s)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
                 aria-label={showKey ? "Hide API key" : "Show API key"}
               >
                 {showKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -88,7 +88,10 @@ function AISettings({
           {models.length > 0 && (
             <div className="flex flex-col gap-2">
               <Label>Model</Label>
-              <Select {...(model !== undefined ? { value: model } : {})} {...(onModelChange !== undefined ? { onValueChange: onModelChange } : {})}>
+              <Select
+                {...(model !== undefined ? { value: model } : {})}
+                {...(onModelChange !== undefined ? { onValueChange: onModelChange } : {})}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select a model" />
                 </SelectTrigger>
@@ -113,7 +116,9 @@ function AISettings({
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
               <Label>Temperature</Label>
-              <span className="text-sm text-muted-foreground font-mono">{temperature.toFixed(2)}</span>
+              <span className="text-muted-foreground font-mono text-sm">
+                {temperature.toFixed(2)}
+              </span>
             </div>
             <Slider
               min={0}
@@ -122,7 +127,9 @@ function AISettings({
               value={[temperature]}
               onValueChange={([v]) => v !== undefined && onTemperatureChange?.(v)}
             />
-            <p className="text-xs text-muted-foreground">Controls randomness — 0 is deterministic, 2 is very creative.</p>
+            <p className="text-muted-foreground text-xs">
+              Controls randomness — 0 is deterministic, 2 is very creative.
+            </p>
           </div>
 
           <Separator />
@@ -130,7 +137,7 @@ function AISettings({
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
               <Label>Max tokens</Label>
-              <span className="text-sm text-muted-foreground font-mono">{maxTokens}</span>
+              <span className="text-muted-foreground font-mono text-sm">{maxTokens}</span>
             </div>
             <Slider
               min={256}
@@ -155,7 +162,7 @@ function AISettings({
             rows={6}
             className="resize-y"
           />
-          <p className="mt-2 text-xs text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-xs">
             This prompt is sent at the start of every conversation.
           </p>
         </CardContent>

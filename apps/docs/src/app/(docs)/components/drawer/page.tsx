@@ -49,7 +49,7 @@ export default function DrawerPage() {
                 <DrawerDescription>Set your daily activity goal.</DrawerDescription>
               </DrawerHeader>
               <div className="p-4 pb-0">
-                <p className="text-center text-sm text-muted-foreground">Drag down to dismiss.</p>
+                <p className="text-muted-foreground text-center text-sm">Drag down to dismiss.</p>
               </div>
               <DrawerFooter>
                 <Button>Submit</Button>
@@ -80,7 +80,9 @@ export default function DrawerPage() {
 </Drawer>`}
       cliInstall="npx aether-ui add drawer"
       manualInstallCode={SOURCE}
-      manualSteps={[{ title: "Install dependencies", code: "npm install vaul", filename: "terminal" }]}
+      manualSteps={[
+        { title: "Install dependencies", code: "npm install vaul", filename: "terminal" },
+      ]}
       examples={[
         {
           title: "Without scale background",
@@ -88,7 +90,9 @@ export default function DrawerPage() {
           preview: (
             <Drawer shouldScaleBackground={false}>
               <DrawerTrigger asChild>
-                <Button variant="outline" size="sm">No scale</Button>
+                <Button variant="outline" size="sm">
+                  No scale
+                </Button>
               </DrawerTrigger>
               <DrawerContent>
                 <div className="mx-auto w-full max-w-sm">
@@ -110,13 +114,26 @@ export default function DrawerPage() {
         },
       ]}
       props={[
-        { name: "shouldScaleBackground", type: "boolean", default: "true", description: "Scales and rounds the page behind the drawer when open." },
+        {
+          name: "shouldScaleBackground",
+          type: "boolean",
+          default: "true",
+          description: "Scales and rounds the page behind the drawer when open.",
+        },
         { name: "open", type: "boolean", description: "Controlled open state." },
-        { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback when open state changes." },
-        { name: "snapPoints", type: "(number | string)[]", description: "Snap points for partial drawer heights, e.g. [0.5, 1]." },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "Callback when open state changes.",
+        },
+        {
+          name: "snapPoints",
+          type: "(number | string)[]",
+          description: "Snap points for partial drawer heights, e.g. [0.5, 1].",
+        },
       ]}
       a11yNotes={[
-        "DrawerContent renders with role=\"dialog\" and focus is trapped inside while open.",
+        'DrawerContent renders with role="dialog" and focus is trapped inside while open.',
         "DrawerTitle and DrawerDescription provide accessible label and description.",
         "Drag-to-dismiss is supplemented by a close button for keyboard and pointer users.",
         "Escape key closes the drawer.",

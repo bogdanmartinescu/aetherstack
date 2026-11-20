@@ -63,7 +63,7 @@ export function MultiSelect({
                 aria-label={`Remove ${opt.label}`}
                 disabled={disabled}
                 onClick={() => toggle(opt.value)}
-                className="ml-0.5 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                className="ring-offset-background focus:ring-ring ml-0.5 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2"
               >
                 <X className="h-3 w-3" aria-hidden="true" />
               </button>
@@ -73,7 +73,7 @@ export function MultiSelect({
             type="button"
             disabled={disabled}
             onClick={clearAll}
-            className="rounded text-xs text-muted-foreground underline-offset-2 hover:underline focus:outline-none focus:ring-1 focus:ring-ring"
+            className="text-muted-foreground focus:ring-ring rounded text-xs underline-offset-2 hover:underline focus:outline-none focus:ring-1"
           >
             Clear all
           </button>
@@ -92,24 +92,22 @@ export function MultiSelect({
               !selected.length && "text-muted-foreground",
             )}
           >
-            <span>
-              {selected.length === 0 ? placeholder : `${selected.length} selected`}
-            </span>
+            <span>{selected.length === 0 ? placeholder : `${selected.length} selected`}</span>
             <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" aria-hidden="true" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
           <CommandPrimitive>
-            <div className="flex items-center border-b border-border px-3">
+            <div className="border-border flex items-center border-b px-3">
               <CommandPrimitive.Input
                 placeholder={searchPlaceholder}
                 value={search}
                 onValueChange={setSearch}
-                className="flex h-10 w-full bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+                className="placeholder:text-muted-foreground flex h-10 w-full bg-transparent py-3 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50"
               />
             </div>
             <CommandPrimitive.List className="max-h-60 overflow-y-auto overflow-x-hidden p-1">
-              <CommandPrimitive.Empty className="py-6 text-center text-sm text-muted-foreground">
+              <CommandPrimitive.Empty className="text-muted-foreground py-6 text-center text-sm">
                 No options found.
               </CommandPrimitive.Empty>
               {options.map((opt) => {
@@ -122,7 +120,7 @@ export function MultiSelect({
                     value={opt.label}
                     disabled={isAtMax}
                     onSelect={() => toggle(opt.value)}
-                    className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                    className="aria-selected:bg-accent aria-selected:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                   >
                     <span
                       className={cn(

@@ -35,14 +35,14 @@ function SourceCard({ title, url, excerpt, favicon, index, className }: SourceCa
       rel="noopener noreferrer"
       title={url}
       className={cn(
-        "flex items-start gap-3 rounded-lg border border-border bg-card p-3 text-sm transition-colors hover:bg-accent",
-        "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        "border-border bg-card hover:bg-accent flex items-start gap-3 rounded-lg border p-3 text-sm transition-colors",
+        "ring-offset-background focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
         className,
       )}
     >
       <div className="mt-0.5 flex flex-shrink-0 items-center gap-2">
         {index !== undefined && (
-          <span className="flex h-5 min-w-5 items-center justify-center rounded bg-muted px-1 font-mono text-[11px] font-medium text-muted-foreground">
+          <span className="bg-muted text-muted-foreground flex h-5 min-w-5 items-center justify-center rounded px-1 font-mono text-[11px] font-medium">
             {index}
           </span>
         )}
@@ -54,13 +54,13 @@ function SourceCard({ title, url, excerpt, favicon, index, className }: SourceCa
             onError={() => setFaviconFailed(true)}
           />
         ) : (
-          <Link className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+          <Link className="text-muted-foreground h-4 w-4" aria-hidden="true" />
         )}
       </div>
       <div className="min-w-0 flex-1">
-        <p className="truncate font-medium text-foreground">{title}</p>
-        <p className="truncate text-xs text-muted-foreground">{domain}</p>
-        {excerpt && <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{excerpt}</p>}
+        <p className="text-foreground truncate font-medium">{title}</p>
+        <p className="text-muted-foreground truncate text-xs">{domain}</p>
+        {excerpt && <p className="text-muted-foreground mt-1 line-clamp-2 text-xs">{excerpt}</p>}
       </div>
       <span className="sr-only"> (opens in a new tab)</span>
     </a>

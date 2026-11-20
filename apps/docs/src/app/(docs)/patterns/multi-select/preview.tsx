@@ -23,7 +23,7 @@ export function MultiSelectPreview() {
         placeholder="Select technologies…"
         maxSelected={4}
       />
-      <p className="text-xs text-muted-foreground text-center">
+      <p className="text-muted-foreground text-center text-xs">
         {value.length === 0 ? "Nothing selected" : `Selected: ${value.join(", ")}`}
       </p>
     </div>

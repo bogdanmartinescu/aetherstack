@@ -34,13 +34,45 @@ export function MySettings() {
 }`}
       preview={<AISettingsPanelPreview />}
       props={[
-        { name: "temperature", type: "number", default: "0.7", description: "Sampling temperature between 0 and 2. Lower values produce more deterministic output." },
-        { name: "onTemperatureChange", type: "(v: number) => void", description: "Called with the new temperature value when the slider changes." },
-        { name: "maxTokens", type: "number", default: "2048", description: "Maximum number of output tokens to generate." },
-        { name: "onMaxTokensChange", type: "(v: number) => void", description: "Called with the new max tokens value when the input changes." },
-        { name: "systemPrompt", type: "string", default: '""', description: "System prompt text shown in the textarea." },
-        { name: "onSystemPromptChange", type: "(v: string) => void", description: "Called with the updated system prompt string on every keystroke." },
-        { name: "className", type: "string", description: "Additional CSS classes applied to the panel container." },
+        {
+          name: "temperature",
+          type: "number",
+          default: "0.7",
+          description:
+            "Sampling temperature between 0 and 2. Lower values produce more deterministic output.",
+        },
+        {
+          name: "onTemperatureChange",
+          type: "(v: number) => void",
+          description: "Called with the new temperature value when the slider changes.",
+        },
+        {
+          name: "maxTokens",
+          type: "number",
+          default: "2048",
+          description: "Maximum number of output tokens to generate.",
+        },
+        {
+          name: "onMaxTokensChange",
+          type: "(v: number) => void",
+          description: "Called with the new max tokens value when the input changes.",
+        },
+        {
+          name: "systemPrompt",
+          type: "string",
+          default: '""',
+          description: "System prompt text shown in the textarea.",
+        },
+        {
+          name: "onSystemPromptChange",
+          type: "(v: string) => void",
+          description: "Called with the updated system prompt string on every keystroke.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional CSS classes applied to the panel container.",
+        },
       ]}
       a11yNotes={[
         "Each control has an associated <label> with a for/id pairing.",

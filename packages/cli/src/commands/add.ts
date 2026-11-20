@@ -21,7 +21,13 @@ export const addCommand = new Command("add")
     const registryUrl = opts.registry ?? config.registry ?? DEFAULT_REGISTRY_URL
 
     for (const name of componentNames) {
-      await addOne(name, { cwd, registryUrl, config, overwrite: opts.overwrite, dryRun: opts.dryRun })
+      await addOne(name, {
+        cwd,
+        registryUrl,
+        config,
+        overwrite: opts.overwrite,
+        dryRun: opts.dryRun,
+      })
     }
   })
 
@@ -66,9 +72,7 @@ async function addOne(
     if (conflicts.length > 0) {
       spinner.warn(pc.yellow(`Conflict — files already exist:`))
       conflicts.forEach((f) => console.log(`  ${pc.yellow("→")} ${f}`))
-      console.log(
-        `\n  Run with ${pc.cyan("--overwrite")} to replace them.\n`,
-      )
+      console.log(`\n  Run with ${pc.cyan("--overwrite")} to replace them.\n`)
       process.exit(1)
     }
   }

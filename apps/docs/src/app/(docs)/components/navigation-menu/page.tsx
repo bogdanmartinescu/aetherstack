@@ -43,17 +43,19 @@ export default function NavigationMenuPage() {
             <NavigationMenuItem>
               <NavigationMenuTrigger>Products</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid gap-2 p-4 w-[280px]">
+                <ul className="grid w-[280px] gap-2 p-4">
                   <li>
-                    <NavigationMenuLink className="block rounded-md p-2 hover:bg-muted" href="#">
+                    <NavigationMenuLink className="hover:bg-muted block rounded-md p-2" href="#">
                       <div className="text-sm font-medium">Aether UI</div>
-                      <div className="text-xs text-muted-foreground">Design system primitives</div>
+                      <div className="text-muted-foreground text-xs">Design system primitives</div>
                     </NavigationMenuLink>
                   </li>
                   <li>
-                    <NavigationMenuLink className="block rounded-md p-2 hover:bg-muted" href="#">
+                    <NavigationMenuLink className="hover:bg-muted block rounded-md p-2" href="#">
                       <div className="text-sm font-medium">Aether CLI</div>
-                      <div className="text-xs text-muted-foreground">Component installation tool</div>
+                      <div className="text-muted-foreground text-xs">
+                        Component installation tool
+                      </div>
                     </NavigationMenuLink>
                   </li>
                 </ul>
@@ -154,11 +156,11 @@ export function NavigationMenuDemo() {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid grid-cols-2 gap-2 p-4 w-[340px]">
+                    <div className="grid w-[340px] grid-cols-2 gap-2 p-4">
                       {["Documentation", "API Reference", "Changelog", "Community"].map((r) => (
                         <NavigationMenuLink
                           key={r}
-                          className="block rounded-md p-2 text-sm hover:bg-muted"
+                          className="hover:bg-muted block rounded-md p-2 text-sm"
                           href="#"
                         >
                           {r}
@@ -241,7 +243,8 @@ export function NavigationMenuDemo() {
             {
               name: "()",
               type: "string",
-              description: "Utility function — returns a className string for standalone NavigationMenuLink items.",
+              description:
+                "Utility function — returns a className string for standalone NavigationMenuLink items.",
             },
           ],
         },

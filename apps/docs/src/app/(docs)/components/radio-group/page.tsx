@@ -117,12 +117,12 @@ export function ControlledRadioGroup() {
           title: "Horizontal layout",
           preview: (
             <fieldset>
-              <legend className="mb-3 text-sm font-medium text-foreground">Plan</legend>
+              <legend className="text-foreground mb-3 text-sm font-medium">Plan</legend>
               <div className="flex gap-4">
                 {["Starter", "Pro", "Enterprise"].map((p) => (
                   <div key={p} className="flex items-center space-x-2">
-                    <div className="h-4 w-4 rounded-full border border-primary" />
-                    <span className="text-sm text-foreground">{p}</span>
+                    <div className="border-primary h-4 w-4 rounded-full border" />
+                    <span className="text-foreground text-sm">{p}</span>
                   </div>
                 ))}
               </div>
@@ -141,19 +141,23 @@ export function ControlledRadioGroup() {
           title: "Card-style options",
           description: "Wrap each item in a Card for a richer selection UI.",
           preview: (
-            <div className="grid gap-3 w-full max-w-xs">
+            <div className="grid w-full max-w-xs gap-3">
               {["Monthly", "Yearly (save 20%)"].map((opt, i) => (
                 <label
                   key={opt}
                   className={`flex cursor-pointer items-start gap-3 rounded-lg border p-4 transition-colors ${i === 1 ? "border-primary bg-primary/5" : "border-border bg-card hover:bg-muted/50"}`}
                 >
-                  <div className={`mt-0.5 h-4 w-4 rounded-full border ${i === 1 ? "border-primary bg-primary" : "border-primary"} flex items-center justify-center`}>
-                    {i === 1 && <div className="h-2 w-2 rounded-full bg-primary-foreground" />}
+                  <div
+                    className={`mt-0.5 h-4 w-4 rounded-full border ${i === 1 ? "border-primary bg-primary" : "border-primary"} flex items-center justify-center`}
+                  >
+                    {i === 1 && <div className="bg-primary-foreground h-2 w-2 rounded-full" />}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground">{opt.split(" (")[0]}</p>
+                    <p className="text-foreground text-sm font-medium">{opt.split(" (")[0]}</p>
                     {opt.includes("(") && (
-                      <p className="text-xs text-muted-foreground">{opt.split("(")[1].replace(")", "")}</p>
+                      <p className="text-muted-foreground text-xs">
+                        {opt.split("(")[1].replace(")", "")}
+                      </p>
                     )}
                   </div>
                 </label>
@@ -200,20 +204,57 @@ export function CardRadioGroup() {
           title: "RadioGroup",
           props: [
             { name: "value", type: "string", description: "Controlled selected value." },
-            { name: "defaultValue", type: "string", description: "Uncontrolled initial selected value." },
-            { name: "onValueChange", type: "(value: string) => void", description: "Callback when the selected value changes." },
-            { name: "disabled", type: "boolean", default: "false", description: "Disables all items in the group." },
-            { name: "required", type: "boolean", default: "false", description: "Required in form context." },
-            { name: "orientation", type: '"horizontal" | "vertical"', default: '"vertical"', description: "Affects arrow key navigation direction." },
+            {
+              name: "defaultValue",
+              type: "string",
+              description: "Uncontrolled initial selected value.",
+            },
+            {
+              name: "onValueChange",
+              type: "(value: string) => void",
+              description: "Callback when the selected value changes.",
+            },
+            {
+              name: "disabled",
+              type: "boolean",
+              default: "false",
+              description: "Disables all items in the group.",
+            },
+            {
+              name: "required",
+              type: "boolean",
+              default: "false",
+              description: "Required in form context.",
+            },
+            {
+              name: "orientation",
+              type: '"horizontal" | "vertical"',
+              default: '"vertical"',
+              description: "Affects arrow key navigation direction.",
+            },
             { name: "className", type: "string", description: "Defaults to grid gap-2." },
           ],
         },
         {
           title: "RadioGroupItem",
           props: [
-            { name: "value", type: "string", required: true, description: "The value of this radio button." },
-            { name: "disabled", type: "boolean", default: "false", description: "Disables this individual item." },
-            { name: "className", type: "string", description: "Additional classes on the radio button." },
+            {
+              name: "value",
+              type: "string",
+              required: true,
+              description: "The value of this radio button.",
+            },
+            {
+              name: "disabled",
+              type: "boolean",
+              default: "false",
+              description: "Disables this individual item.",
+            },
+            {
+              name: "className",
+              type: "string",
+              description: "Additional classes on the radio button.",
+            },
           ],
         },
       ]}

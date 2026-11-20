@@ -3,6 +3,7 @@
 ## What is Aether UI?
 
 **Aether UI** is a premium open-code design system built for:
+
 - SaaS dashboards and admin interfaces
 - Marketing and landing pages
 - Internal tooling and B2B application UIs
@@ -38,11 +39,13 @@ consuming team.
 ## Who Is It For?
 
 **Primary audience:**
+
 - Indie hackers and solo developers building SaaS products or AI applications
 - Small product teams who want a professional baseline fast
 - Developers who appreciate clean, maintainable, well-structured component code
 
 **Secondary audience:**
+
 - Design systems engineers who want a reference for shadcn-based systems
 - Teams evaluating or migrating away from closed component kits
 - AI engineers building LLM-powered interfaces (chat, agent, prompt UIs)
@@ -60,12 +63,14 @@ consuming team.
 ## Registry Tiers
 
 ### Public Registry (`@aether`)
+
 - Free, open-source
 - 65 UI primitives (including 14 AI-native), 39 patterns (including 10 AI-native), 34 blocks (including 9 AI-native)
 - Installable via the Aether UI CLI: `npx @aetherstack/cli add [component]`
 - All items carry AI metadata; consumable via the MCP server
 
 ### Pro Registry (`@aether-pro`) — Future
+
 - Premium blocks and full page templates
 - Advanced vertical kits (SaaS, CRM, Billing, Analytics, AI App)
 - License-gated, per-project or team subscription
@@ -100,6 +105,7 @@ developers:
 
 Aether UI uses a violet-primary color system with neutral grays and clean
 typography. The aesthetic is:
+
 - **Professional, not flashy**
 - **Dense but readable**
 - **Dark-mode native**
@@ -112,15 +118,15 @@ making it trivially overridable per project.
 
 ## Differentiation from Competitors
 
-| | Aether UI | shadcn/ui | Tremor | MUI |
-|---|---|---|---|---|
-| Open code | ✓ | ✓ | ✓ | ✗ |
-| Registry-based install | ✓ | ✓ | ✗ | ✗ |
-| SaaS-focused | ✓ | ✗ | ✓ | ✗ |
-| Marketing blocks | ✓ | ✗ | ✗ | ✗ |
-| AI-native UI primitives | ✓ | ✗ | ✗ | ✗ |
-| MCP server | ✓ | ✗ | ✗ | ✗ |
-| LLM-readable metadata | ✓ | ✗ | ✗ | ✗ |
-| Full blocks (public) | ✓ | ✗ | partial | ✗ |
-| Premium tier | ✓ (future) | ✗ | ✓ | ✓ |
-| Monorepo design system | ✓ | ✗ | ✗ | ✓ |
+|                         | Aether UI  | shadcn/ui | Tremor  | MUI |
+| ----------------------- | ---------- | --------- | ------- | --- |
+| Open code               | ✓          | ✓         | ✓       | ✗   |
+| Registry-based install  | ✓          | ✓         | ✗       | ✗   |
+| SaaS-focused            | ✓          | ✗         | ✓       | ✗   |
+| Marketing blocks        | ✓          | ✗         | ✗       | ✗   |
+| AI-native UI primitives | ✓          | ✗         | ✗       | ✗   |
+| MCP server              | ✓          | ✗         | ✗       | ✗   |
+| LLM-readable metadata   | ✓          | ✗         | ✗       | ✗   |
+| Full blocks (public)    | ✓          | ✗         | partial | ✗   |
+| Premium tier            | ✓ (future) | ✗         | ✓       | ✓   |
+| Monorepo design system  | ✓          | ✗         | ✗       | ✓   |

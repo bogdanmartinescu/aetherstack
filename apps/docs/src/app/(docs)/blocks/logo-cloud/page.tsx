@@ -49,10 +49,25 @@ export default function TrustedBy() {
         />
       }
       props={[
-        { name: "logos", type: "{ name: string; src?: string; icon?: ReactNode; href?: string }[]", required: true, description: "Logo items. Use src for images, icon for custom SVGs, or omit both for text-only display." },
+        {
+          name: "logos",
+          type: "{ name: string; src?: string; icon?: ReactNode; href?: string }[]",
+          required: true,
+          description:
+            "Logo items. Use src for images, icon for custom SVGs, or omit both for text-only display.",
+        },
         { name: "headline", type: "string", description: "Optional label above the logo grid." },
-        { name: "grayscale", type: "boolean", default: "true", description: "Apply greyscale filter with hover to full colour." },
-        { name: "className", type: "string", description: "Additional classes on the section wrapper." },
+        {
+          name: "grayscale",
+          type: "boolean",
+          default: "true",
+          description: "Apply greyscale filter with hover to full colour.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the section wrapper.",
+        },
       ]}
       a11yNotes={[
         "Logo images include an alt attribute set to the logo name.",

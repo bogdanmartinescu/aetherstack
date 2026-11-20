@@ -35,14 +35,33 @@ export function AppHeader() {
 }`}
       preview={<ProfileDropdownPreview />}
       props={[
-        { name: "user", type: "{ name: string; email: string; avatarUrl?: string; role?: string }", required: true, description: "User data shown in the trigger and at the top of the dropdown." },
-        { name: "items", type: "{ label: string; href: string }[]", required: true, description: "Navigation links rendered in the dropdown body." },
-        { name: "onSignOut", type: "() => void", required: true, description: "Called when the user clicks the sign-out item." },
-        { name: "className", type: "string", description: "Additional classes on the trigger button." },
+        {
+          name: "user",
+          type: "{ name: string; email: string; avatarUrl?: string; role?: string }",
+          required: true,
+          description: "User data shown in the trigger and at the top of the dropdown.",
+        },
+        {
+          name: "items",
+          type: "{ label: string; href: string }[]",
+          required: true,
+          description: "Navigation links rendered in the dropdown body.",
+        },
+        {
+          name: "onSignOut",
+          type: "() => void",
+          required: true,
+          description: "Called when the user clicks the sign-out item.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the trigger button.",
+        },
       ]}
       a11yNotes={[
-        "Avatar trigger uses aria-haspopup=\"menu\" and aria-expanded.",
-        "Dropdown uses role=\"menu\"; each link is role=\"menuitem\".",
+        'Avatar trigger uses aria-haspopup="menu" and aria-expanded.',
+        'Dropdown uses role="menu"; each link is role="menuitem".',
         "User name and email in the header section are aria-hidden since they are decorative summaries.",
         "Escape closes the menu and returns focus to the trigger.",
       ]}

@@ -28,12 +28,7 @@ interface CheckResult {
   durationMs: number
 }
 
-function run(
-  id: string,
-  command: string,
-  args: string[],
-  required: boolean,
-): CheckResult {
+function run(id: string, command: string, args: string[], required: boolean): CheckResult {
   const started = Date.now()
   const label = `${command} ${args.join(" ")}`
   process.stdout.write(`→ ${id}: ${label}\n`)
@@ -182,7 +177,12 @@ function main(): void {
   const results: CheckResult[] = []
 
   results.push(
-    run("validate-registry", "pnpm", ["--filter", "@aetherstack/scripts", "validate-registry"], true),
+    run(
+      "validate-registry",
+      "pnpm",
+      ["--filter", "@aetherstack/scripts", "validate-registry"],
+      true,
+    ),
   )
   results.push(
     run("build-registry", "pnpm", ["--filter", "@aetherstack/scripts", "build-registry"], true),
@@ -191,21 +191,21 @@ function main(): void {
     run(
       "registry-freshness",
       "git",
-      ["diff", "--quiet", "--exit-code", "--", "apps/registry-public/public/r", "apps/registry-public/public/llms.txt"],
+      [
+        "diff",
+        "--quiet",
+        "--exit-code",
+        "--",
+        "apps/registry-public/public/r",
+        "apps/registry-public/public/llms.txt",
+      ],
       true,
     ),
   )
   results.push(run("typecheck", "pnpm", ["typecheck"], true))
   results.push(run("lint", "pnpm", ["lint"], true))
   results.push(run("test", "pnpm", ["test"], true))
-  results.push(
-    run(
-      "build-packages",
-      "pnpm",
-      ["turbo", "build", "--filter=./packages/*"],
-      true,
-    ),
-  )
+  results.push(run("build-packages", "pnpm", ["turbo", "build", "--filter=./packages/*"], true))
 
   if (process.env["SKIP_CONSUMER_INSTALL"] === "1") {
     results.push({
@@ -225,7 +225,8 @@ function main(): void {
   const format = run("format:check", "pnpm", ["format:check"], false)
   if (format.status === "FAIL") {
     format.detail =
-      "Known pre-existing gap (hundreds of files). Not enforced in CI. " + format.detail.slice(0, 200)
+      "Known pre-existing gap (hundreds of files). Not enforced in CI. " +
+      format.detail.slice(0, 200)
   }
   results.push(format)
 

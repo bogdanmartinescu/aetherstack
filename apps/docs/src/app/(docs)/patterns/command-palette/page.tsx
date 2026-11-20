@@ -61,10 +61,30 @@ export function MyCommandPalette() {
 }`}
       preview={<CommandPalettePreview />}
       props={[
-        { name: "open", type: "boolean", required: true, description: "Controls dialog visibility (CommandPaletteDialog)." },
-        { name: "onOpenChange", type: "(open: boolean) => void", required: true, description: "Called when the dialog open state should change." },
-        { name: "children", type: "ReactNode", required: true, description: "Compose CommandPalette, CommandPaletteInput, CommandPaletteList etc. inside." },
-        { name: "className", type: "string", description: "Additional classes on the CommandPrimitive root." },
+        {
+          name: "open",
+          type: "boolean",
+          required: true,
+          description: "Controls dialog visibility (CommandPaletteDialog).",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          required: true,
+          description: "Called when the dialog open state should change.",
+        },
+        {
+          name: "children",
+          type: "ReactNode",
+          required: true,
+          description:
+            "Compose CommandPalette, CommandPaletteInput, CommandPaletteList etc. inside.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the CommandPrimitive root.",
+        },
       ]}
       a11yNotes={[
         "Built on cmdk which handles full keyboard navigation: Arrow keys, Enter to select, Escape to dismiss.",

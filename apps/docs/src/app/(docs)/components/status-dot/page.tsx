@@ -16,11 +16,29 @@ export default function StatusDotPage() {
       manualInstallCode={STATUS_DOT_SOURCE}
       examples={[]}
       props={[
-        { name: "status", type: '"idle" | "busy" | "blocked" | "failed" | "finished"', default: "—", description: "Which state to show." },
-        { name: "label", type: "string", default: "—", description: "Spoken name. Defaults to the status." },
-        { name: "pulse", type: "boolean", default: "true when busy", description: "Pulse the dot. Off under reduced motion via motion-safe." },
+        {
+          name: "status",
+          type: '"idle" | "busy" | "blocked" | "failed" | "finished"',
+          default: "—",
+          description: "Which state to show.",
+        },
+        {
+          name: "label",
+          type: "string",
+          default: "—",
+          description: "Spoken name. Defaults to the status.",
+        },
+        {
+          name: "pulse",
+          type: "boolean",
+          default: "true when busy",
+          description: "Pulse the dot. Off under reduced motion via motion-safe.",
+        },
       ]}
-      a11yNotes={["The dot is an image with an accessible name.", "Busy pulses with motion-safe so reduced motion stays still."]}
+      a11yNotes={[
+        "The dot is an image with an accessible name.",
+        "Busy pulses with motion-safe so reduced motion stays still.",
+      ]}
     />
   )
 }

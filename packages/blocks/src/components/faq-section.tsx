@@ -1,10 +1,5 @@
 import { cn } from "@aetherstack/utils"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@aetherstack/ui"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@aetherstack/ui"
 
 export interface FAQItem {
   id: string
@@ -20,35 +15,27 @@ export interface FAQSectionProps {
   className?: string
 }
 
-export function FAQSection({
-  eyebrow,
-  headline,
-  subheading,
-  items,
-  className,
-}: FAQSectionProps) {
+export function FAQSection({ eyebrow, headline, subheading, items, className }: FAQSectionProps) {
   const hasSplitLayout = Boolean(headline || eyebrow || subheading)
 
   return (
-    <section className={cn("w-full py-16 px-4", className)}>
+    <section className={cn("w-full px-4 py-16", className)}>
       <div className="mx-auto max-w-6xl">
         {hasSplitLayout ? (
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left: heading text */}
             <div className="lg:pt-2">
               {eyebrow && (
-                <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+                <p className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
                   {eyebrow}
                 </p>
               )}
               {headline && (
-                <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                <h2 className="text-foreground text-3xl font-bold tracking-tight sm:text-4xl">
                   {headline}
                 </h2>
               )}
-              {subheading && (
-                <p className="mt-4 text-base text-muted-foreground">{subheading}</p>
-              )}
+              {subheading && <p className="text-muted-foreground mt-4 text-base">{subheading}</p>}
             </div>
 
             {/* Right: accordion */}
@@ -58,7 +45,7 @@ export function FAQSection({
                   <AccordionTrigger className="text-left text-sm font-medium">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground">
+                  <AccordionContent className="text-muted-foreground text-sm">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -73,7 +60,7 @@ export function FAQSection({
                   <AccordionTrigger className="text-left text-sm font-medium">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground">
+                  <AccordionContent className="text-muted-foreground text-sm">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>

@@ -50,7 +50,12 @@ const days = [
           default: "—",
           description: "Called when the user activates a day with Enter or Space.",
         },
-        { name: "className", type: "string", default: "—", description: "Extra classes on the listbox root." },
+        {
+          name: "className",
+          type: "string",
+          default: "—",
+          description: "Extra classes on the listbox root.",
+        },
       ]}
       a11yNotes={[
         "The listbox exposes the uptime percent in its accessible name.",

@@ -4,7 +4,8 @@ import { StreamingTextPreview } from "./preview"
 
 export const metadata: Metadata = {
   title: "StreamingText",
-  description: "Renders a string or async token stream character by character, ideal for AI response streaming.",
+  description:
+    "Renders a string or async token stream character by character, ideal for AI response streaming.",
 }
 
 export default function StreamingTextPage() {
@@ -40,7 +41,8 @@ export default function StreamingTextPage() {
         {
           name: "onComplete",
           type: "() => void",
-          description: "Called once when an AsyncIterable finishes. Safe to pass an inline function.",
+          description:
+            "Called once when an AsyncIterable finishes. Safe to pass an inline function.",
         },
         {
           name: "onError",

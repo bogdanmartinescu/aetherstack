@@ -16,15 +16,15 @@ component collection.
 Six related names show up across the repo — this table pins down what each one refers to so imports
 and URLs stay consistent.
 
-| Name | Refers to |
-|---|---|
-| `aetherstack` | The monorepo, the GitHub repository, and the umbrella brand |
-| `Aether UI` | The design system product shipped from this monorepo |
-| `@aetherstack/*` | npm scope for all internal packages (e.g. `@aetherstack/ui`) |
-| `@aether` | Namespace for the **public** registry manifest items |
-| `@aether-pro` | Namespace for the **premium** registry manifest items (license-gated) |
-| `aether-ui` | The CLI binary (`npx @aetherstack/cli` → runs `aether-ui`) |
-| `account.aether-ui.dev` | The Pro account dashboard app (`apps/account`) |
+| Name                    | Refers to                                                             |
+| ----------------------- | --------------------------------------------------------------------- |
+| `aetherstack`           | The monorepo, the GitHub repository, and the umbrella brand           |
+| `Aether UI`             | The design system product shipped from this monorepo                  |
+| `@aetherstack/*`        | npm scope for all internal packages (e.g. `@aetherstack/ui`)          |
+| `@aether`               | Namespace for the **public** registry manifest items                  |
+| `@aether-pro`           | Namespace for the **premium** registry manifest items (license-gated) |
+| `aether-ui`             | The CLI binary (`npx @aetherstack/cli` → runs `aether-ui`)            |
+| `account.aether-ui.dev` | The Pro account dashboard app (`apps/account`)                        |
 
 ## Repository Structure
 
@@ -105,20 +105,20 @@ as external dependencies. It is not a shared package — it is a deployable prod
 
 ## Technology Choices
 
-| Concern | Choice | Rationale |
-|---|---|---|
-| Monorepo | pnpm workspaces + Turborepo | Industry standard, fast, great caching |
-| Language | TypeScript everywhere | Type safety across all boundaries |
-| UI framework | Next.js 16 (App Router) | SSR/SSG support, best-in-class DX |
-| Styling | Tailwind CSS 3 | Utility-first, token-driven |
-| Component model | Open-code, registry-installable | Users own the source; shadcn-format-compatible |
-| CLI bundler | tsup | Single-file CJS output with workspace deps inlined |
-| Schema validation | Zod | Runtime safety for registry data |
-| Versioning | Changesets | Independent package versioning |
-| Linting | ESLint 8 | Next.js native support |
-| Formatting | Prettier + prettier-plugin-tailwindcss | Consistent class ordering |
-| Auth (Phase 8) | Clerk | Built-in React components, Organizations for Team tier, custom session JWT claims for license |
-| Billing (Phase 8) | Stripe | Checkout, Customer Portal, webhook-driven license sync |
+| Concern           | Choice                                 | Rationale                                                                                     |
+| ----------------- | -------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Monorepo          | pnpm workspaces + Turborepo            | Industry standard, fast, great caching                                                        |
+| Language          | TypeScript everywhere                  | Type safety across all boundaries                                                             |
+| UI framework      | Next.js 16 (App Router)                | SSR/SSG support, best-in-class DX                                                             |
+| Styling           | Tailwind CSS 3                         | Utility-first, token-driven                                                                   |
+| Component model   | Open-code, registry-installable        | Users own the source; shadcn-format-compatible                                                |
+| CLI bundler       | tsup                                   | Single-file CJS output with workspace deps inlined                                            |
+| Schema validation | Zod                                    | Runtime safety for registry data                                                              |
+| Versioning        | Changesets                             | Independent package versioning                                                                |
+| Linting           | ESLint 8                               | Next.js native support                                                                        |
+| Formatting        | Prettier + prettier-plugin-tailwindcss | Consistent class ordering                                                                     |
+| Auth (Phase 8)    | Clerk                                  | Built-in React components, Organizations for Team tier, custom session JWT claims for license |
+| Billing (Phase 8) | Stripe                                 | Checkout, Customer Portal, webhook-driven license sync                                        |
 
 ---
 
@@ -128,6 +128,7 @@ For this monorepo, all packages export their **TypeScript source directly**
 (`"main": "./src/index.ts"`). Next.js apps compile them via `transpilePackages`.
 
 This trades a package build step for simplicity during development:
+
 - No `tsc --watch` per package
 - TypeScript errors surface in consuming apps
 - Zero-config hot reload across package boundaries
@@ -193,6 +194,7 @@ User runs: aether-ui add <pro-item>
 ```
 
 ### Key decisions
+
 - **Clerk** handles identity, session tokens, and license metadata — no separate auth database
 - **JWT claims** allow the CLI to verify license tier offline within the token TTL window
 - **Public registry** remains completely unauthenticated and CDN-served — auth only touches `@aether-pro` items

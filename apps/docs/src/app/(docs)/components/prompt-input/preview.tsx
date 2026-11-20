@@ -16,12 +16,9 @@ export function PromptInputPreview() {
   }
 
   return (
-    <div className="flex flex-col gap-3 w-full max-w-md">
+    <div className="flex w-full max-w-md flex-col gap-3">
       {messages.map((m, i) => (
-        <div
-          key={i}
-          className="rounded-lg bg-muted px-3 py-2 text-sm self-end max-w-[80%]"
-        >
+        <div key={i} className="bg-muted max-w-[80%] self-end rounded-lg px-3 py-2 text-sm">
           {m}
         </div>
       ))}

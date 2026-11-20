@@ -4,7 +4,8 @@ import { PatternPage } from "@/components/pattern-page"
 
 export const metadata: Metadata = {
   title: "CodeBlock (AI)",
-  description: "Displays syntax-highlighted code inside AI chat responses, with an optional filename header and copy-to-clipboard button.",
+  description:
+    "Displays syntax-highlighted code inside AI chat responses, with an optional filename header and copy-to-clipboard button.",
 }
 
 export default function CodeBlockAiPage() {

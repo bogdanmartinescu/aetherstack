@@ -149,13 +149,13 @@ export function HeroChatDemo() {
   }
 
   return (
-    <div className="flex h-[560px] flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xl shadow-primary/5">
+    <div className="border-border bg-card shadow-primary/5 flex h-[560px] flex-col overflow-hidden rounded-xl border shadow-xl">
       {/* Title bar */}
-      <div className="flex items-center gap-2 border-b border-border px-4 py-3">
-        <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary/10 text-primary">
+      <div className="border-border flex items-center gap-2 border-b px-4 py-3">
+        <span className="bg-primary/10 text-primary flex h-7 w-7 items-center justify-center rounded-md">
           <Bot className="h-4 w-4" aria-hidden="true" />
         </span>
-        <span className="text-sm font-medium text-foreground">Deploy assistant</span>
+        <span className="text-foreground text-sm font-medium">Deploy assistant</span>
         <ModelBadge model="gpt-4o" provider="openai" className="ml-auto" />
         <Button variant="quiet" size="xs" onClick={reset} disabled={messages === INITIAL_MESSAGES}>
           Reset
@@ -219,7 +219,7 @@ export function HeroChatDemo() {
       </div>
 
       {/* Composer */}
-      <div className="space-y-3 border-t border-border bg-background/50 px-4 py-3">
+      <div className="border-border bg-background/50 space-y-3 border-t px-4 py-3">
         <div className="flex flex-wrap gap-2">
           {SUGGESTIONS.map((suggestion) => (
             <PromptSuggestion

@@ -4,7 +4,8 @@ import { PatternPage } from "@/components/pattern-page"
 
 export const metadata: Metadata = {
   title: "ToolCallCard",
-  description: "Shows a single AI tool invocation with its name, arguments, result, and execution status.",
+  description:
+    "Shows a single AI tool invocation with its name, arguments, result, and execution status.",
 }
 
 export default function ToolCallCardPage() {
@@ -14,23 +15,15 @@ export default function ToolCallCardPage() {
       description="Shows a single AI tool invocation with its name, arguments, result, and execution status."
       packageName="@aetherstack/ui"
       preview={
-        <div className="flex flex-col gap-2 w-full max-w-sm">
+        <div className="flex w-full max-w-sm flex-col gap-2">
           <ToolCallCard
             toolName="search_web"
             args={{ query: "React hooks" }}
             status="done"
             result={{ results: 12 }}
           />
-          <ToolCallCard
-            toolName="read_file"
-            args={{ path: "./src/app.ts" }}
-            status="running"
-          />
-          <ToolCallCard
-            toolName="write_file"
-            status="error"
-            error="Permission denied"
-          />
+          <ToolCallCard toolName="read_file" args={{ path: "./src/app.ts" }} status="running" />
+          <ToolCallCard toolName="write_file" status="error" error="Permission denied" />
         </div>
       }
       importCode={`import { ToolCallCard } from "@aetherstack/ui"`}
@@ -87,7 +80,8 @@ export default function ToolCallCardPage() {
         {
           name: "duration",
           type: "number",
-          description: "Execution time in milliseconds, shown next to the status (e.g. 250ms, 1.5s).",
+          description:
+            "Execution time in milliseconds, shown next to the status (e.g. 250ms, 1.5s).",
         },
         {
           name: "defaultOpen",

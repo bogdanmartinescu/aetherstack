@@ -9,7 +9,7 @@ export function TokenCounterPreview() {
   const MAX = 128000
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-sm">
+    <div className="flex w-full max-w-sm flex-col gap-4">
       <TokenCounter used={used} max={MAX} />
       <Slider
         min={0}

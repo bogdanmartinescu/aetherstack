@@ -29,14 +29,29 @@ export default function LoadingStatePage() {
         </div>
       }
       props={[
-        { name: "variant", type: '"spinner" | "skeleton"', default: '"spinner"', description: "Display style." },
-        { name: "rows", type: "number", default: "4", description: "Number of skeleton rows. Only used when variant=\"skeleton\"." },
-        { name: "text", type: "string", default: '"Loading…"', description: "Screen reader label and visible caption for the spinner variant." },
+        {
+          name: "variant",
+          type: '"spinner" | "skeleton"',
+          default: '"spinner"',
+          description: "Display style.",
+        },
+        {
+          name: "rows",
+          type: "number",
+          default: "4",
+          description: 'Number of skeleton rows. Only used when variant="skeleton".',
+        },
+        {
+          name: "text",
+          type: "string",
+          default: '"Loading…"',
+          description: "Screen reader label and visible caption for the spinner variant.",
+        },
         { name: "className", type: "string", description: "Additional classes on the wrapper." },
       ]}
       a11yNotes={[
-        "The wrapper has aria-busy=\"true\" and aria-label set to the text prop — screen readers announce loading state.",
-        "Use variant=\"skeleton\" when the content shape is known — it reduces layout shift on resolve.",
+        'The wrapper has aria-busy="true" and aria-label set to the text prop — screen readers announce loading state.',
+        'Use variant="skeleton" when the content shape is known — it reduces layout shift on resolve.',
         "Do not leave the page interactive while LoadingState is shown — disable relevant controls.",
       ]}
     />

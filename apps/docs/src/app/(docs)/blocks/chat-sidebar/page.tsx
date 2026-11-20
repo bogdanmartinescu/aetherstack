@@ -51,12 +51,37 @@ export function MyChatSidebar() {
 }`}
       preview={<ChatSidebarPreview />}
       props={[
-        { name: "conversations", type: "Conversation[]", default: "[]", description: "List of conversation objects to render." },
-        { name: "onNewChat", type: "() => void", description: "Called when the 'New chat' button is clicked." },
-        { name: "onConversationClick", type: "(id: string) => void", description: "Called when a conversation item is clicked." },
-        { name: "onConversationDelete", type: "(id: string) => void", description: "Called when the delete action is triggered from the item dropdown." },
-        { name: "onConversationRename", type: "(id: string, title: string) => void", description: "Called after an inline rename is committed (Enter key or checkmark)." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "conversations",
+          type: "Conversation[]",
+          default: "[]",
+          description: "List of conversation objects to render.",
+        },
+        {
+          name: "onNewChat",
+          type: "() => void",
+          description: "Called when the 'New chat' button is clicked.",
+        },
+        {
+          name: "onConversationClick",
+          type: "(id: string) => void",
+          description: "Called when a conversation item is clicked.",
+        },
+        {
+          name: "onConversationDelete",
+          type: "(id: string) => void",
+          description: "Called when the delete action is triggered from the item dropdown.",
+        },
+        {
+          name: "onConversationRename",
+          type: "(id: string, title: string) => void",
+          description: "Called after an inline rename is committed (Enter key or checkmark).",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={[
         "Search input has an implicit label via the visible placeholder; add an aria-label if the field is used in isolation.",

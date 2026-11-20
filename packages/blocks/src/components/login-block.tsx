@@ -3,12 +3,7 @@
 import * as React from "react"
 import { cn } from "@aetherstack/utils"
 import { Button, Input, Checkbox, Label } from "@aetherstack/ui"
-import {
-  FormField,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from "@aetherstack/patterns"
+import { FormField, FormLabel, FormControl, FormMessage } from "@aetherstack/patterns"
 
 export interface LoginBlockProps {
   /** App / product name */
@@ -44,13 +39,21 @@ export function LoginBlock({
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     let valid = true
-    if (!email) { setEmailError("Email is required"); valid = false }
-    else if (!/\S+@\S+\.\S+/.test(email)) { setEmailError("Enter a valid email address"); valid = false }
-    else setEmailError(undefined)
+    if (!email) {
+      setEmailError("Email is required")
+      valid = false
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError("Enter a valid email address")
+      valid = false
+    } else setEmailError(undefined)
 
-    if (!password) { setPasswordError("Password is required"); valid = false }
-    else if (password.length < 8) { setPasswordError("Password must be at least 8 characters"); valid = false }
-    else setPasswordError(undefined)
+    if (!password) {
+      setPasswordError("Password is required")
+      valid = false
+    } else if (password.length < 8) {
+      setPasswordError("Password must be at least 8 characters")
+      valid = false
+    } else setPasswordError(undefined)
 
     if (valid) onSubmit?.({ email, password, remember })
   }
@@ -59,11 +62,11 @@ export function LoginBlock({
     <div className="w-full max-w-sm">
       {/* Logo / app name */}
       <div className="mb-8 flex flex-col items-center text-center">
-        <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-lg font-bold text-primary-foreground">
+        <div className="bg-primary text-primary-foreground mb-3 flex h-10 w-10 items-center justify-center rounded-xl text-lg font-bold">
           {appName.charAt(0)}
         </div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">Sign in</h1>
-        <p className="mt-1 text-sm text-muted-foreground">{tagline}</p>
+        <h1 className="text-foreground text-2xl font-semibold tracking-tight">Sign in</h1>
+        <p className="text-muted-foreground mt-1 text-sm">{tagline}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
@@ -86,7 +89,7 @@ export function LoginBlock({
             <FormLabel>Password</FormLabel>
             <a
               href={forgotPasswordHref}
-              className="text-xs text-primary underline-offset-4 hover:underline"
+              className="text-primary text-xs underline-offset-4 hover:underline"
             >
               Forgot password?
             </a>
@@ -109,7 +112,10 @@ export function LoginBlock({
             checked={remember}
             onCheckedChange={(v) => setRemember(Boolean(v))}
           />
-          <Label htmlFor="remember" className="text-sm font-normal text-muted-foreground cursor-pointer">
+          <Label
+            htmlFor="remember"
+            className="text-muted-foreground cursor-pointer text-sm font-normal"
+          >
             Remember me for 30 days
           </Label>
         </div>
@@ -119,9 +125,12 @@ export function LoginBlock({
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-muted-foreground">
+      <p className="text-muted-foreground mt-6 text-center text-sm">
         Don&apos;t have an account?{" "}
-        <a href={signUpHref} className="text-primary underline-offset-4 hover:underline font-medium">
+        <a
+          href={signUpHref}
+          className="text-primary font-medium underline-offset-4 hover:underline"
+        >
           Sign up
         </a>
       </p>
@@ -130,22 +139,20 @@ export function LoginBlock({
 
   if (panel) {
     return (
-      <div className={cn("flex min-h-screen bg-background", className)}>
+      <div className={cn("bg-background flex min-h-screen", className)}>
         {/* Left panel */}
-        <div className="hidden w-1/2 items-center justify-center bg-muted/30 p-12 lg:flex">
+        <div className="bg-muted/30 hidden w-1/2 items-center justify-center p-12 lg:flex">
           {panel}
         </div>
         {/* Right: form */}
-        <div className="flex flex-1 items-center justify-center p-8">
-          {formCard}
-        </div>
+        <div className="flex flex-1 items-center justify-center p-8">{formCard}</div>
       </div>
     )
   }
 
   return (
-    <div className={cn("flex min-h-screen items-center justify-center bg-muted/20 p-6", className)}>
-      <div className="w-full max-w-sm rounded-xl border border-border bg-card p-8 shadow-sm">
+    <div className={cn("bg-muted/20 flex min-h-screen items-center justify-center p-6", className)}>
+      <div className="border-border bg-card w-full max-w-sm rounded-xl border p-8 shadow-sm">
         {formCard}
       </div>
     </div>

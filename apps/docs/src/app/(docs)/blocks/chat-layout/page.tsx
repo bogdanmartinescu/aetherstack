@@ -50,13 +50,44 @@ export default function ChatPage() {
 }`}
       preview={<ChatLayoutPreview />}
       props={[
-        { name: "children", type: "ReactNode", required: true, description: "Main scrollable content area — typically the message list." },
-        { name: "sidebar", type: "ReactNode", description: "Sidebar content. Hidden on mobile; exposed via a Sheet when sidebarOpen is true." },
-        { name: "header", type: "ReactNode", description: "Content rendered inside the sticky 56 px header bar." },
-        { name: "footer", type: "ReactNode", description: "Content rendered in a fixed footer panel — typically a prompt input." },
-        { name: "sidebarOpen", type: "boolean", default: "false", description: "Controls the mobile Sheet sidebar open state." },
-        { name: "onSidebarToggle", type: "(open: boolean) => void", description: "Called when the mobile menu button or Sheet overlay is interacted with." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "children",
+          type: "ReactNode",
+          required: true,
+          description: "Main scrollable content area — typically the message list.",
+        },
+        {
+          name: "sidebar",
+          type: "ReactNode",
+          description:
+            "Sidebar content. Hidden on mobile; exposed via a Sheet when sidebarOpen is true.",
+        },
+        {
+          name: "header",
+          type: "ReactNode",
+          description: "Content rendered inside the sticky 56 px header bar.",
+        },
+        {
+          name: "footer",
+          type: "ReactNode",
+          description: "Content rendered in a fixed footer panel — typically a prompt input.",
+        },
+        {
+          name: "sidebarOpen",
+          type: "boolean",
+          default: "false",
+          description: "Controls the mobile Sheet sidebar open state.",
+        },
+        {
+          name: "onSidebarToggle",
+          type: "(open: boolean) => void",
+          description: "Called when the mobile menu button or Sheet overlay is interacted with.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={[
         "Sidebar is wrapped in an <aside> landmark on desktop.",

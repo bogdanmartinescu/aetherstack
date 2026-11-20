@@ -22,11 +22,8 @@ function ChatBubble({
 }: ChatBubbleProps) {
   if (role === "system") {
     return (
-      <div
-        data-role="system"
-        className={cn("flex justify-center px-4", className)}
-      >
-        <div className="max-w-[80%] rounded-full bg-muted px-3 py-1 text-center text-xs text-muted-foreground [overflow-wrap:anywhere]">
+      <div data-role="system" className={cn("flex justify-center px-4", className)}>
+        <div className="bg-muted text-muted-foreground max-w-[80%] rounded-full px-3 py-1 text-center text-xs [overflow-wrap:anywhere]">
           {content}
           {timestamp && <span className="ml-2 opacity-70">{timestamp}</span>}
         </div>
@@ -52,7 +49,7 @@ function ChatBubble({
           ) : (
             <div
               aria-hidden="true"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground"
+              className="bg-muted text-muted-foreground flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium"
             >
               {name ? name[0]?.toUpperCase() : "AI"}
             </div>
@@ -64,7 +61,7 @@ function ChatBubble({
         {(name ?? timestamp) && (
           <div
             className={cn(
-              "flex items-center gap-2 text-xs text-muted-foreground",
+              "text-muted-foreground flex items-center gap-2 text-xs",
               isUser && "flex-row-reverse",
             )}
           >
@@ -77,8 +74,8 @@ function ChatBubble({
           className={cn(
             "max-w-full rounded-2xl px-4 py-2.5 text-sm [overflow-wrap:anywhere]",
             isUser
-              ? "rounded-tr-sm bg-primary text-primary-foreground"
-              : "rounded-tl-sm bg-muted text-foreground",
+              ? "bg-primary text-primary-foreground rounded-tr-sm"
+              : "bg-muted text-foreground rounded-tl-sm",
           )}
         >
           {content}

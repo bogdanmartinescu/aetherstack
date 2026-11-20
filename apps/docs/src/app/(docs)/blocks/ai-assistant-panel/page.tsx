@@ -44,13 +44,43 @@ export function PageWithAssistant() {
 }`}
       preview={<AIAssistantPanelPreview />}
       props={[
-        { name: "open", type: "boolean", description: "Controlled open state. Omit to use uncontrolled." },
-        { name: "onOpenChange", type: "(open: boolean) => void", description: "Called when the Sheet open state changes." },
-        { name: "title", type: "string", default: '"AI Assistant"', description: "Heading displayed in the panel header." },
-        { name: "children", type: "ReactNode", description: "Scrollable body content — typically a conversation thread." },
-        { name: "footer", type: "ReactNode", description: "Fixed footer slot — typically a prompt input." },
-        { name: "side", type: '"right" | "left"', default: '"right"', description: "Which edge of the viewport the panel slides in from." },
-        { name: "className", type: "string", description: "Additional classes on the SheetContent element." },
+        {
+          name: "open",
+          type: "boolean",
+          description: "Controlled open state. Omit to use uncontrolled.",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "Called when the Sheet open state changes.",
+        },
+        {
+          name: "title",
+          type: "string",
+          default: '"AI Assistant"',
+          description: "Heading displayed in the panel header.",
+        },
+        {
+          name: "children",
+          type: "ReactNode",
+          description: "Scrollable body content — typically a conversation thread.",
+        },
+        {
+          name: "footer",
+          type: "ReactNode",
+          description: "Fixed footer slot — typically a prompt input.",
+        },
+        {
+          name: "side",
+          type: '"right" | "left"',
+          default: '"right"',
+          description: "Which edge of the viewport the panel slides in from.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the SheetContent element.",
+        },
       ]}
       a11yNotes={[
         "Built on the Sheet primitive which uses role='dialog' with an aria-labelledby pointing to the panel title.",

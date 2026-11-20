@@ -10,20 +10,40 @@ const INITIAL: ColumnState[] = [
   {
     title: "Backlog",
     items: [
-      { id: "1", title: "Design system audit", description: "Review token usage across all components.", badge: "Design" },
-      { id: "2", title: "Performance profiling", description: "Identify bundle size regressions.", badge: "Eng" },
+      {
+        id: "1",
+        title: "Design system audit",
+        description: "Review token usage across all components.",
+        badge: "Design",
+      },
+      {
+        id: "2",
+        title: "Performance profiling",
+        description: "Identify bundle size regressions.",
+        badge: "Eng",
+      },
     ],
   },
   {
     title: "In Progress",
     items: [
-      { id: "3", title: "Dark mode tokens", description: "Update semantic colour tokens for dark theme.", badge: "Design" },
+      {
+        id: "3",
+        title: "Dark mode tokens",
+        description: "Update semantic colour tokens for dark theme.",
+        badge: "Design",
+      },
     ],
   },
   {
     title: "Done",
     items: [
-      { id: "4", title: "Accessibility audit", description: "All components pass WCAG 2.1 AA.", badge: "QA" },
+      {
+        id: "4",
+        title: "Accessibility audit",
+        description: "All components pass WCAG 2.1 AA.",
+        badge: "QA",
+      },
     ],
   },
 ]

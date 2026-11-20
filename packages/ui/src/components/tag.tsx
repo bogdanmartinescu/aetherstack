@@ -77,10 +77,7 @@ export function TagGroup({
     [items.length],
   )
 
-  const handleKeyDown = (
-    event: React.KeyboardEvent<HTMLButtonElement>,
-    index: number,
-  ) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
     if (items.length === 0) return
     if (event.key === "ArrowRight") {
       event.preventDefault()
@@ -112,11 +109,7 @@ export function TagGroup({
   }
 
   return (
-    <div
-      role="group"
-      aria-label={label}
-      className={cn("inline-flex flex-wrap gap-1", className)}
-    >
+    <div role="group" aria-label={label} className={cn("inline-flex flex-wrap gap-1", className)}>
       {items.map((item, index) => (
         <button
           key={item.id}

@@ -32,9 +32,7 @@ describe("StreamingText", () => {
   })
 
   it("applies custom className", () => {
-    const { container } = render(
-      <StreamingText content="Text" className="custom-stream" />,
-    )
+    const { container } = render(<StreamingText content="Text" className="custom-stream" />)
     expect(container.firstChild).toHaveClass("custom-stream")
   })
 
@@ -95,9 +93,7 @@ describe("MarkdownRenderer", () => {
   })
 
   it("applies custom className to wrapper", () => {
-    const { container } = render(
-      <MarkdownRenderer content="Text" className="custom-md" />,
-    )
+    const { container } = render(<MarkdownRenderer content="Text" className="custom-md" />)
     expect(container.firstChild).toHaveClass("custom-md")
   })
 })
@@ -200,13 +196,7 @@ describe("ChatBubble", () => {
   })
 
   it("renders actions slot", () => {
-    render(
-      <ChatBubble
-        role="assistant"
-        content="Text"
-        actions={<button>Copy</button>}
-      />,
-    )
+    render(<ChatBubble role="assistant" content="Text" actions={<button>Copy</button>} />)
     expect(screen.getByRole("button", { name: "Copy" })).toBeInTheDocument()
   })
 })
@@ -225,13 +215,7 @@ describe("SourceCard", () => {
   })
 
   it("renders excerpt when provided", () => {
-    render(
-      <SourceCard
-        title="Docs"
-        url="https://example.com"
-        excerpt="A helpful excerpt"
-      />,
-    )
+    render(<SourceCard title="Docs" url="https://example.com" excerpt="A helpful excerpt" />)
     expect(screen.getByText("A helpful excerpt")).toBeInTheDocument()
   })
 
@@ -348,12 +332,7 @@ describe("PromptSuggestion", () => {
   })
 
   it("renders icon slot when provided", () => {
-    render(
-      <PromptSuggestion
-        label="With icon"
-        icon={<svg data-testid="suggestion-icon" />}
-      />,
-    )
+    render(<PromptSuggestion label="With icon" icon={<svg data-testid="suggestion-icon" />} />)
     expect(screen.getByTestId("suggestion-icon")).toBeInTheDocument()
   })
 })
@@ -377,25 +356,13 @@ describe("ToolCallCard", () => {
   })
 
   it("renders error status", () => {
-    render(
-      <ToolCallCard
-        toolName="get_weather"
-        status="error"
-        error="Connection refused"
-      />,
-    )
+    render(<ToolCallCard toolName="get_weather" status="error" error="Connection refused" />)
     expect(screen.getByText("error")).toBeInTheDocument()
   })
 
   it("expands to show args on click when args are provided", async () => {
     const user = userEvent.setup()
-    render(
-      <ToolCallCard
-        toolName="search"
-        status="done"
-        args={{ query: "react hooks" }}
-      />,
-    )
+    render(<ToolCallCard toolName="search" status="done" args={{ query: "react hooks" }} />)
     const trigger = screen.getByRole("button")
     await user.click(trigger)
     expect(screen.getByText(/query/)).toBeInTheDocument()

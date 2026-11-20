@@ -23,7 +23,7 @@ function TrendArrow({ trend }: { trend: MetricTrend }) {
     <svg
       className={cn(
         "h-3 w-3",
-        trend === "up" ? "rotate-0 text-emerald-500" : "rotate-180 text-destructive",
+        trend === "up" ? "rotate-0 text-emerald-500" : "text-destructive rotate-180",
       )}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -53,20 +53,17 @@ export function MetricCard({
       <CardContent className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            <p className="text-muted-foreground text-xs font-medium uppercase tracking-wider">
               {label}
             </p>
-            <p className="mt-1.5 text-2xl font-semibold tracking-tight text-foreground">
-              {value}
-            </p>
-            {sublabel && (
-              <p className="mt-0.5 text-xs text-muted-foreground">{sublabel}</p>
-            )}
+            <p className="text-foreground mt-1.5 text-2xl font-semibold tracking-tight">{value}</p>
+            {sublabel && <p className="text-muted-foreground mt-0.5 text-xs">{sublabel}</p>}
             {change && (
               <div
                 className={cn(
                   "mt-2 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium",
-                  trend === "up" && "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400",
+                  trend === "up" &&
+                    "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400",
                   trend === "down" && "bg-destructive/10 text-destructive",
                   trend === "neutral" && "bg-muted text-muted-foreground",
                 )}
@@ -77,7 +74,7 @@ export function MetricCard({
             )}
           </div>
           {icon && (
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <div className="bg-primary/10 text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-lg">
               {icon}
             </div>
           )}

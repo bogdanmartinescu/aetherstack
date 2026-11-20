@@ -22,68 +22,68 @@ Source of truth for "what Knowns has": https://ui.knowns.dev/docs/group/componen
 
 ### Already covered — do not rebuild
 
-| Knowns | Aether |
-|---|---|
-| Button | `packages/ui/src/components/button.tsx` (loading, press, xs, quiet, icons) |
-| Context Menu | `context-menu.tsx` |
-| Toggle Group | `toggle-group.tsx` |
-| Input, including prefix/suffix | `input.tsx` + `input-group.tsx` |
-| Select | `select.tsx` |
-| Combobox | `combobox.tsx` |
-| Radio Group | `radio-group.tsx` |
-| Switch | `switch.tsx` |
-| Calendar | `calendar.tsx` (react-day-picker) |
-| Date Range Picker | `packages/patterns/src/components/date-range-picker.tsx` |
-| OTP Input | `input-otp.tsx` |
-| File Drop rows | `FileDropzone` plus `UploadProgress` / `UploadProgressItem`. Do not merge them. |
-| Dropdown, Menu | `dropdown-menu.tsx` |
-| User Menu | `packages/patterns/src/components/profile-dropdown.tsx` |
-| Dialog, Sheet, Drawer, Popover, Tooltip, Hover Card | matching files in `packages/ui` |
-| Toast | `toast.tsx` and `sonner.tsx` |
-| Command Menu | `command-palette.tsx` |
-| Data Table | `data-table.tsx` |
-| Sortable | `sortable-list.tsx` |
-| Carousel, Card, Kbd, Separator, Resizable, Accordion | matching files |
-| Empty | `empty-state.tsx` |
-| Code Block | `packages/ui/src/components/ai/code-block.tsx` |
-| Alert, Spinner | `alert.tsx`, `spinner.tsx` |
-| Chart | `chart.tsx` (Recharts). Do not rewrite it as hand-rolled SVG. |
-| Token Stream | `StreamingText` |
-| Shimmer text | `ThinkingIndicator` |
-| Theme light/dark/system | `ThemeSwitcher` in `packages/patterns`. Do not add a View Transition theme toggle. |
+| Knowns                                               | Aether                                                                             |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Button                                               | `packages/ui/src/components/button.tsx` (loading, press, xs, quiet, icons)         |
+| Context Menu                                         | `context-menu.tsx`                                                                 |
+| Toggle Group                                         | `toggle-group.tsx`                                                                 |
+| Input, including prefix/suffix                       | `input.tsx` + `input-group.tsx`                                                    |
+| Select                                               | `select.tsx`                                                                       |
+| Combobox                                             | `combobox.tsx`                                                                     |
+| Radio Group                                          | `radio-group.tsx`                                                                  |
+| Switch                                               | `switch.tsx`                                                                       |
+| Calendar                                             | `calendar.tsx` (react-day-picker)                                                  |
+| Date Range Picker                                    | `packages/patterns/src/components/date-range-picker.tsx`                           |
+| OTP Input                                            | `input-otp.tsx`                                                                    |
+| File Drop rows                                       | `FileDropzone` plus `UploadProgress` / `UploadProgressItem`. Do not merge them.    |
+| Dropdown, Menu                                       | `dropdown-menu.tsx`                                                                |
+| User Menu                                            | `packages/patterns/src/components/profile-dropdown.tsx`                            |
+| Dialog, Sheet, Drawer, Popover, Tooltip, Hover Card  | matching files in `packages/ui`                                                    |
+| Toast                                                | `toast.tsx` and `sonner.tsx`                                                       |
+| Command Menu                                         | `command-palette.tsx`                                                              |
+| Data Table                                           | `data-table.tsx`                                                                   |
+| Sortable                                             | `sortable-list.tsx`                                                                |
+| Carousel, Card, Kbd, Separator, Resizable, Accordion | matching files                                                                     |
+| Empty                                                | `empty-state.tsx`                                                                  |
+| Code Block                                           | `packages/ui/src/components/ai/code-block.tsx`                                     |
+| Alert, Spinner                                       | `alert.tsx`, `spinner.tsx`                                                         |
+| Chart                                                | `chart.tsx` (Recharts). Do not rewrite it as hand-rolled SVG.                      |
+| Token Stream                                         | `StreamingText`                                                                    |
+| Shimmer text                                         | `ThinkingIndicator`                                                                |
+| Theme light/dark/system                              | `ThemeSwitcher` in `packages/patterns`. Do not add a View Transition theme toggle. |
 
 ### Partial — extend, do not replace
 
-| Knowns behavior | Aether today | Task |
-|---|---|---|
-| Slider range (two thumbs) | Radix range is supported by the primitive, but `slider.tsx` always renders one thumb | 16 |
-| Textarea counter, announced near the limit | Plain `<textarea>` | 17 |
-| Removable badge and +N group | `Badge` variants only | 18 |
-| Checkbox indeterminate icon and select-all group | `checked="indeterminate"` renders the check icon; no group | 19 |
-| Avatar status dot | Image, fallback, group overflow. No status | 2 |
-| Date field that understands "tomorrow" / "next fri" | Button + calendar popover only | 20 |
-| Progress ring | Bar only | 9 |
+| Knowns behavior                                     | Aether today                                                                         | Task |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------ | ---- |
+| Slider range (two thumbs)                           | Radix range is supported by the primitive, but `slider.tsx` always renders one thumb | 16   |
+| Textarea counter, announced near the limit          | Plain `<textarea>`                                                                   | 17   |
+| Removable badge and +N group                        | `Badge` variants only                                                                | 18   |
+| Checkbox indeterminate icon and select-all group    | `checked="indeterminate"` renders the check icon; no group                           | 19   |
+| Avatar status dot                                   | Image, fallback, group overflow. No status                                           | 2    |
+| Date field that understands "tomorrow" / "next fri" | Button + calendar popover only                                                       | 20   |
+| Progress ring                                       | Bar only                                                                             | 9    |
 
 ### Missing — build
 
-| Knowns | Layer | Task |
-|---|---|---|
-| Status Dot | ui | 1 |
-| Tag and TagGroup | ui | 3 |
-| Priority Bars | ui | 4 |
-| Segmented Control | ui | 5 |
-| Social Button | ui | 6 |
-| Password Field | ui | 7 |
-| Password Strength | ui | 8 |
-| Animated Number (also covers Knowns Number Ticker — build one component) | ui | 10 |
-| Uptime Bar | ui | 11 |
-| Heatmap | ui | 12 |
-| Timeline Scrubber | ui | 13 |
-| Time Slots | ui | 14 |
-| Floating Dock, pinned corners only | ui | 15 |
-| Question Card | patterns | 21 |
-| Filter Chips | patterns | 22 |
-| Shine Border, Parallax Card, Fan Stack | ui | 23–25 |
+| Knowns                                                                   | Layer    | Task  |
+| ------------------------------------------------------------------------ | -------- | ----- |
+| Status Dot                                                               | ui       | 1     |
+| Tag and TagGroup                                                         | ui       | 3     |
+| Priority Bars                                                            | ui       | 4     |
+| Segmented Control                                                        | ui       | 5     |
+| Social Button                                                            | ui       | 6     |
+| Password Field                                                           | ui       | 7     |
+| Password Strength                                                        | ui       | 8     |
+| Animated Number (also covers Knowns Number Ticker — build one component) | ui       | 10    |
+| Uptime Bar                                                               | ui       | 11    |
+| Heatmap                                                                  | ui       | 12    |
+| Timeline Scrubber                                                        | ui       | 13    |
+| Time Slots                                                               | ui       | 14    |
+| Floating Dock, pinned corners only                                       | ui       | 15    |
+| Question Card                                                            | patterns | 21    |
+| Filter Chips                                                             | patterns | 22    |
+| Shine Border, Parallax Card, Fan Stack                                   | ui       | 23–25 |
 
 ### Out of scope
 
@@ -194,11 +194,29 @@ export default function StatusDotPage() {
       cliInstall="npx aether-ui add status-dot"
       manualInstallCode={STATUS_DOT_SOURCE}
       props={[
-        { name: "status", type: '"idle" | "busy" | "blocked" | "failed" | "finished"', default: "—", description: "Which state to show." },
-        { name: "label", type: "string", default: "—", description: "Spoken name. Defaults to the status." },
-        { name: "pulse", type: "boolean", default: "true when busy", description: "Pulse the dot. Off under reduced motion via motion-safe." },
+        {
+          name: "status",
+          type: '"idle" | "busy" | "blocked" | "failed" | "finished"',
+          default: "—",
+          description: "Which state to show.",
+        },
+        {
+          name: "label",
+          type: "string",
+          default: "—",
+          description: "Spoken name. Defaults to the status.",
+        },
+        {
+          name: "pulse",
+          type: "boolean",
+          default: "true when busy",
+          description: "Pulse the dot. Off under reduced motion via motion-safe.",
+        },
       ]}
-      a11yNotes={["The dot is an image with an accessible name.", "Busy pulses with motion-safe so reduced motion stays still."]}
+      a11yNotes={[
+        "The dot is an image with an accessible name.",
+        "Busy pulses with motion-safe so reduced motion stays still.",
+      ]}
     />
   )
 }
@@ -442,11 +460,13 @@ type AvatarProps = React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> &
 Destructure `status` and `children`. After `{children}`, render:
 
 ```tsx
-{status ? (
-  <span className="absolute bottom-0 right-0 translate-x-0.5 translate-y-0.5">
-    <StatusDot status={status} />
-  </span>
-) : null}
+{
+  status ? (
+    <span className="absolute bottom-0 right-0 translate-x-0.5 translate-y-0.5">
+      <StatusDot status={status} />
+    </span>
+  ) : null
+}
 ```
 
 The root already has `relative`.
@@ -624,7 +644,9 @@ describe("PriorityBars", () => {
     const img = screen.getByRole("img", { name: "Low priority" })
     expect(img.querySelectorAll('[data-filled="true"]')).toHaveLength(1)
     rerender(<PriorityBars priority="high" />)
-    expect(screen.getByRole("img", { name: "High priority" }).querySelectorAll('[data-filled="true"]')).toHaveLength(3)
+    expect(
+      screen.getByRole("img", { name: "High priority" }).querySelectorAll('[data-filled="true"]'),
+    ).toHaveLength(3)
   })
 
   it("uses an urgent mark instead of bars", () => {
@@ -849,7 +871,10 @@ describe("PasswordField", () => {
     expect(input).toHaveAttribute("autocomplete", "current-password")
     await user.click(screen.getByRole("button", { name: "Show password" }))
     expect(input).toHaveAttribute("type", "text")
-    expect(screen.getByRole("button", { name: "Hide password" })).toHaveAttribute("aria-pressed", "true")
+    expect(screen.getByRole("button", { name: "Hide password" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    )
   })
 
   it("warns when Caps Lock is on", () => {
@@ -893,7 +918,12 @@ Pure helpers and the meter live in one file so the registry installs one module.
 import { describe, it, expect, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { checkPassword, generatePassword, scorePassword, PasswordStrength } from "../components/password-strength"
+import {
+  checkPassword,
+  generatePassword,
+  scorePassword,
+  PasswordStrength,
+} from "../components/password-strength"
 
 describe("password helpers", () => {
   it("scores by length and character classes", () => {
@@ -989,7 +1019,9 @@ describe("ProgressRing", () => {
 
   it("omits the value while indeterminate", () => {
     render(<ProgressRing indeterminate aria-label="Loading" />)
-    expect(screen.getByRole("progressbar", { name: "Loading" })).not.toHaveAttribute("aria-valuenow")
+    expect(screen.getByRole("progressbar", { name: "Loading" })).not.toHaveAttribute(
+      "aria-valuenow",
+    )
   })
 })
 ```
@@ -1045,9 +1077,7 @@ describe("AnimatedNumber", () => {
   })
 
   it("formats percents", () => {
-    render(
-      <AnimatedNumber value={0.125} format={{ style: "percent", maximumFractionDigits: 1 }} />,
-    )
+    render(<AnimatedNumber value={0.125} format={{ style: "percent", maximumFractionDigits: 1 }} />)
     expect(screen.getByText("12.5%")).toBeInTheDocument()
   })
 })
@@ -1123,7 +1153,7 @@ export interface UptimeDay {
 }
 ```
 
-Percent is `Math.round((up / known) * 100)` where `known` excludes `"unknown"`. Zero known days renders `0%`. `role="listbox"` `aria-label={`${percent}% uptime`}`. Each day is `role="option"` with accessible name `` `${label}, ${status}` ``. Only the active index has `tabIndex={0}`; the rest `-1`. ArrowRight, ArrowLeft, Home, and End move it, then focus it. Enter and Space call `onSelect(id)` when `onSelect` is defined. Do not call it for other keys. Tones: up `bg-emerald-500`, degraded `bg-amber-500`, down `bg-destructive`, unknown `bg-muted`.
+Percent is `Math.round((up / known) * 100)` where `known` excludes `"unknown"`. Zero known days renders `0%`. `role="listbox"` `aria-label={`${percent}% uptime`}`. Each day is `role="option"` with accessible name `` `${label}, ${status}` ``. Only the active index has `tabIndex={0}`; the rest `-1`. ArrowRight, ArrowLeft, Home, and End move it, then focus it. Enter and Space call `onSelect(id)`when`onSelect`is defined. Do not call it for other keys. Tones: up`bg-emerald-500`, degraded `bg-amber-500`, down `bg-destructive`, unknown `bg-muted`.
 
 - [ ] **Step 4: Tests pass (2)**
 
@@ -1170,7 +1200,12 @@ describe("Heatmap", () => {
   it("rejects a values grid that does not match the labels", () => {
     expect(() =>
       render(
-        <Heatmap aria-label="Deploys" rowLabels={["Mon"]} columnLabels={["9am"]} values={[[1, 2]]} />,
+        <Heatmap
+          aria-label="Deploys"
+          rowLabels={["Mon"]}
+          columnLabels={["9am"]}
+          values={[[1, 2]]}
+        />,
       ),
     ).toThrow(/values/)
   })
@@ -1212,7 +1247,14 @@ describe("TimelineScrubber", () => {
   it("reports the new value and shows it", () => {
     const onValueChange = vi.fn()
     render(
-      <TimelineScrubber label="Position" min={0} max={10} step={1} value={3} onValueChange={onValueChange} />,
+      <TimelineScrubber
+        label="Position"
+        min={0}
+        max={10}
+        step={1}
+        value={3}
+        onValueChange={onValueChange}
+      />,
     )
     expect(screen.getByRole("slider", { name: "Position" })).toHaveAttribute("aria-valuenow", "3")
     fireEvent.change(screen.getByRole("slider", { name: "Position" }), { target: { value: "4" } })
@@ -1537,7 +1579,10 @@ import { CheckboxGroup } from "../components/checkbox-group"
 describe("Checkbox indeterminate", () => {
   it("marks a mixed checkbox", () => {
     render(<Checkbox checked="indeterminate" aria-label="All rows" />)
-    expect(screen.getByRole("checkbox", { name: "All rows" })).toHaveAttribute("aria-checked", "mixed")
+    expect(screen.getByRole("checkbox", { name: "All rows" })).toHaveAttribute(
+      "aria-checked",
+      "mixed",
+    )
   })
 })
 
@@ -1557,7 +1602,10 @@ describe("CheckboxGroup", () => {
         onValueChange={onValueChange}
       />,
     )
-    expect(screen.getByRole("checkbox", { name: "Select all" })).toHaveAttribute("aria-checked", "mixed")
+    expect(screen.getByRole("checkbox", { name: "Select all" })).toHaveAttribute(
+      "aria-checked",
+      "mixed",
+    )
     await user.click(screen.getByRole("checkbox", { name: "Select all" }))
     expect(onValueChange).toHaveBeenCalledWith(["a", "b"])
   })

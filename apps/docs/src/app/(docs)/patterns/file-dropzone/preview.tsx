@@ -17,9 +17,14 @@ export function FileDropzonePreview() {
       {files.length > 0 && (
         <ul className="space-y-1">
           {files.map((f) => (
-            <li key={f.name} className="flex items-center justify-between rounded border border-border bg-muted/40 px-3 py-1.5 text-xs">
-              <span className="truncate font-medium text-foreground">{f.name}</span>
-              <span className="ml-2 shrink-0 text-muted-foreground">{(f.size / 1024).toFixed(1)} KB</span>
+            <li
+              key={f.name}
+              className="border-border bg-muted/40 flex items-center justify-between rounded border px-3 py-1.5 text-xs"
+            >
+              <span className="text-foreground truncate font-medium">{f.name}</span>
+              <span className="text-muted-foreground ml-2 shrink-0">
+                {(f.size / 1024).toFixed(1)} KB
+              </span>
             </li>
           ))}
         </ul>

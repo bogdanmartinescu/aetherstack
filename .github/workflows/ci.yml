@@ -62,6 +62,9 @@ jobs:
       - name: Lint all packages
         run: pnpm lint
 
+      - name: Format check
+        run: pnpm format:check
+
   # ─── Tests ──────────────────────────────────────────────────────────────────
   # Runs Vitest for every package that has a test script.
   # tokens, ui, patterns, blocks, cli, registry-schema, registry-build.

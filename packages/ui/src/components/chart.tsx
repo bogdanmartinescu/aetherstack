@@ -51,29 +51,19 @@ function resolveColor(series: ChartSeries, index: number): string {
   return series.color ?? CHART_COLORS[index % CHART_COLORS.length] ?? "hsl(var(--chart-1))"
 }
 
-function ChartTooltipContent({
-  active,
-  payload,
-  label,
-}: TooltipProps<number | string, string>) {
+function ChartTooltipContent({ active, payload, label }: TooltipProps<number | string, string>) {
   if (!active || !payload?.length) return null
   return (
-    <div className="rounded-md border border-border bg-popover p-3 text-popover-foreground shadow-md">
-      {label != null && (
-        <p className="mb-1.5 text-xs font-medium text-muted-foreground">
-          {label}
-        </p>
-      )}
+    <div className="border-border bg-popover text-popover-foreground rounded-md border p-3 shadow-md">
+      {label != null && <p className="text-muted-foreground mb-1.5 text-xs font-medium">{label}</p>}
       {payload.map((entry, i) => (
-        <div key={`${String(entry.dataKey ?? entry.name)}-${i}`} className="flex items-center gap-2 text-sm">
-          <span
-            className="inline-block h-2 w-2 rounded-full"
-            style={{ background: entry.color }}
-          />
+        <div
+          key={`${String(entry.dataKey ?? entry.name)}-${i}`}
+          className="flex items-center gap-2 text-sm"
+        >
+          <span className="inline-block h-2 w-2 rounded-full" style={{ background: entry.color }} />
           <span className="font-medium">{entry.name}</span>
-          <span className="ml-auto pl-4 font-mono text-muted-foreground">
-            {entry.value}
-          </span>
+          <span className="text-muted-foreground ml-auto pl-4 font-mono">{entry.value}</span>
         </div>
       ))}
     </div>
@@ -95,12 +85,17 @@ function BarChart({
       <ResponsiveContainer width="100%" height={height}>
         <RechartsBarChart data={data}>
           {showGrid && <CartesianGrid strokeDasharray="3 3" className="stroke-border" />}
-          {showXAxis && <XAxis dataKey="name" className="text-xs fill-muted-foreground" />}
-          {showYAxis && <YAxis className="text-xs fill-muted-foreground" />}
+          {showXAxis && <XAxis dataKey="name" className="fill-muted-foreground text-xs" />}
+          {showYAxis && <YAxis className="fill-muted-foreground text-xs" />}
           <Tooltip content={<ChartTooltipContent />} />
           {showLegend && <Legend />}
           {series.map((s, i) => (
-            <Bar key={s.dataKey} dataKey={s.dataKey} fill={resolveColor(s, i)} radius={[4, 4, 0, 0]} />
+            <Bar
+              key={s.dataKey}
+              dataKey={s.dataKey}
+              fill={resolveColor(s, i)}
+              radius={[4, 4, 0, 0]}
+            />
           ))}
         </RechartsBarChart>
       </ResponsiveContainer>
@@ -123,8 +118,8 @@ function LineChart({
       <ResponsiveContainer width="100%" height={height}>
         <RechartsLineChart data={data}>
           {showGrid && <CartesianGrid strokeDasharray="3 3" className="stroke-border" />}
-          {showXAxis && <XAxis dataKey="name" className="text-xs fill-muted-foreground" />}
-          {showYAxis && <YAxis className="text-xs fill-muted-foreground" />}
+          {showXAxis && <XAxis dataKey="name" className="fill-muted-foreground text-xs" />}
+          {showYAxis && <YAxis className="fill-muted-foreground text-xs" />}
           <Tooltip content={<ChartTooltipContent />} />
           {showLegend && <Legend />}
           {series.map((s, i) => (
@@ -158,8 +153,8 @@ function AreaChart({
       <ResponsiveContainer width="100%" height={height}>
         <RechartsAreaChart data={data}>
           {showGrid && <CartesianGrid strokeDasharray="3 3" className="stroke-border" />}
-          {showXAxis && <XAxis dataKey="name" className="text-xs fill-muted-foreground" />}
-          {showYAxis && <YAxis className="text-xs fill-muted-foreground" />}
+          {showXAxis && <XAxis dataKey="name" className="fill-muted-foreground text-xs" />}
+          {showYAxis && <YAxis className="fill-muted-foreground text-xs" />}
           <Tooltip content={<ChartTooltipContent />} />
           {showLegend && <Legend />}
           {series.map((s, i) => {
@@ -217,14 +212,7 @@ function DonutChart({ data, height = 300, className, showLegend = true }: PieCha
         <RechartsPieChart>
           <Tooltip content={<ChartTooltipContent />} />
           {showLegend && <Legend />}
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            innerRadius="50%"
-            outerRadius="80%"
-            dataKey="value"
-          >
+          <Pie data={data} cx="50%" cy="50%" innerRadius="50%" outerRadius="80%" dataKey="value">
             {data.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
@@ -243,13 +231,19 @@ interface ChartContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   description?: string
 }
 
-function ChartContainer({ title, description, className, children, ...props }: ChartContainerProps) {
+function ChartContainer({
+  title,
+  description,
+  className,
+  children,
+  ...props
+}: ChartContainerProps) {
   return (
-    <div className={cn("rounded-lg border border-border bg-card p-4", className)} {...props}>
+    <div className={cn("border-border bg-card rounded-lg border p-4", className)} {...props}>
       {(title || description) && (
         <div className="mb-4">
           {title && <p className="text-sm font-semibold">{title}</p>}
-          {description && <p className="text-xs text-muted-foreground">{description}</p>}
+          {description && <p className="text-muted-foreground text-xs">{description}</p>}
         </div>
       )}
       {children}

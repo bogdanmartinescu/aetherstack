@@ -4,7 +4,8 @@ import { AIErrorStatePreview } from "./preview"
 
 export const metadata: Metadata = {
   title: "AI Error State",
-  description: "A contextual error display for AI failures with pre-configured messages for common error types.",
+  description:
+    "A contextual error display for AI failures with pre-configured messages for common error types.",
 }
 
 export default function AIErrorStatePage() {
@@ -38,10 +39,28 @@ export function CustomErrorState() {
 }`}
       preview={<AIErrorStatePreview />}
       props={[
-        { name: "type", type: '"rate-limit" | "context-length" | "provider-outage" | "network" | "generic"', default: '"generic"', description: "Error type that maps to a pre-configured icon, heading, and description." },
-        { name: "message", type: "string", description: "Custom error message that overrides the default description for the selected type." },
-        { name: "onRetry", type: "() => void", description: "When provided, renders a Retry button that calls this handler on click." },
-        { name: "className", type: "string", description: "Additional CSS classes applied to the root container." },
+        {
+          name: "type",
+          type: '"rate-limit" | "context-length" | "provider-outage" | "network" | "generic"',
+          default: '"generic"',
+          description: "Error type that maps to a pre-configured icon, heading, and description.",
+        },
+        {
+          name: "message",
+          type: "string",
+          description:
+            "Custom error message that overrides the default description for the selected type.",
+        },
+        {
+          name: "onRetry",
+          type: "() => void",
+          description: "When provided, renders a Retry button that calls this handler on click.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional CSS classes applied to the root container.",
+        },
       ]}
       a11yNotes={[
         "The error container uses role='alert' so screen readers announce it immediately when mounted.",

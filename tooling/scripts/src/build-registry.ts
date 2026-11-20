@@ -42,9 +42,7 @@ for (const warning of warnings) {
 
 const sortedItems = sortRegistryItems(registry.items)
 
-const itemsWithContent: RegistryItem[] = sortedItems.map((item) =>
-  inlineItemFiles(item),
-)
+const itemsWithContent: RegistryItem[] = sortedItems.map((item) => inlineItemFiles(item))
 
 const aggregate: Registry = {
   ...registry,

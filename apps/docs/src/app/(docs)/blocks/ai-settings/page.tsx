@@ -49,17 +49,61 @@ export function SettingsPage() {
       preview={<AISettingsPreview />}
       props={[
         { name: "apiKey", type: "string", default: '""', description: "Current API key value." },
-        { name: "onApiKeyChange", type: "(value: string) => void", description: "Called when the API key input changes." },
+        {
+          name: "onApiKeyChange",
+          type: "(value: string) => void",
+          description: "Called when the API key input changes.",
+        },
         { name: "model", type: "string", description: "Currently selected model ID." },
-        { name: "onModelChange", type: "(value: string) => void", description: "Called when a different model is selected." },
-        { name: "models", type: "Model[]", default: "[]", description: "Available models to show in the selector. Each has id, name, and provider." },
-        { name: "temperature", type: "number", default: "0.7", description: "Current temperature value (0–2)." },
-        { name: "onTemperatureChange", type: "(value: number) => void", description: "Called when the temperature slider changes." },
-        { name: "maxTokens", type: "number", default: "2048", description: "Current max tokens value (256–8192)." },
-        { name: "onMaxTokensChange", type: "(value: number) => void", description: "Called when the max tokens slider changes." },
-        { name: "systemPrompt", type: "string", default: '""', description: "Current system prompt text." },
-        { name: "onSystemPromptChange", type: "(value: string) => void", description: "Called when the system prompt textarea changes." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "onModelChange",
+          type: "(value: string) => void",
+          description: "Called when a different model is selected.",
+        },
+        {
+          name: "models",
+          type: "Model[]",
+          default: "[]",
+          description: "Available models to show in the selector. Each has id, name, and provider.",
+        },
+        {
+          name: "temperature",
+          type: "number",
+          default: "0.7",
+          description: "Current temperature value (0–2).",
+        },
+        {
+          name: "onTemperatureChange",
+          type: "(value: number) => void",
+          description: "Called when the temperature slider changes.",
+        },
+        {
+          name: "maxTokens",
+          type: "number",
+          default: "2048",
+          description: "Current max tokens value (256–8192).",
+        },
+        {
+          name: "onMaxTokensChange",
+          type: "(value: number) => void",
+          description: "Called when the max tokens slider changes.",
+        },
+        {
+          name: "systemPrompt",
+          type: "string",
+          default: '""',
+          description: "Current system prompt text.",
+        },
+        {
+          name: "onSystemPromptChange",
+          type: "(value: string) => void",
+          description: "Called when the system prompt textarea changes.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={[
         "All form fields are associated with a <Label> element.",

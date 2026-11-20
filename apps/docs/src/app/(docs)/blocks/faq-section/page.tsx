@@ -48,19 +48,60 @@ export default function FAQPage() {
           headline="Frequently asked questions"
           subheading="Can't find the answer you're looking for? Reach out to our team."
           items={[
-            { id: "q1", question: "Is Aether UI free to use?", answer: "Yes. The core library is open-source and free forever under the MIT license. A Pro tier with premium components is planned for the future." },
-            { id: "q2", question: "How do I install components?", answer: "Use the CLI: npx aether-ui add <component-name>. This copies the component source directly into your project." },
-            { id: "q3", question: "Does it work with Next.js App Router?", answer: "Yes. All components are compatible with React Server Components and the Next.js App Router. Client components are marked with 'use client' at their boundaries." },
-            { id: "q4", question: "Can I customise the design tokens?", answer: "Absolutely. All visual values are CSS custom properties defined in your global CSS. Override any token to match your brand without forking the components." },
+            {
+              id: "q1",
+              question: "Is Aether UI free to use?",
+              answer:
+                "Yes. The core library is open-source and free forever under the MIT license. A Pro tier with premium components is planned for the future.",
+            },
+            {
+              id: "q2",
+              question: "How do I install components?",
+              answer:
+                "Use the CLI: npx aether-ui add <component-name>. This copies the component source directly into your project.",
+            },
+            {
+              id: "q3",
+              question: "Does it work with Next.js App Router?",
+              answer:
+                "Yes. All components are compatible with React Server Components and the Next.js App Router. Client components are marked with 'use client' at their boundaries.",
+            },
+            {
+              id: "q4",
+              question: "Can I customise the design tokens?",
+              answer:
+                "Absolutely. All visual values are CSS custom properties defined in your global CSS. Override any token to match your brand without forking the components.",
+            },
           ]}
         />
       }
       props={[
-        { name: "items", type: "{ id: string; question: string; answer: string }[]", required: true, description: "Array of FAQ items." },
-        { name: "eyebrow", type: "string", description: "Small uppercase label above the headline." },
-        { name: "headline", type: "string", description: "Section heading. When provided, activates the two-column layout." },
-        { name: "subheading", type: "string", description: "Supporting paragraph below the headline." },
-        { name: "className", type: "string", description: "Additional classes on the section wrapper." },
+        {
+          name: "items",
+          type: "{ id: string; question: string; answer: string }[]",
+          required: true,
+          description: "Array of FAQ items.",
+        },
+        {
+          name: "eyebrow",
+          type: "string",
+          description: "Small uppercase label above the headline.",
+        },
+        {
+          name: "headline",
+          type: "string",
+          description: "Section heading. When provided, activates the two-column layout.",
+        },
+        {
+          name: "subheading",
+          type: "string",
+          description: "Supporting paragraph below the headline.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the section wrapper.",
+        },
       ]}
       a11yNotes={[
         "Built on the Aether UI Accordion which uses Radix UI — keyboard-navigable with arrow keys.",

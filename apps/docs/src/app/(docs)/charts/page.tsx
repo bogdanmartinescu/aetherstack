@@ -80,14 +80,12 @@ function ChartSection({
   return (
     <section className="space-y-4">
       <div>
-        <h2 className="text-xl font-semibold tracking-tight text-foreground">{title}</h2>
-        <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+        <h2 className="text-foreground text-xl font-semibold tracking-tight">{title}</h2>
+        <p className="text-muted-foreground mt-1 text-sm">{description}</p>
       </div>
 
       {/* Live chart preview */}
-      <div className="overflow-hidden rounded-lg border border-border bg-card p-6">
-        {children}
-      </div>
+      <div className="border-border bg-card overflow-hidden rounded-lg border p-6">{children}</div>
 
       {/* Code */}
       <CodeBlock code={code} filename={`${title.toLowerCase().replace(/ /g, "-")}.tsx`} />
@@ -101,9 +99,9 @@ export default function ChartsPage() {
   return (
     <div>
       {/* Header */}
-      <div className="mb-10 border-b border-border pb-8">
-        <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">Charts</h1>
-        <p className="max-w-2xl text-lg text-muted-foreground">
+      <div className="border-border mb-10 border-b pb-8">
+        <h1 className="text-foreground mb-3 text-4xl font-bold tracking-tight">Charts</h1>
+        <p className="text-muted-foreground max-w-2xl text-lg">
           Data visualisation built with{" "}
           <a
             href="https://recharts.org"
@@ -119,7 +117,7 @@ export default function ChartsPage() {
 
         {/* Install */}
         <div className="mt-6">
-          <p className="mb-2 text-sm font-medium text-foreground">Installation</p>
+          <p className="text-foreground mb-2 text-sm font-medium">Installation</p>
           <CodeBlock code="pnpm add recharts" filename="terminal" />
         </div>
       </div>
@@ -195,7 +193,11 @@ export function RevenueAreaChart() {
               />
               <Tooltip contentStyle={TOOLTIP_STYLE} />
               <Legend
-                wrapperStyle={{ fontSize: "12px", paddingTop: "16px", color: "hsl(var(--muted-foreground))" }}
+                wrapperStyle={{
+                  fontSize: "12px",
+                  paddingTop: "16px",
+                  color: "hsl(var(--muted-foreground))",
+                }}
               />
               <Area
                 yAxisId="left"
@@ -266,10 +268,24 @@ export function WeeklyBarChart() {
               />
               <Tooltip contentStyle={TOOLTIP_STYLE} />
               <Legend
-                wrapperStyle={{ fontSize: "12px", paddingTop: "16px", color: "hsl(var(--muted-foreground))" }}
+                wrapperStyle={{
+                  fontSize: "12px",
+                  paddingTop: "16px",
+                  color: "hsl(var(--muted-foreground))",
+                }}
               />
-              <Bar dataKey="sessions" name="Sessions" fill="hsl(269 74% 57%)" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="conversions" name="Conversions" fill="hsl(269 74% 82%)" radius={[4, 4, 0, 0]} />
+              <Bar
+                dataKey="sessions"
+                name="Sessions"
+                fill="hsl(269 74% 57%)"
+                radius={[4, 4, 0, 0]}
+              />
+              <Bar
+                dataKey="conversions"
+                name="Conversions"
+                fill="hsl(269 74% 82%)"
+                radius={[4, 4, 0, 0]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </ChartSection>
@@ -324,7 +340,11 @@ export function MultiLineChart({ data }: { data: typeof monthlyRevenue }) {
               />
               <Tooltip contentStyle={TOOLTIP_STYLE} />
               <Legend
-                wrapperStyle={{ fontSize: "12px", paddingTop: "16px", color: "hsl(var(--muted-foreground))" }}
+                wrapperStyle={{
+                  fontSize: "12px",
+                  paddingTop: "16px",
+                  color: "hsl(var(--muted-foreground))",
+                }}
               />
               <Line
                 yAxisId="left"
@@ -402,9 +422,7 @@ export function PlanPieChart() {
                   outerRadius={110}
                   paddingAngle={3}
                   dataKey="value"
-                  label={({ name, percent }) =>
-                    `${name} ${(percent * 100).toFixed(0)}%`
-                  }
+                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                   labelLine={false}
                 >
                   {planDistribution.map((entry, index) => (
@@ -416,7 +434,11 @@ export function PlanPieChart() {
                   formatter={(value) => [`${value}%`, "Share"]}
                 />
                 <Legend
-                  wrapperStyle={{ fontSize: "12px", paddingTop: "8px", color: "hsl(var(--muted-foreground))" }}
+                  wrapperStyle={{
+                    fontSize: "12px",
+                    paddingTop: "8px",
+                    color: "hsl(var(--muted-foreground))",
+                  }}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -424,17 +446,19 @@ export function PlanPieChart() {
         </ChartSection>
 
         {/* ── Notes ──────────────────────────────────────────────────────── */}
-        <section className="rounded-lg border border-border bg-muted/30 p-6">
-          <h2 className="mb-3 text-base font-semibold text-foreground">Using Aether UI tokens in charts</h2>
-          <p className="mb-4 text-sm text-muted-foreground">
+        <section className="border-border bg-muted/30 rounded-lg border p-6">
+          <h2 className="text-foreground mb-3 text-base font-semibold">
+            Using Aether UI tokens in charts
+          </h2>
+          <p className="text-muted-foreground mb-4 text-sm">
             Pass{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs text-foreground">
+            <code className="bg-muted text-foreground rounded px-1 font-mono text-xs">
               hsl(var(--token-name))
             </code>{" "}
             as the{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs text-foreground">stroke</code> or{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs text-foreground">fill</code> prop
-            to automatically inherit light/dark theme colours. Key tokens:
+            <code className="bg-muted text-foreground rounded px-1 font-mono text-xs">stroke</code>{" "}
+            or <code className="bg-muted text-foreground rounded px-1 font-mono text-xs">fill</code>{" "}
+            prop to automatically inherit light/dark theme colours. Key tokens:
           </p>
           <div className="grid gap-2 sm:grid-cols-2">
             {[
@@ -446,10 +470,10 @@ export function PlanPieChart() {
               ["--destructive", "Negative / error series"],
             ].map(([token, desc]) => (
               <div key={token} className="flex items-start gap-2 text-sm">
-                <code className="mt-0.5 shrink-0 rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground">
+                <code className="bg-muted text-foreground mt-0.5 shrink-0 rounded px-1.5 py-0.5 font-mono text-xs">
                   {token}
                 </code>
-                <span className="text-xs text-muted-foreground">{desc}</span>
+                <span className="text-muted-foreground text-xs">{desc}</span>
               </div>
             ))}
           </div>

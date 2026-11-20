@@ -98,7 +98,8 @@ import { Input } from "@/components/ui/input"
         },
         {
           title: "Disabled label",
-          description: "When the associated input is disabled, the label automatically reduces opacity. This uses Tailwind's peer-disabled: variant.",
+          description:
+            "When the associated input is disabled, the label automatically reduces opacity. This uses Tailwind's peer-disabled: variant.",
           preview: (
             <div className="w-64 space-y-2">
               <Label htmlFor="dis-ex">Disabled field</Label>
@@ -117,7 +118,9 @@ import { Input } from "@/components/ui/input"
             <div className="w-64 space-y-2">
               <Label htmlFor="req-ex">
                 Username{" "}
-                <span className="text-destructive" aria-hidden="true">*</span>
+                <span className="text-destructive" aria-hidden="true">
+                  *
+                </span>
               </Label>
               <Input id="req-ex" placeholder="@handle" required />
             </div>
@@ -132,7 +135,8 @@ import { Input } from "@/components/ui/input"
         {
           name: "htmlFor",
           type: "string",
-          description: "The id of the form element this label is associated with. Clicking the label focuses that element.",
+          description:
+            "The id of the form element this label is associated with. Clicking the label focuses that element.",
         },
         {
           name: "className",
@@ -142,7 +146,8 @@ import { Input } from "@/components/ui/input"
         {
           name: "...props",
           type: "React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>",
-          description: "All Radix Label root props — which extend React.LabelHTMLAttributes<HTMLLabelElement>.",
+          description:
+            "All Radix Label root props — which extend React.LabelHTMLAttributes<HTMLLabelElement>.",
         },
       ]}
       a11yNotes={[

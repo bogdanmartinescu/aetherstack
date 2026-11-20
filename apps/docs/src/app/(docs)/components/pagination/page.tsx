@@ -12,7 +12,8 @@ import { ComponentPage } from "@/components/component-page"
 
 export const metadata: Metadata = {
   title: "Pagination",
-  description: "Navigation controls for moving through paginated content. Renders semantic <nav> and <a> elements.",
+  description:
+    "Navigation controls for moving through paginated content. Renders semantic <nav> and <a> elements.",
 }
 
 const MANUAL_SOURCE = `import * as React from "react"
@@ -135,7 +136,9 @@ export default function PaginationPage() {
               <PaginationLink href="#">2</PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#" isActive>3</PaginationLink>
+              <PaginationLink href="#" isActive>
+                3
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
               <PaginationLink href="#">4</PaginationLink>
@@ -218,7 +221,9 @@ export function PaginationDemo() {
                   <PaginationLink href="#">2</PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
-                  <PaginationLink href="#" isActive>3</PaginationLink>
+                  <PaginationLink href="#" isActive>
+                    3
+                  </PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink href="#">4</PaginationLink>
@@ -260,7 +265,8 @@ export function PaginationDemo() {
         },
         {
           title: "With ellipsis",
-          description: "Use PaginationEllipsis to indicate hidden page ranges for large page counts.",
+          description:
+            "Use PaginationEllipsis to indicate hidden page ranges for large page counts.",
           preview: (
             <Pagination>
               <PaginationContent>
@@ -277,7 +283,9 @@ export function PaginationDemo() {
                   <PaginationLink href="#">8</PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
-                  <PaginationLink href="#" isActive>9</PaginationLink>
+                  <PaginationLink href="#" isActive>
+                    9
+                  </PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink href="#">10</PaginationLink>
@@ -332,19 +340,22 @@ export function PaginationDemo() {
           name: "isActive",
           type: "boolean",
           default: "false",
-          description: "Marks this link as the current page — applies outline style and sets aria-current='page'.",
+          description:
+            "Marks this link as the current page — applies outline style and sets aria-current='page'.",
         },
         {
           name: "isDisabled",
           type: "boolean",
           default: "false",
-          description: "Renders the link inert (no href, aria-disabled, removed from tab order) — e.g. Previous on the first page.",
+          description:
+            "Renders the link inert (no href, aria-disabled, removed from tab order) — e.g. Previous on the first page.",
         },
         {
           name: "size",
           type: '"default" | "sm" | "lg" | "icon"',
           default: '"icon"',
-          description: "Button size. PaginationPrevious and PaginationNext default to \"default\" so their labels fit.",
+          description:
+            'Button size. PaginationPrevious and PaginationNext default to "default" so their labels fit.',
         },
         {
           name: "href",

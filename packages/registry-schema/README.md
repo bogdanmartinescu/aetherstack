@@ -51,16 +51,16 @@ const item: RegistryItem = {
 
 ## Exported schemas and types
 
-| Export | Description |
-|---|---|
-| `registryItemSchema` | Zod schema for a single registry item |
-| `registrySchema` | Zod schema for a full registry manifest |
+| Export                   | Description                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------- |
+| `registryItemSchema`     | Zod schema for a single registry item                                         |
+| `registrySchema`         | Zod schema for a full registry manifest                                       |
 | `registryItemTypeSchema` | Zod enum for item types (`registry:ui`, `registry:pattern`, `registry:block`) |
-| `registryItemFileSchema` | Zod schema for a file entry within an item |
-| `registryItemAiSchema` | Zod schema for the `ai` metadata block |
-| `RegistryItem` | TypeScript type inferred from `registryItemSchema` |
-| `Registry` | TypeScript type inferred from `registrySchema` |
-| `RegistryItemAi` | TypeScript type inferred from `registryItemAiSchema` |
+| `registryItemFileSchema` | Zod schema for a file entry within an item                                    |
+| `registryItemAiSchema`   | Zod schema for the `ai` metadata block                                        |
+| `RegistryItem`           | TypeScript type inferred from `registryItemSchema`                            |
+| `Registry`               | TypeScript type inferred from `registrySchema`                                |
+| `RegistryItemAi`         | TypeScript type inferred from `registryItemAiSchema`                          |
 
 ## Documentation
 

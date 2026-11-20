@@ -4,7 +4,8 @@ import { AttachmentChipPreview } from "./preview"
 
 export const metadata: Metadata = {
   title: "AttachmentChip",
-  description: "A compact chip representing a file attached to a prompt, with file name, formatted size, and an optional remove button.",
+  description:
+    "A compact chip representing a file attached to a prompt, with file name, formatted size, and an optional remove button.",
 }
 
 export default function AttachmentChipPage() {
@@ -44,7 +45,8 @@ export default function AttachmentChipPage() {
         {
           name: "type",
           type: "string",
-          description: "MIME type used to pick an icon (e.g. image/png shows an image icon). Falls back to the file extension.",
+          description:
+            "MIME type used to pick an icon (e.g. image/png shows an image icon). Falls back to the file extension.",
         },
         {
           name: "status",

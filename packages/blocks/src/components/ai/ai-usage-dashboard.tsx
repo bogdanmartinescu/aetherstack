@@ -78,17 +78,21 @@ function MiniBarChart({ data, color = "hsl(var(--primary))" }: MiniBarChartProps
           )
         })}
       </svg>
-      <div className="flex justify-between mt-1">
+      <div className="mt-1 flex justify-between">
         {data.length <= 7 ? (
           data.map((d, i) => (
-            <span key={i} className="text-xs text-muted-foreground truncate" style={{ maxWidth: `${100 / data.length}%` }}>
+            <span
+              key={i}
+              className="text-muted-foreground truncate text-xs"
+              style={{ maxWidth: `${100 / data.length}%` }}
+            >
               {d.label}
             </span>
           ))
         ) : (
           <>
-            <span className="text-xs text-muted-foreground">{data[0]?.label}</span>
-            <span className="text-xs text-muted-foreground">{data[data.length - 1]?.label}</span>
+            <span className="text-muted-foreground text-xs">{data[0]?.label}</span>
+            <span className="text-muted-foreground text-xs">{data[data.length - 1]?.label}</span>
           </>
         )}
       </div>
@@ -113,7 +117,7 @@ function AIUsageDashboard({
         <div className="grid gap-4 sm:grid-cols-3">
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-muted-foreground text-sm font-medium">
                 Total requests
                 {stats.period && ` (${stats.period})`}
               </CardTitle>
@@ -124,7 +128,9 @@ function AIUsageDashboard({
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Total tokens</CardTitle>
+              <CardTitle className="text-muted-foreground text-sm font-medium">
+                Total tokens
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-2xl font-bold">{formatNumber(stats.totalTokens)}</p>
@@ -132,7 +138,9 @@ function AIUsageDashboard({
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Estimated cost</CardTitle>
+              <CardTitle className="text-muted-foreground text-sm font-medium">
+                Estimated cost
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-2xl font-bold">{formatCost(stats.estimatedCost)}</p>
@@ -160,15 +168,15 @@ function AIUsageDashboard({
           <CardContent>
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-border text-left">
-                  <th className="pb-2 font-medium text-muted-foreground">Model</th>
-                  <th className="pb-2 font-medium text-muted-foreground text-right">Tokens</th>
-                  <th className="pb-2 font-medium text-muted-foreground text-right">Cost</th>
+                <tr className="border-border border-b text-left">
+                  <th className="text-muted-foreground pb-2 font-medium">Model</th>
+                  <th className="text-muted-foreground pb-2 text-right font-medium">Tokens</th>
+                  <th className="text-muted-foreground pb-2 text-right font-medium">Cost</th>
                 </tr>
               </thead>
               <tbody>
                 {tokensByModel.map((row, i) => (
-                  <tr key={i} className="border-b border-border/50 last:border-0">
+                  <tr key={i} className="border-border/50 border-b last:border-0">
                     <td className="py-2 font-mono">{row.model}</td>
                     <td className="py-2 text-right tabular-nums">{formatNumber(row.tokens)}</td>
                     <td className="py-2 text-right tabular-nums">{formatCost(row.cost)}</td>

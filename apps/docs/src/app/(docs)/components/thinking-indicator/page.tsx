@@ -4,7 +4,8 @@ import { PatternPage } from "@/components/pattern-page"
 
 export const metadata: Metadata = {
   title: "ThinkingIndicator",
-  description: "Animated dots with a label used to signal that an AI model is processing or loading.",
+  description:
+    "Animated dots with a label used to signal that an AI model is processing or loading.",
 }
 
 export default function ThinkingIndicatorPage() {
@@ -28,7 +29,8 @@ export default function ThinkingIndicatorPage() {
           name: "state",
           type: '"thinking" | "loading"',
           default: '"thinking"',
-          description: "Controls animation style — thinking shows pulsing dots, loading shows a spinner.",
+          description:
+            "Controls animation style — thinking shows pulsing dots, loading shows a spinner.",
         },
         {
           name: "label",

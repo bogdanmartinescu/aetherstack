@@ -22,7 +22,10 @@ interface ToolCallCardProps {
 function formatPayload(value: unknown): string {
   if (typeof value === "string") return value
   try {
-    return JSON.stringify(value, (_key, v: unknown) => (typeof v === "bigint" ? v.toString() : v), 2) ?? String(value)
+    return (
+      JSON.stringify(value, (_key, v: unknown) => (typeof v === "bigint" ? v.toString() : v), 2) ??
+      String(value)
+    )
   } catch {
     return String(value)
   }
@@ -61,7 +64,7 @@ function ToolCallCard({
           {status}
         </span>
         {duration !== undefined && (
-          <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+          <span className="text-muted-foreground shrink-0 text-xs tabular-nums">
             · {formatDuration(duration)}
           </span>
         )}
@@ -70,7 +73,7 @@ function ToolCallCard({
         <ChevronRight
           aria-hidden="true"
           className={cn(
-            "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 motion-reduce:transition-none",
+            "text-muted-foreground h-4 w-4 shrink-0 transition-transform duration-200 motion-reduce:transition-none",
             open && "rotate-90",
           )}
         />
@@ -83,7 +86,7 @@ function ToolCallCard({
       <div
         data-status={status}
         className={cn(
-          "rounded-lg border bg-card",
+          "bg-card rounded-lg border",
           status === "error" ? "border-destructive/40" : "border-border",
           className,
         )}
@@ -94,8 +97,8 @@ function ToolCallCard({
               type="button"
               className={cn(
                 "flex w-full items-center justify-between gap-2 rounded-lg px-4 py-3 text-left text-sm",
-                "ring-offset-background transition-colors hover:bg-accent/50",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+                "ring-offset-background hover:bg-accent/50 transition-colors",
+                "focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset",
               )}
             >
               {header}
@@ -108,7 +111,7 @@ function ToolCallCard({
         )}
 
         <CollapsibleContent>
-          <div className="space-y-3 border-t border-border px-4 pb-4 pt-3">
+          <div className="border-border space-y-3 border-t px-4 pb-4 pt-3">
             {hasArgs && <PayloadSection label="Arguments" value={formatPayload(args)} />}
             {error && <PayloadSection label="Error" value={error} tone="destructive" />}
             {hasResult && <PayloadSection label="Result" value={formatPayload(result)} />}
@@ -142,7 +145,7 @@ function PayloadSection({
         tabIndex={0}
         className={cn(
           "max-h-64 overflow-auto whitespace-pre-wrap break-words rounded p-3 font-mono text-xs",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          "focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2",
           tone === "destructive" ? "bg-destructive/10 text-destructive" : "bg-muted",
         )}
       >
@@ -158,14 +161,14 @@ function StatusIcon({ status }: { status: ToolCallStatus }) {
       return (
         <span
           aria-hidden="true"
-          className="h-4 w-4 shrink-0 rounded-full border-2 border-muted-foreground/40"
+          className="border-muted-foreground/40 h-4 w-4 shrink-0 rounded-full border-2"
         />
       )
     case "running":
       return (
         <span
           aria-hidden="true"
-          className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-primary border-t-transparent motion-reduce:animate-none"
+          className="border-primary h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-t-transparent motion-reduce:animate-none"
         />
       )
     case "done":
@@ -176,7 +179,7 @@ function StatusIcon({ status }: { status: ToolCallStatus }) {
         />
       )
     case "error":
-      return <CircleX aria-hidden="true" className="h-4 w-4 shrink-0 text-destructive" />
+      return <CircleX aria-hidden="true" className="text-destructive h-4 w-4 shrink-0" />
   }
 }
 

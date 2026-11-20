@@ -45,21 +45,18 @@ export function BlockPage({
       {/* Header */}
       <div className="mb-10">
         <div className="mb-2 flex items-center gap-2">
-          <span className="rounded-full border border-border px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+          <span className="border-border text-muted-foreground rounded-full border px-2.5 py-0.5 text-xs font-medium">
             {category}
           </span>
         </div>
-        <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">{name}</h1>
-        <p className="text-lg text-muted-foreground">{description}</p>
+        <h1 className="text-foreground mb-3 text-4xl font-bold tracking-tight">{name}</h1>
+        <p className="text-muted-foreground text-lg">{description}</p>
       </div>
 
       {/* Preview */}
       <section className="mb-10">
-        <div className="overflow-hidden rounded-lg border border-border">
-          <div
-            className="relative overflow-hidden bg-muted/20"
-            style={{ height: previewHeight }}
-          >
+        <div className="border-border overflow-hidden rounded-lg border">
+          <div className="bg-muted/20 relative overflow-hidden" style={{ height: previewHeight }}>
             {previewScale !== 1 ? (
               <div
                 className="absolute left-0 top-0 origin-top-left"
@@ -75,8 +72,8 @@ export function BlockPage({
               <div className="h-full w-full overflow-auto">{preview}</div>
             )}
           </div>
-          <div className="border-t border-border bg-muted/50 px-4 py-3">
-            <p className="font-mono text-xs text-muted-foreground">
+          <div className="border-border bg-muted/50 border-t px-4 py-3">
+            <p className="text-muted-foreground font-mono text-xs">
               import {"{"} {name.replace(/\s/g, "")} {"}"} from &quot;{packageName}&quot;
             </p>
           </div>
@@ -86,51 +83,57 @@ export function BlockPage({
       {/* Installation */}
       {cliInstall && (
         <section className="mb-10">
-          <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Installation</h2>
+          <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+            Installation
+          </h2>
           <CodeBlock code={cliInstall} filename="terminal" />
         </section>
       )}
 
       {/* Import */}
       <section className="mb-10">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Import</h2>
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Import</h2>
         <CodeBlock code={importCode} filename="import.tsx" />
       </section>
 
       {/* Usage */}
       <section className="mb-10">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Usage</h2>
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Usage</h2>
         <CodeBlock code={usageCode} filename={`${name.toLowerCase().replace(/\s/g, "-")}.tsx`} />
       </section>
 
       {/* Props */}
       <section className="mb-10">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Props</h2>
-        <div className="overflow-hidden rounded-lg border border-border text-sm">
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Props</h2>
+        <div className="border-border overflow-hidden rounded-lg border text-sm">
           <table className="w-full">
-            <thead className="border-b border-border bg-muted/50">
+            <thead className="border-border bg-muted/50 border-b">
               <tr>
                 {["Prop", "Type", "Default", "Description"].map((h) => (
-                  <th key={h} className="px-4 py-2.5 text-left font-medium text-foreground">{h}</th>
+                  <th key={h} className="text-foreground px-4 py-2.5 text-left font-medium">
+                    {h}
+                  </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody className="divide-border divide-y">
               {props.map((p) => (
                 <tr key={p.name} className="hover:bg-muted/20 transition-colors">
-                  <td className="px-4 py-2.5 font-mono text-xs text-foreground">
+                  <td className="text-foreground px-4 py-2.5 font-mono text-xs">
                     {p.name}
-                    {p.required && <span className="ml-0.5 text-destructive">*</span>}
+                    {p.required && <span className="text-destructive ml-0.5">*</span>}
                   </td>
-                  <td className="px-4 py-2.5 font-mono text-xs text-muted-foreground">{p.type}</td>
-                  <td className="px-4 py-2.5 font-mono text-xs text-muted-foreground">{p.default ?? "—"}</td>
-                  <td className="px-4 py-2.5 text-xs text-muted-foreground">{p.description}</td>
+                  <td className="text-muted-foreground px-4 py-2.5 font-mono text-xs">{p.type}</td>
+                  <td className="text-muted-foreground px-4 py-2.5 font-mono text-xs">
+                    {p.default ?? "—"}
+                  </td>
+                  <td className="text-muted-foreground px-4 py-2.5 text-xs">{p.description}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="mt-2 text-xs text-muted-foreground">
+        <p className="text-muted-foreground mt-2 text-xs">
           <span className="text-destructive">*</span> Required
         </p>
       </section>
@@ -138,11 +141,13 @@ export function BlockPage({
       {/* A11y */}
       {a11yNotes && a11yNotes.length > 0 && (
         <section>
-          <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Accessibility</h2>
+          <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+            Accessibility
+          </h2>
           <ul className="space-y-2">
             {a11yNotes.map((n) => (
-              <li key={n} className="flex items-start gap-2 text-sm text-muted-foreground">
-                <span className="mt-0.5 shrink-0 text-primary">→</span>
+              <li key={n} className="text-muted-foreground flex items-start gap-2 text-sm">
+                <span className="text-primary mt-0.5 shrink-0">→</span>
                 {n}
               </li>
             ))}

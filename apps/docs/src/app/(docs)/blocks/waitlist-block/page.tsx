@@ -46,13 +46,46 @@ export default function WaitlistPage() {
         />
       }
       props={[
-        { name: "headline", type: "string", default: "'Join the waitlist'", description: "Section heading." },
-        { name: "subheading", type: "string", description: "Supporting paragraph below the headline." },
-        { name: "placeholder", type: "string", default: "'Enter your email address'", description: "Email input placeholder text." },
-        { name: "ctaLabel", type: "string", default: "'Get early access'", description: "Submit button label." },
-        { name: "onSubmit", type: "(email: string) => Promise<void>", description: "Async callback called with the submitted email. Throwing triggers the error state." },
-        { name: "successMessage", type: "string", default: "'You're on the list!'", description: "Message shown after successful submission." },
-        { name: "className", type: "string", description: "Additional classes on the section wrapper." },
+        {
+          name: "headline",
+          type: "string",
+          default: "'Join the waitlist'",
+          description: "Section heading.",
+        },
+        {
+          name: "subheading",
+          type: "string",
+          description: "Supporting paragraph below the headline.",
+        },
+        {
+          name: "placeholder",
+          type: "string",
+          default: "'Enter your email address'",
+          description: "Email input placeholder text.",
+        },
+        {
+          name: "ctaLabel",
+          type: "string",
+          default: "'Get early access'",
+          description: "Submit button label.",
+        },
+        {
+          name: "onSubmit",
+          type: "(email: string) => Promise<void>",
+          description:
+            "Async callback called with the submitted email. Throwing triggers the error state.",
+        },
+        {
+          name: "successMessage",
+          type: "string",
+          default: "'You're on the list!'",
+          description: "Message shown after successful submission.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the section wrapper.",
+        },
       ]}
       a11yNotes={[
         "Email input has type='email' and aria-label='Email address'.",

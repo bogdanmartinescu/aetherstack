@@ -14,9 +14,7 @@ describe("AnimatedNumber", () => {
   })
 
   it("formats percents", () => {
-    render(
-      <AnimatedNumber value={0.125} format={{ style: "percent", maximumFractionDigits: 1 }} />,
-    )
+    render(<AnimatedNumber value={0.125} format={{ style: "percent", maximumFractionDigits: 1 }} />)
     expect(screen.getByText("12.5%")).toBeInTheDocument()
   })
 })

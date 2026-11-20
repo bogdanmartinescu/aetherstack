@@ -25,25 +25,25 @@ Evidence:
 
 ## Before / after
 
-| Location | Before | After |
-| --- | --- | --- |
-| Root `LICENSE` | missing | MIT, Copyright (c) 2026 Bogdan Martinescu |
-| Root `package.json` `license` | missing | `MIT` |
-| `packages/*` `license` field | `MIT` on all 14 | unchanged |
-| `packages/*/LICENSE` | missing on all 14 | identical MIT text |
-| `packages/*/package.json` `files` | omitted `LICENSE` | includes `LICENSE` so `npm pack` ships it |
-| `apps/*`, `tooling/scripts` `license` | missing | `MIT` (private packages; no separate LICENSE required for publish) |
+| Location                              | Before            | After                                                              |
+| ------------------------------------- | ----------------- | ------------------------------------------------------------------ |
+| Root `LICENSE`                        | missing           | MIT, Copyright (c) 2026 Bogdan Martinescu                          |
+| Root `package.json` `license`         | missing           | `MIT`                                                              |
+| `packages/*` `license` field          | `MIT` on all 14   | unchanged                                                          |
+| `packages/*/LICENSE`                  | missing on all 14 | identical MIT text                                                 |
+| `packages/*/package.json` `files`     | omitted `LICENSE` | includes `LICENSE` so `npm pack` ships it                          |
+| `apps/*`, `tooling/scripts` `license` | missing           | `MIT` (private packages; no separate LICENSE required for publish) |
 
 ## Third-party and asset provenance
 
-| Class | Finding | Action |
-| --- | --- | --- |
-| npm runtime dependencies (Radix, cmdk, recharts, zod, commander, …) | Consumed as packages; their licenses remain theirs. No vendored copies of those package trees in source. | None beyond normal npm license compliance at install time. |
-| UI source style | Components are Aetherstack TypeScript/React. They import Radix / lucide / cva; they do not embed foreign SPDX headers or third-party LICENSE blobs. | Keep writing original wrappers; do not paste upstream LICENSE text into component files. |
-| Icons (`packages/icons`) | Four original React SVG marks under `src/aether/`. No third-party icon pack LICENSE. | Covered by the package MIT LICENSE. |
-| Fonts | Apps load Google fonts through `next/font/google` (Inter, JetBrains Mono, and docs-specific faces). No font binaries are checked into the repo. | Font licenses are those of the served faces; not part of the npm package tarballs. |
-| Registry Pro (`registry/pro`) | Two sample Pro blocks live in this MIT monorepo today. Strategy says future paid kits are separate. | Still MIT while they remain here. Extracting them to a proprietary tree is an M4 concern, not a silent license flip in this repo. |
-| Generated registry / docs | Built from source under the same MIT terms. | No extra notice file. |
+| Class                                                               | Finding                                                                                                                                             | Action                                                                                                                            |
+| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| npm runtime dependencies (Radix, cmdk, recharts, zod, commander, …) | Consumed as packages; their licenses remain theirs. No vendored copies of those package trees in source.                                            | None beyond normal npm license compliance at install time.                                                                        |
+| UI source style                                                     | Components are Aetherstack TypeScript/React. They import Radix / lucide / cva; they do not embed foreign SPDX headers or third-party LICENSE blobs. | Keep writing original wrappers; do not paste upstream LICENSE text into component files.                                          |
+| Icons (`packages/icons`)                                            | Four original React SVG marks under `src/aether/`. No third-party icon pack LICENSE.                                                                | Covered by the package MIT LICENSE.                                                                                               |
+| Fonts                                                               | Apps load Google fonts through `next/font/google` (Inter, JetBrains Mono, and docs-specific faces). No font binaries are checked into the repo.     | Font licenses are those of the served faces; not part of the npm package tarballs.                                                |
+| Registry Pro (`registry/pro`)                                       | Two sample Pro blocks live in this MIT monorepo today. Strategy says future paid kits are separate.                                                 | Still MIT while they remain here. Extracting them to a proprietary tree is an M4 concern, not a silent license flip in this repo. |
+| Generated registry / docs                                           | Built from source under the same MIT terms.                                                                                                         | No extra notice file.                                                                                                             |
 
 No `NOTICE`, `COPYING`, or third-party LICENSE files were found under `packages/`, `apps/`, or `tooling/` (excluding `node_modules` and build outputs).
 

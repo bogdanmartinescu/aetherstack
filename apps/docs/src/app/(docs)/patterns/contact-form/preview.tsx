@@ -71,7 +71,7 @@ export function ContactFormPreview() {
         </div>
         <div className="space-y-1">
           <h3 className="text-lg font-semibold">Message received!</h3>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Thanks for reaching out. We&apos;ll get back to you within 24 hours.
           </p>
         </div>
@@ -93,7 +93,7 @@ export function ContactFormPreview() {
     <div className="w-full max-w-md space-y-6">
       <div className="space-y-1">
         <h2 className="text-2xl font-bold tracking-tight">Get in touch</h2>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           We respond to all inquiries within one business day.
         </p>
       </div>
@@ -108,9 +108,7 @@ export function ContactFormPreview() {
               aria-invalid={!!errors.name}
               {...register("name")}
             />
-            {errors.name && (
-              <p className="text-xs text-destructive">{errors.name.message}</p>
-            )}
+            {errors.name && <p className="text-destructive text-xs">{errors.name.message}</p>}
           </div>
 
           <div className="space-y-1.5">
@@ -122,9 +120,7 @@ export function ContactFormPreview() {
               aria-invalid={!!errors.email}
               {...register("email")}
             />
-            {errors.email && (
-              <p className="text-xs text-destructive">{errors.email.message}</p>
-            )}
+            {errors.email && <p className="text-destructive text-xs">{errors.email.message}</p>}
           </div>
         </div>
 
@@ -148,17 +144,13 @@ export function ContactFormPreview() {
               </Select>
             )}
           />
-          {errors.subject && (
-            <p className="text-xs text-destructive">{errors.subject.message}</p>
-          )}
+          {errors.subject && <p className="text-destructive text-xs">{errors.subject.message}</p>}
         </div>
 
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <Label htmlFor="cf-message">Message</Label>
-            <span className="text-xs text-muted-foreground">
-              {(message ?? "").length}/1000
-            </span>
+            <span className="text-muted-foreground text-xs">{(message ?? "").length}/1000</span>
           </div>
           <Textarea
             id="cf-message"
@@ -167,9 +159,7 @@ export function ContactFormPreview() {
             aria-invalid={!!errors.message}
             {...register("message")}
           />
-          {errors.message && (
-            <p className="text-xs text-destructive">{errors.message.message}</p>
-          )}
+          {errors.message && <p className="text-destructive text-xs">{errors.message.message}</p>}
         </div>
 
         <Button type="submit" className="w-full" disabled={isSubmitting}>

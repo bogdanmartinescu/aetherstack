@@ -99,11 +99,11 @@ export function FileDropzone({
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       className={cn(
-        "relative flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-border bg-muted/30 p-8 text-center transition-colors",
+        "border-border bg-muted/30 relative flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed p-8 text-center transition-colors",
         isDragging && "border-primary bg-primary/5",
         disabled
           ? "cursor-not-allowed opacity-50"
-          : "cursor-pointer hover:border-primary/50 hover:bg-muted/50",
+          : "hover:border-primary/50 hover:bg-muted/50 cursor-pointer",
         className,
       )}
     >
@@ -120,7 +120,7 @@ export function FileDropzone({
       />
 
       {/* Upload icon */}
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted text-muted-foreground">
+      <div className="bg-muted text-muted-foreground flex h-12 w-12 items-center justify-center rounded-full">
         <svg
           className="h-6 w-6"
           xmlns="http://www.w3.org/2000/svg"
@@ -139,19 +139,13 @@ export function FileDropzone({
       </div>
 
       <div className="space-y-1">
-        <p className="text-sm font-medium text-foreground">
-          Drag files here or click to browse
-        </p>
+        <p className="text-foreground text-sm font-medium">Drag files here or click to browse</p>
         {maxSize && (
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Max file size: {(maxSize / 1024 / 1024).toFixed(0)} MB
           </p>
         )}
-        {accept && (
-          <p className="text-xs text-muted-foreground">
-            Accepted: {accept}
-          </p>
-        )}
+        {accept && <p className="text-muted-foreground text-xs">Accepted: {accept}</p>}
       </div>
 
       {children}

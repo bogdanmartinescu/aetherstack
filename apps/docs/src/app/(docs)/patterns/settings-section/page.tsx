@@ -43,7 +43,9 @@ export default function SettingsSectionPage() {
             description="Update your personal details."
             footer={
               <>
-                <Button variant="outline" size="sm">Cancel</Button>
+                <Button variant="outline" size="sm">
+                  Cancel
+                </Button>
                 <Button size="sm">Save changes</Button>
               </>
             }
@@ -64,10 +66,27 @@ export default function SettingsSectionPage() {
       props={[
         { name: "title", type: "string", required: true, description: "Section heading." },
         { name: "description", type: "string", description: "Subtext in the header." },
-        { name: "headerAction", type: "ReactNode", description: "Optional action in the header row." },
-        { name: "footer", type: "ReactNode", description: "Footer bar content — right-aligned. Typically Save/Cancel buttons." },
-        { name: "children", type: "ReactNode", required: true, description: "Section body content." },
-        { name: "className", type: "string", description: "Additional classes on the outer section element." },
+        {
+          name: "headerAction",
+          type: "ReactNode",
+          description: "Optional action in the header row.",
+        },
+        {
+          name: "footer",
+          type: "ReactNode",
+          description: "Footer bar content — right-aligned. Typically Save/Cancel buttons.",
+        },
+        {
+          name: "children",
+          type: "ReactNode",
+          required: true,
+          description: "Section body content.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the outer section element.",
+        },
       ]}
     />
   )

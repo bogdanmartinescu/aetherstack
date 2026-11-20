@@ -44,19 +44,15 @@ export function BillingOverview({
   return (
     <div className={cn("w-full space-y-6", className)}>
       {/* Current plan card */}
-      <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
+      <div className="border-border bg-card rounded-xl border p-6 shadow-sm">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            <p className="text-muted-foreground text-xs font-medium uppercase tracking-wider">
               Current plan
             </p>
-            <h2 className="mt-1 text-2xl font-bold text-foreground">
-              {plan.name}
-            </h2>
-            <p className="mt-0.5 text-sm text-muted-foreground">
-              <span className="text-xl font-semibold text-foreground">
-                {plan.price}
-              </span>
+            <h2 className="text-foreground mt-1 text-2xl font-bold">{plan.name}</h2>
+            <p className="text-muted-foreground mt-0.5 text-sm">
+              <span className="text-foreground text-xl font-semibold">{plan.price}</span>
               &nbsp;/ {plan.period}
             </p>
           </div>
@@ -71,7 +67,7 @@ export function BillingOverview({
         {plan.features.length > 0 && (
           <ul className="mt-4 space-y-1.5">
             {plan.features.map((f) => (
-              <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li key={f} className="text-muted-foreground flex items-center gap-2 text-sm">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="14"
@@ -96,24 +92,25 @@ export function BillingOverview({
 
       {/* Usage meters */}
       {usage.length > 0 && (
-        <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <h3 className="mb-4 text-sm font-semibold text-foreground">Usage</h3>
+        <div className="border-border bg-card rounded-xl border p-6 shadow-sm">
+          <h3 className="text-foreground mb-4 text-sm font-semibold">Usage</h3>
           <div className="space-y-4">
             {usage.map((metric) => {
-              const pct = metric.limit > 0
-                ? Math.min(100, Math.round((metric.used / metric.limit) * 100))
-                : 0
+              const pct =
+                metric.limit > 0 ? Math.min(100, Math.round((metric.used / metric.limit) * 100)) : 0
               const isNearLimit = pct >= 80
               return (
                 <div key={metric.label}>
                   <div className="mb-1.5 flex items-center justify-between text-sm">
-                    <span className="font-medium text-foreground">
-                      {metric.label}
-                    </span>
-                    <span className={cn("text-muted-foreground", isNearLimit && "text-destructive font-medium")}>
+                    <span className="text-foreground font-medium">{metric.label}</span>
+                    <span
+                      className={cn(
+                        "text-muted-foreground",
+                        isNearLimit && "text-destructive font-medium",
+                      )}
+                    >
                       {metric.used.toLocaleString()}
-                      {metric.unit ? ` ${metric.unit}` : ""} /{" "}
-                      {metric.limit.toLocaleString()}
+                      {metric.unit ? ` ${metric.unit}` : ""} / {metric.limit.toLocaleString()}
                       {metric.unit ? ` ${metric.unit}` : ""}
                     </span>
                   </div>
@@ -130,14 +127,14 @@ export function BillingOverview({
       )}
 
       {/* Footer: next billing + manage button */}
-      <div className="flex items-center justify-between gap-4 rounded-xl border border-border bg-card px-6 py-4 shadow-sm">
+      <div className="border-border bg-card flex items-center justify-between gap-4 rounded-xl border px-6 py-4 shadow-sm">
         {nextBillingDate ? (
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             Next billing date:{" "}
-            <span className="font-medium text-foreground">{nextBillingDate}</span>
+            <span className="text-foreground font-medium">{nextBillingDate}</span>
           </p>
         ) : (
-          <p className="text-sm text-muted-foreground">No upcoming charges.</p>
+          <p className="text-muted-foreground text-sm">No upcoming charges.</p>
         )}
         {onManageBilling && (
           <Button variant="outline" size="sm" onClick={onManageBilling}>

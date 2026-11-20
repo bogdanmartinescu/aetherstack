@@ -4,7 +4,8 @@ import { BlockPage } from "@/components/block-page"
 
 export const metadata: Metadata = {
   title: "Pricing Section",
-  description: "Responsive 3-tier pricing grid with feature lists, highlighted plan, and CTA buttons.",
+  description:
+    "Responsive 3-tier pricing grid with feature lists, highlighted plan, and CTA buttons.",
 }
 
 const TIERS = [
@@ -112,10 +113,24 @@ export default function PricingPage() {
         />
       }
       props={[
-        { name: "tiers", type: "PricingTier[]", required: true, description: "Array of pricing tiers. Each has name, price, period, description, features, cta, and optional highlighted/badge." },
+        {
+          name: "tiers",
+          type: "PricingTier[]",
+          required: true,
+          description:
+            "Array of pricing tiers. Each has name, price, period, description, features, cta, and optional highlighted/badge.",
+        },
         { name: "title", type: "string", description: "Section heading." },
-        { name: "description", type: "string", description: "Supporting description below the heading." },
-        { name: "className", type: "string", description: "Additional classes on the section wrapper." },
+        {
+          name: "description",
+          type: "string",
+          description: "Supporting description below the heading.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the section wrapper.",
+        },
       ]}
       a11yNotes={[
         "Each tier is rendered as an <article> so screen readers can navigate between them.",

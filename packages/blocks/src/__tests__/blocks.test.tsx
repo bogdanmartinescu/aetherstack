@@ -74,11 +74,7 @@ describe("DashboardShell", () => {
 
   it("renders nav badges", () => {
     render(
-      <DashboardShell
-        navGroups={[
-          { items: [{ label: "Inbox", href: "/inbox", badge: 12 }] },
-        ]}
-      >
+      <DashboardShell navGroups={[{ items: [{ label: "Inbox", href: "/inbox", badge: 12 }] }]}>
         <p>x</p>
       </DashboardShell>,
     )
@@ -111,9 +107,7 @@ describe("DashboardShell", () => {
     const toggle = screen.getByRole("button", { name: /collapse sidebar/i })
     await user.click(toggle)
     expect(screen.queryByText("Acme")).not.toBeInTheDocument()
-    expect(
-      screen.getByRole("button", { name: /expand sidebar/i }),
-    ).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: /expand sidebar/i })).toBeInTheDocument()
   })
 
   it("renders ReactNode pageTitle as-is (no breadcrumb)", () => {
@@ -139,9 +133,7 @@ describe("LoginBlock", () => {
     render(<LoginBlock />)
     expect(screen.getByLabelText(/email address/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument()
-    expect(
-      screen.getByLabelText(/remember me for 30 days/i),
-    ).toBeInTheDocument()
+    expect(screen.getByLabelText(/remember me for 30 days/i)).toBeInTheDocument()
   })
 
   it("shows email and password validation errors when fields are empty", async () => {
@@ -173,9 +165,7 @@ describe("LoginBlock", () => {
     await user.type(screen.getByLabelText(/^password$/i), "short")
     await user.click(screen.getByRole("button", { name: /sign in/i }))
 
-    expect(
-      screen.getByText(/at least 8 characters/i),
-    ).toBeInTheDocument()
+    expect(screen.getByText(/at least 8 characters/i)).toBeInTheDocument()
   })
 
   it("calls onSubmit with valid values", async () => {
@@ -201,13 +191,11 @@ describe("LoginBlock", () => {
 
   it("uses custom signUpHref and forgotPasswordHref", () => {
     render(<LoginBlock signUpHref="/join" forgotPasswordHref="/recover" />)
-    expect(screen.getByRole("link", { name: /sign up/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /sign up/i })).toHaveAttribute("href", "/join")
+    expect(screen.getByRole("link", { name: /forgot password/i })).toHaveAttribute(
       "href",
-      "/join",
+      "/recover",
     )
-    expect(
-      screen.getByRole("link", { name: /forgot password/i }),
-    ).toHaveAttribute("href", "/recover")
   })
 })
 
@@ -216,9 +204,7 @@ describe("LoginBlock", () => {
 describe("SignupBlock", () => {
   it("renders the default heading", () => {
     render(<SignupBlock />)
-    expect(
-      screen.getByRole("heading", { name: /create account/i }),
-    ).toBeInTheDocument()
+    expect(screen.getByRole("heading", { name: /create account/i })).toBeInTheDocument()
   })
 
   it("renders name, email, and password fields", () => {
@@ -300,13 +286,11 @@ describe("SignupBlock", () => {
       "href",
       "/terms-of-service",
     )
-    expect(
-      screen.getByRole("link", { name: /privacy policy/i }),
-    ).toHaveAttribute("href", "/privacy-policy")
-    expect(screen.getByRole("link", { name: /sign in/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /privacy policy/i })).toHaveAttribute(
       "href",
-      "/login-page",
+      "/privacy-policy",
     )
+    expect(screen.getByRole("link", { name: /sign in/i })).toHaveAttribute("href", "/login-page")
   })
 })
 
@@ -400,10 +384,7 @@ describe("LandingHero", () => {
         primaryCta={{ label: "Get started", href: "/start" }}
       />,
     )
-    expect(screen.getByRole("link", { name: "Get started" })).toHaveAttribute(
-      "href",
-      "/start",
-    )
+    expect(screen.getByRole("link", { name: "Get started" })).toHaveAttribute("href", "/start")
   })
 })
 
@@ -433,10 +414,7 @@ describe("CTASection", () => {
 
   it("renders primary CTA", () => {
     render(
-      <CTASection
-        headline="Start now"
-        primaryCta={{ label: "Sign up free", href: "/signup" }}
-      />,
+      <CTASection headline="Start now" primaryCta={{ label: "Sign up free", href: "/signup" }} />,
     )
     expect(screen.getByRole("link", { name: "Sign up free" })).toBeInTheDocument()
   })
@@ -486,14 +464,7 @@ describe("LogoCloud", () => {
   })
 
   it("renders logo names", () => {
-    render(
-      <LogoCloud
-        logos={[
-          { name: "Acme Corp" },
-          { name: "Globex" },
-        ]}
-      />,
-    )
+    render(<LogoCloud logos={[{ name: "Acme Corp" }, { name: "Globex" }]} />)
     expect(screen.getByText("Acme Corp")).toBeInTheDocument()
     expect(screen.getByText("Globex")).toBeInTheDocument()
   })
@@ -548,20 +519,12 @@ describe("PricingComparison", () => {
 
 describe("UserProfilePage", () => {
   it("renders user name", () => {
-    render(
-      <UserProfilePage
-        user={{ name: "Alice Johnson", email: "alice@example.com" }}
-      />,
-    )
+    render(<UserProfilePage user={{ name: "Alice Johnson", email: "alice@example.com" }} />)
     expect(screen.getByText("Alice Johnson")).toBeInTheDocument()
   })
 
   it("renders user email", () => {
-    render(
-      <UserProfilePage
-        user={{ name: "Alice", email: "alice@example.com" }}
-      />,
-    )
+    render(<UserProfilePage user={{ name: "Alice", email: "alice@example.com" }} />)
     expect(screen.getByText("alice@example.com")).toBeInTheDocument()
   })
 })
@@ -638,7 +601,11 @@ describe("ChangelogBlock", () => {
 
 describe("ChatLayout", () => {
   it("renders children (main content area)", () => {
-    render(<ChatLayout><p>Chat content</p></ChatLayout>)
+    render(
+      <ChatLayout>
+        <p>Chat content</p>
+      </ChatLayout>,
+    )
     expect(screen.getByText("Chat content")).toBeInTheDocument()
   })
 
@@ -788,9 +755,7 @@ describe("PromptLibraryPage", () => {
   it("renders prompt titles when prompts are provided", () => {
     render(
       <PromptLibraryPage
-        prompts={[
-          { id: "1", title: "Summarize text", content: "Summarize:", category: "Writing" },
-        ]}
+        prompts={[{ id: "1", title: "Summarize text", content: "Summarize:", category: "Writing" }]}
       />,
     )
     expect(screen.getByText("Summarize text")).toBeInTheDocument()

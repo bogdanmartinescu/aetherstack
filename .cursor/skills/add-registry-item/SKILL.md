@@ -23,11 +23,11 @@ When a new component, pattern, or block is created, complete all steps in the sa
 
 ## 1. Determine the layer
 
-| Layer | Source package | Registry type | Docs path |
-|-------|---------------|---------------|-----------|
-| Primitive | `packages/ui/src/components/` | `registry:ui` | `apps/docs/src/app/(docs)/components/<slug>/page.tsx` |
-| Pattern | `packages/patterns/src/components/` | `registry:pattern` | `apps/docs/src/app/(docs)/patterns/<slug>/page.tsx` |
-| Block | `packages/blocks/src/components/` | `registry:block` | `apps/docs/src/app/(docs)/blocks/<slug>/page.tsx` |
+| Layer     | Source package                      | Registry type      | Docs path                                             |
+| --------- | ----------------------------------- | ------------------ | ----------------------------------------------------- |
+| Primitive | `packages/ui/src/components/`       | `registry:ui`      | `apps/docs/src/app/(docs)/components/<slug>/page.tsx` |
+| Pattern   | `packages/patterns/src/components/` | `registry:pattern` | `apps/docs/src/app/(docs)/patterns/<slug>/page.tsx`   |
+| Block     | `packages/blocks/src/components/`   | `registry:block`   | `apps/docs/src/app/(docs)/blocks/<slug>/page.tsx`     |
 
 The `<slug>` is the kebab-case name (e.g. `StatGroup` → `stat-group`).
 
@@ -55,11 +55,25 @@ export default function MyComponentPage() {
       previewCode={`import { MyComponent } from "@/components/ui/my-component"\n\n<MyComponent />`}
       cliInstall={`npx aether-ui add my-component`}
       manualInstallCode={MANUAL_SOURCE}
-      manualSteps={[{ title: "Install dependencies", code: `npm install <peer-deps>`, filename: "terminal" }]}
-      examples={[
-        { title: "Basic usage", description: "Short description.", preview: <MyComponent />, code: `<MyComponent />` },
+      manualSteps={[
+        { title: "Install dependencies", code: `npm install <peer-deps>`, filename: "terminal" },
       ]}
-      props={[{ name: "propName", type: "string", default: '"default"', description: "What it controls." }]}
+      examples={[
+        {
+          title: "Basic usage",
+          description: "Short description.",
+          preview: <MyComponent />,
+          code: `<MyComponent />`,
+        },
+      ]}
+      props={[
+        {
+          name: "propName",
+          type: "string",
+          default: '"default"',
+          description: "What it controls.",
+        },
+      ]}
       a11yNotes={["Accessibility note.", "Keyboard behavior note."]}
     />
   )
@@ -91,7 +105,11 @@ export default function MyPatternPage() {
       preview={<MyPattern />}
       props={[
         { name: "propName", type: "string", required: true, description: "What it controls." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={["Accessibility note."]}
     />
@@ -137,13 +155,14 @@ export default function MyBlockPage() {
 
 ## 3. Update the package README
 
-| Layer | README |
-|-------|--------|
-| Primitive | `packages/ui/README.md` |
-| Pattern | `packages/patterns/README.md` |
-| Block | `packages/blocks/README.md` |
+| Layer     | README                        |
+| --------- | ----------------------------- |
+| Primitive | `packages/ui/README.md`       |
+| Pattern   | `packages/patterns/README.md` |
+| Block     | `packages/blocks/README.md`   |
 
 **Rules:**
+
 - Add the new item to the correct category table
 - Increment the total count in the heading (`"65 components"` → `"66 components"`)
 - AI-native items (`@aetherstack/*/ai`) go in the AI-native section with their own sub-count
@@ -160,9 +179,7 @@ Add an entry to `registry/public/registry.json`:
   "type": "registry:ui",
   "title": "My Component",
   "description": "One sentence description.",
-  "files": [
-    { "path": "src/components/ui/my-component.tsx", "type": "registry:ui" }
-  ],
+  "files": [{ "path": "src/components/ui/my-component.tsx", "type": "registry:ui" }],
   "dependencies": ["@radix-ui/react-slot"],
   "devDependencies": [],
   "registryDependencies": [],
@@ -188,6 +205,7 @@ pnpm --filter @aetherstack/scripts build-registry
 ```
 
 This single command:
+
 - Rebuilds `apps/registry-public/public/r/registry.json` (aggregate)
 - Writes a per-item `<name>.json` for every registry entry
 - **Regenerates `apps/registry-public/public/llms.txt`** — do NOT hand-edit this file

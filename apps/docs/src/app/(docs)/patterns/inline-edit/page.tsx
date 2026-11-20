@@ -26,16 +26,34 @@ export function PageTitle() {
       preview={<InlineEditPreview />}
       props={[
         { name: "value", type: "string", required: true, description: "Controlled current value." },
-        { name: "onValueChange", type: "(value: string) => void", required: true, description: "Called with the new value when the user saves (Enter or blur)." },
-        { name: "placeholder", type: "string", description: "Shown in the input when value is empty." },
-        { name: "disabled", type: "boolean", default: "false", description: "Prevents entering edit mode." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "onValueChange",
+          type: "(value: string) => void",
+          required: true,
+          description: "Called with the new value when the user saves (Enter or blur).",
+        },
+        {
+          name: "placeholder",
+          type: "string",
+          description: "Shown in the input when value is empty.",
+        },
+        {
+          name: "disabled",
+          type: "boolean",
+          default: "false",
+          description: "Prevents entering edit mode.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={[
-        "The static display element has role=\"button\" and tabIndex={0} so keyboard users can activate it.",
+        'The static display element has role="button" and tabIndex={0} so keyboard users can activate it.',
         "When editing, the underlying <input> receives focus immediately.",
         "Enter confirms; Escape restores the previous value and exits edit mode.",
-        "A visually-hidden hint (\"Press Enter to save, Escape to cancel\") is announced on focus.",
+        'A visually-hidden hint ("Press Enter to save, Escape to cancel") is announced on focus.',
       ]}
     />
   )

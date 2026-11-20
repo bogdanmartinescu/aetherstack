@@ -36,42 +36,42 @@ All apps must include the following CSS variables in their `:root` / `.dark` sel
 
 ### Surfaces
 
-| Variable | Purpose |
-|---|---|
-| `--background` | Page/app background |
-| `--foreground` | Default text |
-| `--card` | Card/panel surface |
-| `--card-foreground` | Text on card |
-| `--popover` | Popover/dropdown surface |
-| `--popover-foreground` | Text in popover |
+| Variable               | Purpose                  |
+| ---------------------- | ------------------------ |
+| `--background`         | Page/app background      |
+| `--foreground`         | Default text             |
+| `--card`               | Card/panel surface       |
+| `--card-foreground`    | Text on card             |
+| `--popover`            | Popover/dropdown surface |
+| `--popover-foreground` | Text in popover          |
 
 ### Interactive
 
-| Variable | Purpose |
-|---|---|
-| `--primary` | Primary action color |
-| `--primary-foreground` | Text on primary background |
-| `--secondary` | Secondary action/surface |
-| `--secondary-foreground` | Text on secondary |
-| `--destructive` | Error/danger action |
-| `--destructive-foreground` | Text on destructive |
-| `--ring` | Focus ring color |
+| Variable                   | Purpose                    |
+| -------------------------- | -------------------------- |
+| `--primary`                | Primary action color       |
+| `--primary-foreground`     | Text on primary background |
+| `--secondary`              | Secondary action/surface   |
+| `--secondary-foreground`   | Text on secondary          |
+| `--destructive`            | Error/danger action        |
+| `--destructive-foreground` | Text on destructive        |
+| `--ring`                   | Focus ring color           |
 
 ### Content
 
-| Variable | Purpose |
-|---|---|
-| `--muted` | Muted surface (subtle background) |
-| `--muted-foreground` | Muted/secondary text |
-| `--accent` | Hover/accent surface |
-| `--accent-foreground` | Text on accent |
+| Variable              | Purpose                           |
+| --------------------- | --------------------------------- |
+| `--muted`             | Muted surface (subtle background) |
+| `--muted-foreground`  | Muted/secondary text              |
+| `--accent`            | Hover/accent surface              |
+| `--accent-foreground` | Text on accent                    |
 
 ### Structure
 
-| Variable | Purpose |
-|---|---|
-| `--border` | Border color |
-| `--input` | Input border/background |
+| Variable   | Purpose                                      |
+| ---------- | -------------------------------------------- |
+| `--border` | Border color                                 |
+| `--input`  | Input border/background                      |
 | `--radius` | Base border radius (scaled by radius tokens) |
 
 ### Sidebar
@@ -112,8 +112,8 @@ palette.violet[600] // → "269 74% 57%"
 semanticColors.light["--primary"] // → "269 74% 57%"
 
 // Motion
-durations.normal   // → "200ms"
-easings.inOut      // → "cubic-bezier(0.4, 0, 0.2, 1)"
+durations.normal // → "200ms"
+easings.inOut // → "cubic-bezier(0.4, 0, 0.2, 1)"
 ```
 
 ### Generating CSS programmatically

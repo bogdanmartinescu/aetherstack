@@ -52,7 +52,7 @@ export function NotificationBell({
           {displayCount && (
             <span
               aria-hidden="true"
-              className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-semibold leading-none text-destructive-foreground"
+              className="bg-destructive text-destructive-foreground absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] font-semibold leading-none"
             >
               {displayCount}
             </span>
@@ -66,7 +66,7 @@ export function NotificationBell({
             <button
               type="button"
               onClick={onMarkAllRead}
-              className="rounded text-xs text-muted-foreground underline-offset-2 hover:underline focus:outline-none focus:ring-1 focus:ring-ring"
+              className="text-muted-foreground focus:ring-ring rounded text-xs underline-offset-2 hover:underline focus:outline-none focus:ring-1"
             >
               Mark all read
             </button>
@@ -74,7 +74,7 @@ export function NotificationBell({
         </div>
         <DropdownMenuSeparator />
         {notifications.length === 0 ? (
-          <p className="py-8 text-center text-sm text-muted-foreground">No notifications</p>
+          <p className="text-muted-foreground py-8 text-center text-sm">No notifications</p>
         ) : (
           <ScrollArea className="max-h-72">
             {notifications.map((notification) => (
@@ -82,7 +82,7 @@ export function NotificationBell({
                 key={notification.id}
                 onClick={() => onNotificationClick?.(notification.id)}
                 className={cn(
-                  "flex cursor-pointer flex-col items-start gap-0.5 px-3 py-2.5 focus:bg-accent",
+                  "focus:bg-accent flex cursor-pointer flex-col items-start gap-0.5 px-3 py-2.5",
                   !notification.read && "bg-accent/40",
                 )}
               >
@@ -91,17 +91,17 @@ export function NotificationBell({
                   {!notification.read && (
                     <span
                       aria-hidden="true"
-                      className="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary"
+                      className="bg-primary mt-1 h-2 w-2 shrink-0 rounded-full"
                     />
                   )}
                 </div>
                 {notification.description && (
-                  <span className="line-clamp-1 text-xs text-muted-foreground">
+                  <span className="text-muted-foreground line-clamp-1 text-xs">
                     {notification.description}
                   </span>
                 )}
                 {notification.timestamp && (
-                  <span className="text-xs text-muted-foreground">{notification.timestamp}</span>
+                  <span className="text-muted-foreground text-xs">{notification.timestamp}</span>
                 )}
               </DropdownMenuItem>
             ))}

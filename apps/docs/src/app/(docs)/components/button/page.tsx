@@ -20,22 +20,53 @@ import { ComponentPage } from "@/components/component-page"
 import { BUTTON_SOURCE } from "@/lib/registry-source"
 
 const STATES = [
-  { state: "Hover", change: "Fill and text shift; ghost and quiet buttons brighten their text", timing: "150ms, ease-out" },
-  { state: "Pressed", change: "Filled and chip buttons scale to 97%; link and quiet stay put", timing: "150ms, ease-out" },
-  { state: "Keyboard focus", change: "A 2px ring in the --ring token appears around the button", timing: "Instant" },
-  { state: "Loading", change: "A spinner replaces the leading icon and a soft band sweeps the label", timing: "1.6s loop" },
-  { state: "Disabled", change: "Dims to 50%, keeps its resting colour, shows a not-allowed cursor", timing: "Instant" },
-  { state: "Touch", change: "Grows one step taller on coarse pointers for a fair thumb target", timing: "—" },
-  { state: "Reduced motion", change: "Press scale, spinner rotation and label sweep are off", timing: "0ms" },
+  {
+    state: "Hover",
+    change: "Fill and text shift; ghost and quiet buttons brighten their text",
+    timing: "150ms, ease-out",
+  },
+  {
+    state: "Pressed",
+    change: "Filled and chip buttons scale to 97%; link and quiet stay put",
+    timing: "150ms, ease-out",
+  },
+  {
+    state: "Keyboard focus",
+    change: "A 2px ring in the --ring token appears around the button",
+    timing: "Instant",
+  },
+  {
+    state: "Loading",
+    change: "A spinner replaces the leading icon and a soft band sweeps the label",
+    timing: "1.6s loop",
+  },
+  {
+    state: "Disabled",
+    change: "Dims to 50%, keeps its resting colour, shows a not-allowed cursor",
+    timing: "Instant",
+  },
+  {
+    state: "Touch",
+    change: "Grows one step taller on coarse pointers for a fair thumb target",
+    timing: "—",
+  },
+  {
+    state: "Reduced motion",
+    change: "Press scale, spinner rotation and label sweep are off",
+    timing: "0ms",
+  },
 ] as const
 
 function useFakeRun(duration = 2000) {
   const [running, setRunning] = React.useState(false)
   const timeout = React.useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  React.useEffect(() => () => {
-    if (timeout.current) clearTimeout(timeout.current)
-  }, [])
+  React.useEffect(
+    () => () => {
+      if (timeout.current) clearTimeout(timeout.current)
+    },
+    [],
+  )
 
   function run() {
     setRunning(true)
@@ -58,12 +89,7 @@ function LoadingDemo() {
       <Button variant="outline" loading={save.running} onClick={save.run}>
         Save changes
       </Button>
-      <Button
-        variant="secondary"
-        icon={<RefreshCw />}
-        loading={retry.running}
-        onClick={retry.run}
-      >
+      <Button variant="secondary" icon={<RefreshCw />} loading={retry.running} onClick={retry.run}>
         Retry run
       </Button>
     </div>
@@ -73,7 +99,7 @@ function LoadingDemo() {
 function ZoomControls() {
   const [zoom, setZoom] = React.useState(100)
   return (
-    <div className="inline-flex items-center gap-1 rounded-lg border border-border p-1">
+    <div className="border-border inline-flex items-center gap-1 rounded-lg border p-1">
       <Button
         size="xs"
         variant="ghost"
@@ -82,7 +108,7 @@ function ZoomControls() {
         disabled={zoom <= 50}
         onClick={() => setZoom((z) => z - 10)}
       />
-      <span className="w-12 text-center text-xs tabular-nums text-muted-foreground">{zoom}%</span>
+      <span className="text-muted-foreground w-12 text-center text-xs tabular-nums">{zoom}%</span>
       <Button
         size="xs"
         variant="ghost"
@@ -98,7 +124,7 @@ function ZoomControls() {
 function QuietDemo() {
   const [expanded, setExpanded] = React.useState(false)
   return (
-    <div className="max-w-sm text-sm text-muted-foreground">
+    <div className="text-muted-foreground max-w-sm text-sm">
       <p>
         The agent reviewed 42 files and proposed 3 changes.
         {expanded && " Two touch the billing module; one updates a test fixture."}
@@ -122,7 +148,7 @@ function StatesTable() {
     <div className="w-full overflow-x-auto">
       <table className="w-full text-left text-sm">
         <thead>
-          <tr className="border-b border-border text-xs uppercase tracking-wide text-muted-foreground">
+          <tr className="border-border text-muted-foreground border-b text-xs uppercase tracking-wide">
             <th className="py-2 pr-4 font-medium">State</th>
             <th className="py-2 pr-4 font-medium">What changes</th>
             <th className="py-2 font-medium">Timing</th>
@@ -130,10 +156,10 @@ function StatesTable() {
         </thead>
         <tbody>
           {STATES.map((row) => (
-            <tr key={row.state} className="border-b border-border last:border-0">
-              <td className="py-2 pr-4 font-medium text-foreground">{row.state}</td>
-              <td className="py-2 pr-4 text-muted-foreground">{row.change}</td>
-              <td className="whitespace-nowrap py-2 font-mono text-xs text-muted-foreground">
+            <tr key={row.state} className="border-border border-b last:border-0">
+              <td className="text-foreground py-2 pr-4 font-medium">{row.state}</td>
+              <td className="text-muted-foreground py-2 pr-4">{row.change}</td>
+              <td className="text-muted-foreground whitespace-nowrap py-2 font-mono text-xs">
                 {row.timing}
               </td>
             </tr>
@@ -282,7 +308,8 @@ animation: {
         },
         {
           title: "With icons",
-          description: "Pass icons through icon and iconRight — they are sized to the button automatically.",
+          description:
+            "Pass icons through icon and iconRight — they are sized to the button automatically.",
           preview: (
             <div className="flex flex-wrap items-center gap-3">
               <Button icon={<Plus />}>New item</Button>
@@ -326,7 +353,8 @@ animation: {
         },
         {
           title: "Quiet inline actions",
-          description: "For “Show more” and similar text actions: no chip, no press, only the text size.",
+          description:
+            "For “Show more” and similar text actions: no chip, no press, only the text size.",
           preview: <QuietDemo />,
           code: `<Button
   variant="quiet"
@@ -420,7 +448,8 @@ animation: {
           name: "disabled",
           type: "boolean",
           default: "false",
-          description: "Native disabled — removed from the tab order, dimmed, with a not-allowed cursor.",
+          description:
+            "Native disabled — removed from the tab order, dimmed, with a not-allowed cursor.",
         },
         {
           name: "...props",

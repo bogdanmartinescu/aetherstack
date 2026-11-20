@@ -16,7 +16,7 @@ export function DateRangePickerPreview() {
         onValueChange={(range) => range && setValue(range)}
         placeholder="Pick a date range"
       />
-      <p className="text-xs text-muted-foreground text-center">
+      <p className="text-muted-foreground text-center text-xs">
         {value.from && value.to
           ? `${value.from.toLocaleDateString()} → ${value.to.toLocaleDateString()}`
           : "No range selected"}

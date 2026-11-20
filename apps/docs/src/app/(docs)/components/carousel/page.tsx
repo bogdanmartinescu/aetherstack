@@ -42,7 +42,7 @@ export default function CarouselPage() {
             <CarouselContent>
               {[1, 2, 3].map((n) => (
                 <CarouselItem key={n}>
-                  <div className="flex h-32 items-center justify-center rounded-lg border border-border bg-muted text-2xl font-bold text-muted-foreground">
+                  <div className="border-border bg-muted text-muted-foreground flex h-32 items-center justify-center rounded-lg border text-2xl font-bold">
                     {n}
                   </div>
                 </CarouselItem>
@@ -99,7 +99,7 @@ export function CarouselDemo() {
                 <CarouselContent>
                   {[1, 2, 3, 4, 5].map((n) => (
                     <CarouselItem key={n} className="basis-1/3">
-                      <div className="flex h-24 items-center justify-center rounded-lg border border-border bg-muted text-lg font-bold text-muted-foreground">
+                      <div className="border-border bg-muted text-muted-foreground flex h-24 items-center justify-center rounded-lg border text-lg font-bold">
                         {n}
                       </div>
                     </CarouselItem>
@@ -131,7 +131,7 @@ export function CarouselDemo() {
                 <CarouselContent>
                   {["A", "B", "C"].map((s) => (
                     <CarouselItem key={s}>
-                      <div className="flex h-28 items-center justify-center rounded-lg border border-border bg-muted text-2xl font-bold text-muted-foreground">
+                      <div className="border-border bg-muted text-muted-foreground flex h-28 items-center justify-center rounded-lg border text-2xl font-bold">
                         {s}
                       </div>
                     </CarouselItem>
@@ -161,7 +161,8 @@ export function CarouselDemo() {
             {
               name: "opts",
               type: "EmblaOptionsType",
-              description: "Options passed directly to Embla Carousel (e.g. loop, align, skipSnaps).",
+              description:
+                "Options passed directly to Embla Carousel (e.g. loop, align, skipSnaps).",
             },
             {
               name: "orientation",

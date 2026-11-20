@@ -50,9 +50,7 @@ export async function installItem(
   try {
     for (const { file, targetRelative, targetAbsolute } of planned) {
       if (existsSync(targetAbsolute) && !overwrite) {
-        throw new Error(
-          `File already exists: ${targetRelative}\nUse --overwrite to replace it.`,
-        )
+        throw new Error(`File already exists: ${targetRelative}\nUse --overwrite to replace it.`)
       }
 
       if (dryRun) {
@@ -64,9 +62,7 @@ export async function installItem(
 
       if (!content) {
         if (!baseUrl) {
-          throw new Error(
-            `No inline content for ${file.path} and no registry URL to fetch from.`,
-          )
+          throw new Error(`No inline content for ${file.path} and no registry URL to fetch from.`)
         }
         content = await fetchFileContent(baseUrl, file.path)
       }

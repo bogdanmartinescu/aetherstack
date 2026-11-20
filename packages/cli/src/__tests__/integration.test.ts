@@ -109,10 +109,7 @@ describe("CLI integration: init + add", () => {
     expect(existsSync(resolve(cwd, "components/patterns/form-field.tsx"))).toBe(true)
     expect(existsSync(resolve(cwd, "components/blocks/dashboard-shell.tsx"))).toBe(true)
 
-    const buttonSource = readFileSync(
-      resolve(cwd, "components/ui/button.tsx"),
-      "utf-8",
-    )
+    const buttonSource = readFileSync(resolve(cwd, "components/ui/button.tsx"), "utf-8")
     expect(buttonSource).toContain("Button")
   })
 

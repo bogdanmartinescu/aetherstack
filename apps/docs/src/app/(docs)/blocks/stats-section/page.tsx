@@ -41,9 +41,23 @@ export default function StatsPage() {
         />
       }
       props={[
-        { name: "stats", type: "{ value: string; label: string; description?: string }[]", required: true, description: "Array of stat items." },
-        { name: "cols", type: "2 | 3 | 4", default: "4", description: "Grid column count. Auto-inferred from stats length when ≤ 4." },
-        { name: "className", type: "string", description: "Additional classes on the section wrapper." },
+        {
+          name: "stats",
+          type: "{ value: string; label: string; description?: string }[]",
+          required: true,
+          description: "Array of stat items.",
+        },
+        {
+          name: "cols",
+          type: "2 | 3 | 4",
+          default: "4",
+          description: "Grid column count. Auto-inferred from stats length when ≤ 4.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the section wrapper.",
+        },
       ]}
       a11yNotes={[
         "Uses semantic <section> element.",

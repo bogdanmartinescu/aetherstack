@@ -26,7 +26,7 @@ export function StepperPreview() {
         >
           Previous
         </Button>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-muted-foreground text-xs">
           Step {step + 1} of {STEPS.length}
         </span>
         <Button

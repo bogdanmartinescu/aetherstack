@@ -84,12 +84,14 @@ export default function CardPage() {
             <CardTitle>Account Plan</CardTitle>
             <CardDescription>You are on the Pro plan.</CardDescription>
           </CardHeader>
-          <CardContent className="text-sm text-muted-foreground">
+          <CardContent className="text-muted-foreground text-sm">
             12 of 50 seats used · renews Jan 1, 2027
           </CardContent>
           <CardFooter className="gap-2">
             <Button size="sm">Manage</Button>
-            <Button size="sm" variant="ghost">View usage</Button>
+            <Button size="sm" variant="ghost">
+              View usage
+            </Button>
           </CardFooter>
         </Card>
       }
@@ -127,7 +129,7 @@ import { Button } from "@/components/ui/button"
                     <CardTitle className="text-3xl">{m.value}</CardTitle>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <p className="text-xs text-muted-foreground">{m.delta} from last month</p>
+                    <p className="text-muted-foreground text-xs">{m.delta} from last month</p>
                   </CardContent>
                 </Card>
               ))}
@@ -148,9 +150,9 @@ import { Button } from "@/components/ui/button"
           description: "CardContent alone for simple content containers.",
           preview: (
             <Card className="w-72">
-              <CardContent className="pt-6 text-sm text-muted-foreground">
-                This is a simple content-only card. Use it for notices, inline notes,
-                or any content that needs a visual container without a formal header.
+              <CardContent className="text-muted-foreground pt-6 text-sm">
+                This is a simple content-only card. Use it for notices, inline notes, or any content
+                that needs a visual container without a formal header.
               </CardContent>
             </Card>
           ),
@@ -172,7 +174,7 @@ import { Button } from "@/components/ui/button"
                 </div>
                 <CardDescription>Manage your API keys and permissions.</CardDescription>
               </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
+              <CardContent className="text-muted-foreground text-sm">
                 2 active keys · last used 3 hours ago
               </CardContent>
             </Card>
@@ -193,12 +195,12 @@ import { Button } from "@/components/ui/button"
           description: "Override the default layout for horizontal cards.",
           preview: (
             <Card className="flex w-full max-w-sm flex-row items-center gap-4 p-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-lg font-bold">
+              <div className="bg-primary/10 text-primary flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-lg font-bold">
                 A
               </div>
               <div className="min-w-0">
-                <p className="truncate text-sm font-medium text-foreground">Alice Chen</p>
-                <p className="truncate text-xs text-muted-foreground">alice@example.com</p>
+                <p className="text-foreground truncate text-sm font-medium">Alice Chen</p>
+                <p className="text-muted-foreground truncate text-xs">alice@example.com</p>
               </div>
               <Badge className="ml-auto shrink-0">Admin</Badge>
             </Card>
@@ -218,43 +220,87 @@ import { Button } from "@/components/ui/button"
         {
           title: "Card",
           props: [
-            { name: "className", type: "string", description: "Additional classes on the outer container div." },
-            { name: "...props", type: "React.HTMLAttributes<HTMLDivElement>", description: "All standard HTML div attributes." },
+            {
+              name: "className",
+              type: "string",
+              description: "Additional classes on the outer container div.",
+            },
+            {
+              name: "...props",
+              type: "React.HTMLAttributes<HTMLDivElement>",
+              description: "All standard HTML div attributes.",
+            },
           ],
         },
         {
           title: "CardHeader",
           props: [
-            { name: "className", type: "string", description: "Defaults to flex flex-col space-y-1.5 p-6." },
-            { name: "...props", type: "React.HTMLAttributes<HTMLDivElement>", description: "All standard HTML div attributes." },
+            {
+              name: "className",
+              type: "string",
+              description: "Defaults to flex flex-col space-y-1.5 p-6.",
+            },
+            {
+              name: "...props",
+              type: "React.HTMLAttributes<HTMLDivElement>",
+              description: "All standard HTML div attributes.",
+            },
           ],
         },
         {
           title: "CardTitle",
           props: [
-            { name: "className", type: "string", description: "Defaults to text-2xl font-semibold leading-none tracking-tight." },
-            { name: "...props", type: "React.HTMLAttributes<HTMLHeadingElement>", description: "Renders as h3." },
+            {
+              name: "className",
+              type: "string",
+              description: "Defaults to text-2xl font-semibold leading-none tracking-tight.",
+            },
+            {
+              name: "...props",
+              type: "React.HTMLAttributes<HTMLHeadingElement>",
+              description: "Renders as h3.",
+            },
           ],
         },
         {
           title: "CardDescription",
           props: [
-            { name: "className", type: "string", description: "Defaults to text-sm text-muted-foreground." },
-            { name: "...props", type: "React.HTMLAttributes<HTMLParagraphElement>", description: "All standard HTML paragraph attributes." },
+            {
+              name: "className",
+              type: "string",
+              description: "Defaults to text-sm text-muted-foreground.",
+            },
+            {
+              name: "...props",
+              type: "React.HTMLAttributes<HTMLParagraphElement>",
+              description: "All standard HTML paragraph attributes.",
+            },
           ],
         },
         {
           title: "CardContent",
           props: [
             { name: "className", type: "string", description: "Defaults to p-6 pt-0." },
-            { name: "...props", type: "React.HTMLAttributes<HTMLDivElement>", description: "All standard HTML div attributes." },
+            {
+              name: "...props",
+              type: "React.HTMLAttributes<HTMLDivElement>",
+              description: "All standard HTML div attributes.",
+            },
           ],
         },
         {
           title: "CardFooter",
           props: [
-            { name: "className", type: "string", description: "Defaults to flex items-center p-6 pt-0." },
-            { name: "...props", type: "React.HTMLAttributes<HTMLDivElement>", description: "All standard HTML div attributes." },
+            {
+              name: "className",
+              type: "string",
+              description: "Defaults to flex items-center p-6 pt-0.",
+            },
+            {
+              name: "...props",
+              type: "React.HTMLAttributes<HTMLDivElement>",
+              description: "All standard HTML div attributes.",
+            },
           ],
         },
       ]}

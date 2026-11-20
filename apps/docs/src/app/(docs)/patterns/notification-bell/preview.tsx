@@ -36,9 +36,7 @@ export function NotificationBellPreview() {
   }
 
   function handleNotificationClick(id: string) {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-    )
+    setNotifications((prev) => prev.map((n) => (n.id === id ? { ...n, read: true } : n)))
   }
 
   return (

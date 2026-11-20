@@ -55,12 +55,14 @@ export default function SeparatorPage() {
         <div className="w-full max-w-sm space-y-4">
           <div className="space-y-1">
             <p className="text-sm font-medium">Aether UI</p>
-            <p className="text-sm text-muted-foreground">A copy-paste component library.</p>
+            <p className="text-muted-foreground text-sm">A copy-paste component library.</p>
           </div>
           <Separator />
           <div className="space-y-1">
             <p className="text-sm font-medium">Components</p>
-            <p className="text-sm text-muted-foreground">Accessible, composable, unstyled primitives.</p>
+            <p className="text-muted-foreground text-sm">
+              Accessible, composable, unstyled primitives.
+            </p>
           </div>
         </div>
       }
@@ -98,7 +100,7 @@ export function SeparatorDemo() {
             <div className="w-full max-w-xs space-y-3">
               <p className="text-sm font-medium">Above the separator</p>
               <Separator />
-              <p className="text-sm text-muted-foreground">Below the separator</p>
+              <p className="text-muted-foreground text-sm">Below the separator</p>
             </div>
           ),
           code: `<div className="space-y-3">
@@ -109,7 +111,8 @@ export function SeparatorDemo() {
         },
         {
           title: "Vertical",
-          description: 'Set orientation="vertical" and place the separator inside a flex row to divide elements side by side.',
+          description:
+            'Set orientation="vertical" and place the separator inside a flex row to divide elements side by side.',
           preview: (
             <div className="flex h-8 items-center gap-3">
               <span className="text-sm font-medium">Blog</span>
@@ -139,7 +142,8 @@ export function SeparatorDemo() {
           name: "decorative",
           type: "boolean",
           default: "true",
-          description: 'When true, the separator is purely visual (role="none"). Set to false for semantic separators that should be announced by screen readers.',
+          description:
+            'When true, the separator is purely visual (role="none"). Set to false for semantic separators that should be announced by screen readers.',
         },
         {
           name: "className",

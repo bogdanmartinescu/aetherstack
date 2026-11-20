@@ -10,32 +10,20 @@ export const metadata: Metadata = {
     `${REGISTRY_STATS.primitives} primitives, ${REGISTRY_STATS.patterns} patterns, ${REGISTRY_STATS.blocks} blocks — install via CLI and own every line of source.`,
 }
 
-function Principle({
-  title,
-  children,
-}: {
-  title: string
-  children: React.ReactNode
-}) {
+function Principle({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-lg border border-border bg-card p-5">
-      <h3 className="mb-2 text-sm font-semibold text-foreground">{title}</h3>
-      <p className="text-sm leading-relaxed text-muted-foreground">{children}</p>
+    <div className="border-border bg-card rounded-lg border p-5">
+      <h3 className="text-foreground mb-2 text-sm font-semibold">{title}</h3>
+      <p className="text-muted-foreground text-sm leading-relaxed">{children}</p>
     </div>
   )
 }
 
-function AudienceCard({
-  title,
-  description,
-}: {
-  title: string
-  description: string
-}) {
+function AudienceCard({ title, description }: { title: string; description: string }) {
   return (
-    <div className="rounded-lg border border-border bg-card p-5">
-      <h3 className="mb-2 text-sm font-semibold text-foreground">{title}</h3>
-      <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
+    <div className="border-border bg-card rounded-lg border p-5">
+      <h3 className="text-foreground mb-2 text-sm font-semibold">{title}</h3>
+      <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
     </div>
   )
 }
@@ -45,15 +33,16 @@ export default function IntroductionPage() {
     <div className="max-w-3xl">
       {/* Header */}
       <div className="mb-10">
-        <div className="mb-4 inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
+        <div className="border-border bg-muted text-muted-foreground mb-4 inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium">
           Aether UI · v0.3.0
         </div>
-        <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground">
+        <h1 className="text-foreground mb-4 text-4xl font-bold tracking-tight">
           Build production UI, faster.
         </h1>
-        <p className="text-lg leading-relaxed text-muted-foreground">
-          Aether UI is a <strong className="text-foreground">premium open-code design system</strong> for
-          SaaS dashboards, marketing sites, and AI-powered applications. Components are installed
+        <p className="text-muted-foreground text-lg leading-relaxed">
+          Aether UI is a{" "}
+          <strong className="text-foreground">premium open-code design system</strong> for SaaS
+          dashboards, marketing sites, and AI-powered applications. Components are installed
           directly into your project via the CLI — you own the source, not a dependency.
         </p>
 
@@ -69,7 +58,7 @@ export default function IntroductionPage() {
             <Link
               key={stat.label}
               href={stat.href}
-              className="inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium text-foreground transition-colors hover:bg-muted/80"
+              className="border-border bg-muted text-foreground hover:bg-muted/80 inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors"
             >
               {stat.label}
             </Link>
@@ -79,25 +68,30 @@ export default function IntroductionPage() {
 
       {/* What it is */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">What is Aether UI?</h2>
-        <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-          Aether UI is <strong className="text-foreground">not a component library</strong> in the traditional
-          sense. You don&apos;t import components from a package at runtime. Instead, the CLI copies
-          battle-tested component source files directly into your project — you get readable TypeScript and
-          JSX that you can edit, extend, and version like any other file in your codebase.
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+          What is Aether UI?
+        </h2>
+        <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+          Aether UI is <strong className="text-foreground">not a component library</strong> in the
+          traditional sense. You don&apos;t import components from a package at runtime. Instead,
+          the CLI copies battle-tested component source files directly into your project — you get
+          readable TypeScript and JSX that you can edit, extend, and version like any other file in
+          your codebase.
         </p>
-        <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-          This solves the customisation dead-end that comes with traditional libraries. Need to change how
-          a Dialog animates? Just edit the file. Need a Button variant that doesn&apos;t exist? Add it.
-          No overrides, no wrappers, no fighting the API — the component is yours.
+        <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+          This solves the customisation dead-end that comes with traditional libraries. Need to
+          change how a Dialog animates? Just edit the file. Need a Button variant that doesn&apos;t
+          exist? Add it. No overrides, no wrappers, no fighting the API — the component is yours.
         </p>
-        <div className="rounded-lg border border-border bg-muted/20 p-4 font-mono text-sm">
+        <div className="border-border bg-muted/20 rounded-lg border p-4 font-mono text-sm">
           <span className="text-muted-foreground"># Install a component into your project</span>
           <br />
           <span className="text-foreground">npx aether-ui add dashboard-shell</span>
           <br />
           <br />
-          <span className="text-muted-foreground"># The source now lives in your repo — edit freely</span>
+          <span className="text-muted-foreground">
+            # The source now lives in your repo — edit freely
+          </span>
           <br />
           <span className="text-foreground">src/components/blocks/dashboard-shell.tsx</span>
         </div>
@@ -105,7 +99,9 @@ export default function IntroductionPage() {
 
       {/* Who is this for */}
       <section className="mb-12">
-        <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">Who is this for?</h2>
+        <h2 className="text-foreground mb-6 text-2xl font-semibold tracking-tight">
+          Who is this for?
+        </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <AudienceCard
             title="SaaS product teams"
@@ -124,42 +120,48 @@ export default function IntroductionPage() {
 
       {/* Design principles */}
       <section className="mb-12">
-        <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">Design principles</h2>
+        <h2 className="text-foreground mb-6 text-2xl font-semibold tracking-tight">
+          Design principles
+        </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Principle title="Open code">
-            Every component is plain, readable TypeScript and JSX. No magic, no wrappers, no black boxes.
-            What you see in the docs is exactly what lives in your project.
+            Every component is plain, readable TypeScript and JSX. No magic, no wrappers, no black
+            boxes. What you see in the docs is exactly what lives in your project.
           </Principle>
           <Principle title="Token-driven">
-            All visual values — colors, radius, shadows, motion — are CSS variables backed by a design token
-            system. Theming is a single CSS override, not a rebuild.
+            All visual values — colors, radius, shadows, motion — are CSS variables backed by a
+            design token system. Theming is a single CSS override, not a rebuild.
           </Principle>
           <Principle title="Accessible by default">
-            Built on Radix UI primitives — keyboard navigation, ARIA roles, focus management, and screen
-            reader support are built in, not bolted on.
+            Built on Radix UI primitives — keyboard navigation, ARIA roles, focus management, and
+            screen reader support are built in, not bolted on.
           </Principle>
           <Principle title="Composable">
-            Every component uses a consistent, composable API. Primitives compose into patterns, patterns
-            compose into blocks. Nothing is a one-off.
+            Every component uses a consistent, composable API. Primitives compose into patterns,
+            patterns compose into blocks. Nothing is a one-off.
           </Principle>
           <Principle title="AI-ready">
-            Plain source in your project means LLMs can read, understand, and improve your components
-            without library-specific knowledge. First-class MCP server and AI metadata included.
+            Plain source in your project means LLMs can read, understand, and improve your
+            components without library-specific knowledge. First-class MCP server and AI metadata
+            included.
           </Principle>
           <Principle title="Registry-native">
-            Compatible with the shadcn/ui registry format — components can be distributed, versioned,
-            and updated from any registry endpoint using the CLI.
+            Compatible with the shadcn/ui registry format — components can be distributed,
+            versioned, and updated from any registry endpoint using the CLI.
           </Principle>
         </div>
       </section>
 
       {/* Architecture */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Architecture layers</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          Aether UI is structured in four layers. Each layer may depend on the layers below it, never above.
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+          Architecture layers
+        </h2>
+        <p className="text-muted-foreground mb-4 text-sm">
+          Aether UI is structured in four layers. Each layer may depend on the layers below it,
+          never above.
         </p>
-        <div className="overflow-hidden rounded-lg border border-border">
+        <div className="border-border overflow-hidden rounded-lg border">
           {[
             {
               layer: "4 — Blocks",
@@ -184,12 +186,14 @@ export default function IntroductionPage() {
           ].map((row, i) => (
             <div
               key={row.layer}
-              className={`flex items-start gap-4 px-4 py-3.5 ${i < 3 ? "border-b border-border" : ""}`}
+              className={`flex items-start gap-4 px-4 py-3.5 ${i < 3 ? "border-border border-b" : ""}`}
             >
-              <div className="w-28 shrink-0 text-xs font-medium text-muted-foreground">{row.layer}</div>
+              <div className="text-muted-foreground w-28 shrink-0 text-xs font-medium">
+                {row.layer}
+              </div>
               <div className="min-w-0 flex-1">
-                <code className="text-xs font-mono text-foreground">{row.pkg}</code>
-                <p className="mt-0.5 text-xs text-muted-foreground">{row.desc}</p>
+                <code className="text-foreground font-mono text-xs">{row.pkg}</code>
+                <p className="text-muted-foreground mt-0.5 text-xs">{row.desc}</p>
               </div>
             </div>
           ))}
@@ -198,7 +202,7 @@ export default function IntroductionPage() {
 
       {/* Tech stack */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Built with</h2>
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Built with</h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {[
             { name: "React 18+", desc: "Component model" },
@@ -208,9 +212,9 @@ export default function IntroductionPage() {
             { name: "Lucide React", desc: "Default icon library" },
             { name: "CVA", desc: "Variant management" },
           ].map((tech) => (
-            <div key={tech.name} className="rounded-lg border border-border bg-muted/20 p-3">
-              <p className="text-sm font-medium text-foreground">{tech.name}</p>
-              <p className="text-xs text-muted-foreground">{tech.desc}</p>
+            <div key={tech.name} className="border-border bg-muted/20 rounded-lg border p-3">
+              <p className="text-foreground text-sm font-medium">{tech.name}</p>
+              <p className="text-muted-foreground text-xs">{tech.desc}</p>
             </div>
           ))}
         </div>
@@ -218,7 +222,7 @@ export default function IntroductionPage() {
 
       {/* Quick start */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Quick start</h2>
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Quick start</h2>
         <CodeBlock
           code={`# 1. Initialize Aether UI in your project
 npx aether-ui@latest init
@@ -231,25 +235,26 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"`}
           filename="terminal"
         />
-        <p className="mt-4 text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-4 text-sm">
           For a complete walkthrough with framework-specific steps, see the{" "}
           <Link href="/installation" className="text-primary underline-offset-4 hover:underline">
             Installation guide
-          </Link>.
+          </Link>
+          .
         </p>
       </section>
 
       {/* Comparison */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
           How is this different from shadcn/ui?
         </h2>
-        <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+        <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
           Aether UI follows the same open-code philosophy as shadcn/ui and its registry format is
           compatible with the shadcn/ui convention. The key differences:
         </p>
-        <div className="overflow-hidden rounded-lg border border-border text-sm">
-          <div className="grid grid-cols-3 gap-0 border-b border-border bg-muted/50 px-4 py-2.5 font-medium text-foreground">
+        <div className="border-border overflow-hidden rounded-lg border text-sm">
+          <div className="border-border bg-muted/50 text-foreground grid grid-cols-3 gap-0 border-b px-4 py-2.5 font-medium">
             <span></span>
             <span>Aether UI</span>
             <span>shadcn/ui</span>
@@ -262,11 +267,11 @@ import { Input } from "@/components/ui/input"`}
             ["AI-native components", "33 (streaming, chat, agents)", "Not included"],
             ["Marketing blocks", "15 sections (hero, features, CTA…)", "Community only"],
             ["MCP server", "Built-in (@aetherstack/mcp-server)", "Third-party"],
-            ["AI generate command", "aether-ui generate \"…\"", "Not included"],
+            ["AI generate command", 'aether-ui generate "…"', "Not included"],
           ].map(([feature, ours, theirs]) => (
             <div
               key={feature as string}
-              className="grid grid-cols-3 gap-0 border-b border-border px-4 py-2.5 last:border-0 transition-colors hover:bg-muted/20"
+              className="border-border hover:bg-muted/20 grid grid-cols-3 gap-0 border-b px-4 py-2.5 transition-colors last:border-0"
             >
               <span className="text-muted-foreground">{feature}</span>
               <span className="text-foreground">{ours}</span>
@@ -278,23 +283,47 @@ import { Input } from "@/components/ui/input"`}
 
       {/* Next steps */}
       <section>
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Next steps</h2>
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Next steps</h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { href: "/installation", title: "Installation", desc: "Set up Aether UI in your framework" },
-            { href: "/cli", title: "CLI reference", desc: "Commands, flags, and aether.json config" },
-            { href: "/components", title: "Components", desc: `Browse all ${REGISTRY_STATS.primitives} primitives` },
-            { href: "/patterns", title: "Patterns", desc: `${REGISTRY_STATS.patterns} app-level compositions` },
-            { href: "/blocks", title: "Blocks", desc: `${REGISTRY_STATS.blocks} full-page sections` },
-            { href: "/llms", title: "AI & LLMs", desc: "MCP server, generate command, AI metadata" },
+            {
+              href: "/installation",
+              title: "Installation",
+              desc: "Set up Aether UI in your framework",
+            },
+            {
+              href: "/cli",
+              title: "CLI reference",
+              desc: "Commands, flags, and aether.json config",
+            },
+            {
+              href: "/components",
+              title: "Components",
+              desc: `Browse all ${REGISTRY_STATS.primitives} primitives`,
+            },
+            {
+              href: "/patterns",
+              title: "Patterns",
+              desc: `${REGISTRY_STATS.patterns} app-level compositions`,
+            },
+            {
+              href: "/blocks",
+              title: "Blocks",
+              desc: `${REGISTRY_STATS.blocks} full-page sections`,
+            },
+            {
+              href: "/llms",
+              title: "AI & LLMs",
+              desc: "MCP server, generate command, AI metadata",
+            },
           ].map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-lg border border-border bg-card p-4 transition-colors hover:bg-muted/40"
+              className="border-border bg-card hover:bg-muted/40 rounded-lg border p-4 transition-colors"
             >
-              <p className="mb-1 text-sm font-semibold text-foreground">{link.title} →</p>
-              <p className="text-xs text-muted-foreground">{link.desc}</p>
+              <p className="text-foreground mb-1 text-sm font-semibold">{link.title} →</p>
+              <p className="text-muted-foreground text-xs">{link.desc}</p>
             </Link>
           ))}
         </div>

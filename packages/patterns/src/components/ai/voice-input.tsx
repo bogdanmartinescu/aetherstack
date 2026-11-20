@@ -85,21 +85,17 @@ function VoiceInput({ onTranscript, disabled = false, className }: VoiceInputPro
         aria-label={isRecording ? "Stop recording" : "Start recording"}
         className={cn(
           "flex h-12 w-12 items-center justify-center rounded-full border-2 transition-all",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
           "disabled:pointer-events-none disabled:opacity-40",
           isRecording
             ? "border-destructive bg-destructive text-destructive-foreground animate-pulse"
             : "border-input bg-background hover:bg-accent hover:text-accent-foreground",
         )}
       >
-        {isRecording ? (
-          <MicOff className="h-5 w-5" />
-        ) : (
-          <Mic className="h-5 w-5" />
-        )}
+        {isRecording ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
       </button>
       {isRecording && (
-        <span className="text-xs text-muted-foreground animate-pulse">Recording…</span>
+        <span className="text-muted-foreground animate-pulse text-xs">Recording…</span>
       )}
     </div>
   )

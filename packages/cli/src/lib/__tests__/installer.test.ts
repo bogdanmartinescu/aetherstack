@@ -74,9 +74,7 @@ describe("installItem", () => {
   it("places registry:ui files under aliases.components when no target is set", async () => {
     await installItem(
       inlineItem({
-        files: [
-          { path: "card.tsx", type: "registry:ui", content: "x" },
-        ],
+        files: [{ path: "card.tsx", type: "registry:ui", content: "x" }],
       }),
       CONFIG,
       cwd,
@@ -122,9 +120,7 @@ describe("installItem", () => {
     mkdirSync(resolve(cwd, "components/ui"), { recursive: true })
     writeFileSync(target, "existing content")
 
-    await expect(installItem(inlineItem(), CONFIG, cwd)).rejects.toThrow(
-      /already exists/,
-    )
+    await expect(installItem(inlineItem(), CONFIG, cwd)).rejects.toThrow(/already exists/)
   })
 
   it("overwrites when overwrite is true", async () => {
@@ -155,9 +151,7 @@ describe("installItem", () => {
   it("fetches file content over HTTP when not inlined", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn().mockResolvedValue(
-        new Response("export const Card = () => null\n", { status: 200 }),
-      ),
+      vi.fn().mockResolvedValue(new Response("export const Card = () => null\n", { status: 200 })),
     )
 
     const item: RegistryItem = inlineItem({
@@ -176,9 +170,7 @@ describe("installItem", () => {
       "https://registry.example.com/r/card.tsx",
       expect.any(Object),
     )
-    expect(readFileSync(resolve(cwd, "components/ui/card.tsx"), "utf-8")).toContain(
-      "Card",
-    )
+    expect(readFileSync(resolve(cwd, "components/ui/card.tsx"), "utf-8")).toContain("Card")
   })
 
   it("throws when no inline content and no baseUrl", async () => {
@@ -186,17 +178,17 @@ describe("installItem", () => {
       files: [{ path: "card.tsx", type: "registry:ui", target: "ui/card.tsx" }],
     })
 
-    await expect(installItem(item, CONFIG, cwd)).rejects.toThrow(
-      /No inline content/,
-    )
+    await expect(installItem(item, CONFIG, cwd)).rejects.toThrow(/No inline content/)
   })
 
   it("propagates errors when remote fetch fails", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn().mockResolvedValue(
-        new Response("err", { status: 500, statusText: "Internal Server Error" }),
-      ),
+      vi
+        .fn()
+        .mockResolvedValue(
+          new Response("err", { status: 500, statusText: "Internal Server Error" }),
+        ),
     )
 
     const item: RegistryItem = inlineItem({

@@ -22,9 +22,9 @@ export function ColorSwatch({ color, selected, onClick, className }: ColorSwatch
       aria-label={`Select color ${color}`}
       aria-pressed={selected}
       className={cn(
-        "h-7 w-7 rounded-md border-2 cursor-pointer transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1",
+        "focus-visible:ring-ring h-7 w-7 cursor-pointer rounded-md border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1",
         selected
-          ? "border-primary ring-2 ring-primary ring-offset-1"
+          ? "border-primary ring-primary ring-2 ring-offset-1"
           : "border-border hover:scale-110",
         className,
       )}
@@ -90,8 +90,10 @@ export function ColorPicker({ value, onChange, presets, className }: ColorPicker
         <button
           type="button"
           onClick={() => nativeInputRef.current?.click()}
-          className="relative h-9 w-9 rounded-md border-2 border-border shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 hover:border-primary/50 transition-colors cursor-pointer"
-          style={{ backgroundColor: isValidHex(normalizeHex(inputText)) ? normalizeHex(inputText) : value }}
+          className="border-border focus-visible:ring-ring hover:border-primary/50 relative h-9 w-9 cursor-pointer rounded-md border-2 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1"
+          style={{
+            backgroundColor: isValidHex(normalizeHex(inputText)) ? normalizeHex(inputText) : value,
+          }}
           title="Open color picker"
           aria-label="Open native color picker"
         >

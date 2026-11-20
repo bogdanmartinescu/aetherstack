@@ -40,7 +40,7 @@ export default function VisuallyHiddenPage() {
             <Settings className="h-4 w-4" />
             <VisuallyHidden>Open settings</VisuallyHidden>
           </Button>
-          <span className="text-sm text-muted-foreground">
+          <span className="text-muted-foreground text-sm">
             Icon button with hidden accessible label
           </span>
         </div>
@@ -85,7 +85,8 @@ export function VisuallyHiddenDemo() {
         },
         {
           title: "Dialog with hidden title",
-          description: "Use inside DialogTitle when you want a title for screen readers but no visible heading.",
+          description:
+            "Use inside DialogTitle when you want a title for screen readers but no visible heading.",
           preview: (
             <Dialog>
               <DialogTrigger asChild>
@@ -98,7 +99,7 @@ export function VisuallyHiddenDemo() {
                 <DialogDescription>
                   <VisuallyHidden>A large preview of the selected image</VisuallyHidden>
                 </DialogDescription>
-                <div className="flex h-40 items-center justify-center rounded-lg bg-muted text-sm text-muted-foreground">
+                <div className="bg-muted text-muted-foreground flex h-40 items-center justify-center rounded-lg text-sm">
                   Image preview content
                 </div>
               </DialogContent>
@@ -126,7 +127,7 @@ export function VisuallyHiddenDemo() {
             <div className="relative">
               <a
                 href="#main"
-                className="absolute left-0 top-0 -translate-y-full rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground transition-transform focus:translate-y-0"
+                className="bg-primary text-primary-foreground absolute left-0 top-0 -translate-y-full rounded-md px-3 py-2 text-sm transition-transform focus:translate-y-0"
               >
                 Skip to main content
               </a>
@@ -150,7 +151,8 @@ export function VisuallyHiddenDemo() {
         {
           name: "className",
           type: "string",
-          description: "Additional Tailwind classes (use sparingly — VisuallyHidden applies its own positioning).",
+          description:
+            "Additional Tailwind classes (use sparingly — VisuallyHidden applies its own positioning).",
         },
       ]}
       a11yNotes={[

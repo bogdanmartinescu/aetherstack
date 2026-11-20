@@ -241,7 +241,21 @@ const nav = [
 
 // Top-level header nav links
 const topNav = [
-  { label: "Docs", href: "/introduction", match: ["/introduction", "/installation", "/cli", "/tokens", "/icons", "/fonts", "/llms", "/pricing", "/forms"] },
+  {
+    label: "Docs",
+    href: "/introduction",
+    match: [
+      "/introduction",
+      "/installation",
+      "/cli",
+      "/tokens",
+      "/icons",
+      "/fonts",
+      "/llms",
+      "/pricing",
+      "/forms",
+    ],
+  },
   { label: "Components", href: "/components", match: ["/components"] },
   { label: "Patterns", href: "/patterns", match: ["/patterns"] },
   { label: "Charts", href: "/charts", match: ["/charts"] },
@@ -317,15 +331,7 @@ function NavItem({ href, label }: { href: string; label: string }) {
 
 // ── Top nav link ──────────────────────────────────────────────────────────────
 
-function TopNavLink({
-  href,
-  label,
-  match,
-}: {
-  href: string
-  label: string
-  match: string[]
-}) {
+function TopNavLink({ href, label, match }: { href: string; label: string; match: string[] }) {
   const pathname = usePathname()
   const active = match.some((prefix) => pathname === prefix || pathname.startsWith(prefix + "/"))
   return (
@@ -333,9 +339,7 @@ function TopNavLink({
       href={href}
       className={cn(
         "text-sm transition-colors",
-        active
-          ? "text-foreground font-medium"
-          : "text-muted-foreground hover:text-foreground",
+        active ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground",
       )}
     >
       {label}
@@ -375,12 +379,12 @@ function DocsSearch() {
     <>
       <button
         onClick={openSearch}
-        className="hidden h-8 items-center gap-2 rounded-md border border-border bg-muted/40 px-3 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:flex"
+        className="border-border bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground hidden h-8 items-center gap-2 rounded-md border px-3 text-xs transition-colors sm:flex"
         aria-label="Search documentation"
       >
         <SearchIcon />
         <span>Search docs...</span>
-        <kbd className="ml-2 hidden rounded border border-border bg-background px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground lg:inline-flex">
+        <kbd className="border-border bg-background text-muted-foreground ml-2 hidden rounded border px-1.5 py-0.5 font-mono text-[10px] lg:inline-flex">
           ⌘K
         </kbd>
       </button>
@@ -421,7 +425,7 @@ export function DocsSidebar() {
     <nav className="space-y-6">
       {visibleGroups.map((g) => (
         <div key={g.group}>
-          <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="text-muted-foreground mb-2 px-3 text-xs font-semibold uppercase tracking-wider">
             {g.group}
           </p>
           <div className="space-y-0.5">
@@ -441,19 +445,24 @@ export function MobileSidebarToggle({ open, onToggle }: { open: boolean; onToggl
   return (
     <button
       onClick={onToggle}
-      className="flex items-center justify-center rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground lg:hidden"
+      className="text-muted-foreground hover:bg-muted hover:text-foreground flex items-center justify-center rounded-md p-2 transition-colors lg:hidden"
       aria-label={open ? "Close navigation" : "Open navigation"}
     >
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
+      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         {open ? (
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6 18L18 6M6 6l12 12"
+          />
         ) : (
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16M4 18h16"
+          />
         )}
       </svg>
     </button>
@@ -466,25 +475,20 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Top bar */}
-      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="border-border bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40 border-b backdrop-blur">
         <div className="mx-auto flex h-14 max-w-[90rem] items-center gap-4 px-4 sm:px-6">
-
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex shrink-0 items-center gap-2"
-            aria-label="Aether UI home"
-          >
-            <div className="flex h-6 w-6 items-center justify-center rounded bg-primary text-[10px] font-bold text-primary-foreground">
+          <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="Aether UI home">
+            <div className="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded text-[10px] font-bold">
               A
             </div>
-            <span className="font-semibold text-foreground text-sm">Aether UI</span>
+            <span className="text-foreground text-sm font-semibold">Aether UI</span>
           </Link>
 
           {/* Separator */}
-          <div className="hidden h-5 w-px shrink-0 bg-border sm:block" aria-hidden="true" />
+          <div className="bg-border hidden h-5 w-px shrink-0 sm:block" aria-hidden="true" />
 
           {/* Top-level nav links */}
           <nav className="hidden items-center gap-5 sm:flex" aria-label="Main navigation">
@@ -512,17 +516,14 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
               href="https://github.com/aetherstack/aetherstack"
               target="_blank"
               rel="noreferrer"
-              className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              className="text-muted-foreground hover:bg-muted hover:text-foreground flex h-8 w-8 items-center justify-center rounded-md transition-colors"
               aria-label="GitHub repository"
             >
               <GitHubIcon />
             </a>
 
             {/* Mobile menu toggle */}
-            <MobileSidebarToggle
-              open={mobileOpen}
-              onToggle={() => setMobileOpen((v) => !v)}
-            />
+            <MobileSidebarToggle open={mobileOpen} onToggle={() => setMobileOpen((v) => !v)} />
           </div>
         </div>
       </header>
@@ -540,20 +541,15 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
           {/* Mobile sidebar overlay */}
           {mobileOpen && (
             <div className="fixed inset-0 z-30 lg:hidden">
-              <div
-                className="absolute inset-0 bg-black/40"
-                onClick={() => setMobileOpen(false)}
-              />
-              <aside className="absolute left-0 top-14 bottom-0 w-64 overflow-y-auto border-r border-border bg-background p-4">
+              <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} />
+              <aside className="border-border bg-background absolute bottom-0 left-0 top-14 w-64 overflow-y-auto border-r p-4">
                 <DocsSidebar />
               </aside>
             </div>
           )}
 
           {/* Main content */}
-          <main className="min-w-0 flex-1 py-10">
-            {children}
-          </main>
+          <main className="min-w-0 flex-1 py-10">{children}</main>
         </div>
       </div>
     </div>

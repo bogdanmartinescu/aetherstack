@@ -86,14 +86,7 @@ describe("ConfirmDialog", () => {
   it("calls onConfirm when confirm button is clicked", async () => {
     const user = userEvent.setup()
     const onConfirm = vi.fn()
-    render(
-      <ConfirmDialog
-        title="Delete"
-        open
-        onOpenChange={() => {}}
-        onConfirm={onConfirm}
-      />,
-    )
+    render(<ConfirmDialog title="Delete" open onOpenChange={() => {}} onConfirm={onConfirm} />)
     await user.click(screen.getByRole("button", { name: /confirm/i }))
     expect(onConfirm).toHaveBeenCalledOnce()
   })
@@ -137,9 +130,7 @@ describe("NotificationBell", () => {
     const user = userEvent.setup()
     render(
       <NotificationBell
-        notifications={[
-          { id: "1", title: "New message", timestamp: "just now" },
-        ]}
+        notifications={[{ id: "1", title: "New message", timestamp: "just now" }]}
       />,
     )
     await user.click(screen.getByRole("button"))

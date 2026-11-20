@@ -288,6 +288,7 @@ Do not add dependencies casually for trivial helpers.
 - preserve debuggability
 
 For internal utilities:
+
 - return clear error states or throw deliberately
 - do not swallow errors without a documented reason
 

@@ -153,7 +153,8 @@ export function DropdownMenuDemo() {
       examples={[
         {
           title: "With groups",
-          description: "Use DropdownMenuGroup and DropdownMenuLabel to organize items into named sections.",
+          description:
+            "Use DropdownMenuGroup and DropdownMenuLabel to organize items into named sections.",
           preview: <DropdownMenuGroupPreview />,
           code: `<DropdownMenu>
   <DropdownMenuTrigger asChild>
@@ -178,7 +179,8 @@ export function DropdownMenuDemo() {
         },
         {
           title: "With checkboxes",
-          description: "Use DropdownMenuCheckboxItem for toggleable boolean options like view settings.",
+          description:
+            "Use DropdownMenuCheckboxItem for toggleable boolean options like view settings.",
           preview: <DropdownMenuCheckboxPreview />,
           code: `"use client"
 import { useState } from "react"
@@ -214,7 +216,8 @@ export function ViewOptions() {
         },
         {
           title: "With shortcuts",
-          description: "Add DropdownMenuShortcut to display keyboard shortcut hints alongside items.",
+          description:
+            "Add DropdownMenuShortcut to display keyboard shortcut hints alongside items.",
           preview: <DropdownMenuShortcutsPreview />,
           code: `<DropdownMenu>
   <DropdownMenuTrigger asChild>
@@ -247,7 +250,8 @@ export function ViewOptions() {
               name: "asChild",
               type: "boolean",
               default: "false",
-              description: "Render as the child element instead of a button. Pass a Button component for proper styling.",
+              description:
+                "Render as the child element instead of a button. Pass a Button component for proper styling.",
             },
           ],
         },
@@ -292,7 +296,8 @@ export function ViewOptions() {
             {
               name: "onSelect",
               type: "(e: Event) => void",
-              description: "Callback when the item is selected. Call e.preventDefault() to keep the menu open.",
+              description:
+                "Callback when the item is selected. Call e.preventDefault() to keep the menu open.",
             },
           ],
         },

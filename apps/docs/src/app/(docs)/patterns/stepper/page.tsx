@@ -32,14 +32,34 @@ export function MyWizard() {
 }`}
       preview={<StepperPreview />}
       props={[
-        { name: "steps", type: "StepperItem[]", required: true, description: "Array of steps. Each item needs id, label, and optional description." },
-        { name: "currentStep", type: "number", required: true, description: "Zero-based index of the active step. Steps below it are rendered as completed." },
-        { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Layout direction of the stepper." },
-        { name: "className", type: "string", description: "Additional classes on the <ol> element." },
+        {
+          name: "steps",
+          type: "StepperItem[]",
+          required: true,
+          description: "Array of steps. Each item needs id, label, and optional description.",
+        },
+        {
+          name: "currentStep",
+          type: "number",
+          required: true,
+          description:
+            "Zero-based index of the active step. Steps below it are rendered as completed.",
+        },
+        {
+          name: "orientation",
+          type: '"horizontal" | "vertical"',
+          default: '"horizontal"',
+          description: "Layout direction of the stepper.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the <ol> element.",
+        },
       ]}
       a11yNotes={[
-        "Rendered as an <ol aria-label=\"Progress steps\"> — correct semantic structure for an ordered sequence.",
-        "The active step circle receives aria-current=\"step\".",
+        'Rendered as an <ol aria-label="Progress steps"> — correct semantic structure for an ordered sequence.',
+        'The active step circle receives aria-current="step".',
         "Completed steps show a checkmark icon (aria-hidden) instead of a number.",
         "Connector lines are aria-hidden decorative elements.",
       ]}

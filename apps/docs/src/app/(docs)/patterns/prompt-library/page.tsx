@@ -49,11 +49,33 @@ export function MyPromptLibrary() {
 }`}
       preview={<PromptLibraryPreview />}
       props={[
-        { name: "prompts", type: "Prompt[]", required: true, description: "Array of prompt items to display. Each item requires id, title, and content." },
-        { name: "categories", type: "string[]", description: "Category names rendered as filter buttons above the prompt list." },
-        { name: "onInsert", type: "(content: string) => void", description: "Called with the prompt content when the user clicks Insert." },
-        { name: "onCopy", type: "(content: string) => void", description: "Called with the prompt content when the user clicks Copy." },
-        { name: "className", type: "string", description: "Additional CSS classes applied to the root container." },
+        {
+          name: "prompts",
+          type: "Prompt[]",
+          required: true,
+          description:
+            "Array of prompt items to display. Each item requires id, title, and content.",
+        },
+        {
+          name: "categories",
+          type: "string[]",
+          description: "Category names rendered as filter buttons above the prompt list.",
+        },
+        {
+          name: "onInsert",
+          type: "(content: string) => void",
+          description: "Called with the prompt content when the user clicks Insert.",
+        },
+        {
+          name: "onCopy",
+          type: "(content: string) => void",
+          description: "Called with the prompt content when the user clicks Copy.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional CSS classes applied to the root container.",
+        },
       ]}
       a11yNotes={[
         "Category filter buttons use aria-pressed to indicate the active filter state.",
