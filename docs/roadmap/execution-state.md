@@ -17,7 +17,7 @@ Initialized 2026-11-20. No implementation or release checks have been run as par
 | M0-02 | VERIFIED | `chore/m0-02-licenses` / PR #9 (base: M0-01 branch) | Provenance report; root + 14 package LICENSE files (MIT, Copyright (c) 2026 Bogdan Martinescu); `license` on root/apps/tooling; package `files` arrays include `LICENSE`; `npm pack --dry-run` for `@aetherstack/utils` lists LICENSE | DONE once PR is merged; optional owner rename of copyright line to a legal entity |
 | M0-03 | VERIFIED | `chore/m0-03-registry-completeness` / PR #10 | Public registry 71→151; every source module registered; `register-missing` script; cycle + public dangling-dep errors in validate-registry; build-registry + audit (`sourceModulesNotInRegistry` = 0/0/0). Remaining docs-only mismatches (`code-block-ai`, `context-menu`, 7 pattern docs routes) deferred to M0-06 | DONE once PR #10 merges |
 | M0-04 | VERIFIED | `chore/m0-04-cli-hardening` / PR #11 | `generate` uses `fetchRegistry` (`/r/registry.json` + Zod); path confinement + alias validation; install rollback; dry-run on init/add; CLI tests 62 pass (`pnpm --filter @aetherstack/cli test`) | DONE once PR merges |
-| M0-05 | VERIFIED | `chore/m0-05-mcp-packaging` / PR pending | Build fails without registry; bundles 151 items from canonical source; `noExternal` for workspace pkgs; shebang fixed; version from package.json; pack smoke + stdio tools; MCP tests 24 pass | DONE once PR merges; npm publish deferred to authorized release |
+| M0-05 | VERIFIED | `chore/m0-05-mcp-packaging` / PR #12 | Build fails without registry; bundles 151 items from canonical source; `noExternal` for workspace pkgs; shebang fixed; version from package.json; pack smoke + stdio tools; MCP tests 24 pass | DONE once PR merges; npm publish deferred to authorized release |
 
 All other tasks in platform-backlog.md are TODO unless gated. Add/update a row per task as work proceeds; never delete evidence for previous completed tasks. Use linked issue/PR and exact command/results, not just "tests pass."
 
@@ -83,9 +83,9 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Changes and affected paths: `packages/mcp-server` tsup/registry/version/index; pack + stdio tests; README; changeset; this file.
 - Acceptance criteria and evidence: `pnpm --filter @aetherstack/mcp-server test` — 24 passed (registry errors, pack item count = 151, stdio list_tools + list_components); typecheck pass after env typing fix.
 - Required checks not run / blockers: publishing a new npm version requires release authority (AGENTS.md); live CDN still M0-08.
-- Commit/PR and remote verification: pending.
+- Commit/PR and remote verification: PR #12 → https://github.com/bogdanmartinescu/aetherstack/pull/12
 - Status: VERIFIED.
-- Next smallest action: open PR; then M0-06 docs/count reconcile.
+- Next smallest action: merge #8→#12; then M0-06 docs/count reconcile.
 
 ## Phase gate log
 Record milestone, all required task IDs, exact suite/results, known limitations, remaining blockers and owner decisions. No milestone marked completed until all applicable requirements are verified. On restart inspect git history and reconcile this file rather than blindly redoing work.
