@@ -45,6 +45,7 @@ export default function ThinkingIndicatorPage() {
       a11yNotes={[
         'The container has role="status" and aria-live="polite" so screen readers announce the thinking state.',
         "Label text is always visible — do not rely on the animation alone to convey meaning.",
+        "Animations stop when the user prefers reduced motion.",
       ]}
     />
   )

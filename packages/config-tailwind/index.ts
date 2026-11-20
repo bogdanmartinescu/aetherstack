@@ -103,6 +103,10 @@ const config: Omit<Config, "content"> = {
           from: { transform: "translateY(100%)" },
           to: { transform: "translateY(0)" },
         },
+        "button-sweep": {
+          from: { transform: "translateX(-100%)" },
+          to: { transform: "translateX(200%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -111,6 +115,7 @@ const config: Omit<Config, "content"> = {
         "fade-out": "fade-out 0.2s ease-out",
         "slide-in-from-top": "slide-in-from-top 0.3s ease-out",
         "slide-in-from-bottom": "slide-in-from-bottom 0.3s ease-out",
+        "button-sweep": "button-sweep 1.6s ease-in-out infinite",
       },
     },
   },

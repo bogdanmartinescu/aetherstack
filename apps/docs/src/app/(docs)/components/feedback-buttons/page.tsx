@@ -22,14 +22,36 @@ export default function FeedbackButtonsPage() {
       cliInstall="npx aether-ui add feedback-buttons"
       props={[
         {
+          name: "value",
+          type: '"up" | "down" | null',
+          description: "Controlled selection. Omit to use the component uncontrolled.",
+        },
+        {
+          name: "defaultValue",
+          type: '"up" | "down" | null',
+          default: "null",
+          description: "Initial selection when uncontrolled.",
+        },
+        {
+          name: "onValueChange",
+          type: '(value: "up" | "down" | null) => void',
+          description: "Called on every change, including null when the selection is cleared.",
+        },
+        {
           name: "onThumbsUp",
           type: "() => void",
-          description: "Called when the thumbs up button is clicked.",
+          description: "Called when thumbs up becomes selected.",
         },
         {
           name: "onThumbsDown",
           type: "() => void",
-          description: "Called when the thumbs down button is clicked.",
+          description: "Called when thumbs down becomes selected.",
+        },
+        {
+          name: "disabled",
+          type: "boolean",
+          default: "false",
+          description: "Disables both buttons.",
         },
         {
           name: "className",
@@ -40,6 +62,8 @@ export default function FeedbackButtonsPage() {
       a11yNotes={[
         "Each button has an aria-label ('Thumbs up' / 'Thumbs down') for screen reader clarity.",
         "Active state is communicated via aria-pressed so assistive technology reflects the selection.",
+        "Users can switch their vote or click the selected button again to clear it.",
+        "Buttons are wrapped in role='group' labelled 'Response feedback'.",
       ]}
     />
   )

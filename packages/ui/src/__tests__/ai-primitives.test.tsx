@@ -307,10 +307,16 @@ describe("TokenCounter", () => {
     expect(screen.getByRole("progressbar")).toBeInTheDocument()
   })
 
-  it("applies destructive styling when usage >= 80%", () => {
+  it("applies warning styling when usage >= 80% and < 100%", () => {
     const { container } = render(<TokenCounter used={900} max={1000} />)
-    const counter = container.querySelector(".text-destructive")
-    expect(counter).toBeInTheDocument()
+    expect(container.firstChild).toHaveAttribute("data-level", "warning")
+    expect(container.querySelector(".text-destructive")).not.toBeInTheDocument()
+  })
+
+  it("applies destructive styling when usage reaches the limit", () => {
+    const { container } = render(<TokenCounter used={1200} max={1000} />)
+    expect(container.firstChild).toHaveAttribute("data-level", "critical")
+    expect(container.querySelector(".text-destructive")).toBeInTheDocument()
   })
 
   it("applies normal styling when usage < 80%", () => {

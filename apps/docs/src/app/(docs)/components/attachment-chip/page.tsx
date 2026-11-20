@@ -44,7 +44,13 @@ export default function AttachmentChipPage() {
         {
           name: "type",
           type: "string",
-          description: "MIME type used for display (e.g. image/png shows an image icon).",
+          description: "MIME type used to pick an icon (e.g. image/png shows an image icon). Falls back to the file extension.",
+        },
+        {
+          name: "status",
+          type: '"idle" | "uploading" | "error"',
+          default: '"idle"',
+          description: "Shows a spinner while uploading or a destructive style on failure.",
         },
         {
           name: "onRemove",
@@ -59,7 +65,8 @@ export default function AttachmentChipPage() {
       ]}
       a11yNotes={[
         "Remove button has aria-label='Remove <filename>' so screen readers identify which file is being removed.",
-        "Chip content is wrapped in a span with role='group' and an aria-label for the file name.",
+        "Truncated file names are available in full via the chip's title tooltip.",
+        "Uploading and error states are announced with visually-hidden text, and the chip is aria-busy while uploading.",
       ]}
     />
   )

@@ -37,9 +37,7 @@ export default function ChatPage() {
       header={<span className="font-medium">React hooks deep-dive</span>}
       footer={
         <PromptInput
-          value=""
-          onChange={() => {}}
-          onSubmit={() => {}}
+          onSubmit={(message) => console.log(message)}
           placeholder="Type a message…"
         />
       }

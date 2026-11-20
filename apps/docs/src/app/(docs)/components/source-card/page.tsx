@@ -63,7 +63,12 @@ export default function SourceCardPage() {
         {
           name: "favicon",
           type: "string",
-          description: "Favicon image URL displayed beside the title.",
+          description: "Favicon image URL displayed beside the title. Falls back to a link icon if it fails to load.",
+        },
+        {
+          name: "index",
+          type: "number",
+          description: "Citation number shown as a badge, matching [n] markers in the response.",
         },
         {
           name: "className",
@@ -73,7 +78,8 @@ export default function SourceCardPage() {
       ]}
       a11yNotes={[
         "The card is rendered as an anchor element — keyboard-navigable and operable with Enter.",
-        "Favicon image has alt='favicon for <domain>' for screen readers.",
+        "The favicon is decorative (alt='') since the domain is shown as text.",
+        "Visually-hidden text tells screen reader users the link opens in a new tab.",
       ]}
     />
   )

@@ -10,11 +10,13 @@
     "./accordion": "./src/components/accordion.tsx",
     "./alert": "./src/components/alert.tsx",
     "./alert-dialog": "./src/components/alert-dialog.tsx",
+    "./animated-number": "./src/components/animated-number.tsx",
     "./collapsible": "./src/components/collapsible.tsx",
     "./drawer": "./src/components/drawer.tsx",
     "./kbd": "./src/components/kbd.tsx",
     "./popover": "./src/components/popover.tsx",
     "./spinner": "./src/components/spinner.tsx",
+    "./status-dot": "./src/components/status-dot.tsx",
     "./avatar": "./src/components/avatar.tsx",
     "./badge": "./src/components/badge.tsx",
     "./button": "./src/components/button.tsx",
@@ -25,26 +27,37 @@
     "./context-menu": "./src/components/context-menu.tsx",
     "./dialog": "./src/components/dialog.tsx",
     "./dropdown-menu": "./src/components/dropdown-menu.tsx",
+    "./floating-dock": "./src/components/floating-dock.tsx",
+    "./heatmap": "./src/components/heatmap.tsx",
     "./hover-card": "./src/components/hover-card.tsx",
     "./input": "./src/components/input.tsx",
     "./label": "./src/components/label.tsx",
     "./pagination": "./src/components/pagination.tsx",
+    "./password-field": "./src/components/password-field.tsx",
+    "./password-strength": "./src/components/password-strength.tsx",
+    "./priority-bars": "./src/components/priority-bars.tsx",
     "./progress": "./src/components/progress.tsx",
     "./radio-group": "./src/components/radio-group.tsx",
     "./scroll-area": "./src/components/scroll-area.tsx",
+    "./segmented-control": "./src/components/segmented-control.tsx",
     "./select": "./src/components/select.tsx",
     "./separator": "./src/components/separator.tsx",
     "./sheet": "./src/components/sheet.tsx",
     "./skeleton": "./src/components/skeleton.tsx",
     "./slider": "./src/components/slider.tsx",
+    "./social-button": "./src/components/social-button.tsx",
     "./switch": "./src/components/switch.tsx",
     "./table": "./src/components/table.tsx",
     "./tabs": "./src/components/tabs.tsx",
+    "./tag": "./src/components/tag.tsx",
     "./textarea": "./src/components/textarea.tsx",
+    "./time-slots": "./src/components/time-slots.tsx",
+    "./timeline-scrubber": "./src/components/timeline-scrubber.tsx",
     "./toast": "./src/components/toast.tsx",
     "./toggle": "./src/components/toggle.tsx",
     "./toggle-group": "./src/components/toggle-group.tsx",
     "./tooltip": "./src/components/tooltip.tsx",
+    "./uptime-bar": "./src/components/uptime-bar.tsx",
     "./globals.css": "./src/styles/globals.css",
     "./aspect-ratio": "./src/components/aspect-ratio.tsx",
     "./button-group": "./src/components/button-group.tsx",
@@ -75,6 +88,11 @@
         "import": "./dist/accordion.mjs",
         "require": "./dist/accordion.js",
         "types": "./dist/accordion.d.ts"
+      },
+      "./animated-number": {
+        "import": "./dist/animated-number.mjs",
+        "require": "./dist/animated-number.js",
+        "types": "./dist/animated-number.d.ts"
       },
       "./avatar": {
         "import": "./dist/avatar.mjs",
@@ -126,6 +144,16 @@
         "require": "./dist/dropdown-menu.js",
         "types": "./dist/dropdown-menu.d.ts"
       },
+      "./floating-dock": {
+        "import": "./dist/floating-dock.mjs",
+        "require": "./dist/floating-dock.js",
+        "types": "./dist/floating-dock.d.ts"
+      },
+      "./heatmap": {
+        "import": "./dist/heatmap.mjs",
+        "require": "./dist/heatmap.js",
+        "types": "./dist/heatmap.d.ts"
+      },
       "./hover-card": {
         "import": "./dist/hover-card.mjs",
         "require": "./dist/hover-card.js",
@@ -146,6 +174,21 @@
         "require": "./dist/pagination.js",
         "types": "./dist/pagination.d.ts"
       },
+      "./password-field": {
+        "import": "./dist/password-field.mjs",
+        "require": "./dist/password-field.js",
+        "types": "./dist/password-field.d.ts"
+      },
+      "./password-strength": {
+        "import": "./dist/password-strength.mjs",
+        "require": "./dist/password-strength.js",
+        "types": "./dist/password-strength.d.ts"
+      },
+      "./priority-bars": {
+        "import": "./dist/priority-bars.mjs",
+        "require": "./dist/priority-bars.js",
+        "types": "./dist/priority-bars.d.ts"
+      },
       "./progress": {
         "import": "./dist/progress.mjs",
         "require": "./dist/progress.js",
@@ -160,6 +203,11 @@
         "import": "./dist/scroll-area.mjs",
         "require": "./dist/scroll-area.js",
         "types": "./dist/scroll-area.d.ts"
+      },
+      "./segmented-control": {
+        "import": "./dist/segmented-control.mjs",
+        "require": "./dist/segmented-control.js",
+        "types": "./dist/segmented-control.d.ts"
       },
       "./select": {
         "import": "./dist/select.mjs",
@@ -186,6 +234,16 @@
         "require": "./dist/slider.js",
         "types": "./dist/slider.d.ts"
       },
+      "./social-button": {
+        "import": "./dist/social-button.mjs",
+        "require": "./dist/social-button.js",
+        "types": "./dist/social-button.d.ts"
+      },
+      "./status-dot": {
+        "import": "./dist/status-dot.mjs",
+        "require": "./dist/status-dot.js",
+        "types": "./dist/status-dot.d.ts"
+      },
       "./switch": {
         "import": "./dist/switch.mjs",
         "require": "./dist/switch.js",
@@ -201,10 +259,25 @@
         "require": "./dist/tabs.js",
         "types": "./dist/tabs.d.ts"
       },
+      "./tag": {
+        "import": "./dist/tag.mjs",
+        "require": "./dist/tag.js",
+        "types": "./dist/tag.d.ts"
+      },
       "./textarea": {
         "import": "./dist/textarea.mjs",
         "require": "./dist/textarea.js",
         "types": "./dist/textarea.d.ts"
+      },
+      "./time-slots": {
+        "import": "./dist/time-slots.mjs",
+        "require": "./dist/time-slots.js",
+        "types": "./dist/time-slots.d.ts"
+      },
+      "./timeline-scrubber": {
+        "import": "./dist/timeline-scrubber.mjs",
+        "require": "./dist/timeline-scrubber.js",
+        "types": "./dist/timeline-scrubber.d.ts"
       },
       "./toast": {
         "import": "./dist/toast.mjs",
@@ -225,6 +298,11 @@
         "import": "./dist/tooltip.mjs",
         "require": "./dist/tooltip.js",
         "types": "./dist/tooltip.d.ts"
+      },
+      "./uptime-bar": {
+        "import": "./dist/uptime-bar.mjs",
+        "require": "./dist/uptime-bar.js",
+        "types": "./dist/uptime-bar.d.ts"
       },
       "./aspect-ratio": {
         "import": "./dist/aspect-ratio.mjs",

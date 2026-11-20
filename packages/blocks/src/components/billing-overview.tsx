@@ -119,7 +119,8 @@ export function BillingOverview({
                   </div>
                   <Progress
                     value={pct}
-                    className={cn("h-2", isNearLimit && "[&>div]:bg-destructive")}
+                    className="h-2"
+                    indicatorClassName={cn(isNearLimit && "bg-destructive")}
                   />
                 </div>
               )

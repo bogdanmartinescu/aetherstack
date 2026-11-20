@@ -1,0 +1,24 @@
+{
+  "name": "timeline-scrubber",
+  "type": "registry:ui",
+  "title": "Timeline Scrubber",
+  "description": "Move one marker along a time range.",
+  "author": "aetherstack",
+  "files": [
+    {
+      "path": "packages/ui/src/components/timeline-scrubber.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/timeline-scrubber.tsx",
+      "content": "\"use client\"\n\nexport interface TimelineScrubberProps {\n  label: string\n  min: number\n  max: number\n  step?: number\n  value: number\n  onValueChange: (value: number) => void\n  className?: string\n}\n\nexport function TimelineScrubber({\n  label,\n  min,\n  max,\n  step,\n  value,\n  onValueChange,\n  className,\n}: TimelineScrubberProps) {\n  const stepValue = step ?? 1\n\n  return (\n    <div {...(className !== undefined ? { className } : {})}>\n      <span className=\"text-sm text-muted-foreground\">{value}</span>\n      <input\n        type=\"range\"\n        role=\"slider\"\n        aria-label={label}\n        aria-valuemin={min}\n        aria-valuemax={max}\n        aria-valuenow={value}\n        min={min}\n        max={max}\n        step={stepValue}\n        value={value}\n        onChange={(event) => onValueChange(Number(event.target.value))}\n        className=\"w-full\"\n      />\n    </div>\n  )\n}"
+    }
+  ],
+  "ai": {
+    "intent": "Move one marker along a time range.",
+    "prompts": [
+      "add a timeline scrubber",
+      "scrub a recording"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

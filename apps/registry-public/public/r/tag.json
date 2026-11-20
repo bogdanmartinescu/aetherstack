@@ -1,0 +1,33 @@
+{
+  "name": "tag",
+  "type": "registry:ui",
+  "title": "Tag",
+  "description": "Selectable and removable chips with roving focus.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils",
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "packages/ui/src/components/tag.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/tag.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { X } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface TagProps {\n  label: string\n  onRemove?: () => void\n  className?: string\n}\n\nconst chipClass =\n  \"inline-flex items-center gap-1 rounded-md border border-border bg-muted px-2 py-0.5 text-xs\"\n\nconst focusRing =\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\"\n\nexport function Tag({ label, onRemove, className }: TagProps) {\n  return (\n    <span className={cn(chipClass, className)}>\n      {label}\n      {onRemove ? (\n        <button\n          type=\"button\"\n          aria-label={`Remove ${label}`}\n          onClick={onRemove}\n          className={cn(\"rounded-sm opacity-70 hover:opacity-100\", focusRing)}\n        >\n          <X className=\"h-3 w-3\" aria-hidden />\n        </button>\n      ) : null}\n    </span>\n  )\n}\n\nexport interface TagItem {\n  id: string\n  label: string\n}\n\nexport interface TagGroupProps {\n  label: string\n  items: readonly TagItem[]\n  selection?: \"single\" | \"multiple\"\n  value?: readonly string[]\n  onValueChange?: (value: string[]) => void\n  className?: string\n}\n\nexport function TagGroup({\n  label,\n  items,\n  selection,\n  value,\n  onValueChange,\n  className,\n}: TagGroupProps) {\n  const [active, setActive] = React.useState(0)\n  const moved = React.useRef(false)\n  const buttonRefs = React.useRef<(HTMLButtonElement | null)[]>([])\n\n  const tabStopIndex = items.length === 0 ? 0 : Math.min(active, items.length - 1)\n\n  React.useEffect(() => {\n    if (!moved.current) return\n    buttonRefs.current[tabStopIndex]?.focus()\n    moved.current = false\n  }, [tabStopIndex])\n\n  const moveActive = React.useCallback(\n    (next: number) => {\n      if (items.length === 0) return\n      setActive(next)\n      moved.current = true\n    },\n    [items.length],\n  )\n\n  const handleKeyDown = (\n    event: React.KeyboardEvent<HTMLButtonElement>,\n    index: number,\n  ) => {\n    if (items.length === 0) return\n    if (event.key === \"ArrowRight\") {\n      event.preventDefault()\n      moveActive((index + 1) % items.length)\n    } else if (event.key === \"ArrowLeft\") {\n      event.preventDefault()\n      moveActive((index - 1 + items.length) % items.length)\n    } else if (event.key === \"Home\") {\n      event.preventDefault()\n      moveActive(0)\n    } else if (event.key === \"End\") {\n      event.preventDefault()\n      moveActive(items.length - 1)\n    }\n  }\n\n  const handleItemClick = (id: string) => {\n    if (selection === undefined || onValueChange === undefined) return\n    if (selection === \"single\") {\n      onValueChange([id])\n      return\n    }\n    const current = value ?? []\n    if (current.includes(id)) {\n      onValueChange(current.filter((itemId) => itemId !== id))\n    } else {\n      onValueChange([...current, id])\n    }\n  }\n\n  return (\n    <div\n      role=\"group\"\n      aria-label={label}\n      className={cn(\"inline-flex flex-wrap gap-1\", className)}\n    >\n      {items.map((item, index) => (\n        <button\n          key={item.id}\n          ref={(node) => {\n            buttonRefs.current[index] = node\n          }}\n          type=\"button\"\n          tabIndex={index === tabStopIndex ? 0 : -1}\n          aria-pressed={value?.includes(item.id) ?? false}\n          onFocus={() => setActive(index)}\n          onClick={() => handleItemClick(item.id)}\n          onKeyDown={(event) => handleKeyDown(event, index)}\n          className={cn(chipClass, focusRing)}\n        >\n          {item.label}\n        </button>\n      ))}\n    </div>\n  )\n}"
+    }
+  ],
+  "ai": {
+    "intent": "Filter or label a collection with quiet chips the user can select or remove.",
+    "prompts": [
+      "add tags",
+      "add removable chips",
+      "add a tag group"
+    ],
+    "composition": [],
+    "slots": [
+      "Tag",
+      "TagGroup"
+    ]
+  }
+}

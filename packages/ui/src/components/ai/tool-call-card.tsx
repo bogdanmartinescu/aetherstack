@@ -1,17 +1,35 @@
 "use client"
 
 import * as React from "react"
-import { CheckCircle, XCircle, ChevronDown, ChevronRight } from "lucide-react"
+import { CircleCheck, CircleX, ChevronRight } from "lucide-react"
 import { cn } from "@aetherstack/utils"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../collapsible"
+
+type ToolCallStatus = "pending" | "running" | "done" | "error"
 
 interface ToolCallCardProps {
   toolName: string
   args?: Record<string, unknown>
   result?: unknown
-  status: "pending" | "running" | "done" | "error"
+  status: ToolCallStatus
   error?: string
+  /** Execution time in milliseconds, shown next to the status. */
+  duration?: number
+  defaultOpen?: boolean
   className?: string
+}
+
+function formatPayload(value: unknown): string {
+  if (typeof value === "string") return value
+  try {
+    return JSON.stringify(value, (_key, v: unknown) => (typeof v === "bigint" ? v.toString() : v), 2) ?? String(value)
+  } catch {
+    return String(value)
+  }
+}
+
+function formatDuration(ms: number): string {
+  return ms < 1000 ? `${Math.round(ms)}ms` : `${(ms / 1000).toFixed(1)}s`
 }
 
 function ToolCallCard({
@@ -20,54 +38,80 @@ function ToolCallCard({
   result,
   status,
   error,
+  duration,
+  defaultOpen = false,
   className,
 }: ToolCallCardProps) {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(defaultOpen)
+  const hasArgs = args !== undefined && Object.keys(args).length > 0
+  const hasResult = result !== undefined && !error
+  const hasDetails = hasArgs || hasResult || Boolean(error)
+
+  const header = (
+    <>
+      <div className="flex min-w-0 items-center gap-2">
+        <StatusIcon status={status} />
+        <span className="truncate font-mono font-medium">{toolName}</span>
+        <span
+          className={cn(
+            "shrink-0 text-xs capitalize",
+            status === "error" ? "text-destructive" : "text-muted-foreground",
+          )}
+        >
+          {status}
+        </span>
+        {duration !== undefined && (
+          <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+            · {formatDuration(duration)}
+          </span>
+        )}
+      </div>
+      {hasDetails && (
+        <ChevronRight
+          aria-hidden="true"
+          className={cn(
+            "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 motion-reduce:transition-none",
+            open && "rotate-90",
+          )}
+        />
+      )}
+    </>
+  )
 
   return (
-    <Collapsible open={open} onOpenChange={setOpen}>
-      <div className={cn("rounded-lg border border-border bg-card", className)}>
-        <CollapsibleTrigger asChild>
-          <button className="flex w-full items-center justify-between gap-2 px-4 py-3 text-sm">
-            <div className="flex items-center gap-2">
-              <StatusIcon status={status} />
-              <span className="font-mono font-medium">{toolName}</span>
-              <span className="text-xs text-muted-foreground capitalize">{status}</span>
-            </div>
-            {open ? (
-              <ChevronDown className="h-4 w-4 text-muted-foreground" />
-            ) : (
-              <ChevronRight className="h-4 w-4 text-muted-foreground" />
-            )}
-          </button>
-        </CollapsibleTrigger>
+    <Collapsible open={open} onOpenChange={setOpen} disabled={!hasDetails}>
+      <div
+        data-status={status}
+        className={cn(
+          "rounded-lg border bg-card",
+          status === "error" ? "border-destructive/40" : "border-border",
+          className,
+        )}
+      >
+        {hasDetails ? (
+          <CollapsibleTrigger asChild>
+            <button
+              type="button"
+              className={cn(
+                "flex w-full items-center justify-between gap-2 rounded-lg px-4 py-3 text-left text-sm",
+                "ring-offset-background transition-colors hover:bg-accent/50",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+              )}
+            >
+              {header}
+            </button>
+          </CollapsibleTrigger>
+        ) : (
+          <div className="flex w-full items-center justify-between gap-2 px-4 py-3 text-sm">
+            {header}
+          </div>
+        )}
 
         <CollapsibleContent>
-          <div className="border-t border-border px-4 pb-4 pt-3 space-y-3">
-            {args && (
-              <div>
-                <p className="mb-1 text-xs font-medium text-muted-foreground uppercase tracking-wide">Arguments</p>
-                <pre className="rounded bg-muted p-3 text-xs overflow-x-auto font-mono">
-                  {JSON.stringify(args, null, 2)}
-                </pre>
-              </div>
-            )}
-            {error && (
-              <div>
-                <p className="mb-1 text-xs font-medium text-destructive uppercase tracking-wide">Error</p>
-                <pre className="rounded bg-destructive/10 p-3 text-xs overflow-x-auto font-mono text-destructive">
-                  {error}
-                </pre>
-              </div>
-            )}
-            {result !== undefined && !error && (
-              <div>
-                <p className="mb-1 text-xs font-medium text-muted-foreground uppercase tracking-wide">Result</p>
-                <pre className="rounded bg-muted p-3 text-xs overflow-x-auto font-mono">
-                  {JSON.stringify(result, null, 2)}
-                </pre>
-              </div>
-            )}
+          <div className="space-y-3 border-t border-border px-4 pb-4 pt-3">
+            {hasArgs && <PayloadSection label="Arguments" value={formatPayload(args)} />}
+            {error && <PayloadSection label="Error" value={error} tone="destructive" />}
+            {hasResult && <PayloadSection label="Result" value={formatPayload(result)} />}
           </div>
         </CollapsibleContent>
       </div>
@@ -75,19 +119,66 @@ function ToolCallCard({
   )
 }
 
-function StatusIcon({ status }: { status: ToolCallCardProps["status"] }) {
+function PayloadSection({
+  label,
+  value,
+  tone = "default",
+}: {
+  label: string
+  value: string
+  tone?: "default" | "destructive"
+}) {
+  return (
+    <div>
+      <p
+        className={cn(
+          "mb-1 text-xs font-medium uppercase tracking-wide",
+          tone === "destructive" ? "text-destructive" : "text-muted-foreground",
+        )}
+      >
+        {label}
+      </p>
+      <pre
+        tabIndex={0}
+        className={cn(
+          "max-h-64 overflow-auto whitespace-pre-wrap break-words rounded p-3 font-mono text-xs",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          tone === "destructive" ? "bg-destructive/10 text-destructive" : "bg-muted",
+        )}
+      >
+        {value}
+      </pre>
+    </div>
+  )
+}
+
+function StatusIcon({ status }: { status: ToolCallStatus }) {
   switch (status) {
     case "pending":
-      return <span className="h-4 w-4 rounded-full border-2 border-muted-foreground/40" />
+      return (
+        <span
+          aria-hidden="true"
+          className="h-4 w-4 shrink-0 rounded-full border-2 border-muted-foreground/40"
+        />
+      )
     case "running":
       return (
-        <span className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+        <span
+          aria-hidden="true"
+          className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-primary border-t-transparent motion-reduce:animate-none"
+        />
       )
     case "done":
-      return <CheckCircle className="h-4 w-4 text-green-500" />
+      return (
+        <CircleCheck
+          aria-hidden="true"
+          className="h-4 w-4 shrink-0 text-emerald-500 dark:text-emerald-400"
+        />
+      )
     case "error":
-      return <XCircle className="h-4 w-4 text-destructive" />
+      return <CircleX aria-hidden="true" className="h-4 w-4 shrink-0 text-destructive" />
   }
 }
 
 export { ToolCallCard }
+export type { ToolCallCardProps, ToolCallStatus }

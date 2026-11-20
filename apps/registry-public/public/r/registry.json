@@ -56,7 +56,7 @@
           "path": "packages/blocks/src/components/billing-overview.tsx",
           "type": "registry:block",
           "target": "components/blocks/billing-overview.tsx",
-          "content": "\"use client\"\n\nimport { cn } from \"@aetherstack/utils\"\nimport { Button, Progress } from \"@aetherstack/ui\"\n\nexport interface BillingPlan {\n  name: string\n  price: string\n  period: string\n  features: string[]\n}\n\nexport interface UsageMetric {\n  label: string\n  used: number\n  limit: number\n  unit?: string\n}\n\nexport interface BillingOverviewProps {\n  plan?: BillingPlan\n  usage?: UsageMetric[]\n  nextBillingDate?: string\n  onUpgrade?: () => void\n  onManageBilling?: () => void\n  className?: string\n}\n\nconst DEFAULT_PLAN: BillingPlan = {\n  name: \"Free\",\n  price: \"$0\",\n  period: \"month\",\n  features: [\"Up to 3 projects\", \"1 team member\", \"Community support\"],\n}\n\nexport function BillingOverview({\n  plan = DEFAULT_PLAN,\n  usage = [],\n  nextBillingDate,\n  onUpgrade,\n  onManageBilling,\n  className,\n}: BillingOverviewProps) {\n  return (\n    <div className={cn(\"w-full space-y-6\", className)}>\n      {/* Current plan card */}\n      <div className=\"rounded-xl border border-border bg-card p-6 shadow-sm\">\n        <div className=\"flex items-start justify-between gap-4\">\n          <div>\n            <p className=\"text-xs font-medium uppercase tracking-wider text-muted-foreground\">\n              Current plan\n            </p>\n            <h2 className=\"mt-1 text-2xl font-bold text-foreground\">\n              {plan.name}\n            </h2>\n            <p className=\"mt-0.5 text-sm text-muted-foreground\">\n              <span className=\"text-xl font-semibold text-foreground\">\n                {plan.price}\n              </span>\n              &nbsp;/ {plan.period}\n            </p>\n          </div>\n          {onUpgrade && (\n            <Button size=\"sm\" onClick={onUpgrade} className=\"shrink-0\">\n              Upgrade plan\n            </Button>\n          )}\n        </div>\n\n        {/* Features */}\n        {plan.features.length > 0 && (\n          <ul className=\"mt-4 space-y-1.5\">\n            {plan.features.map((f) => (\n              <li key={f} className=\"flex items-center gap-2 text-sm text-muted-foreground\">\n                <svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  width=\"14\"\n                  height=\"14\"\n                  viewBox=\"0 0 24 24\"\n                  fill=\"none\"\n                  stroke=\"currentColor\"\n                  strokeWidth=\"2.5\"\n                  strokeLinecap=\"round\"\n                  strokeLinejoin=\"round\"\n                  className=\"text-primary shrink-0\"\n                  aria-hidden\n                >\n                  <polyline points=\"20 6 9 17 4 12\" />\n                </svg>\n                {f}\n              </li>\n            ))}\n          </ul>\n        )}\n      </div>\n\n      {/* Usage meters */}\n      {usage.length > 0 && (\n        <div className=\"rounded-xl border border-border bg-card p-6 shadow-sm\">\n          <h3 className=\"mb-4 text-sm font-semibold text-foreground\">Usage</h3>\n          <div className=\"space-y-4\">\n            {usage.map((metric) => {\n              const pct = metric.limit > 0\n                ? Math.min(100, Math.round((metric.used / metric.limit) * 100))\n                : 0\n              const isNearLimit = pct >= 80\n              return (\n                <div key={metric.label}>\n                  <div className=\"mb-1.5 flex items-center justify-between text-sm\">\n                    <span className=\"font-medium text-foreground\">\n                      {metric.label}\n                    </span>\n                    <span className={cn(\"text-muted-foreground\", isNearLimit && \"text-destructive font-medium\")}>\n                      {metric.used.toLocaleString()}\n                      {metric.unit ? ` ${metric.unit}` : \"\"} /{\" \"}\n                      {metric.limit.toLocaleString()}\n                      {metric.unit ? ` ${metric.unit}` : \"\"}\n                    </span>\n                  </div>\n                  <Progress\n                    value={pct}\n                    className={cn(\"h-2\", isNearLimit && \"[&>div]:bg-destructive\")}\n                  />\n                </div>\n              )\n            })}\n          </div>\n        </div>\n      )}\n\n      {/* Footer: next billing + manage button */}\n      <div className=\"flex items-center justify-between gap-4 rounded-xl border border-border bg-card px-6 py-4 shadow-sm\">\n        {nextBillingDate ? (\n          <p className=\"text-sm text-muted-foreground\">\n            Next billing date:{\" \"}\n            <span className=\"font-medium text-foreground\">{nextBillingDate}</span>\n          </p>\n        ) : (\n          <p className=\"text-sm text-muted-foreground\">No upcoming charges.</p>\n        )}\n        {onManageBilling && (\n          <Button variant=\"outline\" size=\"sm\" onClick={onManageBilling}>\n            Manage billing\n          </Button>\n        )}\n      </div>\n    </div>\n  )\n}\n"
+          "content": "\"use client\"\n\nimport { cn } from \"@aetherstack/utils\"\nimport { Button, Progress } from \"@aetherstack/ui\"\n\nexport interface BillingPlan {\n  name: string\n  price: string\n  period: string\n  features: string[]\n}\n\nexport interface UsageMetric {\n  label: string\n  used: number\n  limit: number\n  unit?: string\n}\n\nexport interface BillingOverviewProps {\n  plan?: BillingPlan\n  usage?: UsageMetric[]\n  nextBillingDate?: string\n  onUpgrade?: () => void\n  onManageBilling?: () => void\n  className?: string\n}\n\nconst DEFAULT_PLAN: BillingPlan = {\n  name: \"Free\",\n  price: \"$0\",\n  period: \"month\",\n  features: [\"Up to 3 projects\", \"1 team member\", \"Community support\"],\n}\n\nexport function BillingOverview({\n  plan = DEFAULT_PLAN,\n  usage = [],\n  nextBillingDate,\n  onUpgrade,\n  onManageBilling,\n  className,\n}: BillingOverviewProps) {\n  return (\n    <div className={cn(\"w-full space-y-6\", className)}>\n      {/* Current plan card */}\n      <div className=\"rounded-xl border border-border bg-card p-6 shadow-sm\">\n        <div className=\"flex items-start justify-between gap-4\">\n          <div>\n            <p className=\"text-xs font-medium uppercase tracking-wider text-muted-foreground\">\n              Current plan\n            </p>\n            <h2 className=\"mt-1 text-2xl font-bold text-foreground\">\n              {plan.name}\n            </h2>\n            <p className=\"mt-0.5 text-sm text-muted-foreground\">\n              <span className=\"text-xl font-semibold text-foreground\">\n                {plan.price}\n              </span>\n              &nbsp;/ {plan.period}\n            </p>\n          </div>\n          {onUpgrade && (\n            <Button size=\"sm\" onClick={onUpgrade} className=\"shrink-0\">\n              Upgrade plan\n            </Button>\n          )}\n        </div>\n\n        {/* Features */}\n        {plan.features.length > 0 && (\n          <ul className=\"mt-4 space-y-1.5\">\n            {plan.features.map((f) => (\n              <li key={f} className=\"flex items-center gap-2 text-sm text-muted-foreground\">\n                <svg\n                  xmlns=\"http://www.w3.org/2000/svg\"\n                  width=\"14\"\n                  height=\"14\"\n                  viewBox=\"0 0 24 24\"\n                  fill=\"none\"\n                  stroke=\"currentColor\"\n                  strokeWidth=\"2.5\"\n                  strokeLinecap=\"round\"\n                  strokeLinejoin=\"round\"\n                  className=\"text-primary shrink-0\"\n                  aria-hidden\n                >\n                  <polyline points=\"20 6 9 17 4 12\" />\n                </svg>\n                {f}\n              </li>\n            ))}\n          </ul>\n        )}\n      </div>\n\n      {/* Usage meters */}\n      {usage.length > 0 && (\n        <div className=\"rounded-xl border border-border bg-card p-6 shadow-sm\">\n          <h3 className=\"mb-4 text-sm font-semibold text-foreground\">Usage</h3>\n          <div className=\"space-y-4\">\n            {usage.map((metric) => {\n              const pct = metric.limit > 0\n                ? Math.min(100, Math.round((metric.used / metric.limit) * 100))\n                : 0\n              const isNearLimit = pct >= 80\n              return (\n                <div key={metric.label}>\n                  <div className=\"mb-1.5 flex items-center justify-between text-sm\">\n                    <span className=\"font-medium text-foreground\">\n                      {metric.label}\n                    </span>\n                    <span className={cn(\"text-muted-foreground\", isNearLimit && \"text-destructive font-medium\")}>\n                      {metric.used.toLocaleString()}\n                      {metric.unit ? ` ${metric.unit}` : \"\"} /{\" \"}\n                      {metric.limit.toLocaleString()}\n                      {metric.unit ? ` ${metric.unit}` : \"\"}\n                    </span>\n                  </div>\n                  <Progress\n                    value={pct}\n                    className=\"h-2\"\n                    indicatorClassName={cn(isNearLimit && \"bg-destructive\")}\n                  />\n                </div>\n              )\n            })}\n          </div>\n        </div>\n      )}\n\n      {/* Footer: next billing + manage button */}\n      <div className=\"flex items-center justify-between gap-4 rounded-xl border border-border bg-card px-6 py-4 shadow-sm\">\n        {nextBillingDate ? (\n          <p className=\"text-sm text-muted-foreground\">\n            Next billing date:{\" \"}\n            <span className=\"font-medium text-foreground\">{nextBillingDate}</span>\n          </p>\n        ) : (\n          <p className=\"text-sm text-muted-foreground\">No upcoming charges.</p>\n        )}\n        {onManageBilling && (\n          <Button variant=\"outline\" size=\"sm\" onClick={onManageBilling}>\n            Manage billing\n          </Button>\n        )}\n      </div>\n    </div>\n  )\n}\n"
         }
       ],
       "ai": {
@@ -1110,6 +1110,35 @@
       }
     },
     {
+      "name": "animated-number",
+      "type": "registry:ui",
+      "title": "Animated Number",
+      "description": "A formatted number for money, percents, and live metrics.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/animated-number.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/animated-number.tsx",
+          "content": "import { cn } from \"@aetherstack/utils\"\n\nconst DEFAULT_FORMAT: Intl.NumberFormatOptions = { maximumFractionDigits: 0 }\n\nexport interface AnimatedNumberProps {\n  value: number\n  format?: Intl.NumberFormatOptions\n  locale?: string\n  className?: string\n}\n\nexport function AnimatedNumber({ value, format, locale, className }: AnimatedNumberProps) {\n  const formatOptions = format ?? DEFAULT_FORMAT\n  const resolvedLocale = locale ?? \"en-US\"\n  const text = new Intl.NumberFormat(resolvedLocale, formatOptions).format(value)\n\n  if (className !== undefined) {\n    return <span className={cn(className)}>{text}</span>\n  }\n\n  return <span>{text}</span>\n}"
+        }
+      ],
+      "ai": {
+        "intent": "Show a formatted number for money, percents, and live metrics.",
+        "prompts": [
+          "add an animated number",
+          "roll a metric up to its value",
+          "add a number ticker"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
@@ -1119,12 +1148,15 @@
         "@radix-ui/react-avatar",
         "@aetherstack/utils"
       ],
+      "registryDependencies": [
+        "status-dot"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/avatar.tsx",
           "type": "registry:ui",
           "target": "components/ui/avatar.tsx",
-          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst Avatar = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full\",\n      className,\n    )}\n    {...props}\n  />\n))\nAvatar.displayName = \"Avatar\"\n\nconst AvatarImage = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Image>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    className={cn(\"aspect-square h-full w-full\", className)}\n    {...props}\n  />\n))\nAvatarImage.displayName = \"AvatarImage\"\n\nconst AvatarFallback = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Fallback>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    className={cn(\n      \"flex h-full w-full items-center justify-center rounded-full bg-muted text-sm font-medium text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nAvatarFallback.displayName = \"AvatarFallback\"\n\ninterface AvatarGroupProps {\n  children: React.ReactNode\n  className?: string\n  max?: number\n}\n\nfunction AvatarGroup({ children, className, max }: AvatarGroupProps) {\n  const childArray = React.Children.toArray(children)\n  const visible = max !== undefined ? childArray.slice(0, max) : childArray\n  const overflow = max !== undefined ? childArray.length - max : 0\n\n  return (\n    <div className={cn(\"flex items-center -space-x-2\", className)}>\n      {visible}\n      {overflow > 0 && (\n        <Avatar>\n          <AvatarFallback>+{overflow}</AvatarFallback>\n        </Avatar>\n      )}\n    </div>\n  )\n}\nAvatarGroup.displayName = \"AvatarGroup\"\n\nexport { Avatar, AvatarImage, AvatarFallback, AvatarGroup }\n"
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\"\nimport { cn } from \"@aetherstack/utils\"\nimport { StatusDot, type StatusDotStatus } from \"./status-dot\"\n\ntype AvatarProps = React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> & {\n  status?: StatusDotStatus\n}\n\nconst Avatar = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Root>,\n  AvatarProps\n>(({ className, status, children, ...props }, ref) => (\n  <AvatarPrimitive.Root\n    ref={ref}\n    className={cn(\"relative flex h-10 w-10 shrink-0 rounded-full\", className)}\n    {...props}\n  >\n    <span className=\"size-full overflow-hidden rounded-full\">{children}</span>\n    {status ? (\n      <span className=\"absolute bottom-0 right-0 translate-x-0.5 translate-y-0.5\">\n        <StatusDot status={status} />\n      </span>\n    ) : null}\n  </AvatarPrimitive.Root>\n))\nAvatar.displayName = \"Avatar\"\n\nconst AvatarImage = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Image>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Image\n    ref={ref}\n    className={cn(\"aspect-square h-full w-full\", className)}\n    {...props}\n  />\n))\nAvatarImage.displayName = \"AvatarImage\"\n\nconst AvatarFallback = React.forwardRef<\n  React.ElementRef<typeof AvatarPrimitive.Fallback>,\n  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>\n>(({ className, ...props }, ref) => (\n  <AvatarPrimitive.Fallback\n    ref={ref}\n    className={cn(\n      \"flex h-full w-full items-center justify-center rounded-full bg-muted text-sm font-medium text-muted-foreground\",\n      className,\n    )}\n    {...props}\n  />\n))\nAvatarFallback.displayName = \"AvatarFallback\"\n\ninterface AvatarGroupProps {\n  children: React.ReactNode\n  className?: string\n  max?: number\n}\n\nfunction AvatarGroup({ children, className, max }: AvatarGroupProps) {\n  const childArray = React.Children.toArray(children)\n  const visible = max !== undefined ? childArray.slice(0, max) : childArray\n  const overflow = max !== undefined ? childArray.length - max : 0\n\n  return (\n    <div\n      className={cn(\n        \"flex items-center -space-x-2 [&>*]:ring-2 [&>*]:ring-background\",\n        className,\n      )}\n    >\n      {visible}\n      {overflow > 0 && (\n        <Avatar aria-label={`${overflow} more`} role=\"img\">\n          <AvatarFallback aria-hidden=\"true\">+{overflow}</AvatarFallback>\n        </Avatar>\n      )}\n    </div>\n  )\n}\nAvatarGroup.displayName = \"AvatarGroup\"\n\nexport { Avatar, AvatarImage, AvatarFallback, AvatarGroup }\n"
         }
       ],
       "ai": {
@@ -1194,6 +1226,7 @@
       "dependencies": [
         "class-variance-authority",
         "@radix-ui/react-slot",
+        "lucide-react",
         "@aetherstack/utils"
       ],
       "files": [
@@ -1201,7 +1234,7 @@
           "path": "packages/ui/src/components/button.tsx",
           "type": "registry:ui",
           "target": "components/ui/button.tsx",
-          "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst buttonVariants = cva(\n  [\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium\",\n    \"ring-offset-background transition-colors\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ],\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground hover:bg-primary/90\",\n        destructive:\n          \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n        outline:\n          \"border border-input bg-background hover:bg-accent hover:text-accent-foreground\",\n        secondary: \"bg-secondary text-secondary-foreground hover:bg-secondary/80\",\n        ghost: \"hover:bg-accent hover:text-accent-foreground\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        default: \"h-10 px-4 py-2\",\n        sm: \"h-9 rounded-md px-3\",\n        lg: \"h-11 rounded-md px-8\",\n        icon: \"h-10 w-10\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\"\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  },\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n"
+          "content": "import * as React from \"react\"\nimport { Slot, Slottable } from \"@radix-ui/react-slot\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { LoaderCircle } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\n/*\n * Hover styles are guarded with `[&:not(:disabled)]:hover:` so a disabled\n * button keeps its resting colour while still showing a not-allowed cursor.\n * The guard also matches anchors (rendered via `asChild`), unlike `enabled:`.\n */\nconst buttonVariants = cva(\n  [\n    \"relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium\",\n    \"ring-offset-background transition-[color,background-color,border-color,opacity,transform] duration-150 ease-out\",\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n    \"disabled:cursor-not-allowed disabled:opacity-50\",\n    \"data-[loading]:cursor-wait\",\n    \"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n  ],\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-primary text-primary-foreground shadow-sm [&:not(:disabled)]:hover:bg-primary/90\",\n        destructive:\n          \"bg-destructive text-destructive-foreground shadow-sm [&:not(:disabled)]:hover:bg-destructive/90\",\n        outline:\n          \"border border-input bg-background shadow-sm [&:not(:disabled)]:hover:bg-accent [&:not(:disabled)]:hover:text-accent-foreground\",\n        secondary:\n          \"bg-secondary text-secondary-foreground [&:not(:disabled)]:hover:bg-secondary/80\",\n        ghost:\n          \"[&:not(:disabled)]:hover:bg-accent [&:not(:disabled)]:hover:text-accent-foreground\",\n        link: \"text-primary underline-offset-4 [&:not(:disabled)]:hover:underline\",\n        quiet:\n          \"text-muted-foreground [&:not(:disabled)]:hover:text-foreground\",\n      },\n      size: {\n        xs: \"h-8 gap-1.5 rounded-md px-2.5 text-xs [&_svg]:size-3.5 [@media(pointer:coarse)]:h-9\",\n        sm: \"h-9 rounded-md px-3 [@media(pointer:coarse)]:h-10\",\n        default: \"h-10 px-4 py-2 [@media(pointer:coarse)]:h-11\",\n        lg: \"h-11 rounded-md px-8 [@media(pointer:coarse)]:h-12\",\n        \"icon-xs\": \"h-8 w-8 [&_svg]:size-3.5 [@media(pointer:coarse)]:h-9 [@media(pointer:coarse)]:w-9\",\n        \"icon-sm\": \"h-9 w-9 [@media(pointer:coarse)]:h-10 [@media(pointer:coarse)]:w-10\",\n        icon: \"h-10 w-10 [@media(pointer:coarse)]:h-11 [@media(pointer:coarse)]:w-11\",\n        \"icon-lg\": \"h-11 w-11 [@media(pointer:coarse)]:h-12 [@media(pointer:coarse)]:w-12\",\n      },\n    },\n    compoundVariants: [\n      // Filled and chip buttons press in; text-only buttons stay put.\n      {\n        variant: [\"default\", \"destructive\", \"outline\", \"secondary\", \"ghost\"],\n        className: \"motion-safe:[&:not(:disabled):not([aria-disabled=true])]:active:scale-[0.97]\",\n      },\n      // Quiet buttons are inline text actions: no chip, only the text size.\n      {\n        variant: \"quiet\",\n        className: \"h-auto w-auto px-0 py-0 [@media(pointer:coarse)]:h-auto [@media(pointer:coarse)]:w-auto\",\n      },\n    ],\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n)\n\ntype ButtonSize = NonNullable<VariantProps<typeof buttonVariants>[\"size\"]>\n\nconst ICON_ONLY_SIZE: Record<ButtonSize, ButtonSize> = {\n  xs: \"icon-xs\",\n  sm: \"icon-sm\",\n  default: \"icon\",\n  lg: \"icon-lg\",\n  \"icon-xs\": \"icon-xs\",\n  \"icon-sm\": \"icon-sm\",\n  icon: \"icon\",\n  \"icon-lg\": \"icon-lg\",\n}\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean\n  /**\n   * Shows a spinner in place of `icon`, sweeps the label, and ignores clicks.\n   * The button stays focusable (`aria-disabled`) so keyboard focus is not lost.\n   */\n  loading?: boolean\n  /** Leading icon. With no children the button becomes square — add an `aria-label`. */\n  icon?: React.ReactNode\n  /** Trailing icon. Hidden while loading. */\n  iconRight?: React.ReactNode\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  (\n    {\n      className,\n      variant,\n      size,\n      asChild = false,\n      loading = false,\n      icon,\n      iconRight,\n      disabled,\n      children,\n      onClick,\n      ...props\n    },\n    ref,\n  ) => {\n    const Comp = asChild ? Slot : \"button\"\n    const hasLabel = asChild || (children !== undefined && children !== null && children !== false)\n    const resolvedSize = !hasLabel && (icon || loading) ? ICON_ONLY_SIZE[size ?? \"default\"] : size\n\n    // Only attach a handler when the consumer passed one: a function prop\n    // created here would break rendering from React Server Components.\n    const clickProps = onClick\n      ? {\n          onClick: (event: React.MouseEvent<HTMLButtonElement>) => {\n            if (loading) {\n              event.preventDefault()\n              return\n            }\n            onClick(event)\n          },\n        }\n      : {}\n\n    const leading = loading ? (\n      <LoaderCircle className=\"animate-spin motion-reduce:animate-none\" aria-hidden=\"true\" />\n    ) : (\n      icon\n    )\n\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size: resolvedSize, className }))}\n        ref={ref}\n        disabled={disabled}\n        aria-disabled={loading || undefined}\n        aria-busy={loading || undefined}\n        data-loading={loading || undefined}\n        {...clickProps}\n        {...props}\n        {...(loading && !asChild ? { type: \"button\" as const } : {})}\n      >\n        {leading}\n        <Slottable>{children}</Slottable>\n        {!loading && iconRight}\n        {loading && variant !== \"quiet\" && variant !== \"link\" && (\n          <span\n            aria-hidden=\"true\"\n            className=\"pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit] motion-reduce:hidden\"\n          >\n            <span className=\"absolute inset-y-0 left-0 w-1/2 animate-button-sweep bg-gradient-to-r from-transparent via-current to-transparent opacity-20\" />\n          </span>\n        )}\n      </Comp>\n    )\n  },\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants }\n"
         }
       ],
       "ai": {
@@ -1510,6 +1543,62 @@
       }
     },
     {
+      "name": "floating-dock",
+      "type": "registry:ui",
+      "title": "Floating Dock",
+      "description": "Pin a small panel to a corner of the screen or a parent.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/floating-dock.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/floating-dock.tsx",
+          "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport type FloatingDockCorner = \"top-left\" | \"top-right\" | \"bottom-left\" | \"bottom-right\"\n\nexport interface FloatingDockProps {\n  corner?: FloatingDockCorner\n  contained?: boolean\n  label?: string\n  children: React.ReactNode\n  className?: string\n}\n\nconst CORNER_POSITION: Record<FloatingDockCorner, string> = {\n  \"top-left\": \"top-4 left-4\",\n  \"top-right\": \"top-4 right-4\",\n  \"bottom-left\": \"bottom-4 left-4\",\n  \"bottom-right\": \"bottom-4 right-4\",\n}\n\nexport function FloatingDock({\n  corner = \"bottom-right\",\n  contained,\n  label = \"Dock\",\n  children,\n  className,\n}: FloatingDockProps) {\n  return (\n    <div\n      role=\"region\"\n      aria-label={label}\n      data-corner={corner}\n      className={cn(\n        contained ? \"absolute\" : \"fixed\",\n        CORNER_POSITION[corner],\n        \"pb-[env(safe-area-inset-bottom)] pr-[env(safe-area-inset-right)]\",\n        \"rounded-lg border border-border bg-card shadow-lg\",\n        className,\n      )}\n    >\n      {children}\n    </div>\n  )\n}"
+        }
+      ],
+      "ai": {
+        "intent": "Pin a small panel to a corner of the screen or a parent.",
+        "prompts": [
+          "add a floating dock",
+          "pin a player to the corner"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "heatmap",
+      "type": "registry:ui",
+      "title": "Heatmap",
+      "description": "A grid of values, such as weekday by hour, inspected from the keyboard.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/heatmap.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/heatmap.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface HeatmapProps {\n  \"aria-label\": string\n  rowLabels: readonly string[]\n  columnLabels: readonly string[]\n  values: readonly (readonly number[])[]\n  className?: string\n}\n\nfunction clampValue(value: number): number {\n  return Math.min(1, Math.max(0, value))\n}\n\nfunction formatValue(value: number): string {\n  const clamped = clampValue(value)\n  return String(Number(clamped.toFixed(2)))\n}\n\nfunction cellBackground(value: number): string {\n  const clamped = clampValue(value)\n  return `color-mix(in srgb, hsl(var(--primary)) ${Math.round(clamped * 100)}%, hsl(var(--muted)))`\n}\n\nconst focusRing =\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\"\n\nexport function Heatmap({\n  \"aria-label\": ariaLabel,\n  rowLabels,\n  columnLabels,\n  values,\n  className,\n}: HeatmapProps) {\n  const [active, setActive] = React.useState({ row: 0, col: 0 })\n  const cellRefs = React.useRef<(HTMLButtonElement | null)[][]>([])\n\n  if (values.length !== rowLabels.length) {\n    throw new Error(\"Heatmap values must match row and column labels\")\n  }\n  for (const row of values) {\n    if (row.length !== columnLabels.length) {\n      throw new Error(\"Heatmap values must match row and column labels\")\n    }\n  }\n\n  const focusCell = (row: number, col: number) => {\n    cellRefs.current[row]?.[col]?.focus()\n  }\n\n  const handleKeyDown = (\n    event: React.KeyboardEvent<HTMLButtonElement>,\n    row: number,\n    col: number,\n  ) => {\n    if (event.key === \"ArrowRight\") {\n      event.preventDefault()\n      const nextCol = Math.min(col + 1, columnLabels.length - 1)\n      if (nextCol !== col) {\n        const next = { row, col: nextCol }\n        setActive(next)\n        focusCell(next.row, next.col)\n      }\n      return\n    }\n\n    if (event.key === \"ArrowLeft\") {\n      event.preventDefault()\n      const nextCol = Math.max(col - 1, 0)\n      if (nextCol !== col) {\n        const next = { row, col: nextCol }\n        setActive(next)\n        focusCell(next.row, next.col)\n      }\n      return\n    }\n\n    if (event.key === \"ArrowDown\") {\n      event.preventDefault()\n      const nextRow = Math.min(row + 1, rowLabels.length - 1)\n      if (nextRow !== row) {\n        const next = { row: nextRow, col }\n        setActive(next)\n        focusCell(next.row, next.col)\n      }\n      return\n    }\n\n    if (event.key === \"ArrowUp\") {\n      event.preventDefault()\n      const nextRow = Math.max(row - 1, 0)\n      if (nextRow !== row) {\n        const next = { row: nextRow, col }\n        setActive(next)\n        focusCell(next.row, next.col)\n      }\n    }\n  }\n\n  return (\n    <div\n      role=\"grid\"\n      aria-label={ariaLabel}\n      className={cn(\"inline-grid gap-1 rounded-md border border-border bg-background p-2\", className)}\n      style={{ gridTemplateColumns: `auto repeat(${columnLabels.length}, auto)` }}\n    >\n      <div className=\"contents\">\n        <div className=\"text-xs font-medium text-muted-foreground\" aria-hidden />\n        {columnLabels.map((column) => (\n          <div\n            key={column}\n            className=\"px-1 text-center text-xs font-medium text-muted-foreground\"\n            aria-hidden\n          >\n            {column}\n          </div>\n        ))}\n      </div>\n      {rowLabels.map((row, rowIndex) => (\n        <div role=\"row\" key={row} className=\"contents\">\n          <div className=\"flex items-center pr-2 text-xs font-medium text-muted-foreground\" aria-hidden>\n            {row}\n          </div>\n          {columnLabels.map((column, colIndex) => {\n            const value = values[rowIndex]?.[colIndex] ?? 0\n            const label = `${row}, ${column}, ${formatValue(value)}`\n            const isActive = active.row === rowIndex && active.col === colIndex\n            return (\n              <button\n                key={`${row}-${column}`}\n                ref={(node) => {\n                  if (!cellRefs.current[rowIndex]) {\n                    cellRefs.current[rowIndex] = []\n                  }\n                  cellRefs.current[rowIndex][colIndex] = node\n                }}\n                type=\"button\"\n                role=\"gridcell\"\n                aria-label={label}\n                tabIndex={isActive ? 0 : -1}\n                onFocus={() => setActive({ row: rowIndex, col: colIndex })}\n                onKeyDown={(event) => handleKeyDown(event, rowIndex, colIndex)}\n                style={{ background: cellBackground(value) }}\n                className={cn(\"size-10 rounded-sm border border-border/50\", focusRing)}\n              />\n            )\n          })}\n        </div>\n      ))}\n    </div>\n  )\n}"
+        }
+      ],
+      "ai": {
+        "intent": "Show a grid of values, such as weekday by hour, with keyboard inspection.",
+        "prompts": [
+          "add a heatmap",
+          "show activity by hour"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "hover-card",
       "type": "registry:ui",
       "title": "Hover Card",
@@ -1560,7 +1649,7 @@
           "path": "packages/ui/src/components/input.tsx",
           "type": "registry:ui",
           "target": "components/ui/input.tsx",
-          "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm\",\n          \"ring-offset-background\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground\",\n          \"placeholder:text-muted-foreground\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className,\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  },\n)\nInput.displayName = \"Input\"\n\nexport { Input }\n"
+          "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type, ...props }, ref) => {\n    return (\n      <input\n        type={type}\n        className={cn(\n          \"flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm\",\n          \"ring-offset-background\",\n          \"file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground\",\n          \"placeholder:text-muted-foreground\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          \"aria-[invalid=true]:border-destructive aria-[invalid=true]:focus-visible:ring-destructive\",\n          className,\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  },\n)\nInput.displayName = \"Input\"\n\nexport { Input }\n"
         }
       ],
       "ai": {
@@ -1634,14 +1723,15 @@
       "author": "aetherstack",
       "dependencies": [
         "@aetherstack/utils",
-        "lucide-react"
+        "lucide-react",
+        "class-variance-authority"
       ],
       "files": [
         {
           "path": "packages/ui/src/components/pagination.tsx",
           "type": "registry:ui",
           "target": "components/ui/pagination.tsx",
-          "content": "import * as React from \"react\"\nimport { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { buttonVariants } from \"./button\"\n\nfunction Pagination({ className, ...props }: React.ComponentProps<\"nav\">) {\n  return (\n    <nav\n      role=\"navigation\"\n      aria-label=\"pagination\"\n      className={cn(\"mx-auto flex w-full justify-center\", className)}\n      {...props}\n    />\n  )\n}\nPagination.displayName = \"Pagination\"\n\nconst PaginationContent = React.forwardRef<\n  HTMLUListElement,\n  React.ComponentProps<\"ul\">\n>(({ className, ...props }, ref) => (\n  <ul\n    ref={ref}\n    className={cn(\"flex flex-row items-center gap-1\", className)}\n    {...props}\n  />\n))\nPaginationContent.displayName = \"PaginationContent\"\n\nconst PaginationItem = React.forwardRef<\n  HTMLLIElement,\n  React.ComponentProps<\"li\">\n>(({ className, ...props }, ref) => (\n  <li ref={ref} className={cn(\"\", className)} {...props} />\n))\nPaginationItem.displayName = \"PaginationItem\"\n\ntype PaginationLinkProps = {\n  isActive?: boolean\n} & React.ComponentProps<\"a\">\n\nfunction PaginationLink({\n  className,\n  isActive,\n  ...props\n}: PaginationLinkProps) {\n  return (\n    <a\n      aria-current={isActive ? \"page\" : undefined}\n      className={cn(\n        buttonVariants({\n          variant: isActive ? \"outline\" : \"ghost\",\n          size: \"icon\",\n        }),\n        className,\n      )}\n      {...props}\n    />\n  )\n}\nPaginationLink.displayName = \"PaginationLink\"\n\nfunction PaginationPrevious({\n  className,\n  ...props\n}: React.ComponentProps<typeof PaginationLink>) {\n  return (\n    <PaginationLink\n      aria-label=\"Go to previous page\"\n      className={cn(\"gap-1 pl-2.5\", className)}\n      {...props}\n    >\n      <ChevronLeftIcon className=\"h-4 w-4\" />\n      <span>Previous</span>\n    </PaginationLink>\n  )\n}\nPaginationPrevious.displayName = \"PaginationPrevious\"\n\nfunction PaginationNext({\n  className,\n  ...props\n}: React.ComponentProps<typeof PaginationLink>) {\n  return (\n    <PaginationLink\n      aria-label=\"Go to next page\"\n      className={cn(\"gap-1 pr-2.5\", className)}\n      {...props}\n    >\n      <span>Next</span>\n      <ChevronRightIcon className=\"h-4 w-4\" />\n    </PaginationLink>\n  )\n}\nPaginationNext.displayName = \"PaginationNext\"\n\nfunction PaginationEllipsis({\n  className,\n  ...props\n}: React.ComponentProps<\"span\">) {\n  return (\n    <span\n      aria-hidden\n      className={cn(\"flex h-9 w-9 items-center justify-center\", className)}\n      {...props}\n    >\n      <MoreHorizontalIcon className=\"h-4 w-4\" />\n      <span className=\"sr-only\">More pages</span>\n    </span>\n  )\n}\nPaginationEllipsis.displayName = \"PaginationEllipsis\"\n\nexport {\n  Pagination,\n  PaginationContent,\n  PaginationItem,\n  PaginationLink,\n  PaginationPrevious,\n  PaginationNext,\n  PaginationEllipsis,\n}\n"
+          "content": "import * as React from \"react\"\nimport { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from \"lucide-react\"\nimport type { VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@aetherstack/utils\"\nimport { buttonVariants } from \"./button\"\n\nfunction Pagination({ className, ...props }: React.ComponentProps<\"nav\">) {\n  return (\n    <nav\n      role=\"navigation\"\n      aria-label=\"pagination\"\n      className={cn(\"mx-auto flex w-full justify-center\", className)}\n      {...props}\n    />\n  )\n}\nPagination.displayName = \"Pagination\"\n\nconst PaginationContent = React.forwardRef<\n  HTMLUListElement,\n  React.ComponentProps<\"ul\">\n>(({ className, ...props }, ref) => (\n  <ul\n    ref={ref}\n    className={cn(\"flex flex-row items-center gap-1\", className)}\n    {...props}\n  />\n))\nPaginationContent.displayName = \"PaginationContent\"\n\nconst PaginationItem = React.forwardRef<\n  HTMLLIElement,\n  React.ComponentProps<\"li\">\n>(({ className, ...props }, ref) => (\n  <li ref={ref} className={cn(\"\", className)} {...props} />\n))\nPaginationItem.displayName = \"PaginationItem\"\n\ntype PaginationLinkProps = {\n  isActive?: boolean\n  /** Renders the link inert (e.g. \"Previous\" on the first page) while keeping its layout. */\n  isDisabled?: boolean\n} & Pick<VariantProps<typeof buttonVariants>, \"size\"> &\n  React.ComponentProps<\"a\">\n\nfunction PaginationLink({\n  className,\n  isActive,\n  isDisabled,\n  size = \"icon\",\n  href,\n  ...props\n}: PaginationLinkProps) {\n  return (\n    <a\n      aria-current={isActive ? \"page\" : undefined}\n      aria-disabled={isDisabled || undefined}\n      tabIndex={isDisabled ? -1 : undefined}\n      href={isDisabled ? undefined : href}\n      className={cn(\n        buttonVariants({\n          variant: isActive ? \"outline\" : \"ghost\",\n          size,\n        }),\n        isDisabled && \"pointer-events-none opacity-50\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\nPaginationLink.displayName = \"PaginationLink\"\n\nfunction PaginationPrevious({\n  className,\n  ...props\n}: React.ComponentProps<typeof PaginationLink>) {\n  return (\n    <PaginationLink\n      aria-label=\"Go to previous page\"\n      size=\"default\"\n      className={cn(\"gap-1 pl-2.5\", className)}\n      {...props}\n    >\n      <ChevronLeftIcon className=\"h-4 w-4\" />\n      <span>Previous</span>\n    </PaginationLink>\n  )\n}\nPaginationPrevious.displayName = \"PaginationPrevious\"\n\nfunction PaginationNext({\n  className,\n  ...props\n}: React.ComponentProps<typeof PaginationLink>) {\n  return (\n    <PaginationLink\n      aria-label=\"Go to next page\"\n      size=\"default\"\n      className={cn(\"gap-1 pr-2.5\", className)}\n      {...props}\n    >\n      <span>Next</span>\n      <ChevronRightIcon className=\"h-4 w-4\" />\n    </PaginationLink>\n  )\n}\nPaginationNext.displayName = \"PaginationNext\"\n\nfunction PaginationEllipsis({\n  className,\n  ...props\n}: React.ComponentProps<\"span\">) {\n  return (\n    <span\n      aria-hidden\n      className={cn(\"flex h-9 w-9 items-center justify-center\", className)}\n      {...props}\n    >\n      <MoreHorizontalIcon className=\"h-4 w-4\" />\n      <span className=\"sr-only\">More pages</span>\n    </span>\n  )\n}\nPaginationEllipsis.displayName = \"PaginationEllipsis\"\n\nexport {\n  Pagination,\n  PaginationContent,\n  PaginationItem,\n  PaginationLink,\n  PaginationPrevious,\n  PaginationNext,\n  PaginationEllipsis,\n}\n"
         }
       ],
       "ai": {
@@ -1665,6 +1755,101 @@
       }
     },
     {
+      "name": "password-field",
+      "type": "registry:ui",
+      "title": "Password Field",
+      "description": "Password input with a show/hide toggle and a Caps Lock warning.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "input",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/password-field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/password-field.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { useId, useLayoutEffect, useRef, useState } from \"react\"\nimport { flushSync } from \"react-dom\"\nimport { Eye, EyeOff } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Input } from \"./input\"\nimport { Button } from \"./button\"\n\nexport interface PasswordFieldProps {\n  label?: string\n  autoComplete?: \"current-password\" | \"new-password\"\n  value?: string\n  defaultValue?: string\n  onChange?: React.ChangeEventHandler<HTMLInputElement>\n  disabled?: boolean\n  name?: string\n  id?: string\n  className?: string\n}\n\nfunction PasswordField({\n  label = \"Password\",\n  autoComplete = \"current-password\",\n  value,\n  defaultValue,\n  onChange,\n  disabled,\n  name,\n  id,\n  className,\n}: PasswordFieldProps) {\n  const generatedId = useId()\n  const statusId = useId()\n  const inputId = id ?? generatedId\n  const [revealed, setRevealed] = useState(false)\n  const [capsLockOn, setCapsLockOn] = useState(false)\n  const inputRef = useRef<HTMLInputElement>(null)\n\n  const syncCapsLockFromKeyboard = (event: KeyboardEvent | React.KeyboardEvent<HTMLInputElement>) => {\n    const on = event.getModifierState(\"CapsLock\")\n    flushSync(() => setCapsLockOn(on))\n  }\n\n  useLayoutEffect(() => {\n    const input = inputRef.current\n    if (!input) return\n    const onKey = (event: KeyboardEvent) => syncCapsLockFromKeyboard(event)\n    input.addEventListener(\"keydown\", onKey)\n    input.addEventListener(\"keyup\", onKey)\n    return () => {\n      input.removeEventListener(\"keydown\", onKey)\n      input.removeEventListener(\"keyup\", onKey)\n    }\n  }, [])\n\n  const inputSpread: React.ComponentProps<typeof Input> = {\n    id: inputId,\n    ref: inputRef,\n    type: revealed ? \"text\" : \"password\",\n    autoComplete,\n    onKeyDown: syncCapsLockFromKeyboard,\n    onKeyUp: syncCapsLockFromKeyboard,\n    className: cn(\"border-border bg-background pr-10\", className),\n    ...(capsLockOn ? { \"aria-describedby\": statusId } : {}),\n    ...(value !== undefined ? { value } : {}),\n    ...(defaultValue !== undefined ? { defaultValue } : {}),\n    ...(onChange !== undefined ? { onChange } : {}),\n    ...(disabled !== undefined ? { disabled } : {}),\n    ...(name !== undefined ? { name } : {}),\n  }\n\n  return (\n    <div className=\"space-y-2\">\n      <label htmlFor={inputId} className=\"text-sm\">\n        {label}\n      </label>\n      <div className=\"relative\">\n        <Input {...inputSpread} />\n        <Button\n          type=\"button\"\n          variant=\"ghost\"\n          size=\"icon\"\n          className=\"absolute right-0 top-0 h-10 text-muted-foreground\"\n          aria-pressed={revealed}\n          aria-label={revealed ? \"Hide password\" : \"Show password\"}\n          onClick={() => setRevealed((open) => !open)}\n          {...(disabled !== undefined ? { disabled } : {})}\n        >\n          {revealed ? (\n            <EyeOff aria-hidden />\n          ) : (\n            <Eye aria-hidden />\n          )}\n        </Button>\n      </div>\n      {capsLockOn ? (\n        <p role=\"status\" id={statusId} className=\"text-sm text-muted-foreground\">\n          Caps Lock is on\n        </p>\n      ) : null}\n    </div>\n  )\n}\n\nexport { PasswordField }"
+        }
+      ],
+      "ai": {
+        "intent": "Collect a password with a show/hide toggle and a Caps Lock warning.",
+        "prompts": [
+          "add a password field",
+          "add a show password toggle"
+        ],
+        "composition": [
+          "input",
+          "button"
+        ],
+        "slots": []
+      }
+    },
+    {
+      "name": "password-strength",
+      "type": "registry:ui",
+      "title": "Password Strength",
+      "description": "Score a password and generate one that passes the rules.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/password-strength.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/password-strength.tsx",
+          "content": "\"use client\"\n\nimport { cn } from \"@aetherstack/utils\"\nimport { Button } from \"./button\"\n\nconst LOWER = \"abcdefghijkmnopqrstuvwxyz\"\nconst UPPER = \"ABCDEFGHJKLMNPQRSTUVWXYZ\"\nconst DIGITS = \"23456789\"\nconst SYMBOLS = \"!@#$%*\"\nconst ALL = LOWER + UPPER + DIGITS + SYMBOLS\n\nconst RULES = [\n  { key: \"length\" as const, label: \"At least 8 characters\" },\n  { key: \"lowercase\" as const, label: \"Lowercase letter\" },\n  { key: \"uppercase\" as const, label: \"Uppercase letter\" },\n  { key: \"number\" as const, label: \"Number\" },\n  { key: \"symbol\" as const, label: \"Symbol\" },\n]\n\nconst SCORE_LABELS = [\"Empty\", \"Weak\", \"Fair\", \"Good\", \"Strong\"] as const\n\nexport interface PasswordCheckResult {\n  length: boolean\n  lowercase: boolean\n  uppercase: boolean\n  number: boolean\n  symbol: boolean\n}\n\nfunction countCharacterClasses(password: string): number {\n  let classes = 0\n  if (/[a-z]/.test(password)) classes++\n  if (/[A-Z]/.test(password)) classes++\n  if (/[0-9]/.test(password)) classes++\n  if (/[^A-Za-z0-9]/.test(password)) classes++\n  return classes\n}\n\nexport function scorePassword(password: string): number {\n  if (password.length === 0) return 0\n  if (password.length < 8) return 1\n\n  const classes = countCharacterClasses(password)\n  if (classes < 3) return 2\n  if (password.length >= 12 && classes === 4) return 4\n  return 3\n}\n\nexport function checkPassword(password: string): PasswordCheckResult {\n  return {\n    length: password.length >= 8,\n    lowercase: /[a-z]/.test(password),\n    uppercase: /[A-Z]/.test(password),\n    number: /[0-9]/.test(password),\n    symbol: /[^A-Za-z0-9]/.test(password),\n  }\n}\n\nfunction pick(set: string, random: () => number): string {\n  return set[Math.min(set.length - 1, Math.floor(random() * set.length))]!\n}\n\nfunction fisherYatesShuffle(chars: string[], random: () => number): void {\n  for (let i = chars.length - 1; i > 0; i--) {\n    const j = Math.min(i, Math.floor(random() * (i + 1)))\n    const tmp = chars[i]!\n    chars[i] = chars[j]!\n    chars[j] = tmp\n  }\n}\n\nexport function generatePassword(length = 16, random: () => number = Math.random): string {\n  const requiredSets = [LOWER, UPPER, DIGITS, SYMBOLS]\n  const takeRequired = Math.min(length, requiredSets.length)\n  const chars: string[] = []\n\n  for (let i = 0; i < takeRequired; i++) {\n    chars.push(pick(requiredSets[i]!, random))\n  }\n\n  while (chars.length < length) {\n    chars.push(pick(ALL, random))\n  }\n\n  fisherYatesShuffle(chars, random)\n  return chars.join(\"\")\n}\n\nexport interface PasswordStrengthProps {\n  password: string\n  onPasswordChange?: (next: string) => void\n}\n\nconst METER_FILL: Record<number, string> = {\n  0: \"w-0 bg-muted\",\n  1: \"w-1/4 bg-destructive\",\n  2: \"w-2/4 bg-muted-foreground\",\n  3: \"w-3/4 bg-primary\",\n  4: \"w-full bg-primary\",\n}\n\nfunction PasswordStrength({ password, onPasswordChange }: PasswordStrengthProps) {\n  const score = scorePassword(password)\n  const checks = checkPassword(password)\n\n  return (\n    <div className=\"flex flex-col gap-3\">\n      <div\n        role=\"meter\"\n        aria-valuemin={0}\n        aria-valuemax={4}\n        aria-valuenow={score}\n        aria-valuetext={SCORE_LABELS[score]}\n        className=\"h-2 w-full overflow-hidden rounded-full bg-secondary\"\n      >\n        <div\n          className={cn(\n            \"h-full rounded-full transition-all duration-300 ease-out motion-reduce:transition-none\",\n            METER_FILL[score],\n          )}\n        />\n      </div>\n\n      <ul className=\"space-y-1 text-sm text-muted-foreground\">\n        {RULES.map((rule) => (\n          <li\n            key={rule.key}\n            data-met={checks[rule.key] ? \"true\" : \"false\"}\n            className={cn(\n              checks[rule.key] && \"text-foreground\",\n            )}\n          >\n            {rule.label}\n          </li>\n        ))}\n      </ul>\n\n      <Button\n        type=\"button\"\n        variant=\"outline\"\n        size=\"sm\"\n        className=\"self-start\"\n        onClick={() => {\n          onPasswordChange?.(generatePassword())\n        }}\n      >\n        Generate password\n      </Button>\n    </div>\n  )\n}\n\nexport { PasswordStrength }"
+        }
+      ],
+      "ai": {
+        "intent": "Show how strong a password is and generate one that passes the rules.",
+        "prompts": [
+          "add a password strength meter",
+          "generate a strong password"
+        ],
+        "composition": [
+          "button"
+        ],
+        "slots": []
+      }
+    },
+    {
+      "name": "priority-bars",
+      "type": "registry:ui",
+      "title": "Priority Bars",
+      "description": "Priority shown as rising bars, or an urgent mark.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/priority-bars.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/priority-bars.tsx",
+          "content": "import { cn } from \"@aetherstack/utils\"\n\nconst LABELS = {\n  none: \"No priority\",\n  low: \"Low priority\",\n  medium: \"Medium priority\",\n  high: \"High priority\",\n  urgent: \"Urgent priority\",\n} as const\n\nconst FILLED_COUNT = {\n  none: 0,\n  low: 1,\n  medium: 2,\n  high: 3,\n  urgent: 0,\n} as const\n\nexport type PriorityBarsPriority = keyof typeof LABELS\n\nexport interface PriorityBarsProps {\n  priority: PriorityBarsPriority\n  decorative?: boolean\n  className?: string\n}\n\nexport function PriorityBars({ priority, decorative, className }: PriorityBarsProps) {\n  const label = LABELS[priority]\n  const isUrgent = priority === \"urgent\"\n  const filled = FILLED_COUNT[priority]\n\n  return (\n    <span\n      {...(decorative\n        ? { \"aria-hidden\": true }\n        : { role: \"img\", \"aria-label\": label })}\n      {...(isUrgent ? { \"data-urgent\": \"true\" } : {})}\n      className={cn(\"inline-flex items-end gap-0.5\", className)}\n    >\n      {isUrgent ? (\n        <span\n          aria-hidden=\"true\"\n          className=\"flex h-3.5 w-3.5 items-center justify-center rounded-sm bg-destructive text-[10px] font-bold leading-none text-destructive-foreground\"\n        >\n          !\n        </span>\n      ) : (\n        ([\"h-2\", \"h-2.5\", \"h-3\"] as const).map((height, index) => (\n          <span\n            key={index}\n            aria-hidden=\"true\"\n            data-filled={index < filled ? \"true\" : \"false\"}\n            className={cn(\n              \"w-1 rounded-sm\",\n              height,\n              index < filled ? \"bg-primary\" : \"bg-muted\",\n            )}\n          />\n        ))\n      )}\n    </span>\n  )\n}"
+        }
+      ],
+      "ai": {
+        "intent": "Show low, medium, high, or urgent priority beside a row.",
+        "prompts": [
+          "add a priority indicator",
+          "show task priority"
+        ],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
@@ -1679,7 +1864,7 @@
           "path": "packages/ui/src/components/progress.tsx",
           "type": "registry:ui",
           "target": "components/ui/progress.tsx",
-          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ProgressPrimitive from \"@radix-ui/react-progress\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst Progress = React.forwardRef<\n  React.ElementRef<typeof ProgressPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>\n>(({ className, value, ...props }, ref) => (\n  <ProgressPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"relative h-2 w-full overflow-hidden rounded-full bg-secondary\",\n      className,\n    )}\n    {...props}\n  >\n    <ProgressPrimitive.Indicator\n      className=\"h-full w-full flex-1 bg-primary transition-all\"\n      style={{ transform: `translateX(-${100 - (value ?? 0)}%)` }}\n    />\n  </ProgressPrimitive.Root>\n))\nProgress.displayName = \"Progress\"\n\nexport { Progress }\n"
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as ProgressPrimitive from \"@radix-ui/react-progress\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface ProgressProps\n  extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> {\n  indicatorClassName?: string\n}\n\nconst Progress = React.forwardRef<\n  React.ElementRef<typeof ProgressPrimitive.Root>,\n  ProgressProps\n>(({ className, indicatorClassName, value, max = 100, ...props }, ref) => {\n  const safeMax = max > 0 ? max : 100\n  const clamped = value == null ? null : Math.min(Math.max(value, 0), safeMax)\n  const percent = clamped == null ? 0 : (clamped / safeMax) * 100\n\n  return (\n    <ProgressPrimitive.Root\n      ref={ref}\n      value={clamped}\n      max={safeMax}\n      className={cn(\n        \"relative h-2 w-full overflow-hidden rounded-full bg-secondary\",\n        className,\n      )}\n      {...props}\n    >\n      <ProgressPrimitive.Indicator\n        className={cn(\n          \"h-full w-full flex-1 bg-primary transition-transform duration-300 ease-out motion-reduce:transition-none\",\n          indicatorClassName,\n        )}\n        style={{ transform: `translateX(-${100 - percent}%)` }}\n      />\n    </ProgressPrimitive.Root>\n  )\n})\nProgress.displayName = \"Progress\"\n\nexport interface ProgressRingProps {\n  value?: number\n  max?: number\n  indeterminate?: boolean\n  \"aria-label\": string\n  className?: string\n}\n\nconst RING_RADIUS = 15.9155\nconst RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS\n\nfunction ProgressRing({\n  value,\n  max,\n  indeterminate,\n  \"aria-label\": ariaLabel,\n  className,\n}: ProgressRingProps) {\n  const safeMax = max == null || max <= 0 ? 100 : max\n  const clamped =\n    indeterminate || typeof value !== \"number\"\n      ? null\n      : Math.min(Math.max(value, 0), safeMax)\n  const percent = clamped == null ? 0 : (clamped / safeMax) * 100\n  const dashOffset = RING_CIRCUMFERENCE - (percent / 100) * RING_CIRCUMFERENCE\n\n  const ariaNow =\n    indeterminate !== true && typeof value === \"number\"\n      ? Math.min(Math.max(value, 0), safeMax)\n      : undefined\n\n  return (\n    <svg\n      role=\"progressbar\"\n      aria-label={ariaLabel}\n      aria-valuemin={0}\n      aria-valuemax={safeMax}\n      {...(ariaNow !== undefined ? { \"aria-valuenow\": ariaNow } : {})}\n      viewBox=\"0 0 36 36\"\n      className={cn(\n        \"h-10 w-10\",\n        indeterminate && \"motion-safe:animate-spin\",\n        className,\n      )}\n    >\n      <circle\n        className=\"fill-none stroke-muted\"\n        cx=\"18\"\n        cy=\"18\"\n        r={RING_RADIUS}\n        strokeWidth=\"3\"\n      />\n      <circle\n        className=\"fill-none stroke-primary\"\n        cx=\"18\"\n        cy=\"18\"\n        r={RING_RADIUS}\n        strokeWidth=\"3\"\n        strokeLinecap=\"round\"\n        strokeDasharray={\n          indeterminate\n            ? `${RING_CIRCUMFERENCE * 0.25} ${RING_CIRCUMFERENCE}`\n            : String(RING_CIRCUMFERENCE)\n        }\n        strokeDashoffset={indeterminate ? 0 : dashOffset}\n        transform=\"rotate(-90 18 18)\"\n      />\n    </svg>\n  )\n}\n\nexport { Progress, ProgressRing }\n"
         }
       ],
       "ai": {
@@ -1715,7 +1900,7 @@
           "path": "packages/ui/src/components/radio-group.tsx",
           "type": "registry:ui",
           "target": "components/ui/radio-group.tsx",
-          "content": "\"use client\"\nimport * as React from \"react\"\nimport * as RadioGroupPrimitive from \"@radix-ui/react-radio-group\"\nimport { Circle } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst RadioGroup = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>\n>(({ className, ...props }, ref) => {\n  return (\n    <RadioGroupPrimitive.Root\n      className={cn(\"grid gap-2\", className)}\n      {...props}\n      ref={ref}\n    />\n  )\n})\nRadioGroup.displayName = RadioGroupPrimitive.Root.displayName\n\nconst RadioGroupItem = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>\n>(({ className, ...props }, ref) => {\n  return (\n    <RadioGroupPrimitive.Item\n      ref={ref}\n      className={cn(\n        \"aspect-square h-4 w-4 rounded-full border border-primary text-primary\",\n        \"ring-offset-background\",\n        \"focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      <RadioGroupPrimitive.Indicator className=\"flex items-center justify-center\">\n        <Circle className=\"h-2.5 w-2.5 fill-current text-current\" />\n      </RadioGroupPrimitive.Indicator>\n    </RadioGroupPrimitive.Item>\n  )\n})\nRadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName\n\nexport { RadioGroup, RadioGroupItem }\n"
+          "content": "\"use client\"\nimport * as React from \"react\"\nimport * as RadioGroupPrimitive from \"@radix-ui/react-radio-group\"\nimport { Circle } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\nconst RadioGroup = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>\n>(({ className, ...props }, ref) => {\n  return (\n    <RadioGroupPrimitive.Root\n      className={cn(\"grid gap-2\", className)}\n      {...props}\n      ref={ref}\n    />\n  )\n})\nRadioGroup.displayName = RadioGroupPrimitive.Root.displayName\n\nconst RadioGroupItem = React.forwardRef<\n  React.ElementRef<typeof RadioGroupPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>\n>(({ className, children, ...props }, ref) => {\n  return (\n    <RadioGroupPrimitive.Item\n      ref={ref}\n      className={cn(\n        \"aspect-square h-4 w-4 rounded-full border border-primary text-primary\",\n        \"ring-offset-background\",\n        \"focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        className,\n      )}\n      {...props}\n    >\n      <RadioGroupPrimitive.Indicator className=\"flex items-center justify-center\">\n        <Circle className=\"h-2.5 w-2.5 fill-current text-current\" />\n      </RadioGroupPrimitive.Indicator>\n      {children}\n    </RadioGroupPrimitive.Item>\n  )\n})\nRadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName\n\nexport { RadioGroup, RadioGroupItem }\n"
         }
       ],
       "ai": {
@@ -1770,6 +1955,38 @@
           "children",
           "ScrollBar"
         ]
+      }
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented Control",
+      "description": "Single-select control with a sliding thumb.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "radio-group"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/segmented-control.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/segmented-control.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { RadioGroup, RadioGroupItem } from \"./radio-group\"\n\nexport interface SegmentedOption {\n  value: string\n  label: string\n  disabled?: boolean\n}\n\nexport interface SegmentedControlProps {\n  options: readonly SegmentedOption[]\n  value?: string\n  defaultValue?: string\n  onValueChange?: (value: string) => void\n  \"aria-label\": string\n  className?: string\n}\n\nfunction enabledIndexAt(\n  options: readonly SegmentedOption[],\n  fromIndex: number,\n  direction: 1 | -1,\n): number | null {\n  if (options.length === 0) return null\n  let index = fromIndex\n  for (let step = 0; step < options.length; step += 1) {\n    index = (index + direction + options.length) % options.length\n    const option = options[index]\n    if (option && !option.disabled) return index\n  }\n  return null\n}\n\nexport function SegmentedControl({\n  options,\n  value,\n  defaultValue,\n  onValueChange,\n  className,\n  \"aria-label\": ariaLabel,\n}: SegmentedControlProps) {\n  const [internalValue, setInternalValue] = React.useState(defaultValue)\n\n  const resolvedValue = value !== undefined ? value : internalValue ?? defaultValue\n  const resolvedIndex =\n    resolvedValue !== undefined\n      ? options.findIndex((option) => option.value === resolvedValue)\n      : -1\n  const showThumb = resolvedValue === undefined || resolvedIndex >= 0\n  const thumbIndex = resolvedValue === undefined ? 0 : resolvedIndex\n  const count = options.length\n\n  const handleValueChange = React.useCallback(\n    (next: string) => {\n      if (value === undefined) {\n        setInternalValue(next)\n      }\n      onValueChange?.(next)\n    },\n    [onValueChange, value],\n  )\n\n  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {\n    if (onValueChange === undefined) return\n    if (event.key !== \"ArrowRight\" && event.key !== \"ArrowLeft\") return\n\n    if (resolvedValue === undefined) return\n\n    const currentIndex = options.findIndex((option) => option.value === resolvedValue)\n    if (currentIndex < 0) return\n\n    const direction = event.key === \"ArrowRight\" ? 1 : -1\n    const nextIndex = enabledIndexAt(options, currentIndex, direction)\n    if (nextIndex === null) return\n\n    const nextOption = options[nextIndex]\n    if (!nextOption) return\n\n    event.preventDefault()\n    handleValueChange(nextOption.value)\n  }\n\n  const radioValueChange =\n    value === undefined || onValueChange !== undefined ? handleValueChange : undefined\n\n  return (\n    <RadioGroup\n      aria-label={ariaLabel}\n      className={cn(\"relative inline-grid gap-0 p-1\", className)}\n      style={{ gridTemplateColumns: `repeat(${count}, minmax(0, 1fr))` }}\n      onKeyDown={handleKeyDown}\n      {...(resolvedValue !== undefined ? { value: resolvedValue } : {})}\n      {...(radioValueChange !== undefined ? { onValueChange: radioValueChange } : {})}\n    >\n      {showThumb ? (\n        <span\n          data-testid=\"segment-thumb\"\n          data-index={String(thumbIndex)}\n          aria-hidden=\"true\"\n          className={cn(\n            \"pointer-events-none absolute inset-y-1 left-1 rounded-md bg-background\",\n            \"motion-safe:transition-transform\",\n          )}\n          style={{\n            width: `calc((100% - 0.5rem) / ${count})`,\n            transform: `translateX(calc(${thumbIndex} * 100%))`,\n          }}\n        />\n      ) : null}\n      {options.map((option) => (\n        <RadioGroupItem\n          key={option.value}\n          value={option.value}\n          className={cn(\n            \"relative z-10 aspect-auto h-8 w-auto rounded-md border-0 bg-transparent px-3\",\n            \"text-sm font-medium shadow-none\",\n            \"data-[state=checked]:bg-transparent data-[state=checked]:text-foreground\",\n            \"[&>span[data-state]]:hidden\",\n          )}\n          {...(option.disabled === true ? { disabled: true } : {})}\n        >\n          {option.label}\n        </RadioGroupItem>\n      ))}\n    </RadioGroup>\n  )\n}"
+        }
+      ],
+      "ai": {
+        "intent": "Pick one of a few options with a sliding thumb.",
+        "prompts": [
+          "add a segmented control",
+          "add a day week month switch"
+        ],
+        "composition": [
+          "radio-group"
+        ],
+        "slots": []
       }
     },
     {
@@ -1967,6 +2184,69 @@
       }
     },
     {
+      "name": "social-button",
+      "type": "registry:ui",
+      "title": "Social Button",
+      "description": "Sign in or sign up with a named provider.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/social-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/social-button.tsx",
+          "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\nimport { Button } from \"./button\"\n\nexport const SOCIAL_PROVIDERS = {\n  google: \"Google\",\n  apple: \"Apple\",\n  microsoft: \"Microsoft\",\n  github: \"GitHub\",\n  gitlab: \"GitLab\",\n  slack: \"Slack\",\n} as const\n\nexport type SocialProvider = keyof typeof SOCIAL_PROVIDERS\n\nexport interface SocialButtonProps {\n  provider: SocialProvider\n  verb?: \"Sign in\" | \"Sign up\" | \"Continue\"\n  variant?: \"outline\" | \"brand\" | \"icon\"\n  loading?: boolean\n  onClick?: React.MouseEventHandler<HTMLButtonElement>\n  className?: string\n}\n\nfunction SocialGlyph({ provider }: { provider: SocialProvider }) {\n  return (\n    <span\n      aria-hidden=\"true\"\n      className={cn(\n        \"inline-flex size-5 shrink-0 items-center justify-center rounded-md bg-muted text-xs font-semibold text-foreground\",\n      )}\n    >\n      {SOCIAL_PROVIDERS[provider][0]}\n    </span>\n  )\n}\n\nexport function SocialButton({\n  provider,\n  verb = \"Sign in\",\n  variant = \"outline\",\n  loading,\n  onClick,\n  className,\n}: SocialButtonProps) {\n  const providerName = SOCIAL_PROVIDERS[provider]\n  const accessibleName = `${verb} with ${providerName}`\n  const isIcon = variant === \"icon\"\n\n  const clickProps = onClick ? { onClick } : {}\n  const sizeProps = isIcon ? { size: \"icon\" as const } : {}\n  const loadingProps = loading !== undefined ? { loading } : {}\n  const classProps = className !== undefined ? { className } : {}\n  const labelProps = isIcon ? { \"aria-label\": accessibleName } : {}\n\n  return (\n    <Button\n      type=\"button\"\n      variant=\"outline\"\n      data-provider={provider}\n      {...sizeProps}\n      {...loadingProps}\n      {...classProps}\n      {...labelProps}\n      {...clickProps}\n    >\n      <SocialGlyph provider={provider} />\n      {!isIcon ? accessibleName : null}\n    </Button>\n  )\n}"
+        }
+      ],
+      "ai": {
+        "intent": "Start a sign-in or sign-up with a named provider.",
+        "prompts": [
+          "add a Google sign in button",
+          "add social login"
+        ],
+        "composition": [
+          "button"
+        ],
+        "slots": []
+      }
+    },
+    {
+      "name": "status-dot",
+      "type": "registry:ui",
+      "title": "Status Dot",
+      "description": "Coloured status dot with a spoken label.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/status-dot.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/status-dot.tsx",
+          "content": "import { cn } from \"@aetherstack/utils\"\n\nconst LABELS = {\n  idle: \"Idle\",\n  busy: \"Busy\",\n  blocked: \"Blocked\",\n  failed: \"Failed\",\n  finished: \"Finished\",\n} as const\n\nconst TONES = {\n  idle: \"bg-muted-foreground\",\n  busy: \"bg-primary\",\n  blocked: \"bg-amber-500\",\n  failed: \"bg-destructive\",\n  finished: \"bg-emerald-500\",\n} as const\n\nexport type StatusDotStatus = keyof typeof LABELS\n\nexport interface StatusDotProps {\n  status: StatusDotStatus\n  label?: string\n  pulse?: boolean\n  className?: string\n}\n\nexport function StatusDot({ status, label, pulse, className }: StatusDotProps) {\n  const text = label ?? LABELS[status]\n  const shouldPulse = pulse ?? status === \"busy\"\n  return (\n    <span role=\"img\" aria-label={text} className={cn(\"inline-flex\", className)}>\n      <span\n        aria-hidden=\"true\"\n        className={cn(\n          \"h-2 w-2 rounded-full\",\n          TONES[status],\n          shouldPulse && \"motion-safe:animate-pulse\",\n        )}\n      />\n    </span>\n  )\n}"
+        }
+      ],
+      "ai": {
+        "intent": "Show whether a person, service, or job is idle, busy, blocked, failed, or finished.",
+        "prompts": [
+          "add a status dot",
+          "show if a user is online",
+          "add a presence indicator"
+        ],
+        "composition": [
+          "avatar"
+        ],
+        "slots": []
+      }
+    },
+    {
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
@@ -2082,6 +2362,39 @@
       }
     },
     {
+      "name": "tag",
+      "type": "registry:ui",
+      "title": "Tag",
+      "description": "Selectable and removable chips with roving focus.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/tag.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tag.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { X } from \"lucide-react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface TagProps {\n  label: string\n  onRemove?: () => void\n  className?: string\n}\n\nconst chipClass =\n  \"inline-flex items-center gap-1 rounded-md border border-border bg-muted px-2 py-0.5 text-xs\"\n\nconst focusRing =\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\"\n\nexport function Tag({ label, onRemove, className }: TagProps) {\n  return (\n    <span className={cn(chipClass, className)}>\n      {label}\n      {onRemove ? (\n        <button\n          type=\"button\"\n          aria-label={`Remove ${label}`}\n          onClick={onRemove}\n          className={cn(\"rounded-sm opacity-70 hover:opacity-100\", focusRing)}\n        >\n          <X className=\"h-3 w-3\" aria-hidden />\n        </button>\n      ) : null}\n    </span>\n  )\n}\n\nexport interface TagItem {\n  id: string\n  label: string\n}\n\nexport interface TagGroupProps {\n  label: string\n  items: readonly TagItem[]\n  selection?: \"single\" | \"multiple\"\n  value?: readonly string[]\n  onValueChange?: (value: string[]) => void\n  className?: string\n}\n\nexport function TagGroup({\n  label,\n  items,\n  selection,\n  value,\n  onValueChange,\n  className,\n}: TagGroupProps) {\n  const [active, setActive] = React.useState(0)\n  const moved = React.useRef(false)\n  const buttonRefs = React.useRef<(HTMLButtonElement | null)[]>([])\n\n  const tabStopIndex = items.length === 0 ? 0 : Math.min(active, items.length - 1)\n\n  React.useEffect(() => {\n    if (!moved.current) return\n    buttonRefs.current[tabStopIndex]?.focus()\n    moved.current = false\n  }, [tabStopIndex])\n\n  const moveActive = React.useCallback(\n    (next: number) => {\n      if (items.length === 0) return\n      setActive(next)\n      moved.current = true\n    },\n    [items.length],\n  )\n\n  const handleKeyDown = (\n    event: React.KeyboardEvent<HTMLButtonElement>,\n    index: number,\n  ) => {\n    if (items.length === 0) return\n    if (event.key === \"ArrowRight\") {\n      event.preventDefault()\n      moveActive((index + 1) % items.length)\n    } else if (event.key === \"ArrowLeft\") {\n      event.preventDefault()\n      moveActive((index - 1 + items.length) % items.length)\n    } else if (event.key === \"Home\") {\n      event.preventDefault()\n      moveActive(0)\n    } else if (event.key === \"End\") {\n      event.preventDefault()\n      moveActive(items.length - 1)\n    }\n  }\n\n  const handleItemClick = (id: string) => {\n    if (selection === undefined || onValueChange === undefined) return\n    if (selection === \"single\") {\n      onValueChange([id])\n      return\n    }\n    const current = value ?? []\n    if (current.includes(id)) {\n      onValueChange(current.filter((itemId) => itemId !== id))\n    } else {\n      onValueChange([...current, id])\n    }\n  }\n\n  return (\n    <div\n      role=\"group\"\n      aria-label={label}\n      className={cn(\"inline-flex flex-wrap gap-1\", className)}\n    >\n      {items.map((item, index) => (\n        <button\n          key={item.id}\n          ref={(node) => {\n            buttonRefs.current[index] = node\n          }}\n          type=\"button\"\n          tabIndex={index === tabStopIndex ? 0 : -1}\n          aria-pressed={value?.includes(item.id) ?? false}\n          onFocus={() => setActive(index)}\n          onClick={() => handleItemClick(item.id)}\n          onKeyDown={(event) => handleKeyDown(event, index)}\n          className={cn(chipClass, focusRing)}\n        >\n          {item.label}\n        </button>\n      ))}\n    </div>\n  )\n}"
+        }
+      ],
+      "ai": {
+        "intent": "Filter or label a collection with quiet chips the user can select or remove.",
+        "prompts": [
+          "add tags",
+          "add removable chips",
+          "add a tag group"
+        ],
+        "composition": [],
+        "slots": [
+          "Tag",
+          "TagGroup"
+        ]
+      }
+    },
+    {
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
@@ -2095,7 +2408,7 @@
           "path": "packages/ui/src/components/textarea.tsx",
           "type": "registry:ui",
           "target": "components/ui/textarea.tsx",
-          "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface TextareaProps\n  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, ...props }, ref) => {\n    return (\n      <textarea\n        className={cn(\n          \"flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm\",\n          \"ring-offset-background\",\n          \"placeholder:text-muted-foreground\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          className,\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  },\n)\nTextarea.displayName = \"Textarea\"\n\nexport { Textarea }\n"
+          "content": "import * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport interface TextareaProps\n  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, ...props }, ref) => {\n    return (\n      <textarea\n        className={cn(\n          \"flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm\",\n          \"ring-offset-background\",\n          \"placeholder:text-muted-foreground\",\n          \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n          \"aria-[invalid=true]:border-destructive aria-[invalid=true]:focus-visible:ring-destructive\",\n          className,\n        )}\n        ref={ref}\n        {...props}\n      />\n    )\n  },\n)\nTextarea.displayName = \"Textarea\"\n\nexport { Textarea }\n"
         }
       ],
       "ai": {
@@ -2117,6 +2430,61 @@
           "placeholder",
           "rows"
         ]
+      }
+    },
+    {
+      "name": "time-slots",
+      "type": "registry:ui",
+      "title": "Time Slots",
+      "description": "Pick one bookable time and confirm it.",
+      "author": "aetherstack",
+      "registryDependencies": [
+        "radio-group",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "packages/ui/src/components/time-slots.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/time-slots.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Button } from \"./button\"\nimport { RadioGroup, RadioGroupItem } from \"./radio-group\"\n\nexport interface TimeSlot {\n  id: string\n  label: string\n  disabled?: boolean\n}\n\nexport interface TimeSlotsProps {\n  timeZoneLabel: string\n  slots: readonly TimeSlot[]\n  value?: string\n  onValueChange?: (id: string) => void\n  onConfirm?: (id: string) => void\n  confirmLabel?: string\n  className?: string\n}\n\nexport function TimeSlots({\n  timeZoneLabel,\n  slots,\n  value,\n  onValueChange,\n  onConfirm,\n  confirmLabel = \"Confirm\",\n  className,\n}: TimeSlotsProps) {\n  const [internal, setInternal] = React.useState<string | undefined>(undefined)\n\n  const resolvedValue = value !== undefined ? value : internal ?? \"\"\n  const confirmDisabled = resolvedValue === \"\"\n\n  const handleValueChange = React.useCallback(\n    (next: string) => {\n      if (value === undefined) {\n        setInternal(next)\n      }\n      onValueChange?.(next)\n    },\n    [onValueChange, value],\n  )\n\n  const handleConfirm = React.useCallback(() => {\n    if (resolvedValue === \"\" || onConfirm === undefined) return\n    onConfirm(resolvedValue)\n  }, [onConfirm, resolvedValue])\n\n  return (\n    <div {...(className !== undefined ? { className } : {})}>\n      <p className=\"text-sm text-muted-foreground\">{timeZoneLabel}</p>\n      <RadioGroup\n        aria-label=\"Times\"\n        className=\"mt-3\"\n        value={resolvedValue}\n        onValueChange={handleValueChange}\n      >\n        {slots.map((slot) => (\n          <RadioGroupItem\n            key={slot.id}\n            value={slot.id}\n            className=\"flex items-center gap-2 text-sm font-medium leading-none\"\n            {...(slot.disabled === true ? { disabled: true } : {})}\n          >\n            {slot.label}\n          </RadioGroupItem>\n        ))}\n      </RadioGroup>\n      <Button\n        type=\"button\"\n        className=\"mt-4\"\n        disabled={confirmDisabled}\n        onClick={handleConfirm}\n      >\n        {confirmLabel}\n      </Button>\n    </div>\n  )\n}"
+        }
+      ],
+      "ai": {
+        "intent": "Pick one bookable time and confirm it.",
+        "prompts": [
+          "add time slots",
+          "add a booking time picker"
+        ],
+        "composition": [
+          "radio-group",
+          "button"
+        ],
+        "slots": []
+      }
+    },
+    {
+      "name": "timeline-scrubber",
+      "type": "registry:ui",
+      "title": "Timeline Scrubber",
+      "description": "Move one marker along a time range.",
+      "author": "aetherstack",
+      "files": [
+        {
+          "path": "packages/ui/src/components/timeline-scrubber.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/timeline-scrubber.tsx",
+          "content": "\"use client\"\n\nexport interface TimelineScrubberProps {\n  label: string\n  min: number\n  max: number\n  step?: number\n  value: number\n  onValueChange: (value: number) => void\n  className?: string\n}\n\nexport function TimelineScrubber({\n  label,\n  min,\n  max,\n  step,\n  value,\n  onValueChange,\n  className,\n}: TimelineScrubberProps) {\n  const stepValue = step ?? 1\n\n  return (\n    <div {...(className !== undefined ? { className } : {})}>\n      <span className=\"text-sm text-muted-foreground\">{value}</span>\n      <input\n        type=\"range\"\n        role=\"slider\"\n        aria-label={label}\n        aria-valuemin={min}\n        aria-valuemax={max}\n        aria-valuenow={value}\n        min={min}\n        max={max}\n        step={stepValue}\n        value={value}\n        onChange={(event) => onValueChange(Number(event.target.value))}\n        className=\"w-full\"\n      />\n    </div>\n  )\n}"
+        }
+      ],
+      "ai": {
+        "intent": "Move one marker along a time range.",
+        "prompts": [
+          "add a timeline scrubber",
+          "scrub a recording"
+        ],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -2275,6 +2643,34 @@
           "TooltipContent",
           "children"
         ]
+      }
+    },
+    {
+      "name": "uptime-bar",
+      "type": "registry:ui",
+      "title": "Uptime Bar",
+      "description": "Day-by-day uptime and a percent that ignores days with no data.",
+      "author": "aetherstack",
+      "dependencies": [
+        "@aetherstack/utils"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/uptime-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/uptime-bar.tsx",
+          "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cn } from \"@aetherstack/utils\"\n\nexport type UptimeStatus = \"up\" | \"degraded\" | \"down\" | \"unknown\"\n\nexport interface UptimeDay {\n  id: string\n  label: string\n  status: UptimeStatus\n}\n\nexport interface UptimeBarProps {\n  days: readonly UptimeDay[]\n  onSelect?: (id: string) => void\n  className?: string\n}\n\nconst TONES: Record<UptimeStatus, string> = {\n  up: \"bg-emerald-500\",\n  degraded: \"bg-amber-500\",\n  down: \"bg-destructive\",\n  unknown: \"bg-muted\",\n}\n\nfunction uptimePercent(days: readonly UptimeDay[]): number {\n  let known = 0\n  let up = 0\n  for (const day of days) {\n    if (day.status === \"unknown\") continue\n    known += 1\n    if (day.status === \"up\") up += 1\n  }\n  if (known === 0) return 0\n  return Math.round((up / known) * 100)\n}\n\nconst focusRing =\n  \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2\"\n\nexport function UptimeBar({ days, onSelect, className }: UptimeBarProps) {\n  const [active, setActive] = React.useState(0)\n  const optionRefs = React.useRef<(HTMLButtonElement | null)[]>([])\n\n  const percent = uptimePercent(days)\n  const tabStopIndex = days.length === 0 ? 0 : Math.min(active, days.length - 1)\n\n  const focusOption = (index: number) => {\n    optionRefs.current[index]?.focus()\n  }\n\n  const handleKeyDown = (\n    event: React.KeyboardEvent<HTMLButtonElement>,\n    index: number,\n  ) => {\n    if (days.length === 0) return\n\n    if (event.key === \"ArrowRight\") {\n      event.preventDefault()\n      const next = Math.min(index + 1, days.length - 1)\n      if (next !== index) {\n        setActive(next)\n        focusOption(next)\n      }\n      return\n    }\n\n    if (event.key === \"ArrowLeft\") {\n      event.preventDefault()\n      const next = Math.max(index - 1, 0)\n      if (next !== index) {\n        setActive(next)\n        focusOption(next)\n      }\n      return\n    }\n\n    if (event.key === \"Home\") {\n      event.preventDefault()\n      setActive(0)\n      focusOption(0)\n      return\n    }\n\n    if (event.key === \"End\") {\n      event.preventDefault()\n      const last = days.length - 1\n      setActive(last)\n      focusOption(last)\n      return\n    }\n\n    if ((event.key === \"Enter\" || event.key === \" \") && onSelect) {\n      event.preventDefault()\n      const day = days[index]\n      if (day) onSelect(day.id)\n    }\n  }\n\n  return (\n    <div\n      role=\"listbox\"\n      aria-label={`${percent}% uptime`}\n      className={cn(\"inline-flex w-full max-w-md gap-0.5 rounded-md border border-border bg-background p-1\", className)}\n    >\n      {days.map((day, index) => (\n        <button\n          key={day.id}\n          ref={(node) => {\n            optionRefs.current[index] = node\n          }}\n          type=\"button\"\n          role=\"option\"\n          aria-label={`${day.label}, ${day.status}`}\n          tabIndex={index === tabStopIndex ? 0 : -1}\n          onFocus={() => setActive(index)}\n          onKeyDown={(event) => handleKeyDown(event, index)}\n          className={cn(\n            \"h-8 min-w-0 flex-1 rounded-sm transition-colors\",\n            TONES[day.status],\n            focusRing,\n          )}\n        />\n      ))}\n    </div>\n  )\n}"
+        }
+      ],
+      "ai": {
+        "intent": "Show day-by-day uptime for one service and the percent that excludes days with no data.",
+        "prompts": [
+          "add an uptime bar",
+          "show service uptime"
+        ],
+        "composition": [],
+        "slots": []
       }
     }
   ]

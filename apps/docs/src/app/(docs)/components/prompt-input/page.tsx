@@ -26,8 +26,13 @@ export default function PromptInputPage() {
         {
           name: "value",
           type: "string",
+          description: "Controlled textarea value. Omit to use the component uncontrolled.",
+        },
+        {
+          name: "defaultValue",
+          type: "string",
           default: '""',
-          description: "Controlled textarea value.",
+          description: "Initial value when uncontrolled. The input clears itself after submit.",
         },
         {
           name: "onValueChange",
@@ -38,6 +43,11 @@ export default function PromptInputPage() {
           name: "onSubmit",
           type: "(value: string) => void",
           description: "Called when user submits via Enter key or the submit button.",
+        },
+        {
+          name: "onStop",
+          type: "() => void",
+          description: "When set, the submit button becomes a stop button while isLoading is true.",
         },
         {
           name: "placeholder",
@@ -63,6 +73,17 @@ export default function PromptInputPage() {
           description: "Character limit; a counter is shown near the submit button when set.",
         },
         {
+          name: "maxHeight",
+          type: "number",
+          default: "200",
+          description: "Height in px the textarea grows to before scrolling.",
+        },
+        {
+          name: "aria-label",
+          type: "string",
+          description: "Accessible name for the textarea. Defaults to the placeholder.",
+        },
+        {
           name: "attachSlot",
           type: "React.ReactNode",
           description: "Slot rendered above the textarea — typically AttachmentChip components.",
@@ -74,9 +95,10 @@ export default function PromptInputPage() {
         },
       ]}
       a11yNotes={[
-        "Submit button label changes to 'Stop' during loading so screen readers reflect the current action.",
-        "Keyboard shortcut: Enter submits, Shift+Enter inserts a newline.",
-        "Character counter is announced via aria-live when approaching the limit.",
+        "With onStop set, the button is labelled 'Stop generating' during loading so screen readers reflect the current action.",
+        "Keyboard shortcut: Enter submits, Shift+Enter inserts a newline. Enter during IME composition never submits.",
+        "The character counter is linked to the textarea via aria-describedby and turns destructive at 90% of the limit.",
+        "The textarea is labelled by aria-label, falling back to the placeholder.",
       ]}
     />
   )

@@ -29,15 +29,41 @@ export default function ReasoningBlockPage() {
       props={[
         {
           name: "content",
-          type: "string",
-          description: "Reasoning text content — shown as preformatted text inside the block.",
+          type: "React.ReactNode",
+          description: "Reasoning content — strings are shown as preformatted text inside the block.",
           required: true,
+        },
+        {
+          name: "title",
+          type: "string",
+          description: "Overrides the header label.",
+        },
+        {
+          name: "isStreaming",
+          type: "boolean",
+          default: "false",
+          description: "Shows a live 'Thinking…' header while the model is still reasoning.",
+        },
+        {
+          name: "duration",
+          type: "number",
+          description: "Reasoning time in seconds, rendered as 'Thought for Ns' once finished.",
+        },
+        {
+          name: "open",
+          type: "boolean",
+          description: "Controlled open state.",
         },
         {
           name: "defaultOpen",
           type: "boolean",
           default: "false",
           description: "Whether the block starts expanded.",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          description: "Called when the block is toggled.",
         },
         {
           name: "className",

@@ -3,19 +3,28 @@
 import * as React from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 import { cn } from "@aetherstack/utils"
+import { StatusDot, type StatusDotStatus } from "./status-dot"
+
+type AvatarProps = React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> & {
+  status?: StatusDotStatus
+}
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
->(({ className, ...props }, ref) => (
+  AvatarProps
+>(({ className, status, children, ...props }, ref) => (
   <AvatarPrimitive.Root
     ref={ref}
-    className={cn(
-      "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
-      className,
-    )}
+    className={cn("relative flex h-10 w-10 shrink-0 rounded-full", className)}
     {...props}
-  />
+  >
+    <span className="size-full overflow-hidden rounded-full">{children}</span>
+    {status ? (
+      <span className="absolute bottom-0 right-0 translate-x-0.5 translate-y-0.5">
+        <StatusDot status={status} />
+      </span>
+    ) : null}
+  </AvatarPrimitive.Root>
 ))
 Avatar.displayName = "Avatar"
 
@@ -58,11 +67,16 @@ function AvatarGroup({ children, className, max }: AvatarGroupProps) {
   const overflow = max !== undefined ? childArray.length - max : 0
 
   return (
-    <div className={cn("flex items-center -space-x-2", className)}>
+    <div
+      className={cn(
+        "flex items-center -space-x-2 [&>*]:ring-2 [&>*]:ring-background",
+        className,
+      )}
+    >
       {visible}
       {overflow > 0 && (
-        <Avatar>
-          <AvatarFallback>+{overflow}</AvatarFallback>
+        <Avatar aria-label={`${overflow} more`} role="img">
+          <AvatarFallback aria-hidden="true">+{overflow}</AvatarFallback>
         </Avatar>
       )}
     </div>

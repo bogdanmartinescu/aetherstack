@@ -37,7 +37,12 @@
       "title": "Button",
       "description": "A versatile button component with multiple variants and sizes.",
       "author": "aetherstack",
-      "dependencies": ["class-variance-authority", "@radix-ui/react-slot", "@aetherstack/utils"],
+      "dependencies": [
+        "class-variance-authority",
+        "@radix-ui/react-slot",
+        "lucide-react",
+        "@aetherstack/utils"
+      ],
       "files": [
         {
           "path": "packages/ui/src/components/button.tsx",
@@ -375,6 +380,28 @@
       }
     },
     {
+      "name": "tag",
+      "type": "registry:ui",
+      "title": "Tag",
+      "description": "Selectable and removable chips with roving focus.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils", "lucide-react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/tag.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tag.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Filter or label a collection with quiet chips the user can select or remove.",
+        "prompts": ["add tags", "add removable chips", "add a tag group"],
+        "composition": [],
+        "slots": ["Tag", "TagGroup"]
+      }
+    },
+    {
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
@@ -402,6 +429,47 @@
       }
     },
     {
+      "name": "time-slots",
+      "type": "registry:ui",
+      "title": "Time Slots",
+      "description": "Pick one bookable time and confirm it.",
+      "author": "aetherstack",
+      "registryDependencies": ["radio-group", "button"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/time-slots.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/time-slots.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Pick one bookable time and confirm it.",
+        "prompts": ["add time slots", "add a booking time picker"],
+        "composition": ["radio-group", "button"],
+        "slots": []
+      }
+    },
+    {
+      "name": "timeline-scrubber",
+      "type": "registry:ui",
+      "title": "Timeline Scrubber",
+      "description": "Move one marker along a time range.",
+      "author": "aetherstack",
+      "files": [
+        {
+          "path": "packages/ui/src/components/timeline-scrubber.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/timeline-scrubber.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Move one marker along a time range.",
+        "prompts": ["add a timeline scrubber", "scrub a recording"],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
@@ -425,6 +493,28 @@
         ],
         "composition": ["button", "badge"],
         "slots": ["TooltipTrigger", "TooltipContent", "children"]
+      }
+    },
+    {
+      "name": "uptime-bar",
+      "type": "registry:ui",
+      "title": "Uptime Bar",
+      "description": "Day-by-day uptime and a percent that ignores days with no data.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/uptime-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/uptime-bar.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show day-by-day uptime for one service and the percent that excludes days with no data.",
+        "prompts": ["add an uptime bar", "show service uptime"],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -771,12 +861,35 @@
       }
     },
     {
+      "name": "animated-number",
+      "type": "registry:ui",
+      "title": "Animated Number",
+      "description": "A formatted number for money, percents, and live metrics.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/animated-number.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/animated-number.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show a formatted number for money, percents, and live metrics.",
+        "prompts": ["add an animated number", "roll a metric up to its value", "add a number ticker"],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
       "description": "User image with fallback initials and stacked group variant.",
       "author": "aetherstack",
       "dependencies": ["@radix-ui/react-avatar", "@aetherstack/utils"],
+      "registryDependencies": ["status-dot"],
       "files": [{ "path": "packages/ui/src/components/avatar.tsx", "type": "registry:ui", "target": "components/ui/avatar.tsx" }],
       "ai": {
         "intent": "Display user profile images with graceful fallback to initials",
@@ -846,6 +959,50 @@
       }
     },
     {
+      "name": "floating-dock",
+      "type": "registry:ui",
+      "title": "Floating Dock",
+      "description": "Pin a small panel to a corner of the screen or a parent.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/floating-dock.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/floating-dock.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Pin a small panel to a corner of the screen or a parent.",
+        "prompts": ["add a floating dock", "pin a player to the corner"],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
+      "name": "heatmap",
+      "type": "registry:ui",
+      "title": "Heatmap",
+      "description": "A grid of values, such as weekday by hour, inspected from the keyboard.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/heatmap.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/heatmap.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show a grid of values, such as weekday by hour, with keyboard inspection.",
+        "prompts": ["add a heatmap", "show activity by hour"],
+        "composition": [],
+        "slots": []
+      }
+    },
+    {
       "name": "hover-card",
       "type": "registry:ui",
       "title": "Hover Card",
@@ -866,13 +1023,79 @@
       "title": "Pagination",
       "description": "Accessible pagination navigation with previous, next, and page links.",
       "author": "aetherstack",
-      "dependencies": ["@aetherstack/utils", "lucide-react"],
+      "dependencies": ["@aetherstack/utils", "lucide-react", "class-variance-authority"],
       "files": [{ "path": "packages/ui/src/components/pagination.tsx", "type": "registry:ui", "target": "components/ui/pagination.tsx" }],
       "ai": {
         "intent": "Navigate between pages of content with previous, next, and numbered page links",
         "prompts": ["add pagination", "add page navigation", "add next previous buttons", "paginate a list"],
         "composition": ["button", "data-table"],
         "slots": ["PaginationPrevious", "PaginationNext", "PaginationLink", "PaginationEllipsis"]
+      }
+    },
+    {
+      "name": "password-field",
+      "type": "registry:ui",
+      "title": "Password Field",
+      "description": "Password input with a show/hide toggle and a Caps Lock warning.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils", "lucide-react"],
+      "registryDependencies": ["input", "button"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/password-field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/password-field.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Collect a password with a show/hide toggle and a Caps Lock warning.",
+        "prompts": ["add a password field", "add a show password toggle"],
+        "composition": ["input", "button"],
+        "slots": []
+      }
+    },
+    {
+      "name": "password-strength",
+      "type": "registry:ui",
+      "title": "Password Strength",
+      "description": "Score a password and generate one that passes the rules.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/password-strength.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/password-strength.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show how strong a password is and generate one that passes the rules.",
+        "prompts": ["add a password strength meter", "generate a strong password"],
+        "composition": ["button"],
+        "slots": []
+      }
+    },
+    {
+      "name": "priority-bars",
+      "type": "registry:ui",
+      "title": "Priority Bars",
+      "description": "Priority shown as rising bars, or an urgent mark.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/priority-bars.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/priority-bars.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show low, medium, high, or urgent priority beside a row.",
+        "prompts": ["add a priority indicator", "show task priority"],
+        "composition": [],
+        "slots": []
       }
     },
     {
@@ -906,6 +1129,28 @@
       }
     },
     {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented Control",
+      "description": "Single-select control with a sliding thumb.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "registryDependencies": ["radio-group"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/segmented-control.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/segmented-control.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Pick one of a few options with a sliding thumb.",
+        "prompts": ["add a segmented control", "add a day week month switch"],
+        "composition": ["radio-group"],
+        "slots": []
+      }
+    },
+    {
       "name": "separator",
       "type": "registry:ui",
       "title": "Separator",
@@ -933,6 +1178,50 @@
         "prompts": ["add a slider", "add a range input", "add a volume control", "add a price range slider"],
         "composition": ["form-field"],
         "slots": ["value", "onValueChange", "min", "max", "step"]
+      }
+    },
+    {
+      "name": "social-button",
+      "type": "registry:ui",
+      "title": "Social Button",
+      "description": "Sign in or sign up with a named provider.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "packages/ui/src/components/social-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/social-button.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Start a sign-in or sign-up with a named provider.",
+        "prompts": ["add a Google sign in button", "add social login"],
+        "composition": ["button"],
+        "slots": []
+      }
+    },
+    {
+      "name": "status-dot",
+      "type": "registry:ui",
+      "title": "Status Dot",
+      "description": "Coloured status dot with a spoken label.",
+      "author": "aetherstack",
+      "dependencies": ["@aetherstack/utils"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "packages/ui/src/components/status-dot.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/status-dot.tsx"
+        }
+      ],
+      "ai": {
+        "intent": "Show whether a person, service, or job is idle, busy, blocked, failed, or finished.",
+        "prompts": ["add a status dot", "show if a user is online", "add a presence indicator"],
+        "composition": ["avatar"],
+        "slots": []
       }
     },
     {

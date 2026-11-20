@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 
 const MANUAL_SOURCE = `import * as React from "react"
 import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
+import type { VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "./button"
 
@@ -41,14 +42,29 @@ const PaginationItem = React.forwardRef<HTMLLIElement, React.ComponentProps<"li"
   ({ className, ...props }, ref) => <li ref={ref} className={cn("", className)} {...props} />,
 )
 
-type PaginationLinkProps = { isActive?: boolean } & React.ComponentProps<"a">
+type PaginationLinkProps = {
+  isActive?: boolean
+  isDisabled?: boolean
+} & Pick<VariantProps<typeof buttonVariants>, "size"> &
+  React.ComponentProps<"a">
 
-function PaginationLink({ className, isActive, ...props }: PaginationLinkProps) {
+function PaginationLink({
+  className,
+  isActive,
+  isDisabled,
+  size = "icon",
+  href,
+  ...props
+}: PaginationLinkProps) {
   return (
     <a
       aria-current={isActive ? "page" : undefined}
+      aria-disabled={isDisabled || undefined}
+      tabIndex={isDisabled ? -1 : undefined}
+      href={isDisabled ? undefined : href}
       className={cn(
-        buttonVariants({ variant: isActive ? "outline" : "ghost", size: "icon" }),
+        buttonVariants({ variant: isActive ? "outline" : "ghost", size }),
+        isDisabled && "pointer-events-none opacity-50",
         className,
       )}
       {...props}
@@ -58,7 +74,7 @@ function PaginationLink({ className, isActive, ...props }: PaginationLinkProps) 
 
 function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
-    <PaginationLink aria-label="Go to previous page" className={cn("gap-1 pl-2.5", className)} {...props}>
+    <PaginationLink aria-label="Go to previous page" size="default" className={cn("gap-1 pl-2.5", className)} {...props}>
       <ChevronLeftIcon className="h-4 w-4" />
       <span>Previous</span>
     </PaginationLink>
@@ -67,7 +83,7 @@ function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof
 
 function PaginationNext({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
-    <PaginationLink aria-label="Go to next page" className={cn("gap-1 pr-2.5", className)} {...props}>
+    <PaginationLink aria-label="Go to next page" size="default" className={cn("gap-1 pr-2.5", className)} {...props}>
       <span>Next</span>
       <ChevronRightIcon className="h-4 w-4" />
     </PaginationLink>
@@ -317,6 +333,18 @@ export function PaginationDemo() {
           type: "boolean",
           default: "false",
           description: "Marks this link as the current page — applies outline style and sets aria-current='page'.",
+        },
+        {
+          name: "isDisabled",
+          type: "boolean",
+          default: "false",
+          description: "Renders the link inert (no href, aria-disabled, removed from tab order) — e.g. Previous on the first page.",
+        },
+        {
+          name: "size",
+          type: '"default" | "sm" | "lg" | "icon"',
+          default: '"icon"',
+          description: "Button size. PaginationPrevious and PaginationNext default to \"default\" so their labels fit.",
         },
         {
           name: "href",

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
 import { PanelLeftIcon } from "lucide-react"
 import { cn } from "@aetherstack/utils"
 import { Button } from "./button"
@@ -181,12 +182,14 @@ interface SidebarMenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
 }
 
 const SidebarMenuButton = React.forwardRef<HTMLButtonElement, SidebarMenuButtonProps>(
-  ({ className, isActive, children, ...props }, ref) => {
+  ({ className, isActive, asChild = false, children, ...props }, ref) => {
     const { open } = useSidebar()
+    const Comp = asChild ? Slot : "button"
     return (
-      <button
+      <Comp
         ref={ref}
         data-active={isActive}
+        aria-current={isActive && asChild ? "page" : undefined}
         className={cn(
           "flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none",
           "ring-offset-background transition-colors",
@@ -201,7 +204,7 @@ const SidebarMenuButton = React.forwardRef<HTMLButtonElement, SidebarMenuButtonP
         {...props}
       >
         {children}
-      </button>
+      </Comp>
     )
   },
 )

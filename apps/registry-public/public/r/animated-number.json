@@ -1,0 +1,29 @@
+{
+  "name": "animated-number",
+  "type": "registry:ui",
+  "title": "Animated Number",
+  "description": "A formatted number for money, percents, and live metrics.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "packages/ui/src/components/animated-number.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/animated-number.tsx",
+      "content": "import { cn } from \"@aetherstack/utils\"\n\nconst DEFAULT_FORMAT: Intl.NumberFormatOptions = { maximumFractionDigits: 0 }\n\nexport interface AnimatedNumberProps {\n  value: number\n  format?: Intl.NumberFormatOptions\n  locale?: string\n  className?: string\n}\n\nexport function AnimatedNumber({ value, format, locale, className }: AnimatedNumberProps) {\n  const formatOptions = format ?? DEFAULT_FORMAT\n  const resolvedLocale = locale ?? \"en-US\"\n  const text = new Intl.NumberFormat(resolvedLocale, formatOptions).format(value)\n\n  if (className !== undefined) {\n    return <span className={cn(className)}>{text}</span>\n  }\n\n  return <span>{text}</span>\n}"
+    }
+  ],
+  "ai": {
+    "intent": "Show a formatted number for money, percents, and live metrics.",
+    "prompts": [
+      "add an animated number",
+      "roll a metric up to its value",
+      "add a number ticker"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

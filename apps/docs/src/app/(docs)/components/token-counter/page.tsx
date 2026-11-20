@@ -31,13 +31,25 @@ export default function TokenCounterPage() {
           required: true,
         },
         {
+          name: "label",
+          type: "string",
+          default: '"Context window"',
+          description: "Visible label, also used as the progress bar's accessible name.",
+        },
+        {
+          name: "warnAt",
+          type: "number",
+          default: "0.8",
+          description: "Fraction of max (0–1) at which the counter turns amber. It turns destructive at 100%.",
+        },
+        {
           name: "className",
           type: "string",
           description: "Additional CSS classes.",
         },
       ]}
       a11yNotes={[
-        "The progress bar uses role='progressbar' with aria-valuenow, aria-valuemin, and aria-valuemax attributes.",
+        "The progress bar uses role='progressbar' with aria-valuenow, aria-valuemin, and aria-valuemax attributes, plus an aria-valuetext like '1,000 of 4,000 tokens used'.",
         "Counts are formatted with locale-aware number formatting for readability.",
       ]}
     />

@@ -1,0 +1,28 @@
+{
+  "name": "priority-bars",
+  "type": "registry:ui",
+  "title": "Priority Bars",
+  "description": "Priority shown as rising bars, or an urgent mark.",
+  "author": "aetherstack",
+  "dependencies": [
+    "@aetherstack/utils"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "packages/ui/src/components/priority-bars.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/priority-bars.tsx",
+      "content": "import { cn } from \"@aetherstack/utils\"\n\nconst LABELS = {\n  none: \"No priority\",\n  low: \"Low priority\",\n  medium: \"Medium priority\",\n  high: \"High priority\",\n  urgent: \"Urgent priority\",\n} as const\n\nconst FILLED_COUNT = {\n  none: 0,\n  low: 1,\n  medium: 2,\n  high: 3,\n  urgent: 0,\n} as const\n\nexport type PriorityBarsPriority = keyof typeof LABELS\n\nexport interface PriorityBarsProps {\n  priority: PriorityBarsPriority\n  decorative?: boolean\n  className?: string\n}\n\nexport function PriorityBars({ priority, decorative, className }: PriorityBarsProps) {\n  const label = LABELS[priority]\n  const isUrgent = priority === \"urgent\"\n  const filled = FILLED_COUNT[priority]\n\n  return (\n    <span\n      {...(decorative\n        ? { \"aria-hidden\": true }\n        : { role: \"img\", \"aria-label\": label })}\n      {...(isUrgent ? { \"data-urgent\": \"true\" } : {})}\n      className={cn(\"inline-flex items-end gap-0.5\", className)}\n    >\n      {isUrgent ? (\n        <span\n          aria-hidden=\"true\"\n          className=\"flex h-3.5 w-3.5 items-center justify-center rounded-sm bg-destructive text-[10px] font-bold leading-none text-destructive-foreground\"\n        >\n          !\n        </span>\n      ) : (\n        ([\"h-2\", \"h-2.5\", \"h-3\"] as const).map((height, index) => (\n          <span\n            key={index}\n            aria-hidden=\"true\"\n            data-filled={index < filled ? \"true\" : \"false\"}\n            className={cn(\n              \"w-1 rounded-sm\",\n              height,\n              index < filled ? \"bg-primary\" : \"bg-muted\",\n            )}\n          />\n        ))\n      )}\n    </span>\n  )\n}"
+    }
+  ],
+  "ai": {
+    "intent": "Show low, medium, high, or urgent priority beside a row.",
+    "prompts": [
+      "add a priority indicator",
+      "show task priority"
+    ],
+    "composition": [],
+    "slots": []
+  }
+}

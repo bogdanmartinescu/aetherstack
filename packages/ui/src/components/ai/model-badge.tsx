@@ -19,3 +19,4 @@ function ModelBadge({ model, provider, className }: ModelBadgeProps) {
 }
 
 export { ModelBadge }
+export type { ModelBadgeProps }

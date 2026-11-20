@@ -116,7 +116,8 @@ export {
   PaginationEllipsis,
 } from "./components/pagination"
 
-export { Progress } from "./components/progress"
+export { Progress, ProgressRing } from "./components/progress"
+export type { ProgressRingProps } from "./components/progress"
 
 export { ScrollArea, ScrollBar } from "./components/scroll-area"
 
@@ -327,6 +328,53 @@ export {
 } from "./components/sidebar"
 
 export { Toaster as SonnerToaster, toast as sonnerToast } from "./components/sonner"
+
+export { StatusDot } from "./components/status-dot"
+export type { StatusDotProps, StatusDotStatus } from "./components/status-dot"
+
+export { Tag, TagGroup } from "./components/tag"
+export type { TagProps, TagGroupProps, TagItem } from "./components/tag"
+
+export { PriorityBars } from "./components/priority-bars"
+export type { PriorityBarsProps, PriorityBarsPriority } from "./components/priority-bars"
+
+export { SegmentedControl } from "./components/segmented-control"
+export type { SegmentedControlProps, SegmentedOption } from "./components/segmented-control"
+
+export { SocialButton, SOCIAL_PROVIDERS } from "./components/social-button"
+export type { SocialButtonProps, SocialProvider } from "./components/social-button"
+
+export { PasswordField } from "./components/password-field"
+export type { PasswordFieldProps } from "./components/password-field"
+
+export {
+  PasswordStrength,
+  scorePassword,
+  checkPassword,
+  generatePassword,
+} from "./components/password-strength"
+export type {
+  PasswordStrengthProps,
+  PasswordCheckResult,
+} from "./components/password-strength"
+
+export { AnimatedNumber } from "./components/animated-number"
+export type { AnimatedNumberProps } from "./components/animated-number"
+
+export { UptimeBar } from "./components/uptime-bar"
+export type { UptimeBarProps, UptimeDay, UptimeStatus } from "./components/uptime-bar"
+
+export { Heatmap } from "./components/heatmap"
+export type { HeatmapProps } from "./components/heatmap"
+
+export { FloatingDock } from "./components/floating-dock"
+export type { FloatingDockProps, FloatingDockCorner } from "./components/floating-dock"
+
+export { TimelineScrubber } from "./components/timeline-scrubber"
+export type { TimelineScrubberProps } from "./components/timeline-scrubber"
+
+export { TimeSlots } from "./components/time-slots"
+export type { TimeSlotsProps, TimeSlot } from "./components/time-slots"
 
 // AI-native UI primitives (Phase 7.5 Track D)
 export * from "./components/ai"
