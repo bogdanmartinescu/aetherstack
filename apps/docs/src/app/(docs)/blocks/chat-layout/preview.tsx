@@ -24,7 +24,7 @@ export function ChatLayoutPreview() {
       sidebar={sidebar}
       header={<span className="text-sm font-medium">How to use React hooks</span>}
       footer={
-        <div className="rounded-md border border-border px-4 py-2.5 text-sm text-muted-foreground">
+        <div className="border-border text-muted-foreground rounded-md border px-4 py-2.5 text-sm">
           Type a message…
         </div>
       }
@@ -33,7 +33,7 @@ export function ChatLayoutPreview() {
       className="h-full"
     >
       <div className="flex h-full items-center justify-center">
-        <p className="text-sm text-muted-foreground">Chat messages appear here</p>
+        <p className="text-muted-foreground text-sm">Chat messages appear here</p>
       </div>
     </ChatLayout>
   )

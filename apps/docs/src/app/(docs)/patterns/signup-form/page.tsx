@@ -4,7 +4,8 @@ import { SignupFormPreview } from "./preview"
 
 export const metadata: Metadata = {
   title: "Sign Up Form",
-  description: "User registration form with password strength meter and confirmation, validated with react-hook-form and Zod.",
+  description:
+    "User registration form with password strength meter and confirmation, validated with react-hook-form and Zod.",
 }
 
 const IMPORT_CODE = `import { useForm } from "react-hook-form"
@@ -76,22 +77,26 @@ export default function SignupFormPage() {
         {
           name: "schema (Zod .refine)",
           type: "ZodEffects",
-          description: "Cross-field refine validates that password and confirmPassword are equal. The error is attached to the confirmPassword field path.",
+          description:
+            "Cross-field refine validates that password and confirmPassword are equal. The error is attached to the confirmPassword field path.",
         },
         {
           name: "watch",
           type: "UseFormWatch<FormValues>",
-          description: "Subscribes to the password field value in real time — powers the PasswordStrength indicator without triggering full re-validation.",
+          description:
+            "Subscribes to the password field value in real time — powers the PasswordStrength indicator without triggering full re-validation.",
         },
         {
           name: "PasswordStrength",
           type: "({ value: string }) => ReactNode",
-          description: "Visual bar that scores the password by length, uppercase, digit, and special character rules. Score ranges from 0–4.",
+          description:
+            "Visual bar that scores the password by length, uppercase, digit, and special character rules. Score ranges from 0–4.",
         },
         {
           name: "terms (z.literal(true))",
           type: "boolean",
-          description: "Using z.literal(true) means the checkbox must be explicitly checked — an unchecked false value fails validation with a custom error message.",
+          description:
+            "Using z.literal(true) means the checkbox must be explicitly checked — an unchecked false value fails validation with a custom error message.",
         },
       ]}
       a11yNotes={[

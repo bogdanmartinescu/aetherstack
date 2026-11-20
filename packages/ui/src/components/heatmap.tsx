@@ -104,15 +104,18 @@ export function Heatmap({
     <div
       role="grid"
       aria-label={ariaLabel}
-      className={cn("inline-grid gap-1 rounded-md border border-border bg-background p-2", className)}
+      className={cn(
+        "border-border bg-background inline-grid gap-1 rounded-md border p-2",
+        className,
+      )}
       style={{ gridTemplateColumns: `auto repeat(${columnLabels.length}, auto)` }}
     >
       <div className="contents">
-        <div className="text-xs font-medium text-muted-foreground" aria-hidden />
+        <div className="text-muted-foreground text-xs font-medium" aria-hidden />
         {columnLabels.map((column) => (
           <div
             key={column}
-            className="px-1 text-center text-xs font-medium text-muted-foreground"
+            className="text-muted-foreground px-1 text-center text-xs font-medium"
             aria-hidden
           >
             {column}
@@ -121,7 +124,10 @@ export function Heatmap({
       </div>
       {rowLabels.map((row, rowIndex) => (
         <div role="row" key={row} className="contents">
-          <div className="flex items-center pr-2 text-xs font-medium text-muted-foreground" aria-hidden>
+          <div
+            className="text-muted-foreground flex items-center pr-2 text-xs font-medium"
+            aria-hidden
+          >
             {row}
           </div>
           {columnLabels.map((column, colIndex) => {
@@ -144,7 +150,7 @@ export function Heatmap({
                 onFocus={() => setActive({ row: rowIndex, col: colIndex })}
                 onKeyDown={(event) => handleKeyDown(event, rowIndex, colIndex)}
                 style={{ background: cellBackground(value) }}
-                className={cn("size-10 rounded-sm border border-border/50", focusRing)}
+                className={cn("border-border/50 size-10 rounded-sm border", focusRing)}
               />
             )
           })}

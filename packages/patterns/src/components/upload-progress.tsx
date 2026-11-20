@@ -30,18 +30,16 @@ export function UploadProgressItem({ file, onRemove }: UploadProgressItemProps) 
       role="listitem"
       aria-label={`${file.name} — ${file.status}`}
       className={cn(
-        "rounded-lg border border-border bg-card p-3",
+        "border-border bg-card rounded-lg border p-3",
         file.status === "error" && "border-destructive/50",
       )}
     >
       <div className="flex items-start gap-3">
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
-            <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
+            <p className="text-foreground truncate text-sm font-medium">{file.name}</p>
             <div className="flex shrink-0 items-center gap-1">
-              {file.status === "uploading" && (
-                <Spinner size="sm" aria-label="Uploading" />
-              )}
+              {file.status === "uploading" && <Spinner size="sm" aria-label="Uploading" />}
               {file.status === "done" && (
                 <CheckCircle
                   className="h-4 w-4 text-green-600 dark:text-green-400"
@@ -49,16 +47,13 @@ export function UploadProgressItem({ file, onRemove }: UploadProgressItemProps) 
                 />
               )}
               {file.status === "error" && (
-                <XCircle
-                  className="h-4 w-4 text-destructive"
-                  aria-label="Upload failed"
-                />
+                <XCircle className="text-destructive h-4 w-4" aria-label="Upload failed" />
               )}
               {onRemove && (
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-5 w-5 text-muted-foreground"
+                  className="text-muted-foreground h-5 w-5"
                   aria-label={`Remove ${file.name}`}
                   onClick={() => onRemove(file.id)}
                 >
@@ -68,7 +63,7 @@ export function UploadProgressItem({ file, onRemove }: UploadProgressItemProps) 
             </div>
           </div>
           {file.size !== undefined && (
-            <p className="mt-0.5 text-xs text-muted-foreground">{formatBytes(file.size)}</p>
+            <p className="text-muted-foreground mt-0.5 text-xs">{formatBytes(file.size)}</p>
           )}
           {file.status !== "error" ? (
             <Progress
@@ -80,7 +75,7 @@ export function UploadProgressItem({ file, onRemove }: UploadProgressItemProps) 
               aria-valuemax={100}
             />
           ) : (
-            <p className="mt-1 text-xs text-destructive">{file.error ?? "Upload failed"}</p>
+            <p className="text-destructive mt-1 text-xs">{file.error ?? "Upload failed"}</p>
           )}
         </div>
       </div>

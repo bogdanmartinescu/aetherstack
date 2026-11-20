@@ -15,7 +15,10 @@ import "./globals.css"
 
 // ── Google font instances — each gets its own CSS variable ──────────────────
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
-const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-plus-jakarta-sans" })
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta-sans",
+})
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" })
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" })
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" })
@@ -41,8 +44,7 @@ export const metadata: Metadata = {
     default: "Aether UI",
     template: "%s — Aether UI",
   },
-  description:
-    "Premium open-code design system for SaaS dashboards and admin interfaces.",
+  description: "Premium open-code design system for SaaS dashboards and admin interfaces.",
   keywords: ["design system", "shadcn", "tailwind", "react", "saas", "dashboard"],
 }
 

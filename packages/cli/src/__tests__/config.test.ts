@@ -53,10 +53,7 @@ describe("loadConfig", () => {
   })
 
   it("throws when registry URL is invalid", () => {
-    writeFileSync(
-      resolve(cwd, CONFIG_FILE_NAME),
-      JSON.stringify({ registry: "not-a-url" }),
-    )
+    writeFileSync(resolve(cwd, CONFIG_FILE_NAME), JSON.stringify({ registry: "not-a-url" }))
 
     expect(() => loadConfig(cwd)).toThrow(/Failed to parse aether\.json/)
   })

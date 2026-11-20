@@ -40,23 +40,78 @@ function relativeTime(timestamp: Date | string): string {
 
 const TYPE_ICONS: Record<NotificationType, React.ReactNode> = {
   info: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-500" aria-hidden>
-      <circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="text-blue-500"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 16v-4" />
+      <path d="M12 8h.01" />
     </svg>
   ),
   success: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-green-500" aria-hidden>
-      <circle cx="12" cy="12" r="10" /><polyline points="9 12 11 14 15 10" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="text-green-500"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="9 12 11 14 15 10" />
     </svg>
   ),
   warning: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500" aria-hidden>
-      <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" /><path d="M12 9v4" /><path d="M12 17h.01" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="text-yellow-500"
+      aria-hidden
+    >
+      <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+      <path d="M12 9v4" />
+      <path d="M12 17h.01" />
     </svg>
   ),
   error: (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-destructive" aria-hidden>
-      <circle cx="12" cy="12" r="10" /><path d="m15 9-6 6" /><path d="m9 9 6 6" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="text-destructive"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="m15 9-6 6" />
+      <path d="m9 9 6 6" />
     </svg>
   ),
 }
@@ -71,7 +126,8 @@ export function NotificationItem({
   onMarkRead?: (id: string) => void
   onDismiss?: (id: string) => void
 }) {
-  const typeIcon = notification.icon ?? (notification.type ? TYPE_ICONS[notification.type] : TYPE_ICONS.info)
+  const typeIcon =
+    notification.icon ?? (notification.type ? TYPE_ICONS[notification.type] : TYPE_ICONS.info)
 
   return (
     <div
@@ -82,7 +138,7 @@ export function NotificationItem({
       )}
     >
       {/* Type icon */}
-      <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-muted">
+      <div className="bg-muted mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
         {typeIcon}
       </div>
 
@@ -91,17 +147,17 @@ export function NotificationItem({
         <p
           className={cn(
             "text-sm leading-snug",
-            notification.read ? "font-normal text-muted-foreground" : "font-medium text-foreground",
+            notification.read ? "text-muted-foreground font-normal" : "text-foreground font-medium",
           )}
         >
           {notification.title}
         </p>
         {notification.description && (
-          <p className="mt-0.5 text-xs text-muted-foreground line-clamp-2">
+          <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
             {notification.description}
           </p>
         )}
-        <p className="mt-1 text-xs text-muted-foreground/60">
+        <p className="text-muted-foreground/60 mt-1 text-xs">
           {relativeTime(notification.timestamp)}
         </p>
       </div>
@@ -112,11 +168,22 @@ export function NotificationItem({
           <button
             type="button"
             onClick={() => onMarkRead(notification.id)}
-            className="flex h-6 w-6 items-center justify-center rounded text-muted-foreground hover:text-foreground focus-visible:outline-none"
+            className="text-muted-foreground hover:text-foreground flex h-6 w-6 items-center justify-center rounded focus-visible:outline-none"
             aria-label="Mark as read"
             title="Mark as read"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </button>
@@ -125,12 +192,24 @@ export function NotificationItem({
           <button
             type="button"
             onClick={() => onDismiss(notification.id)}
-            className="flex h-6 w-6 items-center justify-center rounded text-muted-foreground hover:text-destructive focus-visible:outline-none"
+            className="text-muted-foreground hover:text-destructive flex h-6 w-6 items-center justify-center rounded focus-visible:outline-none"
             aria-label="Dismiss notification"
             title="Dismiss"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
             </svg>
           </button>
         )}
@@ -149,16 +228,11 @@ export function NotificationCenter({
   const unreadCount = notifications.filter((n) => !n.read).length
 
   return (
-    <div
-      className={cn(
-        "w-full rounded-xl border border-border bg-card shadow-sm",
-        className,
-      )}
-    >
+    <div className={cn("border-border bg-card w-full rounded-xl border shadow-sm", className)}>
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-border px-4 py-3">
+      <div className="border-border flex items-center justify-between border-b px-4 py-3">
         <div className="flex items-center gap-2">
-          <h2 className="text-sm font-semibold text-foreground">Notifications</h2>
+          <h2 className="text-foreground text-sm font-semibold">Notifications</h2>
           {unreadCount > 0 && (
             <Badge variant="default" className="h-5 min-w-5 px-1.5 text-xs tabular-nums">
               {unreadCount}
@@ -169,7 +243,7 @@ export function NotificationCenter({
           <Button
             variant="ghost"
             size="sm"
-            className="h-7 text-xs text-muted-foreground"
+            className="text-muted-foreground h-7 text-xs"
             onClick={onMarkAllRead}
           >
             Mark all read
@@ -180,14 +254,27 @@ export function NotificationCenter({
       {/* List */}
       {notifications.length === 0 ? (
         <div className="flex flex-col items-center justify-center px-6 py-12 text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" className="mb-3 text-muted-foreground/40" aria-hidden>
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-muted-foreground/40 mb-3"
+            aria-hidden
+          >
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
           </svg>
-          <p className="text-sm font-medium text-muted-foreground">All caught up</p>
-          <p className="mt-1 text-xs text-muted-foreground/60">No new notifications.</p>
+          <p className="text-muted-foreground text-sm font-medium">All caught up</p>
+          <p className="text-muted-foreground/60 mt-1 text-xs">No new notifications.</p>
         </div>
       ) : (
-        <div className="divide-y divide-border/50 p-2">
+        <div className="divide-border/50 divide-y p-2">
           {notifications.map((notification) => (
             <NotificationItem
               key={notification.id}

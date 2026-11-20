@@ -12,9 +12,7 @@ export function FeedbackButtonsPreview() {
         onThumbsUp={() => setFeedback("positive")}
         onThumbsDown={() => setFeedback("negative")}
       />
-      {feedback && (
-        <p className="text-xs text-muted-foreground">Feedback: {feedback}</p>
-      )}
+      {feedback && <p className="text-muted-foreground text-xs">Feedback: {feedback}</p>}
     </div>
   )
 }

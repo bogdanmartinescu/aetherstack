@@ -71,22 +71,26 @@ export default function ContactFormPage() {
         {
           name: "sent (local state)",
           type: "boolean",
-          description: "Switches the form to a success view after submission. Paired with reset() so clicking 'Send another' restores the blank form.",
+          description:
+            "Switches the form to a success view after submission. Paired with reset() so clicking 'Send another' restores the blank form.",
         },
         {
           name: "reset",
           type: "UseFormReset<FormValues>",
-          description: "Resets all field values and validation state back to defaults. Called together with setSent(false) when the user wants to send another message.",
+          description:
+            "Resets all field values and validation state back to defaults. Called together with setSent(false) when the user wants to send another message.",
         },
         {
           name: "subject (Controller)",
           type: "ZodString (min 1)",
-          description: "The Radix Select needs Controller because it doesn't expose a native input. z.string().min(1) treats an empty string as invalid — triggering the 'Please select a subject' error.",
+          description:
+            "The Radix Select needs Controller because it doesn't expose a native input. z.string().min(1) treats an empty string as invalid — triggering the 'Please select a subject' error.",
         },
         {
           name: "message (min 20, max 1000)",
           type: "ZodString",
-          description: "Minimum length encourages meaningful messages. Maximum length prevents abuse. The live character counter uses watch() to reflect the current count without re-validating.",
+          description:
+            "Minimum length encourages meaningful messages. Maximum length prevents abuse. The live character counter uses watch() to reflect the current count without re-validating.",
         },
       ]}
       a11yNotes={[

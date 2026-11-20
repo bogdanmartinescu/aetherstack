@@ -18,17 +18,12 @@ export interface BuildResult {
  * Throws if the registry fails schema validation.
  * In strict mode, also throws on dependency warnings.
  */
-export function buildRegistry(
-  data: unknown,
-  options: BuildOptions = {},
-): BuildResult {
+export function buildRegistry(data: unknown, options: BuildOptions = {}): BuildResult {
   const { strict = false } = options
 
   const validation = validateRegistry(data)
   if (!validation.valid) {
-    throw new Error(
-      `Registry validation failed:\n${validation.errors.join("\n")}`,
-    )
+    throw new Error(`Registry validation failed:\n${validation.errors.join("\n")}`)
   }
 
   const registry = data as Registry

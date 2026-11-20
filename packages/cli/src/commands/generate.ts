@@ -74,7 +74,12 @@ export const generateCommand = new Command("generate")
       if (plan.starterCode && opts.starter) {
         console.log(`  ${pc.bold("Starter file preview:")}`)
         console.log("")
-        console.log(plan.starterCode.split("\n").map((l) => `    ${l}`).join("\n"))
+        console.log(
+          plan.starterCode
+            .split("\n")
+            .map((l) => `    ${l}`)
+            .join("\n"),
+        )
       }
       return
     }
@@ -121,7 +126,9 @@ export const generateCommand = new Command("generate")
           console.log(`    ${pc.dim("→")} ${f}`)
         }
       } catch (err) {
-        spinner.warn(pc.yellow(`Skipped ${name} — ${err instanceof Error ? err.message : String(err)}`))
+        spinner.warn(
+          pc.yellow(`Skipped ${name} — ${err instanceof Error ? err.message : String(err)}`),
+        )
       }
     }
 

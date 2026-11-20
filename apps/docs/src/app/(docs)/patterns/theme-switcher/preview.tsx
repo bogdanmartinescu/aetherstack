@@ -9,9 +9,7 @@ export function ThemeSwitcherPreview() {
         <ThemeSwitcherDropdown />
         <ThemeSwitcherToggle />
       </div>
-      <p className="text-xs text-muted-foreground">
-        Dropdown (left) · Icon toggle (right)
-      </p>
+      <p className="text-muted-foreground text-xs">Dropdown (left) · Icon toggle (right)</p>
     </div>
   )
 }

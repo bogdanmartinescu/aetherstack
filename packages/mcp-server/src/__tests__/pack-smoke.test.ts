@@ -4,13 +4,7 @@
  * registry. This catches the stale-bundle failure that shipped as 58/71.
  */
 import { execFileSync } from "node:child_process"
-import {
-  existsSync,
-  mkdtempSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from "node:fs"
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { resolve } from "node:path"
 import { afterAll, beforeAll, describe, expect, it } from "vitest"

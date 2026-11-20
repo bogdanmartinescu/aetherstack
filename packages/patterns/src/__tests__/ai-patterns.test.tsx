@@ -67,7 +67,12 @@ describe("PromptBuilder", () => {
   it("calls onTurnsChange when add turn is clicked", async () => {
     const user = userEvent.setup()
     const onTurnsChange = vi.fn()
-    render(<PromptBuilder turns={[{ role: "user" as const, content: "" }]} onTurnsChange={onTurnsChange} />)
+    render(
+      <PromptBuilder
+        turns={[{ role: "user" as const, content: "" }]}
+        onTurnsChange={onTurnsChange}
+      />,
+    )
     await user.click(screen.getByRole("button", { name: /add turn/i }))
     expect(onTurnsChange).toHaveBeenCalled()
   })
@@ -217,7 +222,9 @@ describe("ConversationStarter", () => {
   it("calls onSuggestionClick when a chip is clicked", async () => {
     const user = userEvent.setup()
     const onSuggestionClick = vi.fn()
-    const suggestions = [{ label: "Help me write", prompt: "Write a paragraph about", icon: undefined }]
+    const suggestions = [
+      { label: "Help me write", prompt: "Write a paragraph about", icon: undefined },
+    ]
     render(<ConversationStarter suggestions={suggestions} onSuggestionClick={onSuggestionClick} />)
     await user.click(screen.getByText("Help me write"))
     expect(onSuggestionClick).toHaveBeenCalledWith("Write a paragraph about")

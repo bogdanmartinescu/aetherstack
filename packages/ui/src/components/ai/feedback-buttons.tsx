@@ -49,7 +49,11 @@ function FeedbackButtons({
   }
 
   return (
-    <div role="group" aria-label="Response feedback" className={cn("flex items-center gap-1", className)}>
+    <div
+      role="group"
+      aria-label="Response feedback"
+      className={cn("flex items-center gap-1", className)}
+    >
       <button
         type="button"
         onClick={() => select("up")}

@@ -34,22 +34,20 @@ export function FeaturesSection({
   className,
 }: FeaturesSectionProps) {
   return (
-    <section className={cn("w-full py-16 px-4", className)}>
+    <section className={cn("w-full px-4 py-16", className)}>
       {(eyebrow || headline || subheading) && (
         <div className="mx-auto mb-12 max-w-2xl text-center">
           {eyebrow && (
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+            <p className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
               {eyebrow}
             </p>
           )}
           {headline && (
-            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <h2 className="text-foreground text-3xl font-bold tracking-tight sm:text-4xl">
               {headline}
             </h2>
           )}
-          {subheading && (
-            <p className="mt-4 text-base text-muted-foreground">{subheading}</p>
-          )}
+          {subheading && <p className="text-muted-foreground mt-4 text-base">{subheading}</p>}
         </div>
       )}
 
@@ -59,14 +57,12 @@ export function FeaturesSection({
             <Card key={i} className="border-border bg-card">
               <CardContent className="pt-6">
                 {feature.icon && (
-                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <div className="bg-primary/10 text-primary mb-4 flex h-10 w-10 items-center justify-center rounded-lg">
                     {feature.icon}
                   </div>
                 )}
-                <h3 className="mb-2 text-base font-semibold text-foreground">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">{feature.description}</p>
+                <h3 className="text-foreground mb-2 text-base font-semibold">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm">{feature.description}</p>
               </CardContent>
             </Card>
           ))}
@@ -82,13 +78,13 @@ export function FeaturesSection({
               )}
             >
               {feature.icon && (
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <div className="bg-primary/10 text-primary flex h-12 w-12 shrink-0 items-center justify-center rounded-xl">
                   {feature.icon}
                 </div>
               )}
               <div>
-                <h3 className="text-lg font-semibold text-foreground">{feature.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{feature.description}</p>
+                <h3 className="text-foreground text-lg font-semibold">{feature.title}</h3>
+                <p className="text-muted-foreground mt-2 text-sm">{feature.description}</p>
               </div>
             </div>
           ))}

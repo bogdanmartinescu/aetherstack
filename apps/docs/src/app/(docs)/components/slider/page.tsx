@@ -4,7 +4,8 @@ import { ComponentPage } from "@/components/component-page"
 
 export const metadata: Metadata = {
   title: "Slider",
-  description: "An input where the user selects a value from within a given range by dragging a thumb.",
+  description:
+    "An input where the user selects a value from within a given range by dragging a thumb.",
 }
 
 const MANUAL_SOURCE = `"use client"
@@ -72,7 +73,8 @@ export function SliderDemo() {
       examples={[
         {
           title: "Default",
-          description: "A basic slider with a default value. The thumb can be dragged or controlled via keyboard.",
+          description:
+            "A basic slider with a default value. The thumb can be dragged or controlled via keyboard.",
           preview: (
             <div className="w-full max-w-sm">
               <Slider defaultValue={[33]} />
@@ -82,7 +84,8 @@ export function SliderDemo() {
         },
         {
           title: "With steps",
-          description: "Set step to snap the thumb to discrete values. Useful for quantity selectors or rating inputs.",
+          description:
+            "Set step to snap the thumb to discrete values. Useful for quantity selectors or rating inputs.",
           preview: (
             <div className="w-full max-w-sm">
               <Slider defaultValue={[40]} min={0} max={100} step={10} />
@@ -92,7 +95,8 @@ export function SliderDemo() {
         },
         {
           title: "Range",
-          description: "Passing two values in the defaultValue array creates two thumbs for selecting a range.",
+          description:
+            "Passing two values in the defaultValue array creates two thumbs for selecting a range.",
           preview: (
             <div className="w-full max-w-sm">
               <Slider defaultValue={[25, 75]} />
@@ -115,7 +119,8 @@ export function SliderDemo() {
         {
           name: "defaultValue",
           type: "number[]",
-          description: "Initial value(s) for uncontrolled usage. Use an array with two numbers for a range slider.",
+          description:
+            "Initial value(s) for uncontrolled usage. Use an array with two numbers for a range slider.",
         },
         {
           name: "value",

@@ -46,9 +46,22 @@ export default function SettingsPage() {
         </div>
       }
       props={[
-        { name: "defaultValues", type: "AccountSettingsData", description: "Initial form values: name, email, bio, avatarUrl." },
-        { name: "onSave", type: "(data: AccountSettingsData) => void | Promise<void>", description: "Called with the form data on submit. May be async — the button shows a saving state while pending." },
-        { name: "className", type: "string", description: "Additional classes on the wrapper card." },
+        {
+          name: "defaultValues",
+          type: "AccountSettingsData",
+          description: "Initial form values: name, email, bio, avatarUrl.",
+        },
+        {
+          name: "onSave",
+          type: "(data: AccountSettingsData) => void | Promise<void>",
+          description:
+            "Called with the form data on submit. May be async — the button shows a saving state while pending.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the wrapper card.",
+        },
       ]}
       a11yNotes={[
         "All inputs are associated with their labels via htmlFor/id pairs.",

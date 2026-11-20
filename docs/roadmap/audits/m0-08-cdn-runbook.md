@@ -11,11 +11,11 @@ endpoint is verified.
 
 ## Intended public surface
 
-| Path | Purpose | Cache guidance |
-| --- | --- | --- |
-| `/r/registry.json` | Aggregate manifest | Short TTL or `s-maxage` with stale-while-revalidate; not immutable |
-| `/r/<name>.json` | Per-item install payload | Prefer immutable once versioned URLs exist (`/r/<name>@<version>.json`) |
-| `/llms.txt` | AI discovery index | Short/medium TTL; regenerate with registry build |
+| Path               | Purpose                  | Cache guidance                                                          |
+| ------------------ | ------------------------ | ----------------------------------------------------------------------- |
+| `/r/registry.json` | Aggregate manifest       | Short TTL or `s-maxage` with stale-while-revalidate; not immutable      |
+| `/r/<name>.json`   | Per-item install payload | Prefer immutable once versioned URLs exist (`/r/<name>@<version>.json`) |
+| `/llms.txt`        | AI discovery index       | Short/medium TTL; regenerate with registry build                        |
 
 Source of artefacts today: `apps/registry-public` (static files from
 `pnpm --filter @aetherstack/scripts build-registry`).

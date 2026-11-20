@@ -45,8 +45,8 @@ import { Search, SlidersHorizontal, Download } from "lucide-react"
           <TableToolbar
             search={
               <div className="relative w-56">
-                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                <Input className="pl-8 h-8 text-sm" placeholder="Search members…" readOnly />
+                <Search className="text-muted-foreground absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2" />
+                <Input className="h-8 pl-8 text-sm" placeholder="Search members…" readOnly />
               </div>
             }
             filters={
@@ -65,10 +65,26 @@ import { Search, SlidersHorizontal, Download } from "lucide-react"
         </div>
       }
       props={[
-        { name: "search", type: "ReactNode", description: "Left slot — typically a search Input with a leading icon." },
-        { name: "filters", type: "ReactNode", description: "Middle slot — filter dropdowns, date pickers, etc." },
-        { name: "actions", type: "ReactNode", description: "Right slot — action buttons (Export, Invite, etc.)." },
-        { name: "className", type: "string", description: "Additional classes on the toolbar wrapper." },
+        {
+          name: "search",
+          type: "ReactNode",
+          description: "Left slot — typically a search Input with a leading icon.",
+        },
+        {
+          name: "filters",
+          type: "ReactNode",
+          description: "Middle slot — filter dropdowns, date pickers, etc.",
+        },
+        {
+          name: "actions",
+          type: "ReactNode",
+          description: "Right slot — action buttons (Export, Invite, etc.).",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the toolbar wrapper.",
+        },
       ]}
     />
   )

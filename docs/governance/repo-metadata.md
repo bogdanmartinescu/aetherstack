@@ -2,14 +2,14 @@
 
 Prepared values for the GitHub repository. Apply via the GitHub UI or `gh` when ready.
 
-| Field | Proposed value |
-| --- | --- |
-| Name | `aetherstack` |
+| Field       | Proposed value                                                                                                               |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Name        | `aetherstack`                                                                                                                |
 | Description | Premium open-code design system (Aether UI) — tokens, primitives, patterns, blocks, CLI, MCP, and shadcn-compatible registry |
-| Homepage | `https://aether-ui.dev` |
-| Visibility | Public |
-| Topics | `design-system`, `react`, `typescript`, `tailwindcss`, `shadcn`, `ui-components`, `mcp`, `cli`, `monorepo` |
-| License | MIT (`LICENSE`) |
+| Homepage    | `https://aether-ui.dev`                                                                                                      |
+| Visibility  | Public                                                                                                                       |
+| Topics      | `design-system`, `react`, `typescript`, `tailwindcss`, `shadcn`, `ui-components`, `mcp`, `cli`, `monorepo`                   |
+| License     | MIT (`LICENSE`)                                                                                                              |
 
 ## Related files
 

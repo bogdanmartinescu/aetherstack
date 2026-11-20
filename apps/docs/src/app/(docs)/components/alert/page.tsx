@@ -60,7 +60,7 @@ export default function AlertPage() {
         "5 variants: default, destructive, warning, success, info",
         "Icon slot via svg sibling selectors — just drop an SVG inside",
         "AlertTitle for bold heading, AlertDescription for body text",
-        "role=\"alert\" for screen reader announcement",
+        'role="alert" for screen reader announcement',
       ]}
       preview={
         <div className="flex w-full max-w-md flex-col gap-3">
@@ -108,7 +108,9 @@ import { CheckCircle2 } from "lucide-react"
           preview: (
             <Alert variant="info">
               <AlertTitle>Heads up</AlertTitle>
-              <AlertDescription>Maintenance window is scheduled for Sunday at 02:00 UTC.</AlertDescription>
+              <AlertDescription>
+                Maintenance window is scheduled for Sunday at 02:00 UTC.
+              </AlertDescription>
             </Alert>
           ),
           code: `<Alert variant="info">
@@ -132,13 +134,22 @@ import { CheckCircle2 } from "lucide-react"
         },
       ]}
       props={[
-        { name: "variant", type: '"default" | "destructive" | "warning" | "success" | "info"', default: '"default"', description: "Controls border and text colour of the alert." },
+        {
+          name: "variant",
+          type: '"default" | "destructive" | "warning" | "success" | "info"',
+          default: '"default"',
+          description: "Controls border and text colour of the alert.",
+        },
         { name: "className", type: "string", description: "Additional classes on the alert div." },
-        { name: "...props", type: "React.HTMLAttributes<HTMLDivElement>", description: "All standard HTML div attributes." },
+        {
+          name: "...props",
+          type: "React.HTMLAttributes<HTMLDivElement>",
+          description: "All standard HTML div attributes.",
+        },
       ]}
       a11yNotes={[
-        "Alert has role=\"alert\" so screen readers announce it immediately when it appears in the DOM.",
-        "For non-urgent updates consider role=\"status\" instead — override via the role prop.",
+        'Alert has role="alert" so screen readers announce it immediately when it appears in the DOM.',
+        'For non-urgent updates consider role="status" instead — override via the role prop.',
         "If the alert contains a link or button, ensure those are keyboard-accessible.",
       ]}
     />

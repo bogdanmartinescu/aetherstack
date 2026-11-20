@@ -5,13 +5,7 @@ import { Check, Copy } from "lucide-react"
 import { Button } from "@aetherstack/ui"
 import { cn } from "@aetherstack/utils"
 
-export function InstallCommand({
-  command,
-  className,
-}: {
-  command: string
-  className?: string
-}) {
+export function InstallCommand({ command, className }: { command: string; className?: string }) {
   const [copied, setCopied] = React.useState(false)
   const timeout = React.useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -37,11 +31,11 @@ export function InstallCommand({
   return (
     <div
       className={cn(
-        "inline-flex h-10 items-center gap-3 rounded-md border border-border bg-muted/50 pl-4 pr-1 font-mono text-sm",
+        "border-border bg-muted/50 inline-flex h-10 items-center gap-3 rounded-md border pl-4 pr-1 font-mono text-sm",
         className,
       )}
     >
-      <span aria-hidden="true" className="select-none text-muted-foreground">
+      <span aria-hidden="true" className="text-muted-foreground select-none">
         $
       </span>
       <code className="text-foreground">{command}</code>

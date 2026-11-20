@@ -34,7 +34,7 @@ export function FloatingDock({
         contained ? "absolute" : "fixed",
         CORNER_POSITION[corner],
         "pb-[env(safe-area-inset-bottom)] pr-[env(safe-area-inset-right)]",
-        "rounded-lg border border-border bg-card shadow-lg",
+        "border-border bg-card rounded-lg border shadow-lg",
         className,
       )}
     >

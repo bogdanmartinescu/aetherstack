@@ -32,10 +32,24 @@ export function MyModelPicker() {
 }`}
       preview={<ModelSelectorPreview />}
       props={[
-        { name: "models", type: "Model[]", required: true, description: "List of available models. Each item requires id, name, and provider; capabilities is optional." },
+        {
+          name: "models",
+          type: "Model[]",
+          required: true,
+          description:
+            "List of available models. Each item requires id, name, and provider; capabilities is optional.",
+        },
         { name: "value", type: "string", description: "Controlled selected model ID." },
-        { name: "onValueChange", type: "(id: string) => void", description: "Called when the user selects a different model." },
-        { name: "className", type: "string", description: "Additional CSS classes applied to the trigger button." },
+        {
+          name: "onValueChange",
+          type: "(id: string) => void",
+          description: "Called when the user selects a different model.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional CSS classes applied to the trigger button.",
+        },
       ]}
       a11yNotes={[
         "Built on the Select primitive — uses a native-accessible listbox role.",

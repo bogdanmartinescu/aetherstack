@@ -2,7 +2,16 @@
 
 import * as React from "react"
 import { cn } from "@aetherstack/utils"
-import { Button, Card, CardContent, CardHeader, CardTitle, Label, Slider, Textarea } from "@aetherstack/ui"
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Label,
+  Slider,
+  Textarea,
+} from "@aetherstack/ui"
 
 interface AISettingsPanelProps {
   temperature?: number
@@ -40,7 +49,9 @@ function AISettingsPanel({
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
               <Label className="text-sm">Temperature</Label>
-              <span className="text-sm text-muted-foreground font-mono">{temperature.toFixed(2)}</span>
+              <span className="text-muted-foreground font-mono text-sm">
+                {temperature.toFixed(2)}
+              </span>
             </div>
             <Slider
               min={0}
@@ -49,7 +60,7 @@ function AISettingsPanel({
               value={[temperature]}
               onValueChange={([v]) => v !== undefined && onTemperatureChange?.(v)}
             />
-            <p className="text-xs text-muted-foreground">
+            <p className="text-muted-foreground text-xs">
               Lower = more deterministic · Higher = more creative
             </p>
           </div>
@@ -57,7 +68,7 @@ function AISettingsPanel({
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
               <Label className="text-sm">Max tokens</Label>
-              <span className="text-sm text-muted-foreground font-mono">{maxTokens}</span>
+              <span className="text-muted-foreground font-mono text-sm">{maxTokens}</span>
             </div>
             <Slider
               min={256}

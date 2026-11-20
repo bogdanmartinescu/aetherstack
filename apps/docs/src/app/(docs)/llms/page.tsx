@@ -9,27 +9,23 @@ export const metadata: Metadata = {
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="mb-4 mt-10 text-2xl font-semibold tracking-tight text-foreground">
-      {children}
-    </h2>
+    <h2 className="text-foreground mb-4 mt-10 text-2xl font-semibold tracking-tight">{children}</h2>
   )
 }
 
 function SubHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h3 className="mb-3 mt-8 text-lg font-semibold text-foreground">{children}</h3>
-  )
+  return <h3 className="text-foreground mb-3 mt-8 text-lg font-semibold">{children}</h3>
 }
 
 function Prose({ children }: { children: React.ReactNode }) {
-  return <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">{children}</div>
+  return <div className="text-muted-foreground space-y-3 text-sm leading-relaxed">{children}</div>
 }
 
 function Callout({ title, children }: { title?: string; children: React.ReactNode }) {
   return (
-    <div className="my-4 rounded-lg border border-border bg-muted/40 px-4 py-3">
-      {title && <p className="mb-1 text-sm font-semibold text-foreground">{title}</p>}
-      <div className="text-sm text-muted-foreground">{children}</div>
+    <div className="border-border bg-muted/40 my-4 rounded-lg border px-4 py-3">
+      {title && <p className="text-foreground mb-1 text-sm font-semibold">{title}</p>}
+      <div className="text-muted-foreground text-sm">{children}</div>
     </div>
   )
 }
@@ -44,17 +40,17 @@ function ToolCard({
   params: Array<{ name: string; type: string; description: string }>
 }) {
   return (
-    <div className="mb-4 rounded-lg border border-border bg-card p-4">
+    <div className="border-border bg-card mb-4 rounded-lg border p-4">
       <div className="mb-2 flex items-baseline gap-2">
-        <code className="rounded bg-primary/10 px-1.5 py-0.5 text-xs font-mono font-semibold text-primary">
+        <code className="bg-primary/10 text-primary rounded px-1.5 py-0.5 font-mono text-xs font-semibold">
           {name}
         </code>
-        <span className="text-sm text-muted-foreground">{description}</span>
+        <span className="text-muted-foreground text-sm">{description}</span>
       </div>
       {params.length > 0 && (
         <table className="w-full text-xs">
           <thead>
-            <tr className="border-b border-border text-left text-muted-foreground">
+            <tr className="border-border text-muted-foreground border-b text-left">
               <th className="pb-1 pr-4 font-medium">param</th>
               <th className="pb-1 pr-4 font-medium">type</th>
               <th className="pb-1 font-medium">description</th>
@@ -62,10 +58,10 @@ function ToolCard({
           </thead>
           <tbody>
             {params.map((p) => (
-              <tr key={p.name} className="border-b border-border/50 last:border-0">
-                <td className="py-1 pr-4 font-mono text-foreground">{p.name}</td>
-                <td className="py-1 pr-4 text-muted-foreground">{p.type}</td>
-                <td className="py-1 text-muted-foreground">{p.description}</td>
+              <tr key={p.name} className="border-border/50 border-b last:border-0">
+                <td className="text-foreground py-1 pr-4 font-mono">{p.name}</td>
+                <td className="text-muted-foreground py-1 pr-4">{p.type}</td>
+                <td className="text-muted-foreground py-1">{p.description}</td>
               </tr>
             ))}
           </tbody>
@@ -80,13 +76,13 @@ export default function LlmsPage() {
     <div className="max-w-3xl">
       {/* Header */}
       <div className="mb-10">
-        <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">AI &amp; LLMs</h1>
-        <p className="text-lg text-muted-foreground">
-          Aether UI is designed to be the most LLM-friendly design system in the ecosystem.
-          Every component ships with machine-readable AI metadata, the registry exposes a{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-base">llms.txt</code>{" "}
-          index, and an MCP server lets agents browse and install components directly from
-          Cursor, Claude Desktop, or any MCP-compatible tool. The system also ships{" "}
+        <h1 className="text-foreground mb-3 text-4xl font-bold tracking-tight">AI &amp; LLMs</h1>
+        <p className="text-muted-foreground text-lg">
+          Aether UI is designed to be the most LLM-friendly design system in the ecosystem. Every
+          component ships with machine-readable AI metadata, the registry exposes a{" "}
+          <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-base">llms.txt</code>{" "}
+          index, and an MCP server lets agents browse and install components directly from Cursor,
+          Claude Desktop, or any MCP-compatible tool. The system also ships{" "}
           <strong className="text-foreground">33 AI-native components</strong> — streaming text,
           chat bubbles, prompt inputs, conversation threads, and full chat layouts — all
           SDK-agnostic and installable via the same CLI.
@@ -98,21 +94,22 @@ export default function LlmsPage() {
       <Prose>
         <p>
           The registry publishes a <code>llms.txt</code> file at the root of the public registry
-          following the <a href="https://llmstxt.org/" className="underline underline-offset-4">llms.txt convention</a>.
-          It lists every component with its intent, install command, and composition hints —
+          following the{" "}
+          <a href="https://llmstxt.org/" className="underline underline-offset-4">
+            llms.txt convention
+          </a>
+          . It lists every component with its intent, install command, and composition hints —
           optimised to fit inside an LLM context window.
         </p>
         <p>Paste this URL into any agent context or system prompt:</p>
       </Prose>
-      <CodeBlock
-        code="https://aether-ui.dev/llms.txt"
-        filename="URL"
-      />
+      <CodeBlock code="https://aether-ui.dev/llms.txt" filename="URL" />
       <Prose>
         <p>
-          The file is regenerated on every <code>pnpm --filter @aetherstack/scripts build-registry</code> run
-          and committed alongside the per-item JSON files. The CI stale-artefact check will fail
-          a PR if it becomes out of sync.
+          The file is regenerated on every{" "}
+          <code>pnpm --filter @aetherstack/scripts build-registry</code> run and committed alongside
+          the per-item JSON files. The CI stale-artefact check will fail a PR if it becomes out of
+          sync.
         </p>
       </Prose>
 
@@ -120,8 +117,8 @@ export default function LlmsPage() {
       <SectionHeading>AI Metadata on Registry Items</SectionHeading>
       <Prose>
         <p>
-          Every public registry item ships an <code>ai</code> block alongside the standard registry fields.
-          The schema is:
+          Every public registry item ships an <code>ai</code> block alongside the standard registry
+          fields. The schema is:
         </p>
       </Prose>
       <CodeBlock
@@ -139,16 +136,23 @@ export default function LlmsPage() {
       />
       <Prose>
         <p>
-          <strong className="text-foreground">intent</strong> — injected into <code>llms.txt</code> and MCP tool responses so agents understand what the component does without reading its source.
+          <strong className="text-foreground">intent</strong> — injected into <code>llms.txt</code>{" "}
+          and MCP tool responses so agents understand what the component does without reading its
+          source.
         </p>
         <p>
-          <strong className="text-foreground">prompts</strong> — example natural-language inputs that <code>aether-ui generate</code> and the MCP <code>compose_block</code> tool use to match a description to the right component.
+          <strong className="text-foreground">prompts</strong> — example natural-language inputs
+          that <code>aether-ui generate</code> and the MCP <code>compose_block</code> tool use to
+          match a description to the right component.
         </p>
         <p>
-          <strong className="text-foreground">composition</strong> — sibling components frequently used together. Agents use this to build coherent groups.
+          <strong className="text-foreground">composition</strong> — sibling components frequently
+          used together. Agents use this to build coherent groups.
         </p>
         <p>
-          <strong className="text-foreground">slots</strong> — named insertion points an LLM can target when generating usage code (e.g. <code>children</code>, <code>actions</code>, <code>header</code>).
+          <strong className="text-foreground">slots</strong> — named insertion points an LLM can
+          target when generating usage code (e.g. <code>children</code>, <code>actions</code>,{" "}
+          <code>header</code>).
         </p>
       </Prose>
 
@@ -162,16 +166,19 @@ export default function LlmsPage() {
       <Prose>
         <p>
           <code>@aetherstack/mcp-server</code> is a{" "}
-          <a href="https://modelcontextprotocol.io" className="underline underline-offset-4">Model Context Protocol</a>{" "}
-          server that exposes the Aether UI registry to LLM agents. Connect it to Cursor, Claude Desktop,
-          or any MCP-compatible tool via the <strong>stdio</strong> transport.
+          <a href="https://modelcontextprotocol.io" className="underline underline-offset-4">
+            Model Context Protocol
+          </a>{" "}
+          server that exposes the Aether UI registry to LLM agents. Connect it to Cursor, Claude
+          Desktop, or any MCP-compatible tool via the <strong>stdio</strong> transport.
         </p>
       </Prose>
 
       <SubHeading>Connect to Cursor</SubHeading>
       <Prose>
         <p>
-          Add the following entry to your <code>.cursor/mcp.json</code> (or Cursor&apos;s global MCP settings):
+          Add the following entry to your <code>.cursor/mcp.json</code> (or Cursor&apos;s global MCP
+          settings):
         </p>
       </Prose>
       <CodeBlock
@@ -226,15 +233,27 @@ export default function LlmsPage() {
         name="list_components"
         description="List all components, patterns, and blocks in the registry."
         params={[
-          { name: "type", type: '"all" | "primitives" | "patterns" | "blocks"', description: "Filter by category (default: all)" },
-          { name: "query", type: "string?", description: "Optional keyword filter on name, title, or intent" },
+          {
+            name: "type",
+            type: '"all" | "primitives" | "patterns" | "blocks"',
+            description: "Filter by category (default: all)",
+          },
+          {
+            name: "query",
+            type: "string?",
+            description: "Optional keyword filter on name, title, or intent",
+          },
         ]}
       />
       <ToolCard
         name="get_component"
         description="Get full details about a specific component."
         params={[
-          { name: "name", type: "string", description: 'Registry name, e.g. "button" or "dashboard-shell"' },
+          {
+            name: "name",
+            type: "string",
+            description: 'Registry name, e.g. "button" or "dashboard-shell"',
+          },
         ]}
       />
       <ToolCard
@@ -248,7 +267,11 @@ export default function LlmsPage() {
         name="compose_block"
         description="Given a natural-language UI goal, suggest which components to install and how to compose them."
         params={[
-          { name: "description", type: "string", description: 'e.g. "a SaaS dashboard with a sidebar and KPI cards"' },
+          {
+            name: "description",
+            type: "string",
+            description: 'e.g. "a SaaS dashboard with a sidebar and KPI cards"',
+          },
         ]}
       />
 
@@ -256,8 +279,8 @@ export default function LlmsPage() {
       <SectionHeading>Prompt-Driven CLI</SectionHeading>
       <Prose>
         <p>
-          <code>aether-ui generate</code> resolves a natural-language description into a sequence
-          of <code>add</code> calls and writes a starter file into your project. No LLM or API key
+          <code>aether-ui generate</code> resolves a natural-language description into a sequence of{" "}
+          <code>add</code> calls and writes a starter file into your project. No LLM or API key
           required — resolution is keyword-based and fully deterministic.
         </p>
       </Prose>
@@ -286,9 +309,9 @@ aether-ui generate "data table with users" --dry-run`}
       />
       <Prose>
         <p>
-          The command fetches the registry, resolves matching components, installs each one
-          via the standard <code>add</code> flow, and writes a starter <code>page.tsx</code> file
-          that imports and composes them.
+          The command fetches the registry, resolves matching components, installs each one via the
+          standard <code>add</code> flow, and writes a starter <code>page.tsx</code> file that
+          imports and composes them.
         </p>
       </Prose>
 
@@ -296,10 +319,10 @@ aether-ui generate "data table with users" --dry-run`}
       <Prose>
         <p>The following prompts resolve deterministically to a complete set of components:</p>
       </Prose>
-      <div className="overflow-hidden rounded-lg border border-border">
+      <div className="border-border overflow-hidden rounded-lg border">
         <table className="w-full text-sm">
           <thead className="bg-muted/50">
-            <tr className="border-b border-border text-left text-xs font-medium text-muted-foreground">
+            <tr className="border-border text-muted-foreground border-b text-left text-xs font-medium">
               <th className="px-4 py-2">Prompt</th>
               <th className="px-4 py-2">Components installed</th>
             </tr>
@@ -308,11 +331,13 @@ aether-ui generate "data table with users" --dry-run`}
             {[
               {
                 prompt: "build me a SaaS dashboard",
-                components: "dashboard-shell, metric-card, table, table-toolbar, page-header, empty-state, loading-state, error-state, nav",
+                components:
+                  "dashboard-shell, metric-card, table, table-toolbar, page-header, empty-state, loading-state, error-state, nav",
               },
               {
                 prompt: "make me a chat interface",
-                components: "ai-chat-layout, ai-chat-sidebar, ai-conversation-thread, ai-prompt-input, ai-streaming-text, ai-thinking-indicator, ai-conversation-starter",
+                components:
+                  "ai-chat-layout, ai-chat-sidebar, ai-conversation-thread, ai-prompt-input, ai-streaming-text, ai-thinking-indicator, ai-conversation-starter",
               },
               {
                 prompt: "add an AI assistant panel",
@@ -320,7 +345,8 @@ aether-ui generate "data table with users" --dry-run`}
               },
               {
                 prompt: "agent task view",
-                components: "ai-agent-workspace, ai-tool-call-sequence, ai-tool-call-card, ai-response-card",
+                components:
+                  "ai-agent-workspace, ai-tool-call-sequence, ai-tool-call-card, ai-response-card",
               },
               {
                 prompt: "prompt builder",
@@ -344,12 +370,13 @@ aether-ui generate "data table with users" --dry-run`}
               },
               {
                 prompt: "marketing landing page",
-                components: "marketing-navbar, landing-hero, features-section, testimonials-section, pricing-section, cta-section, footer-section",
+                components:
+                  "marketing-navbar, landing-hero, features-section, testimonials-section, pricing-section, cta-section, footer-section",
               },
             ].map((row, i) => (
-              <tr key={i} className="border-b border-border/50 last:border-0">
-                <td className="px-4 py-2.5 font-mono text-xs text-foreground">{row.prompt}</td>
-                <td className="px-4 py-2.5 text-xs text-muted-foreground">{row.components}</td>
+              <tr key={i} className="border-border/50 border-b last:border-0">
+                <td className="text-foreground px-4 py-2.5 font-mono text-xs">{row.prompt}</td>
+                <td className="text-muted-foreground px-4 py-2.5 text-xs">{row.components}</td>
               </tr>
             ))}
           </tbody>
@@ -386,10 +413,10 @@ Key facts:
 
       {/* MCP Server config reference */}
       <SectionHeading>Environment Variables</SectionHeading>
-      <div className="overflow-hidden rounded-lg border border-border">
+      <div className="border-border overflow-hidden rounded-lg border">
         <table className="w-full text-sm">
           <thead className="bg-muted/50">
-            <tr className="border-b border-border text-left text-xs font-medium text-muted-foreground">
+            <tr className="border-border text-muted-foreground border-b text-left text-xs font-medium">
               <th className="px-4 py-2">Variable</th>
               <th className="px-4 py-2">Default</th>
               <th className="px-4 py-2">Description</th>
@@ -408,10 +435,10 @@ Key facts:
                 description: "Local path to a registry.json file (overrides bundled and URL)",
               },
             ].map((row) => (
-              <tr key={row.var} className="border-b border-border/50 last:border-0">
-                <td className="px-4 py-2.5 font-mono text-xs text-foreground">{row.var}</td>
-                <td className="px-4 py-2.5 text-xs text-muted-foreground">{row.default}</td>
-                <td className="px-4 py-2.5 text-xs text-muted-foreground">{row.description}</td>
+              <tr key={row.var} className="border-border/50 border-b last:border-0">
+                <td className="text-foreground px-4 py-2.5 font-mono text-xs">{row.var}</td>
+                <td className="text-muted-foreground px-4 py-2.5 text-xs">{row.default}</td>
+                <td className="text-muted-foreground px-4 py-2.5 text-xs">{row.description}</td>
               </tr>
             ))}
           </tbody>

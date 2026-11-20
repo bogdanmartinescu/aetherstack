@@ -32,12 +32,12 @@ aether-ui init
 
 ## Commands
 
-| Command | Description |
-|---|---|
-| `init` | Set up Aether UI in an existing project (creates `aether.json`, installs deps) |
-| `add <name>` | Install a component by name, copying source into your project |
-| `list` | List all available components in the registry |
-| `generate "<prompt>"` | Generate a starter page from a natural-language description |
+| Command               | Description                                                                    |
+| --------------------- | ------------------------------------------------------------------------------ |
+| `init`                | Set up Aether UI in an existing project (creates `aether.json`, installs deps) |
+| `add <name>`          | Install a component by name, copying source into your project                  |
+| `list`                | List all available components in the registry                                  |
+| `generate "<prompt>"` | Generate a starter page from a natural-language description                    |
 
 ## Requirements
 

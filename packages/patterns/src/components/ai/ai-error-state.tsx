@@ -52,25 +52,20 @@ interface AIErrorStateProps {
   className?: string
 }
 
-function AIErrorState({
-  type = "generic",
-  message,
-  onRetry,
-  className,
-}: AIErrorStateProps) {
+function AIErrorState({ type = "generic", message, onRetry, className }: AIErrorStateProps) {
   const config = ERROR_CONFIGS[type]
 
   return (
     <div
       className={cn(
-        "flex flex-col items-center gap-4 rounded-lg border border-border bg-card p-8 text-center",
+        "border-border bg-card flex flex-col items-center gap-4 rounded-lg border p-8 text-center",
         className,
       )}
     >
       <span className="text-muted-foreground">{config.icon}</span>
       <div className="space-y-1">
-        <h3 className="font-semibold text-foreground">{config.headline}</h3>
-        <p className="text-sm text-muted-foreground">{message ?? config.description}</p>
+        <h3 className="text-foreground font-semibold">{config.headline}</h3>
+        <p className="text-muted-foreground text-sm">{message ?? config.description}</p>
       </div>
       {onRetry && (
         <Button variant="outline" onClick={onRetry}>

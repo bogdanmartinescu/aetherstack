@@ -38,7 +38,9 @@ function PasswordField({
   const [capsLockOn, setCapsLockOn] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const syncCapsLockFromKeyboard = (event: KeyboardEvent | React.KeyboardEvent<HTMLInputElement>) => {
+  const syncCapsLockFromKeyboard = (
+    event: KeyboardEvent | React.KeyboardEvent<HTMLInputElement>,
+  ) => {
     const on = event.getModifierState("CapsLock")
     flushSync(() => setCapsLockOn(on))
   }
@@ -82,21 +84,17 @@ function PasswordField({
           type="button"
           variant="ghost"
           size="icon"
-          className="absolute right-0 top-0 h-10 text-muted-foreground"
+          className="text-muted-foreground absolute right-0 top-0 h-10"
           aria-pressed={revealed}
           aria-label={revealed ? "Hide password" : "Show password"}
           onClick={() => setRevealed((open) => !open)}
           {...(disabled !== undefined ? { disabled } : {})}
         >
-          {revealed ? (
-            <EyeOff aria-hidden />
-          ) : (
-            <Eye aria-hidden />
-          )}
+          {revealed ? <EyeOff aria-hidden /> : <Eye aria-hidden />}
         </Button>
       </div>
       {capsLockOn ? (
-        <p role="status" id={statusId} className="text-sm text-muted-foreground">
+        <p role="status" id={statusId} className="text-muted-foreground text-sm">
           Caps Lock is on
         </p>
       ) : null}

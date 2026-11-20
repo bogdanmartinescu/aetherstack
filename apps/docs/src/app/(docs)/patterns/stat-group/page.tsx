@@ -59,22 +59,32 @@ import { Users, DollarSign, TrendingUp } from "lucide-react"
               delta={1.1}
               icon={<TrendingUp className="h-5 w-5" />}
             />
-            <StatItem
-              label="Orders"
-              value="1,429"
-              icon={<ShoppingCart className="h-5 w-5" />}
-            />
+            <StatItem label="Orders" value="1,429" icon={<ShoppingCart className="h-5 w-5" />} />
           </StatGroup>
         </div>
       }
       props={[
-        { name: "cols", type: "2 | 3 | 4", default: "3", description: "Number of columns in the responsive grid." },
-        { name: "children", type: "ReactNode", required: true, description: "StatItem components to render in the grid." },
-        { name: "className", type: "string", description: "Additional classes on the grid wrapper." },
+        {
+          name: "cols",
+          type: "2 | 3 | 4",
+          default: "3",
+          description: "Number of columns in the responsive grid.",
+        },
+        {
+          name: "children",
+          type: "ReactNode",
+          required: true,
+          description: "StatItem components to render in the grid.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the grid wrapper.",
+        },
       ]}
       a11yNotes={[
         "StatItem renders a plain div — no interactive role. Values and labels are plain text, readable by screen readers in document order.",
-        "Delta indicators use colour alone to distinguish positive/negative; add a visually-hidden label (e.g. \"up\"/\"down\") for colour-blind users if needed.",
+        'Delta indicators use colour alone to distinguish positive/negative; add a visually-hidden label (e.g. "up"/"down") for colour-blind users if needed.',
         "Icon containers are decorative and can be aria-hidden.",
       ]}
     />

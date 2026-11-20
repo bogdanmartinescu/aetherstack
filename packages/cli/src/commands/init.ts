@@ -25,9 +25,7 @@ export const initCommand = new Command("init")
     const configPath = resolve(cwd, CONFIG_FILE_NAME)
 
     if (existsSync(configPath) && !opts.force && !opts.dryRun) {
-      console.log(
-        pc.yellow(`  ${CONFIG_FILE_NAME} already exists. Use --force to overwrite.`),
-      )
+      console.log(pc.yellow(`  ${CONFIG_FILE_NAME} already exists. Use --force to overwrite.`))
       process.exit(0)
     }
 

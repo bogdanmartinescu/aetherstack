@@ -4,7 +4,8 @@ import { PatternPage } from "@/components/pattern-page"
 
 export const metadata: Metadata = {
   title: "SourceCard",
-  description: "Displays a cited source link with title, domain, and optional excerpt — used in AI responses with web search grounding.",
+  description:
+    "Displays a cited source link with title, domain, and optional excerpt — used in AI responses with web search grounding.",
 }
 
 export default function SourceCardPage() {
@@ -14,7 +15,7 @@ export default function SourceCardPage() {
       description="Displays a cited source link with title, domain, and optional excerpt — used in AI responses with web search grounding."
       packageName="@aetherstack/ui"
       preview={
-        <div className="flex flex-col gap-2 w-full max-w-sm">
+        <div className="flex w-full max-w-sm flex-col gap-2">
           <SourceCard
             title="React Documentation"
             url="https://react.dev"
@@ -63,7 +64,8 @@ export default function SourceCardPage() {
         {
           name: "favicon",
           type: "string",
-          description: "Favicon image URL displayed beside the title. Falls back to a link icon if it fails to load.",
+          description:
+            "Favicon image URL displayed beside the title. Falls back to a link icon if it fails to load.",
         },
         {
           name: "index",

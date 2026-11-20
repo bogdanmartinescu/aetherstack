@@ -43,14 +43,10 @@ export function NavItem({
         className,
       )}
     >
-      {icon && (
-        <span className="flex h-4 w-4 shrink-0 items-center justify-center">
-          {icon}
-        </span>
-      )}
+      {icon && <span className="flex h-4 w-4 shrink-0 items-center justify-center">{icon}</span>}
       <span className="flex-1 truncate">{label}</span>
       {badge !== undefined && (
-        <span className="ml-auto rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+        <span className="bg-primary/10 text-primary ml-auto rounded-full px-2 py-0.5 text-xs font-medium">
           {badge}
         </span>
       )}
@@ -86,15 +82,12 @@ export function NavGroup({
             <button
               type="button"
               onClick={() => setCollapsed((v) => !v)}
-              className="flex w-full items-center justify-between px-3 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground flex w-full items-center justify-between px-3 py-1 text-xs font-semibold uppercase tracking-wider transition-colors"
               aria-expanded={!collapsed}
             >
               {label}
               <svg
-                className={cn(
-                  "h-3 w-3 transition-transform",
-                  collapsed && "-rotate-90",
-                )}
+                className={cn("h-3 w-3 transition-transform", collapsed && "-rotate-90")}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -108,7 +101,7 @@ export function NavGroup({
               </svg>
             </button>
           ) : (
-            <p className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <p className="text-muted-foreground px-3 py-1 text-xs font-semibold uppercase tracking-wider">
               {label}
             </p>
           )}
@@ -128,10 +121,7 @@ export interface SidebarNavProps {
 
 export function SidebarNav({ children, className }: SidebarNavProps) {
   return (
-    <nav
-      aria-label="Sidebar navigation"
-      className={cn("space-y-4", className)}
-    >
+    <nav aria-label="Sidebar navigation" className={cn("space-y-4", className)}>
       {children}
     </nav>
   )

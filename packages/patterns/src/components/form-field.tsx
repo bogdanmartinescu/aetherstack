@@ -63,27 +63,26 @@ export function FormField({
 
 export interface FormLabelProps extends React.ComponentPropsWithoutRef<typeof Label> {}
 
-export const FormLabel = React.forwardRef<
-  React.ElementRef<typeof Label>,
-  FormLabelProps
->(({ className, children, ...props }, ref) => {
-  const { id, error, required } = useFormField()
-  return (
-    <Label
-      ref={ref}
-      htmlFor={id}
-      className={cn(error && "text-destructive", className)}
-      {...props}
-    >
-      {children}
-      {required && (
-        <span className="ml-0.5 text-destructive" aria-hidden="true">
-          *
-        </span>
-      )}
-    </Label>
-  )
-})
+export const FormLabel = React.forwardRef<React.ElementRef<typeof Label>, FormLabelProps>(
+  ({ className, children, ...props }, ref) => {
+    const { id, error, required } = useFormField()
+    return (
+      <Label
+        ref={ref}
+        htmlFor={id}
+        className={cn(error && "text-destructive", className)}
+        {...props}
+      >
+        {children}
+        {required && (
+          <span className="text-destructive ml-0.5" aria-hidden="true">
+            *
+          </span>
+        )}
+      </Label>
+    )
+  },
+)
 FormLabel.displayName = "FormLabel"
 
 // ── FormControl ───────────────────────────────────────────────────────────────
@@ -96,56 +95,51 @@ export function FormControl({ children }: FormControlProps) {
   const { id, error, descriptionId, messageId } = useFormField()
   return React.cloneElement(children, {
     id,
-    "aria-describedby": [descriptionId, error ? messageId : undefined]
-      .filter(Boolean)
-      .join(" ") || undefined,
+    "aria-describedby":
+      [descriptionId, error ? messageId : undefined].filter(Boolean).join(" ") || undefined,
     "aria-invalid": error ? true : undefined,
   } as React.HTMLAttributes<HTMLElement>)
 }
 
 // ── FormDescription ───────────────────────────────────────────────────────────
 
-export interface FormDescriptionProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface FormDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export const FormDescription = React.forwardRef<
-  HTMLParagraphElement,
-  FormDescriptionProps
->(({ className, ...props }, ref) => {
-  const { descriptionId } = useFormField()
-  return (
-    <p
-      ref={ref}
-      id={descriptionId}
-      className={cn("text-xs text-muted-foreground", className)}
-      {...props}
-    />
-  )
-})
+export const FormDescription = React.forwardRef<HTMLParagraphElement, FormDescriptionProps>(
+  ({ className, ...props }, ref) => {
+    const { descriptionId } = useFormField()
+    return (
+      <p
+        ref={ref}
+        id={descriptionId}
+        className={cn("text-muted-foreground text-xs", className)}
+        {...props}
+      />
+    )
+  },
+)
 FormDescription.displayName = "FormDescription"
 
 // ── FormMessage ───────────────────────────────────────────────────────────────
 
-export interface FormMessageProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface FormMessageProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export const FormMessage = React.forwardRef<
-  HTMLParagraphElement,
-  FormMessageProps
->(({ className, children, ...props }, ref) => {
-  const { error, messageId } = useFormField()
-  const body = error ?? children
-  if (!body) return null
-  return (
-    <p
-      ref={ref}
-      id={messageId}
-      role="alert"
-      className={cn("text-xs font-medium text-destructive", className)}
-      {...props}
-    >
-      {body}
-    </p>
-  )
-})
+export const FormMessage = React.forwardRef<HTMLParagraphElement, FormMessageProps>(
+  ({ className, children, ...props }, ref) => {
+    const { error, messageId } = useFormField()
+    const body = error ?? children
+    if (!body) return null
+    return (
+      <p
+        ref={ref}
+        id={messageId}
+        role="alert"
+        className={cn("text-destructive text-xs font-medium", className)}
+        {...props}
+      >
+        {body}
+      </p>
+    )
+  },
+)
 FormMessage.displayName = "FormMessage"

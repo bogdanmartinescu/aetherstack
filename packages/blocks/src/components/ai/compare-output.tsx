@@ -32,12 +32,12 @@ function CompareOutput({ outputs, className }: CompareOutputProps) {
                 </Badge>
               </CardTitle>
               {output.timestamp && (
-                <span className="text-xs text-muted-foreground">{output.timestamp}</span>
+                <span className="text-muted-foreground text-xs">{output.timestamp}</span>
               )}
             </div>
           </CardHeader>
           <CardContent className="flex-1">
-            <div className="text-sm leading-relaxed whitespace-pre-wrap">{output.content}</div>
+            <div className="whitespace-pre-wrap text-sm leading-relaxed">{output.content}</div>
           </CardContent>
         </Card>
       ))}

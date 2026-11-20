@@ -33,9 +33,22 @@ export function MyVoiceInput() {
 }`}
       preview={<VoiceInputPreview />}
       props={[
-        { name: "onTranscript", type: "(text: string) => void", description: "Called with the final transcript string when speech recognition completes." },
-        { name: "disabled", type: "boolean", default: "false", description: "Disables the microphone button." },
-        { name: "className", type: "string", description: "Additional CSS classes applied to the wrapper element." },
+        {
+          name: "onTranscript",
+          type: "(text: string) => void",
+          description: "Called with the final transcript string when speech recognition completes.",
+        },
+        {
+          name: "disabled",
+          type: "boolean",
+          default: "false",
+          description: "Disables the microphone button.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional CSS classes applied to the wrapper element.",
+        },
       ]}
       a11yNotes={[
         'The microphone button has a dynamic aria-label: "Start recording" when idle, "Stop recording" when active.',

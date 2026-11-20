@@ -12,7 +12,10 @@ describe("PasswordField", () => {
     expect(input).toHaveAttribute("autocomplete", "current-password")
     await user.click(screen.getByRole("button", { name: "Show password" }))
     expect(input).toHaveAttribute("type", "text")
-    expect(screen.getByRole("button", { name: "Hide password" })).toHaveAttribute("aria-pressed", "true")
+    expect(screen.getByRole("button", { name: "Hide password" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    )
   })
 
   it("warns when Caps Lock is on", () => {

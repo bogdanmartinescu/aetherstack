@@ -56,11 +56,32 @@ export default function CTAPage() {
       }
       props={[
         { name: "headline", type: "string", required: true, description: "Section heading text." },
-        { name: "subheading", type: "string", description: "Supporting paragraph below the headline." },
-        { name: "primaryCta", type: "{ label: string; href: string }", description: "Primary action button." },
-        { name: "secondaryCta", type: "{ label: string; href: string }", description: "Secondary action button." },
-        { name: "variant", type: "'default' | 'muted' | 'primary'", default: "'default'", description: "Visual style. default = bordered, muted = grey bg, primary = brand colour." },
-        { name: "className", type: "string", description: "Additional classes on the section wrapper." },
+        {
+          name: "subheading",
+          type: "string",
+          description: "Supporting paragraph below the headline.",
+        },
+        {
+          name: "primaryCta",
+          type: "{ label: string; href: string }",
+          description: "Primary action button.",
+        },
+        {
+          name: "secondaryCta",
+          type: "{ label: string; href: string }",
+          description: "Secondary action button.",
+        },
+        {
+          name: "variant",
+          type: "'default' | 'muted' | 'primary'",
+          default: "'default'",
+          description: "Visual style. default = bordered, muted = grey bg, primary = brand colour.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the section wrapper.",
+        },
       ]}
       a11yNotes={[
         "Uses semantic <section> element.",

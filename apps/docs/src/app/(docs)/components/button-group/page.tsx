@@ -127,7 +127,8 @@ export function ButtonGroupDemo() {
           name: "orientation",
           type: '"horizontal" | "vertical"',
           default: '"horizontal"',
-          description: "Layout direction. Horizontal groups buttons left-to-right; vertical stacks them.",
+          description:
+            "Layout direction. Horizontal groups buttons left-to-right; vertical stacks them.",
         },
         {
           name: "className",

@@ -36,7 +36,8 @@ export default function FloatingDockPage() {
           name: "contained",
           type: "boolean",
           default: "false",
-          description: "Use absolute positioning inside a positioned parent instead of fixed viewport pinning.",
+          description:
+            "Use absolute positioning inside a positioned parent instead of fixed viewport pinning.",
         },
         {
           name: "label",

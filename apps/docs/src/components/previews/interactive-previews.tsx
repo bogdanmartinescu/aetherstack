@@ -66,14 +66,8 @@ export function CheckboxPreview() {
   const [checked, setChecked] = useState(false)
   return (
     <div className="flex items-center space-x-2">
-      <Checkbox
-        id="preview-cb"
-        checked={checked}
-        onCheckedChange={(v) => setChecked(Boolean(v))}
-      />
-      <Label htmlFor="preview-cb">
-        {checked ? "Checked" : "Unchecked"}
-      </Label>
+      <Checkbox id="preview-cb" checked={checked} onCheckedChange={(v) => setChecked(Boolean(v))} />
+      <Label htmlFor="preview-cb">{checked ? "Checked" : "Unchecked"}</Label>
     </div>
   )
 }
@@ -182,13 +176,17 @@ export function TabsPreview() {
   return (
     <Tabs defaultValue="account" className="w-full max-w-sm">
       <TabsList className="w-full">
-        <TabsTrigger value="account" className="flex-1">Account</TabsTrigger>
-        <TabsTrigger value="password" className="flex-1">Password</TabsTrigger>
+        <TabsTrigger value="account" className="flex-1">
+          Account
+        </TabsTrigger>
+        <TabsTrigger value="password" className="flex-1">
+          Password
+        </TabsTrigger>
       </TabsList>
-      <TabsContent value="account" className="pt-3 text-sm text-muted-foreground">
+      <TabsContent value="account" className="text-muted-foreground pt-3 text-sm">
         Manage your account settings.
       </TabsContent>
-      <TabsContent value="password" className="pt-3 text-sm text-muted-foreground">
+      <TabsContent value="password" className="text-muted-foreground pt-3 text-sm">
         Change your password here.
       </TabsContent>
     </Tabs>
@@ -299,18 +297,18 @@ export function HoverCardPreview() {
       </HoverCardTrigger>
       <HoverCardContent className="w-64">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted">
+          <div className="bg-muted flex h-10 w-10 items-center justify-center rounded-full">
             <User className="h-5 w-5" />
           </div>
           <div>
             <p className="text-sm font-semibold">@johndoe</p>
-            <p className="text-xs text-muted-foreground">Joined December 2021</p>
+            <p className="text-muted-foreground text-xs">Joined December 2021</p>
           </div>
         </div>
-        <p className="mt-2 text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-2 text-sm">
           Full-stack developer. Building cool things on the web.
         </p>
-        <div className="mt-3 flex items-center gap-1 text-xs text-muted-foreground">
+        <div className="text-muted-foreground mt-3 flex items-center gap-1 text-xs">
           <CalendarDays className="h-3 w-3" />
           Joined December 2021
         </div>
@@ -330,10 +328,10 @@ export function HoverCardLinkPreview() {
       <HoverCardContent className="w-72" side="top">
         <div>
           <p className="text-sm font-semibold">@aetherstack/ui</p>
-          <p className="mt-1 text-xs text-muted-foreground">
+          <p className="text-muted-foreground mt-1 text-xs">
             A beautifully designed component library built with Radix UI and Tailwind CSS.
           </p>
-          <div className="mt-2 flex gap-3 text-xs text-muted-foreground">
+          <div className="text-muted-foreground mt-2 flex gap-3 text-xs">
             <span>⭐ 1.2k</span>
             <span>🍴 142 forks</span>
           </div>
@@ -436,9 +434,7 @@ export function ToastPreview() {
     <div className="flex flex-wrap gap-2">
       <Button
         variant="outline"
-        onClick={() =>
-          toast({ title: "Saved!", description: "Your changes have been saved." })
-        }
+        onClick={() => toast({ title: "Saved!", description: "Your changes have been saved." })}
       >
         Default
       </Button>
@@ -446,7 +442,11 @@ export function ToastPreview() {
         variant="outline"
         className="border-emerald-500/40 text-emerald-700 hover:bg-emerald-50 dark:text-emerald-400 dark:hover:bg-emerald-950/40"
         onClick={() =>
-          toast({ variant: "success", title: "Success!", description: "Your action was completed." })
+          toast({
+            variant: "success",
+            title: "Success!",
+            description: "Your action was completed.",
+          })
         }
       >
         Success
@@ -464,7 +464,11 @@ export function ToastPreview() {
         variant="outline"
         className="border-amber-500/40 text-amber-700 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-950/40"
         onClick={() =>
-          toast({ variant: "warning", title: "Warning", description: "Your session will expire in 5 minutes." })
+          toast({
+            variant: "warning",
+            title: "Warning",
+            description: "Your session will expire in 5 minutes.",
+          })
         }
       >
         Warning

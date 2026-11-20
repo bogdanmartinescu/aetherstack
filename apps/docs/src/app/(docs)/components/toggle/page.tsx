@@ -98,7 +98,8 @@ export function ToggleDemo() {
       examples={[
         {
           title: "Default",
-          description: "The default ghost-style toggle. Background fills on hover; accent fill when pressed.",
+          description:
+            "The default ghost-style toggle. Background fills on hover; accent fill when pressed.",
           preview: <TogglePreview />,
           code: `import { Bold } from "lucide-react"
 

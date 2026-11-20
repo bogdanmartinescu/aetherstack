@@ -29,11 +29,11 @@ is not built on top of shadcn/ui.
 
 Counts match the public registry (`registry/public/registry.json` — **151** items):
 
-| Layer | Core | + AI-native | Total |
-|---|---|---|---|
-| Primitives (`@aetherstack/ui`) | 64 | 14 | **78** |
-| Patterns (`@aetherstack/patterns`) | 29 | 10 | **39** |
-| Blocks (`@aetherstack/blocks`) | 25 | 9 | **34** |
+| Layer                              | Core | + AI-native | Total  |
+| ---------------------------------- | ---- | ----------- | ------ |
+| Primitives (`@aetherstack/ui`)     | 64   | 14          | **78** |
+| Patterns (`@aetherstack/patterns`) | 29   | 10          | **39** |
+| Blocks (`@aetherstack/blocks`)     | 25   | 9           | **34** |
 
 All items carry AI metadata, are installable via the CLI, and have per-item registry JSON. AI-native
 items (`@aether/ai-*`) are SDK-agnostic — they accept plain strings and `AsyncIterable<string>`;
@@ -47,18 +47,18 @@ Core packages are published to npm under the `@aetherstack` org (see versions in
 
 **Continuous development:** [GOAL.md](GOAL.md) · [AGENTS.md](AGENTS.md) · [ROADMAP.md](ROADMAP.md) · [Task backlog](docs/roadmap/platform-backlog.md) · [Execution state](docs/roadmap/execution-state.md). Future platform features and monetization proposals are planning documents, not shipped functionality.
 
-| Doc | Purpose |
-|---|---|
-| [`docs/architecture/overview.md`](docs/architecture/overview.md) | Repo layout, dependency graph, naming glossary |
+| Doc                                                                                        | Purpose                                                            |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| [`docs/architecture/overview.md`](docs/architecture/overview.md)                           | Repo layout, dependency graph, naming glossary                     |
 | [`docs/architecture/engineering-standards.md`](docs/architecture/engineering-standards.md) | Coding, API, styling, a11y, and review standards — source of truth |
-| [`docs/roadmap/build-plan.md`](docs/roadmap/build-plan.md) | Phased roadmap and acceptance criteria |
-| [`docs/product/positioning.md`](docs/product/positioning.md) | Product vision and audience |
-| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Dev setup, branching, commit style, pre-PR checklist |
-| [`SECURITY.md`](SECURITY.md) | Vulnerability reporting |
-| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | Community conduct |
-| [`docs/governance/overview.md`](docs/governance/overview.md) | Maintainer decision process |
-| [`CLAUDE.md`](CLAUDE.md) | Working rules for AI assistants in this repo |
-| [`LICENSE`](LICENSE) | MIT — free for personal and commercial use |
+| [`docs/roadmap/build-plan.md`](docs/roadmap/build-plan.md)                                 | Phased roadmap and acceptance criteria                             |
+| [`docs/product/positioning.md`](docs/product/positioning.md)                               | Product vision and audience                                        |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md)                                                       | Dev setup, branching, commit style, pre-PR checklist               |
+| [`SECURITY.md`](SECURITY.md)                                                               | Vulnerability reporting                                            |
+| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)                                                 | Community conduct                                                  |
+| [`docs/governance/overview.md`](docs/governance/overview.md)                               | Maintainer decision process                                        |
+| [`CLAUDE.md`](CLAUDE.md)                                                                   | Working rules for AI assistants in this repo                       |
+| [`LICENSE`](LICENSE)                                                                       | MIT — free for personal and commercial use                         |
 
 ---
 
@@ -205,21 +205,21 @@ See [`apps/docs/src/app/(docs)/llms`](apps/docs/src/app/%28docs%29/llms) or your
 
 ## Package Overview
 
-| Package | npm | Description |
-|---|---|---|
-| `@aetherstack/tokens` | ✅ 0.1.1 | Design tokens — colors, spacing, typography, radius, shadows |
-| `@aetherstack/ui` | ✅ 0.4.0 | Core UI components — 64 primitives + 14 AI-native primitives |
-| `@aetherstack/patterns` | ✅ 0.3.0 | Higher-level compositions — 29 patterns + 10 AI-native patterns |
-| `@aetherstack/blocks` | ✅ 0.3.0 | Full page-section layout blocks — 25 blocks + 9 AI-native blocks |
-| `@aetherstack/themes` | ✅ 0.0.3 | CSS variable theme collections |
-| `@aetherstack/utils` | ✅ 0.1.1 | `cn()` and shared utility functions |
-| `@aetherstack/registry-schema` | ✅ 0.0.2 | Zod schemas and TypeScript types for registry data + AI metadata |
-| `@aetherstack/mcp-server` | ✅ 0.1.1 | stdio MCP server for AI agent integration |
-| `@aetherstack/cli` | ✅ 0.1.1 | `aether-ui` CLI — `init`, `add`, `list`, `generate` commands |
-| `@aetherstack/registry-build` | internal | Registry validation and build utilities |
-| `@aetherstack/eslint-config` | internal | Shared ESLint configurations |
-| `@aetherstack/typescript-config` | internal | Shared TypeScript configurations |
-| `@aetherstack/tailwind-config` | internal | Shared Tailwind CSS base configuration |
+| Package                          | npm      | Description                                                      |
+| -------------------------------- | -------- | ---------------------------------------------------------------- |
+| `@aetherstack/tokens`            | ✅ 0.1.1 | Design tokens — colors, spacing, typography, radius, shadows     |
+| `@aetherstack/ui`                | ✅ 0.4.0 | Core UI components — 64 primitives + 14 AI-native primitives     |
+| `@aetherstack/patterns`          | ✅ 0.3.0 | Higher-level compositions — 29 patterns + 10 AI-native patterns  |
+| `@aetherstack/blocks`            | ✅ 0.3.0 | Full page-section layout blocks — 25 blocks + 9 AI-native blocks |
+| `@aetherstack/themes`            | ✅ 0.0.3 | CSS variable theme collections                                   |
+| `@aetherstack/utils`             | ✅ 0.1.1 | `cn()` and shared utility functions                              |
+| `@aetherstack/registry-schema`   | ✅ 0.0.2 | Zod schemas and TypeScript types for registry data + AI metadata |
+| `@aetherstack/mcp-server`        | ✅ 0.1.1 | stdio MCP server for AI agent integration                        |
+| `@aetherstack/cli`               | ✅ 0.1.1 | `aether-ui` CLI — `init`, `add`, `list`, `generate` commands     |
+| `@aetherstack/registry-build`    | internal | Registry validation and build utilities                          |
+| `@aetherstack/eslint-config`     | internal | Shared ESLint configurations                                     |
+| `@aetherstack/typescript-config` | internal | Shared TypeScript configurations                                 |
+| `@aetherstack/tailwind-config`   | internal | Shared Tailwind CSS base configuration                           |
 
 ---
 

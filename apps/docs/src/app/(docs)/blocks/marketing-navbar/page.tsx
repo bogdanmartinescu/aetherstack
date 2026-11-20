@@ -47,11 +47,27 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         />
       }
       props={[
-        { name: "brand", type: "string", description: "Brand name text rendered next to the logo." },
+        {
+          name: "brand",
+          type: "string",
+          description: "Brand name text rendered next to the logo.",
+        },
         { name: "logo", type: "ReactNode", description: "Custom logo element." },
-        { name: "navItems", type: "{ label: string; href: string }[]", description: "Navigation link items." },
-        { name: "cta", type: "{ label: string; href: string; variant?: 'default' | 'outline' }", description: "Call-to-action button in the top right." },
-        { name: "className", type: "string", description: "Additional classes on the header element." },
+        {
+          name: "navItems",
+          type: "{ label: string; href: string }[]",
+          description: "Navigation link items.",
+        },
+        {
+          name: "cta",
+          type: "{ label: string; href: string; variant?: 'default' | 'outline' }",
+          description: "Call-to-action button in the top right.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the header element.",
+        },
       ]}
       a11yNotes={[
         "Desktop nav is wrapped in <nav aria-label='Marketing navigation'>.",

@@ -53,21 +53,21 @@ function ReasoningBlock({
     <Collapsible open={open} onOpenChange={handleOpenChange}>
       <div
         data-streaming={isStreaming || undefined}
-        className={cn("rounded-lg border border-border bg-card", className)}
+        className={cn("border-border bg-card rounded-lg border", className)}
       >
         <CollapsibleTrigger asChild>
           <button
             type="button"
             className={cn(
-              "flex w-full items-center gap-2 rounded-lg px-4 py-3 text-left text-sm text-muted-foreground transition-colors hover:text-foreground",
-              "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+              "text-muted-foreground hover:text-foreground flex w-full items-center gap-2 rounded-lg px-4 py-3 text-left text-sm transition-colors",
+              "ring-offset-background focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset",
             )}
           >
             <Lightbulb
               aria-hidden="true"
               className={cn(
                 "h-4 w-4 shrink-0",
-                isStreaming && "animate-pulse text-primary motion-reduce:animate-none",
+                isStreaming && "text-primary animate-pulse motion-reduce:animate-none",
               )}
             />
             <span className="font-medium">{getTitle(title, isStreaming, duration)}</span>
@@ -81,10 +81,10 @@ function ReasoningBlock({
           </button>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="border-t border-border px-4 pb-4 pt-3">
+          <div className="border-border border-t px-4 pb-4 pt-3">
             <div
               tabIndex={0}
-              className="max-h-64 overflow-y-auto whitespace-pre-wrap rounded bg-muted p-3 font-mono text-xs leading-relaxed text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="bg-muted text-muted-foreground focus-visible:ring-ring max-h-64 overflow-y-auto whitespace-pre-wrap rounded p-3 font-mono text-xs leading-relaxed focus-visible:outline-none focus-visible:ring-2"
             >
               {content}
             </div>

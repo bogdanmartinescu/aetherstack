@@ -56,7 +56,7 @@ export function UsersPage() {
 **File handling:** FileDropzone, UploadProgress  
 **User:** ProfileDropdown, NotificationBell, ThemeSwitcher  
 **Styling:** ColorPicker  
-**Content:** ActivityFeed, ChatMessageList, ConfirmDialog, TimelineFeed  
+**Content:** ActivityFeed, ChatMessageList, ConfirmDialog, TimelineFeed
 
 ## AI-native patterns (10)
 

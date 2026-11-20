@@ -163,23 +163,58 @@ export function ControlledTabs() {
           props: [
             { name: "defaultValue", type: "string", description: "Uncontrolled active tab value." },
             { name: "value", type: "string", description: "Controlled active tab value." },
-            { name: "onValueChange", type: "(value: string) => void", description: "Callback when active tab changes." },
-            { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Layout direction — affects arrow key behavior." },
-            { name: "activationMode", type: '"automatic" | "manual"', default: '"automatic"', description: "Whether tabs activate on focus (automatic) or require Enter/Space (manual)." },
+            {
+              name: "onValueChange",
+              type: "(value: string) => void",
+              description: "Callback when active tab changes.",
+            },
+            {
+              name: "orientation",
+              type: '"horizontal" | "vertical"',
+              default: '"horizontal"',
+              description: "Layout direction — affects arrow key behavior.",
+            },
+            {
+              name: "activationMode",
+              type: '"automatic" | "manual"',
+              default: '"automatic"',
+              description:
+                "Whether tabs activate on focus (automatic) or require Enter/Space (manual).",
+            },
           ],
         },
         {
           title: "TabsTrigger",
           props: [
-            { name: "value", type: "string", required: true, description: "Matches a TabsContent value." },
-            { name: "disabled", type: "boolean", default: "false", description: "Disables this tab." },
+            {
+              name: "value",
+              type: "string",
+              required: true,
+              description: "Matches a TabsContent value.",
+            },
+            {
+              name: "disabled",
+              type: "boolean",
+              default: "false",
+              description: "Disables this tab.",
+            },
           ],
         },
         {
           title: "TabsContent",
           props: [
-            { name: "value", type: "string", required: true, description: "Matches a TabsTrigger value." },
-            { name: "forceMount", type: "boolean", description: "Keep the content in the DOM even when inactive (useful for forms that should not lose state)." },
+            {
+              name: "value",
+              type: "string",
+              required: true,
+              description: "Matches a TabsTrigger value.",
+            },
+            {
+              name: "forceMount",
+              type: "boolean",
+              description:
+                "Keep the content in the DOM even when inactive (useful for forms that should not lose state).",
+            },
           ],
         },
       ]}

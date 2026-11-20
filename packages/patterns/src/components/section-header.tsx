@@ -21,12 +21,8 @@ export function SectionHeader({
   return (
     <div className={cn("flex flex-wrap items-start justify-between gap-4", className)}>
       <div className="min-w-0 flex-1">
-        <Heading className="text-base font-semibold text-foreground">
-          {title}
-        </Heading>
-        {description && (
-          <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>
-        )}
+        <Heading className="text-foreground text-base font-semibold">{title}</Heading>
+        {description && <p className="text-muted-foreground mt-0.5 text-sm">{description}</p>}
       </div>
       {action && <div className="shrink-0">{action}</div>}
     </div>
@@ -55,19 +51,14 @@ export function SettingsSection({
   children,
 }: SettingsSectionProps) {
   return (
-    <section
-      className={cn(
-        "rounded-lg border border-border bg-card",
-        className,
-      )}
-    >
+    <section className={cn("border-border bg-card rounded-lg border", className)}>
       {/* Header */}
-      <div className="border-b border-border px-6 py-4">
-      <SectionHeader
-        title={title}
-        {...(description !== undefined && { description })}
-        action={headerAction}
-      />
+      <div className="border-border border-b px-6 py-4">
+        <SectionHeader
+          title={title}
+          {...(description !== undefined && { description })}
+          action={headerAction}
+        />
       </div>
 
       {/* Content */}
@@ -75,7 +66,7 @@ export function SettingsSection({
 
       {/* Footer */}
       {footer && (
-        <div className="flex items-center justify-end gap-2 rounded-b-lg border-t border-border bg-muted/30 px-6 py-3">
+        <div className="border-border bg-muted/30 flex items-center justify-end gap-2 rounded-b-lg border-t px-6 py-3">
           {footer}
         </div>
       )}

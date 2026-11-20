@@ -24,7 +24,13 @@ type Recipe = {
 
 const RECIPES: Recipe[] = [
   {
-    keywords: ["saas dashboard", "admin dashboard", "admin panel", "dashboard layout", "dashboard app"],
+    keywords: [
+      "saas dashboard",
+      "admin dashboard",
+      "admin panel",
+      "dashboard layout",
+      "dashboard app",
+    ],
     components: [
       "dashboard-shell",
       "metric-card",
@@ -64,7 +70,8 @@ export default function DashboardPage() {
 export default function LoginPage() {
   return <LoginBlock />
 }`,
-    notes: "login-block is a self-contained login screen. Pass onSubmit and onForgotPassword props to wire it to your auth logic.",
+    notes:
+      "login-block is a self-contained login screen. Pass onSubmit and onForgotPassword props to wire it to your auth logic.",
   },
   {
     keywords: ["sign up", "signup page", "registration page", "register page", "create account"],
@@ -77,7 +84,13 @@ export default function SignupPage() {
     notes: "signup-block includes name, email, password validation, and terms/privacy links.",
   },
   {
-    keywords: ["settings page", "settings form", "profile settings", "account settings", "user settings"],
+    keywords: [
+      "settings page",
+      "settings form",
+      "profile settings",
+      "account settings",
+      "user settings",
+    ],
     components: ["section-header", "form-field", "input", "textarea", "switch", "button"],
     starterCode: `import { SectionHeader, SettingsSection } from "@/components/patterns/section-header"
 import { FormField, FormLabel, FormControl, FormDescription } from "@/components/patterns/form-field"

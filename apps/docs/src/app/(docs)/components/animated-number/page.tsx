@@ -32,7 +32,12 @@ export default function AnimatedNumberPage() {
           description: "Passed to Intl.NumberFormat.",
         },
         { name: "locale", type: "string", default: '"en-US"', description: "BCP 47 locale tag." },
-        { name: "className", type: "string", default: "—", description: "Optional class on the root span." },
+        {
+          name: "className",
+          type: "string",
+          default: "—",
+          description: "Optional class on the root span.",
+        },
       ]}
       a11yNotes={["The visible text is the full formatted value; no duplicate hidden copy."]}
     />

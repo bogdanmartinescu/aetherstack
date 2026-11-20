@@ -81,9 +81,11 @@ export function SwitchDemo() {
               {["Email notifications", "Push notifications", "Marketing emails"].map((s) => (
                 <div key={s} className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-foreground">{s}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {s === "Marketing emails" ? "We respect your inbox." : "Delivered to your inbox."}
+                    <p className="text-foreground text-sm font-medium">{s}</p>
+                    <p className="text-muted-foreground text-xs">
+                      {s === "Marketing emails"
+                        ? "We respect your inbox."
+                        : "Delivered to your inbox."}
                     </p>
                   </div>
                   <SwitchPreview />
@@ -110,10 +112,10 @@ export function SwitchDemo() {
           title: "Disabled",
           preview: (
             <div className="flex items-center space-x-2">
-              <div className="inline-flex h-6 w-11 items-center rounded-full bg-input opacity-50 cursor-not-allowed">
-                <div className="h-5 w-5 rounded-full bg-background shadow-lg translate-x-0 ml-0.5" />
+              <div className="bg-input inline-flex h-6 w-11 cursor-not-allowed items-center rounded-full opacity-50">
+                <div className="bg-background ml-0.5 h-5 w-5 translate-x-0 rounded-full shadow-lg" />
               </div>
-              <span className="text-sm text-muted-foreground opacity-50">Disabled</span>
+              <span className="text-muted-foreground text-sm opacity-50">Disabled</span>
             </div>
           ),
           code: `<Switch id="disabled" disabled />

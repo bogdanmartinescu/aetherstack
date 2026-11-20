@@ -32,26 +32,49 @@ export default function SignupPage() {
     />
   )
 }`}
-      preview={
-        <SignupBlock
-          appName="Acme"
-          tagline="Create your account to get started."
-        />
-      }
+      preview={<SignupBlock appName="Acme" tagline="Create your account to get started." />}
       props={[
-        { name: "appName", type: "string", default: '"Aether UI"', description: "Product name displayed above the form." },
+        {
+          name: "appName",
+          type: "string",
+          default: '"Aether UI"',
+          description: "Product name displayed above the form.",
+        },
         { name: "tagline", type: "string", description: "Short tagline below the app name." },
-        { name: "onSubmit", type: "(values: { name, email, password }) => void", description: "Called with validated form data on submit." },
-        { name: "signInHref", type: "string", default: '"/login"', description: "URL for the existing account sign-in link." },
-        { name: "termsHref", type: "string", default: '"/terms"', description: "URL for the terms of service link in the footer." },
-        { name: "privacyHref", type: "string", default: '"/privacy"', description: "URL for the privacy policy link in the footer." },
-        { name: "className", type: "string", description: "Additional classes on the root wrapper." },
+        {
+          name: "onSubmit",
+          type: "(values: { name, email, password }) => void",
+          description: "Called with validated form data on submit.",
+        },
+        {
+          name: "signInHref",
+          type: "string",
+          default: '"/login"',
+          description: "URL for the existing account sign-in link.",
+        },
+        {
+          name: "termsHref",
+          type: "string",
+          default: '"/terms"',
+          description: "URL for the terms of service link in the footer.",
+        },
+        {
+          name: "privacyHref",
+          type: "string",
+          default: '"/privacy"',
+          description: "URL for the privacy policy link in the footer.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root wrapper.",
+        },
       ]}
       a11yNotes={[
         "All form fields are labelled via visible labels and htmlFor/id associations.",
         "Inline validation errors are rendered adjacent to each field.",
-        "The password field uses type=\"password\" for native browser masking.",
-        "Terms and privacy links open in the same tab by default — set target=\"_blank\" if needed.",
+        'The password field uses type="password" for native browser masking.',
+        'Terms and privacy links open in the same tab by default — set target="_blank" if needed.',
       ]}
     />
   )

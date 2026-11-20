@@ -9,7 +9,7 @@ export function PromptSuggestionPreview() {
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <div className="flex flex-wrap gap-2 justify-center">
+      <div className="flex flex-wrap justify-center gap-2">
         <PromptSuggestion
           label="Explain this code"
           icon={<Code className="h-3.5 w-3.5" />}
@@ -26,9 +26,7 @@ export function PromptSuggestionPreview() {
           onClick={() => setClicked("Brainstorm ideas")}
         />
       </div>
-      {clicked && (
-        <p className="text-xs text-muted-foreground">Clicked: {clicked}</p>
-      )}
+      {clicked && <p className="text-muted-foreground text-xs">Clicked: {clicked}</p>}
     </div>
   )
 }

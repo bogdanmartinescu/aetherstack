@@ -23,7 +23,13 @@ import { Stepper } from "../components/stepper"
 import { ActivityFeed } from "../components/activity-feed"
 import { FileDropzone } from "../components/file-dropzone"
 import { DataTable } from "../components/data-table"
-import { CommandPalette, CommandPaletteInput, CommandPaletteList, CommandPaletteEmpty, CommandItem } from "../components/command-palette"
+import {
+  CommandPalette,
+  CommandPaletteInput,
+  CommandPaletteList,
+  CommandPaletteEmpty,
+  CommandItem,
+} from "../components/command-palette"
 import { KanbanBoard } from "../components/kanban"
 import { ColorPicker, ColorSwatch } from "../components/color-picker"
 
@@ -169,9 +175,7 @@ describe("useFormField — outside context", () => {
       useFormField()
       return null
     }
-    expect(() => render(<Probe />)).toThrow(
-      "useFormField must be used within a FormField",
-    )
+    expect(() => render(<Probe />)).toThrow("useFormField must be used within a FormField")
   })
 })
 
@@ -194,26 +198,12 @@ describe("Breadcrumb", () => {
   })
 
   it("renders intermediate items as links", () => {
-    render(
-      <Breadcrumb
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Profile" },
-        ]}
-      />,
-    )
+    render(<Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Profile" }]} />)
     expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/")
   })
 
   it("renders last item as non-link with aria-current", () => {
-    render(
-      <Breadcrumb
-        items={[
-          { label: "Home", href: "/" },
-          { label: "Profile" },
-        ]}
-      />,
-    )
+    render(<Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Profile" }]} />)
     const last = screen.getByText("Profile")
     expect(last.tagName).toBe("SPAN")
     expect(last).toHaveAttribute("aria-current", "page")
@@ -297,12 +287,20 @@ describe("SectionHeader", () => {
 
 describe("SettingsSection", () => {
   it("renders title in header", () => {
-    render(<SettingsSection title="Profile"><p>content</p></SettingsSection>)
+    render(
+      <SettingsSection title="Profile">
+        <p>content</p>
+      </SettingsSection>,
+    )
     expect(screen.getByRole("heading", { name: "Profile" })).toBeInTheDocument()
   })
 
   it("renders children in content area", () => {
-    render(<SettingsSection title="Profile"><p>content</p></SettingsSection>)
+    render(
+      <SettingsSection title="Profile">
+        <p>content</p>
+      </SettingsSection>,
+    )
     expect(screen.getByText("content")).toBeInTheDocument()
   })
 
@@ -317,7 +315,9 @@ describe("SettingsSection", () => {
 
   it("does not render footer when not provided", () => {
     const { container } = render(
-      <SettingsSection title="Profile"><p>content</p></SettingsSection>,
+      <SettingsSection title="Profile">
+        <p>content</p>
+      </SettingsSection>,
     )
     expect(container.querySelector(".rounded-b-lg")).not.toBeInTheDocument()
   })
@@ -467,7 +467,9 @@ describe("FilterPill", () => {
 
   it("renders remove button when onRemove is provided", () => {
     render(<FilterPill label="Status: Active" onRemove={() => {}} />)
-    expect(screen.getByRole("button", { name: /Remove filter: Status: Active/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole("button", { name: /Remove filter: Status: Active/i }),
+    ).toBeInTheDocument()
   })
 
   it("does not render remove button without onRemove", () => {
@@ -521,7 +523,11 @@ describe("FilterToolbar", () => {
   })
 
   it("renders children slot", () => {
-    render(<FilterToolbar><button>Filter</button></FilterToolbar>)
+    render(
+      <FilterToolbar>
+        <button>Filter</button>
+      </FilterToolbar>,
+    )
     expect(screen.getByRole("button", { name: "Filter" })).toBeInTheDocument()
   })
 })
@@ -566,10 +572,7 @@ describe("NavItem", () => {
 
   it("is an anchor with correct href", () => {
     render(<NavItem label="Dashboard" href="/dashboard" />)
-    expect(screen.getByRole("link", { name: "Dashboard" })).toHaveAttribute(
-      "href",
-      "/dashboard",
-    )
+    expect(screen.getByRole("link", { name: "Dashboard" })).toHaveAttribute("href", "/dashboard")
   })
 
   it("has aria-current=page when active", () => {
@@ -670,9 +673,7 @@ describe("SidebarNav", () => {
         <NavItem label="Home" href="/" />
       </SidebarNav>,
     )
-    expect(
-      screen.getByRole("navigation", { name: "Sidebar navigation" }),
-    ).toBeInTheDocument()
+    expect(screen.getByRole("navigation", { name: "Sidebar navigation" })).toBeInTheDocument()
   })
 
   it("renders children", () => {
@@ -759,9 +760,7 @@ describe("Stepper", () => {
   })
 
   it("applies vertical orientation", () => {
-    const { container } = render(
-      <Stepper steps={steps} currentStep={0} orientation="vertical" />,
-    )
+    const { container } = render(<Stepper steps={steps} currentStep={0} orientation="vertical" />)
     expect(container.firstChild).toHaveClass("flex-col")
   })
 })

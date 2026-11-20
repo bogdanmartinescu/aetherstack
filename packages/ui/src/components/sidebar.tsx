@@ -46,12 +46,7 @@ const SidebarProvider = React.forwardRef<HTMLDivElement, SidebarProviderProps>(
 
     return (
       <SidebarContext.Provider value={{ open, setOpen, toggle }}>
-        <div
-          ref={ref}
-          data-sidebar-open={open}
-          className={cn("flex h-full", className)}
-          {...props}
-        >
+        <div ref={ref} data-sidebar-open={open} className={cn("flex h-full", className)} {...props}>
           {children}
         </div>
       </SidebarContext.Provider>
@@ -68,7 +63,7 @@ const Sidebar = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>
         ref={ref}
         data-state={open ? "open" : "closed"}
         className={cn(
-          "flex h-full flex-col border-r border-border bg-background transition-all duration-200",
+          "border-border bg-background flex h-full flex-col border-r transition-all duration-200",
           open ? "w-60" : "w-16",
           className,
         )}
@@ -81,99 +76,79 @@ const Sidebar = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>
 )
 Sidebar.displayName = "Sidebar"
 
-const SidebarHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-col gap-2 p-2", className)}
-    {...props}
-  />
-))
+const SidebarHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex flex-col gap-2 p-2", className)} {...props} />
+  ),
+)
 SidebarHeader.displayName = "SidebarHeader"
 
-const SidebarContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex min-h-0 flex-1 flex-col gap-2 overflow-auto p-2", className)}
-    {...props}
-  />
-))
-SidebarContent.displayName = "SidebarContent"
-
-const SidebarFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-col gap-2 p-2", className)}
-    {...props}
-  />
-))
-SidebarFooter.displayName = "SidebarFooter"
-
-const SidebarGroup = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
-    {...props}
-  />
-))
-SidebarGroup.displayName = "SidebarGroup"
-
-const SidebarGroupLabel = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  const { open } = useSidebar()
-  return (
+const SidebarContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        "flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-muted-foreground transition-all duration-200",
-        !open && "sr-only",
-        className,
-      )}
+      className={cn("flex min-h-0 flex-1 flex-col gap-2 overflow-auto p-2", className)}
       {...props}
     />
-  )
-})
+  ),
+)
+SidebarContent.displayName = "SidebarContent"
+
+const SidebarFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex flex-col gap-2 p-2", className)} {...props} />
+  ),
+)
+SidebarFooter.displayName = "SidebarFooter"
+
+const SidebarGroup = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
+      {...props}
+    />
+  ),
+)
+SidebarGroup.displayName = "SidebarGroup"
+
+const SidebarGroupLabel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    const { open } = useSidebar()
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "text-muted-foreground flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium transition-all duration-200",
+          !open && "sr-only",
+          className,
+        )}
+        {...props}
+      />
+    )
+  },
+)
 SidebarGroupLabel.displayName = "SidebarGroupLabel"
 
-const SidebarGroupContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("w-full", className)} {...props} />
-))
+const SidebarGroupContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("w-full", className)} {...props} />
+  ),
+)
 SidebarGroupContent.displayName = "SidebarGroupContent"
 
-const SidebarMenu = React.forwardRef<
-  HTMLUListElement,
-  React.HTMLAttributes<HTMLUListElement>
->(({ className, ...props }, ref) => (
-  <ul
-    ref={ref}
-    className={cn("flex w-full min-w-0 flex-col gap-1", className)}
-    {...props}
-  />
-))
+const SidebarMenu = React.forwardRef<HTMLUListElement, React.HTMLAttributes<HTMLUListElement>>(
+  ({ className, ...props }, ref) => (
+    <ul ref={ref} className={cn("flex w-full min-w-0 flex-col gap-1", className)} {...props} />
+  ),
+)
 SidebarMenu.displayName = "SidebarMenu"
 
-const SidebarMenuItem = React.forwardRef<
-  HTMLLIElement,
-  React.HTMLAttributes<HTMLLIElement>
->(({ className, ...props }, ref) => (
-  <li ref={ref} className={cn("group/menu-item relative", className)} {...props} />
-))
+const SidebarMenuItem = React.forwardRef<HTMLLIElement, React.HTMLAttributes<HTMLLIElement>>(
+  ({ className, ...props }, ref) => (
+    <li ref={ref} className={cn("group/menu-item relative", className)} {...props} />
+  ),
+)
 SidebarMenuItem.displayName = "SidebarMenuItem"
 
 interface SidebarMenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -194,9 +169,9 @@ const SidebarMenuButton = React.forwardRef<HTMLButtonElement, SidebarMenuButtonP
           "flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none",
           "ring-offset-background transition-colors",
           "hover:bg-accent hover:text-accent-foreground",
-          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2",
           "disabled:pointer-events-none disabled:opacity-50",
-          "data-[active=true]:bg-accent data-[active=true]:font-medium data-[active=true]:text-accent-foreground",
+          "data-[active=true]:bg-accent data-[active=true]:text-accent-foreground data-[active=true]:font-medium",
           "[&>svg]:size-4 [&>svg]:shrink-0",
           !open && "justify-center",
           className,

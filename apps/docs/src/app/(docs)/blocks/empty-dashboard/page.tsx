@@ -43,9 +43,22 @@ export default function DashboardPage() {
       }
       previewHeight="500px"
       props={[
-        { name: "title", type: "string", default: '"Welcome to your dashboard"', description: "Heading text." },
-        { name: "description", type: "string", description: "Supporting description below the heading." },
-        { name: "actions", type: "ReactNode", description: "CTA buttons or other actions rendered below the description." },
+        {
+          name: "title",
+          type: "string",
+          default: '"Welcome to your dashboard"',
+          description: "Heading text.",
+        },
+        {
+          name: "description",
+          type: "string",
+          description: "Supporting description below the heading.",
+        },
+        {
+          name: "actions",
+          type: "ReactNode",
+          description: "CTA buttons or other actions rendered below the description.",
+        },
         { name: "className", type: "string", description: "Additional classes on the wrapper." },
       ]}
       a11yNotes={[

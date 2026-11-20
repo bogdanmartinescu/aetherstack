@@ -27,7 +27,7 @@ export function LandingHero({
   className,
 }: LandingHeroProps) {
   return (
-    <section className={cn("w-full py-20 px-4 sm:py-28", className)}>
+    <section className={cn("w-full px-4 py-20 sm:py-28", className)}>
       <div className="mx-auto max-w-4xl text-center">
         {eyebrow && (
           <div className="mb-6 flex justify-center">
@@ -37,14 +37,12 @@ export function LandingHero({
           </div>
         )}
 
-        <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+        <h1 className="text-foreground text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
           {headline}
         </h1>
 
         {subheading && (
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            {subheading}
-          </p>
+          <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-lg">{subheading}</p>
         )}
 
         {(primaryCta || secondaryCta) && (
@@ -63,7 +61,7 @@ export function LandingHero({
         )}
 
         {media && (
-          <div className="mt-14 overflow-hidden rounded-xl border border-border shadow-lg">
+          <div className="border-border mt-14 overflow-hidden rounded-xl border shadow-lg">
             {media}
           </div>
         )}

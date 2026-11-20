@@ -34,7 +34,7 @@ const defaultComponents: Components = {
   p: ({ node: _node, ...props }) => <p className="mb-3 last:mb-0" {...props} />,
   code: ({ node: _node, className, ...props }) => (
     <code
-      className={cn("rounded bg-muted px-1 py-0.5 font-mono text-[0.9em]", className)}
+      className={cn("bg-muted rounded px-1 py-0.5 font-mono text-[0.9em]", className)}
       {...props}
     />
   ),
@@ -50,16 +50,14 @@ const defaultComponents: Components = {
         />
       )
     }
-    return <pre className="my-3 overflow-x-auto rounded-lg bg-muted p-4 text-sm">{children}</pre>
+    return <pre className="bg-muted my-3 overflow-x-auto rounded-lg p-4 text-sm">{children}</pre>
   },
   ul: ({ node: _node, ...props }) => <ul className="mb-3 list-disc space-y-1 pl-5" {...props} />,
-  ol: ({ node: _node, ...props }) => (
-    <ol className="mb-3 list-decimal space-y-1 pl-5" {...props} />
-  ),
+  ol: ({ node: _node, ...props }) => <ol className="mb-3 list-decimal space-y-1 pl-5" {...props} />,
   li: ({ node: _node, ...props }) => <li className="leading-relaxed" {...props} />,
   a: ({ node: _node, children, ...props }) => (
     <a
-      className="rounded-sm text-primary underline underline-offset-2 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="text-primary focus-visible:ring-ring rounded-sm underline underline-offset-2 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2"
       target="_blank"
       rel="noopener noreferrer"
       {...props}
@@ -73,11 +71,11 @@ const defaultComponents: Components = {
   ),
   blockquote: ({ node: _node, ...props }) => (
     <blockquote
-      className="my-3 border-l-4 border-border pl-4 italic text-muted-foreground"
+      className="border-border text-muted-foreground my-3 border-l-4 pl-4 italic"
       {...props}
     />
   ),
-  hr: () => <hr className="my-4 border-border" />,
+  hr: () => <hr className="border-border my-4" />,
   strong: ({ node: _node, ...props }) => <strong className="font-semibold" {...props} />,
   em: ({ node: _node, ...props }) => <em className="italic" {...props} />,
 }

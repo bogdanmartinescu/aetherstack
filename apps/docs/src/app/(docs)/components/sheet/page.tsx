@@ -162,16 +162,39 @@ export function SheetDemo() {
           title: "Sheet (Root)",
           props: [
             { name: "open", type: "boolean", description: "Controlled open state." },
-            { name: "defaultOpen", type: "boolean", default: "false", description: "Uncontrolled initial open state." },
-            { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback when open state changes." },
+            {
+              name: "defaultOpen",
+              type: "boolean",
+              default: "false",
+              description: "Uncontrolled initial open state.",
+            },
+            {
+              name: "onOpenChange",
+              type: "(open: boolean) => void",
+              description: "Callback when open state changes.",
+            },
           ],
         },
         {
           title: "SheetContent",
           props: [
-            { name: "side", type: '"top" | "right" | "bottom" | "left"', default: '"right"', description: "The edge the sheet slides in from." },
-            { name: "className", type: "string", description: "Use sm:max-w-* to control sheet width." },
-            { name: "onInteractOutside", type: "(e: Event) => void", description: "Called when user clicks the overlay. Prevent default to disable close-on-click." },
+            {
+              name: "side",
+              type: '"top" | "right" | "bottom" | "left"',
+              default: '"right"',
+              description: "The edge the sheet slides in from.",
+            },
+            {
+              name: "className",
+              type: "string",
+              description: "Use sm:max-w-* to control sheet width.",
+            },
+            {
+              name: "onInteractOutside",
+              type: "(e: Event) => void",
+              description:
+                "Called when user clicks the overlay. Prevent default to disable close-on-click.",
+            },
           ],
         },
       ]}

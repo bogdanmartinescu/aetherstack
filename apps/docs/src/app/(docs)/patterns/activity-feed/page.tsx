@@ -69,13 +69,18 @@ const items = [
         </div>
       }
       props={[
-        { name: "items", type: "ActivityEntry[]", required: true, description: "List of activity entries to render." },
+        {
+          name: "items",
+          type: "ActivityEntry[]",
+          required: true,
+          description: "List of activity entries to render.",
+        },
         { name: "className", type: "string", description: "Additional classes on the wrapper." },
       ]}
       a11yNotes={[
-        "Rendered as a <ul role=\"list\"> with an aria-label for screen readers.",
+        'Rendered as a <ul role="list"> with an aria-label for screen readers.',
         "Decorative connecting line and avatars are aria-hidden.",
-        "Timestamps use human-readable relative text (e.g. \"5 minutes ago\").",
+        'Timestamps use human-readable relative text (e.g. "5 minutes ago").',
       ]}
     />
   )

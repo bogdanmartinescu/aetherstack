@@ -39,9 +39,7 @@ export const listCommand = new Command("list")
     }
 
     console.log("")
-    console.log(
-      `  ${pc.bold(registry.name)} registry — ${pc.dim(registryUrl)}`,
-    )
+    console.log(`  ${pc.bold(registry.name)} registry — ${pc.dim(registryUrl)}`)
     console.log("")
 
     // Group by type
@@ -68,8 +66,6 @@ export const listCommand = new Command("list")
       console.log("")
     }
 
-    console.log(
-      `  ${pc.dim(`${items.length} item${items.length !== 1 ? "s" : ""} available`)}`,
-    )
+    console.log(`  ${pc.dim(`${items.length} item${items.length !== 1 ? "s" : ""} available`)}`)
     console.log("")
   })

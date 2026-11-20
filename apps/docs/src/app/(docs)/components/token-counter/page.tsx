@@ -4,7 +4,8 @@ import { TokenCounterPreview } from "./preview"
 
 export const metadata: Metadata = {
   title: "TokenCounter",
-  description: "Displays token usage against a context window limit with a progress bar and formatted counts.",
+  description:
+    "Displays token usage against a context window limit with a progress bar and formatted counts.",
 }
 
 export default function TokenCounterPage() {
@@ -40,7 +41,8 @@ export default function TokenCounterPage() {
           name: "warnAt",
           type: "number",
           default: "0.8",
-          description: "Fraction of max (0–1) at which the counter turns amber. It turns destructive at 100%.",
+          description:
+            "Fraction of max (0–1) at which the counter turns amber. It turns destructive at 100%.",
         },
         {
           name: "className",

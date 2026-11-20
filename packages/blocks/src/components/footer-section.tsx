@@ -40,25 +40,19 @@ export function FooterSection({
   const year = new Date().getFullYear()
 
   return (
-    <footer className={cn("w-full border-t border-border bg-background", className)}>
+    <footer className={cn("border-border bg-background w-full border-t", className)}>
       <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6">
         {/* Top grid */}
         <div
           className={cn(
             "grid gap-8",
-            columns.length > 0
-              ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-              : "grid-cols-1",
+            columns.length > 0 ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" : "grid-cols-1",
           )}
         >
           {/* Brand column */}
           <div className="space-y-3">
-            {brand && (
-              <p className="text-base font-bold text-foreground">{brand}</p>
-            )}
-            {tagline && (
-              <p className="text-sm text-muted-foreground">{tagline}</p>
-            )}
+            {brand && <p className="text-foreground text-base font-bold">{brand}</p>}
+            {tagline && <p className="text-muted-foreground text-sm">{tagline}</p>}
             {socialLinks.length > 0 && (
               <ul className="flex flex-wrap gap-3 pt-2">
                 {socialLinks.map((s) => (
@@ -66,7 +60,7 @@ export function FooterSection({
                     <a
                       href={s.href}
                       aria-label={s.platform}
-                      className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-muted-foreground hover:text-foreground flex items-center gap-1.5 text-sm transition-colors"
                     >
                       {s.icon ?? <span>{s.platform}</span>}
                     </a>
@@ -79,13 +73,13 @@ export function FooterSection({
           {/* Link columns */}
           {columns.map((col) => (
             <div key={col.title} className="space-y-3">
-              <p className="text-sm font-semibold text-foreground">{col.title}</p>
+              <p className="text-foreground text-sm font-semibold">{col.title}</p>
               <ul className="space-y-2">
                 {col.links.map((link) => (
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                     >
                       {link.label}
                     </a>
@@ -100,7 +94,7 @@ export function FooterSection({
 
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             {copyright ?? `© ${year} ${brand ?? ""}. All rights reserved.`}
           </p>
           {legalLinks.length > 0 && (
@@ -109,7 +103,7 @@ export function FooterSection({
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-muted-foreground hover:text-foreground text-xs transition-colors"
                   >
                     {link.label}
                   </a>

@@ -171,27 +171,76 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {
           title: "TooltipProvider",
           props: [
-            { name: "delayDuration", type: "number", default: "700", description: "Milliseconds before the tooltip opens after hovering." },
-            { name: "skipDelayDuration", type: "number", default: "300", description: "Milliseconds before delay is skipped (when moving between tooltips quickly)." },
-            { name: "disableHoverableContent", type: "boolean", default: "false", description: "When true, tooltip closes immediately when the pointer moves to the content." },
+            {
+              name: "delayDuration",
+              type: "number",
+              default: "700",
+              description: "Milliseconds before the tooltip opens after hovering.",
+            },
+            {
+              name: "skipDelayDuration",
+              type: "number",
+              default: "300",
+              description:
+                "Milliseconds before delay is skipped (when moving between tooltips quickly).",
+            },
+            {
+              name: "disableHoverableContent",
+              type: "boolean",
+              default: "false",
+              description:
+                "When true, tooltip closes immediately when the pointer moves to the content.",
+            },
           ],
         },
         {
           title: "Tooltip (Root)",
           props: [
             { name: "open", type: "boolean", description: "Controlled open state." },
-            { name: "defaultOpen", type: "boolean", default: "false", description: "Uncontrolled initial open state." },
-            { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback when open state changes." },
-            { name: "delayDuration", type: "number", description: "Override the provider delay for this specific tooltip." },
+            {
+              name: "defaultOpen",
+              type: "boolean",
+              default: "false",
+              description: "Uncontrolled initial open state.",
+            },
+            {
+              name: "onOpenChange",
+              type: "(open: boolean) => void",
+              description: "Callback when open state changes.",
+            },
+            {
+              name: "delayDuration",
+              type: "number",
+              description: "Override the provider delay for this specific tooltip.",
+            },
           ],
         },
         {
           title: "TooltipContent",
           props: [
-            { name: "side", type: '"top" | "right" | "bottom" | "left"', default: '"top"', description: "Preferred side to render." },
-            { name: "sideOffset", type: "number", default: "4", description: "Distance from the trigger in pixels." },
-            { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "Alignment relative to the trigger." },
-            { name: "className", type: "string", description: "Additional classes. Use max-w-* for rich content." },
+            {
+              name: "side",
+              type: '"top" | "right" | "bottom" | "left"',
+              default: '"top"',
+              description: "Preferred side to render.",
+            },
+            {
+              name: "sideOffset",
+              type: "number",
+              default: "4",
+              description: "Distance from the trigger in pixels.",
+            },
+            {
+              name: "align",
+              type: '"start" | "center" | "end"',
+              default: '"center"',
+              description: "Alignment relative to the trigger.",
+            },
+            {
+              name: "className",
+              type: "string",
+              description: "Additional classes. Use max-w-* for rich content.",
+            },
           ],
         },
       ]}

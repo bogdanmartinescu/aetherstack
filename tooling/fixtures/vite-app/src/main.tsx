@@ -5,7 +5,14 @@ import "./index.css"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <main style={{ display: "flex", minHeight: "100vh", alignItems: "center", justifyContent: "center" }}>
+    <main
+      style={{
+        display: "flex",
+        minHeight: "100vh",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Button>Installed from packed @aetherstack/ui</Button>
     </main>
   </StrictMode>,

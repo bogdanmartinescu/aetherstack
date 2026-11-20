@@ -1,9 +1,5 @@
 import type { Metadata } from "next"
-import {
-  ResizablePanelGroup,
-  ResizablePanel,
-  ResizableHandle,
-} from "@aetherstack/ui"
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
 
 export const metadata: Metadata = {
@@ -33,16 +29,16 @@ export default function ResizablePage() {
         <div className="w-full max-w-md">
           <ResizablePanelGroup
             orientation="horizontal"
-            className="min-h-[160px] rounded-lg border border-border"
+            className="border-border min-h-[160px] rounded-lg border"
           >
             <ResizablePanel defaultSize={50}>
-              <div className="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
+              <div className="text-muted-foreground flex h-full items-center justify-center p-4 text-sm">
                 Panel A
               </div>
             </ResizablePanel>
             <ResizableHandle withHandle />
             <ResizablePanel defaultSize={50}>
-              <div className="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
+              <div className="text-muted-foreground flex h-full items-center justify-center p-4 text-sm">
                 Panel B
               </div>
             </ResizablePanel>
@@ -88,16 +84,16 @@ export function ResizableDemo() {
             <div className="w-full max-w-md">
               <ResizablePanelGroup
                 orientation="vertical"
-                className="min-h-[200px] rounded-lg border border-border"
+                className="border-border min-h-[200px] rounded-lg border"
               >
                 <ResizablePanel defaultSize={50}>
-                  <div className="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
+                  <div className="text-muted-foreground flex h-full items-center justify-center p-4 text-sm">
                     Top
                   </div>
                 </ResizablePanel>
                 <ResizableHandle withHandle />
                 <ResizablePanel defaultSize={50}>
-                  <div className="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
+                  <div className="text-muted-foreground flex h-full items-center justify-center p-4 text-sm">
                     Bottom
                   </div>
                 </ResizablePanel>
@@ -116,27 +112,28 @@ export function ResizableDemo() {
         },
         {
           title: "Three panels",
-          description: "Chain multiple panels with handles for a sidebar + content + detail layout.",
+          description:
+            "Chain multiple panels with handles for a sidebar + content + detail layout.",
           preview: (
             <div className="w-full max-w-lg">
               <ResizablePanelGroup
                 orientation="horizontal"
-                className="min-h-[120px] rounded-lg border border-border"
+                className="border-border min-h-[120px] rounded-lg border"
               >
                 <ResizablePanel defaultSize={20} minSize={15}>
-                  <div className="flex h-full items-center justify-center p-2 text-xs text-muted-foreground">
+                  <div className="text-muted-foreground flex h-full items-center justify-center p-2 text-xs">
                     Nav
                   </div>
                 </ResizablePanel>
                 <ResizableHandle withHandle />
                 <ResizablePanel defaultSize={55}>
-                  <div className="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
+                  <div className="text-muted-foreground flex h-full items-center justify-center p-4 text-sm">
                     Content
                   </div>
                 </ResizablePanel>
                 <ResizableHandle withHandle />
                 <ResizablePanel defaultSize={25} minSize={15}>
-                  <div className="flex h-full items-center justify-center p-2 text-xs text-muted-foreground">
+                  <div className="text-muted-foreground flex h-full items-center justify-center p-2 text-xs">
                     Detail
                   </div>
                 </ResizablePanel>

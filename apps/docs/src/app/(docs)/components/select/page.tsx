@@ -93,7 +93,7 @@ export function SelectDemo() {
           title: "With label",
           preview: (
             <div className="w-60 space-y-2">
-              <span className="text-sm font-medium text-foreground">Framework</span>
+              <span className="text-foreground text-sm font-medium">Framework</span>
               <SelectPreview />
             </div>
           ),
@@ -175,31 +175,68 @@ export function ControlledSelect() {
           props: [
             { name: "value", type: "string", description: "Controlled selected value." },
             { name: "defaultValue", type: "string", description: "Uncontrolled initial value." },
-            { name: "onValueChange", type: "(value: string) => void", description: "Callback when selection changes." },
-            { name: "disabled", type: "boolean", default: "false", description: "Disables the entire select." },
+            {
+              name: "onValueChange",
+              type: "(value: string) => void",
+              description: "Callback when selection changes.",
+            },
+            {
+              name: "disabled",
+              type: "boolean",
+              default: "false",
+              description: "Disables the entire select.",
+            },
             { name: "open", type: "boolean", description: "Controlled open state." },
-            { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback when open state changes." },
+            {
+              name: "onOpenChange",
+              type: "(open: boolean) => void",
+              description: "Callback when open state changes.",
+            },
           ],
         },
         {
           title: "SelectTrigger",
           props: [
-            { name: "className", type: "string", description: "Use w-* to control width. Defaults to w-full." },
+            {
+              name: "className",
+              type: "string",
+              description: "Use w-* to control width. Defaults to w-full.",
+            },
           ],
         },
         {
           title: "SelectItem",
           props: [
             { name: "value", type: "string", required: true, description: "The item value." },
-            { name: "disabled", type: "boolean", default: "false", description: "Disables this specific item." },
+            {
+              name: "disabled",
+              type: "boolean",
+              default: "false",
+              description: "Disables this specific item.",
+            },
           ],
         },
         {
           title: "SelectContent",
           props: [
-            { name: "position", type: '"popper" | "item-aligned"', default: '"popper"', description: "Positioning strategy." },
-            { name: "side", type: '"top" | "right" | "bottom" | "left"', default: '"bottom"', description: "Preferred side to open." },
-            { name: "sideOffset", type: "number", default: "4", description: "Distance from trigger in px." },
+            {
+              name: "position",
+              type: '"popper" | "item-aligned"',
+              default: '"popper"',
+              description: "Positioning strategy.",
+            },
+            {
+              name: "side",
+              type: '"top" | "right" | "bottom" | "left"',
+              default: '"bottom"',
+              description: "Preferred side to open.",
+            },
+            {
+              name: "sideOffset",
+              type: "number",
+              default: "4",
+              description: "Distance from trigger in px.",
+            },
           ],
         },
       ]}

@@ -46,7 +46,7 @@ function AIResponseCard({
     <Card className={cn("", className)}>
       {(model ?? timestamp) && (
         <CardHeader className="pb-3">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <div className="text-muted-foreground flex items-center gap-2 text-xs">
             {model && (
               <Badge variant="outline" className="gap-1 font-normal">
                 {model}
@@ -57,14 +57,14 @@ function AIResponseCard({
         </CardHeader>
       )}
       <CardContent className={cn(!(model ?? timestamp) && "pt-6")}>
-        <div className="text-sm leading-relaxed whitespace-pre-wrap">
+        <div className="whitespace-pre-wrap text-sm leading-relaxed">
           {content}
           {isStreaming && (
-            <span className="animate-pulse inline-block w-0.5 h-4 bg-current align-middle ml-0.5" />
+            <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-current align-middle" />
           )}
         </div>
       </CardContent>
-      <CardFooter className="gap-2 justify-between">
+      <CardFooter className="justify-between gap-2">
         <div className="flex items-center gap-1">
           {feedbackProps && (
             <>
@@ -72,7 +72,10 @@ function AIResponseCard({
                 variant="ghost"
                 size="icon"
                 className="h-7 w-7"
-                onClick={() => { setThumbs("up"); feedbackProps.onThumbsUp?.() }}
+                onClick={() => {
+                  setThumbs("up")
+                  feedbackProps.onThumbsUp?.()
+                }}
                 disabled={thumbs === "down"}
                 aria-label="Thumbs up"
               >
@@ -82,7 +85,10 @@ function AIResponseCard({
                 variant="ghost"
                 size="icon"
                 className="h-7 w-7"
-                onClick={() => { setThumbs("down"); feedbackProps.onThumbsDown?.() }}
+                onClick={() => {
+                  setThumbs("down")
+                  feedbackProps.onThumbsDown?.()
+                }}
                 disabled={thumbs === "up"}
                 aria-label="Thumbs down"
               >
@@ -94,12 +100,12 @@ function AIResponseCard({
         <div className="flex items-center gap-1">
           {onRegenerate && (
             <Button variant="ghost" size="sm" onClick={onRegenerate}>
-              <RefreshCw className="h-3.5 w-3.5 mr-1.5" />
+              <RefreshCw className="mr-1.5 h-3.5 w-3.5" />
               Regenerate
             </Button>
           )}
           <Button variant="ghost" size="sm" onClick={handleCopy}>
-            <Copy className="h-3.5 w-3.5 mr-1.5" />
+            <Copy className="mr-1.5 h-3.5 w-3.5" />
             {copied ? "Copied" : "Copy"}
           </Button>
         </div>

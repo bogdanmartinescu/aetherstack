@@ -30,8 +30,25 @@ function formatBytes(bytes: number): string {
 }
 
 const CODE_EXTENSIONS = new Set([
-  "js", "jsx", "ts", "tsx", "json", "py", "rb", "go", "rs", "java", "c", "cpp", "h",
-  "css", "html", "sh", "yml", "yaml", "sql",
+  "js",
+  "jsx",
+  "ts",
+  "tsx",
+  "json",
+  "py",
+  "rb",
+  "go",
+  "rs",
+  "java",
+  "c",
+  "cpp",
+  "h",
+  "css",
+  "html",
+  "sh",
+  "yml",
+  "yaml",
+  "sql",
 ])
 const IMAGE_EXTENSIONS = new Set(["png", "jpg", "jpeg", "gif", "webp", "svg", "avif"])
 const ARCHIVE_EXTENSIONS = new Set(["zip", "tar", "gz", "tgz", "rar", "7z"])
@@ -68,7 +85,7 @@ function AttachmentChip({
       data-status={status}
       aria-busy={status === "uploading" || undefined}
       className={cn(
-        "inline-flex max-w-full items-center gap-1.5 rounded-md border border-border bg-muted py-1 pl-2.5 text-sm",
+        "border-border bg-muted inline-flex max-w-full items-center gap-1.5 rounded-md border py-1 pl-2.5 text-sm",
         onRemove ? "pr-1" : "pr-2.5",
         status === "error" && "border-destructive/50 bg-destructive/10 text-destructive",
         className,
@@ -77,16 +94,16 @@ function AttachmentChip({
       {status === "uploading" ? (
         <span
           aria-hidden="true"
-          className="h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-muted-foreground border-t-transparent motion-reduce:animate-none"
+          className="border-muted-foreground h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-t-transparent motion-reduce:animate-none"
         />
       ) : status === "error" ? (
         <CircleAlert className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       ) : (
-        <Icon className="h-3.5 w-3.5 shrink-0 text-muted-foreground" aria-hidden="true" />
+        <Icon className="text-muted-foreground h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       )}
       <span className="max-w-[160px] truncate font-medium">{name}</span>
       {size !== undefined && (
-        <span className="shrink-0 text-xs text-muted-foreground">{formatBytes(size)}</span>
+        <span className="text-muted-foreground shrink-0 text-xs">{formatBytes(size)}</span>
       )}
       {status === "uploading" && <span className="sr-only">Uploading</span>}
       {status === "error" && <span className="sr-only">Upload failed</span>}
@@ -96,9 +113,9 @@ function AttachmentChip({
           onClick={onRemove}
           aria-label={`Remove ${name}`}
           className={cn(
-            "ml-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded text-muted-foreground",
-            "ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+            "text-muted-foreground ml-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded",
+            "ring-offset-background hover:bg-accent hover:text-accent-foreground transition-colors",
+            "focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2",
           )}
         >
           <X className="h-3 w-3" aria-hidden="true" />

@@ -68,14 +68,24 @@ export function MyTimeline() {
         </div>
       }
       props={[
-        { name: "items", type: "TimelineItem[]", required: true, description: "Array of timeline entries. Each has id, title, description, timestamp, and an optional icon ReactNode." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "items",
+          type: "TimelineItem[]",
+          required: true,
+          description:
+            "Array of timeline entries. Each has id, title, description, timestamp, and an optional icon ReactNode.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={[
         "Rendered as a <ol> (ordered list) since timeline events have inherent chronological order.",
         "Date markers use <time datetime> with machine-readable ISO strings.",
         "Icons are aria-hidden — event titles are the primary accessible label for each entry.",
-        "Relative timestamps (\"2 days ago\") include a visually-hidden absolute date for screen readers.",
+        'Relative timestamps ("2 days ago") include a visually-hidden absolute date for screen readers.',
       ]}
     />
   )

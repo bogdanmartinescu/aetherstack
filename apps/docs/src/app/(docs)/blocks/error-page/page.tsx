@@ -41,23 +41,50 @@ export function ServerError() {
 }`}
       preview={
         <div className="flex gap-4">
-          <div className="flex-1 overflow-hidden rounded-lg border border-border">
-            <ErrorPage
-              code="404"
-              backHref="#"
-              backLabel="Go back home"
-            />
+          <div className="border-border flex-1 overflow-hidden rounded-lg border">
+            <ErrorPage code="404" backHref="#" backLabel="Go back home" />
           </div>
         </div>
       }
       props={[
-        { name: "code", type: "string", default: "'404'", description: "Error code displayed in large type. Supports '404', '500', or any string." },
-        { name: "headline", type: "string", description: "Custom headline. Defaults to a preset for 404/500." },
-        { name: "description", type: "string", description: "Custom description. Defaults to a preset for 404/500." },
-        { name: "backHref", type: "string", default: "'/'", description: "URL for the back link button." },
-        { name: "backLabel", type: "string", default: "'Go back home'", description: "Label for the back link button." },
-        { name: "illustration", type: "ReactNode", description: "Optional illustration rendered above the error code." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "code",
+          type: "string",
+          default: "'404'",
+          description: "Error code displayed in large type. Supports '404', '500', or any string.",
+        },
+        {
+          name: "headline",
+          type: "string",
+          description: "Custom headline. Defaults to a preset for 404/500.",
+        },
+        {
+          name: "description",
+          type: "string",
+          description: "Custom description. Defaults to a preset for 404/500.",
+        },
+        {
+          name: "backHref",
+          type: "string",
+          default: "'/'",
+          description: "URL for the back link button.",
+        },
+        {
+          name: "backLabel",
+          type: "string",
+          default: "'Go back home'",
+          description: "Label for the back link button.",
+        },
+        {
+          name: "illustration",
+          type: "ReactNode",
+          description: "Optional illustration rendered above the error code.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={[
         "The headline renders as an <h1>.",

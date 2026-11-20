@@ -31,22 +31,10 @@ import { Label } from "../components/label"
 import { RadioGroup, RadioGroupItem } from "../components/radio-group"
 import { Skeleton } from "../components/skeleton"
 import { Switch } from "../components/switch"
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-} from "../components/table"
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../components/table"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/tabs"
 import { Textarea } from "../components/textarea"
-import {
-  Tooltip,
-  TooltipProvider,
-  TooltipTrigger,
-  TooltipContent,
-} from "../components/tooltip"
+import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "../components/tooltip"
 import {
   Accordion,
   AccordionItem,
@@ -64,11 +52,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "../components/dropdown-menu"
-import {
-  HoverCard,
-  HoverCardTrigger,
-  HoverCardContent,
-} from "../components/hover-card"
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "../components/hover-card"
 import { Toggle } from "../components/toggle"
 import { ToggleGroup, ToggleGroupItem } from "../components/toggle-group"
 import {
@@ -99,15 +83,8 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "../components/carousel"
-import {
-  InputGroup,
-  InputGroupAddon,
-} from "../components/input-group"
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "../components/input-otp"
+import { InputGroup, InputGroupAddon } from "../components/input-group"
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "../components/input-otp"
 import { VisuallyHidden } from "../components/visually-hidden"
 
 // ─── Badge ───────────────────────────────────────────────────────────────────
@@ -168,7 +145,11 @@ describe("Button", () => {
   it("does not fire onClick when disabled", async () => {
     const user = userEvent.setup()
     const onClick = vi.fn()
-    render(<Button disabled onClick={onClick}>Disabled</Button>)
+    render(
+      <Button disabled onClick={onClick}>
+        Disabled
+      </Button>,
+    )
     await user.click(screen.getByRole("button"))
     expect(onClick).not.toHaveBeenCalled()
   })
@@ -493,14 +474,8 @@ describe("Tabs", () => {
         <TabsContent value="tab2">Panel 2</TabsContent>
       </Tabs>,
     )
-    expect(screen.getByRole("tab", { name: "Tab 1" })).toHaveAttribute(
-      "data-state",
-      "active",
-    )
-    expect(screen.getByRole("tab", { name: "Tab 2" })).toHaveAttribute(
-      "data-state",
-      "inactive",
-    )
+    expect(screen.getByRole("tab", { name: "Tab 1" })).toHaveAttribute("data-state", "active")
+    expect(screen.getByRole("tab", { name: "Tab 2" })).toHaveAttribute("data-state", "inactive")
   })
 
   it("switches panel on tab click", async () => {
@@ -516,10 +491,7 @@ describe("Tabs", () => {
       </Tabs>,
     )
     await user.click(screen.getByRole("tab", { name: "Tab 2" }))
-    expect(screen.getByRole("tab", { name: "Tab 2" })).toHaveAttribute(
-      "data-state",
-      "active",
-    )
+    expect(screen.getByRole("tab", { name: "Tab 2" })).toHaveAttribute("data-state", "active")
   })
 
   it("navigates tabs with arrow keys", async () => {
@@ -720,9 +692,15 @@ describe("Avatar", () => {
   it("AvatarGroup renders all children when no max", () => {
     render(
       <AvatarGroup>
-        <Avatar><AvatarFallback>A1</AvatarFallback></Avatar>
-        <Avatar><AvatarFallback>A2</AvatarFallback></Avatar>
-        <Avatar><AvatarFallback>A3</AvatarFallback></Avatar>
+        <Avatar>
+          <AvatarFallback>A1</AvatarFallback>
+        </Avatar>
+        <Avatar>
+          <AvatarFallback>A2</AvatarFallback>
+        </Avatar>
+        <Avatar>
+          <AvatarFallback>A3</AvatarFallback>
+        </Avatar>
       </AvatarGroup>,
     )
     expect(screen.getByText("A1")).toBeInTheDocument()
@@ -733,9 +711,15 @@ describe("Avatar", () => {
   it("AvatarGroup shows overflow count when max is set", () => {
     render(
       <AvatarGroup max={2}>
-        <Avatar><AvatarFallback>A1</AvatarFallback></Avatar>
-        <Avatar><AvatarFallback>A2</AvatarFallback></Avatar>
-        <Avatar><AvatarFallback>A3</AvatarFallback></Avatar>
+        <Avatar>
+          <AvatarFallback>A1</AvatarFallback>
+        </Avatar>
+        <Avatar>
+          <AvatarFallback>A2</AvatarFallback>
+        </Avatar>
+        <Avatar>
+          <AvatarFallback>A3</AvatarFallback>
+        </Avatar>
       </AvatarGroup>,
     )
     expect(screen.getByText("A1")).toBeInTheDocument()
@@ -1280,16 +1264,12 @@ describe("InputGroup", () => {
   })
 
   it("addon applies correct position class for left", () => {
-    const { container } = render(
-      <InputGroupAddon position="left">@</InputGroupAddon>,
-    )
+    const { container } = render(<InputGroupAddon position="left">@</InputGroupAddon>)
     expect(container.firstChild).toHaveClass("rounded-l-md")
   })
 
   it("addon applies correct position class for right", () => {
-    const { container } = render(
-      <InputGroupAddon position="right">.com</InputGroupAddon>,
-    )
+    const { container } = render(<InputGroupAddon position="right">.com</InputGroupAddon>)
     expect(container.firstChild).toHaveClass("rounded-r-md")
   })
 })

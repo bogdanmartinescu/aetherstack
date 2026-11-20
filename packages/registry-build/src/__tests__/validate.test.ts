@@ -99,9 +99,7 @@ describe("findMissingDependencies", () => {
   it("does not report self-references when the name exists", () => {
     const reg: Registry = {
       name: "test",
-      items: [
-        { name: "a", type: "registry:ui", registryDependencies: ["a"] },
-      ],
+      items: [{ name: "a", type: "registry:ui", registryDependencies: ["a"] }],
     }
     expect(findMissingDependencies(reg)).toEqual([])
   })

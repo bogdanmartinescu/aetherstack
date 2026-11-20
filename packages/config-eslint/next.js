@@ -2,11 +2,7 @@ const { resolve } = require("node:path")
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: [
-    require.resolve("./index.js"),
-    "next/core-web-vitals",
-    "next/typescript",
-  ],
+  extends: [require.resolve("./index.js"), "next/core-web-vitals", "next/typescript"],
   parserOptions: {
     project: resolve(process.cwd(), "tsconfig.json"),
   },

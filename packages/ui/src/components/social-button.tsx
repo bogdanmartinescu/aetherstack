@@ -27,7 +27,7 @@ function SocialGlyph({ provider }: { provider: SocialProvider }) {
     <span
       aria-hidden="true"
       className={cn(
-        "inline-flex size-5 shrink-0 items-center justify-center rounded-md bg-muted text-xs font-semibold text-foreground",
+        "bg-muted text-foreground inline-flex size-5 shrink-0 items-center justify-center rounded-md text-xs font-semibold",
       )}
     >
       {SOCIAL_PROVIDERS[provider][0]}

@@ -28,37 +28,32 @@ function FeatureValue({ value }: { value: boolean | string | React.ReactNode }) 
   if (value === true) {
     return (
       <span className="flex justify-center" aria-label="Included">
-        <Check className="h-4 w-4 text-primary" aria-hidden />
+        <Check className="text-primary h-4 w-4" aria-hidden />
       </span>
     )
   }
   if (value === false) {
     return (
       <span className="flex justify-center" aria-label="Not included">
-        <Minus className="h-4 w-4 text-muted-foreground/40" aria-hidden />
+        <Minus className="text-muted-foreground/40 h-4 w-4" aria-hidden />
       </span>
     )
   }
-  return <span className="text-center text-sm text-foreground">{value as React.ReactNode}</span>
+  return <span className="text-foreground text-center text-sm">{value as React.ReactNode}</span>
 }
 
-export function PricingComparison({
-  tiers,
-  features,
-  className,
-}: PricingComparisonProps) {
-  const categoryGroups = features.reduce<{ category: string | undefined; items: ComparisonFeature[] }[]>(
-    (acc, feature) => {
-      const last = acc[acc.length - 1]
-      if (last && last.category === feature.category) {
-        last.items.push(feature)
-      } else {
-        acc.push({ category: feature.category, items: [feature] })
-      }
-      return acc
-    },
-    [],
-  )
+export function PricingComparison({ tiers, features, className }: PricingComparisonProps) {
+  const categoryGroups = features.reduce<
+    { category: string | undefined; items: ComparisonFeature[] }[]
+  >((acc, feature) => {
+    const last = acc[acc.length - 1]
+    if (last && last.category === feature.category) {
+      last.items.push(feature)
+    } else {
+      acc.push({ category: feature.category, items: [feature] })
+    }
+    return acc
+  }, [])
 
   return (
     <div className={cn("w-full overflow-x-auto", className)}>
@@ -66,34 +61,31 @@ export function PricingComparison({
         {/* Header */}
         <thead>
           <tr>
-            <th className="w-48 pb-4 text-left text-sm font-medium text-muted-foreground" />
+            <th className="text-muted-foreground w-48 pb-4 text-left text-sm font-medium" />
             {tiers.map((tier) => (
               <th
                 key={tier.id}
-                className={cn(
-                  "pb-4 text-center",
-                  tier.highlight && "bg-primary/5 rounded-t-lg",
-                )}
+                className={cn("pb-4 text-center", tier.highlight && "bg-primary/5 rounded-t-lg")}
               >
                 <div
                   className={cn(
-                    "flex flex-col items-center gap-2 px-4 pt-4 pb-2",
-                    tier.highlight && "border-x border-t border-primary rounded-t-lg",
+                    "flex flex-col items-center gap-2 px-4 pb-2 pt-4",
+                    tier.highlight && "border-primary rounded-t-lg border-x border-t",
                   )}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-foreground">{tier.name}</span>
-                    {tier.highlight && (
-                      <Badge className="text-xs">Popular</Badge>
-                    )}
+                    <span className="text-foreground text-sm font-semibold">{tier.name}</span>
+                    {tier.highlight && <Badge className="text-xs">Popular</Badge>}
                   </div>
                   {tier.price && (
                     <div className="flex items-end gap-1">
-                      <span className="text-2xl font-bold tracking-tight text-foreground">
+                      <span className="text-foreground text-2xl font-bold tracking-tight">
                         {tier.price}
                       </span>
                       {tier.period && (
-                        <span className="mb-0.5 text-xs text-muted-foreground">/ {tier.period}</span>
+                        <span className="text-muted-foreground mb-0.5 text-xs">
+                          / {tier.period}
+                        </span>
                       )}
                     </div>
                   )}
@@ -121,21 +113,21 @@ export function PricingComparison({
                 <tr>
                   <td
                     colSpan={tiers.length + 1}
-                    className="border-t border-border pt-6 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                    className="border-border text-muted-foreground border-t pb-2 pt-6 text-xs font-semibold uppercase tracking-wider"
                   >
                     {group.category}
                   </td>
                 </tr>
               )}
               {group.items.map((feature, fi) => (
-                <tr key={fi} className="group border-t border-border/50">
-                  <td className="py-3 pr-4 text-sm text-foreground">{feature.label}</td>
+                <tr key={fi} className="border-border/50 group border-t">
+                  <td className="text-foreground py-3 pr-4 text-sm">{feature.label}</td>
                   {tiers.map((tier) => (
                     <td
                       key={tier.id}
                       className={cn(
-                        "py-3 px-4 text-center",
-                        tier.highlight && "bg-primary/5 border-x border-primary/30",
+                        "px-4 py-3 text-center",
+                        tier.highlight && "bg-primary/5 border-primary/30 border-x",
                       )}
                     >
                       <FeatureValue value={feature.tiers[tier.id] ?? false} />
@@ -152,9 +144,7 @@ export function PricingComparison({
             {tiers.map((tier) => (
               <td
                 key={tier.id}
-                className={cn(
-                  tier.highlight && "border-x border-b border-primary rounded-b-lg",
-                )}
+                className={cn(tier.highlight && "border-primary rounded-b-lg border-x border-b")}
               />
             ))}
           </tr>

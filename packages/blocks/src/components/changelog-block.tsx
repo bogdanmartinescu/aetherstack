@@ -23,7 +23,10 @@ export interface ChangelogBlockProps {
   className?: string
 }
 
-const changeTypeConfig: Record<ChangeType, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
+const changeTypeConfig: Record<
+  ChangeType,
+  { label: string; variant: "default" | "secondary" | "destructive" | "outline" }
+> = {
   added: { label: "Added", variant: "default" },
   changed: { label: "Changed", variant: "secondary" },
   fixed: { label: "Fixed", variant: "outline" },
@@ -38,10 +41,8 @@ export function ChangelogBlock({ entries, className }: ChangelogBlockProps) {
           <div key={entry.id} className="relative flex gap-6 pb-10">
             {/* Timeline line */}
             <div className="flex flex-col items-center">
-              <div className="mt-1.5 h-3 w-3 shrink-0 rounded-full border-2 border-primary bg-background" />
-              {i < entries.length - 1 && (
-                <div className="mt-1 flex-1 w-px bg-border" />
-              )}
+              <div className="border-primary bg-background mt-1.5 h-3 w-3 shrink-0 rounded-full border-2" />
+              {i < entries.length - 1 && <div className="bg-border mt-1 w-px flex-1" />}
             </div>
 
             {/* Content */}
@@ -52,7 +53,7 @@ export function ChangelogBlock({ entries, className }: ChangelogBlockProps) {
                     {entry.version}
                   </Badge>
                 )}
-                <time className="text-xs text-muted-foreground">{entry.date}</time>
+                <time className="text-muted-foreground text-xs">{entry.date}</time>
                 {entry.tags?.map((tag) => (
                   <Badge key={tag} variant="outline" className="text-xs">
                     {tag}
@@ -60,14 +61,10 @@ export function ChangelogBlock({ entries, className }: ChangelogBlockProps) {
                 ))}
               </div>
 
-              <h3 className="mt-2 text-base font-semibold text-foreground">
-                {entry.title}
-              </h3>
+              <h3 className="text-foreground mt-2 text-base font-semibold">{entry.title}</h3>
 
               {entry.description && (
-                <p className="mt-1.5 text-sm text-muted-foreground">
-                  {entry.description}
-                </p>
+                <p className="text-muted-foreground mt-1.5 text-sm">{entry.description}</p>
               )}
 
               {entry.changes && entry.changes.length > 0 && (
@@ -83,8 +80,11 @@ export function ChangelogBlock({ entries, className }: ChangelogBlockProps) {
                         </div>
                         <ul className="space-y-1 pl-1">
                           {group.items.map((item, j) => (
-                            <li key={j} className="flex items-start gap-2 text-sm text-foreground">
-                              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-foreground" aria-hidden />
+                            <li key={j} className="text-foreground flex items-start gap-2 text-sm">
+                              <span
+                                className="bg-muted-foreground mt-2 h-1 w-1 shrink-0 rounded-full"
+                                aria-hidden
+                              />
                               {item}
                             </li>
                           ))}
@@ -95,9 +95,7 @@ export function ChangelogBlock({ entries, className }: ChangelogBlockProps) {
                 </div>
               )}
 
-              {i < entries.length - 1 && (
-                <Separator className="mt-6 hidden" />
-              )}
+              {i < entries.length - 1 && <Separator className="mt-6 hidden" />}
             </div>
           </div>
         ))}

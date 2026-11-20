@@ -184,7 +184,7 @@ export function TableDemo() {
                     <TableCell className="font-medium">{u.name}</TableCell>
                     <TableCell className="text-muted-foreground">{u.email}</TableCell>
                     <TableCell>{u.role}</TableCell>
-                    <TableCell className="text-right text-muted-foreground">Jan 2025</TableCell>
+                    <TableCell className="text-muted-foreground text-right">Jan 2025</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -243,8 +243,16 @@ export function TableDemo() {
                     <TableCell>{u.role}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <Button variant="ghost" size="sm">Edit</Button>
-                        <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">Delete</Button>
+                        <Button variant="ghost" size="sm">
+                          Edit
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-destructive hover:text-destructive"
+                        >
+                          Delete
+                        </Button>
                       </div>
                     </TableCell>
                   </TableRow>
@@ -267,34 +275,64 @@ export function TableDemo() {
         {
           title: "Table",
           props: [
-            { name: "className", type: "string", description: "Applied to the inner <table> element. The outer wrapper is always w-full overflow-auto." },
-            { name: "...props", type: "React.HTMLAttributes<HTMLTableElement>", description: "All standard HTML table attributes." },
+            {
+              name: "className",
+              type: "string",
+              description:
+                "Applied to the inner <table> element. The outer wrapper is always w-full overflow-auto.",
+            },
+            {
+              name: "...props",
+              type: "React.HTMLAttributes<HTMLTableElement>",
+              description: "All standard HTML table attributes.",
+            },
           ],
         },
         {
           title: "TableRow",
           props: [
-            { name: 'data-[state=selected]', type: "—", description: "Add data-state='selected' to highlight a selected row." },
+            {
+              name: "data-[state=selected]",
+              type: "—",
+              description: "Add data-state='selected' to highlight a selected row.",
+            },
             { name: "className", type: "string", description: "Additional classes." },
           ],
         },
         {
           title: "TableHead",
           props: [
-            { name: "className", type: "string", description: "Applied to <th>. Defaults to h-12 px-4 text-left align-middle font-medium text-muted-foreground." },
+            {
+              name: "className",
+              type: "string",
+              description:
+                "Applied to <th>. Defaults to h-12 px-4 text-left align-middle font-medium text-muted-foreground.",
+            },
           ],
         },
         {
           title: "TableCell",
           props: [
-            { name: "colSpan", type: "number", description: "Spans multiple columns (for footer totals, etc.)." },
-            { name: "className", type: "string", description: "Applied to <td>. Defaults to p-4 align-middle." },
+            {
+              name: "colSpan",
+              type: "number",
+              description: "Spans multiple columns (for footer totals, etc.).",
+            },
+            {
+              name: "className",
+              type: "string",
+              description: "Applied to <td>. Defaults to p-4 align-middle.",
+            },
           ],
         },
         {
           title: "TableCaption",
           props: [
-            { name: "className", type: "string", description: "Applied to <caption>. Defaults to mt-4 text-sm text-muted-foreground." },
+            {
+              name: "className",
+              type: "string",
+              description: "Applied to <caption>. Defaults to mt-4 text-sm text-muted-foreground.",
+            },
           ],
         },
       ]}

@@ -58,12 +58,42 @@ export function MyPromptLibrary() {
 }`}
       preview={<PromptLibraryPagePreview />}
       props={[
-        { name: "prompts", type: "Prompt[]", required: true, description: "Array of prompt objects to display in the grid." },
-        { name: "categories", type: "string[]", default: "[]", description: "Explicit category list for the sidebar. If omitted, categories are inferred from the prompts." },
-        { name: "onInsert", type: "(content: string) => void", description: "Called when the Insert button on a prompt card is clicked. Omit to hide the button." },
-        { name: "onSave", type: "(prompt: NewPrompt) => void", description: "Called when the create/edit dialog is saved. Omit to hide the New prompt button and edit action." },
-        { name: "onDelete", type: "(id: string) => void", description: "Called when the delete button on a card is clicked. Omit to hide the button." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "prompts",
+          type: "Prompt[]",
+          required: true,
+          description: "Array of prompt objects to display in the grid.",
+        },
+        {
+          name: "categories",
+          type: "string[]",
+          default: "[]",
+          description:
+            "Explicit category list for the sidebar. If omitted, categories are inferred from the prompts.",
+        },
+        {
+          name: "onInsert",
+          type: "(content: string) => void",
+          description:
+            "Called when the Insert button on a prompt card is clicked. Omit to hide the button.",
+        },
+        {
+          name: "onSave",
+          type: "(prompt: NewPrompt) => void",
+          description:
+            "Called when the create/edit dialog is saved. Omit to hide the New prompt button and edit action.",
+        },
+        {
+          name: "onDelete",
+          type: "(id: string) => void",
+          description:
+            "Called when the delete button on a card is clicked. Omit to hide the button.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={[
         "Category sidebar buttons convey active state via background color and are keyboard-focusable.",

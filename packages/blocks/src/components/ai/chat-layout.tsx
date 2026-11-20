@@ -3,13 +3,7 @@
 import * as React from "react"
 import { Menu, X } from "lucide-react"
 import { cn } from "@aetherstack/utils"
-import {
-  Button,
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@aetherstack/ui"
+import { Button, Sheet, SheetContent, SheetHeader, SheetTitle } from "@aetherstack/ui"
 
 interface ChatLayoutProps {
   sidebar?: React.ReactNode
@@ -31,10 +25,10 @@ function ChatLayout({
   className,
 }: ChatLayoutProps) {
   return (
-    <div className={cn("flex h-screen overflow-hidden bg-background", className)}>
+    <div className={cn("bg-background flex h-screen overflow-hidden", className)}>
       {sidebar && (
         <>
-          <aside className="hidden md:flex w-60 shrink-0 flex-col border-r border-border bg-card">
+          <aside className="border-border bg-card hidden w-60 shrink-0 flex-col border-r md:flex">
             {sidebar}
           </aside>
 
@@ -54,7 +48,7 @@ function ChatLayout({
 
       <div className="flex flex-1 flex-col overflow-hidden">
         {header ? (
-          <header className="flex h-14 shrink-0 items-center border-b border-border px-4 gap-2">
+          <header className="border-border flex h-14 shrink-0 items-center gap-2 border-b px-4">
             {sidebar && (
               <Button
                 variant="ghost"
@@ -69,7 +63,7 @@ function ChatLayout({
             {header}
           </header>
         ) : sidebar ? (
-          <div className="flex h-14 shrink-0 items-center border-b border-border px-4 md:hidden">
+          <div className="border-border flex h-14 shrink-0 items-center border-b px-4 md:hidden">
             <Button
               variant="ghost"
               size="icon"
@@ -83,9 +77,7 @@ function ChatLayout({
 
         <main className="flex-1 overflow-y-auto">{children}</main>
 
-        {footer && (
-          <div className="shrink-0 border-t border-border p-4">{footer}</div>
-        )}
+        {footer && <div className="border-border shrink-0 border-t p-4">{footer}</div>}
       </div>
     </div>
   )

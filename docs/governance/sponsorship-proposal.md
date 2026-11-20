@@ -38,11 +38,11 @@ Should not:
 
 ## Alternatives considered
 
-| Option | Notes |
-| --- | --- |
-| GitHub Sponsors | Lowest friction for GitHub-hosted projects |
+| Option          | Notes                                                        |
+| --------------- | ------------------------------------------------------------ |
+| GitHub Sponsors | Lowest friction for GitHub-hosted projects                   |
 | Open Collective | Better for multi-maintainer expense transparency; more setup |
-| None for now | Acceptable until traffic and support load justify it |
+| None for now    | Acceptable until traffic and support load justify it         |
 
 ## Decision
 

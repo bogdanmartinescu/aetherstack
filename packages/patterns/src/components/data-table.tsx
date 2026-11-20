@@ -72,13 +72,14 @@ export function DataTable<T extends Record<string, unknown>>({
       const av = a[sortKey]
       const bv = b[sortKey]
       if (av === bv) return 0
-      const result = av === null || av === undefined
-        ? 1
-        : bv === null || bv === undefined
-          ? -1
-          : av < bv
+      const result =
+        av === null || av === undefined
+          ? 1
+          : bv === null || bv === undefined
             ? -1
-            : 1
+            : av < bv
+              ? -1
+              : 1
       return sortDir === "asc" ? result : -result
     })
   }, [filtered, sortKey, sortDir])
@@ -117,7 +118,7 @@ export function DataTable<T extends Record<string, unknown>>({
         </div>
       )}
 
-      <div className="overflow-x-auto rounded-md border border-border">
+      <div className="border-border overflow-x-auto rounded-md border">
         <Table>
           <TableHeader>
             <TableRow>
@@ -125,7 +126,7 @@ export function DataTable<T extends Record<string, unknown>>({
                 <TableHead
                   key={String(col.key)}
                   className={cn(
-                    col.sortable && "cursor-pointer select-none hover:bg-muted/50",
+                    col.sortable && "hover:bg-muted/50 cursor-pointer select-none",
                     col.className,
                   )}
                   onClick={col.sortable ? () => handleSort(col.key) : undefined}
@@ -164,7 +165,7 @@ export function DataTable<T extends Record<string, unknown>>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center text-muted-foreground"
+                  className="text-muted-foreground h-24 text-center"
                 >
                   {emptyMessage}
                 </TableCell>
@@ -187,7 +188,7 @@ export function DataTable<T extends Record<string, unknown>>({
       </div>
 
       {totalPages > 1 && (
-        <div className="flex items-center justify-between text-sm text-muted-foreground">
+        <div className="text-muted-foreground flex items-center justify-between text-sm">
           <span>
             Page {safePage + 1} of {totalPages}
           </span>

@@ -29,18 +29,17 @@ const buttonVariants = cva(
           "border border-input bg-background shadow-sm [&:not(:disabled)]:hover:bg-accent [&:not(:disabled)]:hover:text-accent-foreground",
         secondary:
           "bg-secondary text-secondary-foreground [&:not(:disabled)]:hover:bg-secondary/80",
-        ghost:
-          "[&:not(:disabled)]:hover:bg-accent [&:not(:disabled)]:hover:text-accent-foreground",
+        ghost: "[&:not(:disabled)]:hover:bg-accent [&:not(:disabled)]:hover:text-accent-foreground",
         link: "text-primary underline-offset-4 [&:not(:disabled)]:hover:underline",
-        quiet:
-          "text-muted-foreground [&:not(:disabled)]:hover:text-foreground",
+        quiet: "text-muted-foreground [&:not(:disabled)]:hover:text-foreground",
       },
       size: {
         xs: "h-8 gap-1.5 rounded-md px-2.5 text-xs [&_svg]:size-3.5 [@media(pointer:coarse)]:h-9",
         sm: "h-9 rounded-md px-3 [@media(pointer:coarse)]:h-10",
         default: "h-10 px-4 py-2 [@media(pointer:coarse)]:h-11",
         lg: "h-11 rounded-md px-8 [@media(pointer:coarse)]:h-12",
-        "icon-xs": "h-8 w-8 [&_svg]:size-3.5 [@media(pointer:coarse)]:h-9 [@media(pointer:coarse)]:w-9",
+        "icon-xs":
+          "h-8 w-8 [&_svg]:size-3.5 [@media(pointer:coarse)]:h-9 [@media(pointer:coarse)]:w-9",
         "icon-sm": "h-9 w-9 [@media(pointer:coarse)]:h-10 [@media(pointer:coarse)]:w-10",
         icon: "h-10 w-10 [@media(pointer:coarse)]:h-11 [@media(pointer:coarse)]:w-11",
         "icon-lg": "h-11 w-11 [@media(pointer:coarse)]:h-12 [@media(pointer:coarse)]:w-12",
@@ -55,7 +54,8 @@ const buttonVariants = cva(
       // Quiet buttons are inline text actions: no chip, only the text size.
       {
         variant: "quiet",
-        className: "h-auto w-auto px-0 py-0 [@media(pointer:coarse)]:h-auto [@media(pointer:coarse)]:w-auto",
+        className:
+          "h-auto w-auto px-0 py-0 [@media(pointer:coarse)]:h-auto [@media(pointer:coarse)]:w-auto",
       },
     ],
     defaultVariants: {
@@ -79,8 +79,7 @@ const ICON_ONLY_SIZE: Record<ButtonSize, ButtonSize> = {
 }
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean
   /**
    * Shows a spinner in place of `icon`, sweeps the label, and ignores clicks.
@@ -154,7 +153,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit] motion-reduce:hidden"
           >
-            <span className="absolute inset-y-0 left-0 w-1/2 animate-button-sweep bg-gradient-to-r from-transparent via-current to-transparent opacity-20" />
+            <span className="animate-button-sweep absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-current to-transparent opacity-20" />
           </span>
         )}
       </Comp>

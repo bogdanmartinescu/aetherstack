@@ -44,19 +44,19 @@ The system supports:
 
 ## Phase Overview
 
-| Phase | Name | Goal |
-|------|------|------|
-| 1 | Foundation | Monorepo base, package structure, apps, docs scaffolding |
-| 2 | Token System | Design tokens, theme contract, CSS variables, base semantics |
-| 3 | Core Primitives | Stable foundational components for forms, layout, and interaction |
-| 4 | App Patterns | Reusable product-level UI patterns + first 3 blocks (Dashboard Shell, Login, Signup) |
-| 4.6 | Quality, Truth & Coverage | Reality stabilization — registry truth, reference apps, test coverage, CI hardening ✅ |
-| 5 | AI Foundations | LLM-friendly metadata, `llms.txt`, MCP server, prompt-driven CLI flow ✅ |
-| 6 | Component Gap-Fill | Net-new primitives, patterns, and blocks chosen by SaaS/AI value ✅ |
-| 7 | Public Registry Hardened | Production-ready public registry, install flows, CDN, versioning (npm ✅) |
-| 7.5 | Component Completeness | Full shadcn parity + marketing blocks + SaaS patterns + AI-native UI — code complete ✅ |
-| 8 | Pro Architecture | Auth, license gating, premium namespace, billing flow |
-| 9 | Pro Content + Launch | Vertical kits (CRM, Billing, Analytics), AI Recipes Pro, public launch |
+| Phase | Name                      | Goal                                                                                    |
+| ----- | ------------------------- | --------------------------------------------------------------------------------------- |
+| 1     | Foundation                | Monorepo base, package structure, apps, docs scaffolding                                |
+| 2     | Token System              | Design tokens, theme contract, CSS variables, base semantics                            |
+| 3     | Core Primitives           | Stable foundational components for forms, layout, and interaction                       |
+| 4     | App Patterns              | Reusable product-level UI patterns + first 3 blocks (Dashboard Shell, Login, Signup)    |
+| 4.6   | Quality, Truth & Coverage | Reality stabilization — registry truth, reference apps, test coverage, CI hardening ✅  |
+| 5     | AI Foundations            | LLM-friendly metadata, `llms.txt`, MCP server, prompt-driven CLI flow ✅                |
+| 6     | Component Gap-Fill        | Net-new primitives, patterns, and blocks chosen by SaaS/AI value ✅                     |
+| 7     | Public Registry Hardened  | Production-ready public registry, install flows, CDN, versioning (npm ✅)               |
+| 7.5   | Component Completeness    | Full shadcn parity + marketing blocks + SaaS patterns + AI-native UI — code complete ✅ |
+| 8     | Pro Architecture          | Auth, license gating, premium namespace, billing flow                                   |
+| 9     | Pro Content + Launch      | Vertical kits (CRM, Billing, Analytics), AI Recipes Pro, public launch                  |
 
 ---
 
@@ -65,9 +65,11 @@ The system supports:
 Status: Complete
 
 ## Goal
+
 Create the monorepo base and product scaffolding.
 
 ## Delivered
+
 - root monorepo structure (pnpm workspaces + Turborepo)
 - shared config packages (`config-typescript`, `config-eslint`, `config-tailwind`)
 - app scaffolds (`docs`, `studio`, `demo`, `registry-public` with static export)
@@ -81,6 +83,7 @@ Create the monorepo base and product scaffolding.
 - roadmap/docs foundation
 
 ## Exit Criteria — all met
+
 - repo installs cleanly
 - apps run
 - packages resolve
@@ -93,6 +96,7 @@ Create the monorepo base and product scaffolding.
 Status: Complete
 
 ## Delivered
+
 - semantic color system + base neutral palette + accent palettes
 - typography, spacing, radius, shadow, motion scales
 - CSS variable contract with light/dark theme support
@@ -101,6 +105,7 @@ Status: Complete
 - docs for token usage in `apps/docs/src/app/(docs)/tokens`
 
 ## Acceptance Criteria — all met
+
 - tokens are defined centrally and consumed consistently
 - no primitive hardcodes visual values that should come from tokens
 - theme switching is structurally supported
@@ -113,6 +118,7 @@ Status: Complete
 Status: Complete
 
 ## Delivered
+
 - 16 primitives in `packages/ui/src/components/`: Badge, Button, Card, Checkbox, Dialog, Input, Label, Radio Group, Select, Sheet, Skeleton, Switch, Table, Tabs, Textarea, Tooltip
 - shared variant conventions, accessibility pass, docs examples per component
 - 56 vitest cases covering default render, variants/sizes, disabled state, keyboard interaction
@@ -121,27 +127,30 @@ Status: Complete
 ## Phase 3 Extras (delivered beyond spec)
 
 ### Infrastructure
+
 - **Next.js 16.2.4** (Turbopack-enabled) across all four apps
 - **npm publishing pipeline** via `tsup` for `@aetherstack/ui`, `@aetherstack/tokens`, `@aetherstack/utils`
 - **CI (GitHub Actions)** with parallel Typecheck/Lint, Test, and Build jobs
 - **PR template** + `develop` branch model
 
 ### Documentation (apps/docs)
-| Route | Content |
-|-------|---------|
-| `/introduction` | shadcn/ui-style intro: design principles, architecture layers, tech stack, quick-start, comparison table |
-| `/installation` | Setup for Next.js App Router, Pages Router, Vite + React, Remix, Astro, TanStack Start |
-| `/cli` | Full CLI reference: `init`, `add`, `diff`, `update`, `list`, `aether.json` schema |
-| `/tokens` | Design token reference |
-| `/icons` | Lucide React integration: 80+ icon reference grid, a11y notes |
-| `/fonts` | 6-font catalog with live UI demo |
-| `/components` | Component index with category grouping |
-| `/components/[slug]` | Individual pages for all 16 primitives |
-| `/blocks` | Block gallery (Dashboard / Login / Signup) |
-| `/charts` | Recharts integration with 4 live chart examples |
-| `/patterns` | Pattern index + per-pattern pages |
+
+| Route                | Content                                                                                                  |
+| -------------------- | -------------------------------------------------------------------------------------------------------- |
+| `/introduction`      | shadcn/ui-style intro: design principles, architecture layers, tech stack, quick-start, comparison table |
+| `/installation`      | Setup for Next.js App Router, Pages Router, Vite + React, Remix, Astro, TanStack Start                   |
+| `/cli`               | Full CLI reference: `init`, `add`, `diff`, `update`, `list`, `aether.json` schema                        |
+| `/tokens`            | Design token reference                                                                                   |
+| `/icons`             | Lucide React integration: 80+ icon reference grid, a11y notes                                            |
+| `/fonts`             | 6-font catalog with live UI demo                                                                         |
+| `/components`        | Component index with category grouping                                                                   |
+| `/components/[slug]` | Individual pages for all 16 primitives                                                                   |
+| `/blocks`            | Block gallery (Dashboard / Login / Signup)                                                               |
+| `/charts`            | Recharts integration with 4 live chart examples                                                          |
+| `/patterns`          | Pattern index + per-pattern pages                                                                        |
 
 ### Theme + font system
+
 - `next-themes` light/dark/system toggle
 - 6 curated Google Fonts swappable via `data-font` attribute on `<html>`, FOUC-prevention inline script
 
@@ -154,16 +163,19 @@ Status: Complete
 ## Delivered
 
 ### Patterns (packages/patterns)
+
 12 patterns in 9 source files: **FormField** (+ FormLabel, FormControl, FormDescription, FormMessage, useFormField), **PageHeader** (+ Breadcrumb), **SectionHeader** (+ SettingsSection), **EmptyState**, **LoadingState**, **ErrorState**, **MetricCard**, **TableToolbar** (+ FilterToolbar, FilterPill), and **NavItem** / **NavGroup** / **SidebarNav**.
 
 85 vitest cases covering composition contracts, slots, props, error states, and a11y attributes.
 
 ### First three blocks (packages/blocks)
+
 - **DashboardShell** — collapsible sidebar, topbar with search/notifications, content slot
 - **LoginBlock** — email + password form with validation, optional split-panel layout
 - **SignupBlock** — name + email + password form with validation and terms/privacy links
 
 ## Acceptance Criteria — all met
+
 - patterns depend on primitives, not parallel implementations
 - pattern APIs feel product-oriented and reusable
 - docs explain where patterns and blocks should be used
@@ -177,31 +189,37 @@ Status: Complete
 Status: Complete
 
 ## Goal
+
 Close the gap between what the build plan claimed and what was actually shipped. Make every claim verifiable in CI before stacking new phases on top.
 
 ## Tracks (see [stabilization plan](../../.cursor/plans/aetherstack_quality_stabilization_ea20042a.plan.md) for full detail)
 
 ### Track A — Registry truth
+
 - `registry/public/registry.json` populated with all 28 items (16 primitives + 9 patterns + 3 blocks)
 - `registry/pro/registry.json` populated with two `pro: true` placeholders
 - `tooling/scripts/build-registry.ts` emits one `r/<name>.json` per item alongside the aggregate manifest
 - CLI integration test runs `init` + `add` against a fixture project in CI
 
 ### Track B — Reference app reality
+
 - `apps/demo` rebuilt with `/dashboard`, `/users`, `/settings`, `/login` routes using `DashboardShell`, `LoginBlock`, real patterns, and recharts — no placeholder text
 - `apps/studio` extended with Patterns and Blocks sections so the playground reflects everything we ship
 
 ### Track C — Test coverage
+
 - Vitest suites added to `cli` (config / lib/registry / lib/installer + integration), `registry-schema`, `registry-build`, and `blocks`
 - All workspace packages with logic now run in CI
 
 ### Track D — CI hardening
+
 - Build job runs on every PR (no longer push-only)
 - `validate-registry` + `build-registry` diff check enforce registry truth
 - Changeset check fails on PRs that touch `packages/*/src/**` without a `.changeset/*.md`
 - New test suites wired into the CI test job
 
 ### Track E — Cleanups & truth in docs
+
 - `@aetherstack/icons` populated with custom AetherMark / AetherGlyph / AetherSpark / AetherStack icons on top of the lucide-react re-export
 - Stray `console.log` removed from docs installation page
 - Build plan rewritten (this file)
@@ -209,6 +227,7 @@ Close the gap between what the build plan claimed and what was actually shipped.
 - `pnpm install-hooks` callout added to `CONTRIBUTING.md`
 
 ## Acceptance Criteria
+
 - `aether-ui add <any-shipped-item>` installs the file into a fixture project with no errors
 - `apps/registry-public/public/r/` contains exactly N+1 JSON files (one per item plus the aggregate)
 - `apps/demo` boots and shows three real routes plus `/login`
@@ -224,23 +243,27 @@ Close the gap between what the build plan claimed and what was actually shipped.
 Status: Complete
 
 ## Goal
+
 Make Aether UI the most LLM-friendly design system in the ecosystem. Treat AI agents as a primary consumer alongside human developers.
 
 ## Delivered
 
 ### AI Metadata (`packages/registry-schema`)
+
 - `RegistryItemAi` schema added to `registryItemSchema`: `intent`, `prompts`, `composition`, `slots`
 - All 28 public registry items carry an `ai` block
 - `validate-registry` enforces AI metadata on all public items — CI rejects items missing it
 - 8 new tests for the `registryItemAiSchema` and `registryItemSchema.ai` integration
 
 ### `llms.txt` (`apps/registry-public/public/llms.txt`)
+
 - Generated by `build-registry.ts` on every build run
 - Lists every item with install command, intent, slots, composition hints, and example prompts
 - Includes quick-start, architecture overview, and canonical composition recipes
 - CI stale-artefact check now covers `llms.txt` in addition to `apps/registry-public/public/r/`
 
 ### MCP Server (`packages/mcp-server`)
+
 - `@aetherstack/mcp-server` — stdio MCP server using `@modelcontextprotocol/sdk`
 - Tools: `list_components`, `get_component`, `install_component`, `compose_block`
 - Bundled `registry.json` baked in at build time; overrideable via `AETHER_REGISTRY_URL` / `AETHER_REGISTRY_FILE`
@@ -248,22 +271,26 @@ Make Aether UI the most LLM-friendly design system in the ecosystem. Treat AI ag
 - CI test job includes `@aetherstack/mcp-server`
 
 ### Prompt-Driven CLI (`packages/cli`)
+
 - `aether-ui generate "<description>"` resolves to component `add` calls + a starter `page.tsx`
 - `resolveGenerate` in `packages/cli/src/lib/generate.ts` covers 5 canonical recipes and 22 keyword rules
 - `--dry-run` flag previews without writing files; `--no-starter` skips the starter file
 - 8 new tests for `resolveGenerate` covering recipes, keywords, and edge cases
 
 ### Docs (`apps/docs/src/app/(docs)/llms/page.tsx`)
+
 - `/llms` route documents: `llms.txt` URL, AI metadata schema, MCP server setup (Cursor + Claude Desktop), `generate` command, canonical recipes, and a copy-paste system prompt snippet
 - "AI & LLMs" added to sidebar "Getting started" group
 
 ## Acceptance Criteria — all met
+
 - An LLM can fetch `llms.txt` and produce a syntactically valid install plan for "make me a SaaS dashboard" ✓
 - The MCP server exposes all four tools with correct schemas ✓
 - AI metadata is required for new public-registry items (CI rejects items missing it) ✓
 - The prompt-driven CLI resolves 5 canonical demo prompts deterministically ✓
 
 ## Notes
+
 This is Aether UI's primary differentiation lever. Get this right before adding more components.
 
 ---
@@ -273,11 +300,13 @@ This is Aether UI's primary differentiation lever. Get this right before adding 
 Status: Complete
 
 ## Goal
+
 Bring the public surface to "good enough for any SaaS product" by filling gaps prioritized by SaaS frequency and AI-prompt frequency.
 
 ## Delivered
 
 ### Primitives
+
 - DropdownMenu / ContextMenu (Radix popover backbone)
 - Combobox (autocomplete select with search)
 - Calendar / DatePicker
@@ -292,6 +321,7 @@ Bring the public surface to "good enough for any SaaS product" by filling gaps p
 - Pagination
 
 ### Patterns
+
 - DataTable (sortable, paginated, with column visibility)
 - CommandPalette (⌘K searchable command surface)
 - StatGroup (multi-metric dashboard row)
@@ -302,6 +332,7 @@ Bring the public surface to "good enough for any SaaS product" by filling gaps p
 - ColorPicker
 
 ### Blocks
+
 - AccountSettings block
 - BillingOverview block
 - OnboardingChecklist block
@@ -311,12 +342,14 @@ Bring the public surface to "good enough for any SaaS product" by filling gaps p
 - EmptyDashboard block
 
 ## Acceptance Criteria
+
 - Every new item ships with: source code in the right package, vitest tests, docs page, AI metadata, registry entry, per-item JSON output
 - No primitive hardcodes visual values that belong in tokens
 - All items installable end-to-end through the CLI
 - Studio playground updated alongside each new item
 
 ## Notes
+
 Quantity matters here — but not at the cost of consistency. Reject any item that breaks Phase 4 patterns or skips its acceptance gates.
 
 ---
@@ -326,9 +359,11 @@ Quantity matters here — but not at the cost of consistency. Reject any item th
 Status: In progress — npm publish complete ✅
 
 ## Goal
+
 Make the public registry production-quality: durable URLs, versioning, CDN delivery, and a polished install experience.
 
 ## Deliverables
+
 - production registry domain (`registry.aether-ui.dev`) backed by a CDN
 - per-item versioning with semver and `version` field; CLI prefers exact versions when pinned
 - `aether-ui update` command upgrades installed items to their latest registry version
@@ -338,6 +373,7 @@ Make the public registry production-quality: durable URLs, versioning, CDN deliv
 - install-test harness expanded: clean Next.js, Vite, and Remix fixture projects in CI
 
 ## Acceptance Criteria
+
 - A new user can run `npx @aetherstack/cli init && npx @aetherstack/cli add dashboard-shell` against the public CDN with zero local setup
 - Every published item has a stable `/r/<name>@<version>.json` URL
 - CI runs end-to-end install tests against three real frameworks
@@ -541,11 +577,13 @@ These items live in `ai/` subdirectories within each package and are registered 
 Status: Pending
 
 ## Goal
+
 Build the commercial layer: Clerk auth, Stripe billing, license gating, and the premium-namespace runtime — without destabilizing the public system.
 
 ## Deliverables
 
 ### `apps/account` — Account Dashboard
+
 - New Next.js App Router app at `account.aether-ui.dev`
 - Clerk authentication — sign in, sign up, profile management; no custom auth UI required
 - Pages:
@@ -557,6 +595,7 @@ Build the commercial layer: Clerk auth, Stripe billing, license gating, and the 
 - Uses `@aetherstack/ui` and `@aetherstack/tokens` throughout
 
 ### License System
+
 - **Identity:** Clerk — `privateMetadata.license` stores `{ tier, status, seats, stripe_customer_id }`
 - **Session token:** Clerk custom session template adds `license_tier` as a JWT claim; 1-hour TTL with auto-refresh
 - **No external database required** for basic license storage — Clerk handles identity and metadata
@@ -564,6 +603,7 @@ Build the commercial layer: Clerk auth, Stripe billing, license gating, and the 
 - Stripe Checkout for Pro ($79/yr) and Team ($199/yr) tiers; webhook fires on `checkout.session.completed` and `customer.subscription.*` events to keep Clerk metadata in sync
 
 ### CLI Auth Layer (`packages/cli`)
+
 - `aether-ui login` — device flow: opens browser to `account.aether-ui.dev/cli-auth`, polls for JWT, saves to `~/.aetherui/config.json`
 - `aether-ui logout` — clears stored credentials
 - `aether-ui whoami` — prints current user email and license tier
@@ -571,12 +611,14 @@ Build the commercial layer: Clerk auth, Stripe billing, license gating, and the 
 - New file: `packages/cli/src/lib/auth.ts` — reads/writes `~/.aetherui/config.json`, validates JWT claims offline (1-hour window), handles token refresh
 
 ### Pro Registry Gating
+
 - `@aether-pro` namespace fully wired: registry, CDN, schema-level `pro: true` enforcement
 - JWT-validated API route in `apps/account` proxies pro registry item JSON — public registry stays on CDN with no auth
 - Separation rules enforced: pro items live in `registry/pro/**` with their own build pipeline and never appear in public registry artifacts
 - Pro `llms.txt` generated separately and gated behind license
 
 ## Acceptance Criteria
+
 - A non-licensed user cannot download any `pro: true` registry item
 - A licensed user can install pro items via the CLI without a manual auth step after `aether-ui login`
 - `aether-ui login` completes the device flow and stores a valid JWT locally
@@ -587,6 +629,7 @@ Build the commercial layer: Clerk auth, Stripe billing, license gating, and the 
 - Account, billing, and license flows are self-serve and documented
 
 ## Notes
+
 Resist the urge to ship pro content before the gating works end-to-end. Architecture first, content second. The account app must use `@aetherstack/ui` components — Aether UI should eat its own cooking.
 
 ---
@@ -596,17 +639,21 @@ Resist the urge to ship pro content before the gating works end-to-end. Architec
 Status: Pending
 
 ## Goal
+
 Ship enough premium value to justify the paid tier — across advanced components, page templates, vertical kits, and themes for any product type — then launch publicly.
 
 ## Deliverables
 
 ### Advanced Components (pro-gated, `@aether-pro` namespace)
+
 - **RichText editor** — Tiptap-based rich text integration (public primitives shipped in Phase 7.5)
 
 Note: Many components originally listed here (DataTable, CommandPalette, DatePicker, Combobox, FileDropzone, Toast, Avatar, Stepper, Kanban, ActivityFeed, ColorPicker) were shipped as public items in Phases 6–7.5. Phase 9 advanced components focus on pro-tier extensions and vertical-specific compositions.
 
 ### AI Pro Extensions (pro-gated, `@aether-pro/ai-*` namespace)
+
 Extends the public AI-native UI (shipped in Phase 7.5 Track D) with pro-tier capabilities:
+
 - **MultiAgentWorkspace** — multi-agent orchestration view with agent swimlanes and message routing
 - **FunctionCallingDebugger** — tool call inspector with full request/response diff and replay
 - **EmbeddingVisualizer** — 2D/3D embedding space visualization for semantic search UIs
@@ -616,6 +663,7 @@ Extends the public AI-native UI (shipped in Phase 7.5 Track D) with pro-tier cap
 - **PromptVersionDiff** — side-by-side diff of two prompt versions with output comparison
 
 ### Page Templates (pro-gated)
+
 - SaaS landing page (hero, features, pricing, CTA)
 - Marketing site sections (testimonials, logos, FAQ)
 - Full settings page (profile, billing, notifications, team)
@@ -628,6 +676,7 @@ Extends the public AI-native UI (shipped in Phase 7.5 Track D) with pro-tier cap
 - Changelog / release notes page
 
 ### Vertical Kits (pro-gated)
+
 - **SaaS Kit** — landing, auth, onboarding, dashboard, settings, billing
 - **CRM Kit** — Contacts page, Deal Pipeline kanban, Activity Timeline block, Contact Drawer
 - **Billing Kit** — Subscription management, Invoice history, Usage charts, Plan picker
@@ -637,6 +686,7 @@ Extends the public AI-native UI (shipped in Phase 7.5 Track D) with pro-tier cap
 - **AI App Kit** — Full opinionated AI application scaffold: `ChatLayout` + `ChatSidebar` + `AgentWorkspace` + `AISettings` + `AIOnboarding` wired together with a model-provider config layer (built on Phase 7.5 AI blocks)
 
 ### Premium Themes (pro-gated)
+
 - **Slate Pro** — cool-gray, professional
 - **Indigo Pro** — indigo accent, modern
 - **Onyx** — deep dark, high-contrast
@@ -644,6 +694,7 @@ Extends the public AI-native UI (shipped in Phase 7.5 Track D) with pro-tier cap
 - **Emerald** — fresh green-accent palette
 
 ### AI Pro (pro-gated)
+
 - Pro `llms.txt` with all pro-item entries and kit composition recipes, gated behind license
 - 50+ extended `generate` recipes that resolve to pro blocks and templates
 - MCP `compose_block` and `compose_template` tools serving pro items when a valid JWT is present
@@ -651,9 +702,11 @@ Extends the public AI-native UI (shipped in Phase 7.5 Track D) with pro-tier cap
 - Pro AI extensions: MultiAgentWorkspace, FunctionCallingDebugger, EmbeddingVisualizer, FineTuneMonitor, AIAuditLog, CustomModelCard, PromptVersionDiff
 
 ### Figma Kit (pro-gated)
+
 - Full Figma component library matching the Aether UI system, with auto-layout and design tokens bound to the token system
 
 ### Release Polish
+
 - changesets release flow finalized for both `@aetherstack/*` and `@aether-pro/*`
 - versioning policy documented
 - regression checklist for docs, demo, and registry
@@ -663,6 +716,7 @@ Extends the public AI-native UI (shipped in Phase 7.5 Track D) with pro-tier cap
 - visual regression baseline (Playwright + Percy or equivalent) for primitives and blocks
 
 ## Acceptance Criteria
+
 - A subscriber can subscribe, install at least one vertical kit, and ship a working product feature in under 30 minutes
 - All pro content is correctly gated — unlicensed users get helpful upgrade prompts, not raw errors
 - The Figma kit covers 100% of shipped pro components
@@ -670,6 +724,7 @@ Extends the public AI-native UI (shipped in Phase 7.5 Track D) with pro-tier cap
 - Public-facing quality bar is enforceable and verified in CI
 
 ## Notes
+
 This is the public-launch milestone. Defer any item that's not directly required for it. The general-UI scope means templates and kits should serve a broad range of product types — not only SaaS dashboards.
 
 ---
@@ -694,21 +749,27 @@ Recommended order:
 ## Recommended Milestone Strategy
 
 ### Milestone A — Foundation ✅
+
 Phases 2–3 — Aether Base + stable primitives
 
 ### Milestone B — Composability ✅
+
 Phase 4 — Aether UI useful for app teams
 
 ### Milestone B.5 — Trust ✅
+
 Phase 4.6 — Truth, coverage, CI parity with claims
 
 ### Milestone C — AI Native ✅
+
 Phase 5 — Differentiated, LLM-first design system
 
 ### Milestone D — Breadth (in progress)
+
 Phases 6–7.5 — Public registry production-ready with full component coverage (shadcn parity + marketing blocks + AI-native UI). Code complete; Track E (registry/docs/tests) and Phase 7 CDN/versioning remaining.
 
 ### Milestone E — Commercial
+
 Phases 8–9 — Pro tier live, launch ready
 
 ---

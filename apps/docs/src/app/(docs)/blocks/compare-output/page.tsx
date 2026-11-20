@@ -52,13 +52,22 @@ export function ModelComparison() {
   )
 }`}
       preview={
-        <div className="p-4 h-full overflow-auto">
+        <div className="h-full overflow-auto p-4">
           <CompareOutput outputs={DEMO_OUTPUTS} />
         </div>
       }
       props={[
-        { name: "outputs", type: "OutputItem[]", required: true, description: "Array of model output objects to display side by side." },
-        { name: "className", type: "string", description: "Additional classes on the grid container." },
+        {
+          name: "outputs",
+          type: "OutputItem[]",
+          required: true,
+          description: "Array of model output objects to display side by side.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the grid container.",
+        },
       ]}
       a11yNotes={[
         "Each output card has a semantic CardTitle containing the model badge.",

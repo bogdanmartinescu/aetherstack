@@ -40,9 +40,7 @@ function ChatSidebar({
   const [editingId, setEditingId] = React.useState<string | null>(null)
   const [editValue, setEditValue] = React.useState("")
 
-  const filtered = conversations.filter((c) =>
-    c.title.toLowerCase().includes(search.toLowerCase()),
-  )
+  const filtered = conversations.filter((c) => c.title.toLowerCase().includes(search.toLowerCase()))
 
   function startEdit(conv: Conversation) {
     setEditingId(conv.id)
@@ -64,7 +62,7 @@ function ChatSidebar({
       </Button>
 
       <div className="relative">
-        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+        <Search className="text-muted-foreground absolute left-2.5 top-2.5 h-4 w-4" />
         <Input
           placeholder="Search chats…"
           className="pl-8"
@@ -73,7 +71,7 @@ function ChatSidebar({
         />
       </div>
 
-      <div className="flex-1 overflow-y-auto space-y-1">
+      <div className="flex-1 space-y-1 overflow-y-auto">
         {filtered.map((conv) => (
           <div
             key={conv.id}
@@ -95,10 +93,10 @@ function ChatSidebar({
                   className="flex-1 bg-transparent text-sm outline-none"
                 />
                 <button onClick={() => commitEdit(conv.id)} aria-label="Save">
-                  <Check className="h-3.5 w-3.5 text-primary" />
+                  <Check className="text-primary h-3.5 w-3.5" />
                 </button>
                 <button onClick={() => setEditingId(null)} aria-label="Cancel">
-                  <X className="h-3.5 w-3.5 text-muted-foreground" />
+                  <X className="text-muted-foreground h-3.5 w-3.5" />
                 </button>
               </div>
             ) : (
@@ -114,22 +112,22 @@ function ChatSidebar({
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button
-                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="opacity-0 transition-opacity group-hover:opacity-100"
                     aria-label="More options"
                   >
-                    <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
+                    <MoreHorizontal className="text-muted-foreground h-4 w-4" />
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={() => startEdit(conv)}>
-                    <Pencil className="h-3.5 w-3.5 mr-2" />
+                    <Pencil className="mr-2 h-3.5 w-3.5" />
                     Rename
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="text-destructive focus:text-destructive"
                     onClick={() => onConversationDelete?.(conv.id)}
                   >
-                    <Trash2 className="h-3.5 w-3.5 mr-2" />
+                    <Trash2 className="mr-2 h-3.5 w-3.5" />
                     Delete
                   </DropdownMenuItem>
                 </DropdownMenuContent>

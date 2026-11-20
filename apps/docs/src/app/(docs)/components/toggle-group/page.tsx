@@ -119,7 +119,8 @@ export function ToggleGroupDemo() {
       examples={[
         {
           title: "Single select",
-          description: "type='single' — only one item can be active at a time. Ideal for exclusive options like text alignment.",
+          description:
+            "type='single' — only one item can be active at a time. Ideal for exclusive options like text alignment.",
           preview: <ToggleGroupPreview />,
           code: `import { AlignLeft, AlignCenter, AlignRight } from "lucide-react"
 
@@ -137,7 +138,8 @@ export function ToggleGroupDemo() {
         },
         {
           title: "Multiple select",
-          description: "type='multiple' — any number of items can be active simultaneously. Ideal for text formatting options.",
+          description:
+            "type='multiple' — any number of items can be active simultaneously. Ideal for text formatting options.",
           preview: <ToggleGroupMultiplePreview />,
           code: `import { Bold, Italic, Underline } from "lucide-react"
 
@@ -180,7 +182,8 @@ export function ToggleGroupDemo() {
             {
               name: "type",
               type: '"single" | "multiple"',
-              description: "Selection mode. Required. single allows one active item; multiple allows any number.",
+              description:
+                "Selection mode. Required. single allows one active item; multiple allows any number.",
             },
             {
               name: "value",

@@ -4,7 +4,8 @@ import { BlockPage } from "@/components/block-page"
 
 export const metadata: Metadata = {
   title: "AI Usage Dashboard",
-  description: "A dashboard for visualizing AI API usage — request counts, token consumption, estimated cost, and per-model breakdown.",
+  description:
+    "A dashboard for visualizing AI API usage — request counts, token consumption, estimated cost, and per-model breakdown.",
 }
 
 const DEMO_STATS = {
@@ -65,7 +66,7 @@ export function UsagePage() {
   )
 }`}
       preview={
-        <div className="p-4 h-full overflow-auto">
+        <div className="h-full overflow-auto p-4">
           <AIUsageDashboard
             stats={DEMO_STATS}
             tokensByModel={DEMO_MODELS}
@@ -74,10 +75,29 @@ export function UsagePage() {
         </div>
       }
       props={[
-        { name: "stats", type: "UsageStats", description: "Summary KPI object with totalRequests, totalTokens, estimatedCost, and an optional period label." },
-        { name: "tokensByModel", type: "ModelUsage[]", default: "[]", description: "Per-model breakdown rows displayed in the usage table." },
-        { name: "requestsOverTime", type: "DailyUsage[]", default: "[]", description: "Daily usage series rendered as a mini bar chart." },
-        { name: "className", type: "string", description: "Additional classes on the root element." },
+        {
+          name: "stats",
+          type: "UsageStats",
+          description:
+            "Summary KPI object with totalRequests, totalTokens, estimatedCost, and an optional period label.",
+        },
+        {
+          name: "tokensByModel",
+          type: "ModelUsage[]",
+          default: "[]",
+          description: "Per-model breakdown rows displayed in the usage table.",
+        },
+        {
+          name: "requestsOverTime",
+          type: "DailyUsage[]",
+          default: "[]",
+          description: "Daily usage series rendered as a mini bar chart.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root element.",
+        },
       ]}
       a11yNotes={[
         "The bar chart is rendered as an <svg> with aria-label='Bar chart'. Each bar includes a <title> element with the data point label and value.",

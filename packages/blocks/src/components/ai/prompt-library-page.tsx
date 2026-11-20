@@ -60,7 +60,7 @@ function PromptLibraryPage({
   const allCategories =
     categories.length > 0
       ? categories
-      : Array.from(new Set(prompts.map((p) => p.category).filter(Boolean))) as string[]
+      : (Array.from(new Set(prompts.map((p) => p.category).filter(Boolean))) as string[])
 
   const filtered = prompts.filter((p) => {
     const matchesSearch =
@@ -79,7 +79,13 @@ function PromptLibraryPage({
 
   function openEdit(p: Prompt) {
     setEditingPrompt(p)
-    setForm({ title: p.title, content: p.content, description: p.description ?? "", category: p.category ?? "", tags: p.tags ?? [] })
+    setForm({
+      title: p.title,
+      content: p.content,
+      description: p.description ?? "",
+      category: p.category ?? "",
+      tags: p.tags ?? [],
+    })
     setDialogOpen(true)
   }
 
@@ -90,14 +96,14 @@ function PromptLibraryPage({
 
   return (
     <div className={cn("flex h-full gap-0", className)}>
-      <aside className="hidden md:flex w-48 shrink-0 flex-col border-r border-border p-3 gap-1">
-        <p className="px-2 py-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wide">
+      <aside className="border-border hidden w-48 shrink-0 flex-col gap-1 border-r p-3 md:flex">
+        <p className="text-muted-foreground px-2 py-1.5 text-xs font-medium uppercase tracking-wide">
           Categories
         </p>
         <button
           onClick={() => setActiveCategory(null)}
           className={cn(
-            "rounded-md px-2 py-1.5 text-sm text-left transition-colors",
+            "rounded-md px-2 py-1.5 text-left text-sm transition-colors",
             activeCategory === null ? "bg-accent text-accent-foreground" : "hover:bg-accent/50",
           )}
         >
@@ -108,7 +114,7 @@ function PromptLibraryPage({
             key={cat}
             onClick={() => setActiveCategory(cat === activeCategory ? null : cat)}
             className={cn(
-              "rounded-md px-2 py-1.5 text-sm text-left transition-colors",
+              "rounded-md px-2 py-1.5 text-left text-sm transition-colors",
               activeCategory === cat ? "bg-accent text-accent-foreground" : "hover:bg-accent/50",
             )}
           >
@@ -117,10 +123,10 @@ function PromptLibraryPage({
         ))}
       </aside>
 
-      <div className="flex flex-1 flex-col gap-4 p-4 overflow-y-auto">
+      <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-4">
         <div className="flex items-center gap-3">
           <div className="relative flex-1">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Search className="text-muted-foreground absolute left-2.5 top-2.5 h-4 w-4" />
             <Input
               placeholder="Search prompts…"
               className="pl-8"
@@ -130,23 +136,25 @@ function PromptLibraryPage({
           </div>
           {onSave && (
             <Button onClick={openCreate}>
-              <Plus className="h-4 w-4 mr-2" />
+              <Plus className="mr-2 h-4 w-4" />
               New prompt
             </Button>
           )}
         </div>
 
         {filtered.length === 0 ? (
-          <p className="text-center text-sm text-muted-foreground py-12">No prompts found</p>
+          <p className="text-muted-foreground py-12 text-center text-sm">No prompts found</p>
         ) : (
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((p) => (
               <Card key={p.id} className="flex flex-col">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">{p.title}</CardTitle>
-                  {p.description && <CardDescription className="text-xs">{p.description}</CardDescription>}
+                  {p.description && (
+                    <CardDescription className="text-xs">{p.description}</CardDescription>
+                  )}
                 </CardHeader>
-                <CardContent className="flex flex-col gap-3 mt-auto">
+                <CardContent className="mt-auto flex flex-col gap-3">
                   {p.tags && p.tags.length > 0 && (
                     <div className="flex flex-wrap gap-1">
                       {p.tags.map((tag) => (
@@ -156,9 +164,11 @@ function PromptLibraryPage({
                       ))}
                     </div>
                   )}
-                  <div className="flex items-center gap-1 flex-wrap">
+                  <div className="flex flex-wrap items-center gap-1">
                     {onInsert && (
-                      <Button size="sm" onClick={() => onInsert(p.content)}>Insert</Button>
+                      <Button size="sm" onClick={() => onInsert(p.content)}>
+                        Insert
+                      </Button>
                     )}
                     <Button
                       variant="ghost"
@@ -170,7 +180,13 @@ function PromptLibraryPage({
                       <Copy className="h-3.5 w-3.5" />
                     </Button>
                     {onSave && (
-                      <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => openEdit(p)} aria-label="Edit">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => openEdit(p)}
+                        aria-label="Edit"
+                      >
                         <Pencil className="h-3.5 w-3.5" />
                       </Button>
                     )}
@@ -178,7 +194,7 @@ function PromptLibraryPage({
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 text-destructive hover:text-destructive"
+                        className="text-destructive hover:text-destructive h-8 w-8"
                         onClick={() => onDelete(p.id)}
                         aria-label="Delete"
                       >
@@ -235,7 +251,9 @@ function PromptLibraryPage({
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDialogOpen(false)}>Cancel</Button>
+            <Button variant="outline" onClick={() => setDialogOpen(false)}>
+              Cancel
+            </Button>
             <Button onClick={handleSave} disabled={!form.title.trim() || !form.content.trim()}>
               Save
             </Button>

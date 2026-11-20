@@ -60,16 +60,12 @@ export function ChatMessage({ message, isGrouped = false, className }: ChatMessa
       <div className={cn("flex max-w-[75%] flex-col gap-1", isUser && "items-end")}>
         {!isGrouped && (
           <div className={cn("flex items-baseline gap-2", isUser && "flex-row-reverse")}>
-            <span className="text-xs font-medium text-foreground">
+            <span className="text-foreground text-xs font-medium">
               {message.name ??
-                (isUser
-                  ? "You"
-                  : message.role === "assistant"
-                    ? "Assistant"
-                    : "System")}
+                (isUser ? "You" : message.role === "assistant" ? "Assistant" : "System")}
             </span>
             {message.timestamp && (
-              <span className="text-xs text-muted-foreground">{message.timestamp}</span>
+              <span className="text-muted-foreground text-xs">{message.timestamp}</span>
             )}
           </div>
         )}
@@ -77,8 +73,8 @@ export function ChatMessage({ message, isGrouped = false, className }: ChatMessa
           className={cn(
             "rounded-2xl px-3.5 py-2 text-sm leading-relaxed",
             isUser
-              ? "rounded-tr-sm bg-primary text-primary-foreground"
-              : "rounded-tl-sm bg-muted text-foreground",
+              ? "bg-primary text-primary-foreground rounded-tr-sm"
+              : "bg-muted text-foreground rounded-tl-sm",
           )}
         >
           {message.content}

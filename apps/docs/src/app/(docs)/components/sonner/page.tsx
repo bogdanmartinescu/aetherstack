@@ -49,22 +49,13 @@ export default function SonnerPage() {
           <Button variant="outline" onClick={() => sonnerToast("Default notification")}>
             Default
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => sonnerToast.success("Saved successfully!")}
-          >
+          <Button variant="outline" onClick={() => sonnerToast.success("Saved successfully!")}>
             Success
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => sonnerToast.error("Something went wrong")}
-          >
+          <Button variant="outline" onClick={() => sonnerToast.error("Something went wrong")}>
             Error
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => sonnerToast.warning("Session expiring soon")}
-          >
+          <Button variant="outline" onClick={() => sonnerToast.warning("Session expiring soon")}>
             Warning
           </Button>
         </div>
@@ -141,11 +132,21 @@ sonnerToast.promise(fetch("/api/save"), {
           description: "Fire default, success, error, and warning toasts.",
           preview: (
             <div className="flex flex-wrap gap-2">
-              <Button variant="outline" onClick={() => sonnerToast("Hello!")}>Default</Button>
-              <Button variant="outline" onClick={() => sonnerToast.success("Done!")}>Success</Button>
-              <Button variant="outline" onClick={() => sonnerToast.error("Failed!")}>Error</Button>
-              <Button variant="outline" onClick={() => sonnerToast.warning("Heads up!")}>Warning</Button>
-              <Button variant="outline" onClick={() => sonnerToast.info("FYI")}>Info</Button>
+              <Button variant="outline" onClick={() => sonnerToast("Hello!")}>
+                Default
+              </Button>
+              <Button variant="outline" onClick={() => sonnerToast.success("Done!")}>
+                Success
+              </Button>
+              <Button variant="outline" onClick={() => sonnerToast.error("Failed!")}>
+                Error
+              </Button>
+              <Button variant="outline" onClick={() => sonnerToast.warning("Heads up!")}>
+                Warning
+              </Button>
+              <Button variant="outline" onClick={() => sonnerToast.info("FYI")}>
+                Info
+              </Button>
             </div>
           ),
           code: `sonnerToast("Hello!")
@@ -175,15 +176,17 @@ sonnerToast.info("FYI")`,
         },
         {
           title: "Promise toast",
-          description: "Track async operations with loading, success, and error states automatically.",
+          description:
+            "Track async operations with loading, success, and error states automatically.",
           preview: (
             <Button
               variant="outline"
               onClick={() =>
-                sonnerToast.promise(
-                  new Promise((resolve) => setTimeout(resolve, 2000)),
-                  { loading: "Loading…", success: "Done!", error: "Failed" },
-                )
+                sonnerToast.promise(new Promise((resolve) => setTimeout(resolve, 2000)), {
+                  loading: "Loading…",
+                  success: "Done!",
+                  error: "Failed",
+                })
               }
             >
               Async action

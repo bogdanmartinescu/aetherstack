@@ -35,7 +35,7 @@ function DefaultMessage({ msg }: { msg: Message }) {
               className="h-8 w-8 rounded-full object-cover"
             />
           ) : (
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground">
+            <div className="bg-muted text-muted-foreground flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium">
               {msg.name ? msg.name[0]?.toUpperCase() : "AI"}
             </div>
           )}
@@ -45,7 +45,7 @@ function DefaultMessage({ msg }: { msg: Message }) {
         {(msg.name ?? msg.timestamp) && (
           <div
             className={cn(
-              "flex items-center gap-2 text-xs text-muted-foreground",
+              "text-muted-foreground flex items-center gap-2 text-xs",
               isUser && "flex-row-reverse",
             )}
           >
@@ -57,28 +57,28 @@ function DefaultMessage({ msg }: { msg: Message }) {
           className={cn(
             "rounded-2xl px-4 py-2.5 text-sm",
             isUser
-              ? "rounded-tr-sm bg-primary text-primary-foreground"
-              : "rounded-tl-sm bg-muted text-foreground",
+              ? "bg-primary text-primary-foreground rounded-tr-sm"
+              : "bg-muted text-foreground rounded-tl-sm",
           )}
         >
           {msg.isStreaming ? (
             <span>
               {msg.content}
-              <span className="animate-pulse inline-block w-0.5 h-4 bg-current align-middle ml-0.5" />
+              <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-current align-middle" />
             </span>
           ) : (
             msg.content
           )}
         </div>
         {msg.sources && msg.sources.length > 0 && (
-          <div className="mt-1 flex flex-col gap-1 w-full">
+          <div className="mt-1 flex w-full flex-col gap-1">
             {msg.sources.map((src) => (
               <a
                 key={src.url}
                 href={src.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="truncate text-xs text-primary underline underline-offset-2 hover:opacity-80"
+                className="text-primary truncate text-xs underline underline-offset-2 hover:opacity-80"
               >
                 {src.title}
               </a>
@@ -112,11 +112,20 @@ function ConversationThread({
         ),
       )}
       {isThinking && (
-        <div className="flex items-center gap-2 text-muted-foreground text-sm px-4">
+        <div className="text-muted-foreground flex items-center gap-2 px-4 text-sm">
           <span className="flex items-center gap-1">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "0ms" }} />
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "150ms" }} />
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-current animate-bounce" style={{ animationDelay: "300ms" }} />
+            <span
+              className="inline-block h-1.5 w-1.5 animate-bounce rounded-full bg-current"
+              style={{ animationDelay: "0ms" }}
+            />
+            <span
+              className="inline-block h-1.5 w-1.5 animate-bounce rounded-full bg-current"
+              style={{ animationDelay: "150ms" }}
+            />
+            <span
+              className="inline-block h-1.5 w-1.5 animate-bounce rounded-full bg-current"
+              style={{ animationDelay: "300ms" }}
+            />
           </span>
           <span>Thinking…</span>
         </div>

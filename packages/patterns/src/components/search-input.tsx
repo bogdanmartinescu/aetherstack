@@ -45,7 +45,7 @@ export function SearchInput({
   return (
     <div className={cn("relative flex items-center", className)}>
       <Search
-        className="pointer-events-none absolute left-3 h-4 w-4 text-muted-foreground"
+        className="text-muted-foreground pointer-events-none absolute left-3 h-4 w-4"
         aria-hidden="true"
       />
       <Input
@@ -64,13 +64,13 @@ export function SearchInput({
             type="button"
             aria-label="Clear search"
             onClick={handleClear}
-            className="rounded text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-1 focus:ring-ring"
+            className="text-muted-foreground hover:text-foreground focus:ring-ring rounded transition-colors focus:outline-none focus:ring-1"
           >
             <X className="h-3.5 w-3.5" aria-hidden="true" />
           </button>
         )}
         {showShortcut && (
-          <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+          <kbd className="border-border bg-muted text-muted-foreground pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium">
             {shortcut}
           </kbd>
         )}

@@ -55,7 +55,7 @@ function ModelSelector({ models, value, onValueChange, className }: ModelSelecto
                 <div className="flex items-center gap-2">
                   <span>{model.name}</span>
                   {model.capabilities?.map((cap) => (
-                    <Badge key={cap} variant="secondary" className="text-xs py-0">
+                    <Badge key={cap} variant="secondary" className="py-0 text-xs">
                       {cap}
                     </Badge>
                   ))}

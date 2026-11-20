@@ -33,17 +33,12 @@ function Check({ muted = false }: { muted?: boolean }) {
 function Cross() {
   return (
     <svg
-      className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/30"
+      className="text-muted-foreground/30 mt-0.5 h-4 w-4 shrink-0"
       viewBox="0 0 16 16"
       fill="none"
       aria-hidden="true"
     >
-      <path
-        d="M4 4l8 8M12 4l-8 8"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
+      <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
     </svg>
   )
 }
@@ -66,9 +61,11 @@ function FeatureRow({
   return (
     <li className="flex items-start gap-2.5 py-1.5">
       {included ? <Check muted={muted} /> : <Cross />}
-      <span className={`text-sm ${included && !muted ? "text-foreground" : "text-muted-foreground/60"}`}>
+      <span
+        className={`text-sm ${included && !muted ? "text-foreground" : "text-muted-foreground/60"}`}
+      >
         {label}
-        {note && <span className="ml-1.5 text-xs text-muted-foreground">{note}</span>}
+        {note && <span className="text-muted-foreground ml-1.5 text-xs">{note}</span>}
       </span>
     </li>
   )
@@ -76,7 +73,7 @@ function FeatureRow({
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mb-2 mt-4 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60 first:mt-0">
+    <p className="text-muted-foreground/60 mb-2 mt-4 text-[11px] font-semibold uppercase tracking-widest first:mt-0">
       {children}
     </p>
   )
@@ -87,16 +84,38 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 // ---------------------------------------------------------------------------
 
 const freeFeatures = [
-  { group: "Components", items: ["16 UI primitives (Button, Input, Card, Dialog, Table…)", "12 patterns (FormField, MetricCard, TableToolbar, Nav…)", "3 starter blocks (Dashboard Shell, Login, Sign Up)"] },
-  { group: "Tooling", items: ["aether-ui CLI — init, add, list, generate", "MCP server for Cursor, Claude Desktop, and AI agents", "llms.txt + AI metadata on every component"] },
-  { group: "Customisation", items: ["Full component source — edit anything, own everything", "Light, dark, and system theme out of the box", "Token-driven design system (swap colours in CSS)"] },
+  {
+    group: "Components",
+    items: [
+      "16 UI primitives (Button, Input, Card, Dialog, Table…)",
+      "12 patterns (FormField, MetricCard, TableToolbar, Nav…)",
+      "3 starter blocks (Dashboard Shell, Login, Sign Up)",
+    ],
+  },
+  {
+    group: "Tooling",
+    items: [
+      "aether-ui CLI — init, add, list, generate",
+      "MCP server for Cursor, Claude Desktop, and AI agents",
+      "llms.txt + AI metadata on every component",
+    ],
+  },
+  {
+    group: "Customisation",
+    items: [
+      "Full component source — edit anything, own everything",
+      "Light, dark, and system theme out of the box",
+      "Token-driven design system (swap colours in CSS)",
+    ],
+  },
   { group: "Support", items: ["Community support via GitHub Discussions"] },
 ]
 
 const proFeatures = [
   { group: "Licence", items: ["Commercial use — ship in any product or client project"] },
   {
-    group: "Advanced components", note: "coming soon",
+    group: "Advanced components",
+    note: "coming soon",
     items: [
       "DataTable — sortable, filterable, paginated data grid",
       "CommandPalette — ⌘K fuzzy-search command surface",
@@ -113,7 +132,8 @@ const proFeatures = [
     ],
   },
   {
-    group: "Page templates", note: "coming soon",
+    group: "Page templates",
+    note: "coming soon",
     items: [
       "SaaS landing page (hero, features, pricing, CTA)",
       "Marketing site sections (testimonials, logos, FAQ)",
@@ -128,7 +148,8 @@ const proFeatures = [
     ],
   },
   {
-    group: "Vertical kits", note: "coming soon",
+    group: "Vertical kits",
+    note: "coming soon",
     items: [
       "SaaS kit — landing, auth, dashboard, settings, billing",
       "Marketing kit — hero, features, pricing, blog, footer",
@@ -138,7 +159,8 @@ const proFeatures = [
     ],
   },
   {
-    group: "Premium themes", note: "coming soon",
+    group: "Premium themes",
+    note: "coming soon",
     items: [
       "Slate Pro — cool-gray, professional",
       "Indigo Pro — indigo accent, modern",
@@ -148,17 +170,17 @@ const proFeatures = [
     ],
   },
   {
-    group: "AI features", note: "coming soon",
+    group: "AI features",
+    note: "coming soon",
     items: [
       "50+ AI Recipes Pro — prompt-to-feature scaffolding",
       "Pro MCP tools — compose_template, scaffold_page",
     ],
   },
   {
-    group: "Design assets", note: "coming soon",
-    items: [
-      "Figma kit — all components with auto-layout and design tokens",
-    ],
+    group: "Design assets",
+    note: "coming soon",
+    items: ["Figma kit — all components with auto-layout and design tokens"],
   },
   {
     group: "Support",
@@ -177,31 +199,31 @@ const proFeatures = [
 export default function PricingPage() {
   return (
     <div className="max-w-3xl">
-
       {/* Header */}
       <div className="mb-10">
-        <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">Pricing</h1>
-        <p className="text-lg text-muted-foreground">
-          Aether UI is <strong className="text-foreground">free for personal and open-source use</strong>.
-          Pro unlocks commercial use, a library of advanced components, complete page templates,
+        <h1 className="text-foreground mb-3 text-4xl font-bold tracking-tight">Pricing</h1>
+        <p className="text-muted-foreground text-lg">
+          Aether UI is{" "}
+          <strong className="text-foreground">free for personal and open-source use</strong>. Pro
+          unlocks commercial use, a library of advanced components, complete page templates,
           vertical kits, premium themes, and more — with full source ownership on everything.
         </p>
       </div>
 
       {/* Early-access banner */}
-      <div className="mb-8 rounded-xl border border-primary/30 bg-primary/5 px-5 py-4">
+      <div className="border-primary/30 bg-primary/5 mb-8 rounded-xl border px-5 py-4">
         <div className="flex items-start gap-3">
           <span className="mt-0.5 text-lg">🚀</span>
           <div>
-            <p className="mb-0.5 text-sm font-semibold text-foreground">
+            <p className="text-foreground mb-0.5 text-sm font-semibold">
               Founding Member pricing — limited spots
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Lock in <strong className="text-foreground">$49 / year</strong> (regular price{" "}
               <span className="line-through">$79</span>) or grab the{" "}
               <strong className="text-foreground">$149 lifetime deal</strong> (regular{" "}
-              <span className="line-through">$249</span>) before Pro launches.
-              Early access pricing is available to the first 300 members and won&apos;t return.
+              <span className="line-through">$249</span>) before Pro launches. Early access pricing
+              is available to the first 300 members and won&apos;t return.
             </p>
           </div>
         </div>
@@ -209,25 +231,24 @@ export default function PricingPage() {
 
       {/* Tier cards */}
       <div className="mb-12 grid gap-4 sm:grid-cols-2">
-
         {/* Personal */}
-        <div className="flex flex-col rounded-xl border border-border bg-card p-6">
+        <div className="border-border bg-card flex flex-col rounded-xl border p-6">
           <div className="mb-5">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <p className="text-muted-foreground mb-1 text-xs font-semibold uppercase tracking-wider">
               Personal
             </p>
             <div className="flex items-baseline gap-1">
-              <span className="text-4xl font-bold tracking-tight text-foreground">Free</span>
-              <span className="text-sm text-muted-foreground">forever</span>
+              <span className="text-foreground text-4xl font-bold tracking-tight">Free</span>
+              <span className="text-muted-foreground text-sm">forever</span>
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="text-muted-foreground mt-2 text-sm">
               Personal projects, learning, and open-source work.
             </p>
           </div>
 
           <Link
             href="/installation"
-            className="mb-6 inline-flex items-center justify-center rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+            className="border-border bg-background text-foreground hover:bg-muted mb-6 inline-flex items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium transition-colors"
           >
             Get started free
           </Link>
@@ -243,7 +264,13 @@ export default function PricingPage() {
             ))}
             <div>
               <SectionLabel>Not included</SectionLabel>
-              {["Commercial use", "Pro components & templates", "Vertical kits", "Premium themes", "Priority support"].map((item) => (
+              {[
+                "Commercial use",
+                "Pro components & templates",
+                "Vertical kits",
+                "Premium themes",
+                "Priority support",
+              ].map((item) => (
                 <FeatureRow key={item} label={item} included={false} />
               ))}
             </div>
@@ -251,38 +278,38 @@ export default function PricingPage() {
         </div>
 
         {/* Pro */}
-        <div className="flex flex-col rounded-xl border border-primary/40 bg-card p-6 ring-1 ring-primary/20">
+        <div className="border-primary/40 bg-card ring-primary/20 flex flex-col rounded-xl border p-6 ring-1">
           <div className="mb-5">
-            <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            <div className="bg-primary/10 text-primary mb-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold">
+              <span className="bg-primary h-1.5 w-1.5 rounded-full" />
               Coming soon
             </div>
-            <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <p className="text-muted-foreground mb-1 text-xs font-semibold uppercase tracking-wider">
               Pro
             </p>
             <div className="flex items-baseline gap-1">
-              <span className="text-4xl font-bold tracking-tight text-foreground">$79</span>
-              <span className="text-sm text-muted-foreground">/ year</span>
+              <span className="text-foreground text-4xl font-bold tracking-tight">$79</span>
+              <span className="text-muted-foreground text-sm">/ year</span>
             </div>
-            <p className="mt-1 text-xs text-muted-foreground">
+            <p className="text-muted-foreground mt-1 text-xs">
               or <strong className="text-foreground">$249</strong> once, forever
             </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Commercial products, client work, and teams.
-              One licence per project, unlimited developers.
+            <p className="text-muted-foreground mt-2 text-sm">
+              Commercial products, client work, and teams. One licence per project, unlimited
+              developers.
             </p>
           </div>
 
           <div className="mb-6 space-y-2">
             <button
               disabled
-              className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground opacity-50"
+              className="bg-primary text-primary-foreground inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg px-4 py-2 text-sm font-medium opacity-50"
             >
               Buy Pro — $79 / year
             </button>
             <button
               disabled
-              className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg border border-primary/40 bg-primary/5 px-4 py-2 text-sm font-medium text-primary opacity-50"
+              className="border-primary/40 bg-primary/5 text-primary inline-flex w-full cursor-not-allowed items-center justify-center rounded-lg border px-4 py-2 text-sm font-medium opacity-50"
             >
               Lifetime deal — $149 <span className="ml-1.5 line-through opacity-60">$249</span>
             </button>
@@ -310,21 +337,25 @@ export default function PricingPage() {
             ))}
           </ul>
         </div>
-
       </div>
 
       {/* Team callout */}
-      <div className="mb-12 rounded-lg border border-border bg-muted/30 px-5 py-4">
+      <div className="border-border bg-muted/30 mb-12 rounded-lg border px-5 py-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="mb-0.5 text-sm font-semibold text-foreground">Need more than one project?</p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-foreground mb-0.5 text-sm font-semibold">
+              Need more than one project?
+            </p>
+            <p className="text-muted-foreground text-sm">
               A <strong className="text-foreground">Team licence</strong> covers 5 projects for{" "}
-              <strong className="text-foreground">$199 / year</strong>. Unlimited developers per project.
-              Ideal for agencies and product studios.
+              <strong className="text-foreground">$199 / year</strong>. Unlimited developers per
+              project. Ideal for agencies and product studios.
             </p>
           </div>
-          <button disabled className="shrink-0 cursor-not-allowed rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground opacity-50">
+          <button
+            disabled
+            className="border-border bg-background text-muted-foreground shrink-0 cursor-not-allowed rounded-lg border px-4 py-2 text-sm font-medium opacity-50"
+          >
             Coming soon
           </button>
         </div>
@@ -332,12 +363,12 @@ export default function PricingPage() {
 
       {/* What counts as commercial */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
           What counts as commercial use?
         </h2>
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
-            <p className="mb-3 text-sm font-medium text-foreground">Requires a Pro licence</p>
+            <p className="text-foreground mb-3 text-sm font-medium">Requires a Pro licence</p>
             <ul className="space-y-2">
               {[
                 "SaaS or web app that generates revenue",
@@ -345,15 +376,15 @@ export default function PricingPage() {
                 "Internal tool at a for-profit business",
                 "Product sold or licensed to others",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                <li key={item} className="text-muted-foreground flex items-start gap-2.5 text-sm">
+                  <span className="bg-primary mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" />
                   {item}
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="mb-3 text-sm font-medium text-foreground">Always free</p>
+            <p className="text-foreground mb-3 text-sm font-medium">Always free</p>
             <ul className="space-y-2">
               {[
                 "Personal projects with no revenue",
@@ -361,8 +392,8 @@ export default function PricingPage() {
                 "Learning, demos, and experimentation",
                 "Non-profit and educational use",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground/40" />
+                <li key={item} className="text-muted-foreground flex items-start gap-2.5 text-sm">
+                  <span className="bg-muted-foreground/40 mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" />
                   {item}
                 </li>
               ))}
@@ -373,23 +404,35 @@ export default function PricingPage() {
 
       {/* Open-code model */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
           Why open code?
         </h2>
-        <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+        <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
           Aether UI is not a npm dependency you keep up to date. The CLI copies component source
           files directly into your project. You own every line — edit, extend, or delete anything.
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           {[
-            { title: "No runtime dependency", body: "Components live in your repo. No package to update, no breaking API changes forced on you." },
-            { title: "Full customisation", body: "Change the markup, restyle variants, add props. It's your code — no wrapper API to fight." },
-            { title: "Licence tied to install-time", body: "Components you've installed are yours to keep, ship, and modify regardless of your subscription status." },
-            { title: "One licence per project", body: "A Pro licence covers one production project and all the developers working on it — no per-seat counting." },
+            {
+              title: "No runtime dependency",
+              body: "Components live in your repo. No package to update, no breaking API changes forced on you.",
+            },
+            {
+              title: "Full customisation",
+              body: "Change the markup, restyle variants, add props. It's your code — no wrapper API to fight.",
+            },
+            {
+              title: "Licence tied to install-time",
+              body: "Components you've installed are yours to keep, ship, and modify regardless of your subscription status.",
+            },
+            {
+              title: "One licence per project",
+              body: "A Pro licence covers one production project and all the developers working on it — no per-seat counting.",
+            },
           ].map((card) => (
-            <div key={card.title} className="rounded-lg border border-border bg-muted/30 p-4">
-              <p className="mb-1 text-sm font-semibold text-foreground">{card.title}</p>
-              <p className="text-sm leading-relaxed text-muted-foreground">{card.body}</p>
+            <div key={card.title} className="border-border bg-muted/30 rounded-lg border p-4">
+              <p className="text-foreground mb-1 text-sm font-semibold">{card.title}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{card.body}</p>
             </div>
           ))}
         </div>
@@ -397,8 +440,8 @@ export default function PricingPage() {
 
       {/* FAQ */}
       <section className="mb-12">
-        <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">FAQ</h2>
-        <div className="divide-y divide-border">
+        <h2 className="text-foreground mb-6 text-2xl font-semibold tracking-tight">FAQ</h2>
+        <div className="divide-border divide-y">
           {[
             {
               q: "Can I prototype for free and buy Pro before launch?",
@@ -434,36 +477,35 @@ export default function PricingPage() {
             },
           ].map(({ q, a }) => (
             <div key={q} className="py-4">
-              <p className="mb-1.5 text-sm font-semibold text-foreground">{q}</p>
-              <p className="text-sm leading-relaxed text-muted-foreground">{a}</p>
+              <p className="text-foreground mb-1.5 text-sm font-semibold">{q}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{a}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* CTA */}
-      <div className="rounded-xl border border-border bg-muted/30 px-6 py-8 text-center">
-        <p className="mb-1 text-lg font-semibold text-foreground">Start building for free today.</p>
-        <p className="mb-6 text-sm text-muted-foreground">
-          The full public component library is free. No account required.
-          Upgrade to Pro when you&apos;re ready to ship commercially.
+      <div className="border-border bg-muted/30 rounded-xl border px-6 py-8 text-center">
+        <p className="text-foreground mb-1 text-lg font-semibold">Start building for free today.</p>
+        <p className="text-muted-foreground mb-6 text-sm">
+          The full public component library is free. No account required. Upgrade to Pro when
+          you&apos;re ready to ship commercially.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/installation"
-            className="inline-flex items-center rounded-lg bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center rounded-lg px-5 py-2 text-sm font-medium transition-colors"
           >
             Get started free
           </Link>
           <Link
             href="/components"
-            className="inline-flex items-center rounded-lg border border-border bg-background px-5 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+            className="border-border bg-background text-foreground hover:bg-muted inline-flex items-center rounded-lg border px-5 py-2 text-sm font-medium transition-colors"
           >
             Browse components
           </Link>
         </div>
       </div>
-
     </div>
   )
 }

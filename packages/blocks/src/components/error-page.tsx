@@ -48,15 +48,15 @@ export function ErrorPage({
     >
       {illustration && <div className="mb-8">{illustration}</div>}
 
-      <p className="text-8xl font-extrabold tracking-tighter text-muted-foreground/30 sm:text-[10rem]">
+      <p className="text-muted-foreground/30 text-8xl font-extrabold tracking-tighter sm:text-[10rem]">
         {code}
       </p>
 
-      <h1 className="mt-4 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+      <h1 className="text-foreground mt-4 text-2xl font-bold tracking-tight sm:text-3xl">
         {headline ?? defaults.headline}
       </h1>
 
-      <p className="mx-auto mt-4 max-w-md text-sm text-muted-foreground">
+      <p className="text-muted-foreground mx-auto mt-4 max-w-md text-sm">
         {description ?? defaults.description}
       </p>
 

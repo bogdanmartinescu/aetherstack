@@ -107,8 +107,15 @@ export function CheckboxWithLabel() {
           preview: (
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
-                <input type="checkbox" id="dis1" disabled className="h-4 w-4 rounded-sm border border-primary opacity-50 cursor-not-allowed" />
-                <Label htmlFor="dis1" className="opacity-50">Disabled unchecked</Label>
+                <input
+                  type="checkbox"
+                  id="dis1"
+                  disabled
+                  className="border-primary h-4 w-4 cursor-not-allowed rounded-sm border opacity-50"
+                />
+                <Label htmlFor="dis1" className="opacity-50">
+                  Disabled unchecked
+                </Label>
               </div>
             </div>
           ),
@@ -122,7 +129,7 @@ export function CheckboxWithLabel() {
           description: "Build multi-select groups by rendering multiple checkboxes.",
           preview: (
             <fieldset className="space-y-3">
-              <legend className="text-sm font-medium text-foreground mb-3">
+              <legend className="text-foreground mb-3 text-sm font-medium">
                 Notification preferences
               </legend>
               {["Email", "Push notifications", "SMS"].map((item) => (
@@ -145,11 +152,12 @@ export function CheckboxWithLabel() {
         },
         {
           title: "Indeterminate",
-          description: "Use the indeterminate state for a parent checkbox that represents a partially-selected group.",
+          description:
+            "Use the indeterminate state for a parent checkbox that represents a partially-selected group.",
           preview: (
             <div className="flex items-center space-x-2 opacity-80">
-              <div className="h-4 w-4 rounded-sm border border-primary bg-primary flex items-center justify-center">
-                <div className="h-0.5 w-2.5 bg-primary-foreground rounded" />
+              <div className="border-primary bg-primary flex h-4 w-4 items-center justify-center rounded-sm border">
+                <div className="bg-primary-foreground h-0.5 w-2.5 rounded" />
               </div>
               <Label>Select all (partial)</Label>
             </div>
@@ -166,7 +174,8 @@ export function CheckboxWithLabel() {
         {
           name: "checked",
           type: "boolean | 'indeterminate'",
-          description: "Controlled checked state. Pass 'indeterminate' for the partial-selection state.",
+          description:
+            "Controlled checked state. Pass 'indeterminate' for the partial-selection state.",
         },
         {
           name: "defaultChecked",

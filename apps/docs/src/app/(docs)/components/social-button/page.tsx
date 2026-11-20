@@ -66,7 +66,7 @@ export function SocialButtonDemo() {
       ]}
       a11yNotes={[
         "Icon variant exposes the full “{verb} with {Provider}” string as aria-label.",
-        "type=\"button\" is always set so loading does not submit parent forms.",
+        'type="button" is always set so loading does not submit parent forms.',
       ]}
     />
   )

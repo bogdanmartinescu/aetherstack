@@ -165,7 +165,8 @@ export function InputDemo() {
         {
           name: "...props",
           type: "React.InputHTMLAttributes<HTMLInputElement>",
-          description: "All standard HTML input attributes (onChange, value, defaultValue, name, required, etc.).",
+          description:
+            "All standard HTML input attributes (onChange, value, defaultValue, name, required, etc.).",
         },
       ]}
       a11yNotes={[

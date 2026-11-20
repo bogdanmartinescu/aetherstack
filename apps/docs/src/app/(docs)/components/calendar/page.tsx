@@ -108,7 +108,7 @@ export function CalendarDemo() {
       examples={[
         {
           title: "Single date selection",
-          description: "Controlled single-date picker using the mode=\"single\" prop.",
+          description: 'Controlled single-date picker using the mode="single" prop.',
           preview: (
             <div className="flex justify-center">
               <Calendar mode="single" />
@@ -163,7 +163,8 @@ export function DateRangePicker() {
           name: "mode",
           type: '"single" | "multiple" | "range" | "default"',
           default: '"default"',
-          description: "Selection mode. Use 'single' for one date, 'multiple' for several, 'range' for a start–end span.",
+          description:
+            "Selection mode. Use 'single' for one date, 'multiple' for several, 'range' for a start–end span.",
         },
         {
           name: "selected",
@@ -173,13 +174,15 @@ export function DateRangePicker() {
         {
           name: "onSelect",
           type: "(value: ...) => void",
-          description: "Callback fired when the user selects a date. Receives the new selected value.",
+          description:
+            "Callback fired when the user selects a date. Receives the new selected value.",
         },
         {
           name: "showOutsideDays",
           type: "boolean",
           default: "true",
-          description: "Whether to render days from the previous and next months in the current month grid.",
+          description:
+            "Whether to render days from the previous and next months in the current month grid.",
         },
         {
           name: "disabled",

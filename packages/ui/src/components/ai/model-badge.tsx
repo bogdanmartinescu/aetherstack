@@ -10,9 +10,7 @@ interface ModelBadgeProps {
 function ModelBadge({ model, provider, className }: ModelBadgeProps) {
   return (
     <Badge variant="outline" className={cn("gap-1 font-normal", className)}>
-      {provider && (
-        <span className="text-muted-foreground">{provider}/</span>
-      )}
+      {provider && <span className="text-muted-foreground">{provider}/</span>}
       <span>{model}</span>
     </Badge>
   )

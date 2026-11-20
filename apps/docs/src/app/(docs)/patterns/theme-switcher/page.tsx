@@ -45,13 +45,22 @@ export function Navbar() {
 }`}
       preview={<ThemeSwitcherPreview />}
       props={[
-        { name: "—", type: "—", description: "ThemeSwitcherDropdown and ThemeSwitcherToggle take no required props. They read and write the active theme via next-themes internally." },
-        { name: "className", type: "string", description: "Additional classes on the trigger button (both variants)." },
+        {
+          name: "—",
+          type: "—",
+          description:
+            "ThemeSwitcherDropdown and ThemeSwitcherToggle take no required props. They read and write the active theme via next-themes internally.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the trigger button (both variants).",
+        },
       ]}
       a11yNotes={[
-        "Each button carries an aria-label describing the action (\"Toggle theme\" or the active theme name).",
-        "The dropdown uses role=\"menu\" with radio-style aria-checked items for each theme option.",
-        "Active theme is communicated via aria-checked=\"true\" on the selected menu item.",
+        'Each button carries an aria-label describing the action ("Toggle theme" or the active theme name).',
+        'The dropdown uses role="menu" with radio-style aria-checked items for each theme option.',
+        'Active theme is communicated via aria-checked="true" on the selected menu item.',
         "Icons are aria-hidden; labels are the sole source of accessible name.",
       ]}
     />

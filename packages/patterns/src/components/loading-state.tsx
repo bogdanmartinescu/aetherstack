@@ -12,14 +12,7 @@ function Spinner({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       aria-hidden="true"
     >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
       <path
         className="opacity-75"
         fill="currentColor"
@@ -53,7 +46,9 @@ export function LoadingState({
           <div key={i} className="flex items-center gap-3">
             {i === 0 && <Skeleton className="h-9 w-9 shrink-0 rounded-full" />}
             <div className="flex-1 space-y-2">
-              <Skeleton className={cn("h-4", i === 0 ? "w-3/4" : i % 2 === 0 ? "w-5/6" : "w-4/5")} />
+              <Skeleton
+                className={cn("h-4", i === 0 ? "w-3/4" : i % 2 === 0 ? "w-5/6" : "w-4/5")}
+              />
               {i === 0 && <Skeleton className="h-3 w-1/2" />}
             </div>
           </div>
@@ -64,15 +59,12 @@ export function LoadingState({
 
   return (
     <div
-      className={cn(
-        "flex flex-col items-center justify-center gap-3 py-16 text-center",
-        className,
-      )}
+      className={cn("flex flex-col items-center justify-center gap-3 py-16 text-center", className)}
       aria-busy="true"
       aria-label={text}
     >
-      <Spinner className="h-8 w-8 text-primary" />
-      {text && <p className="text-sm text-muted-foreground">{text}</p>}
+      <Spinner className="text-primary h-8 w-8" />
+      {text && <p className="text-muted-foreground text-sm">{text}</p>}
     </div>
   )
 }

@@ -18,7 +18,10 @@ export function FormFieldPreview() {
   return (
     <form
       className="w-full max-w-sm space-y-4"
-      onSubmit={(e) => { e.preventDefault(); setSubmitted(true) }}
+      onSubmit={(e) => {
+        e.preventDefault()
+        setSubmitted(true)
+      }}
     >
       <FormField name="email" error={error} required>
         <FormLabel>Email address</FormLabel>
@@ -27,7 +30,10 @@ export function FormFieldPreview() {
             type="email"
             placeholder="you@example.com"
             value={email}
-            onChange={(e) => { setEmail(e.target.value); setSubmitted(false) }}
+            onChange={(e) => {
+              setEmail(e.target.value)
+              setSubmitted(false)
+            }}
           />
         </FormControl>
         <FormDescription>We&apos;ll send a confirmation to this address.</FormDescription>
@@ -41,7 +47,9 @@ export function FormFieldPreview() {
         </FormControl>
       </FormField>
 
-      <Button type="submit" className="w-full">Submit</Button>
+      <Button type="submit" className="w-full">
+        Submit
+      </Button>
     </form>
   )
 }

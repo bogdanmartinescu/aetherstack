@@ -2,14 +2,7 @@
 
 import * as React from "react"
 import { usePathname } from "next/navigation"
-import {
-  LayoutDashboard,
-  Users,
-  Settings,
-  CreditCard,
-  BarChart3,
-  HelpCircle,
-} from "lucide-react"
+import { LayoutDashboard, Users, Settings, CreditCard, BarChart3, HelpCircle } from "lucide-react"
 import { DashboardShell, type DashboardNavGroup } from "@aetherstack/blocks"
 
 const PAGE_TITLES: Record<string, string> = {

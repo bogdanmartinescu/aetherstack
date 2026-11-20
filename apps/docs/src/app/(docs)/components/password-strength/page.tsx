@@ -18,9 +18,7 @@ export default function PasswordStrengthPage() {
         "Generate button creates a password that passes every rule",
         "Pure helpers for scoring, checking, and generating passwords",
       ]}
-      preview={
-        <PasswordStrength password={password} onPasswordChange={setPassword} />
-      }
+      preview={<PasswordStrength password={password} onPasswordChange={setPassword} />}
       previewCode={`import { useState } from "react"
 import { PasswordStrength } from "@/components/ui/password-strength"
 

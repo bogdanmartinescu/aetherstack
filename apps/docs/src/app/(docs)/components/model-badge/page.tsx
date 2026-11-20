@@ -14,7 +14,7 @@ export default function ModelBadgePage() {
       description="A compact badge that displays the AI model name with an optional provider prefix."
       packageName="@aetherstack/ui"
       preview={
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex flex-wrap items-center gap-2">
           <ModelBadge model="gpt-4o" provider="openai" />
           <ModelBadge model="claude-3-5-sonnet" provider="anthropic" />
           <ModelBadge model="gemini-2.0-flash" provider="google" />

@@ -55,13 +55,18 @@ const MCP_CONFIG = `{
   }
 }`
 
-const MCP_TOOLS = ["list_components", "get_component", "install_component", "compose_block"] as const
+const MCP_TOOLS = [
+  "list_components",
+  "get_component",
+  "install_component",
+  "compose_block",
+] as const
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="bg-background text-foreground min-h-screen">
       <SiteHeader />
       <main>
         <Hero />
@@ -79,12 +84,12 @@ export default function HomePage() {
 
 function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+    <header className="border-border bg-background/95 supports-[backdrop-filter]:bg-background/80 sticky top-0 z-40 border-b backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-6 px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 font-semibold">
           <span
             aria-hidden="true"
-            className="flex h-6 w-6 items-center justify-center rounded bg-primary text-[10px] font-bold text-primary-foreground"
+            className="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded text-[10px] font-bold"
           >
             A
           </span>
@@ -95,7 +100,7 @@ function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.label}
             </Link>
@@ -129,7 +134,7 @@ function Hero() {
   ]
 
   return (
-    <section className="relative overflow-hidden border-b border-border">
+    <section className="border-border relative overflow-hidden border-b">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-[480px] bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.12),transparent_65%)]"
@@ -138,9 +143,9 @@ function Hero() {
         <div className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-500">
           <Link
             href="/llms"
-            className="group mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="border-border bg-muted/60 text-muted-foreground hover:text-foreground group mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium transition-colors"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+            <span className="bg-primary h-1.5 w-1.5 rounded-full" aria-hidden="true" />
             MCP server for AI coding agents
             <ArrowRight
               className="h-3 w-3 transition-transform motion-safe:group-hover:translate-x-0.5"
@@ -150,7 +155,7 @@ function Hero() {
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
             UI for SaaS and AI products, installed as code you own.
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+          <p className="text-muted-foreground mt-6 max-w-xl text-lg">
             Aether UI is an open-code design system for React and Tailwind. One command copies
             accessible, token-themed components into your repo as plain TypeScript, ready to edit
             and easy for your AI agent to read.
@@ -161,10 +166,10 @@ function Hero() {
             </Button>
             <InstallCommand command="npx aether-ui init" />
           </div>
-          <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
+          <ul className="text-muted-foreground mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm">
             {facts.map((fact) => (
               <li key={fact} className="flex items-center gap-1.5">
-                <Check className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+                <Check className="text-primary h-3.5 w-3.5" aria-hidden="true" />
                 {fact}
               </li>
             ))}
@@ -182,7 +187,7 @@ function Hero() {
 
 function Layers() {
   return (
-    <section className="border-b border-border">
+    <section className="border-border border-b">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading
           eyebrow="Architecture"
@@ -202,13 +207,16 @@ function Layers() {
                 <span
                   key={swatch.label}
                   title={swatch.label}
-                  className={`h-8 flex-1 rounded-md border border-border ${swatch.className}`}
+                  className={`border-border h-8 flex-1 rounded-md border ${swatch.className}`}
                 />
               ))}
             </div>
             <div className="mt-3 flex gap-1.5">
               {["rounded-sm", "rounded-md", "rounded-lg", "rounded-full"].map((radius) => (
-                <span key={radius} className={`h-6 flex-1 border border-border bg-muted ${radius}`} />
+                <span
+                  key={radius}
+                  className={`border-border bg-muted h-6 flex-1 border ${radius}`}
+                />
               ))}
             </div>
           </LayerCard>
@@ -242,7 +250,13 @@ function Layers() {
             href="/patterns"
             linkLabel="Browse patterns"
           >
-            <MetricCard label="MRR" value="$48.2k" change="+12.4%" trend="up" className="shadow-none" />
+            <MetricCard
+              label="MRR"
+              value="$48.2k"
+              change="+12.4%"
+              trend="up"
+              className="shadow-none"
+            />
           </LayerCard>
 
           <LayerCard
@@ -257,7 +271,7 @@ function Layers() {
                 <li key={block.name}>
                   <Link
                     href={`/blocks/${block.name}`}
-                    className="flex items-center gap-2 rounded-md border border-border bg-background px-2 py-1.5 text-muted-foreground transition-colors hover:text-foreground"
+                    className="border-border bg-background text-muted-foreground hover:text-foreground flex items-center gap-2 rounded-md border px-2 py-1.5 transition-colors"
                   >
                     <LayoutTemplate className="h-3.5 w-3.5" aria-hidden="true" />
                     {block.title}
@@ -288,16 +302,16 @@ function LayerCard({
   children: ReactNode
 }) {
   return (
-    <div className="flex flex-col rounded-xl border border-border bg-card p-5">
-      <div className="mb-5 min-h-[88px] rounded-lg border border-border bg-muted/30 p-3">
+    <div className="border-border bg-card flex flex-col rounded-xl border p-5">
+      <div className="border-border bg-muted/30 mb-5 min-h-[88px] rounded-lg border p-3">
         {children}
       </div>
-      <span className="font-mono text-xs text-muted-foreground">{step}</span>
+      <span className="text-muted-foreground font-mono text-xs">{step}</span>
       <h3 className="mt-1 font-semibold">{title}</h3>
-      <p className="mt-1.5 flex-1 text-sm text-muted-foreground">{description}</p>
+      <p className="text-muted-foreground mt-1.5 flex-1 text-sm">{description}</p>
       <Link
         href={href}
-        className="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary"
+        className="text-primary group mt-4 inline-flex items-center gap-1 text-sm font-medium"
       >
         {linkLabel}
         <ArrowRight
@@ -323,12 +337,13 @@ function InstallSection() {
     },
     {
       command: "git diff",
-      description: "It is your code now. Change the styles, the API, anything. There is no runtime package to upgrade.",
+      description:
+        "It is your code now. Change the styles, the API, anything. There is no runtime package to upgrade.",
     },
   ]
 
   return (
-    <section className="border-b border-border">
+    <section className="border-border border-b">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2">
         <div>
           <SectionHeading
@@ -339,12 +354,12 @@ function InstallSection() {
           <ol className="mt-10 space-y-6">
             {steps.map((step, index) => (
               <li key={step.command} className="flex gap-4">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border font-mono text-xs text-muted-foreground">
+                <span className="border-border text-muted-foreground flex h-7 w-7 shrink-0 items-center justify-center rounded-full border font-mono text-xs">
                   {index + 1}
                 </span>
                 <div className="min-w-0">
                   <code className="font-mono text-sm font-medium">{step.command}</code>
-                  <p className="mt-1 text-sm text-muted-foreground">{step.description}</p>
+                  <p className="text-muted-foreground mt-1 text-sm">{step.description}</p>
                 </div>
               </li>
             ))}
@@ -386,7 +401,7 @@ function AiSection() {
   ]
 
   return (
-    <section className="border-b border-border bg-muted/30">
+    <section className="border-border bg-muted/30 border-b">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2">
         <div className="order-2 min-w-0 lg:order-1">
           <CodeBlock code={MCP_CONFIG} language="json" filename=".cursor/mcp.json" />
@@ -409,11 +424,11 @@ function AiSection() {
                   <h3 className="flex items-center gap-1.5 font-semibold">
                     {point.title}
                     <ArrowRight
-                      className="h-3.5 w-3.5 text-muted-foreground transition-transform motion-safe:group-hover:translate-x-0.5"
+                      className="text-muted-foreground h-3.5 w-3.5 transition-transform motion-safe:group-hover:translate-x-0.5"
                       aria-hidden="true"
                     />
                   </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{point.description}</p>
+                  <p className="text-muted-foreground mt-1 text-sm">{point.description}</p>
                 </Link>
               </li>
             ))}
@@ -431,8 +446,10 @@ function ClosingCta() {
     <section>
       <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-20 sm:px-6 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Start with one component.</h2>
-          <p className="mt-2 text-muted-foreground">
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+            Start with one component.
+          </h2>
+          <p className="text-muted-foreground mt-2">
             Add a button today and the rest of the system when you need it.
           </p>
         </div>
@@ -480,11 +497,11 @@ function SiteFooter() {
   ]
 
   return (
-    <footer className="border-t border-border">
+    <footer className="border-border border-t">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1fr_auto_auto_auto] md:gap-16">
         <div>
           <span className="font-semibold">Aether UI</span>
-          <p className="mt-2 max-w-xs text-sm text-muted-foreground">
+          <p className="text-muted-foreground mt-2 max-w-xs text-sm">
             An open-code design system by Aetherstack. MIT licensed.
           </p>
         </div>
@@ -495,11 +512,17 @@ function SiteFooter() {
               {column.links.map((link) => (
                 <li key={link.label}>
                   {link.href.startsWith("http") ? (
-                    <a href={link.href} className="text-muted-foreground transition-colors hover:text-foreground">
+                    <a
+                      href={link.href}
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                    >
                       {link.label}
                     </a>
                   ) : (
-                    <Link href={link.href} className="text-muted-foreground transition-colors hover:text-foreground">
+                    <Link
+                      href={link.href}
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                    >
                       {link.label}
                     </Link>
                   )}
@@ -526,9 +549,9 @@ function SectionHeading({
 }) {
   return (
     <div className="max-w-2xl">
-      <p className="text-sm font-medium text-primary">{eyebrow}</p>
+      <p className="text-primary text-sm font-medium">{eyebrow}</p>
       <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2>
-      {description && <p className="mt-4 text-muted-foreground">{description}</p>}
+      {description && <p className="text-muted-foreground mt-4">{description}</p>}
     </div>
   )
 }

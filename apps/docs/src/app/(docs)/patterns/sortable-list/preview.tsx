@@ -19,10 +19,10 @@ export function SortableListPreview() {
         items={items}
         onReorder={setItems}
         renderItem={(item) => (
-          <span className="text-sm text-foreground">{String(item.label ?? "")}</span>
+          <span className="text-foreground text-sm">{String(item.label ?? "")}</span>
         )}
       />
-      <p className="text-xs text-muted-foreground text-center">
+      <p className="text-muted-foreground text-center text-xs">
         Order: {items.map((i) => String(i.label ?? "").split(" ")[0]).join(" → ")}
       </p>
     </div>

@@ -45,15 +45,15 @@ const missing = findMissingDependencies(registry.items)
 
 ## Exported API
 
-| Export | Description |
-|---|---|
-| `buildRegistry(raw)` | Parse and build a registry manifest, returning resolved items and warnings |
-| `sortRegistryItems(items)` | Sort registry items by type order then name |
-| `validateRegistry(raw)` | Validate a full registry manifest against the schema |
-| `validateRegistryItem(raw)` | Validate a single registry item |
-| `findMissingDependencies(items)` | Return dependency names referenced by items that are absent from the list |
-| `BuildResult` | `{ registry: Registry; warnings: string[] }` |
-| `ValidationResult` | `{ valid: boolean; errors: string[] }` |
+| Export                           | Description                                                                |
+| -------------------------------- | -------------------------------------------------------------------------- |
+| `buildRegistry(raw)`             | Parse and build a registry manifest, returning resolved items and warnings |
+| `sortRegistryItems(items)`       | Sort registry items by type order then name                                |
+| `validateRegistry(raw)`          | Validate a full registry manifest against the schema                       |
+| `validateRegistryItem(raw)`      | Validate a single registry item                                            |
+| `findMissingDependencies(items)` | Return dependency names referenced by items that are absent from the list  |
+| `BuildResult`                    | `{ registry: Registry; warnings: string[] }`                               |
+| `ValidationResult`               | `{ valid: boolean; errors: string[] }`                                     |
 
 ## Documentation
 

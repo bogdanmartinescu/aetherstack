@@ -133,12 +133,7 @@ server.tool(
     lines.push(`## Install`, "", "```bash", `aether-ui add ${item.name}`, "```", "")
 
     if (item.ai?.prompts?.length) {
-      lines.push(
-        `## Example Prompts`,
-        "",
-        ...item.ai.prompts.map((p) => `- "${p}"`),
-        "",
-      )
+      lines.push(`## Example Prompts`, "", ...item.ai.prompts.map((p) => `- "${p}"`), "")
     }
 
     if (item.ai?.slots?.length) {
@@ -146,12 +141,7 @@ server.tool(
     }
 
     if (item.ai?.composition?.length) {
-      lines.push(
-        `## Often Used With`,
-        "",
-        ...item.ai.composition.map((c) => `- \`${c}\``),
-        "",
-      )
+      lines.push(`## Often Used With`, "", ...item.ai.composition.map((c) => `- \`${c}\``), "")
     }
 
     if (item.registryDependencies?.length) {
@@ -190,7 +180,7 @@ server.tool(
   {
     names: z
       .array(z.string())
-      .describe("One or more registry names to install (e.g. [\"button\", \"card\"])."),
+      .describe('One or more registry names to install (e.g. ["button", "card"]).'),
   },
   async ({ names }) => {
     const registry = await loadRegistry()
@@ -207,14 +197,7 @@ server.tool(
     const lines: string[] = []
 
     if (found.length > 0) {
-      lines.push(
-        `## Install`,
-        "",
-        "```bash",
-        `aether-ui add ${found.join(" ")}`,
-        "```",
-        "",
-      )
+      lines.push(`## Install`, "", "```bash", `aether-ui add ${found.join(" ")}`, "```", "")
     }
 
     if (notFound.length > 0) {
@@ -244,7 +227,7 @@ server.tool(
     description: z
       .string()
       .describe(
-        "Natural-language description of the UI you want to build, e.g. \"a SaaS dashboard with a sidebar and KPI cards\".",
+        'Natural-language description of the UI you want to build, e.g. "a SaaS dashboard with a sidebar and KPI cards".',
       ),
   },
   async ({ description }) => {
@@ -265,14 +248,7 @@ server.tool(
     ]
 
     if (plan.starterCode) {
-      lines.push(
-        `## Starter File`,
-        "",
-        "```tsx",
-        plan.starterCode,
-        "```",
-        "",
-      )
+      lines.push(`## Starter File`, "", "```tsx", plan.starterCode, "```", "")
     }
 
     if (plan.notes) {

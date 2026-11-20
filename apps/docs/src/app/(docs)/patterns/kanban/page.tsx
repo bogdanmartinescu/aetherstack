@@ -54,11 +54,20 @@ export function MyKanban() {
 }`}
       preview={<KanbanPreview />}
       props={[
-        { name: "columns", type: "KanbanColumnProps[]", required: true, description: "Column definitions with title, items array, and optional onDrop callback." },
-        { name: "className", type: "string", description: "Additional classes on the board wrapper." },
+        {
+          name: "columns",
+          type: "KanbanColumnProps[]",
+          required: true,
+          description: "Column definitions with title, items array, and optional onDrop callback.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the board wrapper.",
+        },
       ]}
       a11yNotes={[
-        "The board wrapper has role=\"region\" aria-label=\"Kanban board\".",
+        'The board wrapper has role="region" aria-label="Kanban board".',
         "Cards are draggable — keyboard drag-and-drop is not supported by the native HTML5 drag API; add a separate accessible reorder mechanism for keyboard users in production.",
         "Card titles are text; badges use the Badge primitive with semantic variant.",
         "Empty column drop targets are visually indicated with a dashed border.",

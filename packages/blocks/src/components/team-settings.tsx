@@ -76,17 +76,12 @@ export function TeamSettings({
   }
 
   return (
-    <div
-      className={cn(
-        "w-full rounded-xl border border-border bg-card p-6 shadow-sm",
-        className,
-      )}
-    >
+    <div className={cn("border-border bg-card w-full rounded-xl border p-6 shadow-sm", className)}>
       {/* Header */}
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h2 className="text-base font-semibold text-foreground">Team members</h2>
-          <p className="mt-0.5 text-sm text-muted-foreground">
+          <h2 className="text-foreground text-base font-semibold">Team members</h2>
+          <p className="text-muted-foreground mt-0.5 text-sm">
             {members.length} {members.length === 1 ? "member" : "members"}
           </p>
         </div>
@@ -121,38 +116,26 @@ export function TeamSettings({
 
       {/* Members list */}
       {members.length === 0 ? (
-        <p className="py-6 text-center text-sm text-muted-foreground">
+        <p className="text-muted-foreground py-6 text-center text-sm">
           No team members yet. Invite someone to get started.
         </p>
       ) : (
-        <ul className="divide-y divide-border">
+        <ul className="divide-border divide-y">
           {members.map((member) => (
-            <li
-              key={member.id}
-              className="flex items-center gap-3 py-3 first:pt-0 last:pb-0"
-            >
+            <li key={member.id} className="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
               <Avatar className="h-9 w-9 shrink-0">
                 <AvatarImage src={member.avatarUrl} alt={member.name} />
-                <AvatarFallback className="text-xs">
-                  {getInitials(member.name)}
-                </AvatarFallback>
+                <AvatarFallback className="text-xs">{getInitials(member.name)}</AvatarFallback>
               </Avatar>
 
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-foreground">
-                  {member.name}
-                </p>
-                <p className="truncate text-xs text-muted-foreground">
-                  {member.email}
-                </p>
+                <p className="text-foreground truncate text-sm font-medium">{member.name}</p>
+                <p className="text-muted-foreground truncate text-xs">{member.email}</p>
               </div>
 
               {/* Role selector / badge */}
               {onRoleChange && member.role !== "owner" ? (
-                <Select
-                  value={member.role}
-                  onValueChange={(val) => onRoleChange(member.id, val)}
-                >
+                <Select value={member.role} onValueChange={(val) => onRoleChange(member.id, val)}>
                   <SelectTrigger className="h-7 w-[100px] text-xs">
                     <SelectValue />
                   </SelectTrigger>
@@ -173,7 +156,7 @@ export function TeamSettings({
                   type="button"
                   variant="ghost"
                   size="sm"
-                  className="h-7 w-7 shrink-0 p-0 text-muted-foreground hover:text-destructive"
+                  className="text-muted-foreground hover:text-destructive h-7 w-7 shrink-0 p-0"
                   onClick={() => onRemove(member.id)}
                   aria-label={`Remove ${member.name}`}
                 >

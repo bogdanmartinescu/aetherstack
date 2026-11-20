@@ -50,18 +50,33 @@ export function TimelineScrubberDemo() {
       manualInstallCode={TIMELINE_SCRUBBER_SOURCE}
       examples={[]}
       props={[
-        { name: "label", type: "string", default: "—", description: "Accessible name for the range input." },
+        {
+          name: "label",
+          type: "string",
+          default: "—",
+          description: "Accessible name for the range input.",
+        },
         { name: "min", type: "number", default: "—", description: "Minimum value of the range." },
         { name: "max", type: "number", default: "—", description: "Maximum value of the range." },
         { name: "step", type: "number", default: "1", description: "Step between values." },
-        { name: "value", type: "number", default: "—", description: "Current position (controlled)." },
+        {
+          name: "value",
+          type: "number",
+          default: "—",
+          description: "Current position (controlled).",
+        },
         {
           name: "onValueChange",
           type: "(value: number) => void",
           default: "—",
           description: "Called when the user moves the scrubber.",
         },
-        { name: "className", type: "string", default: "—", description: "Extra classes on the root element." },
+        {
+          name: "className",
+          type: "string",
+          default: "—",
+          description: "Extra classes on the root element.",
+        },
       ]}
       a11yNotes={[
         "The range input uses aria-label from the label prop and exposes the current value as aria-valuenow.",

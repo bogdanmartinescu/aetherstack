@@ -15,9 +15,7 @@ export function ChatSidebarPreview() {
   const [conversations, setConversations] = React.useState(INITIAL_CONVS)
 
   function handleClick(id: string) {
-    setConversations((prev) =>
-      prev.map((c) => ({ ...c, active: c.id === id })),
-    )
+    setConversations((prev) => prev.map((c) => ({ ...c, active: c.id === id })))
   }
 
   function handleDelete(id: string) {
@@ -25,13 +23,11 @@ export function ChatSidebarPreview() {
   }
 
   function handleRename(id: string, title: string) {
-    setConversations((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, title } : c)),
-    )
+    setConversations((prev) => prev.map((c) => (c.id === id ? { ...c, title } : c)))
   }
 
   return (
-    <div className="h-full border-r border-border bg-card w-64">
+    <div className="border-border bg-card h-full w-64 border-r">
       <ChatSidebar
         conversations={conversations}
         onNewChat={() =>

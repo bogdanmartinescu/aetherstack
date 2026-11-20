@@ -25,11 +25,35 @@ export function MyDateRange() {
 }`}
       preview={<DateRangePickerPreview />}
       props={[
-        { name: "value", type: "{ from?: Date; to?: Date }", required: true, description: "Controlled selected date range." },
-        { name: "onValueChange", type: "(value: { from?: Date; to?: Date }) => void", required: true, description: "Callback fired when the range changes." },
-        { name: "placeholder", type: "string", default: '"Pick a date range"', description: "Trigger button text when no range is selected." },
-        { name: "disabled", type: "boolean", default: "false", description: "Disables the trigger button." },
-        { name: "className", type: "string", description: "Additional classes on the popover trigger." },
+        {
+          name: "value",
+          type: "{ from?: Date; to?: Date }",
+          required: true,
+          description: "Controlled selected date range.",
+        },
+        {
+          name: "onValueChange",
+          type: "(value: { from?: Date; to?: Date }) => void",
+          required: true,
+          description: "Callback fired when the range changes.",
+        },
+        {
+          name: "placeholder",
+          type: "string",
+          default: '"Pick a date range"',
+          description: "Trigger button text when no range is selected.",
+        },
+        {
+          name: "disabled",
+          type: "boolean",
+          default: "false",
+          description: "Disables the trigger button.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the popover trigger.",
+        },
       ]}
       a11yNotes={[
         "The trigger button carries an accessible label derived from the selected range or the placeholder.",

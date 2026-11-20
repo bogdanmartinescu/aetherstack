@@ -15,18 +15,11 @@ export interface LogoCloudProps {
   className?: string
 }
 
-export function LogoCloud({
-  headline,
-  logos,
-  grayscale = true,
-  className,
-}: LogoCloudProps) {
+export function LogoCloud({ headline, logos, grayscale = true, className }: LogoCloudProps) {
   return (
-    <section className={cn("w-full py-12 px-4", className)}>
+    <section className={cn("w-full px-4 py-12", className)}>
       {headline && (
-        <p className="mb-8 text-center text-sm font-medium text-muted-foreground">
-          {headline}
-        </p>
+        <p className="text-muted-foreground mb-8 text-center text-sm font-medium">{headline}</p>
       )}
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-8 sm:gap-12">
         {logos.map((logo) => {
@@ -42,7 +35,7 @@ export function LogoCloud({
           ) : logo.icon ? (
             <span
               className={cn(
-                "flex items-center gap-2 text-sm font-semibold text-muted-foreground transition-all",
+                "text-muted-foreground flex items-center gap-2 text-sm font-semibold transition-all",
                 grayscale && "opacity-60 hover:opacity-100",
               )}
             >
@@ -52,7 +45,7 @@ export function LogoCloud({
           ) : (
             <span
               className={cn(
-                "text-sm font-semibold text-muted-foreground transition-all",
+                "text-muted-foreground text-sm font-semibold transition-all",
                 grayscale && "opacity-60 hover:opacity-100",
               )}
             >

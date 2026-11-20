@@ -4,7 +4,8 @@ import { FontDemo } from "./font-demo"
 
 export const metadata: Metadata = {
   title: "Fonts",
-  description: "Six curated Google Fonts for clean, professional UI development. Switch globally with one click.",
+  description:
+    "Six curated Google Fonts for clean, professional UI development. Switch globally with one click.",
 }
 
 export default function FontsPage() {
@@ -12,30 +13,32 @@ export default function FontsPage() {
     <div className="max-w-3xl">
       {/* Header */}
       <div className="mb-10">
-        <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">Fonts</h1>
-        <p className="text-lg text-muted-foreground">
-          Aether UI ships six curated Google Fonts optimised for professional UI development.
-          The font picker in the top nav applies your choice globally — all components update instantly.
-          Your selection is persisted in <code className="rounded bg-muted px-1 font-mono text-xs">localStorage</code>.
+        <h1 className="text-foreground mb-3 text-4xl font-bold tracking-tight">Fonts</h1>
+        <p className="text-muted-foreground text-lg">
+          Aether UI ships six curated Google Fonts optimised for professional UI development. The
+          font picker in the top nav applies your choice globally — all components update instantly.
+          Your selection is persisted in{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">localStorage</code>.
         </p>
       </div>
 
       {/* Live demo */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Live preview</h2>
-        <p className="mb-5 text-sm text-muted-foreground">
-          Use the <strong className="text-foreground">font picker</strong> in the top navigation bar to switch fonts.
-          The preview below reflects your current selection.
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Live preview</h2>
+        <p className="text-muted-foreground mb-5 text-sm">
+          Use the <strong className="text-foreground">font picker</strong> in the top navigation bar
+          to switch fonts. The preview below reflects your current selection.
         </p>
         <FontDemo />
       </section>
 
       {/* Font catalog */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Font catalog</h2>
-        <p className="mb-6 text-sm text-muted-foreground">
-          Each font is pre-loaded via Next.js <code className="rounded bg-muted px-1 font-mono text-xs">next/font/google</code> — 
-          zero layout shift, self-hosted by Vercel&apos;s CDN, no external requests at runtime.
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Font catalog</h2>
+        <p className="text-muted-foreground mb-6 text-sm">
+          Each font is pre-loaded via Next.js{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">next/font/google</code> — zero
+          layout shift, self-hosted by Vercel&apos;s CDN, no external requests at runtime.
         </p>
 
         <div className="space-y-4">
@@ -83,30 +86,27 @@ export default function FontsPage() {
               note: "A geometric sans with a subtle warmth. Beautifully balanced between technical and approachable.",
             },
           ].map((font) => (
-            <div
-              key={font.id}
-              className="overflow-hidden rounded-lg border border-border bg-card"
-            >
+            <div key={font.id} className="border-border bg-card overflow-hidden rounded-lg border">
               {/* Font specimen */}
               <div
-                className="border-b border-border bg-muted/20 px-5 py-5"
+                className="border-border bg-muted/20 border-b px-5 py-5"
                 style={{ fontFamily: `var(${font.style})` }}
               >
                 <div className="mb-1 flex items-baseline justify-between gap-4">
-                  <span className="text-2xl font-semibold text-foreground">{font.label}</span>
-                  <span className="text-sm text-muted-foreground">{font.author}</span>
+                  <span className="text-foreground text-2xl font-semibold">{font.label}</span>
+                  <span className="text-muted-foreground text-sm">{font.author}</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   The quick brown fox jumps over the lazy dog — 0123456789
                 </p>
-                <p className="mt-2 text-xs text-muted-foreground tracking-wide">
+                <p className="text-muted-foreground mt-2 text-xs tracking-wide">
                   ABCDEFGHIJKLMNOPQRSTUVWXYZ · abcdefghijklmnopqrstuvwxyz
                 </p>
               </div>
 
               {/* Meta */}
               <div className="px-5 py-3">
-                <p className="text-xs text-muted-foreground">{font.note}</p>
+                <p className="text-muted-foreground text-xs">{font.note}</p>
               </div>
             </div>
           ))}
@@ -115,14 +115,16 @@ export default function FontsPage() {
 
       {/* How it works */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">How it works</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          All six fonts are loaded at startup via Next.js font optimisation — each assigned a unique CSS variable.
-          Selecting a font sets a <code className="rounded bg-muted px-1 font-mono text-xs">data-font</code> attribute 
-          on <code className="rounded bg-muted px-1 font-mono text-xs">&lt;html&gt;</code>, and CSS rules 
-          point <code className="rounded bg-muted px-1 font-mono text-xs">--font-sans</code> to the right variable.
-          Since all Tailwind utility classes use <code className="rounded bg-muted px-1 font-mono text-xs">var(--font-sans)</code>, 
-          every component updates immediately.
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">How it works</h2>
+        <p className="text-muted-foreground mb-4 text-sm">
+          All six fonts are loaded at startup via Next.js font optimisation — each assigned a unique
+          CSS variable. Selecting a font sets a{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">data-font</code> attribute on{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">&lt;html&gt;</code>, and CSS
+          rules point <code className="bg-muted rounded px-1 font-mono text-xs">--font-sans</code>{" "}
+          to the right variable. Since all Tailwind utility classes use{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">var(--font-sans)</code>, every
+          component updates immediately.
         </p>
         <CodeBlock
           code={`/* globals.css */
@@ -150,10 +152,13 @@ localStorage.setItem('aether-font', 'manrope')`}
 
       {/* Framework integration */}
       <section className="mb-12">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Framework setup</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          After running <code className="rounded bg-muted px-1 font-mono text-xs">aether-ui init</code>,
-          the CLI writes the font configuration to your project. Here&apos;s what it sets up for Next.js:
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+          Framework setup
+        </h2>
+        <p className="text-muted-foreground mb-4 text-sm">
+          After running{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui init</code>, the CLI
+          writes the font configuration to your project. Here&apos;s what it sets up for Next.js:
         </p>
         <CodeBlock
           code={`// app/layout.tsx
@@ -189,7 +194,11 @@ export default function RootLayout({ children }) {
         />
 
         <div className="mt-4">
-          <p className="mb-3 text-sm text-muted-foreground">For Vite + React, use <code className="rounded bg-muted px-1 font-mono text-xs">@fontsource</code> packages instead:</p>
+          <p className="text-muted-foreground mb-3 text-sm">
+            For Vite + React, use{" "}
+            <code className="bg-muted rounded px-1 font-mono text-xs">@fontsource</code> packages
+            instead:
+          </p>
           <CodeBlock
             code={`# Pick your font
 npm install @fontsource-variable/inter
@@ -207,10 +216,13 @@ import "@fontsource-variable/inter"
 
       {/* aether.config.json */}
       <section>
-        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">Configuration</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          Your chosen font is saved in <code className="rounded bg-muted px-1 font-mono text-xs">aether.config.json</code>. 
-          The CLI uses this when adding new components to ensure the correct import is generated.
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+          Configuration
+        </h2>
+        <p className="text-muted-foreground mb-4 text-sm">
+          Your chosen font is saved in{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">aether.config.json</code>. The
+          CLI uses this when adding new components to ensure the correct import is generated.
         </p>
         <CodeBlock
           code={`{

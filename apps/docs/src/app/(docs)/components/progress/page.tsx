@@ -130,23 +130,23 @@ export function ProgressDemo() {
           preview: (
             <div className="flex w-full max-w-sm flex-col gap-4">
               <div className="flex items-center gap-4">
-                <span className="w-8 text-right text-sm text-muted-foreground">0%</span>
+                <span className="text-muted-foreground w-8 text-right text-sm">0%</span>
                 <Progress value={0} className="flex-1" />
               </div>
               <div className="flex items-center gap-4">
-                <span className="w-8 text-right text-sm text-muted-foreground">25%</span>
+                <span className="text-muted-foreground w-8 text-right text-sm">25%</span>
                 <Progress value={25} className="flex-1" />
               </div>
               <div className="flex items-center gap-4">
-                <span className="w-8 text-right text-sm text-muted-foreground">50%</span>
+                <span className="text-muted-foreground w-8 text-right text-sm">50%</span>
                 <Progress value={50} className="flex-1" />
               </div>
               <div className="flex items-center gap-4">
-                <span className="w-8 text-right text-sm text-muted-foreground">75%</span>
+                <span className="text-muted-foreground w-8 text-right text-sm">75%</span>
                 <Progress value={75} className="flex-1" />
               </div>
               <div className="flex items-center gap-4">
-                <span className="w-8 text-right text-sm text-muted-foreground">100%</span>
+                <span className="text-muted-foreground w-8 text-right text-sm">100%</span>
                 <Progress value={100} className="flex-1" />
               </div>
             </div>
@@ -159,7 +159,8 @@ export function ProgressDemo() {
         },
         {
           title: "Custom height",
-          description: "Override the default h-2 height with a className to create thicker or thinner bars.",
+          description:
+            "Override the default h-2 height with a className to create thicker or thinner bars.",
           preview: (
             <div className="flex w-full max-w-sm flex-col gap-4">
               <Progress value={65} className="h-1" />
@@ -173,7 +174,8 @@ export function ProgressDemo() {
         },
         {
           title: "Ring",
-          description: "Circular progress for compact layouts. Provide aria-label for accessibility.",
+          description:
+            "Circular progress for compact layouts. Provide aria-label for accessibility.",
           preview: (
             <div className="flex items-center gap-6">
               <ProgressRing value={25} aria-label="Upload" />
@@ -188,7 +190,8 @@ export function ProgressDemo() {
         {
           name: "value",
           type: "number | null",
-          description: "Current progress value between 0 and max. Out-of-range values are clamped. Pass null for indeterminate state.",
+          description:
+            "Current progress value between 0 and max. Out-of-range values are clamped. Pass null for indeterminate state.",
         },
         {
           name: "max",
@@ -199,28 +202,31 @@ export function ProgressDemo() {
         {
           name: "indicatorClassName",
           type: "string",
-          description: "Classes for the filled indicator — e.g. bg-destructive for an over-limit state.",
+          description:
+            "Classes for the filled indicator — e.g. bg-destructive for an over-limit state.",
         },
         {
           name: "className",
           type: "string",
-          description: "Additional class names applied to the root track element. Use to override height, color, or radius.",
+          description:
+            "Additional class names applied to the root track element. Use to override height, color, or radius.",
         },
         {
           name: "...props",
           type: "React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>",
-          description: "All Radix Progress Root props are forwarded, including max and getValueLabel.",
+          description:
+            "All Radix Progress Root props are forwarded, including max and getValueLabel.",
         },
         {
           name: "indeterminate",
           type: "boolean",
-          description:
-            "ProgressRing only. When true, the ring spins and aria-valuenow is omitted.",
+          description: "ProgressRing only. When true, the ring spins and aria-valuenow is omitted.",
         },
         {
           name: "aria-label",
           type: "string",
-          description: "ProgressRing only. Required accessible name for the circular progress indicator.",
+          description:
+            "ProgressRing only. Required accessible name for the circular progress indicator.",
         },
       ]}
       a11yNotes={[

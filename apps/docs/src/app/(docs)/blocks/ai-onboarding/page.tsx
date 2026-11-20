@@ -58,9 +58,22 @@ export function SetupFlow() {
 }`}
       preview={<AIOnboardingPreview />}
       props={[
-        { name: "steps", type: "OnboardingStep[]", description: "Array of step objects. Each has id, title, optional description, and a content ReactNode. Defaults to a 3-step API key / model / try-it flow." },
-        { name: "onComplete", type: "() => void", description: "Called when the user clicks 'Get started' on the final step." },
-        { name: "className", type: "string", description: "Additional classes on the root wrapper." },
+        {
+          name: "steps",
+          type: "OnboardingStep[]",
+          description:
+            "Array of step objects. Each has id, title, optional description, and a content ReactNode. Defaults to a 3-step API key / model / try-it flow.",
+        },
+        {
+          name: "onComplete",
+          type: "() => void",
+          description: "Called when the user clicks 'Get started' on the final step.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the root wrapper.",
+        },
       ]}
       a11yNotes={[
         "Step progress is rendered with the Stepper pattern which uses a visually styled list.",

@@ -25,7 +25,7 @@ export function SearchInputPreview() {
         loading={loading}
       />
       {value && (
-        <p className="text-xs text-muted-foreground text-center">
+        <p className="text-muted-foreground text-center text-xs">
           Searching for: <strong>{value}</strong>
         </p>
       )}

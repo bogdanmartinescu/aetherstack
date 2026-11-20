@@ -109,7 +109,7 @@ export function BadgeDemo() {
                 Away
               </Badge>
               <Badge variant="outline" className="gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground" />
+                <span className="bg-muted-foreground h-1.5 w-1.5 rounded-full" />
                 Offline
               </Badge>
             </div>
@@ -123,22 +123,26 @@ export function BadgeDemo() {
           title: "In a table cell",
           description: "Badges work naturally as inline elements within other components.",
           preview: (
-            <div className="rounded-md border border-border overflow-hidden">
+            <div className="border-border overflow-hidden rounded-md border">
               <table className="w-full text-sm">
                 <thead className="bg-muted/50 text-left">
                   <tr>
-                    <th className="px-4 py-2 font-medium text-muted-foreground">Name</th>
-                    <th className="px-4 py-2 font-medium text-muted-foreground">Status</th>
+                    <th className="text-muted-foreground px-4 py-2 font-medium">Name</th>
+                    <th className="text-muted-foreground px-4 py-2 font-medium">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-t border-border">
+                  <tr className="border-border border-t">
                     <td className="px-4 py-2">Alice Chen</td>
-                    <td className="px-4 py-2"><Badge>Active</Badge></td>
+                    <td className="px-4 py-2">
+                      <Badge>Active</Badge>
+                    </td>
                   </tr>
-                  <tr className="border-t border-border">
+                  <tr className="border-border border-t">
                     <td className="px-4 py-2">Bob Marsh</td>
-                    <td className="px-4 py-2"><Badge variant="secondary">Inactive</Badge></td>
+                    <td className="px-4 py-2">
+                      <Badge variant="secondary">Inactive</Badge>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -153,9 +157,15 @@ export function BadgeDemo() {
           description: "Extend with arbitrary Tailwind classes for custom badge colors.",
           preview: (
             <div className="flex flex-wrap gap-2">
-              <Badge className="bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-100/80">Info</Badge>
-              <Badge className="bg-green-100 text-green-800 border-green-200 hover:bg-green-100/80">Success</Badge>
-              <Badge className="bg-amber-100 text-amber-800 border-amber-200 hover:bg-amber-100/80">Warning</Badge>
+              <Badge className="border-blue-200 bg-blue-100 text-blue-800 hover:bg-blue-100/80">
+                Info
+              </Badge>
+              <Badge className="border-green-200 bg-green-100 text-green-800 hover:bg-green-100/80">
+                Success
+              </Badge>
+              <Badge className="border-amber-200 bg-amber-100 text-amber-800 hover:bg-amber-100/80">
+                Warning
+              </Badge>
             </div>
           ),
           code: `<Badge className="bg-blue-100 text-blue-800 border-blue-200">Info</Badge>

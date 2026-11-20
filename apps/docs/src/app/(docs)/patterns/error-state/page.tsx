@@ -28,18 +28,32 @@ export default function ErrorStatePage() {
           <ErrorState
             title="Failed to load members"
             description="We couldn't fetch your team data. Check your connection and try again."
-            action={<Button variant="outline" size="sm">Try again</Button>}
+            action={
+              <Button variant="outline" size="sm">
+                Try again
+              </Button>
+            }
           />
         </div>
       }
       props={[
-        { name: "title", type: "string", default: '"Something went wrong"', description: "Error heading." },
-        { name: "description", type: "string", default: '"An unexpected error occurred…"', description: "Explanatory message." },
+        {
+          name: "title",
+          type: "string",
+          default: '"Something went wrong"',
+          description: "Error heading.",
+        },
+        {
+          name: "description",
+          type: "string",
+          default: '"An unexpected error occurred…"',
+          description: "Explanatory message.",
+        },
         { name: "action", type: "ReactNode", description: "Retry or recovery CTA." },
         { name: "className", type: "string", description: "Additional classes on the container." },
       ]}
       a11yNotes={[
-        "Renders with role=\"alert\" — error is announced immediately to screen readers.",
+        'Renders with role="alert" — error is announced immediately to screen readers.',
         "Pair with focus management: move focus to this component when it appears after a failed action.",
         "The retry action should re-trigger the same operation that failed.",
       ]}

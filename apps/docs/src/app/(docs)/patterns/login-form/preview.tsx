@@ -36,7 +36,7 @@ export function LoginFormPreview() {
     <div className="w-full max-w-sm space-y-6">
       <div className="space-y-1.5 text-center">
         <h2 className="text-2xl font-bold tracking-tight">Welcome back</h2>
-        <p className="text-sm text-muted-foreground">Sign in to your account to continue</p>
+        <p className="text-muted-foreground text-sm">Sign in to your account to continue</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
@@ -50,15 +50,13 @@ export function LoginFormPreview() {
             aria-invalid={!!errors.email}
             {...register("email")}
           />
-          {errors.email && (
-            <p className="text-xs text-destructive">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="text-destructive text-xs">{errors.email.message}</p>}
         </div>
 
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <Label htmlFor="lf-password">Password</Label>
-            <a href="#" className="text-xs text-primary hover:underline">
+            <a href="#" className="text-primary text-xs hover:underline">
               Forgot password?
             </a>
           </div>
@@ -70,14 +68,12 @@ export function LoginFormPreview() {
             aria-invalid={!!errors.password}
             {...register("password")}
           />
-          {errors.password && (
-            <p className="text-xs text-destructive">{errors.password.message}</p>
-          )}
+          {errors.password && <p className="text-destructive text-xs">{errors.password.message}</p>}
         </div>
 
         <div className="flex items-center gap-2">
           <Checkbox id="lf-remember" {...register("remember")} />
-          <Label htmlFor="lf-remember" className="font-normal text-muted-foreground">
+          <Label htmlFor="lf-remember" className="text-muted-foreground font-normal">
             Remember me for 30 days
           </Label>
         </div>
@@ -87,7 +83,7 @@ export function LoginFormPreview() {
         </Button>
       </form>
 
-      <p className="text-center text-xs text-muted-foreground">
+      <p className="text-muted-foreground text-center text-xs">
         No account?{" "}
         <a href="#" className="text-primary hover:underline">
           Create one

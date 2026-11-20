@@ -43,13 +43,11 @@ function PasswordStrength({ value }: { value: string }) {
 
   return (
     <div className="mt-1.5 space-y-1">
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
-        <div
-          className={`h-full rounded-full transition-all ${widths[score]} ${colors[score]}`}
-        />
+      <div className="bg-muted h-1.5 w-full overflow-hidden rounded-full">
+        <div className={`h-full rounded-full transition-all ${widths[score]} ${colors[score]}`} />
       </div>
-      <p className="text-xs text-muted-foreground">
-        Strength: <span className="font-medium text-foreground">{label}</span>
+      <p className="text-muted-foreground text-xs">
+        Strength: <span className="text-foreground font-medium">{label}</span>
       </p>
     </div>
   )
@@ -80,7 +78,9 @@ export function SignupFormPreview() {
     <div className="w-full max-w-sm space-y-6">
       <div className="space-y-1.5 text-center">
         <h2 className="text-2xl font-bold tracking-tight">Create an account</h2>
-        <p className="text-sm text-muted-foreground">Start your free trial — no credit card required</p>
+        <p className="text-muted-foreground text-sm">
+          Start your free trial — no credit card required
+        </p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
@@ -93,9 +93,7 @@ export function SignupFormPreview() {
             aria-invalid={!!errors.name}
             {...register("name")}
           />
-          {errors.name && (
-            <p className="text-xs text-destructive">{errors.name.message}</p>
-          )}
+          {errors.name && <p className="text-destructive text-xs">{errors.name.message}</p>}
         </div>
 
         <div className="space-y-1.5">
@@ -108,9 +106,7 @@ export function SignupFormPreview() {
             aria-invalid={!!errors.email}
             {...register("email")}
           />
-          {errors.email && (
-            <p className="text-xs text-destructive">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="text-destructive text-xs">{errors.email.message}</p>}
         </div>
 
         <div className="space-y-1.5">
@@ -124,9 +120,7 @@ export function SignupFormPreview() {
             {...register("password")}
           />
           <PasswordStrength value={password} />
-          {errors.password && (
-            <p className="text-xs text-destructive">{errors.password.message}</p>
-          )}
+          {errors.password && <p className="text-destructive text-xs">{errors.password.message}</p>}
         </div>
 
         <div className="space-y-1.5">
@@ -140,7 +134,7 @@ export function SignupFormPreview() {
             {...register("confirmPassword")}
           />
           {errors.confirmPassword && (
-            <p className="text-xs text-destructive">{errors.confirmPassword.message}</p>
+            <p className="text-destructive text-xs">{errors.confirmPassword.message}</p>
           )}
         </div>
 
@@ -152,7 +146,7 @@ export function SignupFormPreview() {
               aria-invalid={!!errors.terms}
               {...register("terms")}
             />
-            <Label htmlFor="sf-terms" className="font-normal text-muted-foreground leading-snug">
+            <Label htmlFor="sf-terms" className="text-muted-foreground font-normal leading-snug">
               I agree to the{" "}
               <a href="#" className="text-primary hover:underline">
                 Terms of Service
@@ -163,9 +157,7 @@ export function SignupFormPreview() {
               </a>
             </Label>
           </div>
-          {errors.terms && (
-            <p className="text-xs text-destructive pl-6">{errors.terms.message}</p>
-          )}
+          {errors.terms && <p className="text-destructive pl-6 text-xs">{errors.terms.message}</p>}
         </div>
 
         <Button type="submit" className="w-full" disabled={isSubmitting}>
@@ -173,7 +165,7 @@ export function SignupFormPreview() {
         </Button>
       </form>
 
-      <p className="text-center text-xs text-muted-foreground">
+      <p className="text-muted-foreground text-center text-xs">
         Already have an account?{" "}
         <a href="#" className="text-primary hover:underline">
           Sign in

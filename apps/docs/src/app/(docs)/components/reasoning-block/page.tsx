@@ -4,7 +4,8 @@ import { PatternPage } from "@/components/pattern-page"
 
 export const metadata: Metadata = {
   title: "ReasoningBlock",
-  description: "A collapsible block that surfaces an AI model's chain-of-thought reasoning, collapsed by default to keep responses clean.",
+  description:
+    "A collapsible block that surfaces an AI model's chain-of-thought reasoning, collapsed by default to keep responses clean.",
 }
 
 const SAMPLE_REASONING = `Let me think through this step by step.
@@ -30,7 +31,8 @@ export default function ReasoningBlockPage() {
         {
           name: "content",
           type: "React.ReactNode",
-          description: "Reasoning content — strings are shown as preformatted text inside the block.",
+          description:
+            "Reasoning content — strings are shown as preformatted text inside the block.",
           required: true,
         },
         {

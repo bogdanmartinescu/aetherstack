@@ -45,16 +45,16 @@ export function TestimonialsSection({
   className,
 }: TestimonialsSectionProps) {
   return (
-    <section className={cn("w-full py-16 px-4", className)}>
+    <section className={cn("w-full px-4 py-16", className)}>
       {(eyebrow || headline) && (
         <div className="mx-auto mb-12 max-w-2xl text-center">
           {eyebrow && (
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+            <p className="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
               {eyebrow}
             </p>
           )}
           {headline && (
-            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <h2 className="text-foreground text-3xl font-bold tracking-tight sm:text-4xl">
               {headline}
             </h2>
           )}
@@ -68,10 +68,10 @@ export function TestimonialsSection({
         )}
       >
         {testimonials.map((t) => (
-          <Card key={t.id} className="flex flex-col border-border bg-card">
+          <Card key={t.id} className="border-border bg-card flex flex-col">
             <CardContent className="flex flex-1 flex-col gap-4 pt-6">
               {t.rating !== undefined && <StarRating rating={t.rating} />}
-              <blockquote className="flex-1 text-sm text-foreground leading-relaxed">
+              <blockquote className="text-foreground flex-1 text-sm leading-relaxed">
                 &ldquo;{t.quote}&rdquo;
               </blockquote>
               <div className="flex items-center gap-3">
@@ -87,9 +87,9 @@ export function TestimonialsSection({
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="text-sm font-semibold text-foreground">{t.author}</p>
+                  <p className="text-foreground text-sm font-semibold">{t.author}</p>
                   {(t.role || t.company) && (
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-muted-foreground text-xs">
                       {[t.role, t.company].filter(Boolean).join(", ")}
                     </p>
                   )}

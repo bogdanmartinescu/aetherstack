@@ -38,12 +38,14 @@ export default function KbdPage() {
         "No dependencies",
       ]}
       preview={
-        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+        <div className="text-muted-foreground flex flex-wrap items-center gap-3 text-sm">
           <span className="flex items-center gap-1">
-            Press <Kbd>⌘</Kbd><Kbd>K</Kbd> to search
+            Press <Kbd>⌘</Kbd>
+            <Kbd>K</Kbd> to search
           </span>
           <span className="flex items-center gap-1">
-            <Kbd>Ctrl</Kbd><Kbd>S</Kbd> to save
+            <Kbd>Ctrl</Kbd>
+            <Kbd>S</Kbd> to save
           </span>
           <span className="flex items-center gap-1">
             <Kbd>Escape</Kbd> to close
@@ -62,16 +64,21 @@ export default function KbdPage() {
           title: "In a command palette hint",
           description: "Show shortcuts alongside menu items.",
           preview: (
-            <div className="w-56 rounded-md border border-border bg-background p-1 shadow-sm text-sm">
+            <div className="border-border bg-background w-56 rounded-md border p-1 text-sm shadow-sm">
               {[
                 { label: "Search", keys: ["⌘", "K"] },
                 { label: "New file", keys: ["⌘", "N"] },
                 { label: "Save", keys: ["⌘", "S"] },
               ].map(({ label, keys }) => (
-                <div key={label} className="flex items-center justify-between rounded px-2 py-1.5 hover:bg-accent cursor-pointer">
+                <div
+                  key={label}
+                  className="hover:bg-accent flex cursor-pointer items-center justify-between rounded px-2 py-1.5"
+                >
                   <span>{label}</span>
                   <span className="flex gap-0.5">
-                    {keys.map((k) => <Kbd key={k}>{k}</Kbd>)}
+                    {keys.map((k) => (
+                      <Kbd key={k}>{k}</Kbd>
+                    ))}
                   </span>
                 </div>
               ))}
@@ -88,8 +95,11 @@ export default function KbdPage() {
           title: "In a search input",
           description: "Place inside the search trigger to hint the keyboard shortcut.",
           preview: (
-            <button className="flex h-9 w-64 items-center gap-2 rounded-md border border-border bg-muted/40 px-3 text-xs text-muted-foreground">
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <button className="border-border bg-muted/40 text-muted-foreground flex h-9 w-64 items-center gap-2 rounded-md border px-3 text-xs">
+              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
               <span className="flex-1 text-left">Search…</span>
               <Kbd>⌘K</Kbd>
             </button>
@@ -102,8 +112,16 @@ export default function KbdPage() {
         },
       ]}
       props={[
-        { name: "className", type: "string", description: "Additional classes for sizing, color, or spacing overrides." },
-        { name: "...props", type: "React.HTMLAttributes<HTMLElement>", description: "All standard HTML element attributes." },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes for sizing, color, or spacing overrides.",
+        },
+        {
+          name: "...props",
+          type: "React.HTMLAttributes<HTMLElement>",
+          description: "All standard HTML element attributes.",
+        },
       ]}
       a11yNotes={[
         "<kbd> is a semantic HTML element — screen readers announce its content as keyboard input.",

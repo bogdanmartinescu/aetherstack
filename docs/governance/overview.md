@@ -6,11 +6,11 @@ maintainer-driven.
 
 ## Roles
 
-| Role | Responsibility |
-| --- | --- |
-| Maintainer (repository owner) | Merge authority, releases, npm publish, domain/CDN, commercial gates (M4/M6) |
-| Contributors | PRs against documented standards; no direct pushes to `main` |
-| Agents / automation | Follow [`AGENTS.md`](../../AGENTS.md); never invent completion or publish without authority |
+| Role                          | Responsibility                                                                              |
+| ----------------------------- | ------------------------------------------------------------------------------------------- |
+| Maintainer (repository owner) | Merge authority, releases, npm publish, domain/CDN, commercial gates (M4/M6)                |
+| Contributors                  | PRs against documented standards; no direct pushes to `main`                                |
+| Agents / automation           | Follow [`AGENTS.md`](../../AGENTS.md); never invent completion or publish without authority |
 
 ## Decision process
 

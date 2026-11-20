@@ -36,12 +36,20 @@ const LAYER_META: Record<
 }
 
 /** Curated copy for the first UI completeness batch. Extend as more layers are registered. */
-const UI_META: Record<string, { title: string; description: string; intent: string; prompts: string[] }> = {
+const UI_META: Record<
+  string,
+  { title: string; description: string; intent: string; prompts: string[] }
+> = {
   alert: {
     title: "Alert",
     description: "Contextual feedback banner with severity variants.",
     intent: "Show inline status, warning, success, or error feedback",
-    prompts: ["add an alert", "show a warning banner", "add a success message", "add an error alert"],
+    prompts: [
+      "add an alert",
+      "show a warning banner",
+      "add a success message",
+      "add an error alert",
+    ],
   },
   "alert-dialog": {
     title: "Alert Dialog",
@@ -275,7 +283,11 @@ function parseArgs(argv: string[]) {
     layer,
     excludeAi: argv.includes("--exclude-ai"),
     write: argv.includes("--write"),
-    only: argv.find((a) => a.startsWith("--only="))?.slice(7)?.split(",").filter(Boolean),
+    only: argv
+      .find((a) => a.startsWith("--only="))
+      ?.slice(7)
+      ?.split(",")
+      .filter(Boolean),
   }
 }
 
@@ -312,7 +324,12 @@ function collectImports(source: string): { spec: string; names: string[] }[] {
     const namesRaw = `${match[1] ?? ""},${match[2] ?? ""}`
     const names = namesRaw
       .split(",")
-      .map((part) => part.trim().split(/\s+as\s+/i)[0]?.trim())
+      .map((part) =>
+        part
+          .trim()
+          .split(/\s+as\s+/i)[0]
+          ?.trim(),
+      )
       .filter((name): name is string => Boolean(name) && name !== "type")
     if (match[3]) out.push({ spec: match[3], names })
   }
@@ -401,7 +418,9 @@ function draftItem(modulePath: string, layer: Layer, registeredNames: Set<string
     description: meta?.description ?? `${meta?.title ?? titleCase(slug)} component.`,
     author: "aetherstack",
     ...(dependencies.size > 0 ? { dependencies: [...dependencies].sort() } : {}),
-    ...(filteredRegistryDeps.length > 0 ? { registryDependencies: filteredRegistryDeps.sort() } : {}),
+    ...(filteredRegistryDeps.length > 0
+      ? { registryDependencies: filteredRegistryDeps.sort() }
+      : {}),
     files: [
       {
         path: modulePath,
@@ -427,7 +446,9 @@ function main() {
 
   const manifestPath = resolve(ROOT, "registry/public/registry.json")
   const manifest = JSON.parse(readFileSync(manifestPath, "utf-8")) as Manifest
-  const registeredPaths = new Set(manifest.items.flatMap((item) => item.files.map((file) => file.path)))
+  const registeredPaths = new Set(
+    manifest.items.flatMap((item) => item.files.map((file) => file.path)),
+  )
   const registeredNames = new Set(manifest.items.map((item) => item.name))
 
   const modules = listModules(LAYER_META[args.layer].src).filter((modulePath) => {

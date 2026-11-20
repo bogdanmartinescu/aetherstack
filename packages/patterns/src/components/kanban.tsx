@@ -43,12 +43,12 @@ export function KanbanCard({ item, className }: KanbanCardProps) {
       draggable
       onDragStart={handleDragStart}
       className={cn(
-        "rounded-lg border border-border bg-card p-3 shadow-sm cursor-grab active:cursor-grabbing select-none",
+        "border-border bg-card cursor-grab select-none rounded-lg border p-3 shadow-sm active:cursor-grabbing",
         className,
       )}
     >
       <div className="flex items-start justify-between gap-2">
-        <p className="text-sm font-medium text-foreground leading-snug">{item.title}</p>
+        <p className="text-foreground text-sm font-medium leading-snug">{item.title}</p>
         {item.badge && (
           <Badge variant="secondary" className="shrink-0 text-xs">
             {item.badge}
@@ -56,9 +56,7 @@ export function KanbanCard({ item, className }: KanbanCardProps) {
         )}
       </div>
       {item.description && (
-        <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
-          {item.description}
-        </p>
+        <p className="text-muted-foreground mt-1.5 text-xs leading-relaxed">{item.description}</p>
       )}
     </div>
   )
@@ -98,14 +96,14 @@ export function KanbanColumn({ title, items, onDrop, className }: KanbanColumnPr
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       className={cn(
-        "flex flex-col gap-2 rounded-xl bg-muted/40 p-3 min-h-[200px] w-[280px] transition-colors",
-        isDragOver && "bg-muted/70 ring-2 ring-primary/30",
+        "bg-muted/40 flex min-h-[200px] w-[280px] flex-col gap-2 rounded-xl p-3 transition-colors",
+        isDragOver && "bg-muted/70 ring-primary/30 ring-2",
         className,
       )}
     >
       <div className="flex items-center justify-between px-1 pb-1">
-        <h3 className="text-sm font-semibold text-foreground">{title}</h3>
-        <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
+        <h3 className="text-foreground text-sm font-semibold">{title}</h3>
+        <span className="bg-muted text-muted-foreground rounded-full px-2 py-0.5 text-xs font-medium">
           {items.length}
         </span>
       </div>
@@ -113,7 +111,7 @@ export function KanbanColumn({ title, items, onDrop, className }: KanbanColumnPr
         <KanbanCard key={item.id} item={item} />
       ))}
       {items.length === 0 && (
-        <div className="flex flex-1 items-center justify-center rounded-lg border-2 border-dashed border-border py-6 text-xs text-muted-foreground">
+        <div className="border-border text-muted-foreground flex flex-1 items-center justify-center rounded-lg border-2 border-dashed py-6 text-xs">
           Drop cards here
         </div>
       )}
@@ -126,10 +124,7 @@ export function KanbanColumn({ title, items, onDrop, className }: KanbanColumnPr
 export function KanbanBoard({ columns, className }: KanbanBoardProps) {
   return (
     <div
-      className={cn(
-        "flex gap-4 overflow-x-auto pb-4",
-        className,
-      )}
+      className={cn("flex gap-4 overflow-x-auto pb-4", className)}
       role="region"
       aria-label="Kanban board"
     >

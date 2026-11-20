@@ -28,7 +28,12 @@ describe("Heatmap", () => {
   it("rejects a values grid that does not match the labels", () => {
     expect(() =>
       render(
-        <Heatmap aria-label="Deploys" rowLabels={["Mon"]} columnLabels={["9am"]} values={[[1, 2]]} />,
+        <Heatmap
+          aria-label="Deploys"
+          rowLabels={["Mon"]}
+          columnLabels={["9am"]}
+          values={[[1, 2]]}
+        />,
       ),
     ).toThrow(/values/)
   })

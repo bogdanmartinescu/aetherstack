@@ -49,7 +49,7 @@ export default function PopoverPage() {
             <div className="grid gap-4">
               <div className="space-y-2">
                 <h4 className="font-medium leading-none">Dimensions</h4>
-                <p className="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+                <p className="text-muted-foreground text-sm">Set the dimensions for the layer.</p>
               </div>
               <div className="grid gap-2 text-sm">
                 <div className="flex items-center justify-between">
@@ -77,7 +77,13 @@ export default function PopoverPage() {
 </Popover>`}
       cliInstall="npx aether-ui add popover"
       manualInstallCode={SOURCE}
-      manualSteps={[{ title: "Install dependencies", code: "npm install @radix-ui/react-popover", filename: "terminal" }]}
+      manualSteps={[
+        {
+          title: "Install dependencies",
+          code: "npm install @radix-ui/react-popover",
+          filename: "terminal",
+        },
+      ]}
       examples={[
         {
           title: "Alignment",
@@ -87,7 +93,9 @@ export default function PopoverPage() {
               {(["start", "center", "end"] as const).map((align) => (
                 <Popover key={align}>
                   <PopoverTrigger asChild>
-                    <Button variant="outline" size="sm">{align}</Button>
+                    <Button variant="outline" size="sm">
+                      {align}
+                    </Button>
                   </PopoverTrigger>
                   <PopoverContent align={align} className="text-xs">
                     Aligned to <strong>{align}</strong>
@@ -102,14 +110,29 @@ export default function PopoverPage() {
         },
       ]}
       props={[
-        { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "Horizontal alignment of the popover relative to the trigger." },
-        { name: "sideOffset", type: "number", default: "4", description: "Gap in pixels between the trigger and the popover." },
-        { name: "side", type: '"top" | "right" | "bottom" | "left"', default: '"bottom"', description: "Which side to open on." },
+        {
+          name: "align",
+          type: '"start" | "center" | "end"',
+          default: '"center"',
+          description: "Horizontal alignment of the popover relative to the trigger.",
+        },
+        {
+          name: "sideOffset",
+          type: "number",
+          default: "4",
+          description: "Gap in pixels between the trigger and the popover.",
+        },
+        {
+          name: "side",
+          type: '"top" | "right" | "bottom" | "left"',
+          default: '"bottom"',
+          description: "Which side to open on.",
+        },
         { name: "className", type: "string", description: "Additional classes on PopoverContent." },
       ]}
       a11yNotes={[
         "PopoverTrigger sets aria-expanded and aria-controls automatically.",
-        "The popover panel has role=\"dialog\" — focus moves into it on open.",
+        'The popover panel has role="dialog" — focus moves into it on open.',
         "Escape closes the popover and returns focus to the trigger.",
       ]}
     />

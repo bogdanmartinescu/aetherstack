@@ -31,7 +31,7 @@ export function TimeSlots({
 }: TimeSlotsProps) {
   const [internal, setInternal] = React.useState<string | undefined>(undefined)
 
-  const resolvedValue = value !== undefined ? value : internal ?? ""
+  const resolvedValue = value !== undefined ? value : (internal ?? "")
   const confirmDisabled = resolvedValue === ""
 
   const handleValueChange = React.useCallback(
@@ -51,7 +51,7 @@ export function TimeSlots({
 
   return (
     <div {...(className !== undefined ? { className } : {})}>
-      <p className="text-sm text-muted-foreground">{timeZoneLabel}</p>
+      <p className="text-muted-foreground text-sm">{timeZoneLabel}</p>
       <RadioGroup
         aria-label="Times"
         className="mt-3"
@@ -69,12 +69,7 @@ export function TimeSlots({
           </RadioGroupItem>
         ))}
       </RadioGroup>
-      <Button
-        type="button"
-        className="mt-4"
-        disabled={confirmDisabled}
-        onClick={handleConfirm}
-      >
+      <Button type="button" className="mt-4" disabled={confirmDisabled} onClick={handleConfirm}>
         {confirmLabel}
       </Button>
     </div>

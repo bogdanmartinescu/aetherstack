@@ -1,7 +1,12 @@
 import { describe, it, expect, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { checkPassword, generatePassword, scorePassword, PasswordStrength } from "../components/password-strength"
+import {
+  checkPassword,
+  generatePassword,
+  scorePassword,
+  PasswordStrength,
+} from "../components/password-strength"
 
 describe("password helpers", () => {
   it("scores by length and character classes", () => {

@@ -56,11 +56,31 @@ export default function BillingPage() {
         </div>
       }
       props={[
-        { name: "plan", type: "BillingPlan", description: "Current plan details: name, price, period, features." },
-        { name: "usage", type: "UsageMetric[]", description: "Array of usage metrics, each with label, used, limit, and optional unit." },
-        { name: "nextBillingDate", type: "string", description: "Human-readable next billing date string." },
-        { name: "onUpgrade", type: "() => void", description: "Called when the upgrade button is clicked." },
-        { name: "onManageBilling", type: "() => void", description: "Called when the manage billing button is clicked." },
+        {
+          name: "plan",
+          type: "BillingPlan",
+          description: "Current plan details: name, price, period, features.",
+        },
+        {
+          name: "usage",
+          type: "UsageMetric[]",
+          description: "Array of usage metrics, each with label, used, limit, and optional unit.",
+        },
+        {
+          name: "nextBillingDate",
+          type: "string",
+          description: "Human-readable next billing date string.",
+        },
+        {
+          name: "onUpgrade",
+          type: "() => void",
+          description: "Called when the upgrade button is clicked.",
+        },
+        {
+          name: "onManageBilling",
+          type: "() => void",
+          description: "Called when the manage billing button is clicked.",
+        },
         { name: "className", type: "string", description: "Additional classes on the wrapper." },
       ]}
       a11yNotes={[

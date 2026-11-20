@@ -19,7 +19,7 @@ function ThinkingIndicator({
       role="status"
       aria-live="polite"
       data-state={state}
-      className={cn("flex items-center gap-2 text-sm text-muted-foreground", className)}
+      className={cn("text-muted-foreground flex items-center gap-2 text-sm", className)}
     >
       {state === "thinking" ? (
         <span aria-hidden="true" className="flex items-center gap-1">

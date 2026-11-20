@@ -58,15 +58,12 @@ describe("registryItemTypeSchema", () => {
 
 describe("registryItemFileSchema", () => {
   it("requires path and type", () => {
-    expect(
-      registryItemFileSchema.safeParse({ path: "x.tsx", type: "registry:ui" })
-        .success,
-    ).toBe(true)
+    expect(registryItemFileSchema.safeParse({ path: "x.tsx", type: "registry:ui" }).success).toBe(
+      true,
+    )
 
     expect(registryItemFileSchema.safeParse({ path: "x.tsx" }).success).toBe(false)
-    expect(registryItemFileSchema.safeParse({ type: "registry:ui" }).success).toBe(
-      false,
-    )
+    expect(registryItemFileSchema.safeParse({ type: "registry:ui" }).success).toBe(false)
   })
 
   it("accepts optional content and target", () => {
@@ -102,15 +99,11 @@ describe("registryItemSchema", () => {
   })
 
   it("rejects empty name strings", () => {
-    expect(
-      registryItemSchema.safeParse({ name: "", type: "registry:ui" }).success,
-    ).toBe(false)
+    expect(registryItemSchema.safeParse({ name: "", type: "registry:ui" }).success).toBe(false)
   })
 
   it("rejects unknown registry item type", () => {
-    expect(
-      registryItemSchema.safeParse({ name: "x", type: "registry:bogus" }).success,
-    ).toBe(false)
+    expect(registryItemSchema.safeParse({ name: "x", type: "registry:bogus" }).success).toBe(false)
   })
 
   it("accepts the optional pro flag", () => {
@@ -131,9 +124,7 @@ describe("registrySchema", () => {
   })
 
   it("rejects when items is not an array", () => {
-    expect(
-      registrySchema.safeParse({ ...VALID_REGISTRY, items: "nope" }).success,
-    ).toBe(false)
+    expect(registrySchema.safeParse({ ...VALID_REGISTRY, items: "nope" }).success).toBe(false)
   })
 
   it("rejects when name is missing", () => {
@@ -143,10 +134,9 @@ describe("registrySchema", () => {
   })
 
   it("rejects when homepage is not a URL", () => {
-    expect(
-      registrySchema.safeParse({ ...VALID_REGISTRY, homepage: "not-a-url" })
-        .success,
-    ).toBe(false)
+    expect(registrySchema.safeParse({ ...VALID_REGISTRY, homepage: "not-a-url" }).success).toBe(
+      false,
+    )
   })
 
   it("rejects when an item is invalid", () => {
@@ -159,9 +149,7 @@ describe("registrySchema", () => {
   })
 
   it("permits empty items array", () => {
-    expect(
-      registrySchema.safeParse({ ...VALID_REGISTRY, items: [] }).success,
-    ).toBe(true)
+    expect(registrySchema.safeParse({ ...VALID_REGISTRY, items: [] }).success).toBe(true)
   })
 })
 
@@ -176,9 +164,7 @@ describe("registryItemCssVarsSchema", () => {
   })
 
   it("rejects non-string token values", () => {
-    expect(
-      registryItemCssVarsSchema.safeParse({ light: { background: 123 } }).success,
-    ).toBe(false)
+    expect(registryItemCssVarsSchema.safeParse({ light: { background: 123 } }).success).toBe(false)
   })
 })
 

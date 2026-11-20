@@ -1,15 +1,11 @@
 import type { Metadata } from "next"
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@aetherstack/ui"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
 
 export const metadata: Metadata = {
   title: "Accordion",
-  description: "A vertically stacked set of interactive headings that reveal or hide associated content.",
+  description:
+    "A vertically stacked set of interactive headings that reveal or hide associated content.",
 }
 
 const MANUAL_SOURCE = `"use client"
@@ -88,7 +84,8 @@ export default function AccordionPage() {
           <AccordionItem value="item-1">
             <AccordionTrigger>What is Aether UI?</AccordionTrigger>
             <AccordionContent>
-              Aether UI is a copy-paste component library built with Radix UI and Tailwind CSS. You own the code.
+              Aether UI is a copy-paste component library built with Radix UI and Tailwind CSS. You
+              own the code.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
@@ -100,7 +97,8 @@ export default function AccordionPage() {
           <AccordionItem value="item-3">
             <AccordionTrigger>How do I install it?</AccordionTrigger>
             <AccordionContent>
-              Run <code>npx aether-ui add accordion</code> in your project and the component is copied directly into your codebase.
+              Run <code>npx aether-ui add accordion</code> in your project and the component is
+              copied directly into your codebase.
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -148,20 +146,28 @@ export function AccordionDemo() {
       examples={[
         {
           title: "Single selection",
-          description: 'With type="single" and collapsible, only one item can be open at a time and clicking again closes it.',
+          description:
+            'With type="single" and collapsible, only one item can be open at a time and clicking again closes it.',
           preview: (
             <Accordion type="single" collapsible className="w-full max-w-md">
               <AccordionItem value="q1">
                 <AccordionTrigger>Can I use this in production?</AccordionTrigger>
-                <AccordionContent>Absolutely. Aether UI components are production-ready and fully accessible.</AccordionContent>
+                <AccordionContent>
+                  Absolutely. Aether UI components are production-ready and fully accessible.
+                </AccordionContent>
               </AccordionItem>
               <AccordionItem value="q2">
                 <AccordionTrigger>Does it support dark mode?</AccordionTrigger>
-                <AccordionContent>Yes. All components use CSS variables that automatically adapt to light and dark themes.</AccordionContent>
+                <AccordionContent>
+                  Yes. All components use CSS variables that automatically adapt to light and dark
+                  themes.
+                </AccordionContent>
               </AccordionItem>
               <AccordionItem value="q3">
                 <AccordionTrigger>Is TypeScript supported?</AccordionTrigger>
-                <AccordionContent>Yes. Every component ships with full TypeScript types.</AccordionContent>
+                <AccordionContent>
+                  Yes. Every component ships with full TypeScript types.
+                </AccordionContent>
               </AccordionItem>
             </Accordion>
           ),
@@ -183,15 +189,21 @@ export function AccordionDemo() {
             <Accordion type="multiple" className="w-full max-w-md">
               <AccordionItem value="m1">
                 <AccordionTrigger>Section one</AccordionTrigger>
-                <AccordionContent>Content for section one. Multiple items can be open at the same time.</AccordionContent>
+                <AccordionContent>
+                  Content for section one. Multiple items can be open at the same time.
+                </AccordionContent>
               </AccordionItem>
               <AccordionItem value="m2">
                 <AccordionTrigger>Section two</AccordionTrigger>
-                <AccordionContent>Content for section two. Open both at once to compare.</AccordionContent>
+                <AccordionContent>
+                  Content for section two. Open both at once to compare.
+                </AccordionContent>
               </AccordionItem>
               <AccordionItem value="m3">
                 <AccordionTrigger>Section three</AccordionTrigger>
-                <AccordionContent>Content for section three. Great for settings panels or FAQs.</AccordionContent>
+                <AccordionContent>
+                  Content for section three. Great for settings panels or FAQs.
+                </AccordionContent>
               </AccordionItem>
             </Accordion>
           ),
@@ -212,13 +224,15 @@ export function AccordionDemo() {
           name: "type",
           type: '"single" | "multiple"',
           required: true,
-          description: 'Controls selection behavior. "single" allows one open item; "multiple" allows many.',
+          description:
+            'Controls selection behavior. "single" allows one open item; "multiple" allows many.',
         },
         {
           name: "collapsible",
           type: "boolean",
           default: "false",
-          description: 'When type="single", allows the open item to be closed by clicking it again.',
+          description:
+            'When type="single", allows the open item to be closed by clicking it again.',
         },
         {
           name: "defaultValue",

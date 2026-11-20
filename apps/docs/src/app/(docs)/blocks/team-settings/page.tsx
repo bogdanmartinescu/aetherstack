@@ -48,16 +48,33 @@ export default function TeamPage() {
         </div>
       }
       props={[
-        { name: "members", type: "TeamMember[]", description: "Current team members. Each has id, name, email, role, and optional avatarUrl." },
-        { name: "onInvite", type: "(email: string, role: string) => void", description: "Called when the invite form is submitted." },
-        { name: "onRoleChange", type: "(id: string, role: string) => void", description: "Called when a member's role is changed via the select." },
-        { name: "onRemove", type: "(id: string) => void", description: "Called when the remove button is clicked for a member." },
+        {
+          name: "members",
+          type: "TeamMember[]",
+          description:
+            "Current team members. Each has id, name, email, role, and optional avatarUrl.",
+        },
+        {
+          name: "onInvite",
+          type: "(email: string, role: string) => void",
+          description: "Called when the invite form is submitted.",
+        },
+        {
+          name: "onRoleChange",
+          type: "(id: string, role: string) => void",
+          description: "Called when a member's role is changed via the select.",
+        },
+        {
+          name: "onRemove",
+          type: "(id: string) => void",
+          description: "Called when the remove button is clicked for a member.",
+        },
         { name: "className", type: "string", description: "Additional classes on the wrapper." },
       ]}
       a11yNotes={[
         "Role select dropdowns are built on the Select primitive with proper ARIA combobox semantics.",
         "Remove buttons carry aria-label including the member's name for screen reader context.",
-        "The invite form email input has type=\"email\" for native validation and mobile keyboard optimisation.",
+        'The invite form email input has type="email" for native validation and mobile keyboard optimisation.',
         "Member avatars fall back to initials via the AvatarFallback primitive.",
       ]}
     />

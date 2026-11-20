@@ -9,7 +9,11 @@ export default function PriorityBarsPage() {
     <ComponentPage
       name="Priority Bars"
       description="Priority shown as rising bars, or an urgent mark."
-      features={["None through high as 0–3 filled bars", "Urgent exclamation mark", "Decorative mode"]}
+      features={[
+        "None through high as 0–3 filled bars",
+        "Urgent exclamation mark",
+        "Decorative mode",
+      ]}
       preview={
         <div className="flex items-end gap-4">
           <PriorityBars priority="low" />

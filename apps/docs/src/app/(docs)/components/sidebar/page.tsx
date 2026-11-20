@@ -31,11 +31,14 @@ import { Separator } from "@/components/ui/separator"
 
 function SidebarPreview() {
   return (
-    <div className="w-full max-w-sm overflow-hidden rounded-lg border border-border" style={{ height: 280 }}>
+    <div
+      className="border-border w-full max-w-sm overflow-hidden rounded-lg border"
+      style={{ height: 280 }}
+    >
       <SidebarProvider defaultOpen>
         <div className="flex h-full">
           <Sidebar>
-            <SidebarHeader className="p-3 border-b border-border">
+            <SidebarHeader className="border-border border-b p-3">
               <span className="text-sm font-semibold">My App</span>
             </SidebarHeader>
             <SidebarContent>
@@ -62,19 +65,21 @@ function SidebarPreview() {
                 </SidebarMenu>
               </SidebarGroup>
             </SidebarContent>
-            <SidebarFooter className="p-3 border-t border-border">
+            <SidebarFooter className="border-border border-t p-3">
               <SidebarMenuButton>
                 <HelpCircle className="h-4 w-4" />
                 <span>Help</span>
               </SidebarMenuButton>
             </SidebarFooter>
           </Sidebar>
-          <div className="flex-1 p-4 bg-background">
-            <div className="flex items-center gap-2 mb-3">
+          <div className="bg-background flex-1 p-4">
+            <div className="mb-3 flex items-center gap-2">
               <SidebarTrigger />
               <span className="text-sm font-medium">Main content</span>
             </div>
-            <p className="text-xs text-muted-foreground">Click the trigger to collapse the sidebar.</p>
+            <p className="text-muted-foreground text-xs">
+              Click the trigger to collapse the sidebar.
+            </p>
           </div>
         </div>
       </SidebarProvider>
@@ -160,7 +165,10 @@ export function SidebarDemo() {
           title: "With group labels",
           description: "Use SidebarGroup with SidebarGroupLabel to organize menu sections.",
           preview: (
-            <div className="w-full max-w-xs overflow-hidden rounded-lg border border-border" style={{ height: 240 }}>
+            <div
+              className="border-border w-full max-w-xs overflow-hidden rounded-lg border"
+              style={{ height: 240 }}
+            >
               <SidebarProvider defaultOpen>
                 <div className="flex h-full">
                   <Sidebar>

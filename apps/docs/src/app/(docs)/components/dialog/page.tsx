@@ -213,23 +213,55 @@ export function ControlledDialog() {
           title: "Dialog (Root)",
           props: [
             { name: "open", type: "boolean", description: "Controlled open state." },
-            { name: "defaultOpen", type: "boolean", default: "false", description: "Uncontrolled initial open state." },
-            { name: "onOpenChange", type: "(open: boolean) => void", description: "Callback when open state changes." },
-            { name: "modal", type: "boolean", default: "true", description: "When true, focus is trapped and backdrop is shown." },
+            {
+              name: "defaultOpen",
+              type: "boolean",
+              default: "false",
+              description: "Uncontrolled initial open state.",
+            },
+            {
+              name: "onOpenChange",
+              type: "(open: boolean) => void",
+              description: "Callback when open state changes.",
+            },
+            {
+              name: "modal",
+              type: "boolean",
+              default: "true",
+              description: "When true, focus is trapped and backdrop is shown.",
+            },
           ],
         },
         {
           title: "DialogContent",
           props: [
-            { name: "className", type: "string", description: "Use sm:max-w-* to control dialog width." },
-            { name: "onInteractOutside", type: "(e: Event) => void", description: "Called when user clicks outside. Call e.preventDefault() to prevent closing." },
-            { name: "onEscapeKeyDown", type: "(e: KeyboardEvent) => void", description: "Called on Escape. Call e.preventDefault() to prevent closing." },
+            {
+              name: "className",
+              type: "string",
+              description: "Use sm:max-w-* to control dialog width.",
+            },
+            {
+              name: "onInteractOutside",
+              type: "(e: Event) => void",
+              description:
+                "Called when user clicks outside. Call e.preventDefault() to prevent closing.",
+            },
+            {
+              name: "onEscapeKeyDown",
+              type: "(e: KeyboardEvent) => void",
+              description: "Called on Escape. Call e.preventDefault() to prevent closing.",
+            },
           ],
         },
         {
           title: "DialogClose",
           props: [
-            { name: "asChild", type: "boolean", default: "false", description: "Render as a child element (e.g., wrap a Button)." },
+            {
+              name: "asChild",
+              type: "boolean",
+              default: "false",
+              description: "Render as a child element (e.g., wrap a Button).",
+            },
           ],
         },
       ]}

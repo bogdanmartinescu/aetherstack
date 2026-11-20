@@ -31,7 +31,13 @@ type Recipe = {
 
 const RECIPES: Recipe[] = [
   {
-    keywords: ["saas dashboard", "admin dashboard", "admin panel", "dashboard layout", "dashboard app"],
+    keywords: [
+      "saas dashboard",
+      "admin dashboard",
+      "admin panel",
+      "dashboard layout",
+      "dashboard app",
+    ],
     components: [
       "dashboard-shell",
       "metric-card",
@@ -86,7 +92,13 @@ export default function SignupPage() {
       "signup-block includes name, email, password validation, and terms/privacy links. Pass onSubmit to handle registration.",
   },
   {
-    keywords: ["settings page", "settings form", "profile settings", "account settings", "user settings"],
+    keywords: [
+      "settings page",
+      "settings form",
+      "profile settings",
+      "account settings",
+      "user settings",
+    ],
     components: ["section-header", "form-field", "input", "textarea", "switch", "button"],
     starterCode: `import { SectionHeader, SettingsSection } from "@/components/patterns/section-header"
 import { FormField, FormLabel, FormControl, FormDescription } from "@/components/patterns/form-field"
@@ -208,7 +220,11 @@ export function resolveGenerate(description: string, registry: Registry): Genera
 
   // Also try matching against AI prompts in the registry
   for (const item of registry.items) {
-    if (item.ai?.prompts?.some((p) => lower.includes(p.toLowerCase()) || p.toLowerCase().includes(lower))) {
+    if (
+      item.ai?.prompts?.some(
+        (p) => lower.includes(p.toLowerCase()) || p.toLowerCase().includes(lower),
+      )
+    ) {
       matched.add(item.name)
     }
   }

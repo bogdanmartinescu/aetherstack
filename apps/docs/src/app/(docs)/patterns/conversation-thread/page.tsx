@@ -40,10 +40,28 @@ export function MyThread() {
 }`}
       preview={<ConversationThreadPreview />}
       props={[
-        { name: "messages", type: "Message[]", required: true, description: "Array of message objects to display in the thread." },
-        { name: "isThinking", type: "boolean", default: "false", description: "Shows an animated thinking indicator after the last message." },
-        { name: "renderMessage", type: "(msg: Message) => ReactNode", description: "Custom renderer for individual message bubbles." },
-        { name: "className", type: "string", description: "Additional CSS classes applied to the thread container." },
+        {
+          name: "messages",
+          type: "Message[]",
+          required: true,
+          description: "Array of message objects to display in the thread.",
+        },
+        {
+          name: "isThinking",
+          type: "boolean",
+          default: "false",
+          description: "Shows an animated thinking indicator after the last message.",
+        },
+        {
+          name: "renderMessage",
+          type: "(msg: Message) => ReactNode",
+          description: "Custom renderer for individual message bubbles.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional CSS classes applied to the thread container.",
+        },
       ]}
       a11yNotes={[
         "Messages are rendered as an ordered list so screen readers announce count and position.",

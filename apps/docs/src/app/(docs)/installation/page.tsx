@@ -20,11 +20,11 @@ function Step({
 }) {
   return (
     <div className="flex gap-4">
-      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+      <div className="bg-primary text-primary-foreground flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold">
         {number}
       </div>
       <div className="flex-1 pb-8">
-        <h3 className="mb-3 text-base font-semibold text-foreground">{title}</h3>
+        <h3 className="text-foreground mb-3 text-base font-semibold">{title}</h3>
         {children}
       </div>
     </div>
@@ -33,7 +33,7 @@ function Step({
 
 function FrameworkBadge({ name, emoji }: { name: string; emoji: string }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-md border border-border bg-muted px-2.5 py-1 text-sm font-medium text-foreground">
+    <span className="border-border bg-muted text-foreground inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-sm font-medium">
       <span>{emoji}</span>
       {name}
     </span>
@@ -41,9 +41,7 @@ function FrameworkBadge({ name, emoji }: { name: string; emoji: string }) {
 }
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">{children}</h2>
-  )
+  return <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">{children}</h2>
 }
 
 // ─── Framework-specific install guides ───────────────────────────────────────
@@ -56,8 +54,9 @@ const nextjsAppRouterSteps = (
 cd my-app`}
         filename="terminal"
       />
-      <p className="mt-3 text-sm text-muted-foreground">
-        Make sure to select <strong>TypeScript</strong>, <strong>Tailwind CSS</strong>, and <strong>App Router</strong> when prompted.
+      <p className="text-muted-foreground mt-3 text-sm">
+        Make sure to select <strong>TypeScript</strong>, <strong>Tailwind CSS</strong>, and{" "}
+        <strong>App Router</strong> when prompted.
       </p>
     </Step>
 
@@ -70,9 +69,7 @@ npm install @radix-ui/react-radio-group @radix-ui/react-switch @radix-ui/react-l
 npm install lucide-react tailwindcss-animate`}
         filename="terminal"
       />
-      <p className="mt-3 text-sm text-muted-foreground">
-        Or with pnpm:
-      </p>
+      <p className="text-muted-foreground mt-3 text-sm">Or with pnpm:</p>
       <CodeBlock
         code={`pnpm add @aetherstack/utils class-variance-authority tailwind-merge clsx
 pnpm add @radix-ui/react-slot @radix-ui/react-dialog @radix-ui/react-tabs
@@ -243,9 +240,10 @@ export function cn(...inputs: ClassValue[]) {
 }`}
         filename="src/lib/utils.ts"
       />
-      <p className="mt-2 text-sm text-muted-foreground">
-        If using <code className="rounded bg-muted px-1 font-mono text-xs">@aetherstack/utils</code>, this is already included — import{" "}
-        <code className="rounded bg-muted px-1 font-mono text-xs">cn</code> from there instead.
+      <p className="text-muted-foreground mt-2 text-sm">
+        If using <code className="bg-muted rounded px-1 font-mono text-xs">@aetherstack/utils</code>
+        , this is already included — import{" "}
+        <code className="bg-muted rounded px-1 font-mono text-xs">cn</code> from there instead.
       </p>
     </Step>
 
@@ -255,10 +253,12 @@ export function cn(...inputs: ClassValue[]) {
 npx aether-ui add button`}
         filename="terminal"
       />
-      <p className="mt-3 text-sm text-muted-foreground">
+      <p className="text-muted-foreground mt-3 text-sm">
         The CLI writes the component source directly to{" "}
-        <code className="rounded bg-muted px-1 font-mono text-xs">src/components/ui/button.tsx</code>.
-        You own the code — edit it freely.
+        <code className="bg-muted rounded px-1 font-mono text-xs">
+          src/components/ui/button.tsx
+        </code>
+        . You own the code — edit it freely.
       </p>
     </Step>
   </div>
@@ -272,8 +272,9 @@ const nextjsPagesRouterSteps = (
 cd my-app`}
         filename="terminal"
       />
-      <p className="mt-3 text-sm text-muted-foreground">
-        Select <strong>TypeScript</strong>, <strong>Tailwind CSS</strong>. Do <strong>not</strong> enable App Router.
+      <p className="text-muted-foreground mt-3 text-sm">
+        Select <strong>TypeScript</strong>, <strong>Tailwind CSS</strong>. Do <strong>not</strong>{" "}
+        enable App Router.
       </p>
     </Step>
 
@@ -289,9 +290,9 @@ cd my-app`}
     </Step>
 
     <Step number={3} title="Configure tailwind.config.ts">
-      <p className="mb-3 text-sm text-muted-foreground">
-        Same configuration as App Router — see the Next.js App Router guide above (Step 3).
-        The only difference is the content paths:
+      <p className="text-muted-foreground mb-3 text-sm">
+        Same configuration as App Router — see the Next.js App Router guide above (Step 3). The only
+        difference is the content paths:
       </p>
       <CodeBlock
         code={`content: [
@@ -303,9 +304,9 @@ cd my-app`}
     </Step>
 
     <Step number={4} title="Add CSS variables to styles/globals.css">
-      <p className="mb-3 text-sm text-muted-foreground">
+      <p className="text-muted-foreground mb-3 text-sm">
         Same CSS variable block as the App Router guide (Step 4) — paste it into{" "}
-        <code className="rounded bg-muted px-1 font-mono text-xs">styles/globals.css</code>.
+        <code className="bg-muted rounded px-1 font-mono text-xs">styles/globals.css</code>.
       </p>
     </Step>
 
@@ -445,9 +446,10 @@ export default {
     </Step>
 
     <Step number={5} title="Add CSS variables and Tailwind directives to src/index.css">
-      <p className="mb-3 text-sm text-muted-foreground">
-        Replace the contents of <code className="rounded bg-muted px-1 font-mono text-xs">src/index.css</code>{" "}
-        with the CSS variable block from the Next.js App Router guide (Step 4), then add:
+      <p className="text-muted-foreground mb-3 text-sm">
+        Replace the contents of{" "}
+        <code className="bg-muted rounded px-1 font-mono text-xs">src/index.css</code> with the CSS
+        variable block from the Next.js App Router guide (Step 4), then add:
       </p>
       <CodeBlock
         code={`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -488,10 +490,7 @@ export default defineConfig({
     </Step>
 
     <Step number={7} title="Add components">
-      <CodeBlock
-        code={`npx aether-ui add button input`}
-        filename="terminal"
-      />
+      <CodeBlock code={`npx aether-ui add button input`} filename="terminal" />
     </Step>
   </div>
 )
@@ -512,9 +511,10 @@ cd my-app`}
 npx tailwindcss init -p`}
         filename="terminal"
       />
-      <p className="mt-3 text-sm text-muted-foreground">
-        Add the Tailwind directives to <code className="rounded bg-muted px-1 font-mono text-xs">app/tailwind.css</code> and
-        import it in <code className="rounded bg-muted px-1 font-mono text-xs">app/root.tsx</code>.
+      <p className="text-muted-foreground mt-3 text-sm">
+        Add the Tailwind directives to{" "}
+        <code className="bg-muted rounded px-1 font-mono text-xs">app/tailwind.css</code> and import
+        it in <code className="bg-muted rounded px-1 font-mono text-xs">app/root.tsx</code>.
       </p>
     </Step>
 
@@ -530,9 +530,11 @@ npx tailwindcss init -p`}
     </Step>
 
     <Step number={4} title="Configure Tailwind (same as Vite/React)">
-      <p className="text-sm text-muted-foreground">
-        Use the same <code className="rounded bg-muted px-1 font-mono text-xs">tailwind.config.js</code> configuration
-        from the Vite + React guide above (Step 4). Update the <code className="rounded bg-muted px-1 font-mono text-xs">content</code> array to:
+      <p className="text-muted-foreground text-sm">
+        Use the same{" "}
+        <code className="bg-muted rounded px-1 font-mono text-xs">tailwind.config.js</code>{" "}
+        configuration from the Vite + React guide above (Step 4). Update the{" "}
+        <code className="bg-muted rounded px-1 font-mono text-xs">content</code> array to:
       </p>
       <CodeBlock
         code={`content: ["./app/**/*.{ts,tsx}"],`}
@@ -541,9 +543,11 @@ npx tailwindcss init -p`}
     </Step>
 
     <Step number={5} title="Add CSS variables to app/tailwind.css">
-      <p className="mb-3 text-sm text-muted-foreground">
-        Paste the full <code className="rounded bg-muted px-1 font-mono text-xs">:root</code> / <code className="rounded bg-muted px-1 font-mono text-xs">.dark</code> CSS variable block
-        from the Next.js App Router guide (Step 4) into <code className="rounded bg-muted px-1 font-mono text-xs">app/tailwind.css</code>.
+      <p className="text-muted-foreground mb-3 text-sm">
+        Paste the full <code className="bg-muted rounded px-1 font-mono text-xs">:root</code> /{" "}
+        <code className="bg-muted rounded px-1 font-mono text-xs">.dark</code> CSS variable block
+        from the Next.js App Router guide (Step 4) into{" "}
+        <code className="bg-muted rounded px-1 font-mono text-xs">app/tailwind.css</code>.
       </p>
     </Step>
 
@@ -560,14 +564,10 @@ export const links: LinksFunction = () => [
     </Step>
 
     <Step number={7} title="Add components">
-      <CodeBlock
-        code={`npx aether-ui add button input`}
-        filename="terminal"
-      />
-      <p className="mt-3 text-sm text-muted-foreground">
-        Components using Radix overlays (Dialog, Sheet, Tooltip) work in Remix without
-        any additional configuration — Radix uses portals and Remix handles hydration
-        correctly.
+      <CodeBlock code={`npx aether-ui add button input`} filename="terminal" />
+      <p className="text-muted-foreground mt-3 text-sm">
+        Components using Radix overlays (Dialog, Sheet, Tooltip) work in Remix without any
+        additional configuration — Radix uses portals and Remix handles hydration correctly.
       </p>
     </Step>
   </div>
@@ -582,8 +582,9 @@ cd my-app
 npx astro add react tailwind`}
         filename="terminal"
       />
-      <p className="mt-3 text-sm text-muted-forections">
-        When prompted, accept adding the React and Tailwind integrations. Astro will configure both automatically.
+      <p className="text-muted-forections mt-3 text-sm">
+        When prompted, accept adding the React and Tailwind integrations. Astro will configure both
+        automatically.
       </p>
     </Step>
 
@@ -599,8 +600,10 @@ npx astro add react tailwind`}
     </Step>
 
     <Step number={3} title="Configure tailwind.config.mjs">
-      <p className="mb-3 text-sm text-muted-foreground">
-        Astro generates a <code className="rounded bg-muted px-1 font-mono text-xs">tailwind.config.mjs</code>. Add the Aether UI color tokens and extend the config:
+      <p className="text-muted-foreground mb-3 text-sm">
+        Astro generates a{" "}
+        <code className="bg-muted rounded px-1 font-mono text-xs">tailwind.config.mjs</code>. Add
+        the Aether UI color tokens and extend the config:
       </p>
       <CodeBlock
         code={`import { fontFamily } from "tailwindcss/defaultTheme"
@@ -631,7 +634,7 @@ export default {
     </Step>
 
     <Step number={4} title="Add CSS variables to src/styles/global.css">
-      <p className="mb-3 text-sm text-muted-foreground">
+      <p className="text-muted-foreground mb-3 text-sm">
         Paste the CSS variable block from Step 4 of the Next.js guide into your global stylesheet.
         Import it in your base layout.
       </p>
@@ -662,11 +665,11 @@ import { Button } from "../components/ui/button"
 </Dialog>`}
         filename="src/pages/index.astro"
       />
-      <p className="mt-3 text-sm text-muted-foreground">
-        Purely visual components (Button, Badge, Card) work without hydration.
-        Interactive Radix components (Dialog, Select, Tabs, etc.) require{" "}
-        <code className="rounded bg-muted px-1 font-mono text-xs">client:load</code> or{" "}
-        <code className="rounded bg-muted px-1 font-mono text-xs">client:visible</code>.
+      <p className="text-muted-foreground mt-3 text-sm">
+        Purely visual components (Button, Badge, Card) work without hydration. Interactive Radix
+        components (Dialog, Select, Tabs, etc.) require{" "}
+        <code className="bg-muted rounded px-1 font-mono text-xs">client:load</code> or{" "}
+        <code className="bg-muted rounded px-1 font-mono text-xs">client:visible</code>.
       </p>
     </Step>
   </div>
@@ -695,9 +698,9 @@ npm install`}
     </Step>
 
     <Step number={3} title="Configure Tailwind and CSS variables">
-      <p className="mb-3 text-sm text-muted-foreground">
-        TanStack Start uses Vite under the hood. Follow the same Tailwind configuration
-        and CSS variable setup as the <strong>Vite + React</strong> guide above (Steps 4–5).
+      <p className="text-muted-foreground mb-3 text-sm">
+        TanStack Start uses Vite under the hood. Follow the same Tailwind configuration and CSS
+        variable setup as the <strong>Vite + React</strong> guide above (Steps 4–5).
       </p>
     </Step>
 
@@ -715,10 +718,7 @@ export function cn(...inputs: ClassValue[]) {
     </Step>
 
     <Step number={5} title="Add components and use them in routes">
-      <CodeBlock
-        code={`npx aether-ui add button badge card`}
-        filename="terminal"
-      />
+      <CodeBlock code={`npx aether-ui add button badge card`} filename="terminal" />
       <CodeBlock
         code={`import { createFileRoute } from "@tanstack/react-router"
 import { Button } from "@/components/ui/button"
@@ -743,13 +743,13 @@ export default function InstallationPage() {
     <div className="max-w-3xl">
       {/* Header */}
       <div className="mb-10">
-        <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground">
-          Installation
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          Add Aether UI to any React project. Components are copied directly into your
-          codebase — no wrapper library, no lock-in. You own the source. After setup, run{" "}
-          <code className="rounded bg-muted px-1 font-mono text-base">npx aether-ui add button</code>{" "}
+        <h1 className="text-foreground mb-3 text-4xl font-bold tracking-tight">Installation</h1>
+        <p className="text-muted-foreground text-lg">
+          Add Aether UI to any React project. Components are copied directly into your codebase — no
+          wrapper library, no lock-in. You own the source. After setup, run{" "}
+          <code className="bg-muted rounded px-1 font-mono text-base">
+            npx aether-ui add button
+          </code>{" "}
           to copy any of the {REGISTRY_STATS.total} registry items directly into your project.
         </p>
       </div>
@@ -774,8 +774,8 @@ export default function InstallationPage() {
             "TypeScript (strongly recommended — components are typed throughout)",
             "Tailwind CSS 3.x",
           ].map((req) => (
-            <li key={req} className="flex items-start gap-2 text-sm text-muted-foreground">
-              <span className="mt-0.5 text-primary">✓</span>
+            <li key={req} className="text-muted-foreground flex items-start gap-2 text-sm">
+              <span className="text-primary mt-0.5">✓</span>
               {req}
             </li>
           ))}
@@ -800,10 +800,10 @@ export default function InstallationPage() {
       {/* CLI reference */}
       <section className="mb-12">
         <SectionHeading>CLI reference</SectionHeading>
-        <p className="mb-6 text-sm text-muted-foreground">
-          The <code className="rounded bg-muted px-1 font-mono text-xs">aether-ui</code> CLI
-          copies component source files into your project. No runtime dependency on Aether UI — you
-          own the code.
+        <p className="text-muted-foreground mb-6 text-sm">
+          The <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui</code> CLI copies
+          component source files into your project. No runtime dependency on Aether UI — you own the
+          code.
         </p>
         <div className="space-y-4">
           <CodeBlock
@@ -824,11 +824,12 @@ npx aether-ui add button --cwd /path/to/your/project`}
             filename="terminal"
           />
         </div>
-        <div className="mt-6 rounded-lg border border-border bg-muted/50 p-4">
-          <p className="text-sm font-medium text-foreground">aether.json</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Running <code className="rounded bg-muted px-1 font-mono text-xs">aether-ui init</code> creates
-            a config file that tells the CLI where to install components and how your project is structured:
+        <div className="border-border bg-muted/50 mt-6 rounded-lg border p-4">
+          <p className="text-foreground text-sm font-medium">aether.json</p>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Running <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui init</code>{" "}
+            creates a config file that tells the CLI where to install components and how your
+            project is structured:
           </p>
           <CodeBlock
             code={`{
@@ -853,10 +854,12 @@ npx aether-ui add button --cwd /path/to/your/project`}
       {/* Dark mode */}
       <section className="mb-12">
         <SectionHeading>Dark mode</SectionHeading>
-        <p className="mb-4 text-sm text-muted-foreground">
-          Aether UI uses the <code className="rounded bg-muted px-1 font-mono text-xs">class</code> strategy
-          for dark mode — add the <code className="rounded bg-muted px-1 font-mono text-xs">dark</code> class
-          to the <code className="rounded bg-muted px-1 font-mono text-xs">html</code> element to activate dark mode.
+        <p className="text-muted-foreground mb-4 text-sm">
+          Aether UI uses the <code className="bg-muted rounded px-1 font-mono text-xs">class</code>{" "}
+          strategy for dark mode — add the{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">dark</code> class to the{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">html</code> element to activate
+          dark mode.
         </p>
         <CodeBlock
           code={`// With next-themes (recommended for Next.js)
@@ -879,22 +882,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }`}
           filename="src/app/layout.tsx"
         />
-        <p className="mt-4 text-sm text-muted-foreground">
-          For Vite/Remix/Astro, manually toggle the <code className="rounded bg-muted px-1 font-mono text-xs">dark</code> class
-          on <code className="rounded bg-muted px-1 font-mono text-xs">document.documentElement</code> or use your framework&apos;s
-          preferred theme management library.
+        <p className="text-muted-foreground mt-4 text-sm">
+          For Vite/Remix/Astro, manually toggle the{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">dark</code> class on{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">document.documentElement</code>{" "}
+          or use your framework&apos;s preferred theme management library.
         </p>
       </section>
 
       {/* TypeScript */}
       <section>
         <SectionHeading>TypeScript</SectionHeading>
-        <p className="mb-4 text-sm text-muted-foreground">
-          All components are fully typed. Props extend their corresponding HTML element types
-          so standard HTML attributes (like <code className="rounded bg-muted px-1 font-mono text-xs">aria-*</code>,{" "}
-          <code className="rounded bg-muted px-1 font-mono text-xs">data-*</code>,{" "}
-          <code className="rounded bg-muted px-1 font-mono text-xs">onClick</code>, etc.) work as expected without
-          any extra casting.
+        <p className="text-muted-foreground mb-4 text-sm">
+          All components are fully typed. Props extend their corresponding HTML element types so
+          standard HTML attributes (like{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">aria-*</code>,{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">data-*</code>,{" "}
+          <code className="bg-muted rounded px-1 font-mono text-xs">onClick</code>, etc.) work as
+          expected without any extra casting.
         </p>
         <CodeBlock
           code={`// All HTML button attributes are available

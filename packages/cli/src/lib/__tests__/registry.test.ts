@@ -1,10 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
-import {
-  fetchRegistry,
-  fetchRegistryItem,
-  resolveItem,
-  formatItemType,
-} from "../registry"
+import { fetchRegistry, fetchRegistryItem, resolveItem, formatItemType } from "../registry"
 
 const BASE = "https://registry.example.com"
 
@@ -130,9 +125,7 @@ describe("resolveItem", () => {
   })
 
   it("falls back to aggregate manifest when per-item is missing", async () => {
-    vi.mocked(fetch)
-      .mockResolvedValueOnce(notFound())
-      .mockResolvedValueOnce(jsonResponse(MANIFEST))
+    vi.mocked(fetch).mockResolvedValueOnce(notFound()).mockResolvedValueOnce(jsonResponse(MANIFEST))
 
     const item = await resolveItem(BASE, "button")
     expect(item?.name).toBe("button")
@@ -140,9 +133,7 @@ describe("resolveItem", () => {
   })
 
   it("returns null when item is in neither endpoint", async () => {
-    vi.mocked(fetch)
-      .mockResolvedValueOnce(notFound())
-      .mockResolvedValueOnce(jsonResponse(MANIFEST))
+    vi.mocked(fetch).mockResolvedValueOnce(notFound()).mockResolvedValueOnce(jsonResponse(MANIFEST))
 
     const item = await resolveItem(BASE, "missing")
     expect(item).toBeNull()

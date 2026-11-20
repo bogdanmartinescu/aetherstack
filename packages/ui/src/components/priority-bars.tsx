@@ -31,16 +31,14 @@ export function PriorityBars({ priority, decorative, className }: PriorityBarsPr
 
   return (
     <span
-      {...(decorative
-        ? { "aria-hidden": true }
-        : { role: "img", "aria-label": label })}
+      {...(decorative ? { "aria-hidden": true } : { role: "img", "aria-label": label })}
       {...(isUrgent ? { "data-urgent": "true" } : {})}
       className={cn("inline-flex items-end gap-0.5", className)}
     >
       {isUrgent ? (
         <span
           aria-hidden="true"
-          className="flex h-3.5 w-3.5 items-center justify-center rounded-sm bg-destructive text-[10px] font-bold leading-none text-destructive-foreground"
+          className="bg-destructive text-destructive-foreground flex h-3.5 w-3.5 items-center justify-center rounded-sm text-[10px] font-bold leading-none"
         >
           !
         </span>
@@ -50,11 +48,7 @@ export function PriorityBars({ priority, decorative, className }: PriorityBarsPr
             key={index}
             aria-hidden="true"
             data-filled={index < filled ? "true" : "false"}
-            className={cn(
-              "w-1 rounded-sm",
-              height,
-              index < filled ? "bg-primary" : "bg-muted",
-            )}
+            className={cn("w-1 rounded-sm", height, index < filled ? "bg-primary" : "bg-muted")}
           />
         ))
       )}

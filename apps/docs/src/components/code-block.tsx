@@ -20,19 +20,24 @@ export function CodeBlock({ code, filename, className }: CodeBlockProps) {
   }
 
   return (
-    <div className={cn("relative rounded-lg border border-border bg-muted/50 overflow-hidden", className)}>
+    <div
+      className={cn(
+        "border-border bg-muted/50 relative overflow-hidden rounded-lg border",
+        className,
+      )}
+    >
       {filename && (
-        <div className="flex items-center justify-between border-b border-border bg-muted px-4 py-2">
-          <span className="font-mono text-xs text-muted-foreground">{filename}</span>
+        <div className="border-border bg-muted flex items-center justify-between border-b px-4 py-2">
+          <span className="text-muted-foreground font-mono text-xs">{filename}</span>
         </div>
       )}
       <div className="relative">
         <pre className="overflow-x-auto p-4 text-sm leading-relaxed">
-          <code className="font-mono text-foreground">{code.trim()}</code>
+          <code className="text-foreground font-mono">{code.trim()}</code>
         </pre>
         <button
           onClick={handleCopy}
-          className="absolute right-3 top-3 rounded-md border border-border bg-background px-2 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          className="border-border bg-background text-muted-foreground hover:text-foreground absolute right-3 top-3 rounded-md border px-2 py-1 text-xs transition-colors"
           aria-label="Copy code"
         >
           {copied ? "Copied!" : "Copy"}
@@ -44,7 +49,7 @@ export function CodeBlock({ code, filename, className }: CodeBlockProps) {
 
 export function InlineCode({ children }: { children: React.ReactNode }) {
   return (
-    <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground">
+    <code className="bg-muted text-foreground rounded px-1.5 py-0.5 font-mono text-[0.85em]">
       {children}
     </code>
   )

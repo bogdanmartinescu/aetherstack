@@ -71,18 +71,48 @@ const data: User[] = [
         </div>
       }
       props={[
-        { name: "columns", type: "DataTableColumn<T>[]", required: true, description: "Column definitions including key, header, optional render function, and sortable flag." },
-        { name: "data", type: "T[]", required: true, description: "Row data. T must extend Record<string, unknown>." },
-        { name: "pageSize", type: "number", default: "10", description: "Number of rows per page." },
-        { name: "searchable", type: "boolean", default: "false", description: "Show a search input above the table." },
-        { name: "searchKeys", type: "(keyof T)[]", description: "Which keys to include in search. Defaults to all column keys." },
-        { name: "emptyMessage", type: "string", default: '"No results found."', description: "Message shown when no rows match the current filter." },
+        {
+          name: "columns",
+          type: "DataTableColumn<T>[]",
+          required: true,
+          description:
+            "Column definitions including key, header, optional render function, and sortable flag.",
+        },
+        {
+          name: "data",
+          type: "T[]",
+          required: true,
+          description: "Row data. T must extend Record<string, unknown>.",
+        },
+        {
+          name: "pageSize",
+          type: "number",
+          default: "10",
+          description: "Number of rows per page.",
+        },
+        {
+          name: "searchable",
+          type: "boolean",
+          default: "false",
+          description: "Show a search input above the table.",
+        },
+        {
+          name: "searchKeys",
+          type: "(keyof T)[]",
+          description: "Which keys to include in search. Defaults to all column keys.",
+        },
+        {
+          name: "emptyMessage",
+          type: "string",
+          default: '"No results found."',
+          description: "Message shown when no rows match the current filter.",
+        },
         { name: "className", type: "string", description: "Additional classes on the wrapper." },
       ]}
       a11yNotes={[
-        "Sortable column headers use aria-sort (\"ascending\" | \"descending\" | \"none\").",
-        "The search input has aria-label=\"Search table\" for screen readers.",
-        "Pagination buttons have aria-label (\"Previous page\", \"Next page\") and are disabled when at limits.",
+        'Sortable column headers use aria-sort ("ascending" | "descending" | "none").',
+        'The search input has aria-label="Search table" for screen readers.',
+        'Pagination buttons have aria-label ("Previous page", "Next page") and are disabled when at limits.',
         "Empty state cell spans all columns so the table structure stays valid.",
       ]}
     />

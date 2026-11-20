@@ -70,16 +70,19 @@ function CodeBlock({
 
   return (
     <div
-      className={cn("group relative overflow-hidden rounded-lg border border-border bg-muted", className)}
+      className={cn(
+        "border-border bg-muted group relative overflow-hidden rounded-lg border",
+        className,
+      )}
     >
       {hasHeader && (
-        <div className="flex items-center justify-between gap-2 border-b border-border bg-card px-4 py-2">
+        <div className="border-border bg-card flex items-center justify-between gap-2 border-b px-4 py-2">
           <div className="flex min-w-0 items-center gap-2">
             {filename && (
-              <span className="truncate font-mono text-sm text-muted-foreground">{filename}</span>
+              <span className="text-muted-foreground truncate font-mono text-sm">{filename}</span>
             )}
             {language && !filename && (
-              <span className="text-xs uppercase tracking-wide text-muted-foreground">
+              <span className="text-muted-foreground text-xs uppercase tracking-wide">
                 {language}
               </span>
             )}
@@ -102,8 +105,8 @@ function CodeBlock({
             onClick={() => copy(code)}
             className={cn(
               copyButtonClassName,
-              "absolute right-2 top-2 z-10 bg-muted/80 px-2 py-1 backdrop-blur-sm",
-              "[@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 focus-visible:opacity-100",
+              "bg-muted/80 absolute right-2 top-2 z-10 px-2 py-1 backdrop-blur-sm",
+              "focus-visible:opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100",
               copied && "opacity-100",
             )}
             aria-label={copied ? "Copied" : "Copy code"}
@@ -114,7 +117,7 @@ function CodeBlock({
         <pre
           tabIndex={0}
           data-language={language}
-          className="overflow-x-auto p-4 font-mono text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+          className="focus-visible:ring-ring overflow-x-auto p-4 font-mono text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset"
         >
           {renderLines ? (
             <code className="grid w-max min-w-full">
@@ -128,13 +131,13 @@ function CodeBlock({
                     data-highlighted={isHighlighted || undefined}
                     className={cn(
                       "-mx-4 flex px-4",
-                      isHighlighted && "border-l-2 border-primary bg-primary/10 pl-[14px]",
+                      isHighlighted && "border-primary bg-primary/10 border-l-2 pl-[14px]",
                     )}
                   >
                     {showLineNumbers && (
                       <span
                         aria-hidden="true"
-                        className="mr-4 w-8 shrink-0 select-none text-right text-muted-foreground"
+                        className="text-muted-foreground mr-4 w-8 shrink-0 select-none text-right"
                       >
                         {lineNumber}
                       </span>

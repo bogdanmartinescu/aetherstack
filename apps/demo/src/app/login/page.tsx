@@ -9,13 +9,13 @@ export default function LoginPage() {
       tagline="Sign in to your workspace."
       panel={
         <div className="max-w-sm text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-2xl font-bold text-primary-foreground">
+          <div className="bg-primary text-primary-foreground mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl text-2xl font-bold">
             A
           </div>
-          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+          <h2 className="text-foreground text-xl font-semibold tracking-tight">
             Welcome back to Acme
           </h2>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="text-muted-foreground mt-2 text-sm">
             All your customers, deals, and revenue in one place.
           </p>
         </div>

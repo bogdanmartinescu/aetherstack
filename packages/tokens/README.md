@@ -20,7 +20,15 @@ Import everything from the root or use sub-path imports for individual token gro
 
 ```ts
 // All token groups
-import { palette, semanticColors, fontSizes, spacing, radius, shadows, motion } from "@aetherstack/tokens"
+import {
+  palette,
+  semanticColors,
+  fontSizes,
+  spacing,
+  radius,
+  shadows,
+  motion,
+} from "@aetherstack/tokens"
 
 // Sub-path imports (tree-shakeable)
 import { palette, semanticColors } from "@aetherstack/tokens/colors"

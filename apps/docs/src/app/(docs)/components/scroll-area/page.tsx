@@ -58,9 +58,18 @@ export { ScrollArea, ScrollBar }`
 const tags = Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`)
 
 const horizontalItems = [
-  "Dashboard", "Analytics", "Reports", "Users", "Settings",
-  "Billing", "Integrations", "Docs", "Support", "Changelog",
-  "API", "Webhooks",
+  "Dashboard",
+  "Analytics",
+  "Reports",
+  "Users",
+  "Settings",
+  "Billing",
+  "Integrations",
+  "Docs",
+  "Support",
+  "Changelog",
+  "API",
+  "Webhooks",
 ]
 
 export default function ScrollAreaPage() {
@@ -80,7 +89,7 @@ export default function ScrollAreaPage() {
         <ScrollArea className="h-[200px] w-[350px] rounded-md border p-4">
           <div className="space-y-2">
             {tags.map((tag) => (
-              <div key={tag} className="text-sm text-muted-foreground">
+              <div key={tag} className="text-muted-foreground text-sm">
                 {tag}
               </div>
             ))}
@@ -116,12 +125,13 @@ export function ScrollAreaDemo() {
       examples={[
         {
           title: "Vertical scroll",
-          description: "Set a fixed height on ScrollArea and let content overflow naturally. The custom scrollbar appears automatically.",
+          description:
+            "Set a fixed height on ScrollArea and let content overflow naturally. The custom scrollbar appears automatically.",
           preview: (
             <ScrollArea className="h-[180px] w-[300px] rounded-md border p-4">
               <div className="space-y-2">
                 {tags.map((tag) => (
-                  <div key={tag} className="rounded bg-muted px-2 py-1 text-sm">
+                  <div key={tag} className="bg-muted rounded px-2 py-1 text-sm">
                     {tag}
                   </div>
                 ))}
@@ -140,14 +150,15 @@ export function ScrollAreaDemo() {
         },
         {
           title: "Horizontal scroll",
-          description: "Add a ScrollBar with orientation=\"horizontal\" for horizontal overflow. Use whitespace-nowrap to prevent wrapping.",
+          description:
+            'Add a ScrollBar with orientation="horizontal" for horizontal overflow. Use whitespace-nowrap to prevent wrapping.',
           preview: (
             <ScrollArea className="w-[300px] rounded-md border">
               <div className="flex w-max gap-2 p-4">
                 {horizontalItems.map((item) => (
                   <div
                     key={item}
-                    className="flex h-10 w-24 shrink-0 items-center justify-center rounded-md border bg-muted text-xs font-medium"
+                    className="bg-muted flex h-10 w-24 shrink-0 items-center justify-center rounded-md border text-xs font-medium"
                   >
                     {item}
                   </div>
@@ -196,7 +207,8 @@ export function ScrollAreaDemo() {
               name: "orientation",
               type: '"vertical" | "horizontal"',
               default: '"vertical"',
-              description: "Controls the scrollbar axis. Add a ScrollBar with orientation=\"horizontal\" for horizontal scroll.",
+              description:
+                'Controls the scrollbar axis. Add a ScrollBar with orientation="horizontal" for horizontal scroll.',
             },
             {
               name: "className",

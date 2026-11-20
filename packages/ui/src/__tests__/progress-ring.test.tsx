@@ -12,6 +12,8 @@ describe("ProgressRing", () => {
 
   it("omits the value while indeterminate", () => {
     render(<ProgressRing indeterminate aria-label="Loading" />)
-    expect(screen.getByRole("progressbar", { name: "Loading" })).not.toHaveAttribute("aria-valuenow")
+    expect(screen.getByRole("progressbar", { name: "Loading" })).not.toHaveAttribute(
+      "aria-valuenow",
+    )
   })
 })

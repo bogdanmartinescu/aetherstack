@@ -43,7 +43,7 @@ export default function SpinnerPage() {
       description="A simple CSS-only animated loading indicator. Uses border-t-transparent to create the spinning arc effect. No dependencies."
       features={[
         "4 sizes: sm, default, lg, xl",
-        "role=\"status\" + aria-label for screen reader accessibility",
+        'role="status" + aria-label for screen reader accessibility',
         "Colour inherits from currentColor — adapts to any context",
         "No external dependencies",
       ]}
@@ -113,14 +113,28 @@ export default function SpinnerPage() {
         },
       ]}
       props={[
-        { name: "size", type: '"sm" | "default" | "lg" | "xl"', default: '"default"', description: "Controls the width and height of the spinner." },
-        { name: "label", type: "string", default: '"Loading…"', description: "Screen-reader label set on aria-label and in the sr-only span." },
-        { name: "className", type: "string", description: "Additional classes — use text-* to change colour." },
+        {
+          name: "size",
+          type: '"sm" | "default" | "lg" | "xl"',
+          default: '"default"',
+          description: "Controls the width and height of the spinner.",
+        },
+        {
+          name: "label",
+          type: "string",
+          default: '"Loading…"',
+          description: "Screen-reader label set on aria-label and in the sr-only span.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes — use text-* to change colour.",
+        },
       ]}
       a11yNotes={[
-        "role=\"status\" announces loading updates without interrupting the user.",
+        'role="status" announces loading updates without interrupting the user.',
         "The visible spinner div is hidden to screen readers; the sr-only span provides the label.",
-        "Set label to a meaningful description, e.g. \"Saving changes…\" or \"Loading results…\".",
+        'Set label to a meaningful description, e.g. "Saving changes…" or "Loading results…".',
       ]}
     />
   )

@@ -4,7 +4,8 @@ import { ComponentPage } from "@/components/component-page"
 
 export const metadata: Metadata = {
   title: "Avatar",
-  description: "A circular image element with automatic fallback to initials when the image fails to load.",
+  description:
+    "A circular image element with automatic fallback to initials when the image fails to load.",
 }
 
 const MANUAL_SOURCE = `"use client"
@@ -176,7 +177,8 @@ export function AvatarDemo() {
       examples={[
         {
           title: "With image",
-          description: "Provide a src URL via AvatarImage. If the image loads successfully, AvatarFallback is hidden.",
+          description:
+            "Provide a src URL via AvatarImage. If the image loads successfully, AvatarFallback is hidden.",
           preview: (
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
@@ -202,7 +204,8 @@ export function AvatarDemo() {
         },
         {
           title: "Fallback initials",
-          description: "When no image src is provided, or the image fails to load, AvatarFallback is shown instead.",
+          description:
+            "When no image src is provided, or the image fails to load, AvatarFallback is shown instead.",
           preview: (
             <div className="flex items-center gap-3">
               <Avatar>
@@ -226,7 +229,8 @@ export function AvatarDemo() {
         },
         {
           title: "AvatarGroup with max",
-          description: "Stack multiple avatars together. Set max to limit visible avatars — excess are shown as a +N overflow badge.",
+          description:
+            "Stack multiple avatars together. Set max to limit visible avatars — excess are shown as a +N overflow badge.",
           preview: (
             <AvatarGroup max={3}>
               <Avatar>
@@ -265,7 +269,8 @@ export function AvatarDemo() {
         {
           name: "className",
           type: "string",
-          description: "Additional class names applied to the Avatar root (40×40 circle by default).",
+          description:
+            "Additional class names applied to the Avatar root (40×40 circle by default).",
         },
         {
           name: "...props",

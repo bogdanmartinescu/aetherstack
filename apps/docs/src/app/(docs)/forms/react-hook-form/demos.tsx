@@ -33,11 +33,11 @@ import { PlusIcon, XIcon } from "lucide-react"
 
 function FieldError({ message }: { message?: string }) {
   if (!message) return null
-  return <p className="mt-1 text-xs text-destructive">{message}</p>
+  return <p className="text-destructive mt-1 text-xs">{message}</p>
 }
 
 function FieldHint({ children }: { children: React.ReactNode }) {
-  return <p className="mt-1 text-xs text-muted-foreground">{children}</p>
+  return <p className="text-muted-foreground mt-1 text-xs">{children}</p>
 }
 
 // ── 1. Bug Report demo ────────────────────────────────────────────────────────
@@ -55,8 +55,16 @@ const bugSchema = z.object({
 type BugValues = z.infer<typeof bugSchema>
 
 export function BugReportDemo() {
-  const { register, handleSubmit, reset, watch, formState: { errors, isSubmitting } } =
-    useForm<BugValues>({ resolver: zodResolver(bugSchema), defaultValues: { title: "", description: "" } })
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm<BugValues>({
+    resolver: zodResolver(bugSchema),
+    defaultValues: { title: "", description: "" },
+  })
 
   const desc = watch("description", "")
 
@@ -79,7 +87,12 @@ export function BugReportDemo() {
         <CardDescription>Help us improve by reporting bugs you encounter.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="bug-report-form" onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
+        <form
+          id="bug-report-form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="space-y-4"
+        >
           <div className="space-y-1.5">
             <Label htmlFor="bug-title">Bug Title</Label>
             <Input
@@ -95,7 +108,7 @@ export function BugReportDemo() {
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <Label htmlFor="bug-desc">Description</Label>
-              <span className="text-xs text-muted-foreground tabular-nums">{desc.length}/300</span>
+              <span className="text-muted-foreground text-xs tabular-nums">{desc.length}/300</span>
             </div>
             <Textarea
               id="bug-desc"
@@ -105,7 +118,9 @@ export function BugReportDemo() {
               aria-invalid={!!errors.description}
               {...register("description")}
             />
-            <FieldHint>Include steps to reproduce, expected behavior, and what actually happened.</FieldHint>
+            <FieldHint>
+              Include steps to reproduce, expected behavior, and what actually happened.
+            </FieldHint>
             <FieldError message={errors.description?.message} />
           </div>
         </form>
@@ -134,8 +149,12 @@ const inputSchema = z.object({
 type InputValues = z.infer<typeof inputSchema>
 
 export function InputDemo() {
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } =
-    useForm<InputValues>({ resolver: zodResolver(inputSchema) })
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<InputValues>({ resolver: zodResolver(inputSchema) })
 
   function onSubmit(data: InputValues) {
     toast({ variant: "success", title: "Saved", description: `Username set to @${data.username}` })
@@ -148,7 +167,12 @@ export function InputDemo() {
         <CardDescription>Update your profile information below.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="input-demo-form" onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-1.5">
+        <form
+          id="input-demo-form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="space-y-1.5"
+        >
           <Label htmlFor="inp-username">Username</Label>
           <Input
             id="inp-username"
@@ -157,14 +181,19 @@ export function InputDemo() {
             {...register("username")}
           />
           <FieldHint>
-            This is your public display name. Must be 3–20 characters. Letters, numbers, and underscores only.
+            This is your public display name. Must be 3–20 characters. Letters, numbers, and
+            underscores only.
           </FieldHint>
           <FieldError message={errors.username?.message} />
         </form>
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
-        <Button type="button" variant="outline" onClick={() => reset()}>Reset</Button>
-        <Button type="submit" form="input-demo-form" disabled={isSubmitting}>Save</Button>
+        <Button type="button" variant="outline" onClick={() => reset()}>
+          Reset
+        </Button>
+        <Button type="submit" form="input-demo-form" disabled={isSubmitting}>
+          Save
+        </Button>
       </CardFooter>
     </Card>
   )
@@ -178,8 +207,16 @@ const textareaSchema = z.object({
 type TextareaValues = z.infer<typeof textareaSchema>
 
 export function TextareaDemo() {
-  const { register, handleSubmit, reset, watch, formState: { errors, isSubmitting } } =
-    useForm<TextareaValues>({ resolver: zodResolver(textareaSchema), defaultValues: { about: "" } })
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm<TextareaValues>({
+    resolver: zodResolver(textareaSchema),
+    defaultValues: { about: "" },
+  })
 
   const about = watch("about", "")
 
@@ -191,13 +228,20 @@ export function TextareaDemo() {
     <Card className="w-full max-w-md">
       <CardHeader>
         <CardTitle>Personalization</CardTitle>
-        <CardDescription>Customize your experience by telling us more about yourself.</CardDescription>
+        <CardDescription>
+          Customize your experience by telling us more about yourself.
+        </CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="textarea-demo-form" onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-1.5">
+        <form
+          id="textarea-demo-form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="space-y-1.5"
+        >
           <div className="flex items-center justify-between">
             <Label htmlFor="ta-about">More about you</Label>
-            <span className="text-xs text-muted-foreground tabular-nums">{about.length}/300</span>
+            <span className="text-muted-foreground text-xs tabular-nums">{about.length}/300</span>
           </div>
           <Textarea
             id="ta-about"
@@ -207,13 +251,19 @@ export function TextareaDemo() {
             aria-invalid={!!errors.about}
             {...register("about")}
           />
-          <FieldHint>Tell us more about yourself. This will help us personalise your experience.</FieldHint>
+          <FieldHint>
+            Tell us more about yourself. This will help us personalise your experience.
+          </FieldHint>
           <FieldError message={errors.about?.message} />
         </form>
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
-        <Button type="button" variant="outline" onClick={() => reset()}>Reset</Button>
-        <Button type="submit" form="textarea-demo-form" disabled={isSubmitting}>Save</Button>
+        <Button type="button" variant="outline" onClick={() => reset()}>
+          Reset
+        </Button>
+        <Button type="submit" form="textarea-demo-form" disabled={isSubmitting}>
+          Save
+        </Button>
       </CardFooter>
     </Card>
   )
@@ -227,8 +277,15 @@ const selectSchema = z.object({
 type SelectValues = z.infer<typeof selectSchema>
 
 export function SelectDemo() {
-  const { handleSubmit, reset, control, formState: { isSubmitting } } =
-    useForm<SelectValues>({ resolver: zodResolver(selectSchema), defaultValues: { language: "" } })
+  const {
+    handleSubmit,
+    reset,
+    control,
+    formState: { isSubmitting },
+  } = useForm<SelectValues>({
+    resolver: zodResolver(selectSchema),
+    defaultValues: { language: "" },
+  })
 
   function onSubmit(data: SelectValues) {
     toast({ variant: "success", title: "Saved", description: `Language set to ${data.language}` })
@@ -241,7 +298,12 @@ export function SelectDemo() {
         <CardDescription>Select your preferred spoken language.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="select-demo-form" onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-1.5">
+        <form
+          id="select-demo-form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="space-y-1.5"
+        >
           <Label htmlFor="sel-lang">Spoken Language</Label>
           <Controller
             name="language"
@@ -268,8 +330,12 @@ export function SelectDemo() {
         </form>
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
-        <Button type="button" variant="outline" onClick={() => reset()}>Reset</Button>
-        <Button type="submit" form="select-demo-form" disabled={isSubmitting}>Save</Button>
+        <Button type="button" variant="outline" onClick={() => reset()}>
+          Reset
+        </Button>
+        <Button type="submit" form="select-demo-form" disabled={isSubmitting}>
+          Save
+        </Button>
       </CardFooter>
     </Card>
   )
@@ -290,14 +356,22 @@ const checkboxSchema = z.object({
 type CheckboxValues = z.infer<typeof checkboxSchema>
 
 export function CheckboxDemo() {
-  const { handleSubmit, reset, control, formState: { isSubmitting } } =
-    useForm<CheckboxValues>({
-      resolver: zodResolver(checkboxSchema),
-      defaultValues: { notifications: ["security"] },
-    })
+  const {
+    handleSubmit,
+    reset,
+    control,
+    formState: { isSubmitting },
+  } = useForm<CheckboxValues>({
+    resolver: zodResolver(checkboxSchema),
+    defaultValues: { notifications: ["security"] },
+  })
 
   function onSubmit(data: CheckboxValues) {
-    toast({ variant: "success", title: "Preferences saved", description: `${data.notifications.length} notification type(s) enabled.` })
+    toast({
+      variant: "success",
+      title: "Preferences saved",
+      description: `${data.notifications.length} notification type(s) enabled.`,
+    })
   }
 
   return (
@@ -339,8 +413,12 @@ export function CheckboxDemo() {
         </form>
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
-        <Button type="button" variant="outline" onClick={() => reset()}>Reset</Button>
-        <Button type="submit" form="checkbox-demo-form" disabled={isSubmitting}>Save</Button>
+        <Button type="button" variant="outline" onClick={() => reset()}>
+          Reset
+        </Button>
+        <Button type="submit" form="checkbox-demo-form" disabled={isSubmitting}>
+          Save
+        </Button>
       </CardFooter>
     </Card>
   )
@@ -351,7 +429,11 @@ export function CheckboxDemo() {
 const PLANS = [
   { id: "starter", title: "Starter", description: "For individuals and small teams." },
   { id: "pro", title: "Pro", description: "For businesses with higher demands." },
-  { id: "enterprise", title: "Enterprise", description: "Unlimited scale for large organisations." },
+  {
+    id: "enterprise",
+    title: "Enterprise",
+    description: "Unlimited scale for large organisations.",
+  },
 ]
 
 const radioSchema = z.object({
@@ -360,11 +442,19 @@ const radioSchema = z.object({
 type RadioValues = z.infer<typeof radioSchema>
 
 export function RadioGroupDemo() {
-  const { handleSubmit, reset, control, formState: { isSubmitting } } =
-    useForm<RadioValues>({ resolver: zodResolver(radioSchema), defaultValues: { plan: "" } })
+  const {
+    handleSubmit,
+    reset,
+    control,
+    formState: { isSubmitting },
+  } = useForm<RadioValues>({ resolver: zodResolver(radioSchema), defaultValues: { plan: "" } })
 
   function onSubmit(data: RadioValues) {
-    toast({ variant: "success", title: "Plan selected", description: `Switched to ${data.plan} plan.` })
+    toast({
+      variant: "success",
+      title: "Plan selected",
+      description: `Switched to ${data.plan} plan.`,
+    })
   }
 
   return (
@@ -381,7 +471,9 @@ export function RadioGroupDemo() {
             render={({ field, fieldState }) => (
               <div className="space-y-1.5">
                 <Label>Plan</Label>
-                <p className="text-xs text-muted-foreground">You can upgrade or downgrade at any time.</p>
+                <p className="text-muted-foreground text-xs">
+                  You can upgrade or downgrade at any time.
+                </p>
                 <RadioGroup
                   value={field.value}
                   onValueChange={field.onChange}
@@ -391,7 +483,7 @@ export function RadioGroupDemo() {
                     <label
                       key={plan.id}
                       htmlFor={`plan-${plan.id}`}
-                      className="flex cursor-pointer items-start gap-3 rounded-lg border border-border p-3 transition-colors hover:bg-muted/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5"
+                      className="border-border hover:bg-muted/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 flex cursor-pointer items-start gap-3 rounded-lg border p-3 transition-colors"
                     >
                       <RadioGroupItem
                         value={plan.id}
@@ -401,7 +493,7 @@ export function RadioGroupDemo() {
                       />
                       <div>
                         <p className="text-sm font-medium">{plan.title}</p>
-                        <p className="text-xs text-muted-foreground">{plan.description}</p>
+                        <p className="text-muted-foreground text-xs">{plan.description}</p>
                       </div>
                     </label>
                   ))}
@@ -413,8 +505,12 @@ export function RadioGroupDemo() {
         </form>
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
-        <Button type="button" variant="outline" onClick={() => reset()}>Reset</Button>
-        <Button type="submit" form="radio-demo-form" disabled={isSubmitting}>Save</Button>
+        <Button type="button" variant="outline" onClick={() => reset()}>
+          Reset
+        </Button>
+        <Button type="submit" form="radio-demo-form" disabled={isSubmitting}>
+          Save
+        </Button>
       </CardFooter>
     </Card>
   )
@@ -429,11 +525,15 @@ const switchSchema = z.object({
 type SwitchValues = z.infer<typeof switchSchema>
 
 export function SwitchDemo() {
-  const { handleSubmit, reset, control, formState: { isSubmitting } } =
-    useForm<SwitchValues>({
-      resolver: zodResolver(switchSchema),
-      defaultValues: { twoFactor: false, sessionAlerts: true },
-    })
+  const {
+    handleSubmit,
+    reset,
+    control,
+    formState: { isSubmitting },
+  } = useForm<SwitchValues>({
+    resolver: zodResolver(switchSchema),
+    defaultValues: { twoFactor: false, sessionAlerts: true },
+  })
 
   function onSubmit() {
     toast({ variant: "success", title: "Security settings saved." })
@@ -446,15 +546,22 @@ export function SwitchDemo() {
         <CardDescription>Manage your account security preferences.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="switch-demo-form" onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
+        <form
+          id="switch-demo-form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="space-y-4"
+        >
           <Controller
             name="twoFactor"
             control={control}
             render={({ field }) => (
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <Label htmlFor="sw-2fa" className="leading-none">Multi-factor authentication</Label>
-                  <p className="mt-0.5 text-xs text-muted-foreground">
+                  <Label htmlFor="sw-2fa" className="leading-none">
+                    Multi-factor authentication
+                  </Label>
+                  <p className="text-muted-foreground mt-0.5 text-xs">
                     Require a second factor when signing in.
                   </p>
                 </div>
@@ -469,8 +576,10 @@ export function SwitchDemo() {
             render={({ field }) => (
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <Label htmlFor="sw-session" className="leading-none">Session alerts</Label>
-                  <p className="mt-0.5 text-xs text-muted-foreground">
+                  <Label htmlFor="sw-session" className="leading-none">
+                    Session alerts
+                  </Label>
+                  <p className="text-muted-foreground mt-0.5 text-xs">
                     Get notified when a new session starts from an unrecognised device.
                   </p>
                 </div>
@@ -481,8 +590,12 @@ export function SwitchDemo() {
         </form>
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
-        <Button type="button" variant="outline" onClick={() => reset()}>Reset</Button>
-        <Button type="submit" form="switch-demo-form" disabled={isSubmitting}>Save</Button>
+        <Button type="button" variant="outline" onClick={() => reset()}>
+          Reset
+        </Button>
+        <Button type="submit" form="switch-demo-form" disabled={isSubmitting}>
+          Save
+        </Button>
       </CardFooter>
     </Card>
   )
@@ -499,11 +612,15 @@ const emailArraySchema = z.object({
 type EmailArrayValues = z.infer<typeof emailArraySchema>
 
 export function ArrayFieldsDemo() {
-  const { handleSubmit, reset, control, formState: { isSubmitting } } =
-    useForm<EmailArrayValues>({
-      resolver: zodResolver(emailArraySchema),
-      defaultValues: { emails: [{ address: "" }] },
-    })
+  const {
+    handleSubmit,
+    reset,
+    control,
+    formState: { isSubmitting },
+  } = useForm<EmailArrayValues>({
+    resolver: zodResolver(emailArraySchema),
+    defaultValues: { emails: [{ address: "" }] },
+  })
 
   const { fields, append, remove } = useFieldArray({ control, name: "emails" })
 
@@ -522,10 +639,17 @@ export function ArrayFieldsDemo() {
         <CardDescription>Manage your contact email addresses.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="array-demo-form" onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-3">
+        <form
+          id="array-demo-form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="space-y-3"
+        >
           <div>
             <p className="text-sm font-medium">Email Addresses</p>
-            <p className="text-xs text-muted-foreground">Add up to 5 addresses where we can reach you.</p>
+            <p className="text-muted-foreground text-xs">
+              Add up to 5 addresses where we can reach you.
+            </p>
           </div>
 
           <div className="space-y-2">
@@ -579,8 +703,12 @@ export function ArrayFieldsDemo() {
         </form>
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
-        <Button type="button" variant="outline" onClick={() => reset()}>Reset</Button>
-        <Button type="submit" form="array-demo-form" disabled={isSubmitting}>Save</Button>
+        <Button type="button" variant="outline" onClick={() => reset()}>
+          Reset
+        </Button>
+        <Button type="submit" form="array-demo-form" disabled={isSubmitting}>
+          Save
+        </Button>
       </CardFooter>
     </Card>
   )

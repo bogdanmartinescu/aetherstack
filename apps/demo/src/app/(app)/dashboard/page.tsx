@@ -91,7 +91,11 @@ export default function DashboardPage() {
                       <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid stroke="hsl(var(--border))" strokeDasharray="3 3" vertical={false} />
+                  <CartesianGrid
+                    stroke="hsl(var(--border))"
+                    strokeDasharray="3 3"
+                    vertical={false}
+                  />
                   <XAxis
                     dataKey="month"
                     stroke="hsl(var(--muted-foreground))"
@@ -114,9 +118,7 @@ export default function DashboardPage() {
                       color: "hsl(var(--popover-foreground))",
                       fontSize: 12,
                     }}
-                    formatter={(value: number) =>
-                      `$${value.toLocaleString()}`
-                    }
+                    formatter={(value: number) => `$${value.toLocaleString()}`}
                   />
                   <Legend wrapperStyle={{ fontSize: 12 }} />
                   <Area
@@ -150,7 +152,11 @@ export default function DashboardPage() {
             <div className="h-72 w-full">
               <ResponsiveContainer>
                 <BarChart data={TRAFFIC} margin={{ left: 0, right: 8, top: 8 }}>
-                  <CartesianGrid stroke="hsl(var(--border))" strokeDasharray="3 3" vertical={false} />
+                  <CartesianGrid
+                    stroke="hsl(var(--border))"
+                    strokeDasharray="3 3"
+                    vertical={false}
+                  />
                   <XAxis
                     dataKey="day"
                     stroke="hsl(var(--muted-foreground))"

@@ -4,7 +4,8 @@ import { LoginFormPreview } from "./preview"
 
 export const metadata: Metadata = {
   title: "Login Form",
-  description: "Sign-in form with email, password, and remember-me, validated with react-hook-form and Zod.",
+  description:
+    "Sign-in form with email, password, and remember-me, validated with react-hook-form and Zod.",
 }
 
 const IMPORT_CODE = `import { useForm } from "react-hook-form"
@@ -73,7 +74,8 @@ export default function LoginFormPage() {
         {
           name: "schema",
           type: "ZodObject",
-          description: "Zod validation schema. Email must be a valid address; password requires minimum 8 characters.",
+          description:
+            "Zod validation schema. Email must be a valid address; password requires minimum 8 characters.",
         },
         {
           name: "register",
@@ -83,17 +85,20 @@ export default function LoginFormPage() {
         {
           name: "handleSubmit",
           type: "(handler) => FormEventHandler",
-          description: "Wraps your submit handler to run validation first and only call your function when the form is valid.",
+          description:
+            "Wraps your submit handler to run validation first and only call your function when the form is valid.",
         },
         {
           name: "errors",
           type: "FieldErrors<FormValues>",
-          description: "Validation error messages keyed by field name, displayed as red helper text beneath each input.",
+          description:
+            "Validation error messages keyed by field name, displayed as red helper text beneath each input.",
         },
         {
           name: "isSubmitting",
           type: "boolean",
-          description: "True while the submit handler is pending. Used to disable the submit button and show a loading label.",
+          description:
+            "True while the submit handler is pending. Used to disable the submit button and show a loading label.",
         },
       ]}
       a11yNotes={[

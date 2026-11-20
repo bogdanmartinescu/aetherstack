@@ -10,7 +10,7 @@ export function AIOnboardingPreview() {
   if (done) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-3">
-        <p className="text-sm text-muted-foreground">Onboarding complete!</p>
+        <p className="text-muted-foreground text-sm">Onboarding complete!</p>
         <Button variant="outline" size="sm" onClick={() => setDone(false)}>
           Restart
         </Button>
@@ -18,10 +18,5 @@ export function AIOnboardingPreview() {
     )
   }
 
-  return (
-    <AIOnboarding
-      onComplete={() => setDone(true)}
-      className="px-4"
-    />
-  )
+  return <AIOnboarding onComplete={() => setDone(true)} className="px-4" />
 }

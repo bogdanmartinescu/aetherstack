@@ -8,7 +8,9 @@ describe("PriorityBars", () => {
     const img = screen.getByRole("img", { name: "Low priority" })
     expect(img.querySelectorAll('[data-filled="true"]')).toHaveLength(1)
     rerender(<PriorityBars priority="high" />)
-    expect(screen.getByRole("img", { name: "High priority" }).querySelectorAll('[data-filled="true"]')).toHaveLength(3)
+    expect(
+      screen.getByRole("img", { name: "High priority" }).querySelectorAll('[data-filled="true"]'),
+    ).toHaveLength(3)
   })
 
   it("uses an urgent mark instead of bars", () => {

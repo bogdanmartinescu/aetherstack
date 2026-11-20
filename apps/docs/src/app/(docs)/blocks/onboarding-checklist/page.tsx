@@ -8,11 +8,36 @@ export const metadata: Metadata = {
 }
 
 const STEPS = [
-  { id: "profile", title: "Complete your profile", description: "Add your name and avatar.", completed: true },
-  { id: "project", title: "Create your first project", description: "Set up a new workspace project.", completed: true },
-  { id: "team", title: "Invite a team member", description: "Collaborate by inviting colleagues.", completed: false },
-  { id: "billing", title: "Add a payment method", description: "Upgrade to unlock premium features.", completed: false },
-  { id: "deploy", title: "Deploy to production", description: "Go live with your first deployment.", completed: false },
+  {
+    id: "profile",
+    title: "Complete your profile",
+    description: "Add your name and avatar.",
+    completed: true,
+  },
+  {
+    id: "project",
+    title: "Create your first project",
+    description: "Set up a new workspace project.",
+    completed: true,
+  },
+  {
+    id: "team",
+    title: "Invite a team member",
+    description: "Collaborate by inviting colleagues.",
+    completed: false,
+  },
+  {
+    id: "billing",
+    title: "Add a payment method",
+    description: "Upgrade to unlock premium features.",
+    completed: false,
+  },
+  {
+    id: "deploy",
+    title: "Deploy to production",
+    description: "Go live with your first deployment.",
+    completed: false,
+  },
 ]
 
 export default function OnboardingChecklistPage() {
@@ -49,10 +74,29 @@ export default function WelcomePage() {
         </div>
       }
       props={[
-        { name: "steps", type: "OnboardingStep[]", required: true, description: "Array of steps. Each has id, title, optional description, optional completed flag, and optional href." },
-        { name: "title", type: "string", default: '"Get started"', description: "Section heading." },
-        { name: "description", type: "string", description: "Supporting description below the heading." },
-        { name: "onStepToggle", type: "(id: string, completed: boolean) => void", description: "Called when the user checks or unchecks a step." },
+        {
+          name: "steps",
+          type: "OnboardingStep[]",
+          required: true,
+          description:
+            "Array of steps. Each has id, title, optional description, optional completed flag, and optional href.",
+        },
+        {
+          name: "title",
+          type: "string",
+          default: '"Get started"',
+          description: "Section heading.",
+        },
+        {
+          name: "description",
+          type: "string",
+          description: "Supporting description below the heading.",
+        },
+        {
+          name: "onStepToggle",
+          type: "(id: string, completed: boolean) => void",
+          description: "Called when the user checks or unchecks a step.",
+        },
         { name: "className", type: "string", description: "Additional classes on the wrapper." },
       ]}
       a11yNotes={[

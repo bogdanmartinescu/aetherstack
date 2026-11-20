@@ -35,11 +35,7 @@ function getInitials(name: string): string {
     .toUpperCase()
 }
 
-export function AccountSettings({
-  defaultValues,
-  onSave,
-  className,
-}: AccountSettingsProps) {
+export function AccountSettings({ defaultValues, onSave, className }: AccountSettingsProps) {
   const [name, setName] = React.useState(defaultValues?.name ?? "")
   const [email, setEmail] = React.useState(defaultValues?.email ?? "")
   const [bio, setBio] = React.useState(defaultValues?.bio ?? "")
@@ -58,23 +54,14 @@ export function AccountSettings({
   }
 
   return (
-    <div
-      className={cn(
-        "w-full rounded-xl border border-border bg-card p-6 shadow-sm",
-        className,
-      )}
-    >
-      <h2 className="mb-6 text-base font-semibold text-foreground">
-        Account settings
-      </h2>
+    <div className={cn("border-border bg-card w-full rounded-xl border p-6 shadow-sm", className)}>
+      <h2 className="text-foreground mb-6 text-base font-semibold">Account settings</h2>
 
       {/* Avatar section */}
       <div className="mb-6 flex items-center gap-4">
         <Avatar className="h-16 w-16">
           <AvatarImage src={avatarUrl} alt={name} />
-          <AvatarFallback className="text-lg">
-            {getInitials(name) || "?"}
-          </AvatarFallback>
+          <AvatarFallback className="text-lg">{getInitials(name) || "?"}</AvatarFallback>
         </Avatar>
         <div>
           <Button
@@ -86,9 +73,7 @@ export function AccountSettings({
           >
             Change avatar
           </Button>
-          <p className="mt-1.5 text-xs text-muted-foreground">
-            JPG, PNG or GIF. Max 2 MB.
-          </p>
+          <p className="text-muted-foreground mt-1.5 text-xs">JPG, PNG or GIF. Max 2 MB.</p>
         </div>
       </div>
 
@@ -122,10 +107,7 @@ export function AccountSettings({
         {/* Bio */}
         <div className="space-y-1.5">
           <Label htmlFor="account-bio">
-            Bio{" "}
-            <span className="text-xs font-normal text-muted-foreground">
-              (optional)
-            </span>
+            Bio <span className="text-muted-foreground text-xs font-normal">(optional)</span>
           </Label>
           <Textarea
             id="account-bio"

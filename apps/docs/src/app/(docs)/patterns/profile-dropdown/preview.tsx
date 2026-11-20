@@ -16,11 +16,5 @@ const ITEMS = [
 ]
 
 export function ProfileDropdownPreview() {
-  return (
-    <ProfileDropdown
-      user={USER}
-      items={ITEMS}
-      onSignOut={() => alert("Signed out")}
-    />
-  )
+  return <ProfileDropdown user={USER} items={ITEMS} onSignOut={() => alert("Signed out")} />
 }

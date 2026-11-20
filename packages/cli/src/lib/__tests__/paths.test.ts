@@ -1,10 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { resolve } from "node:path"
-import {
-  assertSafeRegistryFilePath,
-  isInsideProject,
-  resolveInsideProject,
-} from "../paths"
+import { assertSafeRegistryFilePath, isInsideProject, resolveInsideProject } from "../paths"
 
 const CWD = resolve("/tmp/aether-project")
 

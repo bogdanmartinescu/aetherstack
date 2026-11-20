@@ -34,7 +34,11 @@ export default function SectionHeaderPage() {
           <SectionHeader
             title="Connected accounts"
             description="Manage third-party integrations for your account."
-            action={<Button variant="outline" size="sm">Add integration</Button>}
+            action={
+              <Button variant="outline" size="sm">
+                Add integration
+              </Button>
+            }
           />
         </div>
       }
@@ -42,7 +46,12 @@ export default function SectionHeaderPage() {
         { name: "title", type: "string", required: true, description: "Section heading text." },
         { name: "description", type: "string", description: "Optional sub-text below the title." },
         { name: "action", type: "ReactNode", description: "Optional right-aligned element." },
-        { name: "as", type: '"h1" | "h2" | "h3" | "h4"', default: '"h2"', description: "Heading element to render." },
+        {
+          name: "as",
+          type: '"h1" | "h2" | "h3" | "h4"',
+          default: '"h2"',
+          description: "Heading element to render.",
+        },
         { name: "className", type: "string", description: "Additional classes on the wrapper." },
       ]}
     />

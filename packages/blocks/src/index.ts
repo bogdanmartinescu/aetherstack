@@ -29,25 +29,14 @@ export type { OnboardingChecklistProps, OnboardingStep } from "./components/onbo
 
 // Billing
 export { BillingOverview } from "./components/billing-overview"
-export type {
-  BillingOverviewProps,
-  BillingPlan,
-  UsageMetric,
-} from "./components/billing-overview"
+export type { BillingOverviewProps, BillingPlan, UsageMetric } from "./components/billing-overview"
 
 // Settings
 export { AccountSettings } from "./components/account-settings"
-export type {
-  AccountSettingsProps,
-  AccountSettingsData,
-} from "./components/account-settings"
+export type { AccountSettingsProps, AccountSettingsData } from "./components/account-settings"
 
 export { TeamSettings } from "./components/team-settings"
-export type {
-  TeamSettingsProps,
-  TeamMember,
-  TeamMemberRole,
-} from "./components/team-settings"
+export type { TeamSettingsProps, TeamMember, TeamMemberRole } from "./components/team-settings"
 
 // Notifications
 export { NotificationCenter, NotificationItem } from "./components/notification-center"
@@ -59,20 +48,13 @@ export type {
 
 // Marketing
 export { PricingSection } from "./components/pricing-section"
-export type {
-  PricingSectionProps,
-  PricingTier,
-  PricingFeature,
-} from "./components/pricing-section"
+export type { PricingSectionProps, PricingTier, PricingFeature } from "./components/pricing-section"
 
 // Phase 7.5 additions
 
 // Navigation
 export { AppHeader } from "./components/app-header"
-export type {
-  AppHeaderProps,
-  AppHeaderNavItem,
-} from "./components/app-header"
+export type { AppHeaderProps, AppHeaderNavItem } from "./components/app-header"
 
 export { MarketingNavbar } from "./components/marketing-navbar"
 export type {
@@ -92,46 +74,25 @@ export type {
 
 // Marketing sections
 export { LandingHero } from "./components/landing-hero"
-export type {
-  LandingHeroProps,
-  LandingHeroCta,
-} from "./components/landing-hero"
+export type { LandingHeroProps, LandingHeroCta } from "./components/landing-hero"
 
 export { FeaturesSection } from "./components/features-section"
-export type {
-  FeaturesSectionProps,
-  Feature,
-} from "./components/features-section"
+export type { FeaturesSectionProps, Feature } from "./components/features-section"
 
 export { TestimonialsSection } from "./components/testimonials-section"
-export type {
-  TestimonialsSectionProps,
-  Testimonial,
-} from "./components/testimonials-section"
+export type { TestimonialsSectionProps, Testimonial } from "./components/testimonials-section"
 
 export { CTASection } from "./components/cta-section"
-export type {
-  CTASectionProps,
-  CTASectionCta,
-} from "./components/cta-section"
+export type { CTASectionProps, CTASectionCta } from "./components/cta-section"
 
 export { FAQSection } from "./components/faq-section"
-export type {
-  FAQSectionProps,
-  FAQItem,
-} from "./components/faq-section"
+export type { FAQSectionProps, FAQItem } from "./components/faq-section"
 
 export { LogoCloud } from "./components/logo-cloud"
-export type {
-  LogoCloudProps,
-  LogoCloudLogo,
-} from "./components/logo-cloud"
+export type { LogoCloudProps, LogoCloudLogo } from "./components/logo-cloud"
 
 export { StatsSection } from "./components/stats-section"
-export type {
-  StatsSectionProps,
-  Stat,
-} from "./components/stats-section"
+export type { StatsSectionProps, Stat } from "./components/stats-section"
 
 // Pricing
 export { PricingComparison } from "./components/pricing-comparison"

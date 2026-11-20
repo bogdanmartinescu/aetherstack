@@ -96,11 +96,31 @@ export default function SiteFooter() {
       props={[
         { name: "brand", type: "string", description: "Brand name displayed in the first column." },
         { name: "tagline", type: "string", description: "Short tagline below the brand name." },
-        { name: "columns", type: "{ title: string; links: { label: string; href: string }[] }[]", description: "Link columns rendered after the brand column." },
-        { name: "socialLinks", type: "{ platform: string; href: string; icon?: ReactNode }[]", description: "Social links in the brand column." },
-        { name: "legalLinks", type: "{ label: string; href: string }[]", description: "Legal links in the bottom bar." },
-        { name: "copyright", type: "string", description: "Copyright text. Defaults to '© {year} {brand}. All rights reserved.'." },
-        { name: "className", type: "string", description: "Additional classes on the footer element." },
+        {
+          name: "columns",
+          type: "{ title: string; links: { label: string; href: string }[] }[]",
+          description: "Link columns rendered after the brand column.",
+        },
+        {
+          name: "socialLinks",
+          type: "{ platform: string; href: string; icon?: ReactNode }[]",
+          description: "Social links in the brand column.",
+        },
+        {
+          name: "legalLinks",
+          type: "{ label: string; href: string }[]",
+          description: "Legal links in the bottom bar.",
+        },
+        {
+          name: "copyright",
+          type: "string",
+          description: "Copyright text. Defaults to '© {year} {brand}. All rights reserved.'.",
+        },
+        {
+          name: "className",
+          type: "string",
+          description: "Additional classes on the footer element.",
+        },
       ]}
       a11yNotes={[
         "Social links include aria-label set to the platform name for screen readers.",

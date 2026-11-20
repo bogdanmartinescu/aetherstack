@@ -84,7 +84,7 @@ export function InlineEdit({
         }
       }}
       className={cn(
-        "group inline-flex cursor-pointer items-center gap-1.5 rounded-md px-1 py-0.5 transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "hover:bg-accent focus-visible:ring-ring group inline-flex cursor-pointer items-center gap-1.5 rounded-md px-1 py-0.5 transition-colors focus-visible:outline-none focus-visible:ring-2",
         disabled && "cursor-default opacity-60 hover:bg-transparent",
         className,
       )}
@@ -96,7 +96,7 @@ export function InlineEdit({
       )}
       {!disabled && (
         <Pencil
-          className="h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+          className="text-muted-foreground h-3.5 w-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
           aria-hidden="true"
         />
       )}

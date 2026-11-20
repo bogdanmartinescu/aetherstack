@@ -50,10 +50,7 @@ export function UptimeBar({ days, onSelect, className }: UptimeBarProps) {
     optionRefs.current[index]?.focus()
   }
 
-  const handleKeyDown = (
-    event: React.KeyboardEvent<HTMLButtonElement>,
-    index: number,
-  ) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
     if (days.length === 0) return
 
     if (event.key === "ArrowRight") {
@@ -102,7 +99,10 @@ export function UptimeBar({ days, onSelect, className }: UptimeBarProps) {
     <div
       role="listbox"
       aria-label={`${percent}% uptime`}
-      className={cn("inline-flex w-full max-w-md gap-0.5 rounded-md border border-border bg-background p-1", className)}
+      className={cn(
+        "border-border bg-background inline-flex w-full max-w-md gap-0.5 rounded-md border p-1",
+        className,
+      )}
     >
       {days.map((day, index) => (
         <button

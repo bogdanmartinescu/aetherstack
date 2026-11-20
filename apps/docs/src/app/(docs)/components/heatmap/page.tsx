@@ -62,7 +62,12 @@ export default function HeatmapPage() {
           default: "—",
           description: "Numbers from 0 to 1 that set cell intensity.",
         },
-        { name: "className", type: "string", default: "—", description: "Extra classes on the grid root." },
+        {
+          name: "className",
+          type: "string",
+          default: "—",
+          description: "Extra classes on the grid root.",
+        },
       ]}
       a11yNotes={[
         "Each cell is a gridcell with an aria-label of row, column, and formatted value.",

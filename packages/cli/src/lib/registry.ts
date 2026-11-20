@@ -69,10 +69,7 @@ export async function fetchRegistryItem(
  * Resolves a component by name: tries the individual endpoint first, then
  * falls back to fetching the full manifest and finding by name.
  */
-export async function resolveItem(
-  baseUrl: string,
-  name: string,
-): Promise<RegistryItem | null> {
+export async function resolveItem(baseUrl: string, name: string): Promise<RegistryItem | null> {
   const individual = await fetchRegistryItem(baseUrl, name)
   if (individual) return individual
 

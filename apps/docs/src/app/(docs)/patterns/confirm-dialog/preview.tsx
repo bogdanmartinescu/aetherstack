@@ -20,7 +20,13 @@ export function ConfirmDialogPreview() {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <Button variant="destructive" onClick={() => { setOpen(true); setConfirmed(false) }}>
+      <Button
+        variant="destructive"
+        onClick={() => {
+          setOpen(true)
+          setConfirmed(false)
+        }}
+      >
         Delete account
       </Button>
       <ConfirmDialog
@@ -34,9 +40,7 @@ export function ConfirmDialogPreview() {
         onConfirm={handleConfirm}
         isLoading={loading}
       />
-      {confirmed && (
-        <p className="text-xs text-muted-foreground">Action confirmed.</p>
-      )}
+      {confirmed && <p className="text-muted-foreground text-xs">Action confirmed.</p>}
     </div>
   )
 }
