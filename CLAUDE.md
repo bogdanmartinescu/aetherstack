@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+**Current execution entry point:** Read [AGENTS.md](AGENTS.md), [GOAL.md](GOAL.md), [ROADMAP.md](ROADMAP.md) and the [execution state](docs/roadmap/execution-state.md) first. The historical phase context below is retained for reference; the new roadmap controls sequencing and supersedes prior Pro launch ordering. Existing engineering standards and package boundaries still apply.
+
 This file provides working rules for Claude in the Aetherstack monorepo.
 
 ## Project Identity

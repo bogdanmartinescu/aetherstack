@@ -1,0 +1,27 @@
+# Platform expansion architecture
+
+Proposed contracts; implementation belongs to ordered milestones and ADRs. Preserve the existing Turborepo/pnpm monorepo, four applications and tokens -> ui -> patterns -> blocks dependency direction. Keep existing themes/icons/utils/config packages. Add recipe-schema, recipe-engine, project-inspector, doctor, migrations and testing only when their responsibilities justify a package. Registry tooling validates and serializes; it does not own UI behavior. CLI, MCP and Studio delegate to shared pure planning/validation APIs; apps do not fork core logic.
+
+## Registry and distribution
+One canonical manifest per release; generate docs counts, per-item artifacts and llms.txt from it. Validate names, type, paths, exports, file content, AI metadata (intent/prompts/composition/slots), dependencies and license. Reject cycles and missing dependencies. ADR defines immutable versioned URLs and latest aliases, content hashes, compatibility metadata, cache/retention and recovery. Native registry remains primary; shadcn adapter generates genuinely compatible artifacts rather than claiming parity by schema resemblance. CI checks deterministic generation and clean installations. Public endpoints remain anonymous and cacheable.
+
+## Source lifecycle
+aether.json is consumer configuration; propose aether.lock.json with schemaVersion, registry identities, item versions, dependencies, target paths and original content hashes/base reference. Installer computes plan before mutation; validate schema and scoped paths, avoid symlink escapes, explicit dependency manager invocation and conflicts. Dry-run has no writes. Atomic lockfile and staged writes; backups/recovery for interrupted operations. Three-way comparison (installed base, local, upstream) auto-applies only unambiguous changes; otherwise show diff and require decision. Pin versions, document migration, never silently overwrite source. Test add/remove/update/rollback, invalid manifest and offline/error behavior.
+
+## Recipes
+Versioned Zod schema: name/version/title/intent/category, registry dependencies, compatible versions, composition slots, file targets, state list, action contracts, adapter interfaces, a11y/responsive requirements, license and tests. Resolver returns deterministic plan (dependencies, proposed files, prerequisites, conflict list); apply uses lifecycle engine. Start with billing/onboarding/team, then AI chat/agent workspace, CRM, admin, analytics, commerce, booking and developer tools. Real UI interactions and all declared states; mock services explicitly labeled, optional backend adapters; no payment/auth correctness claims from frontend alone.
+
+## AI/MCP
+Keep stdio local server, validate package artifact and bundled manifest. Tools: search/list/get component, list/get recipe, resolve dependencies, get_project_context, plan_feature, compose_page, validate_ui, suggest_fixes, get_theme, check_compatibility, get_upgrade_plan. Separate read-only planning and explicitly authorized mutations. Treat registry descriptions as untrusted data, validate input/output, limit file reads/writes, redact secrets, avoid default network/LLM inference. Use existing coding agent for generation; deterministic selection and validation remain provider-independent. Test actual client configuration and public SKILL.md installation; publish official MCP manifest only with authorization.
+
+## Doctor
+Typed rule result: id, severity, path/range, description, suggestion, fix availability. Start with config/dependencies/imports; then AST-based token and deprecated API rules, limited accessibility indicators. Stable JSON and human-readable output, nonzero exit codes by documented severity, scoped exceptions with reason. No writes by default; preview fixes, apply only safe idempotent patches. Test false positives, negative fixtures and broken configuration. Avoid claiming automated accessibility compliance or arbitrary visual quality scores.
+
+## Studio
+Reuse existing preview app. Controlled component props, responsive viewports, token editor and theme export; schema-versioned theme model and CSS output. Compose existing blocks by slots, maintain undo/redo and validation; export readable TSX/recipes via the same engine. No hidden runtime dependency on Studio. Local-first; hosted sharing only in Cloud.
+
+## Benchmark
+Repository tasks/runners/evaluators/results; compare baseline, conventional registry and Aether with identical requirements/model versions/budgets and repeated runs. Score functional correctness 30%, consistency 20%, accessibility 15%, maintainability 15%, responsiveness 10%, efficiency 10%; define rubrics before running. Record build/test failures, token/time/human intervention, uncertainty and raw artifacts without credentials/private source. Publish methodology and failures alongside results.
+
+## Commercial separation
+Open Core public; proprietary kits in separate private repository after owner approval. Hosted Cloud separate deployment/repository, no mandatory account for free local workflows. Proposed Cloudflare Workers/R2/D1, Queues/Workflows/Cron only when needed; Stripe for billing subject to decision, auth ADR before implementation. Tenant-scoped access checks, revocable tokens, encrypted transport, audit, retention/deletion, backup/restore, cost caps, rate limits, webhook signature and idempotency. Verify cache isolation and negative authorization tests. Do not provision live infrastructure until funded and approved.

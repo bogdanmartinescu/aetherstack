@@ -1,0 +1,90 @@
+# Executable platform backlog
+
+Each row is an individually verifiable task or vertical slice. Dependencies are hard prerequisites unless the maintainer records a justified change. P0 first, then P1 within the current milestone. Detailed acceptance evidence supplements the universal release policy. State is recorded in execution-state.md; do not mark these rows done from old claims.
+
+## M0 — truth, stability and public distribution (P0)
+| ID | Depends on | Implementation | Acceptance evidence |
+| --- | --- | --- | --- |
+| M0-01 | — | Inventory actual source exports, registry entries/types/AI metadata, docs routes, package versions, release artifacts, CI and live endpoints; reproduce failures | Checked-in audit with commit, reproducible commands, counts per layer and gap list; no assumption about README's 138 vs prior registry 58 |
+| M0-02 | M0-01 | Audit root/package licenses, third-party assets and notices; propose MIT policy and correct missing license with owner-confirmed copyright | Provenance report, license consistency; legal uncertainty blocked, no retroactive relicensing |
+| M0-03 | M0-01 | Add missing intended registry items, resolve dependency graph, normalize targets and metadata; generator for inventory, per-item files and llms.txt | Registry validation, duplicate/dangling/cycle checks, generated outputs reproducible with clean diff |
+| M0-04 | M0-03 | Harden CLI init/list/add/generate including registry URL paths, schema validation, errors, path validation and dry-run | Temp-project tests with network failure, malformed data, existing files, traversal and rollback; actual source installation builds |
+| M0-05 | M0-03 | Fix MCP packaging/embedded registry/version consistency and discovery tools | Pack/install smoke test, stdio handshake and tool test against published-like artifact; missing/invalid registry errors verified |
+| M0-06 | M0-03 | Reconcile homepage, component docs, README, npm metadata, setup guides and package counts | Generated facts agree; links and sample commands verified; no unsupported "first" or production-ready claims |
+| M0-07 | M0-04, M0-05 | Clean npm pack/install fixtures and release workflow; validate Node/pnpm requirements and workspace dependency resolution | Packed artifacts in isolated Next/Vite fixtures, CI logs, no workspace-only imports |
+| M0-08 | M0-06, M0-07 | Production registry CDN/site deployment readiness, caching headers, immutable version plan and rollback runbook | Preview endpoint validates; live endpoint smoke test after authorized deployment; no credentials in source |
+| M0-09 | M0-02, M0-06 | Repository metadata, contribution/security/governance, sponsorship proposal and funding config only if verified account | Accurate public repo metadata prepared; sponsorship account setup remains owner action |
+| M0-10 | M0-01..09 | Full baseline release candidate verification | All applicable checks and external consumer tests pass; production deployment/registry verification recorded; blocked external release cannot be called done |
+
+## M1 — compatibility and adoption
+| ID | Depends on | Implementation | Acceptance evidence |
+| --- | --- | --- | --- |
+| M1-01 | M0 | Add supported-version matrix, React 19 and React 18 fixtures; verify Next App Router server/client boundaries and Vite | Build/render/interaction tests per declared combination; unsupported combos documented |
+| M1-02 | M1-01 | Tailwind 4 token/CSS migration with Tailwind 3 transitional path; dark mode and CSS export | Visual and build fixtures both styling versions, migration guide, no unintentional breaking changes |
+| M1-03 | M1-02 | Component coverage audit, prioritize missing forms/data/navigation/AI/RTL states; fix highest-impact gaps | Each item has docs, registry, interaction tests, accessibility and responsive evidence |
+| M1-04 | M1-02 | Transform/validate public registry against actual shadcn schema; retain native CLI | Clean shadcn install of primitive/pattern/block, deps resolved, no conflict with existing project; submission draft |
+| M1-05 | M0-05, M1-04 | MCP registry manifest, verified npm identity, client setup docs for Codex/Claude/Cursor | Published-like stdio fixtures; manifest validated; official publishing requires approval |
+| M1-06 | M1-05 | Public skills for Core, SaaS, AI and accessibility, tested prompts and deterministic discovery | Installable skill folder paths; agent tasks resolve correct entries; explicit fallback and security rules |
+| M1-07 | M1-03 | Reference apps: SaaS dashboard, AI chat, agent workspace, CRM and marketing site (reuse fixtures) | Live or local runnable examples, real UI states, no fake backend guarantees, responsive and a11y checks |
+| M1-08 | M1-04..07 | Launch assets, submission drafts, directory and newsletter tracking | Verified links, demo recordings, docs pages and outreach drafts; external posting only with approval |
+| M1-09 | M1-01..08 | Integration gate | Supported matrix green, release candidate pack checks, demo walkthrough and documented known limits |
+
+## M2 — source lifecycle and recipes
+| ID | Depends on | Implementation | Acceptance evidence |
+| --- | --- | --- | --- |
+| M2-01 | M1 | ADR for registry versioning, immutable manifests/content hashes, compatibility and retention | Schema version, upgrade policy, old-client migration, signed/checksummed artifact strategy |
+| M2-02 | M2-01 | Versioned registry build, stable aliases and immutable item routes, dependency resolver and provenance | Deterministic graph with missing/cyclic/incompatible inputs rejected; pinned installs reproducible |
+| M2-03 | M2-02 | Consumer lockfile with registry URL, versions, paths, base hashes and dependency graph | Atomic writes, schema migration, repeatable init/add; corrupted lockfile recoverable |
+| M2-04 | M2-03 | CLI search/info/diff and project inspector | Read-only by default; local edits and version drift accurately detected; machine-readable output |
+| M2-05 | M2-04 | Update/migrate with three-way comparison, safe apply, backup/rollback | Unchanged/local-only/upstream-only/conflict fixtures, rejected path escapes, no silent overwrite; recovery after partial failure |
+| M2-06 | M2-03 | Remove and dependency checks; theme and registry configuration commands | No orphan removal without explicit selection; validation and dry runs; safe config migration |
+| M2-07 | M2-02 | Recipe schema, dependency DAG, typed slots, states, adapters and quality metadata | Zod contract, valid/invalid fixtures, schema migration, deterministic serialization |
+| M2-08 | M2-03, M2-07 | Recipe engine plan/apply and CLI recipe command | Stable plan, dry-run/read-only, idempotency, explicit conflicts, generated app builds |
+| M2-09 | M2-08 | First SaaS billing, onboarding and team recipes; stable mock adapters | Actual functional interactions and all documented states; contract tests and accessible UI |
+| M2-10 | M2-09 | Extend to AI chat/workspace, admin, CRM, analytics, commerce, booking and devtools (15–20 tested recipes total target) | Each recipe satisfies per-item gate, inventory generated from shipped recipes |
+| M2-11 | M2-01..10 | Lifecycle and composition integration gate | End-to-end clean install -> local edit -> upgrade/conflict -> rollback -> recipe install builds |
+
+## M3 — Doctor, AI composition and stable Core
+| ID | Depends on | Implementation | Acceptance evidence |
+| --- | --- | --- | --- |
+| M3-01 | M2 | Diagnostic schema with rule IDs, severity, locations, suggestions and JSON output/exit codes | Stable schema and fixtures, false-positive suppression with documented reasoning |
+| M3-02 | M3-01 | Doctor dependency/config/import/version rules | Positive and negative fixtures; errors map to actionable remedies |
+| M3-03 | M3-02 | AST-based token/colors/typography/spacing/deprecation rules | Scoped parsing, configurable exceptions, no blanket string replacement |
+| M3-04 | M3-03 | Doctor dry-run/fix for safe rules; CI policy and accessibility indicators | Auditable patches, no writes by default, idempotent fixes; manual review for ambiguous cases |
+| M3-05 | M2-08, M3-01 | MCP search, get_project_context, recipe discovery, dependency resolution, plan_feature, compose_page, validate_ui, get_upgrade_plan | Typed tool contracts, read/write separation, workspace permissions tests, no external code execution |
+| M3-06 | M3-05 | Agent skill updates, prompt metadata and reference integration | Cross-client task demonstrations; explicit sdk/provider-agnostic interfaces |
+| M3-07 | M3-04, M3-06 | Benchmark runner and 10 initial tasks; compare baseline/conventional registry/Aether | Fixed task specs, model/tool budgets, repeated runs, build/behavior/a11y results and raw logs redacted |
+| M3-08 | M3-07 | Expand to 30–50 tasks as capacity allows, publish methodology and negative results | Reproducible scoring; no fabricated metrics or unearned performance claim |
+| M3-09 | M3-01..08 | Core v1.0 candidate: API audit, migration docs, performance, complete registry and regression suite | Semver decision, support matrix, all P0 defects resolved; owner approves actual publishing |
+
+## M4 — premium validation (commercial implementation gated)
+| ID | Depends on | Implementation | Acceptance evidence |
+| --- | --- | --- | --- |
+| M4-01 | M1 | Draft pricing and 15 developer/agency interviews, waitlist/previews, sponsor offering | Documented actual interviews/demand, no fictitious leads; outreach approval as needed |
+| M4-02 | M4-01 + owner approval | Separate Pro repository/license/registry, entitlement design and legal/accounting review | Public code stays usable commercially; license/customer rights clear; authorized private repo and threat model |
+| M4-03 | M4-02, M2 | SaaS kit (shell, billing, onboarding, team, settings) | Complete frontend with mock/optional backend adapters; tested install, docs, previews |
+| M4-04 | M4-02, M2 | AI kit (chat, agents, prompts, usage, tool history) | SDK-agnostic contracts, test coverage, error states and packaging |
+| M4-05 | M4-03, M4-04 | Checkout/entitlement/refunds/download flow in sandbox, not live | Webhook signature/idempotency tests, expiry and purchased-version access tests, privacy and support policy |
+| M4-06 | M4-05 + owner approval | Paid pilot, assess 10 paying customers and support economics | Actual evidence; if weak demand defer remaining kits and iterate; no forced commercial fee on Core |
+
+## M5 — Studio
+| ID | Depends on | Implementation | Acceptance evidence |
+| --- | --- | --- | --- |
+| M5-01 | M1-07 | Existing studio audit, interactive controls and responsive previews | Documented component props and isolated preview fixtures |
+| M5-02 | M2-07, M5-01 | Token/theme editor with typography, colors, contrast, light/dark export | Schema-valid token round-trip, accessible controls, exported theme builds |
+| M5-03 | M2-08, M5-02 | Compose existing blocks with dependency/slot checking | Valid composition, invalid combinations rejected, undo/redo |
+| M5-04 | M5-03 | Export editable TSX and recipe artifacts | Deterministic export builds in clean fixture, no hidden service dependence |
+| M5-05 | M3, M5-04 | Recipe editor with Doctor findings and project integration | Complete edit/validate/export workflow and user feedback; no general site-builder expansion |
+
+## M6 — Cloud (entire implementation gated)
+| ID | Depends on | Implementation | Acceptance evidence |
+| --- | --- | --- | --- |
+| M6-01 | M3, M5 | Validate five interested organizations; define paid pilot, budget and owner approval | Recorded demand, privacy/security ADR and cost limits; defer if absent |
+| M6-02 | M6-01 | Organization/auth/RBAC, tenant model and scoped revocable tokens | Negative cross-tenant tests, session expiry/revoke, audit logs |
+| M6-03 | M6-02 | Private registry artifact storage/API, versions and access control | Tenant-isolated paths/cache, version retention, upload validation and recovery |
+| M6-04 | M6-03 | Connect CLI/MCP/Studio to private registries and shared themes | Auth failure/offline tests, no leak into public registry, Core remains usable offline |
+| M6-05 | M6-04 | Hosted Doctor reports/policy, project management and billing sandbox | Tenant isolation, minimal data retention, deletion/export, webhook and quotas tested |
+| M6-06 | M6-05 + owner approval | Controlled beta and operational runbooks | Backup restore, monitoring, incident response, cost alerts, 3 paid pilots and retention evidence |
+
+## M7 — recurring maintenance (starts now)
+Weekly: triage defects and security, test published packages, validate registry/docs, prioritize real usage, release eligible fixes. Monthly: dependency review, compatibility and performance regressions, metrics/report, roadmap and docs. Quarterly: decide feature expansion, support burden, revenue and framework support; publish roadmap changes. New tasks need durable IDs, dependencies, acceptance evidence, estimates and ownership. Never create work solely to increase component counts.

@@ -1,5 +1,7 @@
 # Aetherstack Build Plan
 
+> Historical implementation roadmap. For new work follow [ROADMAP.md](../../ROADMAP.md), the [platform backlog](platform-backlog.md) and [execution state](execution-state.md). Unfinished historical items are carried into M0–M2; earlier Pro phases are gated by the new business validation plan. Historical completion statements must be reverified.
+
 Status: Phases 1–7.5 code complete · npm packages published at 0.1.0 · Phase 7 remaining items (CDN, versioning, CLI update/diff) + Phase 7.5 Track E (registry/docs/tests) pending
 Project: Aetherstack
 Design system: Aether UI
