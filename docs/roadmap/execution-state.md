@@ -164,6 +164,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Base and working branch: `main` `81fb6c3` → `fix/m0-ci-registry-fonts`.
 - Changes: rebuild `apps/registry-public/public/r` from formatted sources; CI build retries for flaky `next/font/google` 502s.
 - Evidence: `pnpm --filter @aetherstack/scripts build-registry`; local stale check clean after commit; CI Registry was failing on main.
+- Commit/PR: https://github.com/bogdanmartinescu/aetherstack/pull/21
 - Status: IN_PROGRESS until PR merges.
 - Next: merge fix; owner CDN still BLOCKED.
 
