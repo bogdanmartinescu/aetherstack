@@ -1,5 +1,14 @@
 # @aetherstack/docs
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies [f571ca3]
+  - @aetherstack/ui@0.5.0
+  - @aetherstack/blocks@0.3.1
+  - @aetherstack/patterns@0.3.1
+
 ## 0.0.5
 
 ### Patch Changes
