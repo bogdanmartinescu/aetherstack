@@ -1,6 +1,6 @@
 # @aetherstack/ui
 
-> Aether UI — 65 open-code, accessible UI primitives for modern web products.
+> Aether UI — 78 open-code, accessible UI primitives (64 core + 14 AI-native) for modern web products.
 
 Part of the [Aetherstack](https://aether-ui.dev) design system monorepo.
 
@@ -100,7 +100,7 @@ See [aether-ui.dev/installation](https://aether-ui.dev/installation).
 
 ## Documentation
 
-- [Component reference](https://aether-ui.dev/components) — all 65 components with props, usage, and examples
+- [Component reference](https://aether-ui.dev/components) — all 78 primitives with props, usage, and examples
 - [Installation guide](https://aether-ui.dev/installation) — Next.js, Vite, Remix, Astro setup
 - [CLI reference](https://aether-ui.dev/cli) — `aether-ui add`, `init`, `generate`
 - [AI & MCP](https://aether-ui.dev/llms) — MCP server setup, AI metadata, prompt recipes

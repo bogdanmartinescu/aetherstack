@@ -123,10 +123,12 @@ Do not:
 
 ## Current Phase Context
 
-**Phases 1–6 complete · Phase 7 in progress (npm ✅) · Phase 7.5 (Component Completeness) next**
+**Authoritative sequencing:** [ROADMAP.md](ROADMAP.md) and [docs/roadmap/execution-state.md](docs/roadmap/execution-state.md) supersede the historical phase notes below. As of M0, the public registry has **151** items (78 ui / 39 patterns / 34 blocks), matching source modules.
 
-### Phases 1–4.6 (complete)
-See `docs/roadmap/build-plan.md` for full details. Key deliverables:
+**Phases 1–6 complete · Phase 7 / M0 in progress · Phase 7.5 tracks remain in the backlog**
+
+### Phases 1–4.6 (complete — historical counts)
+See `docs/roadmap/build-plan.md` for full details. At the time those phases closed:
 - 16 UI primitives in `packages/ui`
 - 12 patterns in `packages/patterns`
 - 3 blocks in `packages/blocks`
@@ -174,7 +176,7 @@ See `docs/roadmap/build-plan.md` for full details. Key deliverables:
 ### Phase 7 — Public Registry Hardened (in progress)
 
 #### npm Publishing (complete ✅)
-- All 7 packages published at `0.1.0` to the `@aetherstack` npm org
+- Core packages published under the `@aetherstack` npm org (versions move with changesets; see root README package table)
 - `tsup` build infra added to `patterns` and `blocks`
 - `.npmrc` scoped to `@aetherstack` registry (token via `${NPM_TOKEN}` env var)
 - `.github/workflows/release.yml` automates future changeset-driven releases

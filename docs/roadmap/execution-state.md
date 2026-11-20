@@ -3,10 +3,10 @@
 Initialized 2026-11-20. No implementation or release checks have been run as part of this planning change. Historical completion claims are not verified here.
 
 - Active milestone: M0 — truth, stability and public distribution.
-- Last completed task: M0-05 — MCP packaging (pending PR merge; npm republish still needs release authority).
-- Next task: M0-06 — reconcile homepage/docs/README counts (depends on M0-03).
-- Baseline reviewed for planning: main at 6942f57; stack PRs #8–#12 (M0-01..M0-05).
-- Known prior observations (reverify): README/docs counts stale (M0-06); live registry 404 (M0-08). License files present. Public registry **151** items; local MCP pack bundles 151; published npm `@aetherstack/mcp-server@0.1.1` remains stale until authorized release.
+- Last completed task: M0-06 — docs/count reconcile (pending PR merge).
+- Next task: M0-07 — clean npm pack/install fixtures (depends on M0-04, M0-05). M0-08 CDN and npm republish need owner/release authority.
+- Baseline reviewed for planning: main at 6942f57; stack PRs #8–#13 (M0-01..M0-06).
+- Known prior observations (reverify): live registry 404 (M0-08). Public registry **151** items; published npm MCP may remain stale until authorized release.
 - Commercial status: M4 discovery only; paid kit implementation and M6 require explicit owner approval and demand evidence.
 - Publishing status: no release or external submission authority granted by this plan.
 
@@ -18,6 +18,7 @@ Initialized 2026-11-20. No implementation or release checks have been run as par
 | M0-03 | VERIFIED | `chore/m0-03-registry-completeness` / PR #10 | Public registry 71→151; every source module registered; `register-missing` script; cycle + public dangling-dep errors in validate-registry; build-registry + audit (`sourceModulesNotInRegistry` = 0/0/0). Remaining docs-only mismatches (`code-block-ai`, `context-menu`, 7 pattern docs routes) deferred to M0-06 | DONE once PR #10 merges |
 | M0-04 | VERIFIED | `chore/m0-04-cli-hardening` / PR #11 | `generate` uses `fetchRegistry` (`/r/registry.json` + Zod); path confinement + alias validation; install rollback; dry-run on init/add; CLI tests 62 pass (`pnpm --filter @aetherstack/cli test`) | DONE once PR merges |
 | M0-05 | VERIFIED | `chore/m0-05-mcp-packaging` / PR #12 | Build fails without registry; bundles 151 items from canonical source; `noExternal` for workspace pkgs; shebang fixed; version from package.json; pack smoke + stdio tools; MCP tests 24 pass | DONE once PR merges; npm publish deferred to authorized release |
+| M0-06 | VERIFIED | `chore/m0-06-docs-counts` / PR #13 | Align README/package READMEs/CLAUDE/docs intro+install with registry 78/39/34 (151) and live package versions; docs pages use `REGISTRY_STATS` | DONE once PR merges; CONTRIBUTING cleanup is M0-09 |
 
 All other tasks in platform-backlog.md are TODO unless gated. Add/update a row per task as work proceeds; never delete evidence for previous completed tasks. Use linked issue/PR and exact command/results, not just "tests pass."
 
@@ -86,6 +87,17 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Commit/PR and remote verification: PR #12 → https://github.com/bogdanmartinescu/aetherstack/pull/12
 - Status: VERIFIED.
 - Next smallest action: merge #8→#12; then M0-06 docs/count reconcile.
+
+### Checkpoint 2026-11-20 — M0-06
+- Date/time and agent/session: 2026-11-20, Cursor agent session.
+- Milestone and task ID: M0 / M0-06.
+- Base and working branch: `chore/m0-05-mcp-packaging` → `chore/m0-06-docs-counts`.
+- Changes and affected paths: root README; `packages/ui/README.md`; `CLAUDE.md`; `apps/docs` introduction/installation; `docs/roadmap/build-plan.md` inventory note; this file.
+- Acceptance criteria and evidence: public copy uses 78/39/34 (151) and live package versions; docs intro/install read `REGISTRY_STATS`; no remaining "65+" / "0.1.0 for all packages" claims in primary surfaces.
+- Required checks not run / blockers: live link crawl of aether-ui.dev deferred to deploy; CONTRIBUTING Node/scripts belong to M0-09.
+- Commit/PR and remote verification: PR #13 → https://github.com/bogdanmartinescu/aetherstack/pull/13
+- Status: VERIFIED.
+- Next smallest action: merge #8→#13; start M0-07 clean-install fixtures (blocked on merge for CI against tip; can begin on stack tip).
 
 ## Phase gate log
 Record milestone, all required task IDs, exact suite/results, known limitations, remaining blockers and owner decisions. No milestone marked completed until all applicable requirements are verified. On restart inspect git history and reconcile this file rather than blindly redoing work.
