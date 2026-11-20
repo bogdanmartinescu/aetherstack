@@ -30,8 +30,10 @@
 
 - [ ] `pnpm typecheck` passes
 - [ ] `pnpm lint` passes
-- [ ] `pnpm test` passes (all existing tests green)
+- [ ] `pnpm test` passes for affected packages
 - [ ] New tests added for new functionality
+- [ ] Registry: `pnpm --filter @aetherstack/scripts validate-registry` / `build-registry` (if touched)
+- [ ] Distribution: `pnpm consumer-install` (if pack/export/CLI install paths changed)
 - [ ] Manually verified in browser / Studio
 
 ## Breaking changes
