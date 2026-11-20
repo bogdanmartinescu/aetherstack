@@ -1,9 +1,20 @@
 name: Release
 
+# On push to main: open/update the Version Packages PR when changesets exist.
+# npm publish is owner-gated: only runs on workflow_dispatch after npm org
+# publish access is confirmed (auto-publish was failing with E404 for new
+# @aetherstack/* package names / insufficient token scope).
+
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Also publish to npm (requires NPM_TOKEN with publish rights on @aetherstack)"
+        type: boolean
+        default: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -44,14 +55,15 @@ jobs:
       # ── Changesets action ────────────────────────────────────────────────────
       # When there are pending changesets on main:
       #   → Opens / updates a "Version Packages" PR that bumps versions and
-      #     updates CHANGELOGs. Merging that PR then triggers publishing.
-      # When main already has the bumped versions (PR was merged):
-      #   → Builds all packages and publishes them to npm.
+      #     updates CHANGELOGs.
+      # When publishing is enabled (workflow_dispatch only):
+      #   → Builds packages and runs `changeset publish`.
       - name: Create Release PR or publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: pnpm release
+          # Empty publish on push → version PR only (no accidental npm publish).
+          publish: ${{ github.event_name == 'workflow_dispatch' && inputs.publish && 'pnpm release' || '' }}
           title: "chore: version packages"
           commit: "chore: version packages"
         env:

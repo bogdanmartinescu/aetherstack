@@ -25,6 +25,25 @@ Cache headers for Vercel are declared in `apps/registry-public/vercel.json`
 
 ## Deploy checklist (owner)
 
+### Option A — GitHub Actions (preferred)
+
+Workflow: `.github/workflows/deploy-registry.yml` (skipped until enabled).
+
+1. Confirm ownership of the Vercel project and DNS for `registry.aether-ui.dev`.
+2. Create a Vercel project that can receive a static upload of `apps/registry-public/out`
+   (Framework Preset: Other / static; attach the `registry.aether-ui.dev` domain).
+3. In the GitHub repo settings:
+   - Variable `ENABLE_REGISTRY_DEPLOY` = `true`
+   - Secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
+4. Run **Actions → Deploy public registry → Run workflow**, or push a change under
+   `apps/registry-public/**` / registry sources.
+5. Confirm the job’s smoke step passes (`/r/registry.json`, `/r/button.json`, `/llms.txt` → 200).
+6. Confirm response `Cache-Control` matches `apps/registry-public/vercel.json` intent
+   (may require Vercel project header config if static upload ignores `vercel.json`).
+7. Record the deployment URL/commit in `docs/roadmap/execution-state.md`.
+
+### Option B — Manual Vercel project
+
 1. Confirm ownership of the Vercel project and DNS for `registry.aether-ui.dev`.
 2. Create/connect a Vercel project with **Root Directory** `apps/registry-public`
    (Next.js `output: "export"` → `out/`).
@@ -65,3 +84,11 @@ Expected: HTTP 200 for each; button JSON includes `"name":"button"`.
 
 No deploy tokens or Vercel credentials belong in this repository. Use GitHub Actions / Vercel
 project environment secrets only when the owner configures them.
+
+## Related: npm publish gate
+
+`.github/workflows/release.yml` opens Version Packages PRs on push to `main`, but **npm
+publish only runs on manual `workflow_dispatch`**. Auto-publish was failing with
+`E404 PUT @aetherstack/<pkg>` (token/org cannot create those package names). Owner must
+grant publish rights on the `@aetherstack` npm org, then run **Actions → Release → Run
+workflow** with publish enabled.
