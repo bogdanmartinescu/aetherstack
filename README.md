@@ -54,6 +54,9 @@ Core packages are published to npm under the `@aetherstack` org (see versions in
 | [`docs/roadmap/build-plan.md`](docs/roadmap/build-plan.md) | Phased roadmap and acceptance criteria |
 | [`docs/product/positioning.md`](docs/product/positioning.md) | Product vision and audience |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Dev setup, branching, commit style, pre-PR checklist |
+| [`SECURITY.md`](SECURITY.md) | Vulnerability reporting |
+| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | Community conduct |
+| [`docs/governance/overview.md`](docs/governance/overview.md) | Maintainer decision process |
 | [`CLAUDE.md`](CLAUDE.md) | Working rules for AI assistants in this repo |
 | [`LICENSE`](LICENSE) | MIT — free for personal and commercial use |
 
@@ -222,7 +225,9 @@ See [`apps/docs/src/app/(docs)/llms`](apps/docs/src/app/%28docs%29/llms) or your
 
 ## Contributing
 
-This is a private monorepo. Contribution guidelines will be added when the project opens.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for setup, branching, and the pre-PR checklist.
+Conduct: [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Security reports: [`SECURITY.md`](SECURITY.md).
+Governance: [`docs/governance/overview.md`](docs/governance/overview.md).
 
 ---
 
