@@ -3,9 +3,9 @@
 Initialized 2026-11-20. No implementation or release checks have been run as part of this planning change. Historical completion claims are not verified here.
 
 - Active milestone: M0 — truth, stability and public distribution.
-- Last completed task: M0-06 — docs/count reconcile (pending PR merge).
-- Next task: M0-07 — clean npm pack/install fixtures (depends on M0-04, M0-05). M0-08 CDN and npm republish need owner/release authority.
-- Baseline reviewed for planning: main at 6942f57; stack PRs #8–#13 (M0-01..M0-06).
+- Last completed task: M0-07 — consumer pack/install fixtures (pending PR merge).
+- Next task: M0-09 governance (can proceed); M0-08 CDN needs owner; M0-10 gate after remaining tasks.
+- Baseline reviewed for planning: main at 6942f57; stack PRs #8–#14 (M0-01..M0-07).
 - Known prior observations (reverify): live registry 404 (M0-08). Public registry **151** items; published npm MCP may remain stale until authorized release.
 - Commercial status: M4 discovery only; paid kit implementation and M6 require explicit owner approval and demand evidence.
 - Publishing status: no release or external submission authority granted by this plan.
@@ -19,6 +19,7 @@ Initialized 2026-11-20. No implementation or release checks have been run as par
 | M0-04 | VERIFIED | `chore/m0-04-cli-hardening` / PR #11 | `generate` uses `fetchRegistry` (`/r/registry.json` + Zod); path confinement + alias validation; install rollback; dry-run on init/add; CLI tests 62 pass (`pnpm --filter @aetherstack/cli test`) | DONE once PR merges |
 | M0-05 | VERIFIED | `chore/m0-05-mcp-packaging` / PR #12 | Build fails without registry; bundles 151 items from canonical source; `noExternal` for workspace pkgs; shebang fixed; version from package.json; pack smoke + stdio tools; MCP tests 24 pass | DONE once PR merges; npm publish deferred to authorized release |
 | M0-06 | VERIFIED | `chore/m0-06-docs-counts` / PR #13 | Align README/package READMEs/CLAUDE/docs intro+install with registry 78/39/34 (151) and live package versions; docs pages use `REGISTRY_STATS` | DONE once PR merges; CONTRIBUTING cleanup is M0-09 |
+| M0-07 | VERIFIED | `chore/m0-07-consumer-install` / PR pending | Publishable pack helper; Next+Vite fixtures build from packed tarballs; CLI add smoke; CI job; flat UI dist exports; CLI engines>=20; `pnpm consumer-install` pass | DONE once PR merges |
 
 All other tasks in platform-backlog.md are TODO unless gated. Add/update a row per task as work proceeds; never delete evidence for previous completed tasks. Use linked issue/PR and exact command/results, not just "tests pass."
 
@@ -98,6 +99,17 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Commit/PR and remote verification: PR #13 → https://github.com/bogdanmartinescu/aetherstack/pull/13
 - Status: VERIFIED.
 - Next smallest action: merge #8→#13; start M0-07 clean-install fixtures (blocked on merge for CI against tip; can begin on stack tip).
+
+### Checkpoint 2026-11-20 — M0-07
+- Date/time and agent/session: 2026-11-20, Cursor agent session.
+- Milestone and task ID: M0 / M0-07.
+- Base and working branch: `chore/m0-06-docs-counts` → `chore/m0-07-consumer-install`.
+- Changes and affected paths: `tooling/scripts` pack + consumer-install; `tooling/fixtures/{next,vite}-app`; CI consumer-install job; `packages/ui/tsup.config.ts` flat exports; CLI engines>=20; changesets; this file.
+- Acceptance criteria and evidence: `pnpm consumer-install` exit 0 — Next build, Vite build, CLI `add button` against local registry; packed manifests have no `workspace:*` / no `.ts` main; Node engines asserted.
+- Required checks not run / blockers: Remix fixture deferred (backlog only requires Next/Vite); live CDN M0-08; npm publish still gated.
+- Commit/PR and remote verification: pending.
+- Status: VERIFIED.
+- Next smallest action: open PR; then M0-09 or stop for owner merge of stack.
 
 ## Phase gate log
 Record milestone, all required task IDs, exact suite/results, known limitations, remaining blockers and owner decisions. No milestone marked completed until all applicable requirements are verified. On restart inspect git history and reconcile this file rather than blindly redoing work.
