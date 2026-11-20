@@ -47,6 +47,14 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 }
 ```
 
+## Registry resolution
+
+1. `AETHER_REGISTRY_URL` — remote JSON manifest
+2. `AETHER_REGISTRY_FILE` — local JSON path
+3. Bundled `dist/registry.json` — copied from `registry/public/registry.json` at build time
+
+The build fails if the canonical registry is missing or empty. Server handshake `version` matches `package.json`.
+
 ## Documentation
 
 - [AI & MCP guide](https://aether-ui.dev/llms) — MCP setup, tool reference, AI metadata, prompt recipes
