@@ -187,6 +187,7 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Base and working branch: `main` `1a687b9` → `chore/m0-docs-route-gaps`.
 - Changes: add `/components/context-menu`; move docs from `code-block-ai` → `code-block` with redirect; sidebar + preview.
 - Evidence: `pnpm --filter @aetherstack/docs typecheck` exit 0. CDN still 404; no Vercel CLI/secrets in environment.
+- Commit/PR: https://github.com/bogdanmartinescu/aetherstack/pull/24
 - Status: IN_PROGRESS until PR merges.
 - Next: owner CDN/npm gates unchanged.
 
