@@ -3,8 +3,8 @@
 Initialized 2026-11-20. No implementation or release checks have been run as part of this planning change. Historical completion claims are not verified here.
 
 - Active milestone: M0 — truth, stability and public distribution.
-- Last completed task: M0-08 deploy workflow + release publish gate (PR #22).
-- Next task: owner enables `ENABLE_REGISTRY_DEPLOY` + Vercel secrets; fix npm org publish rights; dispatch Release; re-run `pnpm m0-rc-verify`. Parallel: docs route gap fix in flight.
+- Last completed task: docs route gaps (PR #24); deploy preflight (PR #25).
+- Next task: owner adds Secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, then re-run Deploy public registry; then npm org publish + `pnpm m0-rc-verify`.
 - Baseline reviewed: `main` at `13f4c46`. Live registry still 404 `DEPLOYMENT_NOT_FOUND` (rechecked 2026-11-20).
 - Known prior observations (reverify): CDN BLOCKED; npm Release job E404 on `@aetherstack/*` PUT (org/token). Workspace versions ahead of npm (e.g. ui local 0.5.x vs npm 0.4.0).
 - Commercial status: M4 discovery only; paid kit implementation and M6 require explicit owner approval and demand evidence.
@@ -190,6 +190,14 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Commit/PR: https://github.com/bogdanmartinescu/aetherstack/pull/24
 - Status: IN_PROGRESS until PR merges.
 - Next: owner CDN/npm gates unchanged.
+
+### Checkpoint 2026-11-20 — M0-08 deploy attempted (secrets missing)
+
+- Date/time and agent/session: 2026-11-20, Cursor agent session.
+- Milestone and task ID: M0 / M0-08.
+- Evidence: Variable `ENABLE_REGISTRY_DEPLOY=true` set. Deploy workflow run 44831134934 failed preflight — missing `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`. Live registry still 404.
+- Status: BLOCKED on owner Vercel secrets + project/DNS.
+- Next: owner creates Vercel project for registry, adds three secrets, Actions → Deploy public registry → Run workflow.
 
 ## Phase gate log
 
