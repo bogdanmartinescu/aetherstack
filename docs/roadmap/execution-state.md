@@ -3,10 +3,10 @@
 Initialized 2026-11-20. No implementation or release checks have been run as part of this planning change. Historical completion claims are not verified here.
 
 - Active milestone: M0 — truth, stability and public distribution.
-- Last completed task: M0 stack landed on `main` via PR #17 (`030dd2a`); local M0-01..M0-10 engineering complete.
-- Next task: Owner M0-08 CDN deploy + authorized npm release; then re-run `pnpm m0-rc-verify` to clear blockers and mark M0 DONE. Parallel maintenance: format:check cleanup.
-- Baseline reviewed: `main` at `030dd2a` (PR #17). Live registry still 404 `DEPLOYMENT_NOT_FOUND` (rechecked 2026-11-20).
-- Known prior observations (reverify): live registry 404 until owner deploys (M0-08 runbook + `vercel.json` ready). Public registry **151** items; npm publish still gated.
+- Last completed task: format PR #19 on `main`; fixing REG-001 (stale registry artefacts after Prettier).
+- Next task: land REG-001 fix; owner M0-08 CDN deploy + authorized npm; re-run `pnpm m0-rc-verify`.
+- Baseline reviewed: `main` at `81fb6c3`. Live registry still 404 `DEPLOYMENT_NOT_FOUND` (rechecked 2026-11-20).
+- Known prior observations (reverify): live registry 404 until owner deploys. Public registry **151** items; npm publish still gated. REG-001: Prettier rewrote package sources so embedded `public/r/*.json` content drifted until `build-registry`.
 - Commercial status: M4 discovery only; paid kit implementation and M6 require explicit owner approval and demand evidence.
 - Publishing status: no release or external submission authority granted by this plan.
 
@@ -154,8 +154,19 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Base and working branch: `main` `030dd2a` → `chore/m0-format-and-ledger-sync`.
 - Changes: Prettier across tracked sources; `.prettierignore` excludes `.worktrees` + generated registry artefacts; CI enforces `format:check`; ledger marks M0-01..09 DONE after PR #17.
 - Evidence: `pnpm format:check` exit 0; `pnpm typecheck` exit 0; live registry still 404 `DEPLOYMENT_NOT_FOUND`.
-- Status: IN_PROGRESS until PR merges.
+- Status: DONE (PR #19 merged). Side effect: REG-001 stale registry artefacts.
 - Next: owner M0-08 deploy; do not start M1 until M0 exit gate clears.
+
+### Checkpoint 2026-11-20 — REG-001 stale registry after Prettier
+
+- Date/time and agent/session: 2026-11-20, Cursor agent session.
+- Milestone and task ID: M0 / REG-001 (release-blocking CI regression).
+- Base and working branch: `main` `81fb6c3` → `fix/m0-ci-registry-fonts`.
+- Changes: rebuild `apps/registry-public/public/r` from formatted sources; CI build retries for flaky `next/font/google` 502s.
+- Evidence: `pnpm --filter @aetherstack/scripts build-registry`; local stale check clean after commit; CI Registry was failing on main.
+- Commit/PR: https://github.com/bogdanmartinescu/aetherstack/pull/21
+- Status: IN_PROGRESS until PR merges.
+- Next: merge fix; owner CDN still BLOCKED.
 
 ## Phase gate log
 

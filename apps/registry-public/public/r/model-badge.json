@@ -15,7 +15,7 @@
       "path": "packages/ui/src/components/ai/model-badge.tsx",
       "type": "registry:ui",
       "target": "components/ui/ai/model-badge.tsx",
-      "content": "import { cn } from \"@aetherstack/utils\"\nimport { Badge } from \"../badge\"\n\ninterface ModelBadgeProps {\n  model: string\n  provider?: string\n  className?: string\n}\n\nfunction ModelBadge({ model, provider, className }: ModelBadgeProps) {\n  return (\n    <Badge variant=\"outline\" className={cn(\"gap-1 font-normal\", className)}>\n      {provider && (\n        <span className=\"text-muted-foreground\">{provider}/</span>\n      )}\n      <span>{model}</span>\n    </Badge>\n  )\n}\n\nexport { ModelBadge }\nexport type { ModelBadgeProps }\n"
+      "content": "import { cn } from \"@aetherstack/utils\"\nimport { Badge } from \"../badge\"\n\ninterface ModelBadgeProps {\n  model: string\n  provider?: string\n  className?: string\n}\n\nfunction ModelBadge({ model, provider, className }: ModelBadgeProps) {\n  return (\n    <Badge variant=\"outline\" className={cn(\"gap-1 font-normal\", className)}>\n      {provider && <span className=\"text-muted-foreground\">{provider}/</span>}\n      <span>{model}</span>\n    </Badge>\n  )\n}\n\nexport { ModelBadge }\nexport type { ModelBadgeProps }\n"
     }
   ],
   "ai": {
