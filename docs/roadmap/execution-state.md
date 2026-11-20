@@ -19,7 +19,7 @@ Initialized 2026-11-20. No implementation or release checks have been run as par
 | M0-04 | VERIFIED | `chore/m0-04-cli-hardening` / PR #11 | `generate` uses `fetchRegistry` (`/r/registry.json` + Zod); path confinement + alias validation; install rollback; dry-run on init/add; CLI tests 62 pass (`pnpm --filter @aetherstack/cli test`) | DONE once PR merges |
 | M0-05 | VERIFIED | `chore/m0-05-mcp-packaging` / PR #12 | Build fails without registry; bundles 151 items from canonical source; `noExternal` for workspace pkgs; shebang fixed; version from package.json; pack smoke + stdio tools; MCP tests 24 pass | DONE once PR merges; npm publish deferred to authorized release |
 | M0-06 | VERIFIED | `chore/m0-06-docs-counts` / PR #13 | Align README/package READMEs/CLAUDE/docs intro+install with registry 78/39/34 (151) and live package versions; docs pages use `REGISTRY_STATS` | DONE once PR merges; CONTRIBUTING cleanup is M0-09 |
-| M0-07 | VERIFIED | `chore/m0-07-consumer-install` / PR pending | Publishable pack helper; Next+Vite fixtures build from packed tarballs; CLI add smoke; CI job; flat UI dist exports; CLI engines>=20; `pnpm consumer-install` pass | DONE once PR merges |
+| M0-07 | VERIFIED | `chore/m0-07-consumer-install` / PR #14 | Publishable pack helper; Next+Vite fixtures build from packed tarballs; CLI add smoke; CI job; flat UI dist exports; CLI engines>=20; `pnpm consumer-install` pass | DONE once PR merges |
 
 All other tasks in platform-backlog.md are TODO unless gated. Add/update a row per task as work proceeds; never delete evidence for previous completed tasks. Use linked issue/PR and exact command/results, not just "tests pass."
 
@@ -107,9 +107,9 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Changes and affected paths: `tooling/scripts` pack + consumer-install; `tooling/fixtures/{next,vite}-app`; CI consumer-install job; `packages/ui/tsup.config.ts` flat exports; CLI engines>=20; changesets; this file.
 - Acceptance criteria and evidence: `pnpm consumer-install` exit 0 — Next build, Vite build, CLI `add button` against local registry; packed manifests have no `workspace:*` / no `.ts` main; Node engines asserted.
 - Required checks not run / blockers: Remix fixture deferred (backlog only requires Next/Vite); live CDN M0-08; npm publish still gated.
-- Commit/PR and remote verification: pending.
+- Commit/PR and remote verification: PR #14 → https://github.com/bogdanmartinescu/aetherstack/pull/14
 - Status: VERIFIED.
-- Next smallest action: open PR; then M0-09 or stop for owner merge of stack.
+- Next smallest action: merge #8→#14; M0-08 needs owner for CDN; M0-09 governance is next code-ready P0.
 
 ## Phase gate log
 Record milestone, all required task IDs, exact suite/results, known limitations, remaining blockers and owner decisions. No milestone marked completed until all applicable requirements are verified. On restart inspect git history and reconcile this file rather than blindly redoing work.
