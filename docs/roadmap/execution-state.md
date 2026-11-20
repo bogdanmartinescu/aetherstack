@@ -14,7 +14,7 @@ Initialized 2026-11-20. No implementation or release checks have been run as par
 | Task | Status | Branch/commit/PR | Verification evidence | Blocker / next action |
 | --- | --- | --- | --- | --- |
 | M0-01 | VERIFIED | `chore/m0-01-baseline-audit` / PR #8 | `audit-inventory.ts` JSON; install, validate/build-registry (no drift), typecheck, lint, test (728), build pass; `format:check` fails (528 tracked files, pre-existing, not in CI); live registry 404 `DEPLOYMENT_NOT_FOUND`; npm versions match workspace | DONE once PR #8 is merged |
-| M0-02 | VERIFIED | `chore/m0-02-licenses` based on `ebabd81` | Provenance report; root + 14 package LICENSE files (MIT, Copyright (c) 2026 Bogdan Martinescu); `license` on root/apps/tooling; package `files` arrays include `LICENSE`; `npm pack --dry-run` for `@aetherstack/utils` lists LICENSE | DONE once PR is merged; optional owner rename of copyright line to a legal entity |
+| M0-02 | VERIFIED | `chore/m0-02-licenses` / PR #9 (base: M0-01 branch) | Provenance report; root + 14 package LICENSE files (MIT, Copyright (c) 2026 Bogdan Martinescu); `license` on root/apps/tooling; package `files` arrays include `LICENSE`; `npm pack --dry-run` for `@aetherstack/utils` lists LICENSE | DONE once PR is merged; optional owner rename of copyright line to a legal entity |
 
 All other tasks in platform-backlog.md are TODO unless gated. Add/update a row per task as work proceeds; never delete evidence for previous completed tasks. Use linked issue/PR and exact command/results, not just "tests pass."
 
@@ -47,9 +47,9 @@ All other tasks in platform-backlog.md are TODO unless gated. Add/update a row p
 - Changes and affected paths: root `LICENSE`; `packages/*/LICENSE` (14); package `files` arrays; `license` on root, apps, tooling; `docs/roadmap/audits/m0-02-license-provenance.md`; README license link; this file.
 - Acceptance criteria and evidence: provenance report; MIT text consistent; no retroactive relicensing (packages already declared MIT); copyright holder from sole git authorship; `pnpm --filter @aetherstack/utils exec npm pack --dry-run` includes LICENSE.
 - Required checks not run / blockers: none for acceptance. Full workspace typecheck/test not required for license-only files. Entity-name copyright remains an optional owner edit.
-- Commit/PR and remote verification: pending push/PR.
-- Status: VERIFIED (local).
-- Next smallest action and prerequisites: push/PR (base preferably `chore/m0-01-baseline-audit` or main after #8 merges); then start M0-03 registry completeness.
+- Commit/PR and remote verification: PR #9 → https://github.com/bogdanmartinescu/aetherstack/pull/9 (base `chore/m0-01-baseline-audit`).
+- Status: VERIFIED.
+- Next smallest action and prerequisites: merge PR #8 then #9 (or retarget #9 to main after #8); start M0-03 registry completeness.
 
 ## Phase gate log
 Record milestone, all required task IDs, exact suite/results, known limitations, remaining blockers and owner decisions. No milestone marked completed until all applicable requirements are verified. On restart inspect git history and reconcile this file rather than blindly redoing work.
