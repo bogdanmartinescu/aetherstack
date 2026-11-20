@@ -287,5 +287,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-build-
 
+      # next/font/google can 502 in CI; retry a few times before failing the job.
       - name: Build all packages and apps
-        run: pnpm build
+        run: |
+          set -e
+          for attempt in 1 2 3; do
+            if pnpm build; then
+              exit 0
+            fi
+            echo "::warning::pnpm build failed (attempt ${attempt}/3); retrying in 10s"
+            sleep 10
+          done
+          echo "::error::pnpm build failed after 3 attempts"
+          exit 1
