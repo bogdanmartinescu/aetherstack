@@ -1,6 +1,6 @@
 {
   "name": "@aetherstack/cli",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Aether UI CLI — add components from the Aether UI registry into your project",
   "license": "MIT",
   "bin": {

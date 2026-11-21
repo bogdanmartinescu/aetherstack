@@ -1,5 +1,11 @@
 # @aetherstack/cli
 
+## 0.1.3
+
+### Patch Changes
+
+- 839aaa9: Use package metadata for the CLI version so `aether-ui --version` reports the packaged version accurately.
+
 ## 0.1.2
 
 ### Patch Changes
