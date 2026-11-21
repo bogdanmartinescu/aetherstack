@@ -802,8 +802,8 @@ export default function InstallationPage() {
         <SectionHeading>CLI reference</SectionHeading>
         <p className="text-muted-foreground mb-6 text-sm">
           The <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui</code> CLI copies
-          component source files into your project. You own the source; install any runtime dependencies
-          reported by the CLI before building.
+          component source files into your project. You own the source; install any runtime
+          dependencies reported by the CLI before building.
         </p>
         <div className="space-y-4">
           <CodeBlock

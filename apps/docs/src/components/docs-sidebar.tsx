@@ -481,7 +481,10 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
         <div className="mx-auto flex h-14 max-w-[90rem] items-center gap-4 px-4 sm:px-6">
           {/* Logo */}
           <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="Aether UI home">
-            <div className="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded text-[10px] font-bold">
+            <div
+              className="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded text-[10px] font-bold"
+              aria-hidden="true"
+            >
               A
             </div>
             <span className="text-foreground text-sm font-semibold">Aether UI</span>

@@ -328,11 +328,11 @@ function LayerCard({
 function InstallSection() {
   const steps = [
     {
-      command: "npx aether-ui init",
+      command: "npx @aetherstack/cli init",
       description: "Adds the theme tokens, Tailwind preset and the cn() helper to your project.",
     },
     {
-      command: "npx aether-ui add button prompt-input",
+      command: "npx @aetherstack/cli add button prompt-input",
       description: "Copies each component and its dependencies into components/ui.",
     },
     {
@@ -407,7 +407,7 @@ function AiSection() {
           <CodeBlock code={MCP_CONFIG} language="json" filename=".cursor/mcp.json" />
           <div className="mt-3">
             <CodeBlock
-              code={`npx aether-ui generate "a billing page with usage meters and an invoice table"`}
+              code={`npx @aetherstack/cli generate "a billing page with usage meters and an invoice table"`}
               language="bash"
             />
           </div>
@@ -454,7 +454,7 @@ function ClosingCta() {
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <InstallCommand command="npx aether-ui add button" />
+          <InstallCommand command="npx @aetherstack/cli add button" />
           <Button size="lg" variant="outline" asChild>
             <Link href="/installation">Installation guide</Link>
           </Button>

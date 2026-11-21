@@ -97,8 +97,8 @@ export default function CLIPage() {
         <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Quick start</h2>
         <p className="text-muted-foreground mb-4 text-sm">
           Run the published scoped package from the root of an existing React project. Initializing
-          creates aether.json; it does not install framework dependencies or configure Tailwind
-          for you.
+          creates aether.json; it does not install framework dependencies or configure Tailwind for
+          you.
         </p>
         <CodeBlock
           code={`npx @aetherstack/cli init
