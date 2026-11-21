@@ -12,19 +12,19 @@ Initialized 2026-11-20. Historical checkpoint entries below preserve prior obser
 
 ## Task ledger
 
-| Task    | Status                                | Branch/commit/PR                          | Verification evidence                                         | Blocker / next action                                          |
-| ------- | ------------------------------------- | ----------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------- |
-| M0-01   | DONE                                  | PR #8 → `main` (via #17)                  | baseline audit committed                                      | —                                                              |
-| M0-02   | DONE                                  | PR #9 → `main`                            | LICENSE + provenance                                          | optional owner entity rename                                   |
-| M0-03   | DONE                                  | PR #10 → `main` (via #17)                 | registry 151; graph checks                                    | —                                                              |
-| M0-04   | DONE                                  | PR #11 → `main` (via #17)                 | CLI path/schema/dry-run tests                                 | —                                                              |
-| M0-05   | DONE                                  | PR #12 → `main` (via #17)                 | MCP pack/stdio; publish still gated                           | authorized npm release                                         |
-| M0-06   | DONE                                  | PR #13 → `main` (via #17)                 | counts/versions reconciled                                    | docs route gaps closed in follow-up (context-menu, code-block) |
-| M0-07   | DONE                                  | PR #14 → `main` (via #17)                 | consumer-install fixtures + CI                                | —                                                              |
-| M0-08   | IN_PROGRESS / external gate open      | PR #29; CircleCI #11; Worker custom domain | preview live; Cloudflare DNS Worker mapping observed         | Production smoke + clean published CLI installation           |
-| REL-001 | BLOCKED                               | CircleCI `publish_npm` gated              | Historical npm E404 for `@aetherstack/*`                    | Confirm org publish rights; explicit release authorization    |
-| M0-09   | DONE                                  | PR #15 → `main` (via #17)                 | governance docs + repo metadata                               | Sponsors enablement owner action                               |
-| M0-10   | VERIFIED (prior) / BLOCKED (external) | PR #16 → `main` via PR #17                | historical local RC checks; Worker deployments now recorded   | Re-run full RC and external CLI/npm acceptance                |
+| Task    | Status                                | Branch/commit/PR                           | Verification evidence                                       | Blocker / next action                                          |
+| ------- | ------------------------------------- | ------------------------------------------ | ----------------------------------------------------------- | -------------------------------------------------------------- |
+| M0-01   | DONE                                  | PR #8 → `main` (via #17)                   | baseline audit committed                                    | —                                                              |
+| M0-02   | DONE                                  | PR #9 → `main`                             | LICENSE + provenance                                        | optional owner entity rename                                   |
+| M0-03   | DONE                                  | PR #10 → `main` (via #17)                  | registry 151; graph checks                                  | —                                                              |
+| M0-04   | DONE                                  | PR #11 → `main` (via #17)                  | CLI path/schema/dry-run tests                               | —                                                              |
+| M0-05   | DONE                                  | PR #12 → `main` (via #17)                  | MCP pack/stdio; publish still gated                         | authorized npm release                                         |
+| M0-06   | DONE                                  | PR #13 → `main` (via #17)                  | counts/versions reconciled                                  | docs route gaps closed in follow-up (context-menu, code-block) |
+| M0-07   | DONE                                  | PR #14 → `main` (via #17)                  | consumer-install fixtures + CI                              | —                                                              |
+| M0-08   | IN_PROGRESS / external gate open      | PR #29; CircleCI #11; Worker custom domain | preview live; Cloudflare DNS Worker mapping observed        | Production smoke + clean published CLI installation            |
+| REL-001 | BLOCKED                               | CircleCI `publish_npm` gated               | Historical npm E404 for `@aetherstack/*`                    | Confirm org publish rights; explicit release authorization     |
+| M0-09   | DONE                                  | PR #15 → `main` (via #17)                  | governance docs + repo metadata                             | Sponsors enablement owner action                               |
+| M0-10   | VERIFIED (prior) / BLOCKED (external) | PR #16 → `main` via PR #17                 | historical local RC checks; Worker deployments now recorded | Re-run full RC and external CLI/npm acceptance                 |
 
 All other tasks in platform-backlog.md are TODO unless gated. Add/update a row per task as work proceeds; never delete evidence for previous completed tasks. Use linked issue/PR and exact command/results, not just "tests pass."
 

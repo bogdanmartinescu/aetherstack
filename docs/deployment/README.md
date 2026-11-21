@@ -7,12 +7,12 @@ purposes; do not use them to deploy.
 
 ## Current deployment inventory
 
-| Application | Worker | Preview hostname | Canonical hostname | Evidence and next gate |
-| --- | --- | --- | --- | --- |
-| Public registry | `aether-ui-registry` | `aether-ui-registry.hi-5be.workers.dev` | `registry.aether-ui.dev` | [CircleCI #11](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/11/details?useNewPipelines=true) deployed; preview loaded, owner confirmed JSON, Cloudflare DNS shows Worker mapping. Production smoke and published CLI install remain open. |
-| Documentation | `aether-ui-docs` | `aether-ui-docs.hi-5be.workers.dev` | `aether-ui.dev` | [CircleCI #20](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/20/details?useNewPipelines=true) deployed; Custom Domain visible in Cloudflare and `/components/tooltip/` loaded on the production site. Full production regression checks remain open. |
-| Demo | Planned | Not provisioned | `demo.aether-ui.dev` | CF-03: static export, gated Worker deployment, smoke checks, DNS |
-| Studio | Planned, private | Not provisioned | `studio.aether-ui.dev` | CF-04: export, Cloudflare Access policy, gated deploy |
+| Application     | Worker               | Preview hostname                        | Canonical hostname       | Evidence and next gate                                                                                                                                                                                                                                                    |
+| --------------- | -------------------- | --------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Public registry | `aether-ui-registry` | `aether-ui-registry.hi-5be.workers.dev` | `registry.aether-ui.dev` | [CircleCI #11](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/11/details?useNewPipelines=true) deployed; preview loaded, owner confirmed JSON, Cloudflare DNS shows Worker mapping. Production smoke and published CLI install remain open.           |
+| Documentation   | `aether-ui-docs`     | `aether-ui-docs.hi-5be.workers.dev`     | `aether-ui.dev`          | [CircleCI #20](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/20/details?useNewPipelines=true) deployed; Custom Domain visible in Cloudflare and `/components/tooltip/` loaded on the production site. Full production regression checks remain open. |
+| Demo            | Planned              | Not provisioned                         | `demo.aether-ui.dev`     | CF-03: static export, gated Worker deployment, smoke checks, DNS                                                                                                                                                                                                          |
+| Studio          | Planned, private     | Not provisioned                         | `studio.aether-ui.dev`   | CF-04: export, Cloudflare Access policy, gated deploy                                                                                                                                                                                                                     |
 
 Both deployed applications use **Workers Static Assets**: Next.js generates files
 during CI, and Wrangler publishes the `out/` directory. Static hosting does
@@ -40,12 +40,12 @@ from Cloudflare Workers deploys and must remain manually authorized.
 The restricted context `aether-cloudflare-deploy` must contain the
 following names (store sensitive values **only** in CircleCI):
 
-| Environment variable | Usage |
-| --- | --- |
-| `CLOUDFLARE_ACCOUNT_ID` | Selects Cloudflare account |
-| `CLOUDFLARE_API_TOKEN` | Workers deployment API token |
+| Environment variable      | Usage                                           |
+| ------------------------- | ----------------------------------------------- |
+| `CLOUDFLARE_ACCOUNT_ID`   | Selects Cloudflare account                      |
+| `CLOUDFLARE_API_TOKEN`    | Workers deployment API token                    |
 | `REGISTRY_SMOKE_BASE_URL` | `https://aether-ui-registry.hi-5be.workers.dev` |
-| `DOCS_SMOKE_BASE_URL` | `https://aether-ui-docs.hi-5be.workers.dev` |
+| `DOCS_SMOKE_BASE_URL`     | `https://aether-ui-docs.hi-5be.workers.dev`     |
 
 The separate `aether-npm-release` context owns `NPM_TOKEN`. Do not copy
 Cloudflare credentials into the npm release context, commit secrets, or enable
@@ -57,11 +57,11 @@ Workers; a green `verify` alone never means a release happened.
 To publish a reviewed change, start a **new** CircleCI pipeline on `main` with
 one of these Boolean parameters, then approve the hold job after `verify`:
 
-| Target | Parameter set to `true` | Manual approval | Deployment job |
-| --- | --- | --- | --- |
-| Registry | `deploy_registry` | `approve_registry_preview` | `deploy_registry` |
-| Documentation | `deploy_docs` | `approve_docs_preview` | `deploy_docs` |
-| npm packages | `publish_npm` | Separate authorization required | `publish_npm` |
+| Target        | Parameter set to `true` | Manual approval                 | Deployment job    |
+| ------------- | ----------------------- | ------------------------------- | ----------------- |
+| Registry      | `deploy_registry`       | `approve_registry_preview`      | `deploy_registry` |
+| Documentation | `deploy_docs`           | `approve_docs_preview`          | `deploy_docs`     |
+| npm packages  | `publish_npm`           | Separate authorization required | `publish_npm`     |
 
 Leave unrelated Boolean parameters `false`. The npm job uses a dedicated
 context and is **not** part of a website deploy. A deployment passes only
