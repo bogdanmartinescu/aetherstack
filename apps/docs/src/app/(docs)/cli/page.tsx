@@ -4,7 +4,7 @@ import { CodeBlock } from "@/components/code-block"
 export const metadata: Metadata = {
   title: "CLI",
   description:
-    "The aether-ui CLI installs components, generates pages from prompts, and keeps your components up to date. Works with Next.js, Vite, Remix, Astro, and TanStack Start.",
+    "Install Aether UI components from the public registry with the scoped CLI. Includes init, add, list, and deterministic generate scaffolding.",
 }
 
 function Callout({ title, children }: { title?: string; children: React.ReactNode }) {
@@ -80,353 +80,162 @@ function CommandRef({
 export default function CLIPage() {
   return (
     <div className="max-w-3xl">
-      {/* Header */}
       <div className="mb-10">
         <h1 className="text-foreground mb-3 text-4xl font-bold tracking-tight">CLI</h1>
         <p className="text-muted-foreground text-lg">
-          One command adds a production-quality component directly to your codebase. The{" "}
-          <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-base">aether-ui</code> CLI
-          installs components, generates full pages from natural-language prompts, and keeps
-          everything up to date — all without a runtime library to maintain.
+          Install editable components from the Aether UI registry and assemble starter pages from
+          deterministic, registry-backed component selection.
         </p>
       </div>
 
-      {/* Philosophy callout */}
-      <Callout title="Open code, not a dependency">
-        Unlike traditional component libraries, Aether UI copies component source files into your
-        project via the CLI. You get full transparency, full control, and zero API lock-in. Update
-        components by running the CLI again — or just edit them directly.
+      <Callout title="Open code, under your control">
+        The CLI copies source files into your project. You can inspect and edit them locally.
+        Automatic upstream diff and update commands are planned, not available in this release.
       </Callout>
 
-      {/* Installation */}
       <section className="mb-12">
-        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Installation</h2>
+        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Quick start</h2>
         <p className="text-muted-foreground mb-4 text-sm">
-          No global install required. Run the CLI directly with{" "}
-          <code className="bg-muted rounded px-1 font-mono text-xs">npx</code>:
-        </p>
-        <CodeBlock code={`npx aether-ui@latest init`} filename="terminal" />
-        <p className="text-muted-foreground mt-4 text-sm">
-          Or install globally to use the shorter{" "}
-          <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui</code> command:
+          Run the published scoped package from the root of an existing React project. Initializing
+          creates aether.json; it does not install framework dependencies or configure Tailwind for
+          you.
         </p>
         <CodeBlock
-          code={`npm install -g aether-ui
-# or
-pnpm add -g aether-ui`}
+          code={`npx @aetherstack/cli init
+npx @aetherstack/cli list
+npx @aetherstack/cli add button
+npx @aetherstack/cli add input label --dry-run`}
           filename="terminal"
         />
+        <p className="text-muted-foreground mt-4 text-sm">
+          You may also install the package globally with{" "}
+          <code className="bg-muted ml-1 rounded px-1 font-mono text-xs">
+            npm install -g @aetherstack/cli
+          </code>{" "}
+          and run it as <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui</code>.
+        </p>
       </section>
 
-      {/* Commands */}
       <section className="mb-12">
-        <h2 className="text-foreground mb-6 text-2xl font-semibold tracking-tight">Commands</h2>
+        <h2 className="text-foreground mb-6 text-2xl font-semibold tracking-tight">
+          Available commands
+        </h2>
 
         <CommandRef
           command="aether-ui init"
-          description="Initialize Aether UI in a project. Creates aether.json, installs shared dependencies, and sets up the utility function."
+          description="Create aether.json with registry and output-directory settings. Existing configs are preserved unless --force is provided."
           options={[
+            { flag: "--cwd <path>", description: "Project root (default: current directory)." },
             {
-              flag: "--cwd <path>",
-              description: "Working directory. Defaults to the current directory.",
+              flag: "--registry <url>",
+              description: "Registry origin.",
+              default: "https://registry.aether-ui.dev",
             },
-            { flag: "--yes, -y", description: "Skip confirmation prompts and use defaults." },
             {
-              flag: "--defaults, -d",
-              description: "Use default configuration values without prompting.",
+              flag: "--components-dir <path>",
+              description: "Relative path for components.",
+              default: "src/components/ui",
             },
-            { flag: "--force, -f", description: "Force overwrite of existing configuration." },
+            {
+              flag: "--utils-dir <path>",
+              description: "Relative path for utilities.",
+              default: "src/lib",
+            },
+            { flag: "--force", description: "Replace an existing config file." },
+            { flag: "--dry-run", description: "Print the config without writing it." },
           ]}
         />
 
         <CommandRef
-          command="aether-ui add [components...]"
-          description="Add one or more components to your project. Copies component source files into your configured components directory."
+          command="aether-ui add <components...>"
+          description="Copy one or more named registry items into your initialized project."
           args={[
             {
               name: "components",
-              description:
-                "One or more component names to add. Runs interactive selection if omitted.",
+              description: "At least one registry item name.",
+              required: true,
             },
           ]}
           options={[
-            { flag: "--all", description: "Add all available components." },
-            { flag: "--path <path>", description: "Custom path to write the component files." },
-            {
-              flag: "--overwrite",
-              description: "Overwrite existing component files without prompting.",
-            },
-            {
-              flag: "--cwd <path>",
-              description: "Working directory. Defaults to the current directory.",
-            },
-            { flag: "--yes, -y", description: "Skip confirmation prompts." },
-          ]}
-        />
-
-        <CommandRef
-          command="aether-ui diff [component]"
-          description="Show the diff between your local component and the latest registry version. Useful for seeing what changed after an upstream update."
-          args={[
-            {
-              name: "component",
-              description: "Component name to diff. Shows all components with changes if omitted.",
-            },
-          ]}
-          options={[
-            { flag: "--yes, -y", description: "Skip confirmation prompts." },
-            {
-              flag: "--cwd <path>",
-              description: "Working directory. Defaults to the current directory.",
-            },
-          ]}
-        />
-
-        <CommandRef
-          command="aether-ui update [components...]"
-          description="Update components to their latest registry versions. Runs diff first to show changes."
-          args={[
-            {
-              name: "components",
-              description: "Components to update. Updates all installed components if omitted.",
-            },
-          ]}
-          options={[
-            { flag: "--all", description: "Update all installed components." },
-            { flag: "--yes, -y", description: "Skip confirmation and overwrite automatically." },
-            {
-              flag: "--cwd <path>",
-              description: "Working directory. Defaults to the current directory.",
-            },
+            { flag: "--cwd <path>", description: "Project root." },
+            { flag: "--registry <url>", description: "Override the configured registry." },
+            { flag: "--overwrite", description: "Overwrite conflicting local files." },
+            { flag: "--dry-run", description: "Preview destination files without writing." },
           ]}
         />
 
         <CommandRef
           command="aether-ui list"
-          description="List all available components in the Aether UI registry."
+          description="Browse the current remote registry without requiring a local configuration."
           options={[
             {
-              flag: "--installed",
-              description: "Only show components already installed in the project.",
+              flag: "--cwd <path>",
+              description: "Read optional project settings from this directory.",
             },
-            {
-              flag: "--category <name>",
-              description: "Filter by category (primitives, patterns, blocks).",
-            },
+            { flag: "--registry <url>", description: "Override the registry origin." },
+            { flag: "--type <type>", description: "Filter by registry type (ui, pattern, block)." },
           ]}
         />
 
         <CommandRef
-          command={`aether-ui generate "<prompt>"`}
-          description="Generate a starter page or feature scaffold from a natural-language prompt. Installs the required components and writes a page.tsx with the composition wired together."
+          command={'aether-ui generate "<description>"'}
+          description="Match a description to known registry components and optionally create a starter page. This is rule-based scaffolding, not an LLM API."
           args={[
             {
-              name: "prompt",
-              description: "Natural-language description of the UI to generate.",
+              name: "description",
+              description: "Description of the UI to scaffold.",
               required: true,
             },
           ]}
           options={[
+            { flag: "--cwd <path>", description: "Project root." },
+            { flag: "--registry <url>", description: "Override the registry origin." },
+            { flag: "--dry-run", description: "Preview the component plan without writing files." },
             {
-              flag: "--cwd <path>",
-              description: "Working directory. Defaults to the current directory.",
+              flag: "--no-starter",
+              description: "Install matched components without generating a starter page.",
             },
           ]}
         />
-
-        <div className="border-border bg-muted/30 mb-10 rounded-lg border p-4">
-          <p className="text-foreground mb-3 text-sm font-semibold">Generate examples</p>
-          <CodeBlock
-            code={`# SaaS dashboard with charts and activity feed
-npx aether-ui generate "a dashboard page with a stat strip, recent activity feed, and data table"
-
-# AI chat interface
-npx aether-ui generate "an AI chat layout with a sidebar for conversations and a streaming message thread"
-
-# Marketing landing page
-npx aether-ui generate "a landing page with a hero section, feature grid, and pricing table"`}
-            filename="terminal"
-          />
-          <p className="text-muted-foreground mt-3 text-xs">
-            The CLI installs required components, then writes a{" "}
-            <code className="bg-muted rounded px-1 font-mono text-xs">page.tsx</code> with all
-            components composed and ready to customise.
-          </p>
-        </div>
       </section>
 
-      {/* Config file */}
       <section className="mb-12">
         <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
-          Configuration — <code className="font-mono text-xl">aether.json</code>
+          Configuration
         </h2>
         <p className="text-muted-foreground mb-4 text-sm">
-          Running <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui init</code>{" "}
-          creates an <code className="bg-muted rounded px-1 font-mono text-xs">aether.json</code>{" "}
-          file at your project root. All CLI commands read from this file.
+          The init command writes aether.json. The following is the default configuration (an
+          optional $schema field is also written).
         </p>
         <CodeBlock
           code={`{
-  "$schema": "https://aether-ui.dev/schema.json",
-  "style": "default",
-  "rsc": true,
-  "tsx": true,
-  "tailwind": {
-    "config": "tailwind.config.ts",
-    "css": "src/app/globals.css",
-    "baseColor": "neutral",
-    "cssVariables": true,
-    "prefix": ""
-  },
+  "registry": "https://registry.aether-ui.dev",
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils",
-    "ui": "@/components/ui",
-    "lib": "@/lib",
-    "hooks": "@/hooks"
+    "components": "src/components/ui",
+    "utils": "src/lib"
   }
 }`}
           filename="aether.json"
         />
-
-        <div className="border-border mt-6 overflow-hidden rounded-lg border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-border bg-muted/50 border-b">
-                <th className="text-foreground px-4 py-2.5 text-left font-medium">Key</th>
-                <th className="text-foreground px-4 py-2.5 text-left font-medium">Type</th>
-                <th className="text-foreground px-4 py-2.5 text-left font-medium">Description</th>
-              </tr>
-            </thead>
-            <tbody className="divide-border divide-y">
-              {[
-                ["style", `"default" | "new-york"`, "Visual style variant for components."],
-                [
-                  "rsc",
-                  "boolean",
-                  'Enable React Server Component support. Adds "use client" directives where needed.',
-                ],
-                [
-                  "tsx",
-                  "boolean",
-                  "Use TypeScript (.tsx) or JavaScript (.jsx) for component files.",
-                ],
-                ["tailwind.config", "string", "Path to your Tailwind CSS config file."],
-                [
-                  "tailwind.css",
-                  "string",
-                  "Path to the CSS file where global styles and tokens are imported.",
-                ],
-                [
-                  "tailwind.baseColor",
-                  "string",
-                  "Base color palette used for generated CSS variables.",
-                ],
-                [
-                  "tailwind.cssVariables",
-                  "boolean",
-                  "Use CSS variables (true) or Tailwind utility classes (false) for theming.",
-                ],
-                [
-                  "tailwind.prefix",
-                  "string",
-                  'Tailwind class prefix, e.g. "tw-". Leave empty for no prefix.',
-                ],
-                ["aliases.components", "string", "Import alias for your components directory."],
-                ["aliases.utils", "string", "Import alias for the cn utility function."],
-                ["aliases.ui", "string", "Import alias for Aether UI component files."],
-              ].map(([key, type, desc]) => (
-                <tr key={key as string} className="hover:bg-muted/20 transition-colors">
-                  <td className="text-foreground px-4 py-2.5 font-mono text-xs">{key}</td>
-                  <td className="text-muted-foreground px-4 py-2.5 font-mono text-xs">{type}</td>
-                  <td className="text-muted-foreground px-4 py-2.5 text-xs">{desc}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
       </section>
 
-      {/* Common workflows */}
       <section className="mb-12">
         <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
-          Common workflows
+          Working with a monorepo
         </h2>
-
-        <div className="space-y-6">
-          <div>
-            <p className="text-foreground mb-2 text-sm font-medium">Set up a new project</p>
-            <CodeBlock
-              code={`# 1. Create your app (Next.js example)
-npx create-next-app@latest my-app --typescript --tailwind --app
-cd my-app
-
-# 2. Initialize Aether UI
-npx aether-ui@latest init
-
-# 3. Add your first component
-npx aether-ui add button`}
-              filename="terminal"
-            />
-          </div>
-
-          <div>
-            <p className="text-foreground mb-2 text-sm font-medium">
-              Add multiple components at once
-            </p>
-            <CodeBlock
-              code={`npx aether-ui add button input label badge card
-# or interactively (omit component names)
-npx aether-ui add`}
-              filename="terminal"
-            />
-          </div>
-
-          <div>
-            <p className="text-foreground mb-2 text-sm font-medium">Check for upstream updates</p>
-            <CodeBlock
-              code={`# See what changed in the registry vs. your local files
-npx aether-ui diff
-
-# Update specific components
-npx aether-ui update button card
-
-# Update everything
-npx aether-ui update --all`}
-              filename="terminal"
-            />
-          </div>
-
-          <div>
-            <p className="text-foreground mb-2 text-sm font-medium">Use a custom component path</p>
-            <CodeBlock
-              code={`# Write components to a custom directory
-npx aether-ui add button --path src/design-system/ui`}
-              filename="terminal"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Monorepo */}
-      <section>
-        <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
-          Monorepo support
-        </h2>
-        <p className="text-muted-foreground mb-4 text-sm">
-          Using Aether UI inside a pnpm or npm workspace? Pass the{" "}
-          <code className="bg-muted rounded px-1 font-mono text-xs">--cwd</code> flag to point the
-          CLI at the app where you want components installed:
-        </p>
         <CodeBlock
-          code={`# Add a component to a specific workspace app
-npx aether-ui add button --cwd apps/web
-
-# Initialize in a specific workspace app
-npx aether-ui init --cwd apps/web`}
+          code={`npx @aetherstack/cli init --cwd apps/web
+npx @aetherstack/cli add button --cwd apps/web
+npx @aetherstack/cli generate "a SaaS dashboard" --cwd apps/web --dry-run`}
           filename="terminal"
         />
       </section>
+
+      <Callout title="Not yet implemented">
+        Safe upstream diff, update, migration, and component removal are planned for the source
+        lifecycle milestone. For now, changes to installed files are managed by you; always review
+        --overwrite before replacing edited source.
+      </Callout>
     </div>
   )
 }

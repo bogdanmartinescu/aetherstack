@@ -125,6 +125,21 @@ regresses, restore the last known-good version through Cloudflare and
 recheck both hostnames. DNS recovery is a separate action: restore the
 previous verified route only if a cutover fails.
 
+## npm publication gate
+
+The npm release pipeline is **not** part of a Workers deployment. An authorized
+operator starts a new CircleCI pipeline on `main` with `publish_npm=true` and
+all Worker deployment parameters `false`. A green verification job is followed
+by the manual `approve_npm_release` approval hold. Only after approval does
+the restricted `aether-npm-release` context provide `NPM_TOKEN`, and the
+job builds and checks the package tarballs, validates the versions against the
+public npm registry, and executes `pnpm changeset publish`.
+
+The packaging check can also run without credentials via
+`node scripts/verify-npm-packages.mjs --offline` after `pnpm build`.
+Do not approve publishing without reviewing the package inventory and release
+runbook in [NPM-RELEASE-RUNBOOK.md](./NPM-RELEASE-RUNBOOK.md).
+
 ## Outstanding release gates
 
 - Production registry endpoint smoke with schema, cache, CORS, and 404 checks.

@@ -250,7 +250,7 @@ export function cn(...inputs: ClassValue[]) {
     <Step number={7} title="Add your first component">
       <CodeBlock
         code={`# Copy the Button component into your project
-npx aether-ui add button`}
+npx @aetherstack/cli add button`}
         filename="terminal"
       />
       <p className="text-muted-foreground mt-3 text-sm">
@@ -337,8 +337,8 @@ export default function Document() {
 
     <Step number={6} title="Add components and use them">
       <CodeBlock
-        code={`npx aether-ui add button
-npx aether-ui add input`}
+        code={`npx @aetherstack/cli add button
+npx @aetherstack/cli add input`}
         filename="terminal"
       />
       <CodeBlock
@@ -490,7 +490,7 @@ export default defineConfig({
     </Step>
 
     <Step number={7} title="Add components">
-      <CodeBlock code={`npx aether-ui add button input`} filename="terminal" />
+      <CodeBlock code={`npx @aetherstack/cli add button input`} filename="terminal" />
     </Step>
   </div>
 )
@@ -564,7 +564,7 @@ export const links: LinksFunction = () => [
     </Step>
 
     <Step number={7} title="Add components">
-      <CodeBlock code={`npx aether-ui add button input`} filename="terminal" />
+      <CodeBlock code={`npx @aetherstack/cli add button input`} filename="terminal" />
       <p className="text-muted-foreground mt-3 text-sm">
         Components using Radix overlays (Dialog, Sheet, Tooltip) work in Remix without any
         additional configuration — Radix uses portals and Remix handles hydration correctly.
@@ -718,7 +718,7 @@ export function cn(...inputs: ClassValue[]) {
     </Step>
 
     <Step number={5} title="Add components and use them in routes">
-      <CodeBlock code={`npx aether-ui add button badge card`} filename="terminal" />
+      <CodeBlock code={`npx @aetherstack/cli add button badge card`} filename="terminal" />
       <CodeBlock
         code={`import { createFileRoute } from "@tanstack/react-router"
 import { Button } from "@/components/ui/button"
@@ -748,7 +748,7 @@ export default function InstallationPage() {
           Add Aether UI to any React project. Components are copied directly into your codebase — no
           wrapper library, no lock-in. You own the source. After setup, run{" "}
           <code className="bg-muted rounded px-1 font-mono text-base">
-            npx aether-ui add button
+            npx @aetherstack/cli add button
           </code>{" "}
           to copy any of the {REGISTRY_STATS.total} registry items directly into your project.
         </p>
@@ -802,25 +802,25 @@ export default function InstallationPage() {
         <SectionHeading>CLI reference</SectionHeading>
         <p className="text-muted-foreground mb-6 text-sm">
           The <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui</code> CLI copies
-          component source files into your project. No runtime dependency on Aether UI — you own the
-          code.
+          component source files into your project. You own the source; install any runtime
+          dependencies reported by the CLI before building.
         </p>
         <div className="space-y-4">
           <CodeBlock
             code={`# Initialize a project (creates aether.json config)
-npx aether-ui init
+npx @aetherstack/cli init
 
 # List available components
-npx aether-ui list
+npx @aetherstack/cli list
 
 # Add a single component
-npx aether-ui add button
+npx @aetherstack/cli add button
 
 # Add multiple components at once
-npx aether-ui add button badge card input
+npx @aetherstack/cli add button badge card input
 
-# Add to a specific directory
-npx aether-ui add button --cwd /path/to/your/project`}
+# Target a specific project directory
+npx @aetherstack/cli add button --cwd /path/to/your/project`}
             filename="terminal"
           />
         </div>
@@ -833,17 +833,11 @@ npx aether-ui add button --cwd /path/to/your/project`}
           </p>
           <CodeBlock
             code={`{
-  "$schema": "https://aether-ui.dev/schema.json",
-  "style": "default",
-  "tailwind": {
-    "config": "tailwind.config.ts",
-    "css": "src/app/globals.css",
-    "baseColor": "neutral",
-    "cssVariables": true
-  },
+  "$schema": "https://registry.aether-ui.dev/schema.json",
+  "registry": "https://registry.aether-ui.dev",
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils"
+    "components": "src/components/ui",
+    "utils": "src/lib"
   }
 }`}
             filename="aether.json"
