@@ -265,3 +265,10 @@ Record milestone, all required task IDs, exact suite/results, known limitations,
 - Added accessibility notes for `model-badge` and `prompt-suggestion`.
 - Not verified here: `pnpm build`, lint, typecheck and the docs output check have not run in this session; CircleCI `verify` on the PR is the first run.
 - Open: runtime messages in `@aetherstack/cli` and `@aetherstack/mcp-server` still print bare `aether-ui add ...`; changing them needs a package release. Six patterns (filter-toolbar, form-field, metric-card, section-header, settings-section, table-toolbar) have no accessibility notes.
+
+### Checkpoint 2026-11-21 — Code block syntax highlighting
+
+- Branch: `feat/code-syntax-highlighting`. Added a dependency-free tokenizer to the `code-block` registry item (`packages/ui/src/components/ai/code-block.tsx`, languages: ts/tsx/js/jsx, json, bash, css). Colours come from `--code-*` HSL variables with built-in light/dark fallbacks; palette contrast ≥ 4.5:1 on `bg-muted` computed by script (not a browser/axe run).
+- Docs `CodeBlock` reuses `HighlightedCode` from `@aetherstack/ui` and infers the language from `lang`, `filename` (`terminal`, extension) or the code.
+- `code-block.json` and the aggregate `registry.json` were updated by hand from the source (round-trip checked); `build-registry` was not run. `@aetherstack/ui` gains new exports (`HighlightedCode`, `highlightCode`) but no changeset is added, so a package release still needs one.
+- Not run here: build, typecheck, Vitest, visual check. CircleCI `verify` is the first real check.

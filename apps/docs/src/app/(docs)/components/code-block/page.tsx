@@ -42,7 +42,8 @@ export default function CodeBlockPage() {
         {
           name: "language",
           type: "string",
-          description: "Language hint shown in the header (e.g. typescript, python).",
+          description:
+            "Language shown in the header and used for syntax colours: typescript, tsx, javascript, json, bash and css. Other values render without colour.",
         },
         {
           name: "filename",
@@ -56,6 +57,11 @@ export default function CodeBlockPage() {
           description: "Shows a line number gutter.",
         },
         {
+          name: "highlightLines",
+          type: "number[]",
+          description: "1-based line numbers to emphasise.",
+        },
+        {
           name: "className",
           type: "string",
           description: "Additional CSS classes.",
@@ -64,6 +70,8 @@ export default function CodeBlockPage() {
       a11yNotes={[
         "Copy button has an aria-label that updates to 'Copied!' after activation.",
         "Code is wrapped in a <pre><code> block with the language class for screen reader context.",
+        "Syntax colours meet WCAG AA contrast on the muted surface in light and dark themes, and meaning never depends on colour alone because the text is unchanged.",
+        "Retheme the colours with the --code-keyword, --code-string, --code-number, --code-comment, --code-function, --code-type, --code-property, --code-tag and --code-punctuation CSS variables (HSL channels, e.g. 268 70% 42%).",
       ]}
     />
   )
