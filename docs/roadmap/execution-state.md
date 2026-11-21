@@ -224,3 +224,12 @@ Record milestone, all required task IDs, exact suite/results, known limitations,
 - Current state: PREPARED FOR PR, NOT DEPLOYED. No Cloudflare credentials, domain attachment, Worker version or smoke result has been confirmed. The PR's CI result must be recorded after it completes.
 - Owner gate: set `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, and `REGISTRY_SMOKE_BASE_URL` in restricted CircleCI context; authorize preview deployment and custom-domain attachment separately. npm organization publishing remains blocked until validated.
 - Next: merge after green CI; trigger protected preview pipeline, approve it, verify Cloudflare Worker URL, then attach `registry.aether-ui.dev` and smoke-check production.
+
+### Checkpoint 2026-11-21 — CF-01 registry Worker preview deployed
+
+- Milestone: M0 / CF-00 verified, CF-01 preview deployment operational (production domain still pending).
+- Source: PR #29 merged to `main` at `1d227aff020738513cdfc70e33216d69fdcdeb55`.
+- Deployment evidence: CircleCI [pipeline #11](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/11/details?useNewPipelines=true) ran `verify`, `approve_registry_preview`, and `deploy_registry` after explicit operator approval. The user reported the pipeline green.
+- Live preview: [`https://aether-ui-registry.hi-5be.workers.dev/`](https://aether-ui-registry.hi-5be.workers.dev/). The browser rendered the public Aether UI Registry homepage. The deployment workflow includes `node scripts/smoke-registry.mjs` for JSON, CORS, cache-control, `llms.txt`, root, and 404 assertions. These checks were not independently re-run from this documentation session.
+- State: **CF-01 preview deployed**, not complete. `registry.aether-ui.dev` Custom Domain not yet verified; published npm CLI installation from the production URL and M0-08 external acceptance remain pending.
+- Next: inspect existing DNS records before adding the `registry.aether-ui.dev` Worker Custom Domain; verify TLS, JSON, headers, 404, live CLI installation and rollback. Avoid enabling independent Cloudflare Builds or GitHub Actions.

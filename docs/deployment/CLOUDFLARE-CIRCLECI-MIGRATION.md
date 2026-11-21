@@ -2,7 +2,7 @@
 
 Migration reference for the AetherStack monorepo. Baseline: `main` at `1ea579b00b6c` on November 21, 2026.
 
-Status: CircleCI verification passed on PR #28, merged into `main` at `ac18373e` on November 21, 2026. Cloudflare Workers, DNS cutover, restricted deployment contexts, and npm publishing are not verified as operational.
+Status: CircleCI verification is operational and the registry preview Worker is deployed at `https://aether-ui-registry.hi-5be.workers.dev/` through approved CircleCI pipeline #11. The production custom domain, npm publishing, and remaining application migrations are not yet verified.
 
 This document complements [GOAL.md](../../GOAL.md), [AGENTS.md](../../AGENTS.md), [ROADMAP.md](../../ROADMAP.md), and [execution-state.md](../roadmap/execution-state.md). It supersedes the historical Vercel instructions in [the M0-08 runbook](../roadmap/audits/m0-08-cdn-runbook.md).
 
@@ -64,7 +64,7 @@ Complete an installation smoke test in an external clean project using the publi
 
 ### CF-01 implementation status
 
-CircleCI-gated preview deployment configuration, the Worker definition, static output checks, and a deployment runbook are introduced in `feat/cf-01-cloudflare-registry-preview`. See [CF-01 Registry Runbook](./REGISTRY-RUNBOOK.md). The Worker and custom domain remain pending the owner-controlled CircleCI context and live smoke validation. An exact Wrangler 4.165.0 installation is used in the gated job as an interim bootstrap; move Wrangler into the pnpm lockfile in a follow-up dependency maintenance change.
+The registry Worker configuration, static output checks, and a deployment runbook were merged in PR #29. See [CF-01 Registry Runbook](./REGISTRY-RUNBOOK.md). The preview Worker was deployed by the gated CircleCI workflow in [pipeline #11](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/11/details?useNewPipelines=true), and the public homepage is accessible at `https://aether-ui-registry.hi-5be.workers.dev/`. The canonical Custom Domain `registry.aether-ui.dev`, DNS/TLS verification, and published CLI installation remain outstanding. An exact Wrangler 4.165.0 installation is used as an interim CI bootstrap; move Wrangler into the pnpm lockfile in a follow-up maintenance change.
 
 ## CF-02: Migrate the documentation website
 
