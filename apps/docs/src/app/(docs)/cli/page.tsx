@@ -108,10 +108,10 @@ npx @aetherstack/cli add input label --dry-run`}
           filename="terminal"
         />
         <p className="text-muted-foreground mt-4 text-sm">
-          You may also install the package globally with
+          You may also install the package globally with{" "}
           <code className="bg-muted ml-1 rounded px-1 font-mono text-xs">
             npm install -g @aetherstack/cli
-          </code>
+          </code>{" "}
           and run it as <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui</code>.
         </p>
       </section>
