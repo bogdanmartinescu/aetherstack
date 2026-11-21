@@ -247,3 +247,12 @@ Record milestone, all required task IDs, exact suite/results, known limitations,
 - DNS: previous custom-domain attachment error from externally managed A/AAAA/CNAME was resolved by the latest visible dashboard state; the exact DNS changes were not executed or audited in this documentation session. Do not remove unrelated DNS records, especially mail authentication or validation entries.
 - Verified observation boundaries: connected browser loaded one production docs page; Cloudflare dashboard displayed the Custom Domain / Worker mapping. Complete independent production smoke output, published CLI clean-install result, Worker version IDs, performance/accessibility, and rollback evidence have **not** been supplied.
 - Next actions: record production `node scripts/smoke-registry.mjs https://registry.aether-ui.dev`, `node scripts/smoke-docs.mjs https://aether-ui.dev`, and an actual published CLI install/build; only then re-evaluate M0-08/M0-10. CF-03 demo and CF-04 Studio are not deployed.
+
+### Checkpoint 2026-11-21 — npm release preparation (CLI 0.1.3)
+
+- Branch: `chore/release-cli-0.1.3`, based on `main` at `e345dc6` (PR #33 merged, CircleCI `verify` green).
+- Changes: applied the pending Changeset by hand (the Changesets CLI was not runnable in this session): `@aetherstack/cli` 0.1.2 → 0.1.3, changelog entry, Changeset file removed. No other package versions changed.
+- Static review (no install/build/test run in this session): all 151 registry items have unique names, AI metadata and existing source files; no source imports lack a declared dependency; CLI and MCP server bundle `@aetherstack/registry-schema` inline. Notes: `icons`, `registry-schema` and `themes` publish raw TypeScript (no build, no `publishConfig`), so consumers need a transpiler; `ui` declares `clsx`, `tailwind-merge` and `date-fns` without importing them.
+- Required checks not run here: `verify-npm-packages.mjs --offline/--online`, consumer install, external published-CLI install. CircleCI `verify` on this PR is the first run.
+- Status: PREPARED, NOT PUBLISHED. Publishing needs owner approval of `approve_npm_release`.
+- Next: merge after green `verify`, run `publish_npm=true` on `main`, then record versions, job URL and an external clean-consumer install.
