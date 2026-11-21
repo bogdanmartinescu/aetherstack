@@ -62,7 +62,7 @@ export default function PricingComparisonPage() {
       name="Pricing Comparison"
       category="User & content"
       description="A feature comparison table across pricing tiers. Features can be grouped by category. Boolean values render as check or dash icons. String values render inline. The highlighted tier receives an accent border."
-      cliInstall="npx aether-ui add pricing-comparison"
+      cliInstall="npx @aetherstack/cli add pricing-comparison"
       previewScale={0.8}
       previewHeight="500px"
       importCode={`import { PricingComparison } from "@aetherstack/blocks"

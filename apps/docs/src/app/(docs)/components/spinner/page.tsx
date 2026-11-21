@@ -61,7 +61,7 @@ export default function SpinnerPage() {
 <Spinner size="default" />
 <Spinner size="lg" />
 <Spinner size="xl" />`}
-      cliInstall="npx aether-ui add spinner"
+      cliInstall="npx @aetherstack/cli add spinner"
       manualInstallCode={SOURCE}
       examples={[
         {

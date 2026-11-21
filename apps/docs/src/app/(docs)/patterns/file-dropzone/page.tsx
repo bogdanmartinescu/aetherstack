@@ -8,7 +8,7 @@ export default function FileDropzonePage() {
     <PatternPage
       name="File Dropzone"
       description="A drag-and-drop upload area that also supports click-to-browse. Handles drag counter logic correctly across child elements, filters by file type and max size, and exposes selected files via a callback."
-      cliInstall="npx aether-ui add file-dropzone"
+      cliInstall="npx @aetherstack/cli add file-dropzone"
       importCode={`import { FileDropzone } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { FileDropzone } from "@aetherstack/patterns"

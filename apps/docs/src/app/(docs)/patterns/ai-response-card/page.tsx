@@ -14,7 +14,7 @@ export default function AIResponseCardPage() {
       name="AI Response Card"
       description="A self-contained card that displays an AI-generated response. Includes a header with optional model badge and timestamp, action buttons for copying and regenerating, and thumbs up/down feedback. Supports a streaming cursor when isStreaming is true."
       packageName="@aetherstack/patterns"
-      cliInstall="npx aether-ui add ai-response-card"
+      cliInstall="npx @aetherstack/cli add ai-response-card"
       importCode={`import { AIResponseCard } from "@aetherstack/patterns"`}
       usageCode={`import { AIResponseCard } from "@aetherstack/patterns"
 

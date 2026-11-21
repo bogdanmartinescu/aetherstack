@@ -190,7 +190,7 @@ export function PaginationDemo() {
     </Pagination>
   )
 }`}
-      cliInstall={`npx aether-ui add pagination`}
+      cliInstall={`npx @aetherstack/cli add pagination`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {
@@ -200,7 +200,7 @@ export function PaginationDemo() {
         },
         {
           title: "Add the Button component (used for buttonVariants)",
-          code: `npx aether-ui add button`,
+          code: `npx @aetherstack/cli add button`,
           filename: "terminal",
         },
       ]}

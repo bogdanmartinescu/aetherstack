@@ -8,7 +8,7 @@ export default function FilterToolbarPage() {
     <PatternPage
       name="Filter Toolbar"
       description="Displays active filters as dismissible pills. Includes a clear-all action and slots for additional filter controls like dropdowns."
-      cliInstall="npx aether-ui add filter-toolbar"
+      cliInstall="npx @aetherstack/cli add filter-toolbar"
       importCode={`import { FilterToolbar, FilterPill } from "@aetherstack/patterns"`}
       usageCode={`import { FilterToolbar } from "@aetherstack/patterns"
 import { Button } from "@aetherstack/ui"

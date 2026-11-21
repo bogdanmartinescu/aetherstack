@@ -1,30 +1,14 @@
 import type { Metadata } from "next"
 import { DatePicker } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
+import { DATE_PICKER_SOURCE } from "@/lib/registry-source"
 
 export const metadata: Metadata = {
   title: "Date Picker",
   description: "A date selection field composing Calendar and Popover with formatted display.",
 }
 
-const MANUAL_SOURCE = `"use client"
-
-import * as React from "react"
-import { CalendarIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { cn } from "@/lib/utils"
-
-export interface DatePickerProps {
-  value?: Date
-  onValueChange?: (date: Date | undefined) => void
-  placeholder?: string
-  disabled?: boolean
-  className?: string
-}
-
-// Full source: packages/ui/src/components/date-picker.tsx`
+const MANUAL_SOURCE = DATE_PICKER_SOURCE
 
 export default function DatePickerPage() {
   return (
@@ -45,7 +29,7 @@ import { DatePicker } from "@/components/ui/date-picker"
 export function DatePickerDemo() {
   return <DatePicker placeholder="Pick a date" />
 }`}
-      cliInstall={`npx aether-ui add date-picker`}
+      cliInstall={`npx @aetherstack/cli add date-picker`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {
@@ -55,7 +39,7 @@ export function DatePickerDemo() {
         },
         {
           title: "Ensure Calendar and Popover are installed",
-          code: `npx aether-ui add calendar popover`,
+          code: `npx @aetherstack/cli add calendar popover`,
           filename: "terminal",
         },
       ]}

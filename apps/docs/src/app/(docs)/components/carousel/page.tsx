@@ -7,23 +7,14 @@ import {
   CarouselNext,
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
+import { CAROUSEL_SOURCE } from "@/lib/registry-source"
 
 export const metadata: Metadata = {
   title: "Carousel",
   description: "A touch-friendly slider built on Embla Carousel with prev/next navigation.",
 }
 
-const MANUAL_SOURCE = `"use client"
-
-import * as React from "react"
-import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-
-type CarouselApi = UseEmblaCarouselType[1]
-
-// Full source: packages/ui/src/components/carousel.tsx`
+const MANUAL_SOURCE = CAROUSEL_SOURCE
 
 export default function CarouselPage() {
   return (
@@ -80,7 +71,7 @@ export function CarouselDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add carousel`}
+      cliInstall={`npx @aetherstack/cli add carousel`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

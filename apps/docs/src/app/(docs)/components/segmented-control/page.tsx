@@ -47,12 +47,12 @@ export function SegmentedControlDemo() {
   <SegmentedControl aria-label="Range" options={options} defaultValue="week" />
   )
 }`}
-      cliInstall="npx aether-ui add segmented-control"
+      cliInstall="npx @aetherstack/cli add segmented-control"
       manualInstallCode={SEGMENTED_CONTROL_SOURCE}
       manualSteps={[
         {
           title: "Add the radio-group registry dependency",
-          code: "npx aether-ui add radio-group",
+          code: "npx @aetherstack/cli add radio-group",
           filename: "terminal",
         },
       ]}

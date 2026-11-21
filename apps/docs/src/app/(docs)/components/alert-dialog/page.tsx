@@ -79,7 +79,7 @@ export default function AlertDialogPage() {
     </AlertDialogFooter>
   </AlertDialogContent>
 </AlertDialog>`}
-      cliInstall="npx aether-ui add alert-dialog"
+      cliInstall="npx @aetherstack/cli add alert-dialog"
       manualInstallCode={SOURCE}
       manualSteps={[
         {

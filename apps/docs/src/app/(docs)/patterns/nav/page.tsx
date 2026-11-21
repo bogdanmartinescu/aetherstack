@@ -13,7 +13,7 @@ export default function NavPage() {
     <PatternPage
       name="Sidebar Nav"
       description="Composable building blocks for sidebar navigation: NavItem for individual links, NavGroup for labelled sections, and SidebarNav as the root container."
-      cliInstall="npx aether-ui add nav"
+      cliInstall="npx @aetherstack/cli add nav"
       importCode={`import { SidebarNav, NavGroup, NavItem } from "@aetherstack/patterns"`}
       usageCode={`import { SidebarNav, NavGroup, NavItem } from "@aetherstack/patterns"
 import { LayoutDashboard, Users, Settings } from "lucide-react"

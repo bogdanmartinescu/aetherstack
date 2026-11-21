@@ -59,7 +59,7 @@ import { Input } from "@/components/ui/input"
   <Label htmlFor="email">Email address</Label>
   <Input id="email" type="email" placeholder="you@example.com" />
 </div>`}
-      cliInstall={`npx aether-ui add label`}
+      cliInstall={`npx @aetherstack/cli add label`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

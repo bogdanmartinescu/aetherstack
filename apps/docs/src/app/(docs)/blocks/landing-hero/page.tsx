@@ -13,7 +13,7 @@ export default function LandingHeroPage() {
       name="Landing Hero"
       category="Marketing"
       description="A hero section with headline, subheading, dual CTAs, and an optional media slot. Supports an eyebrow badge, large responsive typography, and side-by-side CTA buttons."
-      cliInstall="npx aether-ui add landing-hero"
+      cliInstall="npx @aetherstack/cli add landing-hero"
       previewScale={0.75}
       previewHeight="420px"
       importCode={`import { LandingHero } from "@aetherstack/blocks"`}

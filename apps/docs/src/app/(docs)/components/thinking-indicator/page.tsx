@@ -23,7 +23,7 @@ export default function ThinkingIndicatorPage() {
 
 {/* Loading state */}
 <ThinkingIndicator state="loading" label="Loading response…" />`}
-      cliInstall="npx aether-ui add thinking-indicator"
+      cliInstall="npx @aetherstack/cli add thinking-indicator"
       props={[
         {
           name: "state",

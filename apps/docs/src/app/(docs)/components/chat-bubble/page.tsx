@@ -44,7 +44,7 @@ export default function ChatBubblePage() {
   name="AI"
   timestamp="2:41 PM"
 />`}
-      cliInstall="npx aether-ui add chat-bubble"
+      cliInstall="npx @aetherstack/cli add chat-bubble"
       props={[
         {
           name: "role",

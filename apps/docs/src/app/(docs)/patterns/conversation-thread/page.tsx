@@ -9,7 +9,7 @@ export default function ConversationThreadPage() {
       name="Conversation Thread"
       description="A scrollable message thread that renders user and assistant messages. Supports an animated thinking indicator while the assistant is generating a response, and accepts a custom message renderer for full control over individual message appearance."
       packageName="@aetherstack/patterns"
-      cliInstall="npx aether-ui add conversation-thread"
+      cliInstall="npx @aetherstack/cli add conversation-thread"
       importCode={`import { ConversationThread } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { ConversationThread } from "@aetherstack/patterns"

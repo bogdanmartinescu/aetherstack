@@ -8,7 +8,7 @@ export default function MultiSelectPage() {
     <PatternPage
       name="Multi Select"
       description="A combobox-style multi-select with removable tag chips and search. Options are filtered as the user types; selected values appear as dismissable chips in the trigger."
-      cliInstall="npx aether-ui add multi-select"
+      cliInstall="npx @aetherstack/cli add multi-select"
       importCode={`import { MultiSelect } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { MultiSelect } from "@aetherstack/patterns"

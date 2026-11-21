@@ -12,7 +12,7 @@ export default function BreadcrumbPage() {
     <PatternPage
       name="Breadcrumb"
       description="An accessible navigation aid that shows the current page's location in a hierarchy. The last crumb is marked as the current page."
-      cliInstall="npx aether-ui add breadcrumb"
+      cliInstall="npx @aetherstack/cli add breadcrumb"
       importCode={`import { Breadcrumb } from "@aetherstack/patterns"`}
       usageCode={`<Breadcrumb
   items={[

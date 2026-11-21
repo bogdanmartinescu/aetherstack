@@ -45,7 +45,7 @@ export default function ChatMessageListPage() {
     <PatternPage
       name="Chat Message List"
       description="A chat message list with user and assistant bubbles, avatars, and timestamps. Alternates alignment based on the role field — user messages are right-aligned, assistant messages left."
-      cliInstall="npx aether-ui add chat-message-list"
+      cliInstall="npx @aetherstack/cli add chat-message-list"
       importCode={`import { ChatMessageList } from "@aetherstack/patterns"`}
       usageCode={`import { ChatMessageList } from "@aetherstack/patterns"
 

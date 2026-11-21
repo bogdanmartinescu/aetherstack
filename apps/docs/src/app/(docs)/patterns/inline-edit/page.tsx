@@ -8,7 +8,7 @@ export default function InlineEditPage() {
     <PatternPage
       name="Inline Edit"
       description="Click-to-edit text field with save on Enter and cancel on Escape. The value is displayed as static text until the user activates editing; unsaved changes are discarded on Escape."
-      cliInstall="npx aether-ui add inline-edit"
+      cliInstall="npx @aetherstack/cli add inline-edit"
       importCode={`import { InlineEdit } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { InlineEdit } from "@aetherstack/patterns"

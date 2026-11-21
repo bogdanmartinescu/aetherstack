@@ -14,7 +14,7 @@ export default function UserProfilePageDoc() {
       name="User Profile Page"
       category="User & content"
       description="A user profile block with a cover banner, avatar, bio, location/website/email meta, a stats row, and tabbed content sections. Actions slot accepts any buttons."
-      cliInstall="npx aether-ui add user-profile-page"
+      cliInstall="npx @aetherstack/cli add user-profile-page"
       previewScale={0.75}
       previewHeight="560px"
       importCode={`import { UserProfilePage } from "@aetherstack/blocks"`}

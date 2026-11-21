@@ -9,7 +9,7 @@ export default function ModelSelectorPage() {
       name="Model Selector"
       description="A dropdown component for selecting an AI model from a list. Models are grouped by provider and can display optional capability badges (e.g. vision, tools). Works as a controlled component via value and onValueChange."
       packageName="@aetherstack/patterns"
-      cliInstall="npx aether-ui add model-selector"
+      cliInstall="npx @aetherstack/cli add model-selector"
       importCode={`import { ModelSelector } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { ModelSelector } from "@aetherstack/patterns"

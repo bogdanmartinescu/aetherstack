@@ -28,7 +28,7 @@ export default function CompareOutputPage() {
       name="Compare Output"
       category="AI"
       description="A responsive grid for placing two or more AI model responses side by side. Each column shows the model name badge, an optional timestamp, and the response content. Adapts from a single column on mobile to a two-column layout on larger screens."
-      cliInstall="npx aether-ui add compare-output"
+      cliInstall="npx @aetherstack/cli add compare-output"
       previewHeight="360px"
       importCode={`import { CompareOutput } from "@aetherstack/blocks"`}
       usageCode={`import { CompareOutput } from "@aetherstack/blocks"

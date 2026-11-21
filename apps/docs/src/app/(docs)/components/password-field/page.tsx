@@ -21,17 +21,17 @@ export default function PasswordFieldPage() {
 export function PasswordFieldDemo() {
   return <PasswordField label="Password" />
 }`}
-      cliInstall="npx aether-ui add password-field"
+      cliInstall="npx @aetherstack/cli add password-field"
       manualInstallCode={PASSWORD_FIELD_SOURCE}
       manualSteps={[
         {
           title: "Add the input registry dependency",
-          code: "npx aether-ui add input",
+          code: "npx @aetherstack/cli add input",
           filename: "terminal",
         },
         {
           title: "Add the button registry dependency",
-          code: "npx aether-ui add button",
+          code: "npx @aetherstack/cli add button",
           filename: "terminal",
         },
       ]}

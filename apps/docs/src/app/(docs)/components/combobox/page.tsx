@@ -245,7 +245,7 @@ export function ComboboxDemo() {
     </Combobox>
   )
 }`}
-      cliInstall={`npx aether-ui add combobox`}
+      cliInstall={`npx @aetherstack/cli add combobox`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

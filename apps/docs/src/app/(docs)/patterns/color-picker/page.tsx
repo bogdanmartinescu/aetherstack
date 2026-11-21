@@ -8,7 +8,7 @@ export default function ColorPickerPage() {
     <PatternPage
       name="Color Picker"
       description="A controlled hex color picker combining a native browser color input with a manual hex text field and optional preset swatches. Validates and normalises hex values on blur."
-      cliInstall="npx aether-ui add color-picker"
+      cliInstall="npx @aetherstack/cli add color-picker"
       importCode={`import { ColorPicker, ColorSwatch } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { ColorPicker } from "@aetherstack/patterns"

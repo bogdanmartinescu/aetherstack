@@ -38,7 +38,7 @@ export default function FormFieldPage() {
       {/* Installation */}
       <section className="mb-10">
         <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Installation</h2>
-        <CodeBlock code={`npx aether-ui add form-field`} filename="terminal" />
+        <CodeBlock code={`npx @aetherstack/cli add form-field`} filename="terminal" />
       </section>
 
       {/* Usage */}

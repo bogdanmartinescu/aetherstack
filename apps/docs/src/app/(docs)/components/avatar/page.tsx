@@ -160,7 +160,7 @@ export function AvatarDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add avatar`}
+      cliInstall={`npx @aetherstack/cli add avatar`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {
@@ -170,7 +170,7 @@ export function AvatarDemo() {
         },
         {
           title: "Registry dependency",
-          code: `npx aether-ui add status-dot`,
+          code: `npx @aetherstack/cli add status-dot`,
           filename: "terminal",
         },
       ]}

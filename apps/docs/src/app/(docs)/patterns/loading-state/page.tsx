@@ -12,7 +12,7 @@ export default function LoadingStatePage() {
     <PatternPage
       name="Loading State"
       description="Two variants for communicating async work: a centered spinner for initial loads, and skeleton rows for content-shaped placeholders."
-      cliInstall="npx aether-ui add loading-state"
+      cliInstall="npx @aetherstack/cli add loading-state"
       importCode={`import { LoadingState } from "@aetherstack/patterns"`}
       usageCode={`// Spinner (default)
 <LoadingState text="Fetching data…" />

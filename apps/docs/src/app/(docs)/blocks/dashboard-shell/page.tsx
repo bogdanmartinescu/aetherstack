@@ -50,7 +50,7 @@ export default function DashboardShellPage() {
       name="Dashboard Shell"
       category="Shells"
       description="A full-page SaaS application shell with a collapsible sidebar, topbar with search and notifications, and a flexible content slot. Composable nav groups and user info are passed as props."
-      cliInstall="npx aether-ui add dashboard-shell"
+      cliInstall="npx @aetherstack/cli add dashboard-shell"
       previewScale={0.5}
       previewHeight="460px"
       importCode={`import { DashboardShell } from "@aetherstack/blocks"`}

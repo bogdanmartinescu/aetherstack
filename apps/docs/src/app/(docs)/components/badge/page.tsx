@@ -69,7 +69,7 @@ export function BadgeDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add badge`}
+      cliInstall={`npx @aetherstack/cli add badge`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

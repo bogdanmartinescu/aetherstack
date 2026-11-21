@@ -13,7 +13,7 @@ export default function MarketingNavbarPage() {
       name="Marketing Navbar"
       category="App navigation"
       description="A sticky marketing site navigation bar with logo, centred nav links, and a CTA button. Collapses to a hamburger sheet on mobile. Backdrop-blur applied on scroll."
-      cliInstall="npx aether-ui add marketing-navbar"
+      cliInstall="npx @aetherstack/cli add marketing-navbar"
       previewHeight="80px"
       importCode={`import { MarketingNavbar } from "@aetherstack/blocks"`}
       usageCode={`import { MarketingNavbar } from "@aetherstack/blocks"

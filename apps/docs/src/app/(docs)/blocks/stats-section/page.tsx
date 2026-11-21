@@ -13,7 +13,7 @@ export default function StatsSectionPage() {
       name="Stats Section"
       category="Marketing"
       description="A marketing statistics row displaying large bold numbers with labels and optional descriptions. Dividers separate columns on desktop; items stack on mobile."
-      cliInstall="npx aether-ui add stats-section"
+      cliInstall="npx @aetherstack/cli add stats-section"
       previewHeight="200px"
       importCode={`import { StatsSection } from "@aetherstack/blocks"`}
       usageCode={`import { StatsSection } from "@aetherstack/blocks"

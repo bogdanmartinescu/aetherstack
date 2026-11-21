@@ -12,7 +12,7 @@ export default function ThemeSwitcherPage() {
     <PatternPage
       name="Theme Switcher"
       description="A light/dark/system theme toggle. Comes in two variants: a dropdown listing all three options and a compact icon-only toggle. Requires next-themes ThemeProvider in the root layout."
-      cliInstall="npx aether-ui add theme-switcher"
+      cliInstall="npx @aetherstack/cli add theme-switcher"
       importCode={`import { ThemeSwitcher, ThemeSwitcherToggle, ThemeSwitcherDropdown } from "@aetherstack/patterns"`}
       usageCode={`// In layout.tsx — wrap the app with ThemeProvider
 import { ThemeProvider } from "next-themes"

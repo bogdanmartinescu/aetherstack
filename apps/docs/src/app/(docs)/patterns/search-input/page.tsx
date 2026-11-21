@@ -8,7 +8,7 @@ export default function SearchInputPage() {
     <PatternPage
       name="Search Input"
       description="An enhanced search field with a clear button, loading spinner, and optional keyboard shortcut hint. The shortcut badge is decorative — wire your own keyboard handler to open/focus the field."
-      cliInstall="npx aether-ui add search-input"
+      cliInstall="npx @aetherstack/cli add search-input"
       importCode={`import { SearchInput } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { SearchInput } from "@aetherstack/patterns"

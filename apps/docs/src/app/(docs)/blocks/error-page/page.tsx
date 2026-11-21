@@ -13,7 +13,7 @@ export default function ErrorPageDoc() {
       name="Error Page"
       category="Errors"
       description="A full-page error state for 404, 500, or any custom error code. Ships with sensible default headlines and descriptions that can be overridden. Includes a back-home button and an optional illustration slot."
-      cliInstall="npx aether-ui add error-page"
+      cliInstall="npx @aetherstack/cli add error-page"
       previewScale={0.75}
       previewHeight="420px"
       importCode={`import { ErrorPage } from "@aetherstack/blocks"`}

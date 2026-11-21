@@ -13,7 +13,7 @@ export default function MetricCardPage() {
     <PatternPage
       name="Metric Card"
       description="A dashboard stat card displaying a key metric with optional trend indicator and icon. Composes the Card primitive."
-      cliInstall="npx aether-ui add metric-card"
+      cliInstall="npx @aetherstack/cli add metric-card"
       importCode={`import { MetricCard } from "@aetherstack/patterns"`}
       usageCode={`import { DollarSign, Users, TrendingUp } from "lucide-react"
 import { MetricCard } from "@aetherstack/patterns"

@@ -37,7 +37,7 @@ export default function AgentWorkspacePage() {
       name="Agent Workspace"
       category="AI"
       description="A visual workspace that tracks agent task execution in real time. Shows a task card with progress bar, an expandable list of tool-call steps with arguments and results, an optional collapsible reasoning panel, and a final output card with a copy button."
-      cliInstall="npx aether-ui add agent-workspace"
+      cliInstall="npx @aetherstack/cli add agent-workspace"
       previewHeight="420px"
       importCode={`import { AgentWorkspace } from "@aetherstack/blocks"`}
       usageCode={`import { AgentWorkspace } from "@aetherstack/blocks"

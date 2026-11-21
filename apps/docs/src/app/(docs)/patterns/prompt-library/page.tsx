@@ -13,7 +13,7 @@ export default function PromptLibraryPage() {
       name="Prompt Library"
       description="A searchable, filterable library of reusable prompts. Each prompt shows a title, optional description, and category tags. Users can insert a prompt into the active input or copy it to the clipboard. Supports category filter buttons for quick browsing."
       packageName="@aetherstack/patterns"
-      cliInstall="npx aether-ui add prompt-library"
+      cliInstall="npx @aetherstack/cli add prompt-library"
       importCode={`import { PromptLibrary } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { PromptLibrary } from "@aetherstack/patterns"

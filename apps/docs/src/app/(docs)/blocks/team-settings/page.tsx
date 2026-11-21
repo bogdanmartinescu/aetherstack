@@ -20,7 +20,7 @@ export default function TeamSettingsPage() {
       name="Team Settings"
       category="Settings"
       description="A team management panel listing current members with their roles. Owners and admins can invite new members by email, change roles via a select dropdown, and remove members."
-      cliInstall="npx aether-ui add team-settings"
+      cliInstall="npx @aetherstack/cli add team-settings"
       previewHeight="520px"
       importCode={`import { TeamSettings } from "@aetherstack/blocks"
 import type { TeamMember } from "@aetherstack/blocks"`}

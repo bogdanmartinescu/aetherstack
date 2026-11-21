@@ -44,7 +44,7 @@ export default function TimelineFeedPage() {
     <PatternPage
       name="Timeline Feed"
       description="A vertical timeline with date markers and event entries. Items are grouped by date automatically; each entry renders an icon, title, description, and relative timestamp."
-      cliInstall="npx aether-ui add timeline-feed"
+      cliInstall="npx @aetherstack/cli add timeline-feed"
       importCode={`import { TimelineFeed } from "@aetherstack/patterns"`}
       usageCode={`import { TimelineFeed } from "@aetherstack/patterns"
 import { Rocket } from "lucide-react"

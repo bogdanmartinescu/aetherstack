@@ -48,7 +48,7 @@ export default function ToolCallCardPage() {
   status="error"
   error="Permission denied"
 />`}
-      cliInstall="npx aether-ui add tool-call-card"
+      cliInstall="npx @aetherstack/cli add tool-call-card"
       props={[
         {
           name: "toolName",

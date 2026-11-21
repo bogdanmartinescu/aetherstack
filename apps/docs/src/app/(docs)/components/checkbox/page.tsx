@@ -68,7 +68,7 @@ export function CheckboxDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add checkbox`}
+      cliInstall={`npx @aetherstack/cli add checkbox`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

@@ -13,7 +13,7 @@ export default function AccountSettingsPage() {
       name="Account Settings"
       category="Settings"
       description="A self-contained user profile settings card with avatar display, display name, email, and bio fields. Handles async save state internally."
-      cliInstall="npx aether-ui add account-settings"
+      cliInstall="npx @aetherstack/cli add account-settings"
       importCode={`import { AccountSettings } from "@aetherstack/blocks"`}
       usageCode={`import { AccountSettings } from "@aetherstack/blocks"
 

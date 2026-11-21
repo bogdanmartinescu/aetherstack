@@ -367,7 +367,7 @@ export default function ComponentsPage() {
           AI-native UI. Unlike a runtime library, each component you add lives in your codebase —
           edit it, extend it, or replace it at any time. Run{" "}
           <code className="bg-muted rounded px-1 font-mono text-xs">
-            npx aether-ui add &lt;name&gt;
+            npx @aetherstack/cli add &lt;name&gt;
           </code>{" "}
           to install any component in seconds.
         </p>

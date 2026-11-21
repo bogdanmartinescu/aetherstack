@@ -8,19 +8,19 @@ The `aether-ui` binary is the primary way to install Aether UI components. It co
 
 ```bash
 # Scaffold a new project with Aether UI configured
-npx aether-ui init
+npx @aetherstack/cli init
 
 # Add a component (copies source to your project)
-npx aether-ui add button
-npx aether-ui add data-table
-npx aether-ui add dashboard-shell
+npx @aetherstack/cli add button
+npx @aetherstack/cli add data-table
+npx @aetherstack/cli add dashboard-shell
 
 # List all available components
-npx aether-ui list
+npx @aetherstack/cli list
 
 # Generate a page from a natural-language prompt
-npx aether-ui generate "settings page with profile and billing tabs"
-npx aether-ui generate "chat interface with sidebar and message thread"
+npx @aetherstack/cli generate "settings page with profile and billing tabs"
+npx @aetherstack/cli generate "chat interface with sidebar and message thread"
 ```
 
 ## Install globally (optional)

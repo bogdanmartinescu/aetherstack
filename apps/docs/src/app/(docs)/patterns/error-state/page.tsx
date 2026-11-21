@@ -9,7 +9,7 @@ export default function ErrorStatePage() {
     <PatternPage
       name="Error State"
       description="A consistent presentation for failed data fetches or unexpected errors. Gives users context and a clear path forward."
-      cliInstall="npx aether-ui add error-state"
+      cliInstall="npx @aetherstack/cli add error-state"
       importCode={`import { ErrorState } from "@aetherstack/patterns"`}
       usageCode={`<ErrorState
   title="Failed to load members"

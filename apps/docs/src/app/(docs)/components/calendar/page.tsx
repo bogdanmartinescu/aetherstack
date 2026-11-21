@@ -96,7 +96,7 @@ export default function CalendarPage() {
 export function CalendarDemo() {
   return <Calendar />
 }`}
-      cliInstall={`npx aether-ui add calendar`}
+      cliInstall={`npx @aetherstack/cli add calendar`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

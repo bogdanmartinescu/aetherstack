@@ -8,7 +8,7 @@ export default function SortableListPage() {
     <PatternPage
       name="Sortable List"
       description="A drag-and-drop sortable list with keyboard accessibility powered by dnd-kit. Each row renders via a renderItem render-prop, keeping item presentation fully customisable."
-      cliInstall="npx aether-ui add sortable-list"
+      cliInstall="npx @aetherstack/cli add sortable-list"
       importCode={`import { SortableList } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { SortableList } from "@aetherstack/patterns"

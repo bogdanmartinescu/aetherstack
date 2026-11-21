@@ -9,7 +9,7 @@ export default function AISettingsPage() {
       name="AI Settings"
       category="AI"
       description="A fully controlled settings panel with three cards: API Configuration (key with show/hide toggle and model selector), Generation Parameters (temperature and max-tokens sliders), and System Prompt (resizable textarea). All values are controlled via callback props."
-      cliInstall="npx aether-ui add ai-settings"
+      cliInstall="npx @aetherstack/cli add ai-settings"
       previewHeight="400px"
       importCode={`import { AISettings } from "@aetherstack/blocks"`}
       usageCode={`"use client"

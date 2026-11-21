@@ -9,7 +9,7 @@ export default function ChatLayoutPage() {
       name="Chat Layout"
       category="AI Layout"
       description="A full-page chat shell that composes a persistent desktop sidebar, a sticky header bar, a scrollable main content area, and an optional footer slot. On mobile the sidebar collapses into a Sheet drawer controlled by the built-in menu toggle."
-      cliInstall="npx aether-ui add chat-layout"
+      cliInstall="npx @aetherstack/cli add chat-layout"
       previewHeight="420px"
       importCode={`import { ChatLayout } from "@aetherstack/blocks"`}
       usageCode={`"use client"

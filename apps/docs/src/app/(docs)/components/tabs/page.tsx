@@ -89,7 +89,7 @@ export function TabsDemo() {
     </Tabs>
   )
 }`}
-      cliInstall={`npx aether-ui add tabs`}
+      cliInstall={`npx @aetherstack/cli add tabs`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

@@ -75,7 +75,7 @@ export function RadioGroupDemo() {
     </RadioGroup>
   )
 }`}
-      cliInstall={`npx aether-ui add radio-group`}
+      cliInstall={`npx @aetherstack/cli add radio-group`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

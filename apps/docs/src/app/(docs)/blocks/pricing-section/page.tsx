@@ -64,7 +64,7 @@ export default function PricingSectionPage() {
       name="Pricing Section"
       category="Marketing"
       description="A responsive 3-tier pricing grid with feature lists, check/cross icons, an optional highlighted plan with a badge, and CTA buttons. Fully customisable via the tiers prop."
-      cliInstall="npx aether-ui add pricing-section"
+      cliInstall="npx @aetherstack/cli add pricing-section"
       previewScale={0.75}
       previewHeight="520px"
       importCode={`import { PricingSection } from "@aetherstack/blocks"

@@ -19,12 +19,12 @@ export default function SocialButtonPage() {
 export function SocialButtonDemo() {
   return <SocialButton provider="google" variant="outline" />
 }`}
-      cliInstall="npx aether-ui add social-button"
+      cliInstall="npx @aetherstack/cli add social-button"
       manualInstallCode={SOCIAL_BUTTON_SOURCE}
       manualSteps={[
         {
           title: "Add the button registry dependency",
-          code: "npx aether-ui add button",
+          code: "npx @aetherstack/cli add button",
           filename: "terminal",
         },
       ]}

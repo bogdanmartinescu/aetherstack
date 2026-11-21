@@ -25,7 +25,7 @@ export default function StreamingTextPage() {
 }
 
 <StreamingText content={makeStream()} onComplete={() => console.log("done")} />`}
-      cliInstall="npx aether-ui add streaming-text"
+      cliInstall="npx @aetherstack/cli add streaming-text"
       props={[
         {
           name: "content",

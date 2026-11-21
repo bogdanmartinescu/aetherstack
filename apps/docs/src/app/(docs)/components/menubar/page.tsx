@@ -13,18 +13,14 @@ import {
   MenubarCheckboxItem,
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
+import { MENUBAR_SOURCE } from "@/lib/registry-source"
 
 export const metadata: Metadata = {
   title: "Menubar",
   description: "An application-level menu bar for top-level navigation commands.",
 }
 
-const MANUAL_SOURCE = `import * as React from "react"
-import * as MenubarPrimitive from "@radix-ui/react-menubar"
-import { Check, ChevronRight, Circle } from "lucide-react"
-import { cn } from "@/lib/utils"
-
-// Full source: packages/ui/src/components/menubar.tsx`
+const MANUAL_SOURCE = MENUBAR_SOURCE
 
 export default function MenubarPage() {
   return (
@@ -122,7 +118,7 @@ export function MenubarDemo() {
     </Menubar>
   )
 }`}
-      cliInstall={`npx aether-ui add menubar`}
+      cliInstall={`npx @aetherstack/cli add menubar`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

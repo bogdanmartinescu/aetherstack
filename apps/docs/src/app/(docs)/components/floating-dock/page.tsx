@@ -22,7 +22,7 @@ export default function FloatingDockPage() {
 <FloatingDock>
   <p>Call</p>
 </FloatingDock>`}
-      cliInstall="npx aether-ui add floating-dock"
+      cliInstall="npx @aetherstack/cli add floating-dock"
       manualInstallCode={FLOATING_DOCK_SOURCE}
       examples={[]}
       props={[

@@ -46,7 +46,7 @@ export function TimelineScrubberDemo() {
     />
   )
 }`}
-      cliInstall="npx aether-ui add timeline-scrubber"
+      cliInstall="npx @aetherstack/cli add timeline-scrubber"
       manualInstallCode={TIMELINE_SCRUBBER_SOURCE}
       examples={[]}
       props={[

@@ -21,7 +21,7 @@ export default function PromptInputPage() {
   isLoading={false}
   maxLength={4000}
 />`}
-      cliInstall="npx aether-ui add prompt-input"
+      cliInstall="npx @aetherstack/cli add prompt-input"
       props={[
         {
           name: "value",

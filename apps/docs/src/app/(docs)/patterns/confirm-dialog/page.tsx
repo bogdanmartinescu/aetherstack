@@ -8,7 +8,7 @@ export default function ConfirmDialogPage() {
     <PatternPage
       name="Confirm Dialog"
       description="A reusable confirmation dialog for destructive or irreversible actions. Accepts a variant prop to apply destructive styling to the confirm button and supports an async loading state while the action runs."
-      cliInstall="npx aether-ui add confirm-dialog"
+      cliInstall="npx @aetherstack/cli add confirm-dialog"
       importCode={`import { ConfirmDialog } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { ConfirmDialog } from "@aetherstack/patterns"

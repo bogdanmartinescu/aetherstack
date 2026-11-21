@@ -9,7 +9,7 @@ export default function AISettingsPanelPage() {
       name="AI Settings Panel"
       description="A settings panel for controlling AI generation parameters. Provides sliders and inputs for temperature (0–2), max output tokens, and a system prompt textarea. All fields are fully controlled — wire them to your AI SDK configuration."
       packageName="@aetherstack/patterns"
-      cliInstall="npx aether-ui add ai-settings-panel"
+      cliInstall="npx @aetherstack/cli add ai-settings-panel"
       importCode={`import { AISettingsPanel } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { AISettingsPanel } from "@aetherstack/patterns"

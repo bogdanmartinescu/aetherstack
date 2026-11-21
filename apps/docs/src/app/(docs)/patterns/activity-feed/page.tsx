@@ -41,7 +41,7 @@ export default function ActivityFeedPage() {
     <PatternPage
       name="Activity Feed"
       description="A chronological timeline of events with user attribution, action descriptions, and relative timestamps. Renders an avatar (initials or custom icon) per entry."
-      cliInstall="npx aether-ui add activity-feed"
+      cliInstall="npx @aetherstack/cli add activity-feed"
       importCode={`import { ActivityFeed, ActivityItem } from "@aetherstack/patterns"`}
       usageCode={`import { ActivityFeed } from "@aetherstack/patterns"
 

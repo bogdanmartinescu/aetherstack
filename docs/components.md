@@ -107,8 +107,8 @@ All primitives meet WCAG 2.1 AA requirements:
 ### Install via CLI (Phase 6+)
 
 ```bash
-npx aether-ui add button
-npx aether-ui add dialog sheet tabs
+npx @aetherstack/cli add button
+npx @aetherstack/cli add dialog sheet tabs
 ```
 
 ### Import directly

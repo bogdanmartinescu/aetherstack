@@ -23,7 +23,7 @@ export default function TagPage() {
         </div>
       }
       previewCode={`import { Tag, TagGroup } from "@/components/ui/tag"\n\n<TagGroup label="Labels" items={[{ id: "bug", label: "Bug" }, { id: "docs", label: "Docs" }, { id: "ui", label: "UI" }]} />\n<Tag label="Beta" onRemove={() => {}} />`}
-      cliInstall="npx aether-ui add tag"
+      cliInstall="npx @aetherstack/cli add tag"
       manualInstallCode={TAG_SOURCE}
       examples={[]}
       props={[

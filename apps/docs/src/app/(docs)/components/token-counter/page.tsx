@@ -17,7 +17,7 @@ export default function TokenCounterPage() {
       preview={<TokenCounterPreview />}
       importCode={`import { TokenCounter } from "@aetherstack/ui"`}
       usageCode={`<TokenCounter used={12400} max={128000} />`}
-      cliInstall="npx aether-ui add token-counter"
+      cliInstall="npx @aetherstack/cli add token-counter"
       props={[
         {
           name: "used",

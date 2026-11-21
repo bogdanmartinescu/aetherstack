@@ -102,7 +102,7 @@ export function ToggleGroupDemo() {
     </ToggleGroup>
   )
 }`}
-      cliInstall={`npx aether-ui add toggle-group`}
+      cliInstall={`npx @aetherstack/cli add toggle-group`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {
@@ -112,7 +112,7 @@ export function ToggleGroupDemo() {
         },
         {
           title: "Add the Toggle component",
-          code: `npx aether-ui add toggle`,
+          code: `npx @aetherstack/cli add toggle`,
           filename: "terminal",
         },
       ]}

@@ -13,7 +13,7 @@ export default function LoginBlockPage() {
       name="Login"
       category="Auth"
       description="A centered login card with email, password, remember-me checkbox, and forgot-password link. Includes inline field validation. Optionally renders a split-panel layout with a custom left side."
-      cliInstall="npx aether-ui add login-block"
+      cliInstall="npx @aetherstack/cli add login-block"
       previewHeight="480px"
       importCode={`import { LoginBlock } from "@aetherstack/blocks"`}
       usageCode={`import { LoginBlock } from "@aetherstack/blocks"

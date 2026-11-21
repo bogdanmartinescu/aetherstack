@@ -86,7 +86,7 @@ export function ToggleDemo() {
     </Toggle>
   )
 }`}
-      cliInstall={`npx aether-ui add toggle`}
+      cliInstall={`npx @aetherstack/cli add toggle`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

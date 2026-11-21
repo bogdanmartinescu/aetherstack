@@ -13,7 +13,7 @@ export default function StatGroupPage() {
     <PatternPage
       name="Stat Group"
       description="A responsive grid of stat cards for dashboard overviews. Each StatItem shows a label, primary value, optional percentage delta (green/red), and an icon slot."
-      cliInstall="npx aether-ui add stat-group"
+      cliInstall="npx @aetherstack/cli add stat-group"
       importCode={`import { StatGroup, StatItem } from "@aetherstack/patterns"`}
       usageCode={`import { StatGroup, StatItem } from "@aetherstack/patterns"
 import { Users, DollarSign, TrendingUp } from "lucide-react"

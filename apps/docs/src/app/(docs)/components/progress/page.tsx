@@ -114,7 +114,7 @@ export default function ProgressPage() {
 export function ProgressDemo() {
   return <Progress value={60} />
 }`}
-      cliInstall={`npx aether-ui add progress`}
+      cliInstall={`npx @aetherstack/cli add progress`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

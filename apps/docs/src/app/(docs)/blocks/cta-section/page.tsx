@@ -13,7 +13,7 @@ export default function CTASectionPage() {
       name="CTA Section"
       category="Marketing"
       description="A full-width call-to-action banner with headline, subheading, and primary and secondary CTA buttons. Three variants: default (bordered), muted (grey background), and primary (brand-coloured)."
-      cliInstall="npx aether-ui add cta-section"
+      cliInstall="npx @aetherstack/cli add cta-section"
       previewScale={0.75}
       previewHeight="540px"
       importCode={`import { CTASection } from "@aetherstack/blocks"`}

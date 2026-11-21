@@ -1,6 +1,7 @@
 "use client"
 
 import { ComponentPage } from "@/components/component-page"
+import { DROPDOWN_MENU_SOURCE } from "@/lib/registry-source"
 import {
   DropdownMenuPreview,
   DropdownMenuGroupPreview,
@@ -8,95 +9,7 @@ import {
   DropdownMenuShortcutsPreview,
 } from "@/components/previews/interactive-previews"
 
-const MANUAL_SOURCE = `"use client"
-
-import * as React from "react"
-import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
-import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
-
-const DropdownMenu = DropdownMenuPrimitive.Root
-const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger
-const DropdownMenuGroup = DropdownMenuPrimitive.Group
-const DropdownMenuPortal = DropdownMenuPrimitive.Portal
-const DropdownMenuSub = DropdownMenuPrimitive.Sub
-const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup
-
-const DropdownMenuContent = React.forwardRef<...>(({ className, sideOffset = 4, ...props }, ref) => (
-  <DropdownMenuPrimitive.Portal>
-    <DropdownMenuPrimitive.Content
-      ref={ref}
-      sideOffset={sideOffset}
-      className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md",
-        "data-[state=open]:animate-in data-[state=closed]:animate-out ...",
-        className,
-      )}
-      {...props}
-    />
-  </DropdownMenuPrimitive.Portal>
-))
-
-const DropdownMenuItem = React.forwardRef<...>(({ className, inset, ...props }, ref) => (
-  <DropdownMenuPrimitive.Item
-    ref={ref}
-    className={cn(
-      "relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      inset && "pl-8",
-      className,
-    )}
-    {...props}
-  />
-))
-
-const DropdownMenuCheckboxItem = React.forwardRef<...>(({ className, children, checked, ...props }, ref) => (
-  <DropdownMenuPrimitive.CheckboxItem ref={ref} className={cn("...", className)} checked={checked} {...props}>
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-      <DropdownMenuPrimitive.ItemIndicator>
-        <CheckIcon className="h-4 w-4" />
-      </DropdownMenuPrimitive.ItemIndicator>
-    </span>
-    {children}
-  </DropdownMenuPrimitive.CheckboxItem>
-))
-
-const DropdownMenuLabel = React.forwardRef<...>(({ className, inset, ...props }, ref) => (
-  <DropdownMenuPrimitive.Label
-    ref={ref}
-    className={cn("px-2 py-1.5 text-xs font-semibold", inset && "pl-8", className)}
-    {...props}
-  />
-))
-
-const DropdownMenuSeparator = React.forwardRef<...>(({ className, ...props }, ref) => (
-  <DropdownMenuPrimitive.Separator
-    ref={ref}
-    className={cn("-mx-1 my-1 h-px bg-muted", className)}
-    {...props}
-  />
-))
-
-function DropdownMenuShortcut({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
-  return <span className={cn("ml-auto text-xs tracking-widest opacity-60", className)} {...props} />
-}
-
-// + DropdownMenuSubTrigger, DropdownMenuSubContent, DropdownMenuRadioItem
-// Full source: packages/ui/src/components/dropdown-menu.tsx
-
-export {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuGroup,
-  DropdownMenuPortal,
-  DropdownMenuSub,
-  DropdownMenuRadioGroup,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuCheckboxItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-}`
+const MANUAL_SOURCE = DROPDOWN_MENU_SOURCE
 
 export default function DropdownMenuPage() {
   return (
@@ -141,7 +54,7 @@ export function DropdownMenuDemo() {
     </DropdownMenu>
   )
 }`}
-      cliInstall={`npx aether-ui add dropdown-menu`}
+      cliInstall={`npx @aetherstack/cli add dropdown-menu`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

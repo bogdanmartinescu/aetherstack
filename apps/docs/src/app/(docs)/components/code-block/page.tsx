@@ -31,7 +31,7 @@ export default function CodeBlockPage() {
   language="typescript"
   showLineNumbers
 />`}
-      cliInstall="npx aether-ui add code-block"
+      cliInstall="npx @aetherstack/cli add code-block"
       props={[
         {
           name: "code",

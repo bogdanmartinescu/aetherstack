@@ -8,7 +8,7 @@ export default function KanbanPage() {
     <PatternPage
       name="Kanban Board"
       description="A composable drag-and-drop Kanban board. Cards are draggable across columns using the native HTML5 drag API. Columns highlight on drag-over and call onDrop to let you update state externally."
-      cliInstall="npx aether-ui add kanban"
+      cliInstall="npx @aetherstack/cli add kanban"
       importCode={`import { KanbanBoard, KanbanColumn, KanbanCard } from "@aetherstack/patterns"
 import type { KanbanItem } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"

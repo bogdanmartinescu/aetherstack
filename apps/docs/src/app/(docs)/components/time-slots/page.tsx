@@ -37,17 +37,17 @@ export function TimeSlotsDemo() {
     />
   )
 }`}
-      cliInstall="npx aether-ui add time-slots"
+      cliInstall="npx @aetherstack/cli add time-slots"
       manualInstallCode={TIME_SLOTS_SOURCE}
       manualSteps={[
         {
           title: "Add the radio-group registry dependency",
-          code: "npx aether-ui add radio-group",
+          code: "npx @aetherstack/cli add radio-group",
           filename: "terminal",
         },
         {
           title: "Add the button registry dependency",
-          code: "npx aether-ui add button",
+          code: "npx @aetherstack/cli add button",
           filename: "terminal",
         },
       ]}

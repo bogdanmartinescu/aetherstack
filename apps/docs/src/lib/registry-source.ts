@@ -17,6 +17,19 @@ import tag from "../../../registry-public/public/r/tag.json"
 import timeSlots from "../../../registry-public/public/r/time-slots.json"
 import timelineScrubber from "../../../registry-public/public/r/timeline-scrubber.json"
 import uptimeBar from "../../../registry-public/public/r/uptime-bar.json"
+import carousel from "../../../registry-public/public/r/carousel.json"
+import chart from "../../../registry-public/public/r/chart.json"
+import datePicker from "../../../registry-public/public/r/date-picker.json"
+import dialog from "../../../registry-public/public/r/dialog.json"
+import dropdownMenu from "../../../registry-public/public/r/dropdown-menu.json"
+import inputGroup from "../../../registry-public/public/r/input-group.json"
+import inputOtp from "../../../registry-public/public/r/input-otp.json"
+import menubar from "../../../registry-public/public/r/menubar.json"
+import navigationMenu from "../../../registry-public/public/r/navigation-menu.json"
+import resizable from "../../../registry-public/public/r/resizable.json"
+import sheet from "../../../registry-public/public/r/sheet.json"
+import sidebar from "../../../registry-public/public/r/sidebar.json"
+import toast from "../../../registry-public/public/r/toast.json"
 
 interface RegistryItemJson {
   files: { content: string }[]
@@ -56,3 +69,29 @@ export const SEGMENTED_CONTROL_SOURCE = toManualSource(segmentedControl)
 export const SOCIAL_BUTTON_SOURCE = toManualSource(socialButton)
 
 export const UPTIME_BAR_SOURCE = toManualSource(uptimeBar)
+
+export const CAROUSEL_SOURCE = toManualSource(carousel)
+
+export const CHART_SOURCE = toManualSource(chart)
+
+export const DATE_PICKER_SOURCE = toManualSource(datePicker)
+
+export const DIALOG_SOURCE = toManualSource(dialog)
+
+export const DROPDOWN_MENU_SOURCE = toManualSource(dropdownMenu)
+
+export const INPUT_GROUP_SOURCE = toManualSource(inputGroup)
+
+export const INPUT_OTP_SOURCE = toManualSource(inputOtp)
+
+export const MENUBAR_SOURCE = toManualSource(menubar)
+
+export const NAVIGATION_MENU_SOURCE = toManualSource(navigationMenu)
+
+export const RESIZABLE_SOURCE = toManualSource(resizable)
+
+export const SHEET_SOURCE = toManualSource(sheet)
+
+export const SIDEBAR_SOURCE = toManualSource(sidebar)
+
+export const TOAST_SOURCE = toManualSource(toast)

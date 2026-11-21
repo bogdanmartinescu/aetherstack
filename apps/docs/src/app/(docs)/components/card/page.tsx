@@ -111,7 +111,7 @@ import { Button } from "@/components/ui/button"
     <Button size="sm" variant="ghost">View usage</Button>
   </CardFooter>
 </Card>`}
-      cliInstall={`npx aether-ui add card`}
+      cliInstall={`npx @aetherstack/cli add card`}
       manualInstallCode={MANUAL_SOURCE}
       examples={[
         {

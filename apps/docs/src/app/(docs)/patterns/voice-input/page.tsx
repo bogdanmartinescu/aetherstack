@@ -9,7 +9,7 @@ export default function VoiceInputPage() {
       name="Voice Input"
       description="A microphone button that captures speech using the browser's Web Speech API and returns a transcript string via the onTranscript callback. The button pulses with a destructive style while recording. Falls back gracefully in browsers that do not support the API."
       packageName="@aetherstack/patterns"
-      cliInstall="npx aether-ui add voice-input"
+      cliInstall="npx @aetherstack/cli add voice-input"
       importCode={`import { VoiceInput } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { VoiceInput } from "@aetherstack/patterns"

@@ -113,7 +113,7 @@ export function ScrollAreaDemo() {
     </ScrollArea>
   )
 }`}
-      cliInstall={`npx aether-ui add scroll-area`}
+      cliInstall={`npx @aetherstack/cli add scroll-area`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

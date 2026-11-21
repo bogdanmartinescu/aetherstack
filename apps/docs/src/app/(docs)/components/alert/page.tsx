@@ -99,7 +99,7 @@ import { CheckCircle2 } from "lucide-react"
   <AlertTitle>Success</AlertTitle>
   <AlertDescription>Your changes have been saved.</AlertDescription>
 </Alert>`}
-      cliInstall="npx aether-ui add alert"
+      cliInstall="npx @aetherstack/cli add alert"
       manualInstallCode={SOURCE}
       examples={[
         {

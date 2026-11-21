@@ -13,7 +13,7 @@ export default function SignupBlockPage() {
       name="Sign Up"
       category="Auth"
       description="A centered sign-up form with full name, email, and password fields. Includes inline validation, a terms/privacy footer, and a link back to the login page."
-      cliInstall="npx aether-ui add signup-block"
+      cliInstall="npx @aetherstack/cli add signup-block"
       previewHeight="520px"
       importCode={`import { SignupBlock } from "@aetherstack/blocks"`}
       usageCode={`import { SignupBlock } from "@aetherstack/blocks"

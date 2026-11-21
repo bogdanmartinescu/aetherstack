@@ -20,7 +20,7 @@ export default function AnimatedNumberPage() {
   value={48210}
   format={{ style: "currency", currency: "USD", maximumFractionDigits: 0 }}
 />`}
-      cliInstall="npx aether-ui add animated-number"
+      cliInstall="npx @aetherstack/cli add animated-number"
       manualInstallCode={ANIMATED_NUMBER_SOURCE}
       examples={[]}
       props={[

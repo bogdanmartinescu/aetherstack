@@ -8,7 +8,7 @@ export default function StepperPage() {
     <PatternPage
       name="Stepper"
       description="A multi-step progress indicator that shows completed, current, and upcoming steps. Supports horizontal and vertical orientations with connector lines and optional step descriptions."
-      cliInstall="npx aether-ui add stepper"
+      cliInstall="npx @aetherstack/cli add stepper"
       importCode={`import { Stepper } from "@aetherstack/patterns"
 import type { StepperItem } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"

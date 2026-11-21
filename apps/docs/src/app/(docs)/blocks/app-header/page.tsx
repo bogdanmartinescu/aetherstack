@@ -14,7 +14,7 @@ export default function AppHeaderPage() {
       name="App Header"
       category="App navigation"
       description="A sticky application top navigation bar with logo, nav links that highlight the active route, and a right-side actions slot. Collapses to a sheet on mobile."
-      cliInstall="npx aether-ui add app-header"
+      cliInstall="npx @aetherstack/cli add app-header"
       previewHeight="72px"
       importCode={`import { AppHeader } from "@aetherstack/blocks"`}
       usageCode={`import { AppHeader } from "@aetherstack/blocks"

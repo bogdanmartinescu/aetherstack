@@ -161,7 +161,7 @@ export function TableDemo() {
     </Table>
   )
 }`}
-      cliInstall={`npx aether-ui add table`}
+      cliInstall={`npx @aetherstack/cli add table`}
       manualInstallCode={MANUAL_SOURCE}
       examples={[
         {

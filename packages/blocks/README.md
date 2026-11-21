@@ -69,10 +69,10 @@ import {
 ## CLI-first workflow
 
 ```bash
-npx aether-ui add dashboard-shell
-npx aether-ui add account-settings
-npx aether-ui add landing-hero
-npx aether-ui add chat-layout
+npx @aetherstack/cli add dashboard-shell
+npx @aetherstack/cli add account-settings
+npx @aetherstack/cli add landing-hero
+npx @aetherstack/cli add chat-layout
 ```
 
 See [aether-ui.dev/blocks](https://aether-ui.dev/blocks).
