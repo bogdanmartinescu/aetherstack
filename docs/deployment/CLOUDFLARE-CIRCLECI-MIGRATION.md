@@ -8,15 +8,15 @@
 
 **Use CircleCI exclusively for CI/CD:** checks, tests, builds, release verification and eventually Wrangler deployments. Keep GitHub for Git, issues and PRs; keep npm for the CLI, MCP server and library packages. Do **not** use GitHub Actions, Vercel deploy workflows or Cloudflare Workers Builds as independent build systems. Cloudflare provides DNS, SSL, CDN and Workers Static Assets. Prefer Workers over new Pages deployments.
 
-| Existing application/package               | Current implementation                                | Target                                                                           |
-| ------------------------------------------ | ----------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `apps/registry-public`                     | Next.js 16, `output: "export"`, static `out/`         | `registry.aether-ui.dev`: Worker Static Assets                                   |
-| `apps/docs`                                | Next.js 16, component demos, no observed API handlers | `aether-ui.dev`: test static export first, otherwise evaluate vinext             |
-| `apps/demo`                                | Next.js 16, no observed API handlers                  | `demo.aether-ui.dev`: static Worker                                              |
-| `apps/studio`                              | Next.js 16, component playground                      | `studio.aether-ui.dev`: static Worker; restrict with Access until public release |
-| `packages/cli`                             | Node CLI `@aetherstack/cli`                           | npm; registry hostname unchanged                                                 |
-| `packages/mcp-server`                      | stdio MCP package                                     | npm; no Cloudflare hosting needed                                                |
-| `packages/{ui,patterns,blocks,tokens,...}` | npm packages                                          | npm; no runtime hosting move                                                     |
+**Deployment targets:**
+
+- **`apps/registry-public`** — Next.js 16, `output: "export"`, static `out/`; target: `registry.aether-ui.dev`: Worker Static Assets.
+- **`apps/docs`** — Next.js 16, component demos, no observed API handlers; target: `aether-ui.dev`: test static export first, otherwise evaluate vinext.
+- **`apps/demo`** — Next.js 16, no observed API handlers; target: `demo.aether-ui.dev`: static Worker.
+- **`apps/studio`** — Next.js 16, component playground; target: `studio.aether-ui.dev`: static Worker; restrict with Access until public release.
+- **`packages/cli`** — Node CLI `@aetherstack/cli`; target: npm; registry hostname unchanged.
+- **`packages/mcp-server`** — stdio MCP package; target: npm; no Cloudflare hosting needed.
+- **`packages/{ui,patterns,blocks,tokens,...}`** — npm packages; target: npm; no runtime hosting move.
 
 Do not rewrite UI packages, migrate framework versions or add D1/R2/Queues for static registry assets. Future private registries and team services can use Workers + R2/D1 after explicit business gates, independently from this hosting migration.
 
@@ -36,10 +36,13 @@ Do not rewrite UI packages, migrate framework versions or add D1/R2/Queues for s
 
 This configuration covers the *build/validation* part of the migration immediately; it does **not** imply that Cloudflare projects are already provisioned or deployments are active.
 
-
 ### CircleCI pnpm bootstrap (EACCES)
 
 The CircleCI `cimg/node:22.16` image may contain a root-owned global pnpm in `/usr/local/lib/node_modules`. Do **not** run `npm install --global pnpm@9.1.0` against that prefix; it can fail with `EACCES` while renaming pnpm files. `.circleci/config.yml` instead installs pnpm 9.1.0 under `$HOME/.local/pnpm` using `npm install --global --prefix "$HOME/.local/pnpm" pnpm@9.1.0`, prepends its `bin` to `PATH`, and writes the same PATH update to `$BASH_ENV` for later steps. It verifies the pinned version before `pnpm install --frozen-lockfile`. No sudo, global permission changes, or fallback to an unpinned pnpm. Re-run the CircleCI PR build to verify the fix in the actual image.
+
+### npm authentication during CI
+
+The repository `.npmrc` configures the public `@aetherstack` registry without a token placeholder. Routine CircleCI verification can install public dependencies without `NPM_TOKEN`. Only the restricted, manually authorized `publish_npm` job writes an npm authentication token to `$HOME/.npmrc` with user-only file permissions; `NPM_TOKEN` remains in the `aether-npm-release` context and is never committed to Git.
 
 ## 3. M0-08 becomes Cloudflare-first: CF-01 registry
 
@@ -75,6 +78,7 @@ The CircleCI `cimg/node:22.16` image may contain a root-owned global pnpm in `/u
 Only CircleCI invokes Wrangler. Do **not** enable Cloudflare Workers Builds/Git integration in parallel.
 
 After CF-01..04 static exports are proven, expand `.circleci/config.yml` with distinct jobs:
+
 - `deploy_registry`, `deploy_docs`, `deploy_demo`, `deploy_studio`. Jobs `requires: [verify]`; `main` only; use the restricted `aether-cloudflare-deploy` context.
 - Declare pipeline parameters such as `deploy_registry=false`, `deploy_docs=false`, or use explicit CircleCI approval steps. Require operator approval before initial production cutover; enable controlled auto-deploy only after a successful staged run.
 - Validate that `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` exist without logging values. Cloudflare API token: minimum Worker editing permissions for existing Workers; add routes/custom domain permissions only when needed. Restrict CircleCI context to protected branches/maintainers.
@@ -93,30 +97,30 @@ After CF-01..04 static exports are proven, expand `.circleci/config.yml` with di
 
 ## 8. CF-07 acceptance, release and M0 closeout
 
-| Test                   | Required                                                                                  |
-| ---------------------- | ----------------------------------------------------------------------------------------- |
-| CircleCI PR validation | Format, TS, ESLint, unit/integration, build, registry, consumer fixture pass              |
-| CLI clean install      | Published CLI retrieves actual production manifest/item and installs usable source        |
-| Registry endpoints     | Aggregate, component, `llms.txt` 200 + schema/count + CORS/cache; bad slug 404            |
-| Docs                   | All canonical pages/metadata, demos and deep links; unknown URL 404                       |
-| Demo/Studio            | Correct routing, CSS/fonts, responsive states; Studio Access as planned                   |
-| Deployment             | Reproducible CircleCI job, constrained context, recorded commit/build version             |
-| Rollback               | Previous Worker version can be restored and rechecked                                     |
-| npm                    | Manual CircleCI publish path validated with authorized token and package access           |
-| Governance             | GitHub branch protection requires CircleCI checks; no GitHub Actions or Cloudflare Builds |
-| Documentation          | README, migration state, incident runbooks and build instructions current                 |
+**Required acceptance evidence:**
+
+- **CircleCI PR validation:** Format, TS, ESLint, unit/integration, build, registry, consumer fixture pass.
+- **CLI clean install:** Published CLI retrieves actual production manifest/item and installs usable source.
+- **Registry endpoints:** Aggregate, component, `llms.txt` 200 + schema/count + CORS/cache; bad slug 404.
+- **Docs:** All canonical pages/metadata, demos and deep links; unknown URL 404.
+- **Demo/Studio:** Correct routing, CSS/fonts, responsive states; Studio Access as planned.
+- **Deployment:** Reproducible CircleCI job, constrained context, recorded commit/build version.
+- **Rollback:** Previous Worker version can be restored and rechecked.
+- **npm:** Manual CircleCI publish path validated with authorized token and package access.
+- **Governance:** GitHub branch protection requires CircleCI checks; no GitHub Actions or Cloudflare Builds.
+- **Documentation:** README, migration state, incident runbooks and build instructions current.
 
 Update `docs/roadmap/execution-state.md` and `docs/roadmap/audits/m0-10-rc-verification.md` with fresh results. **M0 is not complete** while a production deployment or authorized package release gate remains blocked.
 
 ## 9. Secret handling and operator checklist
 
-| Place                                                | Variables                                       | Notes                                                          |
-| ---------------------------------------------------- | ----------------------------------------------- | -------------------------------------------------------------- |
-| CircleCI `aether-cloudflare-deploy` context (future) | `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` | Scope token narrowly; protect context                          |
-| CircleCI `aether-npm-release` context                | `NPM_TOKEN`                                     | Only when owner authorizes publishing and org permissions work |
-| GitHub                                               | Branch rules, reviews, CircleCI required checks | **No** deployment credentials or Actions workflows             |
-| Cloudflare                                           | Worker names, Custom Domains, DNS, Access       | No automatic Cloudflare Builds                                 |
-| Repository                                           | Wrangler configs, CI definition, docs           | Never commit token values or `.env` secrets                    |
+**Secret and access ownership:**
+
+- **CircleCI `aether-cloudflare-deploy` context (future):** `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`; Scope token narrowly; protect context.
+- **CircleCI `aether-npm-release` context:** `NPM_TOKEN`; Only when owner authorizes publishing and org permissions work.
+- **GitHub:** Branch rules, reviews, CircleCI required checks; **No** deployment credentials or Actions workflows.
+- **Cloudflare:** Worker names, Custom Domains, DNS, Access; No automatic Cloudflare Builds.
+- **Repository:** Wrangler configs, CI definition, docs; Never commit token values or `.env` secrets.
 
 ### Owner prerequisites
 
@@ -141,6 +145,7 @@ Connect the repo in CircleCI and confirm first CI green; later create Cloudflare
 7. Resume M1–M7 product roadmap. Keep the four app deployments separate and never replace runtime npm/stdio packaging with Cloudflare hosting.
 
 ### References
+
 - [CircleCI configuration](https://circleci.com/docs/reference/configuration-reference/)
 - [CircleCI pipeline configuration validation](https://circleci.com/docs/guides/toolkit/how-to-use-the-circleci-local-cli/)
 - [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/)
