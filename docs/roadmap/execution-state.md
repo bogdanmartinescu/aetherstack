@@ -215,3 +215,12 @@ Record milestone, all required task IDs, exact suite/results, known limitations,
 - Changes: CircleCI validation and manual-gated npm release config; removed GitHub Actions workflow files in PR; added docs/deployment/CLOUDFLARE-CIRCLECI-MIGRATION.md; linked roadmap and README.
 - Status: CI migration PREPARED, NOT VERIFIED. CircleCI project connection, pipeline run, Cloudflare worker deployments, domain cutover and npm release have **not** been performed.
 - Next: Connect repository to CircleCI, validate config, obtain green PR run, enable CircleCI required check, merge PR; implement CF-01 registry Worker preview and deployment with protected CircleCI context. Never label M0-08 complete until live endpoint tests pass.
+
+### Checkpoint 2026-11-21 — CF-01 Cloudflare registry deployment preparation
+
+- Branch: `feat/cf-01-cloudflare-registry-preview`, based on `ac18373e6306` on `main`.
+- Scope: registry Worker Static Assets configuration, Cloudflare `_headers`, local export and remote HTTP smoke checks, manual CircleCI approval and deployment job, owner runbook. Remove obsolete Vercel registry config.
+- Acceptance: normal CircleCI verification green; generated output matches manifest, deploy job is gated behind `deploy_registry=true` on `main`, restricted context and manual approval; preview and production HTTP smoke pass when owner has configured the account.
+- Current state: PREPARED FOR PR, NOT DEPLOYED. No Cloudflare credentials, domain attachment, Worker version or smoke result has been confirmed. The PR's CI result must be recorded after it completes.
+- Owner gate: set `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, and `REGISTRY_SMOKE_BASE_URL` in restricted CircleCI context; authorize preview deployment and custom-domain attachment separately. npm organization publishing remains blocked until validated.
+- Next: merge after green CI; trigger protected preview pipeline, approve it, verify Cloudflare Worker URL, then attach `registry.aether-ui.dev` and smoke-check production.

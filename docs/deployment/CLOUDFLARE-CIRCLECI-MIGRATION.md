@@ -2,7 +2,7 @@
 
 Migration reference for the AetherStack monorepo. Baseline: `main` at `1ea579b00b6c` on November 21, 2026.
 
-Status: CircleCI configuration is prepared in the migration pull request. Cloudflare Workers, DNS cutover, restricted deployment contexts, and npm publishing are not verified as operational.
+Status: CircleCI verification passed on PR #28, merged into `main` at `ac18373e` on November 21, 2026. Cloudflare Workers, DNS cutover, restricted deployment contexts, and npm publishing are not verified as operational.
 
 This document complements [GOAL.md](../../GOAL.md), [AGENTS.md](../../AGENTS.md), [ROADMAP.md](../../ROADMAP.md), and [execution-state.md](../roadmap/execution-state.md). It supersedes the historical Vercel instructions in [the M0-08 runbook](../roadmap/audits/m0-08-cdn-runbook.md).
 
@@ -30,7 +30,7 @@ The repository-root `.circleci/config.yml` is the source of truth for CI. Use No
 
 The verification job must run the repository's existing formatting, TypeScript, lint, registry validation, registry generation, generated-artifact freshness, unit tests, workspace builds, and isolated Next.js and Vite consumer installation checks.
 
-The older `.github/workflows` CI, registry deployment, and release workflows are removed by the migration pull request. GitHub must not retain parallel production jobs after the CircleCI transition.
+The old `.github/workflows` CI, registry deployment, and release workflows were removed from `main` by PR #27. GitHub must not retain parallel production jobs after the CircleCI transition.
 
 Connect the GitHub repository to CircleCI and confirm a green pull request pipeline. Protect `main` using the actual CircleCI required status check. YAML validation alone is not sufficient evidence that the migration succeeded.
 
@@ -61,6 +61,10 @@ Add a CircleCI deployment job that invokes the pinned Wrangler version only afte
 After preview validation, attach `registry.aether-ui.dev` to the Worker. Verify HTTP 200 for the aggregate JSON, individual component JSON, and `llms.txt`. Verify schema integrity, accurate cache headers, appropriate CORS, and HTTP 404 for unknown component names.
 
 Complete an installation smoke test in an external clean project using the published `@aetherstack/cli` package and the production registry endpoint. Do not mark M0-08 complete based only on local artifact generation.
+
+### CF-01 implementation status
+
+CircleCI-gated preview deployment configuration, the Worker definition, static output checks, and a deployment runbook are introduced in `feat/cf-01-cloudflare-registry-preview`. See [CF-01 Registry Runbook](./REGISTRY-RUNBOOK.md). The Worker and custom domain remain pending the owner-controlled CircleCI context and live smoke validation. An exact Wrangler 4.165.0 installation is used in the gated job as an interim bootstrap; move Wrangler into the pnpm lockfile in a follow-up dependency maintenance change.
 
 ## CF-02: Migrate the documentation website
 

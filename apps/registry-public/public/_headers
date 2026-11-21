@@ -1,0 +1,9 @@
+# Public, unversioned registry endpoints. Keep TTLs short until immutable URLs exist.
+/r/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=60, s-maxage=60, stale-while-revalidate=300
+  X-Content-Type-Options: nosniff
+
+/llms.txt
+  Cache-Control: public, max-age=300, s-maxage=300, stale-while-revalidate=300
+  X-Content-Type-Options: nosniff
