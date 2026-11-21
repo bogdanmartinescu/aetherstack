@@ -8,6 +8,9 @@ parameters:
   publish_npm:
     type: boolean
     default: false
+  deploy_registry:
+    type: boolean
+    default: false
 
 executors:
   node:
@@ -72,6 +75,45 @@ jobs:
           name: Clean Next.js and Vite consumer installs
           command: pnpm consumer-install
 
+  deploy_registry:
+    executor: node
+    steps:
+      - setup_project
+      - run:
+          name: Verify required Cloudflare deployment settings
+          command: |
+            set -euo pipefail
+            for key in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID REGISTRY_SMOKE_BASE_URL; do
+              if [ -z "${!key:-}" ]; then
+                echo "Missing $key in the restricted aether-cloudflare-deploy context"
+                exit 1
+              fi
+            done
+            if ! [[ "$CLOUDFLARE_ACCOUNT_ID" =~ ^[0-9a-fA-F]{32}$ ]]; then
+              echo "CLOUDFLARE_ACCOUNT_ID must be 32 hexadecimal characters"
+              exit 1
+            fi
+      - run:
+          name: Build registry and validate static export
+          command: |
+            set -euo pipefail
+            pnpm --filter @aetherstack/scripts validate-registry
+            pnpm --filter @aetherstack/scripts build-registry
+            pnpm --filter @aetherstack/registry-public build
+            node scripts/verify-registry-output.mjs
+      - run:
+          name: Deploy preview Worker with pinned Wrangler 4.165.0
+          command: |
+            set -euo pipefail
+            WRANGLER_PREFIX="$HOME/.local/wrangler"
+            mkdir -p "$WRANGLER_PREFIX"
+            npm install --global --prefix "$WRANGLER_PREFIX" --no-audit --no-fund wrangler@4.165.0
+            "$WRANGLER_PREFIX/bin/wrangler" --version
+            "$WRANGLER_PREFIX/bin/wrangler" deploy --config apps/registry-public/wrangler.jsonc
+      - run:
+          name: Smoke-test deployed registry
+          command: node scripts/smoke-registry.mjs "$REGISTRY_SMOKE_BASE_URL"
+
   publish_npm:
     executor: node
     steps:
@@ -97,6 +139,16 @@ workflows:
   validate_and_release:
     jobs:
       - verify
+      - approve_registry_preview:
+          type: approval
+          requires:
+            - verify
+          filters: pipeline.git.branch == "main" and pipeline.parameters.deploy_registry
+      - deploy_registry:
+          context: aether-cloudflare-deploy
+          requires:
+            - approve_registry_preview
+          filters: pipeline.git.branch == "main" and pipeline.parameters.deploy_registry
       - publish_npm:
           context: aether-npm-release
           requires:

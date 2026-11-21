@@ -62,6 +62,10 @@ After preview validation, attach `registry.aether-ui.dev` to the Worker. Verify 
 
 Complete an installation smoke test in an external clean project using the published `@aetherstack/cli` package and the production registry endpoint. Do not mark M0-08 complete based only on local artifact generation.
 
+### CF-01 implementation status
+
+CircleCI-gated preview deployment configuration, the Worker definition, static output checks, and a deployment runbook are introduced in `feat/cf-01-cloudflare-registry-preview`. See [CF-01 Registry Runbook](./REGISTRY-RUNBOOK.md). The Worker and custom domain remain pending the owner-controlled CircleCI context and live smoke validation. An exact Wrangler 4.165.0 installation is used in the gated job as an interim bootstrap; move Wrangler into the pnpm lockfile in a follow-up dependency maintenance change.
+
 ## CF-02: Migrate the documentation website
 
 Audit `apps/docs` for server APIs, dynamic routes, Next.js Image optimization, redirects, generated metadata, client search, component preview dependencies, fonts, and theme state.
