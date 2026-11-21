@@ -2,6 +2,9 @@ import { existsSync, readdirSync, statSync } from "node:fs"
 import { resolve } from "node:path"
 import type { MetadataRoute } from "next"
 
+// Emit the sitemap at build time for Cloudflare Workers Static Assets.
+export const dynamic = "force-static"
+
 const BASE_URL = "https://aether-ui.dev"
 
 /**

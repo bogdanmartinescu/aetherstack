@@ -36,9 +36,17 @@ for (const route of routes) {
   assert.ok((await stat(file)).isFile(), `Missing static export for ${route}`)
 }
 
-for (const file of ["404.html", "llms.txt", "_headers", "_redirects"]) {
+for (const file of ["404.html", "llms.txt", "robots.txt", "sitemap.xml", "_headers", "_redirects"]) {
   assert.ok((await stat(join(output, file))).isFile(), `Missing docs output ${file}`)
 }
+
+const [robotsTxt, sitemapXml] = await Promise.all([
+  readFile(join(output, "robots.txt"), "utf8"),
+  readFile(join(output, "sitemap.xml"), "utf8"),
+])
+assert.ok(robotsTxt.includes("Sitemap: https://aether-ui.dev/sitemap.xml"), "Wrong robots sitemap")
+assert.ok(sitemapXml.includes("<urlset"), "Sitemap is not valid-looking XML")
+assert.ok(sitemapXml.includes("https://aether-ui.dev/"), "Sitemap must link to the canonical host")
 
 const redirects = await readFile(join(output, "_redirects"), "utf8")
 assert.ok(redirects.includes("/components/code-block-ai"), "Missing legacy redirect")

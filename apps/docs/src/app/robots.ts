@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next"
 
+// Static export has no server runtime for metadata route handlers.
+export const dynamic = "force-static"
+
 const BASE_URL = "https://aether-ui.dev"
 
 export default function robots(): MetadataRoute.Robots {
