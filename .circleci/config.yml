@@ -72,6 +72,9 @@ jobs:
           name: Build packages and applications
           command: pnpm build
       - run:
+          name: Verify exported public registry
+          command: node scripts/verify-registry-output.mjs
+      - run:
           name: Clean Next.js and Vite consumer installs
           command: pnpm consumer-install
 
