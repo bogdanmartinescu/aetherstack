@@ -13,14 +13,14 @@ import {
   MenubarCheckboxItem,
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-import { getRegistrySource } from "@/lib/registry-source"
+import { MENUBAR_SOURCE } from "@/lib/registry-source"
 
 export const metadata: Metadata = {
   title: "Menubar",
   description: "An application-level menu bar for top-level navigation commands.",
 }
 
-const MANUAL_SOURCE = getRegistrySource("menubar")
+const MANUAL_SOURCE = MENUBAR_SOURCE
 
 export default function MenubarPage() {
   return (

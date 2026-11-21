@@ -1,10 +1,10 @@
 "use client"
 
 import { ComponentPage } from "@/components/component-page"
-import { getRegistrySource } from "@/lib/registry-source"
+import { TOAST_SOURCE } from "@/lib/registry-source"
 import { ToastPreview, ToastDestructivePreview } from "@/components/previews/interactive-previews"
 
-const MANUAL_SOURCE = getRegistrySource("toast")
+const MANUAL_SOURCE = TOAST_SOURCE
 
 export default function ToastPage() {
   return (

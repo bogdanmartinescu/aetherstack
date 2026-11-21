@@ -1,14 +1,14 @@
 import type { Metadata } from "next"
 import { DatePicker } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-import { getRegistrySource } from "@/lib/registry-source"
+import { DATE_PICKER_SOURCE } from "@/lib/registry-source"
 
 export const metadata: Metadata = {
   title: "Date Picker",
   description: "A date selection field composing Calendar and Popover with formatted display.",
 }
 
-const MANUAL_SOURCE = getRegistrySource("date-picker")
+const MANUAL_SOURCE = DATE_PICKER_SOURCE
 
 export default function DatePickerPage() {
   return (

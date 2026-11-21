@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { ComponentPage } from "@/components/component-page"
-import { getRegistrySource } from "@/lib/registry-source"
+import { SHEET_SOURCE } from "@/lib/registry-source"
 import { SheetPreview } from "@/components/previews/interactive-previews"
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "A slide-in panel from any screen edge.",
 }
 
-const MANUAL_SOURCE = getRegistrySource("sheet")
+const MANUAL_SOURCE = SHEET_SOURCE
 
 export default function SheetPage() {
   return (

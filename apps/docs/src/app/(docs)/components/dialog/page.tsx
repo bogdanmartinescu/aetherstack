@@ -1,10 +1,10 @@
 "use client"
 
 import { ComponentPage } from "@/components/component-page"
-import { getRegistrySource } from "@/lib/registry-source"
+import { DIALOG_SOURCE } from "@/lib/registry-source"
 import { DialogPreview } from "@/components/previews/interactive-previews"
 
-const MANUAL_SOURCE = getRegistrySource("dialog")
+const MANUAL_SOURCE = DIALOG_SOURCE
 
 export default function DialogPage() {
   return (

@@ -1,7 +1,7 @@
 "use client"
 
 import { ComponentPage } from "@/components/component-page"
-import { getRegistrySource } from "@/lib/registry-source"
+import { DROPDOWN_MENU_SOURCE } from "@/lib/registry-source"
 import {
   DropdownMenuPreview,
   DropdownMenuGroupPreview,
@@ -9,7 +9,7 @@ import {
   DropdownMenuShortcutsPreview,
 } from "@/components/previews/interactive-previews"
 
-const MANUAL_SOURCE = getRegistrySource("dropdown-menu")
+const MANUAL_SOURCE = DROPDOWN_MENU_SOURCE
 
 export default function DropdownMenuPage() {
   return (

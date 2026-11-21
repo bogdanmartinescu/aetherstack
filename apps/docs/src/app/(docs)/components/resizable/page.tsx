@@ -1,14 +1,14 @@
 import type { Metadata } from "next"
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-import { getRegistrySource } from "@/lib/registry-source"
+import { RESIZABLE_SOURCE } from "@/lib/registry-source"
 
 export const metadata: Metadata = {
   title: "Resizable",
   description: "Draggable split-pane panels for adjustable layouts.",
 }
 
-const MANUAL_SOURCE = getRegistrySource("resizable")
+const MANUAL_SOURCE = RESIZABLE_SOURCE
 
 export default function ResizablePage() {
   return (

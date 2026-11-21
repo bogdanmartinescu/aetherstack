@@ -1,14 +1,14 @@
 import type { Metadata } from "next"
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-import { getRegistrySource } from "@/lib/registry-source"
+import { INPUT_OTP_SOURCE } from "@/lib/registry-source"
 
 export const metadata: Metadata = {
   title: "Input OTP",
   description: "An accessible one-time password input with individual digit slots.",
 }
 
-const MANUAL_SOURCE = getRegistrySource("input-otp")
+const MANUAL_SOURCE = INPUT_OTP_SOURCE
 
 export default function InputOTPPage() {
   return (

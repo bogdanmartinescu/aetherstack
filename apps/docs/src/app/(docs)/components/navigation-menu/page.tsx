@@ -8,7 +8,7 @@ import {
   NavigationMenuLink,
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-import { getRegistrySource } from "@/lib/registry-source"
+import { NAVIGATION_MENU_SOURCE } from "@/lib/registry-source"
 
 const navTriggerStyle =
   "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: "A full navigation menu with animated submenus and keyboard support.",
 }
 
-const MANUAL_SOURCE = getRegistrySource("navigation-menu")
+const MANUAL_SOURCE = NAVIGATION_MENU_SOURCE
 
 export default function NavigationMenuPage() {
   return (

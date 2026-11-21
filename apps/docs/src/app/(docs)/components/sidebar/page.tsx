@@ -12,7 +12,7 @@ import {
   SidebarTrigger,
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-import { getRegistrySource } from "@/lib/registry-source"
+import { SIDEBAR_SOURCE } from "@/lib/registry-source"
 import { LayoutDashboard, Settings, Users, HelpCircle } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: "A context-driven collapsible sidebar with icon-only collapsed mode.",
 }
 
-const MANUAL_SOURCE = getRegistrySource("sidebar")
+const MANUAL_SOURCE = SIDEBAR_SOURCE
 
 function SidebarPreview() {
   return (

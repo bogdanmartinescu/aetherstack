@@ -7,14 +7,14 @@ import {
   CarouselNext,
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-import { getRegistrySource } from "@/lib/registry-source"
+import { CAROUSEL_SOURCE } from "@/lib/registry-source"
 
 export const metadata: Metadata = {
   title: "Carousel",
   description: "A touch-friendly slider built on Embla Carousel with prev/next navigation.",
 }
 
-const MANUAL_SOURCE = getRegistrySource("carousel")
+const MANUAL_SOURCE = CAROUSEL_SOURCE
 
 export default function CarouselPage() {
   return (
