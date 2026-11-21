@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { AppHeader } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
 import { Button } from "@aetherstack/ui"
-
-export const metadata: Metadata = {
-  title: "App Header",
-  description: "A sticky application top navigation bar with logo, nav links, and action slots.",
-}
 
 export default function AppHeaderPage() {
   return (

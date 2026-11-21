@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { LogoCloud } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Logo Cloud",
-  description: "A partner/trusted-by logo grid with optional greyscale filter.",
-}
 
 export default function LogoCloudPage() {
   return (

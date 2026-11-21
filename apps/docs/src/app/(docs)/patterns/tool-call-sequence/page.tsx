@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { ToolCallSequencePreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "Tool Call Sequence",
-  description:
-    "A collapsible step list that visualises the status and details of sequential AI tool calls.",
-}
 
 export default function ToolCallSequencePage() {
   return (

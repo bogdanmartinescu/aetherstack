@@ -1,13 +1,7 @@
-import type { Metadata } from "next"
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
 import { INPUT_GROUP_SOURCE } from "@/lib/registry-source"
 import { DollarSign, Search } from "lucide-react"
-
-export const metadata: Metadata = {
-  title: "Input Group",
-  description: "An Input with left and/or right addon slots for icons, labels, or buttons.",
-}
 
 const MANUAL_SOURCE = INPUT_GROUP_SOURCE
 

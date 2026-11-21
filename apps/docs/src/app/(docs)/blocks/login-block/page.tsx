@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { LoginBlock } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Login",
-  description: "Centered login card with email, password, remember-me, and forgot-password link.",
-}
 
 export default function LoginBlockPage() {
   return (

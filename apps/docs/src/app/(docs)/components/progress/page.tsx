@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { Progress, ProgressRing } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Progress",
-  description: "Displays an indicator showing the completion progress of a task.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

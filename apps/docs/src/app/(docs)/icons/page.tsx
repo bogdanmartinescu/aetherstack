@@ -1,11 +1,4 @@
-import type { Metadata } from "next"
 import { CodeBlock } from "@/components/code-block"
-
-export const metadata: Metadata = {
-  title: "Icons",
-  description:
-    "Aether UI ships with Lucide React as the default icon library — lightweight, consistent, and tree-shakeable.",
-}
 
 const ICON_GROUPS = [
   {

@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { FeaturesSection } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Features Section",
-  description: "A features showcase with icon, title, and description per feature in a grid.",
-}
 
 export default function FeaturesSectionPage() {
   return (

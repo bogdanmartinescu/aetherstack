@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { MarketingNavbar } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Marketing Navbar",
-  description: "A sticky marketing site navigation with logo, links, and a CTA button.",
-}
 
 export default function MarketingNavbarPage() {
   return (

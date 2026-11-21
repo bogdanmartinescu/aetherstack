@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { TestimonialsSection } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Testimonials Section",
-  description: "A social proof grid of customer quotes with avatar, name, and role.",
-}
 
 export default function TestimonialsSectionPage() {
   return (

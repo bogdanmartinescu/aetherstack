@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { Breadcrumb } from "@aetherstack/patterns"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Breadcrumb",
-  description: "Accessible crumb trail with configurable separator.",
-}
 
 export default function BreadcrumbPage() {
   return (

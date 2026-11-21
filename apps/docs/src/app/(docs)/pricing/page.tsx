@@ -1,11 +1,4 @@
-import type { Metadata } from "next"
 import Link from "next/link"
-
-export const metadata: Metadata = {
-  title: "Pricing",
-  description:
-    "Aether UI is free for personal and open-source use. Pro unlocks commercial use, advanced components, page templates, vertical kits, premium themes, and more.",
-}
 
 // ---------------------------------------------------------------------------
 // Icons

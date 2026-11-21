@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import {
   SidebarProvider,
   Sidebar,
@@ -14,11 +13,6 @@ import {
 import { ComponentPage } from "@/components/component-page"
 import { SIDEBAR_SOURCE } from "@/lib/registry-source"
 import { LayoutDashboard, Settings, Users, HelpCircle } from "lucide-react"
-
-export const metadata: Metadata = {
-  title: "Sidebar",
-  description: "A context-driven collapsible sidebar with icon-only collapsed mode.",
-}
 
 const MANUAL_SOURCE = SIDEBAR_SOURCE
 

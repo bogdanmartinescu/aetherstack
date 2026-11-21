@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { ProfileDropdownPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "Profile Dropdown",
-  description: "A user avatar trigger with name, role, and a dropdown of nav links and sign-out.",
-}
 
 export default function ProfileDropdownPage() {
   return (

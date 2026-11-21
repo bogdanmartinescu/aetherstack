@@ -1,14 +1,6 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 import { CodeBlock } from "@/components/code-block"
 import { REGISTRY_STATS } from "@/lib/registry-stats"
-
-export const metadata: Metadata = {
-  title: "Introduction",
-  description:
-    "Aether UI is a premium open-code design system for SaaS, marketing, and AI-powered products. " +
-    `${REGISTRY_STATS.primitives} primitives, ${REGISTRY_STATS.patterns} patterns, ${REGISTRY_STATS.blocks} blocks — install via CLI and own every line of source.`,
-}
 
 function Principle({ title, children }: { title: string; children: React.ReactNode }) {
   return (

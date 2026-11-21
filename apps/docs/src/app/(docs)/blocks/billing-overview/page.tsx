@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { BillingOverview } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Billing Overview",
-  description: "Current plan card, usage metrics with progress bars, and next billing date.",
-}
 
 export default function BillingOverviewPage() {
   return (

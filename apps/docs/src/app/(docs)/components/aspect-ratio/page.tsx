@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { AspectRatio } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Aspect Ratio",
-  description: "Constrains content to a given width/height ratio using Radix UI.",
-}
 
 const MANUAL_SOURCE = `import * as AspectRatioPrimitive from "@radix-ui/react-aspect-ratio"
 

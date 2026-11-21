@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { CodeBlock } from "@/components/code-block"
 import { FormFieldPreview } from "./previews"
-
-export const metadata: Metadata = {
-  title: "Form Field",
-  description: "Label + control + helper text + error message composition with context hook.",
-}
 
 export default function FormFieldPage() {
   return (

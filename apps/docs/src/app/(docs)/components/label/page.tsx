@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { Label, Input, Checkbox } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Label",
-  description: "An accessible label for form fields.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import * as LabelPrimitive from "@radix-ui/react-label"

@@ -1,11 +1,4 @@
-import type { Metadata } from "next"
 import Link from "next/link"
-
-export const metadata: Metadata = {
-  title: "Components",
-  description:
-    "Browse 65 open-code React components — primitives, AI-native UI, and more. All token-driven, accessible by default, and installable via the Aether UI CLI.",
-}
 
 const components = [
   {

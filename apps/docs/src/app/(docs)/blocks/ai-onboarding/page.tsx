@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { BlockPage } from "@/components/block-page"
 import { AIOnboardingPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "AI Onboarding",
-  description: "A multi-step onboarding flow for introducing users to an AI feature or product.",
-}
 
 export default function AIOnboardingPage() {
   return (

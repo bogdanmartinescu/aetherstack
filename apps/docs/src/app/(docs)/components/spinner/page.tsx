@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { Spinner, Button } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Spinner",
-  description: "Animated loading indicator with four sizes.",
-}
 
 const SOURCE = `import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"

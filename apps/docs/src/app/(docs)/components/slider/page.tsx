@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { Slider } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Slider",
-  description:
-    "An input where the user selects a value from within a given range by dragging a thumb.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

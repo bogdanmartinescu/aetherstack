@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { LandingHero } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Landing Hero",
-  description: "A hero section with headline, subheading, dual CTAs, and optional media slot.",
-}
 
 export default function LandingHeroPage() {
   return (

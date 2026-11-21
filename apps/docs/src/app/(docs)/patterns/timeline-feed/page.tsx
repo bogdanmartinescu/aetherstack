@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { TimelineFeed } from "@aetherstack/patterns"
 import { Rocket, GitMerge, Tag, Star } from "lucide-react"
-
-export const metadata: Metadata = {
-  title: "Timeline Feed",
-  description: "A vertical timeline with date markers and event entries.",
-}
 
 const ITEMS = [
   {

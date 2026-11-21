@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { StatGroup, StatItem } from "@aetherstack/patterns"
 import { Users, DollarSign, TrendingUp, ShoppingCart } from "lucide-react"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Stat Group",
-  description: "Responsive grid of stat cards with labels, values, delta indicators, and icons.",
-}
 
 export default function StatGroupPage() {
   return (

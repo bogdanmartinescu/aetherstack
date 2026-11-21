@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { OnboardingChecklist } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Onboarding Checklist",
-  description: "Step-by-step onboarding checklist with progress bar and hide-completed toggle.",
-}
 
 const STEPS = [
   {

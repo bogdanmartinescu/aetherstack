@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { Badge } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Badge",
-  description: "Small label for status, count, or category.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"

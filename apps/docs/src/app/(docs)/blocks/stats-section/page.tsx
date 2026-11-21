@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { StatsSection } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Stats Section",
-  description: "A marketing statistics row with large bold numbers and labels.",
-}
 
 export default function StatsSectionPage() {
   return (

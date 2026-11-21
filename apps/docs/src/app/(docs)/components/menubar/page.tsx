@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import {
   Menubar,
   MenubarMenu,
@@ -14,11 +13,6 @@ import {
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
 import { MENUBAR_SOURCE } from "@/lib/registry-source"
-
-export const metadata: Metadata = {
-  title: "Menubar",
-  description: "An application-level menu bar for top-level navigation commands.",
-}
 
 const MANUAL_SOURCE = MENUBAR_SOURCE
 

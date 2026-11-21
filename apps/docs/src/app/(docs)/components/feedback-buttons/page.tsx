@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { FeedbackButtonsPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "FeedbackButtons",
-  description: "Thumbs up / thumbs down buttons for collecting inline feedback on AI responses.",
-}
 
 export default function FeedbackButtonsPage() {
   return (

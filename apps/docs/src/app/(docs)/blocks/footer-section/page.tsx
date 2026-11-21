@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { FooterSection } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Footer Section",
-  description: "A multi-column site footer with links, social icons, and copyright line.",
-}
 
 export default function FooterSectionPage() {
   return (

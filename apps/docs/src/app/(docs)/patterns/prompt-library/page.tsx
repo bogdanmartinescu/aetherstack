@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { PromptLibraryPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "Prompt Library",
-  description: "A searchable, filterable library of reusable prompts with insert and copy actions.",
-}
 
 export default function PromptLibraryPage() {
   return (

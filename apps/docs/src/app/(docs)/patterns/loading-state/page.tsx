@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { LoadingState } from "@aetherstack/patterns"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Loading State",
-  description: "Spinner or skeleton-row variant for async loading views.",
-}
 
 export default function LoadingStatePage() {
   return (

@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { StreamingTextPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "StreamingText",
-  description:
-    "Renders a string or async token stream character by character, ideal for AI response streaming.",
-}
 
 export default function StreamingTextPage() {
   return (

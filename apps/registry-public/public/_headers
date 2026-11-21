@@ -1,5 +1,13 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Strict-Transport-Security: max-age=31536000
+
 # Public, unversioned registry endpoints. Keep TTLs short until immutable URLs exist.
+# JSON endpoints are for tools, not search results.
 /r/*
+  X-Robots-Tag: noindex
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=60, s-maxage=60, stale-while-revalidate=300
   X-Content-Type-Options: nosniff

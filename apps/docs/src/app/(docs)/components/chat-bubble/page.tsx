@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { ChatBubble } from "@aetherstack/ui"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "ChatBubble",
-  description:
-    "A single message bubble for AI chat UIs, aligned left for assistant messages and right for user messages.",
-}
 
 export default function ChatBubblePage() {
   return (

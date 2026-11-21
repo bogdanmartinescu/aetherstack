@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { ThinkingIndicator } from "@aetherstack/ui"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "ThinkingIndicator",
-  description:
-    "Animated dots with a label used to signal that an AI model is processing or loading.",
-}
 
 export default function ThinkingIndicatorPage() {
   return (

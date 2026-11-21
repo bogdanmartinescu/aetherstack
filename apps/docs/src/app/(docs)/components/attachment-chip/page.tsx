@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { AttachmentChipPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "AttachmentChip",
-  description:
-    "A compact chip representing a file attached to a prompt, with file name, formatted size, and an optional remove button.",
-}
 
 export default function AttachmentChipPage() {
   return (

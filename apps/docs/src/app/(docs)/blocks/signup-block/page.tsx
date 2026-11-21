@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { SignupBlock } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Sign Up",
-  description: "Sign-up form with name, email, and password fields and inline validation.",
-}
 
 export default function SignupBlockPage() {
   return (

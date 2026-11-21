@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { ScrollArea, ScrollBar } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Scroll Area",
-  description: "Augments native scroll functionality for custom, cross-browser scrollbar styling.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

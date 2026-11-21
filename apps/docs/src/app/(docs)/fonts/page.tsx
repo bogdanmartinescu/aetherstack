@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { CodeBlock } from "@/components/code-block"
 import { FontDemo } from "./font-demo"
-
-export const metadata: Metadata = {
-  title: "Fonts",
-  description:
-    "Six curated Google Fonts for clean, professional UI development. Switch globally with one click.",
-}
 
 export default function FontsPage() {
   return (

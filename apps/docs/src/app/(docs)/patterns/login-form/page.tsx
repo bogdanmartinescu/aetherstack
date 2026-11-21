@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { LoginFormPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "Login Form",
-  description:
-    "Sign-in form with email, password, and remember-me, validated with react-hook-form and Zod.",
-}
 
 const IMPORT_CODE = `import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"

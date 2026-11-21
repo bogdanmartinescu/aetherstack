@@ -8,13 +8,16 @@ import { GitHubIcon } from "@/components/docs-sidebar"
 import { ThemeToggle } from "@/components/theme-font-controls"
 import { HeroChatDemo } from "@/components/landing/hero-chat-demo"
 import { InstallCommand } from "@/components/landing/install-command"
+import { JsonLd } from "@/components/json-ld"
 import { REGISTRY_BLOCKS, REGISTRY_STATS } from "@/lib/registry-stats"
+import { SITE_NAME, SITE_URL, pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: { absolute: "Aether UI — React components for SaaS and AI products" },
+export const metadata: Metadata = pageMetadata({
+  title: "Aether UI — React components for SaaS and AI products",
   description:
     "An open-code design system for React and Tailwind. Install accessible, token-themed primitives, patterns, blocks and AI chat components as source you own.",
-}
+  path: "/",
+})
 
 const GITHUB_URL = "https://github.com/bogdanmartinescu/aetherstack"
 const AI_PRIMITIVE_COUNT = 14
@@ -64,9 +67,33 @@ const MCP_TOOLS = [
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
+const HOME_JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: `${SITE_URL}/`,
+      name: SITE_NAME,
+      description:
+        "Open-code React and Tailwind design system for SaaS and AI products, installed as source you own.",
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": `${SITE_URL}/#source`,
+      name: SITE_NAME,
+      url: `${SITE_URL}/`,
+      codeRepository: GITHUB_URL,
+      programmingLanguage: "TypeScript",
+      license: "https://opensource.org/licenses/MIT",
+    },
+  ],
+}
+
 export default function HomePage() {
   return (
     <div className="bg-background text-foreground min-h-screen">
+      <JsonLd data={HOME_JSON_LD} />
       <SiteHeader />
       <main>
         <Hero />

@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { Avatar, AvatarImage, AvatarFallback, AvatarGroup } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Avatar",
-  description:
-    "A circular image element with automatic fallback to initials when the image fails to load.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

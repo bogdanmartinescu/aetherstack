@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { TokenCounterPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "TokenCounter",
-  description:
-    "Displays token usage against a context window limit with a progress bar and formatted counts.",
-}
 
 export default function TokenCounterPage() {
   return (

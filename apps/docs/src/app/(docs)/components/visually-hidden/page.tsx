@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import {
   VisuallyHidden,
   Button,
@@ -10,11 +9,6 @@ import {
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
 import { Settings } from "lucide-react"
-
-export const metadata: Metadata = {
-  title: "Visually Hidden",
-  description: "Hides content visually while keeping it accessible to screen readers.",
-}
 
 const MANUAL_SOURCE = `import * as VisuallyHiddenPrimitive from "@radix-ui/react-visually-hidden"
 

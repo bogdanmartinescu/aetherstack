@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { ErrorPage } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Error Page",
-  description: "A full-page 404/500 error state with code, headline, description, and back link.",
-}
 
 export default function ErrorPageDoc() {
   return (

@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { ComponentPage } from "@/components/component-page"
 import { TooltipPreview } from "@/components/previews/interactive-previews"
-
-export const metadata: Metadata = {
-  title: "Tooltip",
-  description: "A contextual label shown on hover or focus.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import * as TooltipPrimitive from "@radix-ui/react-tooltip"

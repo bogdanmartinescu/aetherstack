@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { ToolCallCard } from "@aetherstack/ui"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "ToolCallCard",
-  description:
-    "Shows a single AI tool invocation with its name, arguments, result, and execution status.",
-}
 
 export default function ToolCallCardPage() {
   return (

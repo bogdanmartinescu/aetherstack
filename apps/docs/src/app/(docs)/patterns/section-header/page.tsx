@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { SectionHeader } from "@aetherstack/patterns"
 import { Button } from "@aetherstack/ui"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Section Header",
-  description: "Lightweight section heading with title, description, and optional action.",
-}
 
 export default function SectionHeaderPage() {
   return (
