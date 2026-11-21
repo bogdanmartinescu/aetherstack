@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const config = {
+  output: "export",
+  trailingSlash: true,
+  images: { unoptimized: true },
   transpilePackages: [
     "@aetherstack/ui",
     "@aetherstack/patterns",
