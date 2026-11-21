@@ -97,7 +97,8 @@ export default function CLIPage() {
         <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Quick start</h2>
         <p className="text-muted-foreground mb-4 text-sm">
           Run the published scoped package from the root of an existing React project. Initializing
-          creates aether.json; it does not install framework dependencies or configure Tailwind for you.
+          creates aether.json; it does not install framework dependencies or configure Tailwind
+          for you.
         </p>
         <CodeBlock
           code={`npx @aetherstack/cli init
@@ -116,16 +117,30 @@ npx @aetherstack/cli add input label --dry-run`}
       </section>
 
       <section className="mb-12">
-        <h2 className="text-foreground mb-6 text-2xl font-semibold tracking-tight">Available commands</h2>
+        <h2 className="text-foreground mb-6 text-2xl font-semibold tracking-tight">
+          Available commands
+        </h2>
 
         <CommandRef
           command="aether-ui init"
           description="Create aether.json with registry and output-directory settings. Existing configs are preserved unless --force is provided."
           options={[
             { flag: "--cwd <path>", description: "Project root (default: current directory)." },
-            { flag: "--registry <url>", description: "Registry origin.", default: "https://registry.aether-ui.dev" },
-            { flag: "--components-dir <path>", description: "Relative path for components.", default: "src/components/ui" },
-            { flag: "--utils-dir <path>", description: "Relative path for utilities.", default: "src/lib" },
+            {
+              flag: "--registry <url>",
+              description: "Registry origin.",
+              default: "https://registry.aether-ui.dev",
+            },
+            {
+              flag: "--components-dir <path>",
+              description: "Relative path for components.",
+              default: "src/components/ui",
+            },
+            {
+              flag: "--utils-dir <path>",
+              description: "Relative path for utilities.",
+              default: "src/lib",
+            },
             { flag: "--force", description: "Replace an existing config file." },
             { flag: "--dry-run", description: "Print the config without writing it." },
           ]}
@@ -134,7 +149,13 @@ npx @aetherstack/cli add input label --dry-run`}
         <CommandRef
           command="aether-ui add <components...>"
           description="Copy one or more named registry items into your initialized project."
-          args={[{ name: "components", description: "At least one registry item name.", required: true }]}
+          args={[
+            {
+              name: "components",
+              description: "At least one registry item name.",
+              required: true,
+            },
+          ]}
           options={[
             { flag: "--cwd <path>", description: "Project root." },
             { flag: "--registry <url>", description: "Override the configured registry." },
@@ -147,7 +168,10 @@ npx @aetherstack/cli add input label --dry-run`}
           command="aether-ui list"
           description="Browse the current remote registry without requiring a local configuration."
           options={[
-            { flag: "--cwd <path>", description: "Read optional project settings from this directory." },
+            {
+              flag: "--cwd <path>",
+              description: "Read optional project settings from this directory.",
+            },
             { flag: "--registry <url>", description: "Override the registry origin." },
             { flag: "--type <type>", description: "Filter by registry type (ui, pattern, block)." },
           ]}
@@ -156,12 +180,21 @@ npx @aetherstack/cli add input label --dry-run`}
         <CommandRef
           command={'aether-ui generate "<description>"'}
           description="Match a description to known registry components and optionally create a starter page. This is rule-based scaffolding, not an LLM API."
-          args={[{ name: "description", description: "Description of the UI to scaffold.", required: true }]}
+          args={[
+            {
+              name: "description",
+              description: "Description of the UI to scaffold.",
+              required: true,
+            },
+          ]}
           options={[
             { flag: "--cwd <path>", description: "Project root." },
             { flag: "--registry <url>", description: "Override the registry origin." },
             { flag: "--dry-run", description: "Preview the component plan without writing files." },
-            { flag: "--no-starter", description: "Install matched components without generating a starter page." },
+            {
+              flag: "--no-starter",
+              description: "Install matched components without generating a starter page.",
+            },
           ]}
         />
       </section>
@@ -171,8 +204,8 @@ npx @aetherstack/cli add input label --dry-run`}
           Configuration
         </h2>
         <p className="text-muted-foreground mb-4 text-sm">
-          The init command writes aether.json. The following is the default configuration
-          (an optional $schema field is also written).
+          The init command writes aether.json. The following is the default configuration (an
+          optional $schema field is also written).
         </p>
         <CodeBlock
           code={`{

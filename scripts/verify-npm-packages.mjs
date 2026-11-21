@@ -37,7 +37,11 @@ async function publishedVersion(name) {
   const url = `https://registry.npmjs.org/${encodeURIComponent(name)}/latest`
   const response = await fetch(url, { signal: AbortSignal.timeout(15_000) })
   if (response.status === 404) return null
-  assert.equal(response.status, 200, `npm registry request for ${name} returned HTTP ${response.status}`)
+  assert.equal(
+    response.status,
+    200,
+    `npm registry request for ${name} returned HTTP ${response.status}`,
+  )
   const metadata = await response.json()
   assert.equal(metadata.name, name, `npm returned unexpected package for ${name}`)
   assert.equal(typeof metadata.version, "string")
@@ -86,8 +90,10 @@ try {
 
     for (const field of ["dependencies", "optionalDependencies", "peerDependencies"]) {
       for (const [name, version] of Object.entries(packed[field] ?? {})) {
-        assert.ok(typeof version === "string" && !version.startsWith("workspace:"),
-          `Unresolved workspace dependency in ${manifest.name}: ${field}.${name}`)
+        assert.ok(
+          typeof version === "string" && !version.startsWith("workspace:"),
+          `Unresolved workspace dependency in ${manifest.name}: ${field}.${name}`,
+        )
       }
     }
 
@@ -105,17 +111,23 @@ try {
 
     for (const entrypoint of entrypoints) {
       const normalized = entrypoint.slice(2)
-      assert.ok(files.has(normalized),
-        `Publishable archive for ${manifest.name} is missing ${entrypoint}`)
+      assert.ok(
+        files.has(normalized),
+        `Publishable archive for ${manifest.name} is missing ${entrypoint}`,
+      )
     }
 
     if (online) {
       const remote = await publishedVersion(manifest.name)
       const status = remote === null ? "new" : compareVersion(manifest.version, remote)
-      assert.ok(status === "new" || status >= 0,
-        `Refusing to publish downgrade: ${manifest.name} local ${manifest.version} < npm ${remote}`)
+      assert.ok(
+        status === "new" || status >= 0,
+        `Refusing to publish downgrade: ${manifest.name} local ${manifest.version} < npm ${remote}`,
+      )
       if (status === "new" || status > 0) {
-        console.log(`PUBLISH ${manifest.name}@${manifest.version} (npm latest: ${remote ?? "not published"})`)
+        console.log(
+          `PUBLISH ${manifest.name}@${manifest.version} (npm latest: ${remote ?? "not published"})`,
+        )
       } else {
         console.log(`SKIP ${manifest.name}@${manifest.version} (already published)`)
       }
