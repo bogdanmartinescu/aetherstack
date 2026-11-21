@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { AIErrorStatePreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "AI Error State",
-  description:
-    "A contextual error display for AI failures with pre-configured messages for common error types.",
-}
 
 export default function AIErrorStatePage() {
   return (

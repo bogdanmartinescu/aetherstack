@@ -1,13 +1,7 @@
-import type { Metadata } from "next"
 import { EmptyState } from "@aetherstack/patterns"
 import { Button } from "@aetherstack/ui"
 import { Users } from "lucide-react"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Empty State",
-  description: "Icon, title, description and CTA for zero-data views.",
-}
 
 export default function EmptyStatePage() {
   return (

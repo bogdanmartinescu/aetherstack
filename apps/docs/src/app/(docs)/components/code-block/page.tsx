@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { CodeBlock } from "@aetherstack/ui"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Code Block",
-  description:
-    "Displays syntax-highlighted code with an optional filename header and copy-to-clipboard button. Works in AI chat responses and general docs.",
-}
 
 export default function CodeBlockPage() {
   return (

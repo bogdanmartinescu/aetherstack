@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { CTASection } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "CTA Section",
-  description: "A full-width call-to-action banner with heading, subtext, and button.",
-}
 
 export default function CTASectionPage() {
   return (

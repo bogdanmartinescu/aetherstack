@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { Separator } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Separator",
-  description: "Visually or semantically separates content with a horizontal or vertical line.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

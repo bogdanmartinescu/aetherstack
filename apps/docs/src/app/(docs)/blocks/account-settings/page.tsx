@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { AccountSettings } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Account Settings",
-  description: "User profile form with avatar, display name, email, and bio fields.",
-}
 
 export default function AccountSettingsPage() {
   return (

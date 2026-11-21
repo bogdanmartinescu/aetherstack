@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import {
   Card,
   CardContent,
@@ -10,11 +9,6 @@ import {
   Badge,
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Card",
-  description: "A surface container for grouping related content.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import { cn } from "@/lib/utils"

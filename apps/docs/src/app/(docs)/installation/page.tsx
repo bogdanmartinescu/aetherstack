@@ -1,13 +1,6 @@
-import type { Metadata } from "next"
 import { CodeBlock } from "@/components/code-block"
 import { DocTabs } from "@/components/doc-tabs"
 import { REGISTRY_STATS } from "@/lib/registry-stats"
-
-export const metadata: Metadata = {
-  title: "Installation",
-  description:
-    "Add Aether UI to any React project in minutes. Works with Next.js, Vite, Remix, Astro, and TanStack Start. Components install directly into your codebase — no lock-in.",
-}
 
 function Step({
   number,

@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { BarChart, LineChart } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
 import { CHART_SOURCE } from "@/lib/registry-source"
-
-export const metadata: Metadata = {
-  title: "Chart",
-  description: "Recharts wrapper components with token-based colors and sensible defaults.",
-}
 
 const MANUAL_SOURCE = CHART_SOURCE
 

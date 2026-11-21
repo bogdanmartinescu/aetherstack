@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { ModelBadge } from "@aetherstack/ui"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "ModelBadge",
-  description: "A compact badge that displays the AI model name with an optional provider prefix.",
-}
 
 export default function ModelBadgePage() {
   return (

@@ -1,10 +1,4 @@
-import type { Metadata } from "next"
 import Link from "next/link"
-
-export const metadata: Metadata = {
-  title: "Patterns",
-  description: "Reusable product-level UI compositions built on Aether UI primitives.",
-}
 
 const PATTERNS = [
   {

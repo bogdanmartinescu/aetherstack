@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { PageHeader } from "@aetherstack/patterns"
 import { Button } from "@aetherstack/ui"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Page Header",
-  description: "Title, description, breadcrumb, and actions slot for page-level headings.",
-}
 
 export default function PageHeaderPage() {
   return (

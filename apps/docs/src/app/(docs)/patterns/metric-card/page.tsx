@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { MetricCard } from "@aetherstack/patterns"
 import { Users, DollarSign, TrendingUp, ShoppingCart } from "lucide-react"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Metric Card",
-  description: "Dashboard stat card: label, value, trend badge, and icon.",
-}
 
 export default function MetricCardPage() {
   return (

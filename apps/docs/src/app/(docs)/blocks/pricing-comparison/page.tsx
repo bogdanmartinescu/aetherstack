@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { PricingComparison } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Pricing Comparison",
-  description:
-    "A feature comparison table across pricing tiers with checkmarks and highlighted column.",
-}
 
 const TIERS = [
   { id: "free", name: "Free", price: "$0", period: "mo", cta: { label: "Get started", href: "#" } },

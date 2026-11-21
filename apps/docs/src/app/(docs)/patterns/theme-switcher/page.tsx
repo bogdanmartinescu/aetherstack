@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { ThemeSwitcherPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "Theme Switcher",
-  description: "A light/dark/system theme toggle with dropdown and icon-only variants.",
-}
 
 export default function ThemeSwitcherPage() {
   return (

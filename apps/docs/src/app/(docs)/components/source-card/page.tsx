@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { SourceCard } from "@aetherstack/ui"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "SourceCard",
-  description:
-    "Displays a cited source link with title, domain, and optional excerpt — used in AI responses with web search grounding.",
-}
 
 export default function SourceCardPage() {
   return (

@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { WaitlistBlock } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Waitlist Block",
-  description: "An email waitlist signup with a success state after submission.",
-}
 
 export default function WaitlistBlockPage() {
   return (

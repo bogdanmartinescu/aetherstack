@@ -1,12 +1,6 @@
 import type { Metadata } from "next"
 import { CodeBlock } from "@/components/code-block"
 
-export const metadata: Metadata = {
-  title: "AI & LLMs",
-  description:
-    "Using Aether UI with AI agents — llms.txt, MCP server, prompt-driven CLI, AI metadata, and AI-native components.",
-}
-
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="text-foreground mb-4 mt-10 text-2xl font-semibold tracking-tight">{children}</h2>

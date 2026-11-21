@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { NotificationCenter } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Notification Center",
-  description: "Notification list with read/unread state, mark-all-read, and dismiss actions.",
-}
 
 const NOTIFICATIONS = [
   {

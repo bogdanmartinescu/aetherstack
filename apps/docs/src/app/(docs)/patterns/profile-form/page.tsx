@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { ProfileFormPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "Profile Settings Form",
-  description:
-    "Multi-section profile settings form with Select and Switch fields, character counter, and dirty-state detection.",
-}
 
 const IMPORT_CODE = `import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"

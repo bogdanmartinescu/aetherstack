@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { AIResponseCardPreview } from "./preview"
-
-export const metadata: Metadata = {
-  title: "AI Response Card",
-  description:
-    "A card component that displays an AI-generated response with copy, regenerate, and feedback actions.",
-}
 
 export default function AIResponseCardPage() {
   return (

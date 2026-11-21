@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { TeamSettings } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Team Settings",
-  description: "Member list with role management, invite form, and remove actions.",
-}
 
 const MEMBERS = [
   { id: "1", name: "Alice Martin", email: "alice@example.com", role: "owner" as const },

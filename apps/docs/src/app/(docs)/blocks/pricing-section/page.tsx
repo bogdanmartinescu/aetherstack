@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { PricingSection } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Pricing Section",
-  description:
-    "Responsive 3-tier pricing grid with feature lists, highlighted plan, and CTA buttons.",
-}
 
 const TIERS = [
   {

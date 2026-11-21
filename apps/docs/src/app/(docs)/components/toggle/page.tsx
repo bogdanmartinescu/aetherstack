@@ -1,15 +1,9 @@
-import type { Metadata } from "next"
 import { ComponentPage } from "@/components/component-page"
 import {
   TogglePreview,
   ToggleOutlinePreview,
   ToggleSizesPreview,
 } from "@/components/previews/interactive-previews"
-
-export const metadata: Metadata = {
-  title: "Toggle",
-  description: "A two-state button that can be on or off. Built on Radix UI Toggle.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

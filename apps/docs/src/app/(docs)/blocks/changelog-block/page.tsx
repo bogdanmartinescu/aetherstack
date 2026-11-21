@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { ChangelogBlock } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Changelog Block",
-  description: "A release notes feed with version, date, title, tags, and grouped change lists.",
-}
 
 export default function ChangelogBlockPage() {
   return (

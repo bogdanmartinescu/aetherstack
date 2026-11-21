@@ -1,11 +1,4 @@
-import type { Metadata } from "next"
 import { CodeBlock } from "@/components/code-block"
-
-export const metadata: Metadata = {
-  title: "CLI",
-  description:
-    "Install Aether UI components from the public registry with the scoped CLI. Includes init, add, list, and deterministic generate scaffolding.",
-}
 
 function Callout({ title, children }: { title?: string; children: React.ReactNode }) {
   return (

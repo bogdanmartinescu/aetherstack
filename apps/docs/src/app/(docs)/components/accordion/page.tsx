@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Accordion",
-  description:
-    "A vertically stacked set of interactive headings that reveal or hide associated content.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { ReasoningBlock } from "@aetherstack/ui"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "ReasoningBlock",
-  description:
-    "A collapsible block that surfaces an AI model's chain-of-thought reasoning, collapsed by default to keep responses clean.",
-}
 
 const SAMPLE_REASONING = `Let me think through this step by step.
 

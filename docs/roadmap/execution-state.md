@@ -265,3 +265,11 @@ Record milestone, all required task IDs, exact suite/results, known limitations,
 - Added accessibility notes for `model-badge` and `prompt-suggestion`.
 - Not verified here: `pnpm build`, lint, typecheck and the docs output check have not run in this session; CircleCI `verify` on the PR is the first run.
 - Open: runtime messages in `@aetherstack/cli` and `@aetherstack/mcp-server` still print bare `aether-ui add ...`; changing them needs a package release. Six patterns (filter-toolbar, form-field, metric-card, section-header, settings-section, table-toolbar) have no accessibility notes.
+
+### Checkpoint 2026-11-21 — technical SEO pass (docs and registry sites)
+
+- Branch: `seo/technical-seo-metadata`, based on `main` at `8ebb025`.
+- Findings from the live site: 62 pages (57 of them client components, which cannot export metadata) inherited the default title "Aether UI" and one generic description; no canonical, Open Graph, Twitter or JSON-LD data; sitemap URLs lacked the trailing slash the site enforces and carried identical file-mtime `lastmod` values; all seven font families were preloaded on every page; the components index said "65 components" (registry: 78).
+- Changes: `apps/docs/src/lib/seo.ts` builds metadata from the registry manifest; one `layout.tsx` per docs route (171) supplies a unique title, description, canonical, Open Graph and Twitter data plus BreadcrumbList JSON-LD; home page gets WebSite and SoftwareSourceCode JSON-LD; `metadataBase`, viewport and theme colour in the root layout; `og.png` and `icon.svg`; sitemap uses canonical trailing-slash URLs without `lastmod`; non-default fonts no longer preload; security headers on both Workers; registry site gets metadata, `robots.txt`, a sitemap and `X-Robots-Tag: noindex` on `/r/*`; `scripts/verify-docs-output.mjs` now fails the build on missing, duplicate or malformed metadata.
+- Owner decision needed: `/pricing` advertises paid Pro tiers and prices ($49–$199) for products that do not exist and contradicts the MIT licence. It is set to `noindex` and removed from the sitemap; its body copy is unchanged.
+- Not verified here: no install, build or test could run; CircleCI `verify` (including the new metadata assertions against the exported HTML) is the first real check. A Content-Security-Policy was not added because the site relies on inline scripts.

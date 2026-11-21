@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { CompareOutput } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Compare Output",
-  description: "A side-by-side grid for comparing responses from two or more AI models.",
-}
 
 const DEMO_OUTPUTS = [
   {

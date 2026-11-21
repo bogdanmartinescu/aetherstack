@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { Kbd } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Kbd",
-  description: "Keyboard key badge for displaying shortcuts and hotkeys.",
-}
 
 const SOURCE = `import * as React from "react"
 import { cn } from "@/lib/utils"

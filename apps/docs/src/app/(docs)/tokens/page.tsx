@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import type { ReactNode } from "react"
 import {
   palette,
@@ -13,12 +12,6 @@ import {
   easings,
   transitions,
 } from "@aetherstack/tokens"
-
-export const metadata: Metadata = {
-  title: "Tokens",
-  description:
-    "Aether UI design token reference — colors, typography, spacing, radius, shadows, and motion.",
-}
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (

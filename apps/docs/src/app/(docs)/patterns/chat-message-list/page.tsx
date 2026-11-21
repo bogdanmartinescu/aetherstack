@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { PatternPage } from "@/components/pattern-page"
 import { ChatMessageList } from "@aetherstack/patterns"
-
-export const metadata: Metadata = {
-  title: "Chat Message List",
-  description: "A chat message list with user and assistant bubbles, avatars, and timestamps.",
-}
 
 const MESSAGES = [
   {

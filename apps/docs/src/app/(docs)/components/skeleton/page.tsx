@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { Skeleton, Card, CardContent, CardHeader } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Skeleton",
-  description: "A loading placeholder that mimics the shape of content.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import { cn } from "@/lib/utils"

@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { Alert, AlertTitle, AlertDescription } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
 import { Info, AlertTriangle, CheckCircle2, XCircle } from "lucide-react"
-
-export const metadata: Metadata = {
-  title: "Alert",
-  description: "Contextual feedback messages with multiple severity variants.",
-}
 
 const SOURCE = `import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"

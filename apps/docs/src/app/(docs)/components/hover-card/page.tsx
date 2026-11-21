@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { ComponentPage } from "@/components/component-page"
 import { HoverCardPreview, HoverCardLinkPreview } from "@/components/previews/interactive-previews"
-
-export const metadata: Metadata = {
-  title: "Hover Card",
-  description:
-    "A popover that appears when hovering over a trigger element. Ideal for previewing user profiles and link details.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

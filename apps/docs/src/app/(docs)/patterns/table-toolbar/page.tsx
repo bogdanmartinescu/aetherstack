@@ -1,13 +1,7 @@
-import type { Metadata } from "next"
 import { TableToolbar } from "@aetherstack/patterns"
 import { Button, Input } from "@aetherstack/ui"
 import { Search, SlidersHorizontal, Download } from "lucide-react"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Table Toolbar",
-  description: "Search + filter + actions layout above a data table.",
-}
 
 export default function TableToolbarPage() {
   return (

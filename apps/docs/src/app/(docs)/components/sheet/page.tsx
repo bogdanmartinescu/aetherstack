@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { ComponentPage } from "@/components/component-page"
 import { SHEET_SOURCE } from "@/lib/registry-source"
 import { SheetPreview } from "@/components/previews/interactive-previews"
-
-export const metadata: Metadata = {
-  title: "Sheet",
-  description: "A slide-in panel from any screen edge.",
-}
 
 const MANUAL_SOURCE = SHEET_SOURCE
 

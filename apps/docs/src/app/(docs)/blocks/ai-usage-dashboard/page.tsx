@@ -1,12 +1,5 @@
-import type { Metadata } from "next"
 import { AIUsageDashboard } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "AI Usage Dashboard",
-  description:
-    "A dashboard for visualizing AI API usage — request counts, token consumption, estimated cost, and per-model breakdown.",
-}
 
 const DEMO_STATS = {
   totalRequests: 14820,

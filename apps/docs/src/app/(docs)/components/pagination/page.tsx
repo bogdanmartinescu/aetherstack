@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import {
   Pagination,
   PaginationContent,
@@ -9,12 +8,6 @@ import {
   PaginationEllipsis,
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Pagination",
-  description:
-    "Navigation controls for moving through paginated content. Renders semantic <nav> and <a> elements.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"

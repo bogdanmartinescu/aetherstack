@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { SettingsSection } from "@aetherstack/patterns"
 import { Button, Input, Label } from "@aetherstack/ui"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Settings Section",
-  description: "Structured settings card with header, content, and optional footer.",
-}
 
 export default function SettingsSectionPage() {
   return (

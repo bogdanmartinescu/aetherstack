@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import {
   Carousel,
   CarouselContent,
@@ -8,11 +7,6 @@ import {
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
 import { CAROUSEL_SOURCE } from "@/lib/registry-source"
-
-export const metadata: Metadata = {
-  title: "Carousel",
-  description: "A touch-friendly slider built on Embla Carousel with prev/next navigation.",
-}
 
 const MANUAL_SOURCE = CAROUSEL_SOURCE
 

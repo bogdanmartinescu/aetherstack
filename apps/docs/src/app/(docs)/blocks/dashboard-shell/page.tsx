@@ -1,13 +1,7 @@
-import type { Metadata } from "next"
 import { DashboardShell } from "@aetherstack/blocks"
 import { MetricCard } from "@aetherstack/patterns"
 import { DollarSign, Users, TrendingUp, Activity } from "lucide-react"
 import { BlockPage } from "@/components/block-page"
-
-export const metadata: Metadata = {
-  title: "Dashboard Shell",
-  description: "Full-page SaaS app shell with collapsible sidebar, topbar, and content slot.",
-}
 
 function DemoContent() {
   return (

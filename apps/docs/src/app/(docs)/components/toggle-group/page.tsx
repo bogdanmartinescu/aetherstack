@@ -1,15 +1,9 @@
-import type { Metadata } from "next"
 import { ComponentPage } from "@/components/component-page"
 import {
   ToggleGroupPreview,
   ToggleGroupMultiplePreview,
   ToggleGroupOutlinePreview,
 } from "@/components/previews/interactive-previews"
-
-export const metadata: Metadata = {
-  title: "Toggle Group",
-  description: "A set of two-state toggle buttons that can enforce single or multiple selection.",
-}
 
 const MANUAL_SOURCE = `"use client"
 

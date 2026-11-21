@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { DataTable } from "@aetherstack/patterns"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Data Table",
-  description: "Sortable, searchable, paginated data table built on the Table primitive.",
-}
 
 type User = {
   name: string

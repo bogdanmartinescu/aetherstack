@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { ButtonGroup, Button } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Button Group",
-  description: "Groups multiple buttons into a segmented row with shared border treatment.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import { cn } from "@/lib/utils"

@@ -1,11 +1,5 @@
-import type { Metadata } from "next"
 import { ActivityFeed } from "@aetherstack/patterns"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Activity Feed",
-  description: "Chronological activity timeline with user avatars, actions, and timestamps.",
-}
 
 const SAMPLE_ITEMS = [
   {

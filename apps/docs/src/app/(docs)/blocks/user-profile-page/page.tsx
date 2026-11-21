@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { UserProfilePage } from "@aetherstack/blocks"
 import { BlockPage } from "@/components/block-page"
 import { Button } from "@aetherstack/ui"
-
-export const metadata: Metadata = {
-  title: "User Profile Page",
-  description: "A user profile block with avatar, bio, stats row, and optional tabs.",
-}
 
 export default function UserProfilePageDoc() {
   return (

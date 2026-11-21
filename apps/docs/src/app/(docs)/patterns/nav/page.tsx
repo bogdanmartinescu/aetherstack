@@ -1,12 +1,6 @@
-import type { Metadata } from "next"
 import { SidebarNav, NavGroup, NavItem } from "@aetherstack/patterns"
 import { LayoutDashboard, Users, Settings, Bell, BarChart2, Shield } from "lucide-react"
 import { PatternPage } from "@/components/pattern-page"
-
-export const metadata: Metadata = {
-  title: "Sidebar Nav",
-  description: "NavItem, NavGroup, and SidebarNav composable sidebar navigation building blocks.",
-}
 
 export default function NavPage() {
   return (

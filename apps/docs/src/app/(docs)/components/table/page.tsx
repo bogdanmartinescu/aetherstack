@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import {
   Table,
   TableBody,
@@ -12,11 +11,6 @@ import {
   Button,
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
-
-export const metadata: Metadata = {
-  title: "Table",
-  description: "A semantic HTML table for displaying tabular data.",
-}
 
 const MANUAL_SOURCE = `import * as React from "react"
 import { cn } from "@/lib/utils"
