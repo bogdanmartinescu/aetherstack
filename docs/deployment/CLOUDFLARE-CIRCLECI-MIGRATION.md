@@ -1,153 +1,157 @@
-# Aether UI — Cloudflare Hosting and CircleCI Migration
+# Aether UI Cloudflare and CircleCI migration
 
-**Status:** implementation plan; CI migration introduced in the associated pull request. **Owner-controlled:** connecting CircleCI, creating Cloudflare resources, configuring secrets, DNS cutover and actual npm publishing.  
-**Baseline inspected:** `1ea579b00b6c` (`main`, 2026-11-21).  
-**Execution authority:** [GOAL.md](../../GOAL.md), [AGENTS.md](../../AGENTS.md), [ROADMAP.md](../../ROADMAP.md), [execution state](../roadmap/execution-state.md). This plan supersedes the Vercel path in the [historical M0-08 runbook](../roadmap/audits/m0-08-cdn-runbook.md).
+Migration reference for the AetherStack monorepo. Baseline: `main` at `1ea579b00b6c` on November 21, 2026.
 
-## 1. Architectural decision
+Status: CircleCI configuration is prepared in the migration pull request. Cloudflare Workers, DNS cutover, restricted deployment contexts, and npm publishing are not verified as operational.
 
-**Use CircleCI exclusively for CI/CD:** checks, tests, builds, release verification and eventually Wrangler deployments. Keep GitHub for Git, issues and PRs; keep npm for the CLI, MCP server and library packages. Do **not** use GitHub Actions, Vercel deploy workflows or Cloudflare Workers Builds as independent build systems. Cloudflare provides DNS, SSL, CDN and Workers Static Assets. Prefer Workers over new Pages deployments.
+This document complements [GOAL.md](../../GOAL.md), [AGENTS.md](../../AGENTS.md), [ROADMAP.md](../../ROADMAP.md), and [execution-state.md](../roadmap/execution-state.md). It supersedes the historical Vercel instructions in [the M0-08 runbook](../roadmap/audits/m0-08-cdn-runbook.md).
 
-**Deployment targets:**
+## Architecture decision
 
-- **`apps/registry-public`** — Next.js 16, `output: "export"`, static `out/`; target: `registry.aether-ui.dev`: Worker Static Assets.
-- **`apps/docs`** — Next.js 16, component demos, no observed API handlers; target: `aether-ui.dev`: test static export first, otherwise evaluate vinext.
-- **`apps/demo`** — Next.js 16, no observed API handlers; target: `demo.aether-ui.dev`: static Worker.
-- **`apps/studio`** — Next.js 16, component playground; target: `studio.aether-ui.dev`: static Worker; restrict with Access until public release.
-- **`packages/cli`** — Node CLI `@aetherstack/cli`; target: npm; registry hostname unchanged.
-- **`packages/mcp-server`** — stdio MCP package; target: npm; no Cloudflare hosting needed.
-- **`packages/{ui,patterns,blocks,tokens,...}`** — npm packages; target: npm; no runtime hosting move.
+CircleCI is the exclusive build, test, validation, release, and deployment runner. GitHub remains the repository and pull request service. Cloudflare handles DNS, TLS, CDN, and web application hosting. npm remains the distribution service for published libraries, the CLI, and the local MCP server.
 
-Do not rewrite UI packages, migrate framework versions or add D1/R2/Queues for static registry assets. Future private registries and team services can use Workers + R2/D1 after explicit business gates, independently from this hosting migration.
+Do not enable GitHub Actions or Cloudflare Workers Builds alongside CircleCI. Do not introduce D1, R2, KV, or queues merely to host static documentation and registry JSON.
 
-## 2. CircleCI migration (CF-00: introduced, live verification pending)
+### Deployment targets
 
-- Repo-root `.circleci/config.yml` becomes the single CI definition. It currently verifies the complete monorepo with **Node 22 + pnpm 9.1.0**, frozen install, formatting, typecheck, lint, public registry validation/regeneration/freshness, tests, workspace build and isolated Next/Vite consumer installs.
-- A **disabled-by-default** pipeline parameter `publish_npm=false` allows an authorized manual npm release on `main` after validation, using a restricted `aether-npm-release` CircleCI context. A release still requires valid org publishing rights and owner approval. No push/PR automatically publishes packages.
-- Legacy `.github/workflows/{ci,release,deploy-registry}.yml` are removed in this migration PR. They remain active on the existing `main` until the replacement PR is merged; do not enable both systems after cutover.
-- **Owner setup:** connect `bogdanmartinescu/aetherstack` to CircleCI; select `.circleci/config.yml`, enable push/PR pipelines, add a protected context called `aether-npm-release` only when npm publish is desired, restrict use to trusted maintainers and `main`.
-- **Mandatory gate:** run `circleci config validate .circleci/config.yml` locally when CLI is available, then confirm a real CircleCI PR pipeline passes every step. Do not declare CI migrated from YAML syntax alone.
-- Enable CircleCI required status checks in GitHub branch protection. Verify the exact status check name before requiring it; only then merge/retire GitHub Actions. Consider change-protected CircleCI deployment contexts and least-privilege GitHub integration.
-- **Free-credit strategy:** start with one serial verification job to avoid duplicated pnpm installs/builds; profile job time and use CircleCI caching or path filtering only after measuring. Never skip important checks solely to reduce credits.
+The public component registry in `apps/registry-public` uses the existing Next.js static export and deploys to `registry.aether-ui.dev` using Workers Static Assets.
 
-### Expected CI stages
+The documentation application in `apps/docs` deploys to `aether-ui.dev`. Verify that Next.js static export can handle the current routes and interactive examples. Evaluate vinext only if static export has a documented blocker.
 
-`checkout → install pinned pnpm → frozen dependencies → format → typecheck → lint → validate/build registry → freshness → tests → full build → consumer-install → success`.
+The example application in `apps/demo` deploys to `demo.aether-ui.dev` using Workers Static Assets after a successful static build.
 
-This configuration covers the *build/validation* part of the migration immediately; it does **not** imply that Cloudflare projects are already provisioned or deployments are active.
+The component playground in `apps/studio` deploys to `studio.aether-ui.dev`. Keep this application restricted with Cloudflare Access until the project explicitly makes it public.
 
-### CircleCI pnpm bootstrap (EACCES)
+The `packages/cli` and `packages/mcp-server` packages remain distributed through npm. TypeScript component packages, tokens, themes, utilities, and registry schema remain published through npm rather than served through Worker code.
 
-The CircleCI `cimg/node:22.16` image may contain a root-owned global pnpm in `/usr/local/lib/node_modules`. Do **not** run `npm install --global pnpm@9.1.0` against that prefix; it can fail with `EACCES` while renaming pnpm files. `.circleci/config.yml` instead installs pnpm 9.1.0 under `$HOME/.local/pnpm` using `npm install --global --prefix "$HOME/.local/pnpm" pnpm@9.1.0`, prepends its `bin` to `PATH`, and writes the same PATH update to `$BASH_ENV` for later steps. It verifies the pinned version before `pnpm install --frozen-lockfile`. No sudo, global permission changes, or fallback to an unpinned pnpm. Re-run the CircleCI PR build to verify the fix in the actual image.
+## CF-00: Establish CircleCI
 
-### npm authentication during CI
+The repository-root `.circleci/config.yml` is the source of truth for CI. Use Node.js 22, pnpm 9.1.0, a frozen lockfile, and one serial verification job until actual duration and credit usage justify parallelization.
 
-The repository `.npmrc` configures the public `@aetherstack` registry without a token placeholder. Routine CircleCI verification can install public dependencies without `NPM_TOKEN`. Only the restricted, manually authorized `publish_npm` job writes an npm authentication token to `$HOME/.npmrc` with user-only file permissions; `NPM_TOKEN` remains in the `aether-npm-release` context and is never committed to Git.
+The verification job must run the repository's existing formatting, TypeScript, lint, registry validation, registry generation, generated-artifact freshness, unit tests, workspace builds, and isolated Next.js and Vite consumer installation checks.
 
-## 3. M0-08 becomes Cloudflare-first: CF-01 registry
+The older `.github/workflows` CI, registry deployment, and release workflows are removed by the migration pull request. GitHub must not retain parallel production jobs after the CircleCI transition.
 
-1. Reconfirm source inventory with `pnpm --filter @aetherstack/scripts validate-registry`, `build-registry`, `pnpm build`, `pnpm consumer-install`. Current source manifest contains **151** entries: 78 primitives, 39 patterns, 34 blocks; do not hardcode these counts into release checks.
-2. Add a root-pinned `wrangler` devDependency and update the pnpm lockfile through pnpm. Add `apps/registry-public/wrangler.jsonc` with a **distinct** Worker name, `assets.directory: "./out"`, `assets.not_found_handling: "404-page"`, and an appropriate compatibility date. Maintain the existing static Next export.
-3. Replace `vercel.json` with `public/_headers`. Declare public CORS for registry JSON. Verify specific manifest caching vs `/r/*` wildcard and ensure only one effective `Cache-Control` header. Do not mark mutable aliases immutable.
-4. In the CircleCI deploy job (CF-05), build registry artifacts *before* `apps/registry-public` static export, confirm `out/r/registry.json`, `out/r/button.json`, `out/llms.txt`, then deploy via pinned `pnpm exec wrangler deploy --config apps/registry-public/wrangler.jsonc`.
-5. Use a preview `workers.dev` Worker first; owner attaches `registry.aether-ui.dev` as a Custom Domain only after preview tests. Registry deployment must be manual/approval-gated initially, and only originate from validated `main`.
-6. Verify HTTP 200 for `/r/registry.json`, `/r/button.json`, `/llms.txt`, expected JSON schema/count, CORS/caching, 404 for invalid names and actual `npx @aetherstack/cli add button` from a clean external project using the **published** CLI.
+Connect the GitHub repository to CircleCI and confirm a green pull request pipeline. Protect `main` using the actual CircleCI required status check. YAML validation alone is not sufficient evidence that the migration succeeded.
 
-**Exit:** production registry installation succeeds. Preserve the canonical registry URL so consumer config, docs and CLI need no hostname change.
+### Pin pnpm without permission errors
 
-## 4. CF-02 documentation migration
+CircleCI's `cimg/node:22.16` image may have a root-owned global pnpm installation. Installing pnpm globally into `/usr/local/lib/node_modules` can fail with `EACCES`.
 
-1. Inventory `apps/docs` for server-only features, image optimization, dynamic routes, redirects, font dependencies, `sitemap.xml`, `robots.txt`, `llms.txt`, external URLs and search. No API routes were found in the inspected tree, but verify at build time.
-2. Try Next.js `output: "export"` with `trailingSlash` and image rules only where required. Preserve monorepo `transpilePackages`; do not change Next/React/Tailwind versions as part of hosting migration.
-3. Ensure every documented URL exports its correct HTML; check deep links, working examples, client-side interactions, 404 behavior, light/dark theme, fonts, screenshots and SEO metadata.
-4. Add `apps/docs/wrangler.jsonc`; deploy preview via CircleCI + Wrangler; only use **vinext** after a documented static-export blocker and an ADR.
-5. Fix the GitHub CTA to `https://github.com/bogdanmartinescu/aetherstack` and public installation text to `npx @aetherstack/cli` if the current unscoped command is not actually owned/published. Do not advertise unimplemented `diff`/`update` commands.
-6. Deploy and validate `aether-ui.dev` while preserving the old host as rollback until complete.
+Install the pinned version with `npm install --global --prefix "$HOME/.local/pnpm" pnpm@9.1.0`. Add `$HOME/.local/pnpm/bin` to `PATH` and persist the value through `$BASH_ENV`. Assert the version before running workspace installation. Never add `sudo` or weaken filesystem permissions to fix the problem.
 
-**Exit:** all canonical docs routes and UI examples work, and online inventory matches the published registry.
+### Keep npm authentication separate
 
-## 5. CF-03 demo and CF-04 Studio
+Routine CircleCI verification reads public npm packages without an authentication token. Do not reference an unset `NPM_TOKEN` in the repository-level `.npmrc`.
 
-- Test static export for both Next.js apps and deploy independently on Workers Static Assets. No server-only APIs were found in the inspected route tree; confirm on build.
-- Demo: public, responsive and accessible showcase, realistic states with no unimplemented backend claims.
-- Studio: internal at first; apply Cloudflare Access for authentication, then release publicly only after product/QA readiness. Never mistake demo-only components for production APIs.
-- Verify custom-domain TLS, deep routing, assets, previews, return status codes and ability to roll back each application independently.
+The manually authorized package release job obtains `NPM_TOKEN` from the restricted `aether-npm-release` context. It writes a private `$HOME/.npmrc` and validates publishing permissions before invoking Changesets. No ordinary pull request is allowed to publish packages.
 
-## 6. CF-05 CircleCI-based deployment orchestration (next implementation)
+## CF-01: Deploy the public registry first
 
-Only CircleCI invokes Wrangler. Do **not** enable Cloudflare Workers Builds/Git integration in parallel.
+Revalidate the current source manifest and generated artifacts using the existing registry scripts. The baseline registry contained 151 entries: 78 primitives, 39 patterns, and 34 blocks. Release validation should derive these counts rather than hardcode them.
 
-After CF-01..04 static exports are proven, expand `.circleci/config.yml` with distinct jobs:
+Add pinned Wrangler tooling in the repository lockfile. Create `apps/registry-public/wrangler.jsonc` with a unique Worker name, the static `./out` assets directory, explicit 404 handling, and a current compatibility date.
 
-- `deploy_registry`, `deploy_docs`, `deploy_demo`, `deploy_studio`. Jobs `requires: [verify]`; `main` only; use the restricted `aether-cloudflare-deploy` context.
-- Declare pipeline parameters such as `deploy_registry=false`, `deploy_docs=false`, or use explicit CircleCI approval steps. Require operator approval before initial production cutover; enable controlled auto-deploy only after a successful staged run.
-- Validate that `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` exist without logging values. Cloudflare API token: minimum Worker editing permissions for existing Workers; add routes/custom domain permissions only when needed. Restrict CircleCI context to protected branches/maintainers.
-- Use a pinned Wrangler version in pnpm lockfile, never unpinned `npx --yes wrangler@latest` for production. Each job builds from one commit SHA and records deployed Worker name, SHA and URL.
-- Run live smoke tests **after** deployment and fail on non-200/invalid content. Protect simultaneous production deploys; maintain per-app logs and rollback identifiers.
-- Include shared files and lockfile in monorepo change detection. Introduce CircleCI path filtering only after correctness is demonstrated, with broad fallbacks for shared packages and registry generator changes.
-- Keep npm publishing **separate** from web deploys. CircleCI's manual release context requires `NPM_TOKEN`, org publish rights, versioned Changesets and post-publication verification.
+Keep `apps/registry-public/next.config.mjs` in static-export mode. Build registry outputs first, then run the Next.js export. Verify that the output includes `r/registry.json`, `r/button.json`, and `llms.txt`.
 
-## 7. CF-06 DNS and cutover
+Replace the Vercel-only header configuration with Cloudflare static asset header rules. Apply public CORS to registry JSON. Use short cache lifetimes for mutable registry endpoints; plan immutable, versioned component URLs for the future M2 lifecycle engine.
 
-1. Inventory current Cloudflare zone, authoritative nameservers, `A/AAAA/CNAME`, redirects and email MX/SPF/DKIM/DMARC records. Never blindly replace a live DNS zone.
-2. Deploy preview Worker names first. Attach `registry.aether-ui.dev`, then `aether-ui.dev`, `demo.aether-ui.dev`, `studio.aether-ui.dev` one at a time. Configure `www` redirect if appropriate.
-3. Verify TLS, canonical URLs, asset cache headers, CORS, 404, AI discovery, robots/sitemap and no search-indexed temporary `workers.dev` pages.
-4. Maintain rollback to the previous known-good Cloudflare Worker version; preserve existing docs hosting until cutover is confirmed.
-5. After all sites are green, remove Vercel tokens/projects and obsolete configuration through reviewed changes. Never delete active DNS records before documenting their replacement.
+Add a CircleCI deployment job that invokes the pinned Wrangler version only after the verification job succeeds. Start with a preview Worker and manually approved production deployment. Use a protected `aether-cloudflare-deploy` context.
 
-## 8. CF-07 acceptance, release and M0 closeout
+After preview validation, attach `registry.aether-ui.dev` to the Worker. Verify HTTP 200 for the aggregate JSON, individual component JSON, and `llms.txt`. Verify schema integrity, accurate cache headers, appropriate CORS, and HTTP 404 for unknown component names.
 
-**Required acceptance evidence:**
+Complete an installation smoke test in an external clean project using the published `@aetherstack/cli` package and the production registry endpoint. Do not mark M0-08 complete based only on local artifact generation.
 
-- **CircleCI PR validation:** Format, TS, ESLint, unit/integration, build, registry, consumer fixture pass.
-- **CLI clean install:** Published CLI retrieves actual production manifest/item and installs usable source.
-- **Registry endpoints:** Aggregate, component, `llms.txt` 200 + schema/count + CORS/cache; bad slug 404.
-- **Docs:** All canonical pages/metadata, demos and deep links; unknown URL 404.
-- **Demo/Studio:** Correct routing, CSS/fonts, responsive states; Studio Access as planned.
-- **Deployment:** Reproducible CircleCI job, constrained context, recorded commit/build version.
-- **Rollback:** Previous Worker version can be restored and rechecked.
-- **npm:** Manual CircleCI publish path validated with authorized token and package access.
-- **Governance:** GitHub branch protection requires CircleCI checks; no GitHub Actions or Cloudflare Builds.
-- **Documentation:** README, migration state, incident runbooks and build instructions current.
+## CF-02: Migrate the documentation website
 
-Update `docs/roadmap/execution-state.md` and `docs/roadmap/audits/m0-10-rc-verification.md` with fresh results. **M0 is not complete** while a production deployment or authorized package release gate remains blocked.
+Audit `apps/docs` for server APIs, dynamic routes, Next.js Image optimization, redirects, generated metadata, client search, component preview dependencies, fonts, and theme state.
 
-## 9. Secret handling and operator checklist
+Try Next.js static export while preserving the current framework and monorepo `transpilePackages` setup. Do not combine the hosting migration with React, Tailwind, or Next.js major-version upgrades.
 
-**Secret and access ownership:**
+Verify that the export produces correct standalone HTML for every canonical route, direct navigation works, unknown pages return HTTP 404, and interactive examples behave correctly.
 
-- **CircleCI `aether-cloudflare-deploy` context (future):** `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`; Scope token narrowly; protect context.
-- **CircleCI `aether-npm-release` context:** `NPM_TOKEN`; Only when owner authorizes publishing and org permissions work.
-- **GitHub:** Branch rules, reviews, CircleCI required checks; **No** deployment credentials or Actions workflows.
-- **Cloudflare:** Worker names, Custom Domains, DNS, Access; No automatic Cloudflare Builds.
-- **Repository:** Wrangler configs, CI definition, docs; Never commit token values or `.env` secrets.
+Verify SEO assets including canonical links, `robots.txt`, `sitemap.xml`, and `llms.txt`. Test light and dark modes, responsive layout, fonts, and navigation.
 
-### Owner prerequisites
+Fix the homepage GitHub destination to the actual `bogdanmartinescu/aetherstack` repository. Validate the public CLI command against the published package; do not advertise CLI `diff` and `update` functionality until implemented.
 
-Connect the repo in CircleCI and confirm first CI green; later create Cloudflare API token/account scope and Worker projects, attach hostnames after preview smoke tests, set restricted CircleCI context values; independently resolve existing npm `E404` publication permissions. The agent may prepare code/PRs, but should not claim live provisioning, account changes, deployments or payment actions until confirmed.
+Create a separate Wrangler configuration and deploy a documentation preview using CircleCI. Promote the preview to `aether-ui.dev` only after the smoke tests pass.
 
-## 10. CI failure, rollback and ongoing maintenance
+## CF-03: Deploy the public demo
 
-- **Validation fails:** block merge, fix the code; do not disable checks or silently deploy. A CircleCI context/credits outage is an explicit blocker, not a pass.
-- **Cloudflare deployment fails:** leave previous version serving and retain preview/artifacts; diagnose Wrangler output and permissions.
-- **Smoke test fails after deploy:** revert to prior Worker version, rerun checks and record incident. Restore previous DNS routing only if necessary and safe.
-- **npm publish fails:** do not change package names/versions blindly; verify org rights, token scopes, version status and `npm whoami`; keep release manual.
-- Weekly monitor CI duration/credits, registry reachability, release mismatch, CDN cache, package integration. Monthly review security, dependency updates, costs, live installation and agent docs.
+Enable and test static export for `apps/demo`. Ensure component demonstrations do not depend on undocumented server APIs and contain functional responsive states.
 
-## 11. Implementation order for an AI agent
+Deploy using a separate Cloudflare Worker, with its own version history and domain `demo.aether-ui.dev`. Verify direct links, styles, fonts, accessibility, asset caching, and rollback independently of the docs site.
 
-1. Re-read `AGENTS.md`, this document, current `main`, repository scripts and execution state.
-2. Verify CircleCI is connected and its validation pipeline is green (CF-00); do not mark this done from committed YAML alone.
-3. Implement CF-01 registry config, output and preview tests in a focused branch/PR; add a manual CircleCI deployment job with protected context. No live cutover without owner authorization.
-4. Implement CF-02 docs static-export adaptation, then CF-03 demo and CF-04 Studio in separate tested PRs.
-5. Integrate CF-05 deployment gating, shared-package change detection, smoke/rollback; configure CircleCI contexts with owner action.
-6. Perform authorized CF-06 domain cutover, then CF-07 end-to-end validation and update the M0 state.
-7. Resume M1–M7 product roadmap. Keep the four app deployments separate and never replace runtime npm/stdio packaging with Cloudflare hosting.
+## CF-04: Deploy Studio
 
-### References
+Test static export and build of `apps/studio`. Deploy the current playground to a separate Worker at `studio.aether-ui.dev`.
 
-- [CircleCI configuration](https://circleci.com/docs/reference/configuration-reference/)
-- [CircleCI pipeline configuration validation](https://circleci.com/docs/guides/toolkit/how-to-use-the-circleci-local-cli/)
-- [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/)
-- [Cloudflare Worker permissions](https://developers.cloudflare.com/workers/authorization/)
-- [Cloudflare static asset headers](https://developers.cloudflare.com/workers/static-assets/headers/)
+Apply Cloudflare Access before exposing internal functionality. A future production Studio with accounts, saved themes, or private registries may justify a separate authenticated Worker API, D1, and R2. These services are not required for the initial migration.
+
+## CF-05: Complete CircleCI deployment orchestration
+
+Expand the CircleCI configuration with independent deployment jobs for the registry, documentation, demo, and Studio. Every production job must depend on successful verification and must be restricted to the protected `main` branch.
+
+Use a restricted CircleCI context named `aether-cloudflare-deploy` for `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`. Give the token minimum required Worker deployment permissions and do not print values in CI logs.
+
+Initially require explicit approval before production deployment. After a complete staged run succeeds, allow controlled automatic deployments where appropriate.
+
+Pin Wrangler in the lockfile and execute it from CircleCI. Avoid installing an unpinned latest version during production deployment. Record the commit SHA, deployed Worker identifier, endpoint, and deployment version for rollback.
+
+Run HTTP and content smoke tests after each deployment. Introduce monorepo path filtering only when shared-package dependencies, registry generation, and the lockfile are correctly accounted for.
+
+Keep npm releases separate from web deployments. The CircleCI package-publishing job remains manually authorized and is blocked until npm organization publishing permissions are confirmed.
+
+## CF-06: Perform DNS and custom-domain cutover
+
+Inventory DNS and preserve current email and verification records, including MX, SPF, DKIM, and DMARC. Confirm Cloudflare zone ownership and authoritative nameserver activation.
+
+Attach the production registry first, then documentation, demo, and Studio. Verify Cloudflare-managed TLS, canonical URLs, HTTP response codes, assets, redirects, and cache policies at each cutover.
+
+Prevent temporary preview deployments from being indexed. Do not delete a functioning website or the previous deployment path until the new Cloudflare site is independently verified.
+
+Capture the prior known-good Worker version before every deployment. Use Cloudflare Worker rollback when code deployment fails. Treat any future database schema migrations as separate rollback operations.
+
+After stable cutover, remove obsolete Vercel configuration and credentials in a reviewed change.
+
+## CF-07: Release acceptance and M0 closeout
+
+CircleCI must validate formatting, TypeScript, ESLint, test suites, registry generation and freshness, package builds, application builds, and clean consumer installs.
+
+The registry must serve valid aggregate and per-item JSON, serve AI discovery metadata, enforce expected cache and CORS rules, and return HTTP 404 for invalid paths.
+
+The published CLI must be able to fetch and install a component from the live Cloudflare registry. Verify actual consumer compilation rather than only file downloads.
+
+The documentation and demo must function on canonical domains. Studio must have the intended access policy. Deep links, responsive layout, SEO, and accessibility must be checked.
+
+Deployment jobs must use restricted credentials and produce reproducible releases with recorded commit identifiers and tested rollback procedures.
+
+GitHub branch protection must require CircleCI rather than GitHub Actions. npm publication must remain manually gated until appropriate credentials and ownership are confirmed.
+
+Update `docs/roadmap/execution-state.md` and the M0 release-candidate verification records with evidence from actual CircleCI runs and live Cloudflare endpoints. M0 is not complete while external registry or npm release gates are blocked.
+
+## Secret ownership
+
+CircleCI deployment context: `aether-cloudflare-deploy`, containing `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`.
+
+CircleCI release context: `aether-npm-release`, containing `NPM_TOKEN`.
+
+GitHub: branch protection, reviews, status checks, and source control only.
+
+Cloudflare: Worker projects, DNS, custom domains, TLS certificates, and Studio Access.
+
+Repository: Wrangler configurations, CircleCI pipeline, source code, and migration documentation, with no committed credentials.
+
+## Execution contract for AI coding agents
+
+Work through CF-00 to CF-07 in dependency order. At the start of every session, read `AGENTS.md`, the current `main` branch, this migration plan, and the persistent execution state.
+
+Implement each milestone in a small pull request with tests, an acceptance checklist, and the exact command results. Update the execution state and push only reviewed changes.
+
+Stop at owner-controlled gates involving CircleCI contexts, Cloudflare credentials, DNS, release authority, public deployment, or publishing payments. Do not claim success before the external action and smoke test have been independently verified.
+
+After full migration acceptance, resume the existing M1 through M7 product roadmap.
+
+## References
+
+See the [CircleCI configuration reference](https://circleci.com/docs/reference/configuration-reference/), [CircleCI environment variable guidance](https://circleci.com/docs/guides/security/env-vars/), [Cloudflare Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/), and [Cloudflare authorization documentation](https://developers.cloudflare.com/workers/authorization/).
