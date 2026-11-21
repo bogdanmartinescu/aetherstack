@@ -1,5 +1,7 @@
 # Aether UI platform roadmap — 2027
 
+**Infrastructure decision:** [Cloudflare + CircleCI migration](docs/deployment/CLOUDFLARE-CIRCLECI-MIGRATION.md) supersedes the Vercel deployment path. CircleCI replaces GitHub Actions for checks/builds/releases/deployments; production Workers cutover is still a gated M0 task. Do not mark M0-08 complete until live smoke tests pass.
+
 Status: proposed development program, initialized 2026-11-20. Dates are target windows, not promises. [Backlog](docs/roadmap/platform-backlog.md) is the execution order; [state](docs/roadmap/execution-state.md) is the checkpoint. Existing phases 1–7.5 remain historical records; their unfinished registry, CDN, versioning and documentation obligations are included in M0/M2 below. Historical Pro phases 8–9 are deferred until M4 approval.
 
 ## Milestones and dependencies

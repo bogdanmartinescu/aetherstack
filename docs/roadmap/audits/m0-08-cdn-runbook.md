@@ -1,5 +1,7 @@
 # M0-08 — Registry CDN readiness & rollback runbook
 
+> **Historical Vercel runbook, superseded.** Current target is Cloudflare Workers Static Assets with CircleCI-only CI/CD; follow [CLOUDFLARE-CIRCLECI-MIGRATION.md](../../deployment/CLOUDFLARE-CIRCLECI-MIGRATION.md). Preserve this file only for rollback/history of earlier attempts.
+
 **Status:** readiness docs only. Live deploy and smoke tests require owner authorization
 (Vercel project / DNS for `registry.aether-ui.dev`). Do not mark M0-08 DONE until the live
 endpoint is verified.
