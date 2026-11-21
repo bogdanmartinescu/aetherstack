@@ -13,9 +13,11 @@ unscoped package. The internal `@aetherstack/registry-build` package is
 marked `private: true`, consistent with its tooling-only role.
 
 Source versions in the monorepo may be ahead of the current npm `latest`
-versions. Existing manifest versions should not be bumped speculatively:
-compare actual npm metadata, review pending Changesets, and verify the exact
-publishable artifacts before authorizing a release.
+versions. Compare actual npm metadata and validate all tarballs. A patch
+Changeset records the CLI version-reporting fix. Before authorizing publication,
+apply `pnpm changeset version` on a separate reviewed release-preparation PR,
+commit the resulting version/changelog/lockfile changes, and repeat all checks.
+The online release preflight rejects pending, unapplied Changesets.
 
 ## Preflight on a branch / local environment
 

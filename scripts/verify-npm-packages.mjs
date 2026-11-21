@@ -19,6 +19,15 @@ const online = process.argv.includes("--online")
 assert.ok(online || process.argv.includes("--offline"), "Pass --offline or --online explicitly")
 assert.ok(!(online && process.argv.includes("--offline")), "Select exactly one preflight mode")
 
+function collectExportTargets(value) {
+  if (typeof value === "string") return [value]
+  if (Array.isArray(value)) return value.flatMap(collectExportTargets)
+  if (value && typeof value === "object") {
+    return Object.values(value).flatMap(collectExportTargets)
+  }
+  return []
+}
+
 const parseVersion = (version) => {
   assert.match(version, /^\d+\.\d+\.\d+$/, `Expected a stable semver version: ${version}`)
   return version.split(".").map(Number)
@@ -59,6 +68,16 @@ const publicPackages = readdirSync(packages, { withFileTypes: true })
   .sort((a, b) => a.manifest.name.localeCompare(b.manifest.name))
 
 assert.ok(publicPackages.length >= 9, "Publishable package inventory unexpectedly small")
+
+if (online) {
+  const pending = readdirSync(join(root, ".changeset"))
+    .filter((file) => file.endsWith(".md") && file !== "README.md")
+  assert.equal(
+    pending.length,
+    0,
+    `Apply and review pending Changesets before publishing: ${pending.join(", ")}`,
+  )
+}
 const candidateNames = new Set()
 const temp = mkdtempSync(join(tmpdir(), "aetherstack-npm-preflight-"))
 
@@ -104,10 +123,13 @@ try {
         .map((name) => name.replace(/^package\//, "").replace(/^\.\//, "")),
     )
     const entrypoints = [
-      packed.main,
-      ...Object.values(packed.bin ?? {}),
-      ...Object.values(packed.exports ?? {}).filter((value) => typeof value === "string"),
-    ].filter((value) => typeof value === "string" && value.startsWith("./"))
+      ...collectExportTargets(packed.main),
+      ...collectExportTargets(packed.module),
+      ...collectExportTargets(packed.types),
+      ...collectExportTargets(packed.typings),
+      ...collectExportTargets(packed.bin),
+      ...collectExportTargets(packed.exports),
+    ].filter((value) => value.startsWith("./"))
 
     for (const entrypoint of entrypoints) {
       const normalized = entrypoint.slice(2)
