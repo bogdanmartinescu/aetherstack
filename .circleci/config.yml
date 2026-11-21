@@ -21,8 +21,16 @@ commands:
     steps:
       - checkout
       - run:
-          name: Install pinned pnpm
-          command: npm install --global pnpm@9.1.0
+          name: Install pinned pnpm without root permissions
+          command: |
+            set -euo pipefail
+            PNPM_PREFIX="$HOME/.local/pnpm"
+            mkdir -p "$PNPM_PREFIX"
+            npm install --global --prefix "$PNPM_PREFIX" --no-audit --no-fund pnpm@9.1.0
+            export PATH="$PNPM_PREFIX/bin:$PATH"
+            # CircleCI sources BASH_ENV before each subsequent run step.
+            echo 'export PATH="$HOME/.local/pnpm/bin:$PATH"' >> "$BASH_ENV"
+            test "$(pnpm --version)" = "9.1.0"
       - run:
           name: Install workspace dependencies
           command: pnpm install --frozen-lockfile
