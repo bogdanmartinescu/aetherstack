@@ -1,6 +1,6 @@
 # AetherStack: CircleCI is the exclusive CI/CD runner.
-# Web deployments will be added after Cloudflare Workers static exports and
-# restricted CircleCI deployment contexts are implemented (CF-01..CF-05).
+# Cloudflare Worker deployments and npm publication are independently opt-in,
+# gated on verification, and require an explicit approval job.
 # GitHub is source control only; do not enable GitHub Actions or Workers Builds.
 version: 2.1
 
@@ -80,6 +80,12 @@ jobs:
       - run:
           name: Verify exported documentation routes
           command: node scripts/verify-docs-output.mjs
+      - run:
+          name: Verify published CLI documentation
+          command: node scripts/verify-cli-docs.mjs
+      - run:
+          name: Validate publishable npm tarballs (no publication)
+          command: node scripts/verify-npm-packages.mjs --offline
       - run:
           name: Clean Next.js and Vite consumer installs
           command: pnpm consumer-install
@@ -179,8 +185,14 @@ jobs:
             printf '//registry.npmjs.org/:_authToken=%s\n' "$NPM_TOKEN" > "$HOME/.npmrc"
             npm whoami --registry https://registry.npmjs.org
       - run:
-          name: Publish already-versioned Changesets packages (manual only)
-          command: pnpm release
+          name: Build and preflight public npm artifacts against npm registry
+          command: |
+            set -euo pipefail
+            pnpm turbo build --filter='./packages/*'
+            node scripts/verify-npm-packages.mjs --online
+      - run:
+          name: Publish verified versions via Changesets (authorized only)
+          command: pnpm changeset publish
 
 workflows:
   validate_and_release:
@@ -206,8 +218,13 @@ workflows:
           requires:
             - approve_docs_preview
           filters: pipeline.git.branch == "main" and pipeline.parameters.deploy_docs
+      - approve_npm_release:
+          type: approval
+          requires:
+            - verify
+          filters: pipeline.git.branch == "main" and pipeline.parameters.publish_npm
       - publish_npm:
           context: aether-npm-release
           requires:
-            - verify
+            - approve_npm_release
           filters: pipeline.git.branch == "main" and pipeline.parameters.publish_npm

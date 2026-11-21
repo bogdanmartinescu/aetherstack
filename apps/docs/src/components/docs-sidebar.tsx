@@ -513,7 +513,7 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
 
             {/* GitHub */}
             <a
-              href="https://github.com/aetherstack/aetherstack"
+              href="https://github.com/bogdanmartinescu/aetherstack"
               target="_blank"
               rel="noreferrer"
               className="text-muted-foreground hover:bg-muted hover:text-foreground flex h-8 w-8 items-center justify-center rounded-md transition-colors"
