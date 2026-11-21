@@ -55,7 +55,7 @@ CORS, caching, and 404 behavior. Do not expose secret values in logs.
 
 Cloudflare manages the Worker Custom Domain record. If Cloudflare rejects a
 hostname because it has externally managed A/AAAA/CNAME records, first
-inspect the *exact* hostname and old provider, then remove only the conflicting
+inspect the _exact_ hostname and old provider, then remove only the conflicting
 records. Preserve unrelated DNS, including MX, TXT, and nameservers. A manual
 CNAME to the `workers.dev` preview is not required.
 

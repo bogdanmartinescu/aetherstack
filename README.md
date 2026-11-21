@@ -58,7 +58,6 @@ CircleCI is the exclusive verification and deployment runner. See the
   `aether-ui-registry.hi-5be.workers.dev`.
 - The public npm release and clean published-CLI installation acceptance remain separate gates.
 
-
 **Continuous development:** [GOAL.md](GOAL.md) · [AGENTS.md](AGENTS.md) · [ROADMAP.md](ROADMAP.md) · [Task backlog](docs/roadmap/platform-backlog.md) · [Execution state](docs/roadmap/execution-state.md). Future platform features and monetization proposals are planning documents, not shipped functionality.
 
 | Doc                                                                                        | Purpose                                                            |
