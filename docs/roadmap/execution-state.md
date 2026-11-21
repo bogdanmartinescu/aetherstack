@@ -4,9 +4,9 @@ Initialized 2026-11-20. No implementation or release checks have been run as par
 
 - Active milestone: M0 — truth, stability and public distribution.
 - Last completed task: docs route gaps (PR #24); deploy preflight (PR #25).
-- Next task: owner adds Secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, then re-run Deploy public registry; then npm org publish + `pnpm m0-rc-verify`.
+- Next task: connect CircleCI and verify its replacement CI pipeline, then implement the Cloudflare Workers Static Assets registry preview/deployment per `docs/deployment/CLOUDFLARE-CIRCLECI-MIGRATION.md`; separately resolve npm org publish permissions and re-run `pnpm m0-rc-verify`.
 - Baseline reviewed: `main` at `13f4c46`. Live registry still 404 `DEPLOYMENT_NOT_FOUND` (rechecked 2026-11-20).
-- Known prior observations (reverify): CDN BLOCKED; npm Release job E404 on `@aetherstack/*` PUT (org/token). Workspace versions ahead of npm (e.g. ui local 0.5.x vs npm 0.4.0).
+- Known prior observations (reverify): CDN BLOCKED; prior npm Release job E404 on `@aetherstack/*` PUT (org/token). Workspace versions ahead of npm (e.g. ui local 0.5.x vs npm 0.4.0). Prior Vercel deployment path superseded by Cloudflare Workers + CircleCI; this changes the target, not the milestone exit criteria.
 - Commercial status: M4 discovery only; paid kit implementation and M6 require explicit owner approval and demand evidence.
 - Publishing status: no release or external submission authority granted by this plan.
 
@@ -208,3 +208,10 @@ Record milestone, all required task IDs, exact suite/results, known limitations,
 - Required tasks M0-01..M0-10: local engineering on `main` via PR #17; M0-08 live deploy BLOCKED; M0-10 external npm/CDN BLOCKED.
 - Suite: see `docs/roadmap/audits/m0-10-rc-verification.md` (HEAD at run: `eb3628c`; report regenerated after typecheck fix).
 - Milestone exit: **not satisfied** until live `registry.aether-ui.dev` returns 200 for `/r/registry.json` and authorized publish path is verified.
+
+### Checkpoint 2026-11-21 — Cloudflare + CircleCI migration plan
+
+- Milestone: M0 infrastructure pivot (CF-00..CF-07); previous Vercel/CDN instructions are historical.
+- Changes: CircleCI validation and manual-gated npm release config; removed GitHub Actions workflow files in PR; added docs/deployment/CLOUDFLARE-CIRCLECI-MIGRATION.md; linked roadmap and README.
+- Status: CI migration PREPARED, NOT VERIFIED. CircleCI project connection, pipeline run, Cloudflare worker deployments, domain cutover and npm release have **not** been performed.
+- Next: Connect repository to CircleCI, validate config, obtain green PR run, enable CircleCI required check, merge PR; implement CF-01 registry Worker preview and deployment with protected CircleCI context. Never label M0-08 complete until live endpoint tests pass.

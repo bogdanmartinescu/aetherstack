@@ -45,6 +45,8 @@ Core packages are published to npm under the `@aetherstack` org (see versions in
 
 ## Project Docs
 
+**Hosting and CI/CD migration:** [Cloudflare + CircleCI plan](docs/deployment/CLOUDFLARE-CIRCLECI-MIGRATION.md). CircleCI is the target CI/CD provider; Cloudflare deployments are not yet provisioned.
+
 **Continuous development:** [GOAL.md](GOAL.md) · [AGENTS.md](AGENTS.md) · [ROADMAP.md](ROADMAP.md) · [Task backlog](docs/roadmap/platform-backlog.md) · [Execution state](docs/roadmap/execution-state.md). Future platform features and monetization proposals are planning documents, not shipped functionality.
 
 | Doc                                                                                        | Purpose                                                            |

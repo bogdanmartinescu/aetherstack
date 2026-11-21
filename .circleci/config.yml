@@ -1,0 +1,96 @@
+# AetherStack: CircleCI is the exclusive CI/CD runner.
+# Web deployments will be added after Cloudflare Workers static exports and
+# restricted CircleCI deployment contexts are implemented (CF-01..CF-05).
+# GitHub is source control only; do not enable GitHub Actions or Workers Builds.
+version: 2.1
+
+parameters:
+  publish_npm:
+    type: boolean
+    default: false
+
+executors:
+  node:
+    docker:
+      - image: cimg/node:22.16
+    resource_class: medium
+    working_directory: ~/aetherstack
+
+commands:
+  setup_project:
+    steps:
+      - checkout
+      - run:
+          name: Install pinned pnpm
+          command: npm install --global pnpm@9.1.0
+      - run:
+          name: Install workspace dependencies
+          command: pnpm install --frozen-lockfile
+
+jobs:
+  verify:
+    executor: node
+    steps:
+      - setup_project
+      - run:
+          name: Format
+          command: pnpm format:check
+      - run:
+          name: TypeScript
+          command: pnpm typecheck
+      - run:
+          name: ESLint
+          command: pnpm lint
+      - run:
+          name: Validate public registry
+          command: pnpm --filter @aetherstack/scripts validate-registry
+      - run:
+          name: Generate registry artifacts
+          command: pnpm --filter @aetherstack/scripts build-registry
+      - run:
+          name: Check registry artifacts are committed and current
+          command: |
+            git diff --exit-code -- \
+              apps/registry-public/public/r \
+              apps/registry-public/public/llms.txt \
+              apps/docs/public/llms.txt
+      - run:
+          name: Test
+          command: pnpm test
+      - run:
+          name: Build packages and applications
+          command: pnpm build
+      - run:
+          name: Clean Next.js and Vite consumer installs
+          command: pnpm consumer-install
+
+  publish_npm:
+    executor: node
+    steps:
+      - setup_project
+      - run:
+          name: Require npm release credentials
+          command: |
+            if [ -z "${NPM_TOKEN:-}" ]; then
+              echo "Missing NPM_TOKEN in restricted CircleCI context."
+              exit 1
+            fi
+      - run:
+          name: Authenticate to npm without exposing token
+          command: |
+            umask 077
+            printf '//registry.npmjs.org/:_authToken=%s\n' "$NPM_TOKEN" > "$HOME/.npmrc"
+            npm whoami --registry https://registry.npmjs.org
+      - run:
+          name: Publish already-versioned Changesets packages (manual only)
+          command: pnpm release
+
+workflows:
+  validate_and_release:
+    jobs:
+      - verify
+      - publish_npm:
+          context: aether-npm-release
+          requires:
+            - verify
+          filters: pipeline.git.branch == "main" and pipeline.parameters.publish_npm
