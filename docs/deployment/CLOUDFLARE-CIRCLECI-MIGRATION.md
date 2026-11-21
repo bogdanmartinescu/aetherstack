@@ -36,6 +36,11 @@ Do not rewrite UI packages, migrate framework versions or add D1/R2/Queues for s
 
 This configuration covers the *build/validation* part of the migration immediately; it does **not** imply that Cloudflare projects are already provisioned or deployments are active.
 
+
+### CircleCI pnpm bootstrap (EACCES)
+
+The CircleCI `cimg/node:22.16` image may contain a root-owned global pnpm in `/usr/local/lib/node_modules`. Do **not** run `npm install --global pnpm@9.1.0` against that prefix; it can fail with `EACCES` while renaming pnpm files. `.circleci/config.yml` instead installs pnpm 9.1.0 under `$HOME/.local/pnpm` using `npm install --global --prefix "$HOME/.local/pnpm" pnpm@9.1.0`, prepends its `bin` to `PATH`, and writes the same PATH update to `$BASH_ENV` for later steps. It verifies the pinned version before `pnpm install --frozen-lockfile`. No sudo, global permission changes, or fallback to an unpinned pnpm. Re-run the CircleCI PR build to verify the fix in the actual image.
+
 ## 3. M0-08 becomes Cloudflare-first: CF-01 registry
 
 1. Reconfirm source inventory with `pnpm --filter @aetherstack/scripts validate-registry`, `build-registry`, `pnpm build`, `pnpm consumer-install`. Current source manifest contains **151** entries: 78 primitives, 39 patterns, 34 blocks; do not hardcode these counts into release checks.
