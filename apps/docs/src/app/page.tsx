@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "An open-code design system for React and Tailwind. Install accessible, token-themed primitives, patterns, blocks and AI chat components as source you own.",
 }
 
-const GITHUB_URL = "https://github.com/aetherstack/aetherstack"
+const GITHUB_URL = "https://github.com/bogdanmartinescu/aetherstack"
 const AI_PRIMITIVE_COUNT = 14
 
 const NAV_LINKS = [
@@ -164,7 +164,7 @@ function Hero() {
             <Button size="lg" asChild iconRight={<ArrowRight />}>
               <Link href="/components">Browse components</Link>
             </Button>
-            <InstallCommand command="npx aether-ui init" />
+            <InstallCommand command="npx @aetherstack/cli init" />
           </div>
           <ul className="text-muted-foreground mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm">
             {facts.map((fact) => (

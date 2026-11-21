@@ -11,6 +11,9 @@ parameters:
   deploy_registry:
     type: boolean
     default: false
+  deploy_docs:
+    type: boolean
+    default: false
 
 executors:
   node:
@@ -75,6 +78,9 @@ jobs:
           name: Verify exported public registry
           command: node scripts/verify-registry-output.mjs
       - run:
+          name: Verify exported documentation routes
+          command: node scripts/verify-docs-output.mjs
+      - run:
           name: Clean Next.js and Vite consumer installs
           command: pnpm consumer-install
 
@@ -117,6 +123,44 @@ jobs:
           name: Smoke-test deployed registry
           command: node scripts/smoke-registry.mjs "$REGISTRY_SMOKE_BASE_URL"
 
+  deploy_docs:
+    executor: node
+    steps:
+      - setup_project
+      - run:
+          name: Check restricted Cloudflare deployment context
+          command: |
+            set -euo pipefail
+            for key in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID DOCS_SMOKE_BASE_URL; do
+              if [ -z "${!key:-}" ]; then
+                echo "Missing $key in aether-cloudflare-deploy CircleCI context"
+                exit 1
+              fi
+            done
+            if ! [[ "$CLOUDFLARE_ACCOUNT_ID" =~ ^[0-9a-fA-F]{32}$ ]]; then
+              echo "CLOUDFLARE_ACCOUNT_ID must contain 32 hexadecimal characters"
+              exit 1
+            fi
+      - run:
+          name: Build static documentation and validate every page
+          command: |
+            set -euo pipefail
+            pnpm --filter @aetherstack/scripts build-registry
+            pnpm --filter @aetherstack/docs build
+            node scripts/verify-docs-output.mjs
+      - run:
+          name: Deploy docs preview through Wrangler 4.165.0
+          command: |
+            set -euo pipefail
+            WRANGLER_PREFIX="$HOME/.local/wrangler"
+            mkdir -p "$WRANGLER_PREFIX"
+            npm install --global --prefix "$WRANGLER_PREFIX" --no-audit --no-fund wrangler@4.165.0
+            "$WRANGLER_PREFIX/bin/wrangler" --version
+            "$WRANGLER_PREFIX/bin/wrangler" deploy --config apps/docs/wrangler.jsonc
+      - run:
+          name: Smoke-test deployed documentation
+          command: node scripts/smoke-docs.mjs "$DOCS_SMOKE_BASE_URL"
+
   publish_npm:
     executor: node
     steps:
@@ -152,6 +196,16 @@ workflows:
           requires:
             - approve_registry_preview
           filters: pipeline.git.branch == "main" and pipeline.parameters.deploy_registry
+      - approve_docs_preview:
+          type: approval
+          requires:
+            - verify
+          filters: pipeline.git.branch == "main" and pipeline.parameters.deploy_docs
+      - deploy_docs:
+          context: aether-cloudflare-deploy
+          requires:
+            - approve_docs_preview
+          filters: pipeline.git.branch == "main" and pipeline.parameters.deploy_docs
       - publish_npm:
           context: aether-npm-release
           requires:
