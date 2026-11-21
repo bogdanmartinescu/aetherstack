@@ -6,7 +6,7 @@ import userEvent from "@testing-library/user-event"
 import { StreamingText } from "../components/ai/streaming-text"
 import { ThinkingIndicator } from "../components/ai/thinking-indicator"
 import { MarkdownRenderer } from "../components/ai/markdown-renderer"
-import { CodeBlock } from "../components/ai/code-block"
+import { CodeBlock, highlightCode } from "../components/ai/code-block"
 import { PromptInput } from "../components/ai/prompt-input"
 import { PromptSuggestion } from "../components/ai/prompt-suggestion"
 import { ChatBubble } from "../components/ai/chat-bubble"
@@ -312,13 +312,81 @@ describe("CodeBlock lines", () => {
   })
 })
 
+describe("CodeBlock syntax highlighting", () => {
+  const types = (code: string, language: string) =>
+    highlightCode(code, language)
+      .filter((token) => token.type !== "plain")
+      .map((token) => `${token.type}:${token.text}`)
+
+  it("classifies script keywords, strings, numbers and comments", () => {
+    expect(types('const a = "x" // hi', "ts")).toEqual([
+      "keyword:const",
+      "punctuation:=",
+      'string:"x"',
+      "comment:// hi",
+    ])
+    expect(types("return 42", "js")).toEqual(["keyword:return", "number:42"])
+  })
+
+  it("keeps control-flow keywords as keywords when followed by a parenthesis", () => {
+    expect(types("if (a) {}", "ts")[0]).toBe("keyword:if")
+  })
+
+  it("tells JSX tags from comparisons and generics", () => {
+    expect(types("return <div />", "tsx")).toContain("tag:div")
+    expect(types("a < b", "ts")).not.toContain("tag:b")
+    expect(types("useState<number>(0)", "ts")).not.toContain("tag:number")
+  })
+
+  it("marks JSON keys as properties and values as strings", () => {
+    expect(types('{ "a": "b" }', "json")).toEqual([
+      "punctuation:{",
+      'property:"a"',
+      "punctuation::",
+      'string:"b"',
+      "punctuation:}",
+    ])
+  })
+
+  it("treats the first shell word as a command and dashes as flags", () => {
+    expect(types("npx cli add --yes", "bash")).toEqual(["function:npx", "property:--yes"])
+  })
+
+  it("returns plain text for unknown languages", () => {
+    expect(highlightCode("const a = 1", "klingon")).toEqual([
+      { type: "plain", text: "const a = 1" },
+    ])
+  })
+
+  it("never changes the text it renders", () => {
+    const code = 'export const A = () => <b className="x">{n + 1}</b>\n// done'
+    expect(
+      highlightCode(code, "tsx")
+        .map((token) => token.text)
+        .join(""),
+    ).toBe(code)
+    const { container } = render(<CodeBlock code={code} language="tsx" showLineNumbers />)
+    expect(container.querySelector("code")).toHaveTextContent(
+      '1export const A = () => <b className="x">{n + 1}</b>2// done',
+    )
+  })
+
+  it("only adds colour spans when a language is given", () => {
+    const plain = render(<CodeBlock code="const a = 1" />)
+    expect(plain.container.querySelector("[data-token]")).toBeNull()
+    plain.unmount()
+    const coloured = render(<CodeBlock code="const a = 1" language="ts" />)
+    expect(coloured.container.querySelector('[data-token="keyword"]')).toHaveTextContent("const")
+  })
+})
+
 // ─── MarkdownRenderer ─────────────────────────────────────────────────────────
 
 describe("MarkdownRenderer rendering", () => {
   it("renders fenced code through CodeBlock with a language label and copy button", () => {
-    render(<MarkdownRenderer content={"```ts\nconst a = 1\n```"} />)
+    const { container } = render(<MarkdownRenderer content={"```ts\nconst a = 1\n```"} />)
     expect(screen.getByText("ts")).toBeInTheDocument()
-    expect(screen.getByText("const a = 1")).toBeInTheDocument()
+    expect(container.querySelector("pre code")).toHaveTextContent("const a = 1")
     expect(screen.getByRole("button", { name: "Copy code" })).toBeInTheDocument()
   })
 
