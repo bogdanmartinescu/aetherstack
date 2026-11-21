@@ -1,36 +1,79 @@
-# CF-02 Docs Cloudflare Worker Preview
+# CF-02: Documentation Worker runbook
 
-Status: preview implementation prepared, not yet deployed. The docs Worker is independent of the deployed registry Worker.
+Status (2026-11-21): **deployed**. PR #31 merged the Next.js static-export
+configuration; [CircleCI pipeline #20](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/20/details?useNewPipelines=true)
+ran `verify`, `approve_docs_preview`, and `deploy_docs`. The Cloudflare dashboard
+lists `aether-ui.dev` as a Custom Domain on `aether-ui-docs`, and a production
+documentation page was loaded in the connected browser. Broader visual and accessibility
+acceptance is still outstanding.
+
+For the deployment matrix, DNS cutover, and rollback policy, see the
+[operations guide](./README.md).
 
 ## Configuration
 
-- Worker: `aether-ui-docs`, static assets from `apps/docs/out`
-- Preview hostname: `https://aether-ui-docs.hi-5be.workers.dev`
-- Production hostname after preview validation: `aether-ui.dev`
-- Runtime: Cloudflare Workers Static Assets, no Worker script and no Cloudflare Builds
-- Build: `pnpm --filter @aetherstack/scripts build-registry` then `pnpm --filter @aetherstack/docs build`
-- Validation: `node scripts/verify-docs-output.mjs` checks all page routes and static assets
-- Public smoke: `node scripts/smoke-docs.mjs https://aether-ui-docs.hi-5be.workers.dev`
+- Source: `apps/docs`; Next.js `output: "export"`, `trailingSlash: true`.
+- Worker: `aether-ui-docs`; config: `apps/docs/wrangler.jsonc`.
+- Static asset directory: `apps/docs/out` (built in CircleCI).
+- Preview URL: `https://aether-ui-docs.hi-5be.workers.dev`.
+- Production Custom Domain: `https://aether-ui.dev`.
+- Asset handling: `404-page` and `auto-trailing-slash`.
+- Response rules: `apps/docs/public/_headers` and `_redirects`.
+- SEO metadata: statically generated `robots.txt`, `sitemap.xml`, and `llms.txt`.
+- Redirect: `/components/code-block-ai` → `/components/code-block/` (301).
 
-Next.js outputs static HTML with trailing slashes. Cloudflare uses `404-page` for non-existent routes and `auto-trailing-slash` for exported folder indexes. Cloudflare `_redirects` preserves the legacy `/components/code-block-ai` route as a 301 to `/components/code-block/`.
+The documentation uses no Cloudflare database or server-side Next.js runtime. The
+`robots.ts` and `sitemap.ts` routes must remain explicitly static to support the export.
 
-## Operator-controlled configuration
+## CI/CD and secrets
 
-Reuse the protected CircleCI context `aether-cloudflare-deploy` with `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`. Add one environment variable:
+The `aether-cloudflare-deploy` CircleCI context holds the following variables:
 
-`DOCS_SMOKE_BASE_URL=https://aether-ui-docs.hi-5be.workers.dev`
+- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_API_TOKEN`
+- `DOCS_SMOKE_BASE_URL=https://aether-ui-docs.hi-5be.workers.dev`
 
-Do not attach the domain or enable Cloudflare Workers Builds while the preview has not been independently validated.
+Never copy their secret values into this repository. GitHub Actions and Cloudflare
+Workers Builds are not used.
 
-## Release sequence
+## Redeployment procedure
 
-1. Wait for the normal CircleCI `verify` job to pass on this PR. This includes a full Next.js static export and route inventory check.
-2. Merge the PR. Trigger a new CircleCI pipeline on `main` with `deploy_docs=true`, leaving `publish_npm=false` and `deploy_registry=false`.
-3. Approve `approve_docs_preview` only after the validation job succeeds. `deploy_docs` then creates the Worker if absent.
-4. Confirm all smoke checks in the deploy job pass. Inspect `/`, `/components/button/`, `/patterns/`, the hashed Next.js JS asset, `/llms.txt`, old-slug 301 and invalid-route 404.
-5. Verify interactive examples, theme switching, font selection, keyboard operation, narrow-screen navigation, metadata and CSS in a real browser.
-6. Record the Worker version and Git commit. Attach `aether-ui.dev` through Workers Custom Domains **only** after assessing existing DNS and obtaining approval for the website cutover.
-7. Repeat smoke tests on `https://aether-ui.dev` and verify the published CLI against the live registry.
-8. Keep previous known-good Workers versions available for rollback.
+1. Merge a reviewed PR after the normal CircleCI `verify` job passes.
+2. Trigger a **new** pipeline on `main` with `deploy_docs=true`;
+   keep `deploy_registry=false` and `publish_npm=false`.
+3. Approve `approve_docs_preview` when the verification job is green.
+4. Confirm `deploy_docs` builds the site, verifies exported pages, runs Wrangler,
+   and passes the HTTP smoke script against `DOCS_SMOKE_BASE_URL`.
+5. Validate the production hostname separately; the deploy job's preview smoke
+   does not automatically test `https://aether-ui.dev`.
+6. Inspect interactive examples, search, fonts, theme switching, desktop/mobile
+   navigation, SEO, and accessibility. Record the deployed commit and Worker version.
 
-This PR **does not deploy docs, change DNS, release npm packages or enable automatic deployment**. If static export fails, fix the actual incompatibility rather than disabling checks or silently switching to a dynamic runtime.
+Relevant commands from the monorepo root:
+
+```bash
+pnpm --filter @aetherstack/scripts build-registry
+pnpm --filter @aetherstack/docs build
+node scripts/verify-docs-output.mjs
+node scripts/smoke-docs.mjs https://aether-ui-docs.hi-5be.workers.dev
+node scripts/smoke-docs.mjs https://aether-ui.dev
+```
+
+## Custom domain and rollback
+
+Cloudflare manages the `aether-ui.dev` Worker Custom Domain. If adding it reports
+"externally managed DNS records", inspect **DNS → Records** and remove only
+conflicting old A/AAAA/CNAME records for the apex after validating the replacement.
+Preserve MX, TXT (SPF/DKIM/DMARC and verification), CAA, nameservers, and unrelated
+subdomain records. Do **not** create a manual CNAME to `workers.dev`.
+
+For a bad deployment, use Cloudflare's Worker version rollback to restore the
+previous known-good version; for a bad DNS cutover, restore the last verified
+hostname mapping. Re-run smoke checks and record the result.
+
+## Open acceptance checks
+
+- Production smoke command, deep links, SEO, redirects, JS/CSS, and not-found 404.
+- Interactive component demos, responsive states, keyboard navigation, and theme/fonts.
+- Version/commit metadata and rollback evidence.
+- Published CLI integration with the production registry is a separate release gate.
