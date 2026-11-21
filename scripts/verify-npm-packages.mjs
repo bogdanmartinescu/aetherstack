@@ -9,7 +9,7 @@
  */
 import assert from "node:assert/strict"
 import { execFileSync } from "node:child_process"
-import { mkdtempSync, readFileSync, readdirSync, rmSync } from "node:fs"
+import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join, resolve } from "node:path"
 
@@ -66,6 +66,7 @@ try {
     candidateNames.add(manifest.name)
 
     const archiveDir = join(temp, manifest.name.split("/")[1])
+    mkdirSync(archiveDir, { recursive: true })
     // pnpm pack rewrites workspace:* dependencies to actual publishable versions.
     execFileSync("pnpm", ["pack", "--pack-destination", archiveDir], {
       cwd: directory,
