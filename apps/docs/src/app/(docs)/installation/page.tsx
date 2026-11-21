@@ -802,8 +802,8 @@ export default function InstallationPage() {
         <SectionHeading>CLI reference</SectionHeading>
         <p className="text-muted-foreground mb-6 text-sm">
           The <code className="bg-muted rounded px-1 font-mono text-xs">aether-ui</code> CLI copies
-          component source files into your project. No runtime dependency on Aether UI — you own the
-          code.
+          component source files into your project. You own the source; install any runtime dependencies
+          reported by the CLI before building.
         </p>
         <div className="space-y-4">
           <CodeBlock
@@ -819,7 +819,7 @@ npx @aetherstack/cli add button
 # Add multiple components at once
 npx @aetherstack/cli add button badge card input
 
-# Add to a specific directory
+# Target a specific project directory
 npx @aetherstack/cli add button --cwd /path/to/your/project`}
             filename="terminal"
           />
@@ -833,17 +833,11 @@ npx @aetherstack/cli add button --cwd /path/to/your/project`}
           </p>
           <CodeBlock
             code={`{
-  "$schema": "https://aether-ui.dev/schema.json",
-  "style": "default",
-  "tailwind": {
-    "config": "tailwind.config.ts",
-    "css": "src/app/globals.css",
-    "baseColor": "neutral",
-    "cssVariables": true
-  },
+  "$schema": "https://registry.aether-ui.dev/schema.json",
+  "registry": "https://registry.aether-ui.dev",
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils"
+    "components": "src/components/ui",
+    "utils": "src/lib"
   }
 }`}
             filename="aether.json"
