@@ -75,7 +75,7 @@ export function ContextMenuDemo() {
     </ContextMenu>
   )
 }`}
-      cliInstall={`npx aether-ui add context-menu`}
+      cliInstall={`npx @aetherstack/cli add context-menu`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

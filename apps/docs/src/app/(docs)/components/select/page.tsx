@@ -79,7 +79,7 @@ export function SelectDemo() {
     </Select>
   )
 }`}
-      cliInstall={`npx aether-ui add select`}
+      cliInstall={`npx @aetherstack/cli add select`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

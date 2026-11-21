@@ -214,7 +214,7 @@ export function ButtonDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add button`}
+      cliInstall={`npx @aetherstack/cli add button`}
       manualInstallCode={BUTTON_SOURCE}
       manualSteps={[
         {

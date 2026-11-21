@@ -57,7 +57,7 @@ export function VisuallyHiddenDemo() {
     </Button>
   )
 }`}
-      cliInstall={`npx aether-ui add visually-hidden`}
+      cliInstall={`npx @aetherstack/cli add visually-hidden`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

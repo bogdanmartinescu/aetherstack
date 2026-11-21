@@ -9,7 +9,7 @@ export default function PromptBuilderPage() {
       name="Prompt Builder"
       description="An interactive multi-turn prompt editor that lets users construct system, user, and assistant conversation turns. Each turn can be added, edited, reordered, or removed. Useful for prompt engineering workflows and chat playground UIs."
       packageName="@aetherstack/patterns"
-      cliInstall="npx aether-ui add prompt-builder"
+      cliInstall="npx @aetherstack/cli add prompt-builder"
       importCode={`import { PromptBuilder } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { PromptBuilder } from "@aetherstack/patterns"

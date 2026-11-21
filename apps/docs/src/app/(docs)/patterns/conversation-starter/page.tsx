@@ -9,7 +9,7 @@ export default function ConversationStarterPage() {
       name="Conversation Starter"
       description="An empty-state component shown before a conversation begins. Displays a heading, optional subheading, and a set of suggestion chips. Clicking a chip fires onSuggestionClick with the associated prompt string so the parent can pre-fill the input or immediately send a message."
       packageName="@aetherstack/patterns"
-      cliInstall="npx aether-ui add conversation-starter"
+      cliInstall="npx @aetherstack/cli add conversation-starter"
       importCode={`import { ConversationStarter } from "@aetherstack/patterns"`}
       usageCode={`import { ConversationStarter } from "@aetherstack/patterns"
 import { Sparkles, Code } from "lucide-react"

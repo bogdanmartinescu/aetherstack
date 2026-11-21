@@ -64,7 +64,7 @@ export function SkeletonDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add skeleton`}
+      cliInstall={`npx @aetherstack/cli add skeleton`}
       manualInstallCode={MANUAL_SOURCE}
       examples={[
         {

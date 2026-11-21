@@ -256,3 +256,12 @@ Record milestone, all required task IDs, exact suite/results, known limitations,
 - Required checks not run here: `verify-npm-packages.mjs --offline/--online`, consumer install, external published-CLI install. CircleCI `verify` on this PR is the first run.
 - Status: PREPARED, NOT PUBLISHED. Publishing needs owner approval of `approve_npm_release`.
 - Next: merge after green `verify`, run `publish_npm=true` on `main`, then record versions, job URL and an external clean-consumer install.
+
+### Checkpoint 2026-11-21 — docs command and manual-source correction
+
+- Branch: `docs/scoped-cli-and-manual-source`, based on `main` at `8ebb025`.
+- Finding: about 156 docs pages, the package READMEs, `docs/components.md` and the `llms.txt` generator told users to run `npx aether-ui ...`, but the CLI is published only as `@aetherstack/cli` (see the npm release runbook). All occurrences now read `npx @aetherstack/cli ...`; the two checked-in `llms.txt` copies were edited to match the generator and should be confirmed by CI's artifact-currency check.
+- Finding: 13 component pages (carousel, chart, date-picker, dialog, dropdown-menu, input-group, input-otp, menubar, navigation-menu, resizable, sheet, sidebar, toast) showed truncated "manual install" source. They now read the item's real source from `apps/registry-public/public/r/<name>.json` at build time (`apps/docs/src/lib/registry-source.ts`).
+- Added accessibility notes for `model-badge` and `prompt-suggestion`.
+- Not verified here: `pnpm build`, lint, typecheck and the docs output check have not run in this session; CircleCI `verify` on the PR is the first run.
+- Open: runtime messages in `@aetherstack/cli` and `@aetherstack/mcp-server` still print bare `aether-ui add ...`; changing them needs a package release. Six patterns (filter-toolbar, form-field, metric-card, section-header, settings-section, table-toolbar) have no accessibility notes.

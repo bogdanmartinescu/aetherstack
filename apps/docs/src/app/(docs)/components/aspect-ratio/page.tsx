@@ -49,7 +49,7 @@ export function AspectRatioDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add aspect-ratio`}
+      cliInstall={`npx @aetherstack/cli add aspect-ratio`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

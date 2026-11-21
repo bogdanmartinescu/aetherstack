@@ -8,7 +8,7 @@ export default function UploadProgressPage() {
     <PatternPage
       name="Upload Progress"
       description="File upload progress display with status icons and a remove action. Each file row shows a filename, formatted size, a progress bar, and a status icon — uploading spinner, success check, or error indicator."
-      cliInstall="npx aether-ui add upload-progress"
+      cliInstall="npx @aetherstack/cli add upload-progress"
       importCode={`import { UploadProgress } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { UploadProgress } from "@aetherstack/patterns"

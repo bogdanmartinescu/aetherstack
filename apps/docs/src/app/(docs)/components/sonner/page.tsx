@@ -82,7 +82,7 @@ export function SonnerDemo() {
     </>
   )
 }`}
-      cliInstall={`npx aether-ui add sonner`}
+      cliInstall={`npx @aetherstack/cli add sonner`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

@@ -9,7 +9,7 @@ export default function ChatSidebarPage() {
       name="Chat Sidebar"
       category="AI Layout"
       description="A conversation list sidebar with a new-chat button, live search filter, inline rename editing, and per-item delete via a dropdown menu. Designed to slot directly inside ChatLayout."
-      cliInstall="npx aether-ui add chat-sidebar"
+      cliInstall="npx @aetherstack/cli add chat-sidebar"
       previewHeight="360px"
       importCode={`import { ChatSidebar } from "@aetherstack/blocks"`}
       usageCode={`"use client"

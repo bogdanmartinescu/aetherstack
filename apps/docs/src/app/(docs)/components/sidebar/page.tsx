@@ -12,6 +12,7 @@ import {
   SidebarTrigger,
 } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
+import { getRegistrySource } from "@/lib/registry-source"
 import { LayoutDashboard, Settings, Users, HelpCircle } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -19,15 +20,7 @@ export const metadata: Metadata = {
   description: "A context-driven collapsible sidebar with icon-only collapsed mode.",
 }
 
-const MANUAL_SOURCE = `"use client"
-
-import * as React from "react"
-import { PanelLeftIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-
-// Full source: packages/ui/src/components/sidebar.tsx`
+const MANUAL_SOURCE = getRegistrySource("sidebar")
 
 function SidebarPreview() {
   return (
@@ -151,7 +144,7 @@ export function SidebarDemo() {
     </SidebarProvider>
   )
 }`}
-      cliInstall={`npx aether-ui add sidebar`}
+      cliInstall={`npx @aetherstack/cli add sidebar`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

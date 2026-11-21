@@ -13,7 +13,7 @@ export default function SectionHeaderPage() {
     <PatternPage
       name="Section Header"
       description="A lightweight block heading for grouping related content within a page. Lighter than PageHeader — no breadcrumb, smaller type."
-      cliInstall="npx aether-ui add section-header"
+      cliInstall="npx @aetherstack/cli add section-header"
       importCode={`import { SectionHeader } from "@aetherstack/patterns"`}
       usageCode={`// Basic
 <SectionHeader title="Connected accounts" />

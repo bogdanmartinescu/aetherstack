@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { InputGroup, InputGroupAddon, InputGroupText, Input } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
+import { getRegistrySource } from "@/lib/registry-source"
 import { DollarSign, Search } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -8,54 +9,7 @@ export const metadata: Metadata = {
   description: "An Input with left and/or right addon slots for icons, labels, or buttons.",
 }
 
-const MANUAL_SOURCE = `import * as React from "react"
-import { cn } from "@/lib/utils"
-
-export interface InputGroupProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export interface InputGroupAddonProps extends React.HTMLAttributes<HTMLDivElement> {
-  position?: "left" | "right"
-}
-
-const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("flex w-full items-stretch", className)}
-      {...props}
-    />
-  ),
-)
-InputGroup.displayName = "InputGroup"
-
-const InputGroupAddon = React.forwardRef<HTMLDivElement, InputGroupAddonProps>(
-  ({ className, position = "left", ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(
-        "flex items-center border border-input bg-muted px-3 text-sm text-muted-foreground",
-        position === "left"
-          ? "rounded-l-md border-r-0"
-          : "rounded-r-md border-l-0",
-        className,
-      )}
-      {...props}
-    />
-  ),
-)
-InputGroupAddon.displayName = "InputGroupAddon"
-
-const InputGroupText = React.forwardRef<
-  HTMLSpanElement,
-  React.HTMLAttributes<HTMLSpanElement>
->(({ className, ...props }, ref) => (
-  <span ref={ref} className={cn("select-none", className)} {...props} />
-))
-InputGroupText.displayName = "InputGroupText"
-
-export { InputGroup, InputGroupAddon, InputGroupText }
-
-// Full source: packages/ui/src/components/input-group.tsx`
+const MANUAL_SOURCE = getRegistrySource("input-group")
 
 export default function InputGroupPage() {
   return (
@@ -107,7 +61,7 @@ export function InputGroupDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add input-group`}
+      cliInstall={`npx @aetherstack/cli add input-group`}
       manualInstallCode={MANUAL_SOURCE}
       examples={[
         {

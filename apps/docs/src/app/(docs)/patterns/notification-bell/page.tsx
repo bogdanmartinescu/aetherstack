@@ -8,7 +8,7 @@ export default function NotificationBellPage() {
     <PatternPage
       name="Notification Bell"
       description="A bell icon with an unread count badge and a dropdown notification panel. Each entry shows a title, description, and relative timestamp. A mark-all-read action clears the badge."
-      cliInstall="npx aether-ui add notification-bell"
+      cliInstall="npx @aetherstack/cli add notification-bell"
       importCode={`import { NotificationBell } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { NotificationBell } from "@aetherstack/patterns"

@@ -28,7 +28,7 @@ export default function PriorityBarsPage() {
   <PriorityBars priority="high" />
   <PriorityBars priority="urgent" />
 </div>`}
-      cliInstall="npx aether-ui add priority-bars"
+      cliInstall="npx @aetherstack/cli add priority-bars"
       manualInstallCode={PRIORITY_BARS_SOURCE}
       examples={[]}
       props={[

@@ -9,7 +9,7 @@ export default function PromptLibraryPageDocPage() {
       name="Prompt Library Page"
       category="AI"
       description="A full-page layout for managing a prompt library. Features a category sidebar, live search filter, a responsive prompt card grid with insert, copy, edit, and delete actions, and a dialog for creating or editing prompts."
-      cliInstall="npx aether-ui add prompt-library-page"
+      cliInstall="npx @aetherstack/cli add prompt-library-page"
       previewHeight="420px"
       importCode={`import { PromptLibraryPage } from "@aetherstack/blocks"`}
       usageCode={`"use client"

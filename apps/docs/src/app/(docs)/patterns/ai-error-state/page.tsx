@@ -14,7 +14,7 @@ export default function AIErrorStatePage() {
       name="AI Error State"
       description="A contextual error display for AI-specific failure modes. Accepts a type prop that maps to a pre-configured icon, heading, and description. Supports a custom message override and an optional onRetry callback that renders a retry button."
       packageName="@aetherstack/patterns"
-      cliInstall="npx aether-ui add ai-error-state"
+      cliInstall="npx @aetherstack/cli add ai-error-state"
       importCode={`import { AIErrorState } from "@aetherstack/patterns"`}
       usageCode={`import { AIErrorState } from "@aetherstack/patterns"
 

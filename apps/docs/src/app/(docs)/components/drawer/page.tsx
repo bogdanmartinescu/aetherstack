@@ -78,7 +78,7 @@ export default function DrawerPage() {
     </DrawerFooter>
   </DrawerContent>
 </Drawer>`}
-      cliInstall="npx aether-ui add drawer"
+      cliInstall="npx @aetherstack/cli add drawer"
       manualInstallCode={SOURCE}
       manualSteps={[
         { title: "Install dependencies", code: "npm install vaul", filename: "terminal" },

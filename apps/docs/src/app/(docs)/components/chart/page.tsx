@@ -1,27 +1,14 @@
 import type { Metadata } from "next"
 import { BarChart, LineChart } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
+import { getRegistrySource } from "@/lib/registry-source"
 
 export const metadata: Metadata = {
   title: "Chart",
   description: "Recharts wrapper components with token-based colors and sensible defaults.",
 }
 
-const MANUAL_SOURCE = `import * as React from "react"
-import {
-  BarChart as RechartsBarChart,
-  LineChart as RechartsLineChart,
-  Bar,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts"
-import { cn } from "@/lib/utils"
-
-// Full source: packages/ui/src/components/chart.tsx`
+const MANUAL_SOURCE = getRegistrySource("chart")
 
 const SAMPLE_DATA = [
   { month: "Jan", revenue: 4000 },
@@ -81,7 +68,7 @@ export function ChartDemo() {
     />
   )
 }`}
-      cliInstall={`npx aether-ui add chart`}
+      cliInstall={`npx @aetherstack/cli add chart`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

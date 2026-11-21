@@ -76,7 +76,7 @@ export function TooltipDemo() {
     </TooltipProvider>
   )
 }`}
-      cliInstall={`npx aether-ui add tooltip`}
+      cliInstall={`npx @aetherstack/cli add tooltip`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

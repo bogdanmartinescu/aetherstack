@@ -1,18 +1,14 @@
 import type { Metadata } from "next"
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
+import { getRegistrySource } from "@/lib/registry-source"
 
 export const metadata: Metadata = {
   title: "Resizable",
   description: "Draggable split-pane panels for adjustable layouts.",
 }
 
-const MANUAL_SOURCE = `import * as React from "react"
-import { GripVertical } from "lucide-react"
-import * as ResizablePrimitive from "react-resizable-panels"
-import { cn } from "@/lib/utils"
-
-// Full source: packages/ui/src/components/resizable.tsx`
+const MANUAL_SOURCE = getRegistrySource("resizable")
 
 export default function ResizablePage() {
   return (
@@ -67,7 +63,7 @@ export function ResizableDemo() {
     </ResizablePanelGroup>
   )
 }`}
-      cliInstall={`npx aether-ui add resizable`}
+      cliInstall={`npx @aetherstack/cli add resizable`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

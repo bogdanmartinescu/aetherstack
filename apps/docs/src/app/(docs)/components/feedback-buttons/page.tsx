@@ -19,7 +19,7 @@ export default function FeedbackButtonsPage() {
   onThumbsUp={() => submitFeedback("positive")}
   onThumbsDown={() => submitFeedback("negative")}
 />`}
-      cliInstall="npx aether-ui add feedback-buttons"
+      cliInstall="npx @aetherstack/cli add feedback-buttons"
       props={[
         {
           name: "value",

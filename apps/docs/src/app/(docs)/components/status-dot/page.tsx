@@ -12,7 +12,7 @@ export default function StatusDotPage() {
       features={["Five statuses", "Spoken label", "Pulse only while busy"]}
       preview={<StatusDot status="busy" />}
       previewCode={`import { StatusDot } from "@/components/ui/status-dot"\n\n<StatusDot status="busy" />`}
-      cliInstall="npx aether-ui add status-dot"
+      cliInstall="npx @aetherstack/cli add status-dot"
       manualInstallCode={STATUS_DOT_SOURCE}
       examples={[]}
       props={[

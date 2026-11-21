@@ -34,7 +34,7 @@ export default function DataTablePage() {
     <PatternPage
       name="Data Table"
       description="A fully-featured data table with client-side sorting, fuzzy search, and pagination. Built on the Table primitive with generic column definitions."
-      cliInstall="npx aether-ui add data-table"
+      cliInstall="npx @aetherstack/cli add data-table"
       importCode={`import { DataTable } from "@aetherstack/patterns"
 import type { DataTableColumn } from "@aetherstack/patterns"`}
       usageCode={`import { DataTable } from "@aetherstack/patterns"

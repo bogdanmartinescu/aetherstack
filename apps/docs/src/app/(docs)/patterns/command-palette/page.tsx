@@ -8,7 +8,7 @@ export default function CommandPalettePage() {
     <PatternPage
       name="Command Palette"
       description="A keyboard-first command palette built on cmdk. Supports grouped results, fuzzy search, empty states, and dialog presentation. Bind it to ⌘K for a native feel."
-      cliInstall="npx aether-ui add command-palette"
+      cliInstall="npx @aetherstack/cli add command-palette"
       importCode={`import {
   CommandPaletteDialog,
   CommandPalette,

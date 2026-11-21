@@ -59,7 +59,7 @@ export function TextareaDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add textarea`}
+      cliInstall={`npx @aetherstack/cli add textarea`}
       manualInstallCode={MANUAL_SOURCE}
       examples={[
         {

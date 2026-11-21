@@ -48,7 +48,7 @@ export default function NotificationCenterPage() {
       name="Notification Center"
       category="Feedback"
       description="A notification feed with read/unread state, per-type icons (info, success, warning, error), mark-as-read, mark-all-read, and dismiss actions."
-      cliInstall="npx aether-ui add notification-center"
+      cliInstall="npx @aetherstack/cli add notification-center"
       previewHeight="480px"
       importCode={`import { NotificationCenter } from "@aetherstack/blocks"`}
       usageCode={`import { NotificationCenter } from "@aetherstack/blocks"

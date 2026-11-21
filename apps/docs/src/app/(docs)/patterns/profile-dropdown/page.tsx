@@ -12,7 +12,7 @@ export default function ProfileDropdownPage() {
     <PatternPage
       name="Profile Dropdown"
       description="A user avatar trigger with name, role, and a dropdown of nav links and a sign-out action. Designed for top navigation bars and sidebars."
-      cliInstall="npx aether-ui add profile-dropdown"
+      cliInstall="npx @aetherstack/cli add profile-dropdown"
       importCode={`import { ProfileDropdown } from "@aetherstack/patterns"`}
       usageCode={`import { ProfileDropdown } from "@aetherstack/patterns"
 

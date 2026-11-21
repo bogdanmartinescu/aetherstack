@@ -13,7 +13,7 @@ export default function ChangelogBlockPage() {
       name="Changelog Block"
       category="User & content"
       description="A release notes timeline with version badge, date, title, optional description, tags, and grouped change lists (added, changed, fixed, removed). Renders as a vertical timeline with connecting lines."
-      cliInstall="npx aether-ui add changelog-block"
+      cliInstall="npx @aetherstack/cli add changelog-block"
       previewScale={0.85}
       previewHeight="560px"
       importCode={`import { ChangelogBlock } from "@aetherstack/blocks"

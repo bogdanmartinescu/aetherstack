@@ -10,7 +10,7 @@ export default function EmptyDashboardPage() {
       name="Empty Dashboard"
       category="Dashboard"
       description="A polished zero-state screen shown to new users who haven't set anything up yet. Features a subtle dot-grid background, an illustration placeholder, customisable title, description, and actions slot."
-      cliInstall="npx aether-ui add empty-dashboard"
+      cliInstall="npx @aetherstack/cli add empty-dashboard"
       importCode={`import { EmptyDashboard } from "@aetherstack/blocks"`}
       usageCode={`import { EmptyDashboard } from "@aetherstack/blocks"
 import { Button } from "@aetherstack/ui"

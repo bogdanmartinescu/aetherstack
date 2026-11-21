@@ -1,20 +1,14 @@
 import type { Metadata } from "next"
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@aetherstack/ui"
 import { ComponentPage } from "@/components/component-page"
+import { getRegistrySource } from "@/lib/registry-source"
 
 export const metadata: Metadata = {
   title: "Input OTP",
   description: "An accessible one-time password input with individual digit slots.",
 }
 
-const MANUAL_SOURCE = `"use client"
-
-import * as React from "react"
-import { OTPInput, OTPInputContext } from "input-otp"
-import { Dot } from "lucide-react"
-import { cn } from "@/lib/utils"
-
-// Full source: packages/ui/src/components/input-otp.tsx`
+const MANUAL_SOURCE = getRegistrySource("input-otp")
 
 export default function InputOTPPage() {
   return (
@@ -68,7 +62,7 @@ export function InputOTPDemo() {
     </InputOTP>
   )
 }`}
-      cliInstall={`npx aether-ui add input-otp`}
+      cliInstall={`npx @aetherstack/cli add input-otp`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

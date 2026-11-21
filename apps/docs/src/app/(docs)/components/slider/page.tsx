@@ -61,7 +61,7 @@ export default function SliderPage() {
 export function SliderDemo() {
   return <Slider defaultValue={[50]} />
 }`}
-      cliInstall={`npx aether-ui add slider`}
+      cliInstall={`npx @aetherstack/cli add slider`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

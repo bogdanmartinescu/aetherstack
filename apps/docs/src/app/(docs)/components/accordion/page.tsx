@@ -97,8 +97,8 @@ export default function AccordionPage() {
           <AccordionItem value="item-3">
             <AccordionTrigger>How do I install it?</AccordionTrigger>
             <AccordionContent>
-              Run <code>npx aether-ui add accordion</code> in your project and the component is
-              copied directly into your codebase.
+              Run <code>npx @aetherstack/cli add accordion</code> in your project and the component
+              is copied directly into your codebase.
             </AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -128,13 +128,13 @@ export function AccordionDemo() {
       <AccordionItem value="item-3">
         <AccordionTrigger>How do I install it?</AccordionTrigger>
         <AccordionContent>
-          Run npx aether-ui add accordion in your project.
+          Run npx @aetherstack/cli add accordion in your project.
         </AccordionContent>
       </AccordionItem>
     </Accordion>
   )
 }`}
-      cliInstall={`npx aether-ui add accordion`}
+      cliInstall={`npx @aetherstack/cli add accordion`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

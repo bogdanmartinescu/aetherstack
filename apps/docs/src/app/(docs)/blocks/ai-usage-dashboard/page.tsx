@@ -37,7 +37,7 @@ export default function AIUsageDashboardPage() {
       name="AI Usage Dashboard"
       category="AI"
       description="A monitoring dashboard for AI API consumption. Displays three KPI stat cards (requests, tokens, cost), a bar chart of request volume over time using an inline SVG renderer, and a sortable per-model usage breakdown table."
-      cliInstall="npx aether-ui add ai-usage-dashboard"
+      cliInstall="npx @aetherstack/cli add ai-usage-dashboard"
       previewHeight="400px"
       importCode={`import { AIUsageDashboard } from "@aetherstack/blocks"`}
       usageCode={`import { AIUsageDashboard } from "@aetherstack/blocks"

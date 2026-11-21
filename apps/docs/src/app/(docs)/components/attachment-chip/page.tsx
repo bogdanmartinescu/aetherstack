@@ -29,7 +29,7 @@ export default function AttachmentChipPage() {
   type="image/png"
   onRemove={() => removeAttachment("screenshot.png")}
 />`}
-      cliInstall="npx aether-ui add attachment-chip"
+      cliInstall="npx @aetherstack/cli add attachment-chip"
       props={[
         {
           name: "name",

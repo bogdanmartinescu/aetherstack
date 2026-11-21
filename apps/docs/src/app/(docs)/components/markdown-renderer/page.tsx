@@ -36,7 +36,7 @@ Here is the answer with **formatting** support.
 \`
 
 <MarkdownRenderer content={response} />`}
-      cliInstall="npx aether-ui add markdown-renderer"
+      cliInstall="npx @aetherstack/cli add markdown-renderer"
       props={[
         {
           name: "content",

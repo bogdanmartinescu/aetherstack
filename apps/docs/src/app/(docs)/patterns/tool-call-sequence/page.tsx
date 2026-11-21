@@ -14,7 +14,7 @@ export default function ToolCallSequencePage() {
       name="Tool Call Sequence"
       description="A collapsible step list that visualises the status and details of sequential AI tool calls. Each step shows a numbered index, the tool name, a status icon (pending, running, done, or error), and an expandable drawer displaying the call arguments, result, or error payload."
       packageName="@aetherstack/patterns"
-      cliInstall="npx aether-ui add tool-call-sequence"
+      cliInstall="npx @aetherstack/cli add tool-call-sequence"
       importCode={`import { ToolCallSequence } from "@aetherstack/patterns"`}
       usageCode={`import { ToolCallSequence } from "@aetherstack/patterns"
 

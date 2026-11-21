@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { ComponentPage } from "@/components/component-page"
+import { getRegistrySource } from "@/lib/registry-source"
 import { SheetPreview } from "@/components/previews/interactive-previews"
 
 export const metadata: Metadata = {
@@ -7,31 +8,7 @@ export const metadata: Metadata = {
   description: "A slide-in panel from any screen edge.",
 }
 
-const MANUAL_SOURCE = `// Sheet is built on @radix-ui/react-dialog with a side variant.
-// It shares the Dialog overlay and close button infrastructure.
-// Full source: packages/ui/src/components/sheet.tsx
-
-import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { cva } from "class-variance-authority"
-import { X } from "lucide-react"
-import { cn } from "@/lib/utils"
-
-const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out ...",
-  {
-    variants: {
-      side: {
-        top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
-        bottom: "inset-x-0 bottom-0 border-t ...",
-        left: "inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm ...",
-        right: "inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm ...",
-      },
-    },
-    defaultVariants: { side: "right" },
-  },
-)
-
-export { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, SheetClose }`
+const MANUAL_SOURCE = getRegistrySource("sheet")
 
 export default function SheetPage() {
   return (
@@ -75,7 +52,7 @@ export function SheetDemo() {
     </Sheet>
   )
 }`}
-      cliInstall={`npx aether-ui add sheet`}
+      cliInstall={`npx @aetherstack/cli add sheet`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

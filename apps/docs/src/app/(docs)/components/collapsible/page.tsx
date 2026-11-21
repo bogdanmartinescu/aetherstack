@@ -69,7 +69,7 @@ function Demo() {
     </Collapsible>
   )
 }`}
-      cliInstall="npx aether-ui add collapsible"
+      cliInstall="npx @aetherstack/cli add collapsible"
       manualInstallCode={SOURCE}
       manualSteps={[
         {

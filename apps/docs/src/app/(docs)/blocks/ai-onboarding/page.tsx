@@ -13,7 +13,7 @@ export default function AIOnboardingPage() {
       name="AI Onboarding"
       category="AI"
       description="A multi-step onboarding flow built on the Stepper pattern. Each step renders a card with a configurable title, description, and content slot. Navigation is handled internally with Back / Continue buttons and a final Get started CTA."
-      cliInstall="npx aether-ui add ai-onboarding"
+      cliInstall="npx @aetherstack/cli add ai-onboarding"
       previewHeight="400px"
       importCode={`import { AIOnboarding } from "@aetherstack/blocks"`}
       usageCode={`"use client"

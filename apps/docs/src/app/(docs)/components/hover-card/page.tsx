@@ -90,7 +90,7 @@ export function HoverCardDemo() {
     </HoverCard>
   )
 }`}
-      cliInstall={`npx aether-ui add hover-card`}
+      cliInstall={`npx @aetherstack/cli add hover-card`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

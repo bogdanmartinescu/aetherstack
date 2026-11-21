@@ -42,7 +42,7 @@ export default function SourceCardPage() {
   excerpt="Resources for developers, by developers."
   favicon="https://developer.mozilla.org/favicon.ico"
 />`}
-      cliInstall="npx aether-ui add source-card"
+      cliInstall="npx @aetherstack/cli add source-card"
       props={[
         {
           name: "title",

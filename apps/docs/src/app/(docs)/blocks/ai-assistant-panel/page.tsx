@@ -9,7 +9,7 @@ export default function AIAssistantPanelPage() {
       name="AI Assistant Panel"
       category="AI"
       description="A 420 px wide slide-over Sheet panel for embedding an AI chat assistant alongside any page content. Supports a configurable title, a scrollable content area, an optional footer slot, and both left and right anchor positions."
-      cliInstall="npx aether-ui add ai-assistant-panel"
+      cliInstall="npx @aetherstack/cli add ai-assistant-panel"
       previewHeight="420px"
       importCode={`import { AIAssistantPanel } from "@aetherstack/blocks"`}
       usageCode={`"use client"

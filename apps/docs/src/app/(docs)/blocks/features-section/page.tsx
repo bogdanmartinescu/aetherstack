@@ -13,7 +13,7 @@ export default function FeaturesSectionPage() {
       name="Features Section"
       category="Marketing"
       description="A features showcase with optional eyebrow, headline, and subheading, followed by a responsive card grid. Each card supports an icon, title, and description. Supports 2, 3, or 4 column layouts and a list variant."
-      cliInstall="npx aether-ui add features-section"
+      cliInstall="npx @aetherstack/cli add features-section"
       previewScale={0.7}
       previewHeight="520px"
       importCode={`import { FeaturesSection } from "@aetherstack/blocks"`}

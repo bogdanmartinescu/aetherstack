@@ -13,7 +13,7 @@ export default function SettingsSectionPage() {
     <PatternPage
       name="Settings Section"
       description="A card-style section for settings pages: a bordered container with a header, body, and optional footer bar with save/cancel actions."
-      cliInstall="npx aether-ui add settings-section"
+      cliInstall="npx @aetherstack/cli add settings-section"
       importCode={`import { SettingsSection } from "@aetherstack/patterns"`}
       usageCode={`<SettingsSection
   title="Profile"

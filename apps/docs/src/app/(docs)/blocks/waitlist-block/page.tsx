@@ -13,7 +13,7 @@ export default function WaitlistBlockPage() {
       name="Waitlist Block"
       category="User & content"
       description="An email waitlist signup section with headline, subheading, email input, and submit button. Shows a success confirmation after submission. Handles loading state and error messages."
-      cliInstall="npx aether-ui add waitlist-block"
+      cliInstall="npx @aetherstack/cli add waitlist-block"
       previewHeight="320px"
       importCode={`import { WaitlistBlock } from "@aetherstack/blocks"`}
       usageCode={`import { WaitlistBlock } from "@aetherstack/blocks"

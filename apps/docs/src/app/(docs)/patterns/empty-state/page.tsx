@@ -14,7 +14,7 @@ export default function EmptyStatePage() {
     <PatternPage
       name="Empty State"
       description="A consistent presentation for views with no data yet. Guides users toward the first meaningful action."
-      cliInstall="npx aether-ui add empty-state"
+      cliInstall="npx @aetherstack/cli add empty-state"
       importCode={`import { EmptyState } from "@aetherstack/patterns"`}
       usageCode={`import { Users } from "lucide-react"
 import { EmptyState } from "@aetherstack/patterns"

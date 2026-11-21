@@ -14,7 +14,7 @@ export default function TableToolbarPage() {
     <PatternPage
       name="Table Toolbar"
       description="A flexible toolbar that sits above a data table. Left slot for search and filters, right slot for action buttons."
-      cliInstall="npx aether-ui add table-toolbar"
+      cliInstall="npx @aetherstack/cli add table-toolbar"
       importCode={`import { TableToolbar } from "@aetherstack/patterns"`}
       usageCode={`import { TableToolbar } from "@aetherstack/patterns"
 import { Button, Input } from "@aetherstack/ui"

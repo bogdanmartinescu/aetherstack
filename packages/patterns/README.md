@@ -80,10 +80,10 @@ import {
 ## CLI-first workflow
 
 ```bash
-npx aether-ui add data-table
-npx aether-ui add command-palette
-npx aether-ui add kanban
-npx aether-ui add date-range-picker
+npx @aetherstack/cli add data-table
+npx @aetherstack/cli add command-palette
+npx @aetherstack/cli add kanban
+npx @aetherstack/cli add date-range-picker
 ```
 
 See [aether-ui.dev/patterns](https://aether-ui.dev/patterns).

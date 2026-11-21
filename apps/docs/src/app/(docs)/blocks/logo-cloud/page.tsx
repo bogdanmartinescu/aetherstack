@@ -13,7 +13,7 @@ export default function LogoCloudPage() {
       name="Logo Cloud"
       category="Marketing"
       description="A partner or trusted-by logo grid with an optional headline and configurable greyscale filter. Logos can be images, custom icon nodes, or plain text names."
-      cliInstall="npx aether-ui add logo-cloud"
+      cliInstall="npx @aetherstack/cli add logo-cloud"
       previewHeight="180px"
       importCode={`import { LogoCloud } from "@aetherstack/blocks"`}
       usageCode={`import { LogoCloud } from "@aetherstack/blocks"

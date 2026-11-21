@@ -75,7 +75,7 @@ export default function PopoverPage() {
     <p className="text-sm">Popover content goes here.</p>
   </PopoverContent>
 </Popover>`}
-      cliInstall="npx aether-ui add popover"
+      cliInstall="npx @aetherstack/cli add popover"
       manualInstallCode={SOURCE}
       manualSteps={[
         {

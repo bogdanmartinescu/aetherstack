@@ -13,7 +13,7 @@ export default function PageHeaderPage() {
     <PatternPage
       name="Page Header"
       description="A consistent top-of-page structure: breadcrumb trail, title, optional description, and a right-aligned actions slot."
-      cliInstall="npx aether-ui add page-header"
+      cliInstall="npx @aetherstack/cli add page-header"
       importCode={`import { PageHeader } from "@aetherstack/patterns"`}
       usageCode={`// Basic
 <PageHeader

@@ -57,7 +57,7 @@ export default function KbdPage() {
 <span>Press <Kbd>⌘</Kbd><Kbd>K</Kbd> to search</span>
 <span><Kbd>Ctrl</Kbd><Kbd>S</Kbd> to save</span>
 <span><Kbd>Escape</Kbd> to close</span>`}
-      cliInstall="npx aether-ui add kbd"
+      cliInstall="npx @aetherstack/cli add kbd"
       manualInstallCode={SOURCE}
       examples={[
         {

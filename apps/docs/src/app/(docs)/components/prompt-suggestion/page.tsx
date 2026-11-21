@@ -18,7 +18,7 @@ export default function PromptSuggestionPage() {
   icon={<Sparkles className="h-3.5 w-3.5" />}
   onClick={() => setValue("Brainstorm ideas for my project")}
 />`}
-      cliInstall="npx aether-ui add prompt-suggestion"
+      cliInstall="npx @aetherstack/cli add prompt-suggestion"
       props={[
         {
           name: "label",
@@ -41,6 +41,17 @@ export default function PromptSuggestionPage() {
           type: "string",
           description: "Additional CSS classes.",
         },
+        {
+          name: "...props",
+          type: "React.ButtonHTMLAttributes<HTMLButtonElement>",
+          description:
+            "Other native button attributes, such as disabled, type and aria-*, are forwarded.",
+        },
+      ]}
+      a11yNotes={[
+        "Renders a native button, so it is focusable and activates with Enter and Space.",
+        "The label is the accessible name; the optional icon is hidden from assistive technology.",
+        "Keyboard focus shows a visible ring, and disabled uses the native disabled attribute.",
       ]}
     />
   )

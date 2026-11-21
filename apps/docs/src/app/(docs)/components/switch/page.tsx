@@ -63,7 +63,7 @@ export function SwitchDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add switch`}
+      cliInstall={`npx @aetherstack/cli add switch`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

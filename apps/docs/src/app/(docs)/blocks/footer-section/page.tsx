@@ -13,7 +13,7 @@ export default function FooterSectionPage() {
       name="Footer Section"
       category="App navigation"
       description="A multi-column site footer with brand tagline, link columns, social links, legal links, and a copyright line. Responsive grid that stacks on mobile."
-      cliInstall="npx aether-ui add footer-section"
+      cliInstall="npx @aetherstack/cli add footer-section"
       previewScale={0.75}
       previewHeight="340px"
       importCode={`import { FooterSection } from "@aetherstack/blocks"`}

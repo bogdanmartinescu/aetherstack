@@ -13,7 +13,7 @@ export default function TestimonialsSectionPage() {
       name="Testimonials Section"
       category="Marketing"
       description="A social proof grid of customer quotes with star rating, blockquote, avatar, name, and role. Supports 2 or 3 column layouts with an optional eyebrow and headline."
-      cliInstall="npx aether-ui add testimonials-section"
+      cliInstall="npx @aetherstack/cli add testimonials-section"
       previewScale={0.7}
       previewHeight="460px"
       importCode={`import { TestimonialsSection } from "@aetherstack/blocks"`}

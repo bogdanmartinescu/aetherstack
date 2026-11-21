@@ -26,7 +26,7 @@ export default function ModelBadgePage() {
 
 {/* Model name only */}
 <ModelBadge model="gemini-2.0-flash" />`}
-      cliInstall="npx aether-ui add model-badge"
+      cliInstall="npx @aetherstack/cli add model-badge"
       props={[
         {
           name: "model",
@@ -44,6 +44,10 @@ export default function ModelBadgePage() {
           type: "string",
           description: "Additional CSS classes.",
         },
+      ]}
+      a11yNotes={[
+        "Renders text only; it is not focusable or interactive.",
+        "The provider prefix and the model name are read as plain text, in that order.",
       ]}
     />
   )

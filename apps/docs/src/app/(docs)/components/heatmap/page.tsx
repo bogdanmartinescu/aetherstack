@@ -34,7 +34,7 @@ export default function HeatmapPage() {
     [1, 0],
   ]}
 />`}
-      cliInstall="npx aether-ui add heatmap"
+      cliInstall="npx @aetherstack/cli add heatmap"
       manualInstallCode={HEATMAP_SOURCE}
       examples={[]}
       props={[

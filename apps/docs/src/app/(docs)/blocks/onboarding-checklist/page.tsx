@@ -46,7 +46,7 @@ export default function OnboardingChecklistPage() {
       name="Onboarding Checklist"
       category="Onboarding"
       description="A guided onboarding checklist with a progress bar, toggleable steps, and a 'hide completed' option. Step state is managed internally with an external sync callback."
-      cliInstall="npx aether-ui add onboarding-checklist"
+      cliInstall="npx @aetherstack/cli add onboarding-checklist"
       previewHeight="460px"
       importCode={`import { OnboardingChecklist } from "@aetherstack/blocks"
 import type { OnboardingStep } from "@aetherstack/blocks"`}

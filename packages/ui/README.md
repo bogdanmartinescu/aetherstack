@@ -83,7 +83,7 @@ This package requires a Tailwind CSS setup with the Aether UI token variables. A
 Or install components via the CLI for a fully configured setup:
 
 ```bash
-npx aether-ui init
+npx @aetherstack/cli init
 ```
 
 ## CLI-first workflow
@@ -91,9 +91,9 @@ npx aether-ui init
 For the recommended open-code workflow where you own component source:
 
 ```bash
-npx aether-ui add button
-npx aether-ui add dialog
-npx aether-ui add sidebar
+npx @aetherstack/cli add button
+npx @aetherstack/cli add dialog
+npx @aetherstack/cli add sidebar
 ```
 
 See [aether-ui.dev/installation](https://aether-ui.dev/installation).

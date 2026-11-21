@@ -64,7 +64,7 @@ export function InputDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add input`}
+      cliInstall={`npx @aetherstack/cli add input`}
       manualInstallCode={MANUAL_SOURCE}
       examples={[
         {

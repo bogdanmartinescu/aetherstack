@@ -2,7 +2,7 @@
  * @aetherstack/blocks
  *
  * Installable full-section layouts built on patterns + primitives.
- * Install via the CLI: npx aether-ui add <block-name>
+ * Install via the CLI: npx @aetherstack/cli add <block-name>
  */
 
 // Shells

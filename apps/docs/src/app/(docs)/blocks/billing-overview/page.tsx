@@ -13,7 +13,7 @@ export default function BillingOverviewPage() {
       name="Billing Overview"
       category="Billing"
       description="Displays the user's current subscription plan, usage metrics with progress bars, and billing actions. Upgrade and manage billing callbacks are passed in."
-      cliInstall="npx aether-ui add billing-overview"
+      cliInstall="npx @aetherstack/cli add billing-overview"
       importCode={`import { BillingOverview } from "@aetherstack/blocks"`}
       usageCode={`import { BillingOverview } from "@aetherstack/blocks"
 

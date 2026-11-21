@@ -8,7 +8,7 @@ export default function DateRangePickerPage() {
     <PatternPage
       name="Date Range Picker"
       description="A date range selector composing Calendar in range mode with a Popover trigger. Displays a formatted summary of the selected from/to dates in the trigger button."
-      cliInstall="npx aether-ui add date-range-picker"
+      cliInstall="npx @aetherstack/cli add date-range-picker"
       importCode={`import { DateRangePicker } from "@aetherstack/patterns"`}
       usageCode={`import * as React from "react"
 import { DateRangePicker } from "@aetherstack/patterns"

@@ -86,7 +86,7 @@ export default function IntroductionPage() {
         <div className="border-border bg-muted/20 rounded-lg border p-4 font-mono text-sm">
           <span className="text-muted-foreground"># Install a component into your project</span>
           <br />
-          <span className="text-foreground">npx aether-ui add dashboard-shell</span>
+          <span className="text-foreground">npx @aetherstack/cli add dashboard-shell</span>
           <br />
           <br />
           <span className="text-muted-foreground">
@@ -225,10 +225,10 @@ export default function IntroductionPage() {
         <h2 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">Quick start</h2>
         <CodeBlock
           code={`# 1. Initialize Aether UI in your project
-npx aether-ui@latest init
+npx @aetherstack/cli@latest init
 
 # 2. Add components
-npx aether-ui add button input label badge card
+npx @aetherstack/cli add button input label badge card
 
 # 3. Import and use
 import { Button } from "@/components/ui/button"

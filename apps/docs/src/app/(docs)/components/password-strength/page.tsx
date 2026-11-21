@@ -29,12 +29,12 @@ export function PasswordStrengthDemo() {
     <PasswordStrength password={password} onPasswordChange={setPassword} />
   )
 }`}
-      cliInstall="npx aether-ui add password-strength"
+      cliInstall="npx @aetherstack/cli add password-strength"
       manualInstallCode={PASSWORD_STRENGTH_SOURCE}
       manualSteps={[
         {
           title: "Add the button registry dependency",
-          code: "npx aether-ui add button",
+          code: "npx @aetherstack/cli add button",
           filename: "terminal",
         },
       ]}

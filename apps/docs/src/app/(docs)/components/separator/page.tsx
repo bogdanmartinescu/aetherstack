@@ -83,7 +83,7 @@ export function SeparatorDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add separator`}
+      cliInstall={`npx @aetherstack/cli add separator`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

@@ -26,7 +26,7 @@ export default function ReasoningBlockPage() {
   content={response.thinking}
   defaultOpen={false}
 />`}
-      cliInstall="npx aether-ui add reasoning-block"
+      cliInstall="npx @aetherstack/cli add reasoning-block"
       props={[
         {
           name: "content",

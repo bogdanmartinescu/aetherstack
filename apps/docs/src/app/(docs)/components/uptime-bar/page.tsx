@@ -34,7 +34,7 @@ const days = [
 ]
 
 <UptimeBar days={days} />`}
-      cliInstall="npx aether-ui add uptime-bar"
+      cliInstall="npx @aetherstack/cli add uptime-bar"
       manualInstallCode={UPTIME_BAR_SOURCE}
       examples={[]}
       props={[

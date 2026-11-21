@@ -72,7 +72,7 @@ export function ButtonGroupDemo() {
     </ButtonGroup>
   )
 }`}
-      cliInstall={`npx aether-ui add button-group`}
+      cliInstall={`npx @aetherstack/cli add button-group`}
       manualInstallCode={MANUAL_SOURCE}
       examples={[
         {

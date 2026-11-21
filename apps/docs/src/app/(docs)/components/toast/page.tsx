@@ -1,51 +1,10 @@
 "use client"
 
 import { ComponentPage } from "@/components/component-page"
+import { getRegistrySource } from "@/lib/registry-source"
 import { ToastPreview, ToastDestructivePreview } from "@/components/previews/interactive-previews"
 
-const MANUAL_SOURCE = `"use client"
-
-import * as React from "react"
-import * as ToastPrimitive from "@radix-ui/react-toast"
-import { cva, type VariantProps } from "class-variance-authority"
-import { CheckCircle2, XCircle, AlertTriangle, Info, X } from "lucide-react"
-import { cn } from "@/lib/utils"
-
-const toastVariants = cva([...], {
-  variants: {
-    variant: {
-      default:     "border-border bg-background text-foreground",
-      success:     "border-emerald-500/30 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-100",
-      warning:     "border-amber-500/30 bg-amber-50 text-amber-900 dark:bg-amber-950/60 dark:text-amber-100",
-      info:        "border-blue-500/30 bg-blue-50 text-blue-900 dark:bg-blue-950/60 dark:text-blue-100",
-      destructive: "border-destructive/30 bg-destructive/10 text-destructive",
-    },
-  },
-  defaultVariants: { variant: "default" },
-})
-
-// Convenience component — drop in your root layout
-function Toaster() {
-  const { toasts } = useToast()
-  return (
-    <ToastProvider>
-      {toasts.map(({ id, title, description, action, variant, ...props }) => (
-        <Toast key={id} variant={variant} {...props}>
-          {VARIANT_ICONS[variant ?? "default"]}
-          <div className="flex-1 space-y-0.5">
-            {title && <ToastTitle>{title}</ToastTitle>}
-            {description && <ToastDescription>{description}</ToastDescription>}
-          </div>
-          {action}
-          <ToastClose />
-        </Toast>
-      ))}
-      <ToastViewport />
-    </ToastProvider>
-  )
-}
-
-// Full source: packages/ui/src/components/toast.tsx`
+const MANUAL_SOURCE = getRegistrySource("toast")
 
 export default function ToastPage() {
   return (
@@ -86,7 +45,7 @@ export function ToastDemo() {
     </div>
   )
 }`}
-      cliInstall={`npx aether-ui add toast`}
+      cliInstall={`npx @aetherstack/cli add toast`}
       manualInstallCode={MANUAL_SOURCE}
       manualSteps={[
         {

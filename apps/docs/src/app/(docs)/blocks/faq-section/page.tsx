@@ -13,7 +13,7 @@ export default function FAQSectionPage() {
       name="FAQ Section"
       category="Marketing"
       description="An FAQ accordion section with optional eyebrow, headline, and subheading. When a heading is provided, the layout splits into a two-column grid on large screens. Without a heading, the accordion is centred and constrained."
-      cliInstall="npx aether-ui add faq-section"
+      cliInstall="npx @aetherstack/cli add faq-section"
       previewScale={0.75}
       previewHeight="480px"
       importCode={`import { FAQSection } from "@aetherstack/blocks"`}
@@ -58,7 +58,7 @@ export default function FAQPage() {
               id: "q2",
               question: "How do I install components?",
               answer:
-                "Use the CLI: npx aether-ui add <component-name>. This copies the component source directly into your project.",
+                "Use the CLI: npx @aetherstack/cli add <component-name>. This copies the component source directly into your project.",
             },
             {
               id: "q3",
