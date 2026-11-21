@@ -1,41 +1,68 @@
-# CF-01 registry Worker deployment
+# CF-01: Registry Worker runbook
 
-**Status:** configuration prepared; Cloudflare deployment is not yet verified. This runbook uses CircleCI exclusively.
+Status (2026-11-21): **preview deployed; production Custom Domain configured**.
+PR #29 added the Worker and CI checks.
+[CircleCI pipeline #11](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/11/details?useNewPipelines=true)
+ran `verify`, `approve_registry_preview`, and `deploy_registry`.
+The preview homepage loaded, the owner confirmed registry JSON was accessible,
+and Cloudflare's DNS view shows `registry.aether-ui.dev` as a Worker-managed
+hostname for `aether-ui-registry`. Production HTTP/CLI release acceptance is
+not yet fully recorded.
 
-## Implementation
+See the [deployment operations guide](./README.md) for shared CircleCI,
+Custom Domain, and rollback procedures.
 
-The registry Worker configuration is `apps/registry-public/wrangler.jsonc`. The asset source is the existing Next.js static export (`apps/registry-public/out`). Cloudflare's `_headers` rules live in `apps/registry-public/public/_headers`; the static export must copy them into the deployment output.
+## Configuration and build
 
-The CI pipeline runs `pnpm --filter @aetherstack/scripts validate-registry`, `pnpm --filter @aetherstack/scripts build-registry`, `pnpm --filter @aetherstack/registry-public build`, and `node scripts/verify-registry-output.mjs`.
+- Source: `apps/registry-public`; Next.js static export to `out/`.
+- Worker: `aether-ui-registry`; config: `apps/registry-public/wrangler.jsonc`.
+- Preview URL: `https://aether-ui-registry.hi-5be.workers.dev`.
+- Production URL: `https://registry.aether-ui.dev`.
+- Public assets: `/r/registry.json`, `/r/button.json`, `/llms.txt`.
+- Headers: `apps/registry-public/public/_headers` (JSON CORS and cache policies).
+- Validation: `scripts/verify-registry-output.mjs` and `scripts/smoke-registry.mjs`.
+- Wrangler: exactly `4.165.0` installed by CI into a user-owned prefix.
+  Move Wrangler to the pnpm lockfile as future dependency maintenance.
 
-The separate CircleCI deployment job installs **exactly Wrangler 4.165.0** into a user-owned prefix. It is intentionally not an automatic push deployment. Project-lockfile integration is a later maintenance task; until then, do not replace the exact version with `latest`.
+## CircleCI deployment
 
-## Required CircleCI setup
+The restricted `aether-cloudflare-deploy` context supplies:
 
-Create a restricted context named `aether-cloudflare-deploy` and restrict access to authorized maintainers, protected branches, and the AetherStack project.
+- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_API_TOKEN`
+- `REGISTRY_SMOKE_BASE_URL=https://aether-ui-registry.hi-5be.workers.dev`
 
-Add `CLOUDFLARE_ACCOUNT_ID` (32 hexadecimal characters), `CLOUDFLARE_API_TOKEN` (least-privilege Worker edit permissions), and `REGISTRY_SMOKE_BASE_URL` (the intended HTTPS preview URL for `aether-ui-registry`, ending in `.workers.dev`).
+The normal `verify` job builds and checks registry artifacts but **does not deploy**.
+For a registry redeploy:
 
-The owner must enable the account's `workers.dev` subdomain and confirm the preview hostname in the Cloudflare dashboard. Do not add Cloudflare tokens or account details to GitHub or repository files.
+1. Merge a reviewed change after CircleCI verification.
+2. Trigger a new pipeline on `main` with `deploy_registry=true`;
+   leave `deploy_docs=false` and `publish_npm=false`.
+3. Approve `approve_registry_preview`.
+4. Confirm the Wrangler `deploy_registry` job and preview HTTP smoke test pass.
+5. Run the production smoke command, check the Custom Domain, and record the
+   commit, Worker version, headers, and exact result.
 
-## Runbook
+```bash
+node scripts/smoke-registry.mjs https://aether-ui-registry.hi-5be.workers.dev
+node scripts/smoke-registry.mjs https://registry.aether-ui.dev
+```
 
-1. Merge the CF-01 PR only after CircleCI's normal `verify` job passes.
-2. Check CircleCI context restrictions and populate the three required variables. Confirm the `REGISTRY_SMOKE_BASE_URL` hostname matches the Worker output.
-3. Manually trigger a CircleCI pipeline on `main` with the boolean parameter `deploy_registry=true`. Do not enable `publish_npm` for this operation.
-4. Approve the `approve_registry_preview` hold job. The deployment job must run only after the full `verify` job.
-5. Verify the static export, Wrangler version, Worker deployment and HTTP smoke checks complete successfully.
-6. Confirm the Worker was deployed to the preview endpoint and inspect HTTP response headers independently.
-7. When approved, attach `registry.aether-ui.dev` as a Cloudflare Worker Custom Domain. Preserve unrelated DNS, email, and verification records.
-8. Re-run `node scripts/smoke-registry.mjs https://registry.aether-ui.dev` against the production hostname. Test the published CLI from a clean external consumer.
-9. Record the Worker version, deployment SHA, custom-domain status, and installation results in `docs/roadmap/execution-state.md`.
+The smoke script checks aggregate and component JSON, AI discovery content,
+CORS, caching, and 404 behavior. Do not expose secret values in logs.
 
-The deployment job never attaches the production Custom Domain by itself. `deploy_registry=false` is the default and PR pipelines cannot schedule a deploy. Requiring explicit approval prevents accidental deployment if a pipeline parameter is set incorrectly.
+## DNS and failure recovery
 
-## Acceptance and rollback
+Cloudflare manages the Worker Custom Domain record. If Cloudflare rejects a
+hostname because it has externally managed A/AAAA/CNAME records, first
+inspect the _exact_ hostname and old provider, then remove only the conflicting
+records. Preserve unrelated DNS, including MX, TXT, and nameservers. A manual
+CNAME to the `workers.dev` preview is not required.
 
-The smoke script checks the root page, manifest JSON, Button JSON, AI discovery file, public CORS and cache headers, and a missing-item 404. The export checker validates the exact manifest-to-item-file mapping and generated static assets.
+If an update breaks the registry, roll back to the last known-good Worker
+deployment in Cloudflare and verify preview and production routes. Treat DNS
+rollback separately from deployment rollback.
 
-If export validation fails, fix the registry generator or artifacts; do not bypass the check. If the deployment fails, preserve the current running Worker. If the deployed registry returns invalid data, roll back the Worker to a known-good deployment through Cloudflare and re-run the smoke script. For a DNS cutover failure, restore the previous verified route without deleting unrelated DNS records.
-
-**M0-08 and CF-01 remain incomplete until the live registry works and a published CLI consumer can install a component.**
+**M0-08 remains open** until a clean external consumer installs a component
+using the actually published `@aetherstack/cli` package against the production
+registry and successfully builds.

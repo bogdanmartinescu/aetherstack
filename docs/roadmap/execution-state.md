@@ -1,16 +1,20 @@
 # Execution state — persistent agent checkpoint
 
-Initialized 2026-11-20. No implementation or release checks have been run as part of this planning change. Historical completion claims are not verified here.
+Initialized 2026-11-20. Historical checkpoint entries below preserve prior observations; the most recent status is recorded at the end of this file.
 
 - Active milestone: M0 — truth, stability and public distribution.
-- Last completed task: docs route gaps (PR #24); deploy preflight (PR #25).
-- Next task: connect CircleCI and verify its replacement CI pipeline, then implement the Cloudflare Workers Static Assets registry preview/deployment per `docs/deployment/CLOUDFLARE-CIRCLECI-MIGRATION.md`; separately resolve npm org publish permissions and re-run `pnpm m0-rc-verify`.
-- Baseline reviewed: `main` at `13f4c46`. Live registry still 404 `DEPLOYMENT_NOT_FOUND` (rechecked 2026-11-20).
-- Known prior observations (reverify): CDN BLOCKED; prior npm Release job E404 on `@aetherstack/*` PUT (org/token). Workspace versions ahead of npm (e.g. ui local 0.5.x vs npm 0.4.0). Prior Vercel deployment path superseded by Cloudflare Workers + CircleCI; this changes the target, not the milestone exit criteria.
+- Most recent deployment work: registry Worker PR #29 / CircleCI #11; docs Worker PR #31 / CircleCI #20; custom domains visible in Cloudflare.
+- Next task: run and record production registry/docs smoke tests, verify an actual published CLI consumer, and reconcile release gate M0-08/M0-10. Next Worker migrations: demo and access-restricted Studio.
+- Current infrastructure baseline: `main` at `dd9e3c6` (2026-11-21); registry and docs Workers deployed via approved CircleCI pipelines. Historical 2026-11-20 Vercel 404 is superseded.
+- Known remaining risks: npm release organization permissions and package/version drift; clean external CLI install is unverified. Cloudflare Workers + CircleCI supersede the old Vercel and GitHub Actions deployment paths.
 - Commercial status: M4 discovery only; paid kit implementation and M6 require explicit owner approval and demand evidence.
 - Publishing status: no release or external submission authority granted by this plan.
 
 ## Task ledger
+
+The rows below preserve the November 20 baseline snapshot for audit purposes,
+including superseded Vercel deployment entries. For the current Cloudflare
+status, use the latest checkpoint at the end of this file.
 
 | Task    | Status                                | Branch/commit/PR                          | Verification evidence                                         | Blocker / next action                                          |
 | ------- | ------------------------------------- | ----------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------- |
@@ -233,3 +237,13 @@ Record milestone, all required task IDs, exact suite/results, known limitations,
 - Live preview: [`https://aether-ui-registry.hi-5be.workers.dev/`](https://aether-ui-registry.hi-5be.workers.dev/). The browser rendered the public Aether UI Registry homepage. The deployment workflow includes `node scripts/smoke-registry.mjs` for JSON, CORS, cache-control, `llms.txt`, root, and 404 assertions. These checks were not independently re-run from this documentation session.
 - State: **CF-01 preview deployed**, not complete. `registry.aether-ui.dev` Custom Domain not yet verified; published npm CLI installation from the production URL and M0-08 external acceptance remain pending.
 - Next: inspect existing DNS records before adding the `registry.aether-ui.dev` Worker Custom Domain; verify TLS, JSON, headers, 404, live CLI installation and rollback. Avoid enabling independent Cloudflare Builds or GitHub Actions.
+
+### Checkpoint 2026-11-21 — Cloudflare Worker Custom Domains observed
+
+- Infrastructure: Cloudflare Workers Static Assets + CircleCI; no Vercel or GitHub Actions deployment path. Operational instructions: [deployment README](../deployment/README.md).
+- CF-01: PR #29 merged at `1d227aff`; approved [CircleCI pipeline #11](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/11/details?useNewPipelines=true) deployed `aether-ui-registry`; preview homepage loaded, owner confirmed JSON, and Cloudflare DNS showed a Worker mapping for `registry.aether-ui.dev`.
+- CF-02: PR #31 merged at `dd9e3c6`; approved [CircleCI pipeline #20](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/20/details?useNewPipelines=true) deployed `aether-ui-docs`; Cloudflare's Worker dashboard listed `aether-ui.dev` as a Custom Domain and the production `/components/tooltip/` page rendered in the browser.
+- CI: deployment jobs are opt-in (`deploy_registry`/`deploy_docs` default `false`), require passing `verify` and distinct manual approval, use the restricted `aether-cloudflare-deploy` context and Wrangler 4.165.0. The separate npm release gate remains restricted.
+- DNS: previous custom-domain attachment error from externally managed A/AAAA/CNAME was resolved by the latest visible dashboard state; the exact DNS changes were not executed or audited in this documentation session. Do not remove unrelated DNS records, especially mail authentication or validation entries.
+- Verified observation boundaries: connected browser loaded one production docs page; Cloudflare dashboard displayed the Custom Domain / Worker mapping. Complete independent production smoke output, published CLI clean-install result, Worker version IDs, performance/accessibility, and rollback evidence have **not** been supplied.
+- Next actions: record production `node scripts/smoke-registry.mjs https://registry.aether-ui.dev`, `node scripts/smoke-docs.mjs https://aether-ui.dev`, and an actual published CLI install/build; only then re-evaluate M0-08/M0-10. CF-03 demo and CF-04 Studio are not deployed.

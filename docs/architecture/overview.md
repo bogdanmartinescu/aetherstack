@@ -143,7 +143,7 @@ Aether UI uses its own registry and CLI — not the shadcn CLI.
 
 - `registry/public/registry.json` — source of truth for the public registry, committed to git
 - `apps/registry-public/public/r/registry.json` — built artifact, copied by `build-registry` script
-- `apps/registry-public` — static Next.js export served from a CDN at `registry.aether-ui.dev`
+- `apps/registry-public` — Next.js static export deployed as Cloudflare Worker `aether-ui-registry` at `registry.aether-ui.dev`
 - `packages/cli` — the `aether-ui` CLI that reads from the registry and installs components
 
 ### CLI flow

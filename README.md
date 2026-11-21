@@ -45,7 +45,18 @@ Core packages are published to npm under the `@aetherstack` org (see versions in
 
 ## Project Docs
 
-**Hosting and CI/CD migration:** [Cloudflare + CircleCI plan](docs/deployment/CLOUDFLARE-CIRCLECI-MIGRATION.md). CircleCI is the target CI/CD provider; Cloudflare deployments are not yet provisioned.
+**Hosting and CI/CD:** Cloudflare Workers Static Assets host the documentation and registry;
+CircleCI is the exclusive verification and deployment runner. See the
+[Cloudflare deployment operations guide](docs/deployment/README.md),
+[registry runbook](docs/deployment/REGISTRY-RUNBOOK.md),
+[docs runbook](docs/deployment/DOCS-RUNBOOK.md), and
+[migration plan](docs/deployment/CLOUDFLARE-CIRCLECI-MIGRATION.md).
+
+- Documentation: https://aether-ui.dev (Worker: `aether-ui-docs`).
+- Registry: https://registry.aether-ui.dev (Worker: `aether-ui-registry`).
+- Preview endpoints: `aether-ui-docs.hi-5be.workers.dev` and
+  `aether-ui-registry.hi-5be.workers.dev`.
+- The public npm release and clean published-CLI installation acceptance remain separate gates.
 
 **Continuous development:** [GOAL.md](GOAL.md) · [AGENTS.md](AGENTS.md) · [ROADMAP.md](ROADMAP.md) · [Task backlog](docs/roadmap/platform-backlog.md) · [Execution state](docs/roadmap/execution-state.md). Future platform features and monetization proposals are planning documents, not shipped functionality.
 

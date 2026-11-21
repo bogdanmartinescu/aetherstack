@@ -2,9 +2,15 @@
 
 Migration reference for the AetherStack monorepo. Baseline: `main` at `1ea579b00b6c` on November 21, 2026.
 
-Status: CircleCI verification is operational and the registry preview Worker is deployed at `https://aether-ui-registry.hi-5be.workers.dev/` through approved CircleCI pipeline #11. The production custom domain, npm publishing, and remaining application migrations are not yet verified.
+Status (November 21, 2026): CircleCI verification and approved preview deployments are
+operational. The registry Worker was deployed in CircleCI pipeline #11; the docs Worker was
+deployed in pipeline #20. Cloudflare's dashboard shows Worker Custom Domains for
+`registry.aether-ui.dev` and `aether-ui.dev`, and the production docs site renders a
+component page. Published-CLI consumer acceptance, exhaustive production smoke checks,
+and the demo/Studio migrations remain open. See the
+[deployment operations guide](./README.md) for the current operational snapshot.
 
-This document complements [GOAL.md](../../GOAL.md), [AGENTS.md](../../AGENTS.md), [ROADMAP.md](../../ROADMAP.md), and [execution-state.md](../roadmap/execution-state.md). It supersedes the historical Vercel instructions in [the M0-08 runbook](../roadmap/audits/m0-08-cdn-runbook.md).
+This planning document complements [GOAL.md](../../GOAL.md), [AGENTS.md](../../AGENTS.md), [ROADMAP.md](../../ROADMAP.md), and [execution-state.md](../roadmap/execution-state.md). It supersedes the historical Vercel instructions in [the M0-08 runbook](../roadmap/audits/m0-08-cdn-runbook.md).
 
 ## Architecture decision
 
@@ -64,7 +70,15 @@ Complete an installation smoke test in an external clean project using the publi
 
 ### CF-01 implementation status
 
-The registry Worker configuration, static output checks, and a deployment runbook were merged in PR #29. See [CF-01 Registry Runbook](./REGISTRY-RUNBOOK.md). The preview Worker was deployed by the gated CircleCI workflow in [pipeline #11](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/11/details?useNewPipelines=true), and the public homepage is accessible at `https://aether-ui-registry.hi-5be.workers.dev/`. The canonical Custom Domain `registry.aether-ui.dev`, DNS/TLS verification, and published CLI installation remain outstanding. An exact Wrangler 4.165.0 installation is used as an interim CI bootstrap; move Wrangler into the pnpm lockfile in a follow-up maintenance change.
+PR #29 introduced the registry Worker, exported-artifact checks, and CircleCI deployment.
+[Pipeline #11](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/11/details?useNewPipelines=true)
+ran verification, manual approval, and deployment. The registry preview homepage was verified
+in the browser and the owner confirmed access to registry JSON. Cloudflare's DNS view now
+shows `registry.aether-ui.dev` as a Worker-managed hostname for `aether-ui-registry`.
+Production HTTP/header smoke testing and a clean external published-CLI installation still
+require recorded evidence; do not mark M0-08 complete on JSON browser access alone.
+Wrangler is installed at exactly 4.165.0 during the CI job pending lockfile integration.
+See the [registry runbook](./REGISTRY-RUNBOOK.md).
 
 ## CF-02: Migrate the documentation website
 
@@ -78,7 +92,20 @@ Verify SEO assets including canonical links, `robots.txt`, `sitemap.xml`, and `l
 
 Fix the homepage GitHub destination to the actual `bogdanmartinescu/aetherstack` repository. Validate the public CLI command against the published package; do not advertise CLI `diff` and `update` functionality until implemented.
 
-Create a separate Wrangler configuration and deploy a documentation preview using CircleCI. Promote the preview to `aether-ui.dev` only after the smoke tests pass.
+Create a separate Wrangler configuration and deploy a documentation preview using CircleCI.
+Promote the preview to `aether-ui.dev` only after the smoke tests pass.
+
+### CF-02 implementation status
+
+PR #31 added the static docs export, `apps/docs/wrangler.jsonc`, full exported-route
+verification, SEO asset checks, and manually approved CircleCI deployment. The export required
+`export const dynamic = "force-static"` in `robots.ts` and `sitemap.ts`.
+[Pipeline #20](https://app.circleci.com/pipelines/gh/bogdanmartinescu/aetherstack/20/details?useNewPipelines=true)
+executed `verify`, `approve_docs_preview`, and `deploy_docs`. Cloudflare now lists
+`aether-ui.dev` as the docs Worker's Custom Domain, and the production
+`/components/tooltip/` page rendered in the connected browser. Full page-by-page visual
+and accessibility regression testing has not been recorded. See the
+[docs runbook](./DOCS-RUNBOOK.md).
 
 ## CF-03: Deploy the public demo
 
@@ -110,7 +137,13 @@ Keep npm releases separate from web deployments. The CircleCI package-publishing
 
 Inventory DNS and preserve current email and verification records, including MX, SPF, DKIM, and DMARC. Confirm Cloudflare zone ownership and authoritative nameserver activation.
 
-Attach the production registry first, then documentation, demo, and Studio. Verify Cloudflare-managed TLS, canonical URLs, HTTP response codes, assets, redirects, and cache policies at each cutover.
+Attach the production registry first, then documentation, demo, and Studio. The registry
+and docs Custom Domains now appear in Cloudflare. Verify Cloudflare-managed TLS,
+canonical URLs, HTTP response codes, assets, redirects, and cache policies at each cutover.
+Before adding a Custom Domain, remove only conflicting externally managed A/AAAA/CNAME
+records for the exact target hostname; keep MX, email authentication TXT, verification,
+and other unrelated records. Cloudflare creates its own Worker DNS mapping. See
+[DNS cutover and recovery](./README.md#dns-cutover-and-recovery).
 
 Prevent temporary preview deployments from being indexed. Do not delete a functioning website or the previous deployment path until the new Cloudflare site is independently verified.
 
@@ -136,7 +169,7 @@ Update `docs/roadmap/execution-state.md` and the M0 release-candidate verificati
 
 ## Secret ownership
 
-CircleCI deployment context: `aether-cloudflare-deploy`, containing `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`.
+CircleCI deployment context: `aether-cloudflare-deploy`, containing `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`, `REGISTRY_SMOKE_BASE_URL`, and `DOCS_SMOKE_BASE_URL`.
 
 CircleCI release context: `aether-npm-release`, containing `NPM_TOKEN`.
 
